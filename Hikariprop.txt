@@ -1,0 +1,17 @@
+dataSourceClassName=com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+dataSource.serverName=my-sql-address.com
+dataSource.port=3306
+dataSource.databaseName=myschema
+dataSource.user=my_user
+dataSource.password=XXXXXXXXXXXX
+dataSource.cachePrepStmts=true
+dataSource.prepStmtCacheSize=250
+dataSource.prepStmtCacheSqlLimit=2048
+dataSource.useServerPrepStmts=true
+dataSource.useLocalSessionState=true
+dataSource.useLocalTransactionState=true
+dataSource.rewriteBatchedStatements=true
+dataSource.cacheResultSetMetadata=true
+dataSource.cacheServerConfiguration=true
+dataSource.elideSetAutoCommits=true
+dataSource.maintainTimeStats=false
