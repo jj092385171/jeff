@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import servlerProject.entity.Admin;
-import servlerProject.service.impl.AdminServiceImpl;
 
 @WebServlet("/showall")
 public class ShowAllAdminservlet extends HttpServlet {
