@@ -1,17 +1,11 @@
 package servlerProject.dao.impl;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-
-import com.mysql.cj.xdevapi.PreparableStatement;
 
 import servlerProject.dao.AdminDao;
 import servlerProject.entity.Admin;

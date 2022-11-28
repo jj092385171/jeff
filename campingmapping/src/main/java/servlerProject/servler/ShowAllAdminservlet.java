@@ -20,8 +20,10 @@ public class ShowAllAdminservlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
-		AdminServiceImpl adminServiceImpl = new AdminServiceImpl();
-		List<Admin> adminList = adminServiceImpl.showAllAdmin();
+		
+		@SuppressWarnings("unchecked")
+		List<Admin> adminList = (List<Admin>) req.getAttribute("admins");
+		
 		PrintWriter writer = resp.getWriter();
 		if (adminList!=null) {
 			adminList.forEach(admins-> writer.println(admins.toString()+"<br>"));		
