@@ -1,0 +1,17 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[lotteryRecord](
+	[lotteryId] [int] NOT NULL,
+	[userId] [int] NOT NULL,
+	[win] [bit] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[lotteryRecord]  WITH CHECK ADD FOREIGN KEY([lotteryId])
+REFERENCES [dbo].[lottery] ([lotteryId])
+GO
+ALTER TABLE [dbo].[lotteryRecord]  WITH CHECK ADD FOREIGN KEY([userId])
+REFERENCES [dbo].[member] ([UID])
+GO
+
