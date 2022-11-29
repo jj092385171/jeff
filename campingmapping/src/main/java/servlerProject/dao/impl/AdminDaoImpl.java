@@ -1,6 +1,9 @@
 package servlerProject.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -39,11 +42,14 @@ public class AdminDaoImpl implements AdminDao {
 			e.printStackTrace();
 		}
 		return null;
+		
 	}
+	
 
 	@Override
 	public List<Admin> selectAll() {
 		try {
+			
 			List<Admin> admins = queryRunner.query(DbUtils.getConnection(), "SELECT * FROM member ",
 					new BeanListHandler<Admin>(Admin.class));
 			return admins;
