@@ -1,4 +1,4 @@
-USE [CampingMappingDataBase]
+USE [campDB]
 GO
 
 /****** Object:  Table [dbo].[member]    Script Date: 2022/11/23 下午 07:39:36 ******/
@@ -10,20 +10,23 @@ GO
 
 CREATE TABLE [dbo].[member](
 	[UID] [int] IDENTITY(1,1) NOT NULL,
-	[password] [int]  NOT NULL,
+	[FaceBookID] [nchar](50)   NULL,
+	[GoogleID] [nchar](50)   NULL,
+	[LineID] [nchar](50)   NULL,
+	[password] [nchar](50)   NULL,
 	[account(email)] [nchar](50) NOT NULL,
 	[Nickname] [nchar](50) NULL,
-	[firstname] [nchar](50) NOT NULL,
-	[lastname] [nchar](50) NOT NULL,
+	[firstname] [nchar](50)  NULL,
+	[lastname] [nchar](50)  NULL,
 	[exp] [int] NOT NULL,
 	[leavel] [int] NOT NULL,
 	[poit] [int] NOT NULL,
 	[phone] [int] NULL,
-	[birthday] [date] NOT NULL,
+	[birthday] [int] NOT NULL,
 	[address] [nchar](100) NULL,
 	[email] [nchar](50) NOT NULL,
 	[gender] [int] NULL,
-	[registerdata] [date] NOT NULL,
+	[registerdata] [int] NOT NULL,
 	[subscribed] [nchar](2) NOT NULL,
  CONSTRAINT [PK_member] PRIMARY KEY CLUSTERED 
 (

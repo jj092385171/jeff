@@ -1,12 +1,14 @@
-package servlerProject.service.impl;
+package T4_01.servlerProject.service.impl;
 
 import java.util.List;
 
-import servlerProject.dao.AdminDao;
-import servlerProject.dao.impl.AdminDaoImpl;
-import servlerProject.entity.Admin;
-import servlerProject.service.AdminService;
-import servlerProject.utils.DbUtils;
+import T4_01.servlerProject.dao.AdminDao;
+import T4_01.servlerProject.dao.impl.AdminDaoImpl;
+import T4_01.servlerProject.entity.Admin;
+import T4_01.servlerProject.service.AdminService;
+import utils.DbUtils;
+
+
 
 public  class AdminServiceImpl implements AdminService {
 

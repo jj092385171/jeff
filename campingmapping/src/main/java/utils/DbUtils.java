@@ -1,4 +1,4 @@
-package servlerProject.utils;
+package utils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

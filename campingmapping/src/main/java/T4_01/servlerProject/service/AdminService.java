@@ -1,10 +1,12 @@
-package servlerProject.service;
+package T4_01.servlerProject.service;
 
 import java.util.List;
 
+import T4_01.servlerProject.entity.Admin;
 
 
-import servlerProject.entity.Admin;
+
+
 
 public interface AdminService {
 public Admin login (int UID,String password);

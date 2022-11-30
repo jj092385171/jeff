@@ -1,4 +1,4 @@
-package servlerProject.servler;
+package T4_01.servlerProject.servler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servlerProject.entity.Admin;
+import T4_01.servlerProject.entity.Admin;
+
+
 
 @WebServlet("/showall")
 public class ShowAllAdminservlet extends HttpServlet {

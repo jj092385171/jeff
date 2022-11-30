@@ -1,4 +1,4 @@
-package ch01;
+package T4_01.ch01;
 
 import java.io.IOException;
 import java.io.PrintWriter;
