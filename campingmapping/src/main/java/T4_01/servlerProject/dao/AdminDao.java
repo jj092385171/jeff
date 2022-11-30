@@ -1,8 +1,8 @@
-package servlerProject.dao;
+package T4_01.servlerProject.dao;
 
 import java.util.List;
 
-import servlerProject.entity.Admin;
+import T4_01.servlerProject.entity.Admin;
 
 public interface AdminDao {
 	public int insert(Admin admin);

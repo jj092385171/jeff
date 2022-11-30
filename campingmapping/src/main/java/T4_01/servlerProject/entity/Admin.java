@@ -1,4 +1,4 @@
-package servlerProject.entity;
+package T4_01.servlerProject.entity;
 
 public class Admin {
 	private int UID;

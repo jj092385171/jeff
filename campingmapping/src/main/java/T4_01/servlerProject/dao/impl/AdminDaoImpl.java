@@ -1,18 +1,19 @@
-package servlerProject.dao.impl;
+package T4_01.servlerProject.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import servlerProject.dao.AdminDao;
-import servlerProject.entity.Admin;
-import servlerProject.utils.DbUtils;
+import T4_01.servlerProject.dao.AdminDao;
+import T4_01.servlerProject.entity.Admin;
+import utils.DbUtils;
+
+
 
 public class AdminDaoImpl implements AdminDao {
 	private QueryRunner queryRunner = new QueryRunner();
