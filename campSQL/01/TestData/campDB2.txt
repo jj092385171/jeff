@@ -1,6 +1,6 @@
 USE [campDB]
 GO
-/****** Object:  Table [dbo].[license]    Script Date: 2022/12/1 下午 01:28:30 ******/
+/****** Object:  Table [dbo].[license]    Script Date: 2022/11/30 下午 08:13:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -17,7 +17,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[limits]    Script Date: 2022/12/1 下午 01:28:30 ******/
+/****** Object:  Table [dbo].[limits]    Script Date: 2022/11/30 下午 08:13:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -41,7 +41,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[member]    Script Date: 2022/12/1 下午 01:28:30 ******/
+/****** Object:  Table [dbo].[member]    Script Date: 2022/11/30 下午 08:13:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -56,11 +56,11 @@ CREATE TABLE [dbo].[member](
 	[leavel] [int] NOT NULL,
 	[point] [int] NOT NULL,
 	[phone] [int] NULL,
-	[birthday] [datetime2](7) NOT NULL,
+	[birthday] [datetime2] NOT NULL,
 	[address] [nvarchar](100) NULL,
 	[email] [nvarchar](50) NOT NULL,
 	[gender] [int] NULL,
-	[registerdata] [datetime2](7) NOT NULL,
+	[registerdata] [datetime2] NOT NULL,
 	[subscribed] [char](1) NOT NULL,
  CONSTRAINT [PK_member] PRIMARY KEY CLUSTERED 
 (
@@ -118,44 +118,44 @@ INSERT [dbo].[limits] ([UID], [nomore], [buy], [sell], [publisher], [message], [
 GO
 SET IDENTITY_INSERT [dbo].[member] ON 
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (1, N'YagamiTaichi', N'八神太一', N'太一', N'八神', 0, 1, 0, NULL, CAST(N'1988-03-17T00:00:01.0000000' AS DateTime2), NULL, N'YagamiTaichi@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (1, N'YagamiTaichi', N'八神太一', N'太一', N'八神', 0, 1, 0, NULL, 1988-03-17 00:00:01, NULL, N'YagamiTaichi@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (2, N'IshidaYamato', N'石田大和', N'大和', N'石田', 0, 1, 0, NULL, CAST(N'1988-07-20T00:00:01.0000000' AS DateTime2), NULL, N'IshidaYamato@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (2, N'IshidaYamato', N'石田大和', N'大和', N'石田', 0, 1, 0, NULL, 1988-07-20 00:00:01, NULL, N'IshidaYamato@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (3, N'JohnDepp', N'強尼戴普', N'強尼', N'戴普', 0, 1, 0, NULL, CAST(N'1963-06-09T01:00:01.0000000' AS DateTime2), NULL, N'JohnDepp@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (3, N'JohnDepp', N'強尼戴普', N'強尼', N'戴普', 0, 1, 0, NULL, 1963-06-09 01:00:00, NULL, N'JohnDepp@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (4, N'LeonardoPikachu', N'李奧納多·皮卡丘', N'李奧納多', N'皮卡丘', 0, 1, 0, NULL, CAST(N'1974-11-11T01:00:01.0000000' AS DateTime2), NULL, N'LeonardoPikachu@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (4, N'LeonardoPikachu', N'李奧納多·皮卡丘', N'李奧納多', N'皮卡丘', 0, 1, 0, NULL, 1974-11-11 01:00:00, NULL, N'LeonardoPikachu@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (5, N'Squidward', N'章魚哥', NULL, N'章魚哥', 0, 1, 0, NULL, CAST(N'1975-10-23T01:00:01.0000000' AS DateTime2), NULL, N'Squidward@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (5, N'Squidward', N'章魚哥', NULL, N'章魚哥', 0, 1, 0, NULL, 1975-10-23 01:00:00, NULL, N'Squidward@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (6, N'PatrickStar', N'派大星', NULL, N'派大星', 0, 1, 0, NULL, CAST(N'1985-02-26T01:00:01.0000000' AS DateTime2), NULL, N'PatrickStar@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (6, N'PatrickStar', N'派大星', NULL, N'派大星', 0, 1, 0, NULL, 1985-02-26 01:00:00 GMT+0, NULL, N'PatrickStar@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (7, N'RyanReynolds', N'萊恩雷諾斯', N'萊恩', N'雷諾斯', 0, 1, 0, NULL, CAST(N'1976-10-23T01:00:01.0000000' AS DateTime2), NULL, N'RyanReynolds@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (7, N'RyanReynolds', N'萊恩雷諾斯', N'萊恩', N'雷諾斯', 0, 1, 0, NULL, 1976-10-23 01:00:00, NULL, N'RyanReynolds@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (8, N'ChristopherHemsworth', N'克里斯漢斯沃', N'克里斯', N'漢斯沃', 0, 1, 0, NULL, CAST(N'1983-08-11T00:00:01.0000000' AS DateTime2), NULL, N'ChristopherHemsworth@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (8, N'ChristopherHemsworth', N'克里斯漢斯沃', N'克里斯', N'漢斯沃', 0, 1, 0, NULL, 1983-08-11 00:00:00, NULL, N'ChristopherHemsworth@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (9, N'ShihShihDer', N'施育群', N'育群', N'施', 0, 1, 0, NULL, CAST(N'1992-04-10T00:00:01.0000000' AS DateTime2), NULL, N'ShihShihDer@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (9, N'ShihShihDer', N'施育群', N'育群', N'施', 0, 1, 0, NULL, 1992-04-10 00:00:00, NULL, N'ShihShihDer@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (10, N'DwightHoward', N'德懷特霍華德', N'德懷特', N'霍華德', 0, 1, 0, NULL, CAST(N'1985-12-08T00:00:01.0000000' AS DateTime2), NULL, N'DwightHoward@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (10, N'DwightHoward', N'德懷特霍華德', N'德懷特', N'霍華德', 0, 1, 0, NULL, 1985-12-08 00:00:00, NULL, N'DwightHoward@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (11, N'WuBai', N'伍佰', N'俊霖', N'吳', 0, 1, 0, NULL, CAST(N'1968-01-14T00:00:01.0000000' AS DateTime2), NULL, N'WuBai@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (11, N'WuBai', N'伍佰', N'俊霖', N'吳', 0, 1, 0, NULL, 1968-01-14 00:00:00, NULL, N'WuBai@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
-INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (12, N'ChienMingWang', N'王建民', N'建民', N'王', 0, 1, 0, NULL, CAST(N'1980-03-31T00:00:01.0000000' AS DateTime2), NULL, N'ChienMingWang@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n')
+INSERT [dbo].[member] ([UID], [account(email)], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed]) VALUES (12, N'ChienMingWang', N'王建民', N'建民', N'王', 0, 1, 0, NULL, 1980-03-31 00:00:00, NULL, N'ChienMingWang@cm.com', NULL, 2022-11-29 00:00:01, N'n')
 GO
 SET IDENTITY_INSERT [dbo].[member] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__member__449601202C141600]    Script Date: 2022/12/1 下午 01:28:30 ******/
-ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ__member__449601202C141600] UNIQUE NONCLUSTERED 
+/****** Object:  Index [UQ__member__44960120B2CD420B]    Script Date: 2022/11/30 下午 08:13:51 ******/
+ALTER TABLE [dbo].[member] ADD UNIQUE NONCLUSTERED 
 (
 	[account(email)] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__member__AB6E61642DAED69E]    Script Date: 2022/12/1 下午 01:28:30 ******/
-ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ__member__AB6E61642DAED69E] UNIQUE NONCLUSTERED 
+/****** Object:  Index [UQ__member__AB6E616445AE4C9D]    Script Date: 2022/11/30 下午 08:13:51 ******/
+ALTER TABLE [dbo].[member] ADD UNIQUE NONCLUSTERED 
 (
 	[email] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
