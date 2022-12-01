@@ -17,8 +17,8 @@ CREATE TABLE [dbo].[discuss](
 	[releaseDate] [datetime2](7) NOT NULL,
 	[userLike] [int] NULL,
 	[userUnlike] [int] NULL,
-	[report] [bit] NULL,
-	[hide] [bit] NULL
+	[report] [int] NULL,
+	[hide] [int] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[discuss] ADD PRIMARY KEY CLUSTERED 
