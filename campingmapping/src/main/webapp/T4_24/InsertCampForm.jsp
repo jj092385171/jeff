@@ -15,7 +15,7 @@ form {
 </style>
 </head>
 <body>
-	<form name="InsertCampForm" action="<c:url value='/T4_24/InsertCampServlet' />" method="POST" enctype=“multipart/form-data”>
+	<form name="InsertCampForm" action="<c:url value='/T4_24/InsertCampServlet' />" method="POST" enctype="multipart/form-data">
 		<table border="1">
 			<thead>
 				<tr bgcolor='lightblue'>
