@@ -1,0 +1,76 @@
+USE [campDB]
+GO
+
+/****** Object:  Table [dbo].[category]    Script Date: 2022/12/1 下午 04:33:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[category](
+	[Pd_id] [int] NOT NULL,
+	[UID] [int] NULL,
+	[name] [nvarchar](max) NULL,
+	[title] [nvarchar](max) NOT NULL,
+	[content] [nvarchar](max) NOT NULL,
+	[type] [nvarchar](max) NOT NULL,
+	[picture] [varbinary](max) NULL,
+	[price] [int] NOT NULL,
+	[inventory] [int] NOT NULL,
+	[Pd_date] [datetime] NOT NULL,
+	[Pd_last_update] [datetime] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+
+
+USE [campDB]
+GO
+
+/****** Object:  Table [dbo].[productOrder]    Script Date: 2022/11/29 下午 06:57:08 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[productOrder](
+	[orderID] [int] NOT NULL,
+	[date] [datetime] NOT NULL,
+	[detail] [nvarchar](max) NOT NULL,
+	[money] [int] NULL,
+	[quantity] [int] NULL,
+	[address] [nvarchar](max) NULL,
+	[phone] [varchar](15) NULL,
+	[name] [varchar](32) NOT NULL,
+	[userUID] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+USE [campDB]
+GO
+
+/****** Object:  Table [dbo].[shoppingCart]    Script Date: 2022/11/29 下午 06:57:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[shoppingCart](
+	[ct_id] [int] NOT NULL,
+	[Pd_id] [int] NOT NULL,
+	[ct_qty] [int] NOT NULL,
+	[od_id] [int] NOT NULL,
+	[ct_date] [datetime] NOT NULL,
+	[user_id] [varchar](50) NOT NULL,
+	[Pd_price] [decimal](9, 2) NOT NULL,
+	[Co_id] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+
