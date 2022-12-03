@@ -5,7 +5,7 @@ GO
 CREATE TABLE [dbo].[lotteryRecord](
 	[lotteryId] [int] NOT NULL,
 	[userId] [int] NOT NULL,
-	[win] [bit] NULL
+	[winner] [int] NULL
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[lotteryRecord]  WITH CHECK ADD FOREIGN KEY([lotteryId])
@@ -14,4 +14,3 @@ GO
 ALTER TABLE [dbo].[lotteryRecord]  WITH CHECK ADD FOREIGN KEY([userId])
 REFERENCES [dbo].[member] ([UID])
 GO
-
