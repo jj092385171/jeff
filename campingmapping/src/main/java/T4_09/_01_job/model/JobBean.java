@@ -1,5 +1,6 @@
 package T4_09._01_job.model;
 
+import java.sql.Blob;
 import java.util.Date;
 
 public class JobBean {
@@ -11,6 +12,7 @@ public class JobBean {
 	private String place;//地點
 	private String date;//上班日期
 	private String time;//上班時段
+	private Blob img;//上班時段
 	private String remark;//備註
 	private Date rackUp;//上架日期
 	private Date rackDown;//下架日期
@@ -18,33 +20,31 @@ public class JobBean {
 	public JobBean(){
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("JobBean [uID=");
-		builder.append(uID);
-		builder.append(", blank=");
-		builder.append(blank);
-		builder.append(", salary=");
-		builder.append(salary);
-		builder.append(", quantity=");
-		builder.append(quantity);
-		builder.append(", place=");
-		builder.append(place);
-		builder.append(", date=");
-		builder.append(date);
-		builder.append(", time=");
-		builder.append(time);
-		builder.append(", remark=");
-		builder.append(remark);
-		builder.append(", rackUp=");
-		builder.append(rackUp);
-		builder.append(", rackDown=");
-		builder.append(rackDown);
-		builder.append("]");
-		return builder.toString();
+	public JobBean(int uID, String blank, int salary, int quantity, String place, String date, String time, Blob img,
+			String remark, Date rackUp, Date rackDown) {
+		super();
+		this.uID = uID;
+		this.blank = blank;
+		this.salary = salary;
+		this.quantity = quantity;
+		this.place = place;
+		this.date = date;
+		this.time = time;
+		this.img = img;
+		this.remark = remark;
+		this.rackUp = rackUp;
+		this.rackDown = rackDown;
 	}
 
+	public Blob getImg() {
+		return img;
+	}
+
+	public void setImg(Blob img) {
+		this.img = img;
+	}
+
+	
 	public int getuID() {
 		return uID;
 	}
@@ -125,20 +125,37 @@ public class JobBean {
 		this.rackDown = rackDown;
 	}
 
-	public JobBean(int uID, String blank, int salary, int quantity, String place, String date, String time,
-			String remark, Date rackUp, Date rackDown) {
-		super();
-		this.uID = uID;
-		this.blank = blank;
-		this.salary = salary;
-		this.quantity = quantity;
-		this.place = place;
-		this.date = date;
-		this.time = time;
-		this.remark = remark;
-		this.rackUp = rackUp;
-		this.rackDown = rackDown;
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("JobBean [uID=");
+		builder.append(uID);
+		builder.append(", blank=");
+		builder.append(blank);
+		builder.append(", salary=");
+		builder.append(salary);
+		builder.append(", quantity=");
+		builder.append(quantity);
+		builder.append(", place=");
+		builder.append(place);
+		builder.append(", date=");
+		builder.append(date);
+		builder.append(", time=");
+		builder.append(time);
+		builder.append(", img=");
+		builder.append(img);
+		builder.append(", remark=");
+		builder.append(remark);
+		builder.append(", rackUp=");
+		builder.append(rackUp);
+		builder.append(", rackDown=");
+		builder.append(rackDown);
+		builder.append("]");
+		return builder.toString();
 	}
+
+
 
 	
 

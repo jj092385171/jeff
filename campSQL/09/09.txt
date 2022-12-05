@@ -1,1 +1,121 @@
-5161516511651
+USE [campDB]
+GO
+/****** Object:  Table [dbo].[campOrd]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[campOrd](
+	[UID] [int] NOT NULL,
+	[ordDate] [datetime2](7) NOT NULL,
+	[ordID] [int] NOT NULL,
+	[total] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[campOrdItem]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[campOrdItem](
+	[ordID] [int] NOT NULL,
+	[amount] [int] NOT NULL,
+	[price] [int] NOT NULL,
+	[itemPrice] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Comment]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comment](
+	[UID] [int] NOT NULL,
+	[jDate] [datetime2](7) NOT NULL,
+	[jcontent] [varbinary](100) NULL,
+	[img] [varbinary](max) NOT NULL,
+	[reportID] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Comment_report]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comment_report](
+	[reportID] [int] NOT NULL,
+	[reason] [varbinary](50) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[hr]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[hr](
+	[uid] [int] NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[Lexperience] [nvarchar](50) NULL,
+	[seniority] [nvarchar](50) NULL,
+	[language] [nvarchar](50) NULL,
+	[apply] [nvarchar](50) NOT NULL,
+	[img] [varbinary](max) NULL,
+	[remark] [nvarchar](100) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[job]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[job](
+	[uID] [int] NOT NULL,
+	[job] [nvarchar](20) NOT NULL,
+	[salary] [nvarchar](20) NOT NULL,
+	[quantity] [int] NULL,
+	[place] [nvarchar](50) NOT NULL,
+	[time] [nvarchar](50) NOT NULL,
+	[date] [nvarchar](50) NOT NULL,
+	[img] [varbinary](max) NULL,
+	[remark] [nvarchar](50) NULL,
+	[rackUp] [datetime2](7) NOT NULL,
+	[rackDown] [datetime2](7) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[license_product]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[license_product](
+	[proID] [int] NOT NULL,
+	[price] [int] NOT NULL,
+	[starDate] [datetime2](7) NOT NULL,
+	[endDate] [datetime2](7) NOT NULL,
+	[img] [varbinary](max) NOT NULL,
+	[decribe] [nvarchar](100) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[licenseOrd]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[licenseOrd](
+	[UID] [int] NOT NULL,
+	[ordDate] [datetime2](7) NOT NULL,
+	[ordID] [int] NOT NULL,
+	[total] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[licenseOrdItem]    Script Date: 2022/12/5 下午 07:03:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[licenseOrdItem](
+	[ordID] [int] NOT NULL,
+	[proID] [int] NOT NULL,
+	[itemPrice] [int] NOT NULL
+) ON [PRIMARY]
+GO
