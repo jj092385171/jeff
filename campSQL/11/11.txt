@@ -1,0 +1,26 @@
+CREATE TABLE initiating(
+initiatingnum INT NOT NULL PRIMARY KEY,
+postmember INT NOT NULL,
+postdate DATETIME2  NOT NULL,
+startdate DATETIME2 NOT NULL,
+enddate DATETIME2 NOT NULL,
+currentnum INT NOT NULL,
+acceptablenum INT NOT NULL,
+camparea NVARCHAR NOT NULL,
+pair INT NOT NULL
+);
+
+CREATE TABLE messagelist(
+messagelistnum INT NOT NULL PRIMARY KEY,
+initiating_num INT NOT NULL REFERENCES initiating(initiatingnum),
+messagemember  INT NOT NULL,
+messagetext NVARCHAR NOT NULL,
+);
+
+CREATE TABLE joinlist(
+joinlistnum INT NOT NULL PRIMARY KEY,
+initiating_num INT NOT NULL REFERENCES initiating(initiatingnum),
+joinmember INT NOT NULL,
+joinpeoplenum INT NOT NULL,
+accept INT NOT NULL
+);
