@@ -1,8 +1,8 @@
-package T4_36;
+package T4_36.entity;
 
 import java.util.Date;
 
-public class productOrder {
+public class ProductOrder {
 
 	private int orderID;
 	// 訂單編號(pk)
@@ -29,9 +29,9 @@ public class productOrder {
 	private int od_shipping_cost;
 	// 運送費用
 
-	public productOrder(int orderID, String od_status, Date od_date, Date od_last_update, String user_id,
-			String od_shipping_name, int pd_price, String od_shipping_address, String od_shipping_email,
-			String od_shipping_phone, String od_shipping_postal_code, int od_shipping_cost) {
+	public ProductOrder(int orderID, String od_status, Date od_date, Date od_last_update, String user_id,
+                        String od_shipping_name, int pd_price, String od_shipping_address, String od_shipping_email,
+                        String od_shipping_phone, String od_shipping_postal_code, int od_shipping_cost) {
 		super();
 		this.orderID = orderID;
 		Od_status = od_status;

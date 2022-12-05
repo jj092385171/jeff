@@ -1,10 +1,10 @@
-package T4_36;
+package T4_36.entity;
 
 import java.util.Date;
 
-public class category {
+public class Category {
 
-	private int Pd_id;
+	private Integer Pd_id;
 	// 產品編號(pk)
 	private int UID;
 	// 會員 id(fk)
@@ -31,8 +31,8 @@ public class category {
 		return Pd_id;
 	}
 
-	public category(int pd_id, int uID, String name, String title, String content, String type, String picture,
-			int price, int inventory, Date pd_date, Date pd_last_update) {
+	public Category(Integer pd_id, int uID, String name, String title, String content, String type, String picture,
+					int price, int inventory, Date pd_date, Date pd_last_update) {
 		super();
 		Pd_id = pd_id;
 		UID = uID;
