@@ -25,35 +25,45 @@ form {
 			<tbody>
 				<tr bgcolor='lightgreen'>
 					<td width="120" height="40">營地名:</td>
-					<td width="600" height="40" align="left"><input id='memberId'
+					<td width="600" height="40" align="left"><input id='campName'
 						style="text-align: left" name="campName" value="${param.campName}" type="text" size="14">
 						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.campName}</div>
 					</td>
 				</tr>
 				<tr bgcolor='lightgreen'>
 					<td width="120" height="40">縣市:</td>
-					<td width="600" height="40" align="left"><input id='pswd'
-						style="text-align: left" name="city" value="${param.city}" type="password" size="14">
-						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.city}</div>
+					<td width="600" height="40" align="left">
+						<c:forEach var='city' items='${cityList}'>
+							<input type="radio" name="cityID" value="${city.getCityID()}" />${city.getCityName()}
+						</c:forEach>
 					</td>
 				</tr>
 				<tr bgcolor='lightgreen'>
 					<td width="120" height="40">地址:</td>
-					<td width="600" height="40" align="left"><input name="location" value="${param.location}"
+					<td width="600" height="40" align="left"><input id='location' name="location" value="${param.location}"
 						type="text" size="20">
-						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.name}</div>
+						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.location}</div>
 					</td>
 				</tr>
 				<tr bgcolor='lightgreen'>
 					<td width="120" height="40">選擇營地圖片:</td>
-					<td width="600" height="40" align="left"><input name="campPictures" 
+					<td width="600" height="40" align="left"><input id='campPictures' name="campPictures" 
 						type="file" size="20">
+						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.campPictures}</div>
 					</td>
 				</tr>
 				<tr bgcolor='lightgreen'>
 					<td width="120" height="40">簡介:</td>
 					<td width="600" height="40" align="left"><input name="discription" value="${param.discription}"
 						type="text" size="20">
+					</td>
+				</tr>
+				<tr bgcolor='lightgreen'>
+					<td width="120" height="40">標籤:</td>
+					<td width="600" height="40" align="left">
+						<c:forEach var='tag' items='${tagList}'>
+							<input type="checkbox" name="tagID" value="${tag.getTagID()}" />${tag.getTagName()}
+						</c:forEach>
 					</td>
 				</tr>
 				<tr bgcolor='lightblue'>

@@ -1,9 +1,11 @@
-package T4_24.Do;
+package T4_24.Controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,14 +17,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import T4_24.Dao.CampDao;
+import T4_24.Dao.TagDao;
+import T4_24.Dao.TagOfCampDao;
 import T4_24.Models.CampBean;
+import T4_24.Models.TagBean;
 
 
 @MultipartConfig
 @WebServlet("/T4_24/InsertCampServlet")
 public class InsertCampServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HashMap<String, String> errorMsg = new HashMap<>();
@@ -37,35 +43,42 @@ public class InsertCampServlet extends HttpServlet {
 			errorMsg.put("campName", "必須輸入營地名稱");
 		}
 		//縣市
-		String city = request.getParameter("city");
-		if(city == null  ||  city.trim().length() == 0) {
-			errorMsg.put("city", "必須輸入縣市");
-		}
+		String cityID = request.getParameter("cityID");
+		
 		//地址
 		String location = request.getParameter("location");
 		if(location == null  ||  location.trim().length() == 0) {
 			errorMsg.put("location", "必須輸入地址");
 		}	
 		//讀圖
-//		String campPictures = request.getParameter("campPictures");
 		Part part = request.getPart("campPictures");
 		InputStream is = part.getInputStream();
-//		byte[] pic = new byte[is.available()];
-//		is.read(pic);
+		if(is.read() == -1) {
+			errorMsg.put("campPictures", "必須選擇圖片");
+		}	
 		//簡介
 		String discription = request.getParameter("discription");
+		//標籤
+		String[] tagIDs = request.getParameterValues("tagID");
+		
 		
 		//錯誤返回呼叫jsp
-		if(! errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/InsertCampForm.jsp");
+		if(!errorMsg.isEmpty()) {
+			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/InsertCamp");
 			rd.forward(request, response);
 			return;
+			
 		}
 		
-		CampBean cb = new CampBean(campName, city, location, is, discription);
+		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location, is, discription);
 		CampDao campDao = new CampDao();
+		TagOfCampDao tagOfCampDao = new TagOfCampDao();
+		
 		try {
-			campDao.Add(cb);
+			BigDecimal campID = campDao.Add(cb);
+			for(String tagID : tagIDs) {
+				tagOfCampDao.Add( Integer.valueOf(tagID) ,campID.intValueExact() );
+			}
 			session.setAttribute("CampBean", cb);
 			
 			String contextPath = request.getContextPath();
