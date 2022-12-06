@@ -95,8 +95,8 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 	}
 
 	@Override
-	public ProductOrder findById(int orderNo) {
-		log.info("依照orderNo編號讀取特定一筆訂單的所有資料之Dao, orderNo=" + orderNo);
+	public ProductOrder findById(int orderID) {
+		log.info("依照orderID編號讀取特定一筆訂單的所有資料之Dao, orderID=" + orderID);
 		ProductOrder ob = null;
 		DataSource ds = null;
 		Set<ProductOrderItems> set = null;
