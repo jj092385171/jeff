@@ -15,50 +15,48 @@ public class MemberImpl implements MemberDao {
 	public Member insert(Member member) {
 		try {
 			Member insert = queryRunner.insert(DbUtils.getConnection(),
-					"INSERT INTO member (account,Nickname,firstname ,lastname,exp,leavel,point,phone,birthday,address ,email,gender,registerdata ,subscribed ,shot)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+					"INSERT INTO member (account,Nickname,firstname ,lastname,exp,leavel,point,phone,birthday,address ,email,gender ,subscribed ,shot)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
 					new BeanHandler<Member>(Member.class), member.getAccount(),
 					member.getNickname(), member.getFirstname(),
 					member.getLastname(), member.getExp(), member.getLeavel(),
 					member.getPoint(), member.getPhone(), member.getBirthday(),
 					member.getAddress(), member.getEmail(), member.getGender(),
-					member.getRegisterdata(), member.getSubscribed(),
-					member.getShot());
+					member.getSubscribed(), member.getShot());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	@Override
 	public int delete(String account) {
 		try {
-			int update = queryRunner.update(DbUtils.getConnection(), 
-					"DELETE FROM member WHERE account = ?"
-					,account);
-			return update;
+			int delete = queryRunner.update(DbUtils.getConnection(),
+					"DELETE FROM member WHERE account = ?", account);
+			return delete;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
-		return 0;
 	}
 
 	@Override
 	public int update(Member member) {
 		try {
 			int update = queryRunner.update(DbUtils.getConnection(),
-					"UPDATE member SET account = ?,Nickname = ?,firstname = ?,lastname = ?,exp = ?,leavel = ?,point = ?,phone = ?,birthday = ?,address = ?,email = ?,gender = ?,registerdata = ?,subscribed = ?,shot = ? WHERE account = ?",
+					"UPDATE member SET account = ?,Nickname = ?,firstname = ?,lastname = ?,exp = ?,leavel = ?,point = ?,phone = ?,birthday = ?,address = ?,email = ?,gender = ?,subscribed = ?,shot = ? WHERE account = ?",
 					member.getNickname(), member.getFirstname(),
 					member.getLastname(), member.getExp(), member.getLeavel(),
 					member.getPoint(), member.getPhone(), member.getBirthday(),
 					member.getAddress(), member.getEmail(), member.getGender(),
-					member.getRegisterdata(), member.getSubscribed(),
-					member.getShot(),member.getAccount());
+					member.getSubscribed(), member.getShot(),
+					member.getAccount());
 			return update;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
-		return 0;
 	}
 
 	@Override
@@ -70,8 +68,8 @@ public class MemberImpl implements MemberDao {
 			return member;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	@Override
@@ -84,8 +82,8 @@ public class MemberImpl implements MemberDao {
 			return members;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 }
