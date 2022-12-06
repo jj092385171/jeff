@@ -3,6 +3,7 @@ package T4_24.Controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import org.hibernate.Hibernate;
 
 import T4_24.Dao.CampDao;
 import T4_24.Dao.TagDao;
@@ -56,6 +59,8 @@ public class InsertCampServlet extends HttpServlet {
 		if(is.read() == -1) {
 			errorMsg.put("campPictures", "必須選擇圖片");
 		}	
+		com.mysql.cj.jdbc.Blob blob = (com.mysql.cj.jdbc.Blob) Hibernate.createBlob(is);
+		
 		//簡介
 		String discription = request.getParameter("discription");
 		//標籤
@@ -70,7 +75,7 @@ public class InsertCampServlet extends HttpServlet {
 			
 		}
 		
-		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location, is, discription);
+		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location, blob, discription);
 		CampDao campDao = new CampDao();
 		TagOfCampDao tagOfCampDao = new TagOfCampDao();
 		

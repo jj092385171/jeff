@@ -11,7 +11,7 @@
 <h1>營地: ${ CampBean.campName } 的資料新增成功</h1>
 縣市: ${ CampBean.cityID }<br>
 地址: ${ CampBean.location }<br>
-圖片: <img src="data:image/jpg;base64,${CampBean.getBinaryString()}"><br>
+圖片: <img src='data:image/png;base64,${CampBean.getBase64String()}'><br>
 簡介: ${ CampBean.discription }<br>
 
 <p>

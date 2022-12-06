@@ -2,9 +2,12 @@ package T4_24.Models;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.Base64;
 
 import org.apache.commons.io.IOUtils;
+
+import com.mysql.cj.jdbc.Blob;
 
 
 public class CampBean {
@@ -13,7 +16,7 @@ public class CampBean {
 	private String campName;
 	private int cityID;
 	private String location;
-	private InputStream campPictures;
+	private java.sql.Blob campPictures;
 	private String discription;
 	
 	
@@ -21,7 +24,7 @@ public class CampBean {
 		
 	}
 
-	public CampBean(String campName, int cityID, String location, InputStream campPictures, String discription) {
+	public CampBean(String campName, int cityID, String location, java.sql.Blob campPictures, String discription) {
 		super();
 		this.campName = campName;
 		this.cityID = cityID;
@@ -64,11 +67,11 @@ public class CampBean {
 		this.location = location;
 	}
 
-	public InputStream getCampPictures() {
+	public java.sql.Blob getCampPictures() {
 		return campPictures;
 	}
 
-	public void setCampPictures(InputStream campPictures) {
+	public void setCampPictures(java.sql.Blob campPictures) {
 		this.campPictures = campPictures;
 	}
 
@@ -82,12 +85,9 @@ public class CampBean {
 	
 	
 
-	public String getBinaryString() throws IOException {
-		byte[] sourceBytes = IOUtils.toByteArray(campPictures);
-		System.out.println(sourceBytes);
-		System.out.println(campPictures);
+	public String getBase64String() throws IOException, SQLException {
+		byte[] sourceBytes = IOUtils.toByteArray(campPictures.getBinaryStream());
 		String encodedString = Base64.getEncoder().encodeToString(sourceBytes); 
-		System.out.println(encodedString);
 		return encodedString;
 	}
 	
