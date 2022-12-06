@@ -24,6 +24,7 @@ public class DiscussionDao {
 	SimpleDateFormat dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	// 新增貼文
+	
 	public void insertPost(Integer userId, String title, String content, InputStream picture, Integer people,
 			Integer price, String county, String stringStartDate, String stringEndDate, Integer score)
 			throws SQLException, ParseException {
@@ -43,6 +44,39 @@ public class DiscussionDao {
 		java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
 		preState.setDate(9, endDate); // 設定endDate
 		preState.setInt(10, score); // 設定score
+		String stringReleaseDate = dateTime.format(new Date()); // 設定releaseDate
+		Date utilReleaseDate = dateTime.parse(stringReleaseDate);
+		// java.sql.Date releaseDate = new java.sql.Date(utilReleaseDate.getTime());
+		// java.sql.Time releaseTime = new java.sql.Time(utilReleaseDate.getTime());
+		java.sql.Timestamp releaseDate = new java.sql.Timestamp(utilReleaseDate.getTime());
+		preState.setTimestamp(11, releaseDate);
+		preState.setInt(12, 0); // 設定userLike
+		preState.setInt(13, 0); // 設定userUnlike
+		preState.setInt(14, 0); // 設定postReport
+		preState.setInt(15, 0); // 設定postHide
+		preState.executeUpdate();
+		System.out.println("新增貼文完成");
+		preState.close();
+	}
+	public void insertPost2(DiscussionBean d)
+					throws SQLException, ParseException {
+		String sql = "insert into post values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement preState = conn.prepareStatement(sql);
+//		preState.setInt(1, d.getUserId()); // 設定userId
+		preState.setInt(1, 1); // 設定userId
+		preState.setString(2, d.getTitle()); // 設定title
+		preState.setString(3, d.getContent()); // 設定content
+		preState.setBinaryStream(4, d.getPicture()); // 設定picture
+		preState.setInt(5, d.getPeople()); // 設定people
+		preState.setInt(6, d.getPrice()); // 設定price
+		preState.setString(7, d.getCounty()); // 設定county
+//		Date utilStartDate = date.parse(stringStartDate);
+		java.sql.Date startDate = new java.sql.Date(d.getStartDate().getTime());
+		preState.setDate(8, startDate); // 設定startDate
+//		Date utilEndDate = date.parse(stringEndDate);
+		java.sql.Date endDate = new java.sql.Date(d.getEndDate().getTime());
+		preState.setDate(9, endDate); // 設定endDate
+		preState.setInt(10, d.getScore()); // 設定score
 		String stringReleaseDate = dateTime.format(new Date()); // 設定releaseDate
 		Date utilReleaseDate = dateTime.parse(stringReleaseDate);
 		// java.sql.Date releaseDate = new java.sql.Date(utilReleaseDate.getTime());
@@ -204,11 +238,11 @@ public class DiscussionDao {
 			java.sql.Date sqlStartDate = rs.getDate("startDate"); // 取startDate
 			Date utilStartDate = new Date(sqlStartDate.getTime());
 			String stringStartDate = date.format(utilStartDate);
-			bean.setStartDate(stringStartDate);
+//			bean.setStartDate(stringStartDate);
 			java.sql.Date sqlEndDate = rs.getDate("endDate"); // 取endDate
 			Date utilEndDate = new Date(sqlEndDate.getTime());
 			String stringEndDate = date.format(utilEndDate);
-			bean.setEndDate(stringEndDate);
+//			bean.setEndDate(stringEndDate);
 			bean.setScore(rs.getInt("score")); // 取score
 			java.sql.Timestamp sqlReleaseDate = rs.getTimestamp("releaseDate"); // 取releaseDate
 			String stringReleaseDate = dateTime.format(sqlReleaseDate);

@@ -1,6 +1,7 @@
 package T4_33.bean;
 
 import java.io.InputStream;
+import java.util.Date;
 
 public class DiscussionBean {
 	// 會員
@@ -14,8 +15,8 @@ public class DiscussionBean {
 	private int people;
 	private int price;
 	private String county;
-	private String startDate;
-	private String endDate;
+	private Date startDate;
+	private Date endDate;
 	private int score;
 	private String releaseDate;
 	private int userLike;
@@ -95,19 +96,19 @@ public class DiscussionBean {
 		this.county = county;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

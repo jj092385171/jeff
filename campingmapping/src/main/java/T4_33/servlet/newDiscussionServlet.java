@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import T4_33.bean.DiscussionBean;
 import T4_33.dao.DiscussionDao;
 import utils.DbUtils;
 
@@ -35,25 +36,44 @@ public class newDiscussionServlet extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DiscussionBean b = new DiscussionBean();
+
 			request.setCharacterEncoding("UTF-8");
 			String title = request.getParameter("title");
+			b.setTitle(title);
 			String content = request.getParameter("content");
+			b.setContent(content);
 			String stringPicture = request.getParameter("picture");
+			b.setPicture(null);
 			//String要轉成inputStream
-			String stringPeople = request.getParameter("people");
-			int people = Integer.parseInt(stringPeople);
-			String stringPrice = request.getParameter("price");
-			int price = Integer.parseInt(stringPrice);
-			String county = request.getParameter("county");
-			String stringStartDate = request.getParameter("startDate");
-			Date utilStartDate = date.parse(stringStartDate);
-			java.sql.Date startDate = new java.sql.Date(utilStartDate.getTime());
-			String stringEndDate = request.getParameter("endDate");
-			Date utilEndDate = date.parse(stringEndDate);
-			java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
-			String score = request.getParameter("price");
+			int People = Integer.parseInt(request.getParameter("people"));
+			b.setPeople(People);
+			String pricejsp = request.getParameter("price");
+			int price;
+			if( pricejsp != "") {
+				price = Integer.parseInt(pricejsp);
+				
+			}else {
+				
+				price = 0;
+			}
 			
-			d.insertPost(1, title, content, null, null, null, county, stringStartDate, stringEndDate, null);
+			b.setPrice(price);
+			String county = request.getParameter("county");
+			b.setCounty(county);
+			Date StartDate = date.parse(request.getParameter("startDate"));
+			b.setStartDate(StartDate);
+//			Date utilStartDate = date.parse(stringStartDate);
+//			java.sql.Date startDate = new java.sql.Date(utilStartDate.getTime());
+			Date  EndDate = date.parse(request.getParameter("endDate"));
+			b.setEndDate(EndDate);
+//			Date utilEndDate = date.parse(stringEndDate);
+//			java.sql.Date endDate = new java.sql.Date(utilEndDate.getTime());
+			int score =  Integer.parseInt(request.getParameter("score"));
+			b.setScore(score);
+			DiscussionDao Dao = new DiscussionDao(DbUtils.getConnection());
+//			Dao.insertPost(1, title, content, null, people, price, county, stringStartDate, stringEndDate, score);
+			Dao.insertPost2(b);
 			
 			
 			request.setAttribute("title", title);
