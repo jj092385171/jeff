@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,14 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.Hibernate;
 
 import T4_24.Dao.CampDao;
+import T4_24.Dao.CityDao;
 import T4_24.Dao.TagDao;
 import T4_24.Dao.TagOfCampDao;
 import T4_24.Models.CampBean;
+import T4_24.Models.CityBean;
 import T4_24.Models.TagBean;
+import T4_24.Models.TagOfCampBean;
 
 
 @MultipartConfig
@@ -58,7 +64,7 @@ public class InsertCampServlet extends HttpServlet {
 		InputStream is = part.getInputStream();
 		if(is.read() == -1) {
 			errorMsg.put("campPictures", "必須選擇圖片");
-		}	
+		}
 		Blob blob = Hibernate.createBlob(is);
 		
 		//簡介
@@ -75,17 +81,27 @@ public class InsertCampServlet extends HttpServlet {
 			
 		}
 		
-		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location, blob, discription);
+		CampBean cb = new CampBean(null, campName, Integer.valueOf(cityID), location, blob, discription);
 		CampDao campDao = new CampDao();
 		TagOfCampDao tagOfCampDao = new TagOfCampDao();
+		TagDao tagDao = new TagDao();
+		CityDao cityDao = new CityDao();
+		List<TagBean> tagList = new ArrayList<>();
 		
 		try {
 			BigDecimal campID = campDao.Add(cb);
+			CityBean city = cityDao.findCityNameByCityID(Integer.valueOf(cityID));
+			
 			for(String tagID : tagIDs) {
 				tagOfCampDao.Add( Integer.valueOf(tagID) ,campID.intValueExact() );
+				tagList.add( tagDao.findTagNameByTagID(Integer.valueOf(tagID) ) );
 			}
+			
+			
 			session.setAttribute("ID", campID.toString());
 			session.setAttribute("CampBean", cb);
+			session.setAttribute("city", city);
+			session.setAttribute("tagList", tagList);
 			
 			String contextPath = request.getContextPath();
 			response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/InsertMemberSuccess.jsp") ); 

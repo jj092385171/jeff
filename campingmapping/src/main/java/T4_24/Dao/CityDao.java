@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import T4_24.Models.CityBean;
@@ -15,6 +16,12 @@ public class CityDao {
 	
 	Connection conn = DbUtils.getConnection();
 	QueryRunner qr = new QueryRunner();
+	
+	//透過cityID查詢cityName
+	public CityBean findCityNameByCityID(int cityID) throws SQLException {
+		String sql = "select * from city where cityID = ?";
+		return (CityBean) qr.query(conn, sql, new BeanHandler(CityBean.class), cityID);	
+	}
 	
 	//搜尋全部城市
 	public List<CityBean> show() throws SQLException {

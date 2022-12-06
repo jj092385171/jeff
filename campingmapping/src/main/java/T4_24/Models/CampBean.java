@@ -6,6 +6,9 @@ import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Base64;
 
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
+
 import org.apache.commons.io.IOUtils;
 
 import com.mysql.cj.jdbc.Blob;
@@ -13,7 +16,7 @@ import com.mysql.cj.jdbc.Blob;
 
 public class CampBean {
 	
-	private int campID;
+	private Integer campID;
 	private String campName;
 	private int cityID;
 	private String location;
@@ -25,8 +28,9 @@ public class CampBean {
 		
 	}
 
-	public CampBean(String campName, int cityID, String location, java.sql.Blob campPictures, String discription) {
+	public CampBean(Integer campID, String campName, int cityID, String location, java.sql.Blob campPictures, String discription) {
 		super();
+		this.campID = campID;
 		this.campName = campName;
 		this.cityID = cityID;
 		this.location = location;
@@ -36,11 +40,11 @@ public class CampBean {
 
 
 	
-	public int getCampID() {
+	public Integer getCampID() {
 		return campID;
 	}
 
-	public void setCampID(int campID) {
+	public void setCampID(Integer campID) {
 		this.campID = campID;
 	}
 
@@ -92,6 +96,7 @@ public class CampBean {
 //		return encodedString;
 //		
 //	}
+	
 	
 	
 }

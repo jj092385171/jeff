@@ -29,11 +29,11 @@ form {
 					<td width="600" height="40" align="left">
 						<c:forEach var='camp' items='${campList}'>
 							營地編號: ${ camp.getCampID() }<br>
-<%-- 							營地: ${ camp.getCampName() }<br> --%>
-<%-- 							縣市: ${ camp.getCityID() }<br> --%>
-<%-- 							地址: ${ camp.getLocation() }<br> --%>
-<%-- 							圖片: <img src="data:image/gif;base64,${ CampBean.getBinaryString() }"><br> --%>
-<%-- 							簡介: ${ camp.getDiscription() }<br> --%>
+							營地: ${ camp.getCampName() }<br>
+							縣市: ${ camp.getCityID() }<br>
+							地址: ${ camp.getLocation() }<br>
+<!-- 							圖片: <br> -->
+							簡介: ${ camp.getDiscription() }<br>
 						</c:forEach>
 					</td>
 				<tr bgcolor='lightblue'>

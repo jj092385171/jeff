@@ -2,42 +2,40 @@ package T4_24.Models;
 
 public class TagOfCampBean {
 
-	private String tagID;
-	private String campID;
+	private int tagID;
+	private int campID;
 	
 	
 	public TagOfCampBean() {
 	}
 
 
-	public TagOfCampBean(String tagID, String campID) {
+	public TagOfCampBean(int tagID, int campID) {
 		super();
 		this.tagID = tagID;
 		this.campID = campID;
 	}
 
 
-	public String getTagID() {
+	public int getTagID() {
 		return tagID;
 	}
 
 
-	public void setTagID(String tagID) {
+	public void setTagID(int tagID) {
 		this.tagID = tagID;
 	}
 
 
-	public String getCampID() {
+	public int getCampID() {
 		return campID;
 	}
 
 
-	public void setCampID(String campID) {
+	public void setCampID(int campID) {
 		this.campID = campID;
 	}
-	
-	
-	
+
 	
 	
 }
