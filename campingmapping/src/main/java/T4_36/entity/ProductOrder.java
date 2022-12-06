@@ -1,6 +1,8 @@
 package T4_36.entity;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class ProductOrder {
 
@@ -28,10 +30,15 @@ public class ProductOrder {
 	// 郵遞區號
 	private int od_shipping_cost;
 	// 運送費用
+	Set<ProductOrder> items = new LinkedHashSet<>();
+
+	public ProductOrder() {
+
+	}
 
 	public ProductOrder(int orderID, String od_status, Date od_date, Date od_last_update, String user_id,
-                        String od_shipping_name, int pd_price, String od_shipping_address, String od_shipping_email,
-                        String od_shipping_phone, String od_shipping_postal_code, int od_shipping_cost) {
+			String od_shipping_name, int pd_price, String od_shipping_address, String od_shipping_email,
+			String od_shipping_phone, String od_shipping_postal_code, int od_shipping_cost, Set<ProductOrder> items) {
 		super();
 		this.orderID = orderID;
 		Od_status = od_status;
@@ -45,6 +52,15 @@ public class ProductOrder {
 		this.od_shipping_phone = od_shipping_phone;
 		this.od_shipping_postal_code = od_shipping_postal_code;
 		this.od_shipping_cost = od_shipping_cost;
+		this.items = items;
+	}
+
+	public Set<ProductOrder> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<ProductOrder> items) {
+		this.items = items;
 	}
 
 	public String getUser_id() {
@@ -141,16 +157,6 @@ public class ProductOrder {
 
 	public void setOd_shipping_cost(int od_shipping_cost) {
 		this.od_shipping_cost = od_shipping_cost;
-	}
-
-	@Override
-	public String toString() {
-		return "productOrder [orderID=" + orderID + ", Od_status=" + Od_status + ", od_date=" + od_date
-				+ ", od_last_update=" + od_last_update + ", user_id=" + user_id + ", od_shipping_name="
-				+ od_shipping_name + ", Pd_price=" + Pd_price + ", od_shipping_address=" + od_shipping_address
-				+ ", od_shipping_email=" + od_shipping_email + ", od_shipping_phone=" + od_shipping_phone
-				+ ", od_shipping_postal_code=" + od_shipping_postal_code + ", od_shipping_cost=" + od_shipping_cost
-				+ "]";
 	}
 
 }
