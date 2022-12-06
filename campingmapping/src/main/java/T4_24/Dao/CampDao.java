@@ -32,9 +32,9 @@ public class CampDao {
 			return qr.query(conn, sql, new BeanListHandler<CampBean>(CampBean.class));	
 		}
 		
-		public List<CampBean> showID() throws SQLException {
-			String sql = "select campID from camp";
-			return qr.query(conn, sql, new BeanListHandler<CampBean>(CampBean.class));	
+		public CampBean findByID(int campID) throws SQLException {
+			String sql = "select campID from camp where campID = ?";
+			return qr.query(conn, sql, new BeanHandler<CampBean>(CampBean.class),campID);	
 		}
 		
 		//部分搜尋

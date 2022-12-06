@@ -29,7 +29,7 @@ public class DeleteCampPageServlet extends HttpServlet {
 		CampDao campDao = new CampDao();
 		
 		try {
-			List<CampBean> campList = campDao.showID();
+			List<CampBean> campList = campDao.findByID();
 			request.setAttribute("campList", campList);
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/DeleteCampByIDForm.jsp");
 			System.out.println("666");

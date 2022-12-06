@@ -2,6 +2,7 @@ package T4_24.Models;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Base64;
 
@@ -85,11 +86,12 @@ public class CampBean {
 	
 	
 
-	public String getBase64String() throws IOException, SQLException {
-		byte[] sourceBytes = IOUtils.toByteArray(campPictures.getBinaryStream());
-		String encodedString = Base64.getEncoder().encodeToString(sourceBytes); 
-		return encodedString;
-	}
+//	public String getBase64String() throws IOException, SQLException {
+//		byte[] sourceBytes = IOUtils.toByteArray(campPictures.getBinaryStream());
+//		String encodedString = Base64.getEncoder().encodeToString(sourceBytes); 
+//		return encodedString;
+//		
+//	}
 	
 	
 }

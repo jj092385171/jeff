@@ -59,7 +59,7 @@ public class InsertCampServlet extends HttpServlet {
 		if(is.read() == -1) {
 			errorMsg.put("campPictures", "必須選擇圖片");
 		}	
-		com.mysql.cj.jdbc.Blob blob = (com.mysql.cj.jdbc.Blob) Hibernate.createBlob(is);
+		Blob blob = Hibernate.createBlob(is);
 		
 		//簡介
 		String discription = request.getParameter("discription");
@@ -84,6 +84,7 @@ public class InsertCampServlet extends HttpServlet {
 			for(String tagID : tagIDs) {
 				tagOfCampDao.Add( Integer.valueOf(tagID) ,campID.intValueExact() );
 			}
+			session.setAttribute("ID", campID.toString());
 			session.setAttribute("CampBean", cb);
 			
 			String contextPath = request.getContextPath();
