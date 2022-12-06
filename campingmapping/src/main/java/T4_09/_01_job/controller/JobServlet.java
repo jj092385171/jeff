@@ -11,12 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/jobServlet")
-public class jobServlet extends HttpServlet {
+public class JobServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public jobServlet() {
-		super();
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -24,6 +21,7 @@ public class jobServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/_01_job.jsp");
 		rd.forward(request, response);

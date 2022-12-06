@@ -3,6 +3,7 @@ package T4_09._01_job.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -12,14 +13,13 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import T4_09._01_job.model.JobBean;
 import utils.DbUtils;
 
-public class jobDAOimpl implements jobDAO {
+public class JobDAOimpl implements JobDAO {
 	private QueryRunner queryRunner = new QueryRunner();
 
 
-	
+	//新增資料
 	@Override
-	public void addJob(JobBean jobBean) {
-		//新增資料
+	public int addJob(JobBean jobBean) {
 		String sql = "insert into job values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			int row= queryRunner.update(sql, jobBean.getuID(), jobBean.getSalary(), jobBean.getQuantity(),
@@ -28,6 +28,7 @@ public class jobDAOimpl implements jobDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return 0;
 	}
 
 	//透過職缺搜尋
@@ -43,21 +44,22 @@ public class jobDAOimpl implements jobDAO {
 		return null;
 	}
 
+	//透過職缺刪除資料
 	@Override
-	public void deleteJob(String blank) {
-		//透過職缺刪除資料
+	public int deleteJob(String blank) {
 		String sql = "delete from job where blank = ?";
 	 try {
 		 int row= queryRunner.update(sql,new BeanHandler<JobBean>(JobBean.class), blank);
 		 
 	} catch (Exception e) {
 		e.printStackTrace();
-	}	
+	}
+	return 0;	
 	}
 
+	//透過id更改職缺
 	@Override
-	public void updateJob(JobBean jobBean) {
-		//透過id更改職缺
+	public int updateJob(JobBean jobBean) {
 		String sql = "update job set blank = ? where uID = ?";
 		try {
 			int row = queryRunner.update(sql,jobBean.getBlank(),jobBean.getuID());
@@ -65,11 +67,12 @@ public class jobDAOimpl implements jobDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return 0;
 	}
- 
+	
+	//搜尋全部
 	@Override
 	public List<JobBean> selectAll() {
-		//搜尋全部
 		String sql = "select* from job";
 		try {
 			List<JobBean> li = queryRunner.query(sql, new ResultSetHandler<List<JobBean>>(){
@@ -90,16 +93,14 @@ public class jobDAOimpl implements jobDAO {
 						jb.setRackUp(rs.getDate("rackUp"));
 						list.add(jb);
 					}
-					return list;
-					
+					return list;				
 				}
-			});
-			
+			});		
 		} catch (Exception e) {
-		}
-		
+		}		
 		return null;
 	}
+
 
 
 }
