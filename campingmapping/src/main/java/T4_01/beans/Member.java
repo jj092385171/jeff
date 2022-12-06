@@ -1,6 +1,6 @@
 package T4_01.beans;
 
-import java.io.InputStream;
+import java.sql.Blob;
 import java.util.Date;
 
 //會員
@@ -36,12 +36,13 @@ public class Member {
 //	訂閱(Y y/N n)
 	private String subscribed;
 //	大頭像
-	private InputStream shot;
+	private Blob shot;
+	
 	public Member() {}
 	public Member(int uID, String account, String nickname, String firstname,
 			String lastname, int exp, int leavel, int point, String phone,
 			Date birthday, String address, String email, int gender,
-			Date registerdata, String subscribed, InputStream shot) {
+			Date registerdata, String subscribed, Blob shot) {
 		super();
 		UID = uID;
 		this.account = account;
@@ -150,10 +151,10 @@ public class Member {
 	public void setSubscribed(String subscribed) {
 		this.subscribed = subscribed;
 	}
-	public InputStream getShot() {
+	public Blob getShot() {
 		return shot;
 	}
-	public void setShot(InputStream shot) {
+	public void setShot(Blob shot) {
 		this.shot = shot;
 	}
 	@Override

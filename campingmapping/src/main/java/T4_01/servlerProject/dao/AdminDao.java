@@ -12,6 +12,8 @@ public interface AdminDao {
 	public int update(Admin admin);
 
 	public Admin select(int UID );
+	
+	
 	public List<Admin> selectAll();
 }
 

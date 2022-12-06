@@ -48,6 +48,15 @@ public class LimitsDaoImpl implements LimitsDao {
 	@Override
 	public int update(Limits limits) {
 		
+		try {
+			queryRunner.update(DbUtils.getConnection(),
+					""
+					,limits);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return 0;
 	}
 
