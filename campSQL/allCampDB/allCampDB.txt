@@ -1,0 +1,772 @@
+USE [campDB]
+GO
+/****** Object:  Table [dbo].[camp]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[camp](
+	[campID] [int] IDENTITY(1,1) NOT NULL,
+	[campName] [nvarchar](50) NOT NULL,
+	[cityID] [int] NOT NULL,
+	[location] [nvarchar](50) NOT NULL,
+	[campPictures] [varbinary](max) NOT NULL,
+	[discription] [nvarchar](max) NULL,
+ CONSTRAINT [PK_camp] PRIMARY KEY CLUSTERED 
+(
+	[campID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[campOrd]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[campOrd](
+	[UID] [int] NOT NULL,
+	[ordDate] [datetime2](7) NOT NULL,
+	[ordID] [int] NOT NULL,
+	[total] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[campOrdItem]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[campOrdItem](
+	[ordID] [int] NOT NULL,
+	[amount] [int] NOT NULL,
+	[price] [int] NOT NULL,
+	[itemPrice] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[category]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[category](
+	[Pd_id] [int] NOT NULL,
+	[UID] [int] NULL,
+	[name] [nvarchar](max) NULL,
+	[title] [nvarchar](max) NOT NULL,
+	[content] [nvarchar](max) NOT NULL,
+	[type] [nvarchar](max) NOT NULL,
+	[picture] [varbinary](max) NULL,
+	[price] [int] NOT NULL,
+	[inventory] [int] NOT NULL,
+	[Pd_date] [datetime] NOT NULL,
+	[Pd_last_update] [datetime] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[city]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[city](
+	[cityID] [int] IDENTITY(1,1) NOT NULL,
+	[cityName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_city] PRIMARY KEY CLUSTERED 
+(
+	[cityID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Comment_report]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comment_report](
+	[reportID] [int] NOT NULL,
+	[reason] [varbinary](50) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[coupon]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[coupon](
+	[couponID] [int] IDENTITY(1,1) NOT NULL,
+	[couponCode] [nvarchar](50) NOT NULL,
+	[couponName] [nvarchar](50) NOT NULL,
+	[couponType] [int] NOT NULL,
+	[couponAmount] [int] NOT NULL,
+	[couponUsed] [int] NOT NULL,
+	[couponRule] [nvarchar](max) NOT NULL,
+	[startDate] [datetime2](7) NOT NULL,
+	[endDate] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_coupon] PRIMARY KEY CLUSTERED 
+(
+	[couponID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[couponWallet]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[couponWallet](
+	[CWID] [int] IDENTITY(1,1) NOT NULL,
+	[UID] [int] NOT NULL,
+	[couponID] [int] NOT NULL,
+	[state] [int] NOT NULL,
+ CONSTRAINT [PK_couponWallet] PRIMARY KEY CLUSTERED 
+(
+	[CWID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[hr]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[hr](
+	[uid] [int] NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[Lexperience] [nvarchar](50) NULL,
+	[seniority] [nvarchar](50) NULL,
+	[language] [nvarchar](50) NULL,
+	[apply] [nvarchar](50) NOT NULL,
+	[img] [varbinary](max) NULL,
+	[remark] [nvarchar](100) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[job]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[job](
+	[uID] [int] NOT NULL,
+	[job] [nvarchar](20) NOT NULL,
+	[salary] [nvarchar](20) NOT NULL,
+	[quantity] [int] NULL,
+	[place] [nvarchar](50) NOT NULL,
+	[time] [nvarchar](50) NOT NULL,
+	[date] [nvarchar](50) NOT NULL,
+	[img] [varbinary](max) NULL,
+	[remark] [nvarchar](50) NULL,
+	[rackUp] [datetime2](7) NOT NULL,
+	[rackDown] [datetime2](7) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[jobComment]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[jobComment](
+	[UID] [int] NOT NULL,
+	[jDate] [datetime2](7) NOT NULL,
+	[jcontent] [varbinary](100) NULL,
+	[img] [varbinary](max) NOT NULL,
+	[reportID] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[license]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[license](
+	[UID] [int] NOT NULL,
+	[account] [nvarchar](50) NULL,
+	[FaceBookID] [nvarchar](50) NULL,
+	[GoogleID] [nvarchar](50) NULL,
+	[LineID] [nvarchar](50) NULL,
+	[password] [nvarchar](50) NULL,
+ CONSTRAINT [PK__license__C5B196028C928526] PRIMARY KEY CLUSTERED 
+(
+	[UID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[license_product]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[license_product](
+	[proID] [int] NOT NULL,
+	[price] [int] NOT NULL,
+	[starDate] [datetime2](7) NOT NULL,
+	[endDate] [datetime2](7) NOT NULL,
+	[img] [varbinary](max) NOT NULL,
+	[decribe] [nvarchar](100) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[licenseOrd]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[licenseOrd](
+	[UID] [int] NOT NULL,
+	[ordDate] [datetime2](7) NOT NULL,
+	[ordID] [int] NOT NULL,
+	[total] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[licenseOrdItem]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[licenseOrdItem](
+	[ordID] [int] NOT NULL,
+	[proID] [int] NOT NULL,
+	[itemPrice] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[limits]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[limits](
+	[UID] [int] NOT NULL,
+	[account] [nvarchar](50) NOT NULL,
+	[nomore] [char](1) NOT NULL,
+	[buy] [char](1) NOT NULL,
+	[sell] [char](1) NOT NULL,
+	[publisher] [char](1) NOT NULL,
+	[message] [char](1) NOT NULL,
+	[enterprise] [char](1) NOT NULL,
+	[applier] [char](1) NOT NULL,
+	[mainhoster] [char](1) NOT NULL,
+	[attender] [char](1) NOT NULL,
+	[campingowner] [char](1) NOT NULL,
+	[customer] [char](1) NOT NULL,
+ CONSTRAINT [PK__limits__C5B1960258D3750F] PRIMARY KEY CLUSTERED 
+(
+	[UID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LoginHistory]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LoginHistory](
+	[UID] [int] NOT NULL,
+	[account] [nvarchar](50) NOT NULL,
+	[IP] [nvarchar](50) NOT NULL,
+	[LoginDate] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_LoginHistory] PRIMARY KEY CLUSTERED 
+(
+	[UID] ASC,
+	[LoginDate] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[lottery]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[lottery](
+	[lotteryId] [int] IDENTITY(1,1) NOT NULL,
+	[lotteryName] [nvarchar](30) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[lotteryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[lotteryRecord]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[lotteryRecord](
+	[lotteryId] [int] NOT NULL,
+	[userId] [int] NOT NULL,
+	[winner] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[member]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[member](
+	[UID] [int] IDENTITY(1,1) NOT NULL,
+	[account] [nvarchar](50) NOT NULL,
+	[Nickname] [nvarchar](50) NULL,
+	[firstname] [nvarchar](50) NULL,
+	[lastname] [nvarchar](50) NULL,
+	[exp] [int] NOT NULL,
+	[leavel] [int] NOT NULL,
+	[point] [int] NOT NULL,
+	[phone] [nvarchar](50) NULL,
+	[birthday] [datetime2](7) NOT NULL,
+	[address] [nvarchar](100) NULL,
+	[email] [nvarchar](50) NOT NULL,
+	[gender] [int] NULL,
+	[registerdata] [datetime2](7) NOT NULL,
+	[subscribed] [char](1) NOT NULL,
+	[shot] [varbinary](max) NULL,
+ CONSTRAINT [PK_member] PRIMARY KEY CLUSTERED 
+(
+	[UID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[orderList]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[orderList](
+	[listID] [int] IDENTITY(1,1) NOT NULL,
+	[UID] [int] NOT NULL,
+	[phone] [nvarchar](50) NOT NULL,
+	[orderTime] [datetime2](7) NOT NULL,
+	[goingTime] [date] NOT NULL,
+	[leaveTime] [date] NOT NULL,
+	[siteID] [int] NOT NULL,
+	[numbers] [int] NOT NULL,
+	[statusID] [int] NOT NULL,
+ CONSTRAINT [PK_orderList] PRIMARY KEY CLUSTERED 
+(
+	[listID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[post]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[post](
+	[postId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NOT NULL,
+	[title] [nvarchar](30) NOT NULL,
+	[content] [nvarchar](max) NOT NULL,
+	[picture] [varbinary](max) NULL,
+	[people] [int] NULL,
+	[price] [int] NULL,
+	[county] [nvarchar](3) NULL,
+	[startDate] [date] NULL,
+	[endDate] [date] NULL,
+	[score] [int] NULL,
+	[releaseDate] [datetime2](7) NOT NULL,
+	[userLike] [int] NULL,
+	[userUnlike] [int] NULL,
+	[postReport] [int] NULL,
+	[postHide] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[postId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[postComment]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[postComment](
+	[postCommentId] [int] IDENTITY(1,1) NOT NULL,
+	[postId] [int] NOT NULL,
+	[userId] [int] NOT NULL,
+	[postComment] [nvarchar](100) NOT NULL,
+	[postCommentReport] [int] NULL,
+	[postCommentHide] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[postCommentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[productOrder]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[productOrder](
+	[orderID] [int] NOT NULL,
+	[date] [datetime] NOT NULL,
+	[detail] [nvarchar](max) NOT NULL,
+	[money] [int] NULL,
+	[quantity] [int] NULL,
+	[address] [nvarchar](max) NULL,
+	[phone] [varchar](15) NULL,
+	[name] [varchar](32) NOT NULL,
+	[userUID] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[shoppingCart]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[shoppingCart](
+	[ct_id] [int] NOT NULL,
+	[Pd_id] [int] NOT NULL,
+	[ct_qty] [int] NOT NULL,
+	[od_id] [int] NOT NULL,
+	[ct_date] [datetime] NOT NULL,
+	[user_id] [varchar](50) NOT NULL,
+	[Pd_price] [decimal](9, 2) NOT NULL,
+	[Co_id] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[site]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[site](
+	[siteID] [int] IDENTITY(1,1) NOT NULL,
+	[siteName] [nvarchar](50) NOT NULL,
+	[sitePictures] [nvarchar](50) NOT NULL,
+	[totalSites] [int] NOT NULL,
+	[siteMoney] [int] NOT NULL,
+	[campID] [int] NOT NULL,
+ CONSTRAINT [PK_site] PRIMARY KEY CLUSTERED 
+(
+	[siteID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[situation]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[situation](
+	[statusID] [int] IDENTITY(1,1) NOT NULL,
+	[status] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_situation] PRIMARY KEY CLUSTERED 
+(
+	[statusID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tag]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tag](
+	[tagID] [int] IDENTITY(1,1) NOT NULL,
+	[tagName] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_tag] PRIMARY KEY CLUSTERED 
+(
+	[tagID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tagOfCamp]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tagOfCamp](
+	[tagID] [int] NOT NULL,
+	[campID] [int] NOT NULL,
+ CONSTRAINT [PK_tagOFcamp] PRIMARY KEY CLUSTERED 
+(
+	[tagID] ASC,
+	[campID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[vote]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[vote](
+	[voteId] [int] IDENTITY(1,1) NOT NULL,
+	[voteName] [nvarchar](30) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[voteId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[voteOption]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[voteOption](
+	[optionId] [int] IDENTITY(1,1) NOT NULL,
+	[optionName] [nvarchar](30) NOT NULL,
+	[voteId] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[optionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[voteRecord]    Script Date: 2022/12/6 下午 01:39:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[voteRecord](
+	[voteId] [int] NOT NULL,
+	[optionId] [int] NOT NULL,
+	[userId] [int] NOT NULL
+) ON [PRIMARY]
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (1, N'YagamiTaichi', NULL, NULL, NULL, N'1')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (2, N'IshidaYamato', NULL, NULL, NULL, N'2')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (3, N'JohnDepp', NULL, NULL, NULL, N'3')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (4, N'LeonardoPikachu', NULL, NULL, NULL, N'4')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (5, N'Squidward', NULL, NULL, NULL, N'5')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (6, N'PatrickStar', NULL, NULL, NULL, N'6')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (7, N'RyanReynolds', NULL, NULL, NULL, N'7')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (8, N'ChristopherHemsworth', NULL, NULL, NULL, N'8')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (9, N'ShihShihDer', NULL, NULL, NULL, N'9')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (10, N'DwightHoward', NULL, NULL, NULL, N'10')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (11, N'WuBai', NULL, NULL, NULL, N'11')
+GO
+INSERT [dbo].[license] ([UID], [account], [FaceBookID], [GoogleID], [LineID], [password]) VALUES (12, N'ChienMingWang', NULL, NULL, NULL, N'12')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (1, N'YagamiTaichi', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (2, N'IshidaYamato', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (3, N'JohnDepp', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (4, N'LeonardoPikachu', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (5, N'Squidward', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (6, N'PatrickStar', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (7, N'RyanReynolds', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (8, N'ChristopherHemsworth', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (9, N'ShihShihDer', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (10, N'DwightHoward', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (11, N'WuBai', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+INSERT [dbo].[limits] ([UID], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer]) VALUES (12, N'ChienMingWang', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y')
+GO
+SET IDENTITY_INSERT [dbo].[member] ON 
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (1, N'YagamiTaichi', N'八神太一', N'太一', N'八神', 0, 1, 0, NULL, CAST(N'1988-03-17T00:00:01.0000000' AS DateTime2), NULL, N'YagamiTaichi@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (2, N'IshidaYamato', N'石田大和', N'大和', N'石田', 0, 1, 0, NULL, CAST(N'1988-07-20T00:00:01.0000000' AS DateTime2), NULL, N'IshidaYamato@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (3, N'JohnDepp', N'強尼戴普', N'強尼', N'戴普', 0, 1, 0, NULL, CAST(N'1963-06-09T01:00:01.0000000' AS DateTime2), NULL, N'JohnDepp@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (4, N'LeonardoPikachu', N'李奧納多·皮卡丘', N'李奧納多', N'皮卡丘', 0, 1, 0, NULL, CAST(N'1974-11-11T01:00:01.0000000' AS DateTime2), NULL, N'LeonardoPikachu@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (5, N'Squidward', N'章魚哥', NULL, N'章魚哥', 0, 1, 0, NULL, CAST(N'1975-10-23T01:00:01.0000000' AS DateTime2), NULL, N'Squidward@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (6, N'PatrickStar', N'派大星', NULL, N'派大星', 0, 1, 0, NULL, CAST(N'1985-02-26T01:00:01.0000000' AS DateTime2), NULL, N'PatrickStar@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (7, N'RyanReynolds', N'萊恩雷諾斯', N'萊恩', N'雷諾斯', 0, 1, 0, NULL, CAST(N'1976-10-23T01:00:01.0000000' AS DateTime2), NULL, N'RyanReynolds@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (8, N'ChristopherHemsworth', N'克里斯漢斯沃', N'克里斯', N'漢斯沃', 0, 1, 0, NULL, CAST(N'1983-08-11T00:00:01.0000000' AS DateTime2), NULL, N'ChristopherHemsworth@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (9, N'ShihShihDer', N'施育群', N'育群', N'施', 0, 1, 0, NULL, CAST(N'1992-04-10T00:00:01.0000000' AS DateTime2), NULL, N'ShihShihDer@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (10, N'DwightHoward', N'德懷特霍華德', N'德懷特', N'霍華德', 0, 1, 0, NULL, CAST(N'1985-12-08T00:00:01.0000000' AS DateTime2), NULL, N'DwightHoward@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (11, N'WuBai', N'伍佰', N'俊霖', N'吳', 0, 1, 0, NULL, CAST(N'1968-01-14T00:00:01.0000000' AS DateTime2), NULL, N'WuBai@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+INSERT [dbo].[member] ([UID], [account], [Nickname], [firstname], [lastname], [exp], [leavel], [point], [phone], [birthday], [address], [email], [gender], [registerdata], [subscribed], [shot]) VALUES (12, N'ChienMingWang', N'王建民', N'建民', N'王', 0, 1, 0, NULL, CAST(N'1980-03-31T00:00:01.0000000' AS DateTime2), NULL, N'ChienMingWang@cm.com', NULL, CAST(N'2022-11-29T00:00:01.0000000' AS DateTime2), N'n', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[member] OFF
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [uk_couponCode]    Script Date: 2022/12/6 下午 01:39:38 ******/
+ALTER TABLE [dbo].[coupon] ADD  CONSTRAINT [uk_couponCode] UNIQUE NONCLUSTERED 
+(
+	[couponCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__member__449601202C141600]    Script Date: 2022/12/6 下午 01:39:38 ******/
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ__member__449601202C141600] UNIQUE NONCLUSTERED 
+(
+	[account] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ_account]    Script Date: 2022/12/6 下午 01:39:38 ******/
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ_account] UNIQUE NONCLUSTERED 
+(
+	[account] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [UQ_UID]    Script Date: 2022/12/6 下午 01:39:38 ******/
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ_UID] UNIQUE NONCLUSTERED 
+(
+	[UID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__nomore__628FA481]  DEFAULT ('y') FOR [nomore]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__buy__6383C8BA]  DEFAULT ('y') FOR [buy]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__sell__6477ECF3]  DEFAULT ('n') FOR [sell]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__publishe__656C112C]  DEFAULT ('y') FOR [publisher]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__message__66603565]  DEFAULT ('y') FOR [message]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__enterpri__6754599E]  DEFAULT ('n') FOR [enterprise]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__applier__68487DD7]  DEFAULT ('y') FOR [applier]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__mainhost__693CA210]  DEFAULT ('y') FOR [mainhoster]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__attender__6A30C649]  DEFAULT ('y') FOR [attender]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__campingo__6B24EA82]  DEFAULT ('n') FOR [campingowner]
+GO
+ALTER TABLE [dbo].[limits] ADD  CONSTRAINT [DF__limits__customer__6C190EBB]  DEFAULT ('y') FOR [customer]
+GO
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_exp]  DEFAULT ((0)) FOR [exp]
+GO
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_leavel]  DEFAULT ((1)) FOR [leavel]
+GO
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_poit]  DEFAULT ((0)) FOR [point]
+GO
+ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_subscribed]  DEFAULT (N'n') FOR [subscribed]
+GO
+ALTER TABLE [dbo].[camp]  WITH CHECK ADD  CONSTRAINT [FK_camp_city] FOREIGN KEY([cityID])
+REFERENCES [dbo].[city] ([cityID])
+GO
+ALTER TABLE [dbo].[camp] CHECK CONSTRAINT [FK_camp_city]
+GO
+ALTER TABLE [dbo].[couponWallet]  WITH CHECK ADD  CONSTRAINT [fk_coupon_couponWallet_couponID] FOREIGN KEY([couponID])
+REFERENCES [dbo].[coupon] ([couponID])
+GO
+ALTER TABLE [dbo].[couponWallet] CHECK CONSTRAINT [fk_coupon_couponWallet_couponID]
+GO
+ALTER TABLE [dbo].[couponWallet]  WITH CHECK ADD  CONSTRAINT [fk_member_couponWallet_UID] FOREIGN KEY([UID])
+REFERENCES [dbo].[member] ([UID])
+GO
+ALTER TABLE [dbo].[couponWallet] CHECK CONSTRAINT [fk_member_couponWallet_UID]
+GO
+ALTER TABLE [dbo].[license]  WITH CHECK ADD  CONSTRAINT [fk_member_license_account] FOREIGN KEY([account])
+REFERENCES [dbo].[member] ([account])
+GO
+ALTER TABLE [dbo].[license] CHECK CONSTRAINT [fk_member_license_account]
+GO
+ALTER TABLE [dbo].[license]  WITH NOCHECK ADD  CONSTRAINT [fk_member_license_UID] FOREIGN KEY([UID])
+REFERENCES [dbo].[member] ([UID])
+NOT FOR REPLICATION 
+GO
+ALTER TABLE [dbo].[license] CHECK CONSTRAINT [fk_member_license_UID]
+GO
+ALTER TABLE [dbo].[limits]  WITH CHECK ADD  CONSTRAINT [fk_member_limits_account] FOREIGN KEY([account])
+REFERENCES [dbo].[member] ([account])
+GO
+ALTER TABLE [dbo].[limits] CHECK CONSTRAINT [fk_member_limits_account]
+GO
+ALTER TABLE [dbo].[limits]  WITH CHECK ADD  CONSTRAINT [fk_member_limits_UID] FOREIGN KEY([UID])
+REFERENCES [dbo].[member] ([UID])
+GO
+ALTER TABLE [dbo].[limits] CHECK CONSTRAINT [fk_member_limits_UID]
+GO
+ALTER TABLE [dbo].[LoginHistory]  WITH CHECK ADD  CONSTRAINT [FK_member_LoginHistor_account] FOREIGN KEY([account])
+REFERENCES [dbo].[member] ([account])
+GO
+ALTER TABLE [dbo].[LoginHistory] CHECK CONSTRAINT [FK_member_LoginHistor_account]
+GO
+ALTER TABLE [dbo].[LoginHistory]  WITH CHECK ADD  CONSTRAINT [FK_member_LoginHistor_UID] FOREIGN KEY([UID])
+REFERENCES [dbo].[member] ([UID])
+GO
+ALTER TABLE [dbo].[LoginHistory] CHECK CONSTRAINT [FK_member_LoginHistor_UID]
+GO
+ALTER TABLE [dbo].[lotteryRecord]  WITH CHECK ADD FOREIGN KEY([lotteryId])
+REFERENCES [dbo].[lottery] ([lotteryId])
+GO
+ALTER TABLE [dbo].[lotteryRecord]  WITH CHECK ADD  CONSTRAINT [FK__lotteryRe__userI__339FAB6E] FOREIGN KEY([userId])
+REFERENCES [dbo].[member] ([UID])
+GO
+ALTER TABLE [dbo].[lotteryRecord] CHECK CONSTRAINT [FK__lotteryRe__userI__339FAB6E]
+GO
+ALTER TABLE [dbo].[orderList]  WITH CHECK ADD  CONSTRAINT [FK_orderList_site] FOREIGN KEY([siteID])
+REFERENCES [dbo].[site] ([siteID])
+GO
+ALTER TABLE [dbo].[orderList] CHECK CONSTRAINT [FK_orderList_site]
+GO
+ALTER TABLE [dbo].[orderList]  WITH CHECK ADD  CONSTRAINT [FK_orderList_situation] FOREIGN KEY([statusID])
+REFERENCES [dbo].[situation] ([statusID])
+GO
+ALTER TABLE [dbo].[orderList] CHECK CONSTRAINT [FK_orderList_situation]
+GO
+ALTER TABLE [dbo].[post]  WITH CHECK ADD  CONSTRAINT [FK__post__userId__282DF8C2] FOREIGN KEY([userId])
+REFERENCES [dbo].[member] ([UID])
+GO
+ALTER TABLE [dbo].[post] CHECK CONSTRAINT [FK__post__userId__282DF8C2]
+GO
+ALTER TABLE [dbo].[postComment]  WITH CHECK ADD FOREIGN KEY([postId])
+REFERENCES [dbo].[post] ([postId])
+GO
+ALTER TABLE [dbo].[postComment]  WITH CHECK ADD FOREIGN KEY([userId])
+REFERENCES [dbo].[member] ([UID])
+GO
+ALTER TABLE [dbo].[site]  WITH CHECK ADD  CONSTRAINT [FK_site_camp] FOREIGN KEY([campID])
+REFERENCES [dbo].[camp] ([campID])
+GO
+ALTER TABLE [dbo].[site] CHECK CONSTRAINT [FK_site_camp]
+GO
+ALTER TABLE [dbo].[situation]  WITH CHECK ADD  CONSTRAINT [FK_situation_situation] FOREIGN KEY([statusID])
+REFERENCES [dbo].[situation] ([statusID])
+GO
+ALTER TABLE [dbo].[situation] CHECK CONSTRAINT [FK_situation_situation]
+GO
+ALTER TABLE [dbo].[tagOfCamp]  WITH CHECK ADD  CONSTRAINT [FK_tagOFcamp_camp] FOREIGN KEY([campID])
+REFERENCES [dbo].[camp] ([campID])
+GO
+ALTER TABLE [dbo].[tagOfCamp] CHECK CONSTRAINT [FK_tagOFcamp_camp]
+GO
+ALTER TABLE [dbo].[tagOfCamp]  WITH CHECK ADD  CONSTRAINT [FK_tagOFcamp_tag] FOREIGN KEY([tagID])
+REFERENCES [dbo].[tag] ([tagID])
+GO
+ALTER TABLE [dbo].[tagOfCamp] CHECK CONSTRAINT [FK_tagOFcamp_tag]
+GO
+ALTER TABLE [dbo].[voteOption]  WITH CHECK ADD FOREIGN KEY([voteId])
+REFERENCES [dbo].[vote] ([voteId])
+GO
+ALTER TABLE [dbo].[voteRecord]  WITH CHECK ADD FOREIGN KEY([optionId])
+REFERENCES [dbo].[voteOption] ([optionId])
+GO
+ALTER TABLE [dbo].[voteRecord]  WITH CHECK ADD  CONSTRAINT [FK__voteRecor__userI__3B40CD36] FOREIGN KEY([userId])
+REFERENCES [dbo].[member] ([UID])
+GO
+ALTER TABLE [dbo].[voteRecord] CHECK CONSTRAINT [FK__voteRecor__userI__3B40CD36]
+GO
+ALTER TABLE [dbo].[voteRecord]  WITH CHECK ADD FOREIGN KEY([voteId])
+REFERENCES [dbo].[vote] ([voteId])
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'帳號' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'member', @level2type=N'COLUMN',@level2name=N'account'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'暱稱' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'member', @level2type=N'COLUMN',@level2name=N'Nickname'
+GO
