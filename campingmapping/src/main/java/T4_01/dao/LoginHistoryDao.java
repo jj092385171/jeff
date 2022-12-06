@@ -1,4 +1,4 @@
-package T4_01.dao.impl;
+package T4_01.dao;
 
 import java.util.Date;
 import java.util.List;
