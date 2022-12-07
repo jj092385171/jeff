@@ -1,0 +1,5 @@
+USE [campDB]
+GO
+ UPDATE limits SET UID = ? ,account = ? ,nomore = ? ,buy = ? ,sell = ? ,publisher = ? ,message = ? ,enterprise = ? ,applier = ? ,mainhoster = ? ,attender = ? ,campingowner = ? ,customer = ? WHERE ?
+GO UPDATE limits SET   account] = ? , nomore] = ? , buy] = ? , sell] = ? , publisher] = ? , message] = ? , enterprise] = ? , applier] = ? , mainhoster] = ? , attender] = ? , campingowner] = ? , customer] = ? WHERE UID = ?
+

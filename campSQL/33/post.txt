@@ -1,0 +1,31 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[post](
+	[postId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NOT NULL,
+	[title] [nvarchar](30) NOT NULL,
+	[content] [nvarchar](max) NOT NULL,
+	[picture] [varbinary](max) NULL,
+	[people] [int] NULL,
+	[price] [int] NULL,
+	[county] [nvarchar](3) NULL,
+	[startDate] [date] NULL,
+	[endDate] [date] NULL,
+	[score] [int] NULL,
+	[releaseDate] [datetime2](7) NOT NULL,
+	[userLike] [int] NULL,
+	[userUnlike] [int] NULL,
+	[postReport] [int] NULL,
+	[postHide] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[post] ADD PRIMARY KEY CLUSTERED 
+(
+	[postId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[post]  WITH CHECK ADD FOREIGN KEY([userId])
+REFERENCES [dbo].[member] ([UID])
+GO

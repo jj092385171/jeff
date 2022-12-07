@@ -36,9 +36,11 @@ public class LonginServlet extends HttpServlet {
 		if (admin != null) {
 //			成功
 			printWriter.println("成功");
+			
 		} else {
 //			失敗
 			printWriter.println("失敗");
+			
 		}
 
 	}

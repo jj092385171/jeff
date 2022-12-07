@@ -36,6 +36,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public Admin select(int username) {
 		try {
+			
 			Admin admin = queryRunner.query(DbUtils.getConnection(), " SELECT * FROM member WHERE UID = ? ",
 					new BeanHandler<Admin>(Admin.class), username);
 			return admin;
