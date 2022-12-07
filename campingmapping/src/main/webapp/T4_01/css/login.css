@@ -1,9 +1,11 @@
 /* 登入框樣式 */
 
 .container {
+
     position: relative;
-    width: 400px;
-    min-height: 400px;
+    width: 300px;
+    min-height: 300px;
+    border-radius: 10%;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: center;
@@ -13,6 +15,7 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-right: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 10px;
 }
 
 .form {
@@ -81,8 +84,8 @@
 /* 登入按鈕樣式 */
 
 .form .inputBox input[type="submit"] {
-    background: #fff;
-    color: #666;
+    background: rgba(255, 255, 255, 0.575);
+    color: rgba(102, 102, 102, 1);
     max-width: 100px;
     margin-bottom: 20px;
     font-weight: 600;
