@@ -32,7 +32,6 @@ public class controller extends HttpServlet {
 		InitiatingDaoImpl iDao = new InitiatingDaoImpl();
 		Map<String, String[]> params = request.getParameterMap();
 		InitiatingBean initiatingBean = iDao.setInitiatingBean(params);
-		System.out.println(initiatingBean.getPostmember());
 		iDao.insertInitiating(initiatingBean);
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_11/TestResult.jsp");
 			rd.forward(request, response);
