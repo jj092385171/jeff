@@ -19,14 +19,14 @@ public class TagDao {
 	Connection conn = DbUtils.getConnection();
 	QueryRunner qr = new QueryRunner();
 	
-	//透過標籤ID 查詢營地的標籤名
-	public TagBean findTagNameByTagID(int tagID) throws SQLException{
-		String sql = "select * from tag where tagID = ?";
-		return (TagBean) qr.query(conn, sql, new BeanHandler(TagBean.class), tagID);
-	}
-	
+//	//透過標籤ID 查詢營地的標籤名
+//	public TagBean findTagNameByTagID(int tagID) throws SQLException{
+//		String sql = "select * from tag where tagID = ?";
+//		return (TagBean) qr.query(conn, sql, new BeanHandler(TagBean.class), tagID);
+//	}
+//	
 	//搜尋全部
-	public List<TagBean> show() throws SQLException {
+	public List<TagBean> showAll() throws SQLException {
 		String sql = "select * from tag";
 		return qr.query(conn, sql, new BeanListHandler<TagBean>(TagBean.class));	
 	}

@@ -25,7 +25,7 @@ public class QueryCampPageServlet extends HttpServlet {
 
 		CityDao cityDao = new CityDao();
 		try {
-			List<CityBean> cityList = cityDao.show();
+			List<CityBean> cityList = cityDao.showAll();
 			request.setAttribute("cityList", cityList);
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/QueryByCityNameForm.jsp");
 			rd.forward(request, response);

@@ -2,44 +2,45 @@ package T4_24.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import T4_24.Dao.CampDao;
-import T4_24.Models.CampBean;
 
 
-@WebServlet("/T4_24/DeleteCampPageServlet")
-public class DeleteCampPageServlet extends HttpServlet {
+@WebServlet("/T4_24/DeleteCampByIDServlet")
+public class DeleteCampByIDServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		String campID = request.getParameter("campID");
 		CampDao campDao = new CampDao();
 		
+		
 		try {
-			List<CampBean> campList = campDao.findByID();
-			request.setAttribute("campList", campList);
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/DeleteCampByIDForm.jsp");
-			System.out.println("666");
-			rd.forward(request, response);
-			return;
+			campDao.deletdByCampID(Integer.valueOf(campID));
 			
-			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	
+		session.setAttribute("campID", campID + " 刪除成功");
 		
+		String contextPath = request.getContextPath();
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/DeleteByCampIDSuccess.jsp"));
 	}
+
 }

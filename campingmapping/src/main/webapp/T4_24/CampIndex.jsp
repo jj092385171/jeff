@@ -13,7 +13,8 @@
 <h1>營地管理</h1>
 <a href="<c:url value='/T4_24/InsertCampPageServlet' />">新增營地</a><p/>
 <a href="<c:url value='/T4_24/QueryCampPageServlet' />">查詢營地</a><p/>
-<a href="<c:url value='/T4_24/DeleteCampPageServlet' />">刪除營地</a><p/>
+<a href="<c:url value='/T4_24/ShowAllCampsPageServlet' />">刪除營地</a><p/>
+<a href="<c:url value='/T4_24/ShowAllCampsPageServlet' />">修改營地</a><p/>
 <hr>
 
 

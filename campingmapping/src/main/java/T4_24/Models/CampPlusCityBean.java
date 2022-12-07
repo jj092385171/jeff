@@ -1,101 +1,113 @@
 package T4_24.Models;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.SQLException;
-import java.util.Base64;
+import java.sql.Blob;
 import java.util.List;
 
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
+public class CampPlusCityBean {
 
-import org.apache.commons.io.IOUtils;
-
-import com.mysql.cj.jdbc.Blob;
-
-
-public class CampBean {
-	
 	private Integer campID;
 	private String campName;
 	private int cityID;
+	private String cityName;
 	private String location;
 	private java.sql.Blob campPictures;
 	private String discription;
+	private List<TagPlusCampBean> tagList;
 	
-
-	public CampBean(){
-		
+	
+	public CampPlusCityBean() {
 	}
 
-	public CampBean(String campName, int cityID, String location, java.sql.Blob campPictures, String discription) {
+
+	public CampPlusCityBean(Integer campID, String campName, int cityID, String cityName, String location,
+			Blob campPictures, String discription) {
 		super();
+		this.campID = campID;
 		this.campName = campName;
 		this.cityID = cityID;
+		this.cityName = cityName;
 		this.location = location;
 		this.campPictures = campPictures;
 		this.discription = discription;
 	}
 
 
-	
 	public Integer getCampID() {
 		return campID;
 	}
+
 
 	public void setCampID(Integer campID) {
 		this.campID = campID;
 	}
 
+
 	public String getCampName() {
 		return campName;
 	}
+
 
 	public void setCampName(String campName) {
 		this.campName = campName;
 	}
 
+
 	public int getCityID() {
 		return cityID;
 	}
+
 
 	public void setCityID(int cityID) {
 		this.cityID = cityID;
 	}
 
+
+	public String getCityName() {
+		return cityName;
+	}
+
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+
 	public String getLocation() {
 		return location;
 	}
+
 
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
+
 	public java.sql.Blob getCampPictures() {
 		return campPictures;
 	}
+
 
 	public void setCampPictures(java.sql.Blob campPictures) {
 		this.campPictures = campPictures;
 	}
 
+
 	public String getDiscription() {
 		return discription;
 	}
+
 
 	public void setDiscription(String discription) {
 		this.discription = discription;
 	}
 	
-	
+	public List<TagPlusCampBean> getTagList() {
+		return tagList;
+	}
 
-//	public String getBase64String() throws IOException, SQLException {
-//		byte[] sourceBytes = IOUtils.toByteArray(campPictures.getBinaryStream());
-//		String encodedString = Base64.getEncoder().encodeToString(sourceBytes); 
-//		return encodedString;
-//		
-//	}
+	public void setTagList(List<TagPlusCampBean> tagList) {
+		this.tagList = tagList;
+	}
 	
 	
 	

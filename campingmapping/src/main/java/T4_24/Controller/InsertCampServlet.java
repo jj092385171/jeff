@@ -24,13 +24,17 @@ import javax.sql.rowset.serial.SerialException;
 import org.hibernate.Hibernate;
 
 import T4_24.Dao.CampDao;
+import T4_24.Dao.CampPlusCityDao;
 import T4_24.Dao.CityDao;
 import T4_24.Dao.TagDao;
 import T4_24.Dao.TagOfCampDao;
+import T4_24.Dao.TagPlusCampDao;
 import T4_24.Models.CampBean;
+import T4_24.Models.CampPlusCityBean;
 import T4_24.Models.CityBean;
 import T4_24.Models.TagBean;
 import T4_24.Models.TagOfCampBean;
+import T4_24.Models.TagPlusCampBean;
 
 
 @MultipartConfig
@@ -81,30 +85,31 @@ public class InsertCampServlet extends HttpServlet {
 			
 		}
 		
-		CampBean cb = new CampBean(null, campName, Integer.valueOf(cityID), location, blob, discription);
+		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location, blob, discription);
 		CampDao campDao = new CampDao();
 		TagOfCampDao tagOfCampDao = new TagOfCampDao();
-		TagDao tagDao = new TagDao();
-		CityDao cityDao = new CityDao();
-		List<TagBean> tagList = new ArrayList<>();
+		TagPlusCampDao tagPlusCampDao = new TagPlusCampDao();
+		CampPlusCityDao campPlusCityDao = new CampPlusCityDao();
+		List<TagPlusCampBean> tagList = new ArrayList<>();
 		
 		try {
 			BigDecimal campID = campDao.Add(cb);
-			CityBean city = cityDao.findCityNameByCityID(Integer.valueOf(cityID));
 			
+			//利用campID和tagID新增營地的標籤
 			for(String tagID : tagIDs) {
 				tagOfCampDao.Add( Integer.valueOf(tagID) ,campID.intValueExact() );
-				tagList.add( tagDao.findTagNameByTagID(Integer.valueOf(tagID) ) );
+				tagList.add( tagPlusCampDao.findTagNameByTagID(Integer.valueOf(tagID) ) );
 			}
 			
+			CampPlusCityBean cpcBean = campPlusCityDao.findCampByID(campID.intValueExact());
 			
-			session.setAttribute("ID", campID.toString());
-			session.setAttribute("CampBean", cb);
-			session.setAttribute("city", city);
+			session.setAttribute("campID", campID.toString());
+			session.setAttribute("cpcBean", cpcBean);
 			session.setAttribute("tagList", tagList);
 			
+			
 			String contextPath = request.getContextPath();
-			response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/InsertMemberSuccess.jsp") ); 
+			response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/InsertCampSuccess.jsp") ); 
 			return;
 			
 		} catch (SQLException e) {

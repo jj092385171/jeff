@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import T4_24.Dao.CampDao;
+import T4_24.Dao.CampPlusCityDao;
 import T4_24.Models.CampBean;
+import T4_24.Models.CampPlusCityBean;
 
 @WebServlet("/T4_24/GetCampImage")
 public class GetCampImage extends HttpServlet {
@@ -33,9 +35,10 @@ public class GetCampImage extends HttpServlet {
 			String id = request.getParameter("id");
 			System.out.println("id:"+id);
 			// 讀取瀏覽器傳送來的type，以分辨要處理哪個表格
-			CampDao campDao = new CampDao();
-			CampBean campBean = campDao.findCampByID(Integer.valueOf(id));
-			campPictures = campBean.getCampPictures();
+			CampPlusCityDao campPlusCityDao = new CampPlusCityDao();
+			
+			CampPlusCityBean cpcBean = campPlusCityDao.findCampByID(Integer.valueOf(id));
+			campPictures = cpcBean.getCampPictures();
 			is = campPictures.getBinaryStream();
 			System.out.println("is:"+is);
 			
@@ -51,7 +54,7 @@ public class GetCampImage extends HttpServlet {
 			while ((len = is.read(bytes)) != -1) {
 				os.write(bytes, 0, len);
 				System.out.println("os:"+os);
-				os.flush();
+//				os.flush();
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

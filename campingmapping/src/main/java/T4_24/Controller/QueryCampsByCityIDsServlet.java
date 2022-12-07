@@ -14,9 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import T4_24.Dao.CampDao;
+import T4_24.Dao.CampPlusCityDao;
 import T4_24.Dao.CityDao;
+import T4_24.Dao.TagPlusCampDao;
 import T4_24.Models.CampBean;
+import T4_24.Models.CampPlusCityBean;
 import T4_24.Models.CityBean;
+import T4_24.Models.TagPlusCampBean;
 
 
 @WebServlet("/T4_24/QueryCampsByCityIDsServlet")
@@ -28,20 +32,18 @@ public class QueryCampsByCityIDsServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
-		CampDao campDao = new CampDao();
-		CityDao cityDao = new CityDao();
+		
+		CampPlusCityDao campPlusCityDao = new CampPlusCityDao();
+		TagPlusCampDao tagPlusCampDao = new TagPlusCampDao();
 		
 		String[] cityIDs = request.getParameterValues("cityID");
-		
-		List<CampBean> campList = new ArrayList<CampBean>();	
-		List<CityBean> cityList = new ArrayList<CityBean>();	
+		List<CampPlusCityBean> cpcList = new ArrayList<CampPlusCityBean>();
+		List<TagPlusCampBean> tagList = new ArrayList<>();
 		
 		for(String cityID : cityIDs) {
 			try {
-				List<CampBean> findCampsByCityID = campDao.findCampsByCityID( Integer.valueOf(cityID));
-				campList.addAll(findCampsByCityID);
-				
-				cityList.add( cityDao.findCityNameByCityID(Integer.valueOf(cityID)) );
+				List<CampPlusCityBean> findCampsByCityID = campPlusCityDao.findCampsByCityID( Integer.valueOf(cityID));
+				cpcList.addAll(findCampsByCityID);
 				
 				
 			} catch (NumberFormatException | SQLException e) {
@@ -49,10 +51,18 @@ public class QueryCampsByCityIDsServlet extends HttpServlet {
 			}
 		}
 		
+		for(CampPlusCityBean cpcBean : cpcList) {
+			try {
+				tagList = tagPlusCampDao.findTagNameByCampID(cpcBean.getCampID());
+				cpcBean.setTagList(tagList);
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
-		
-		session.setAttribute("campList", campList);
-		session.setAttribute("cityList", cityList);
+		session.setAttribute("cpcList", cpcList);
 		
 		String contextPath = request.getContextPath();
 		response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/QueryByCityNameResult.jsp") ); 

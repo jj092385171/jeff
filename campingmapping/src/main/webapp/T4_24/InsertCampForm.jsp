@@ -34,7 +34,7 @@ form {
 					<td width="120" height="40">縣市:</td>
 					<td width="600" height="40" align="left">
 						<c:forEach var='city' items='${cityList}'>
-							<input type="radio" name="cityID" value="${city.getCityID()}" />${city.getCityName()}
+							<input type="radio" name="cityID" value="${city.cityID}" />${city.cityName}
 						</c:forEach>
 					</td>
 				</tr>
@@ -62,7 +62,7 @@ form {
 					<td width="120" height="40">標籤:</td>
 					<td width="600" height="40" align="left">
 						<c:forEach var='tag' items='${tagList}'>
-							<input type="checkbox" name="tagID" value="${tag.getTagID()}" />${tag.getTagName()}
+							<input type="checkbox" name="tagID" value="${tag.tagID}" />${tag.tagName}
 						</c:forEach>
 					</td>
 				</tr>
