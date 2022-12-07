@@ -10,29 +10,29 @@ public class ProductOrderItems {
 	// 產品編號(fk)
 	private String Pd_name;
 	// 產品名稱(fk)
-	private String discount ;
+	private Double discount ;
 	// 折扣
 	private Double Pd_price;
 	// 單價
-	private Integer quantity;
+	private Integer amount;
 	// 數量
 	
 	private String title;
 	
 	
-	public ProductOrderItems(int seqno, int orderID, int pd_id, String pd_name, String discount, Double pd_price,
-			Integer quantity) {
+	public ProductOrderItems(int seqno, int orderID, int pd_id, String pd_name, Double pd_price, Integer amount,
+			String title) {
 		super();
 		this.seqno = seqno;
 		this.orderID = orderID;
 		this.Pd_id = pd_id;
 		this.Pd_name = pd_name;
-		this.discount = discount;
 		this.Pd_price = pd_price;
-		this.quantity = quantity;
+		this.amount = amount;
+		this.title = title;
 	}
-	public ProductOrderItems(int seqno, int orderID, int pd_id, String pd_name, String discount, Double pd_price,
-			Integer quantity, String title) {
+	public ProductOrderItems(int seqno, int orderID, int pd_id, String pd_name, Double discount, Double pd_price,
+			Integer amount, String title) {
 		super();
 		this.seqno = seqno;
 		this.orderID = orderID;
@@ -40,14 +40,14 @@ public class ProductOrderItems {
 		this.Pd_name = pd_name;
 		this.discount = discount;
 		this.Pd_price = pd_price;
-		this.quantity = quantity;
+		this.amount = amount;
 		this.title = title;
 	}
 	public Integer getQuantity() {
-		return quantity;
+		return amount;
 	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+	public void setQuantity(Integer amount) {
+		this.amount = amount;
 	}
 	public int getSeqno() {
 		return seqno;
@@ -73,10 +73,10 @@ public class ProductOrderItems {
 	public void setPd_name(String pd_name) {
 		Pd_name = pd_name;
 	}
-	public String getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
-	public void setDiscount(String discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 	public Double getPd_price() {

@@ -1,5 +1,6 @@
 package T4_36.entity;
 
+import java.sql.Blob;
 import java.util.Date;
 
 public class Category {
@@ -16,7 +17,7 @@ public class Category {
 	// 產品規格
 	private String type;
 	// 產品類型
-	private String picture;
+	private Blob picture;
 	// 照片 vinbinary
 	private int price;
 	// 價位
@@ -31,10 +32,10 @@ public class Category {
 		return Pd_id;
 	}
 
-	public Category(Integer pd_id, String userID, String name, String title, String content, String type,
-			String picture, int price, int inventory) {
+
+	public Category(String userID, String name, String title, String content, String type, Blob picture, int price,
+			int inventory, Date pd_date, Date pd_last_update) {
 		super();
-		this.Pd_id = pd_id;
 		this.userID = userID;
 		this.name = name;
 		this.title = title;
@@ -43,9 +44,12 @@ public class Category {
 		this.picture = picture;
 		this.price = price;
 		this.inventory = inventory;
+		this.Pd_date = pd_date;
+		this.Pd_last_update = pd_last_update;
 	}
 
-	public Category(Integer pd_id, String userID, String name, String title, String content, String type, String picture,
+
+	public Category(Integer pd_id, String userID, String name, String title, String content, String type, Blob picture,
 					int price, int inventory, Date pd_date, Date pd_last_update) {
 		super();
 		this.Pd_id = pd_id;
@@ -105,11 +109,11 @@ public class Category {
 		this.type = type;
 	}
 
-	public String getPicture() {
+	public Blob getPicture() {
 		return picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(Blob picture) {
 		this.picture = picture;
 	}
 

@@ -82,7 +82,7 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 					ps2.setInt(1, id);
 					ps2.setInt(2, oib.getPd_id());
 					ps2.setString(3, oib.getPd_name());
-					ps2.setString(4, oib.getDiscount());
+					ps2.setDouble(4, oib.getDiscount());
 					ps2.setDouble(5, oib.getPd_price());
 					ps2.executeUpdate();
 					log.info("處理訂單之Dao: 新增一筆OrderItemBean到OrderItemBean表格= " + oib);
@@ -146,8 +146,8 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 					String Pd_name = rs.getString("Pd_name");
 					Integer amount = rs.getInt("amount");
 					Double Pd_price = rs.getDouble("Pd_price");
-					ProductOrderItems poi = new ProductOrderItems(seqNo, orderNo2, Pd_id, Pd_name, amount, Pd_price,
-							null);
+					ProductOrderItems poi = new ProductOrderItems(seqNo, orderNo2, Pd_id, Pd_name, Pd_price,
+							amount,null);
 					set.add(poi);
 				}
 				ob.setItems(set);

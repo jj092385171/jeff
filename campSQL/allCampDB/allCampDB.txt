@@ -41,15 +41,16 @@ CREATE TABLE [dbo].[campOrdItem](
 	[price] [int] NOT NULL,
 	[itemPrice] [int] NOT NULL
 ) ON [PRIMARY]
+USE [campDB]
 GO
-/****** Object:  Table [dbo].[category]    Script Date: 2022/12/6 下午 01:39:38 ******/
+/****** Object:  Table [dbo].[camp]    Script Date: 2022/12/6 下午 01:39:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[category](
-	[Pd_id] [int] NOT NULL,
-	[UID] [int] NULL,
+	[Pd_id] [int] IDENTITY(1,1) NOT NULL,
+	[userID] [nvarchar](max) NOT NULL,
 	[name] [nvarchar](max) NULL,
 	[title] [nvarchar](max) NOT NULL,
 	[content] [nvarchar](max) NOT NULL,
@@ -58,11 +59,12 @@ CREATE TABLE [dbo].[category](
 	[price] [int] NOT NULL,
 	[inventory] [int] NOT NULL,
 	[Pd_date] [datetime] NOT NULL,
-	[Pd_last_update] [datetime] NOT NULL
+	[Pd_last_update] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Pd_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[city]    Script Date: 2022/12/6 下午 01:39:38 ******/
-SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -385,23 +387,46 @@ PRIMARY KEY CLUSTERED
 (
 	[postCommentId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY]GO
+USE [campDB]
 GO
-/****** Object:  Table [dbo].[productOrder]    Script Date: 2022/12/6 下午 01:39:38 ******/
+/****** Object:  Table [dbo].[camp]    Script Date: 2022/12/6 下午 01:39:38 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[productOrder](
+	[orderID] [int] IDENTITY(1,1) NOT NULL,
+	[Od_status] [nvarchar](max) NOT NULL,
+	[od_date] [datetime2](7) NOT NULL,
+	[od_last_update] [datetime2](7) NOT NULL,
+	[user_id] [nvarchar](max) NOT NULL,
+	[od_shipping_name] [nvarchar](max) NOT NULL,
+	[Pd_price] [float] NULL,
+	[od_shipping_address] [nvarchar](max) NULL,
+	[od_shipping_email] [varchar](32) NULL,
+	[od_shipping_phone] [varchar](15) NULL,
+	[od_shipping_postal_code] [varchar](15) NULL,
+	[od_shipping_cost] [float] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[orderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[productOrderItems](
+	[seqno] [int] IDENTITY(1,1) NOT NULL,
 	[orderID] [int] NOT NULL,
-	[date] [datetime] NOT NULL,
-	[detail] [nvarchar](max) NOT NULL,
-	[money] [int] NULL,
-	[quantity] [int] NULL,
-	[address] [nvarchar](max) NULL,
-	[phone] [varchar](15) NULL,
-	[name] [varchar](32) NOT NULL,
-	[userUID] [int] NOT NULL
+	[Pd_id] [int] NOT NULL,
+	[Pd_name] [nvarchar](max) NOT NULL,
+	[discount] [float] NOT NULL,
+	[Pd_price] [float] NULL,
+	[quantityquantity] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[seqno] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[shoppingCart]    Script Date: 2022/12/6 下午 01:39:38 ******/

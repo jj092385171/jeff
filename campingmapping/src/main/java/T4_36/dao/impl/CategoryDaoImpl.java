@@ -6,7 +6,10 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import utils.DbUtils;
+import utils.ImageUtil;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -22,12 +25,11 @@ public class CategoryDaoImpl implements CategoryDao {
 //     新增一筆記錄---
     @Override
     public boolean insert(Category category) throws SQLException {
-        String sql = "INSERT INTO `" + "category" +
-                "` (Pd_id, UID, name, title, content, type, picture, price, inventory, Pd_date, Pd_last_update) " +
-                "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO " + "category" +
+                " ( userID, name, title, content, type, picture, price, inventory, Pd_date, Pd_last_update) " +
+                "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Category result = queryRunner.insert(connection, sql, new BeanHandler<>(Category.class),
-                    category.getPd_id(),
                     category.getuserID(),
                     category.getName(),
                     category.getTitle(),
@@ -44,20 +46,29 @@ public class CategoryDaoImpl implements CategoryDao {
     
     @Override
     public boolean inserttest(Category category) throws SQLException {
-        String sql = "INSERT INTO `" + "category" +
-                "` (Pd_id, UID, name, title, content, type, picture, price, inventory, ) " +
-                "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    	FileInputStream  in = null ;
+//    	try {
+//			in = ImageUtil.readImage(category.getPicture());
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+        String sql = "INSERT INTO " + "category" +
+                " (userID, name, title, content, type, picture,  price, inventory, Pd_date ,Pd_last_update) " +
+                "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Category resulttest = queryRunner.insert(connection, sql, new BeanHandler<>(Category.class),
-                    category.getPd_id(),
                     category.getuserID(),
                     category.getName(),
                     category.getTitle(),
                     category.getContent(),
                     category.getType(),
                     category.getPicture(),
+//                    in,
                     category.getPrice(),
-                    category.getInventory());
+                    category.getInventory(),
+            		category.getPd_date(),
+            		category.getPd_last_update());
 
         return Objects.nonNull(resulttest);
     }

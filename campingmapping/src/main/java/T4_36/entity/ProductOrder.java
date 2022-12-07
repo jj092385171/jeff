@@ -30,7 +30,7 @@ public class ProductOrder {
 	// 郵遞區號
 	private Double od_shipping_cost;
 	// 運送費用
-	Set<ProductOrder> items = new LinkedHashSet<>();
+	Set<ProductOrderItems> items = new LinkedHashSet<>();
 
 	public ProductOrder() {
 
@@ -38,7 +38,7 @@ public class ProductOrder {
 
 	public ProductOrder(Integer no, String od_status, Date od_date, Date od_last_update, String user_id,
 			String od_shipping_name, Double pd_price, String od_shipping_address, String od_shipping_email,
-			String od_shipping_phone, String od_shipping_postal_code, Double od_shipping_cost, Set<ProductOrder> items) {
+			String od_shipping_phone, String od_shipping_postal_code, Double od_shipping_cost, Set<ProductOrderItems> items) {
 		super();
 		this.orderID = no;
 		this.Od_status = od_status;
@@ -55,11 +55,11 @@ public class ProductOrder {
 		this.items = items;
 	}
 
-	public Set<ProductOrder> getItems() {
+	public Set<ProductOrderItems> getItems() {
 		return items;
 	}
 
-	public void setItems(Set<ProductOrder> items) {
+	public void setItems(Set<ProductOrderItems> items) {
 		this.items = items;
 	}
 
