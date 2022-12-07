@@ -18,7 +18,8 @@ public class CategoryDaoImpl implements CategoryDao {
     private final QueryRunner queryRunner = new QueryRunner();
 
     private final Connection connection = DbUtils.getConnection();
-
+    
+//     新增一筆記錄---
     @Override
     public boolean insert(Category category) throws SQLException {
         String sql = "INSERT INTO `" + "category" +
@@ -27,27 +28,49 @@ public class CategoryDaoImpl implements CategoryDao {
 
             Category result = queryRunner.insert(connection, sql, new BeanHandler<>(Category.class),
                     category.getPd_id(),
-                    category.getUID(),
+                    category.getuserID(),
                     category.getName(),
                     category.getTitle(),
                     category.getContent(),
                     category.getType(),
                     category.getPicture(),
-                    category.getPicture(),
+                    category.getPrice(),
                     category.getInventory(),
                     category.getPd_date(),
                     category.getPd_last_update());
 
         return Objects.nonNull(result);
     }
-
+    
     @Override
-    public int delete(int id) throws SQLException {
+    public boolean inserttest(Category category) throws SQLException {
+        String sql = "INSERT INTO `" + "category" +
+                "` (Pd_id, UID, name, title, content, type, picture, price, inventory, ) " +
+                "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            Category resulttest = queryRunner.insert(connection, sql, new BeanHandler<>(Category.class),
+                    category.getPd_id(),
+                    category.getuserID(),
+                    category.getName(),
+                    category.getTitle(),
+                    category.getContent(),
+                    category.getType(),
+                    category.getPicture(),
+                    category.getPrice(),
+                    category.getInventory());
+
+        return Objects.nonNull(resulttest);
+    }
+    
+    // 依Pd_id來刪除單筆記錄
+    @Override
+    public int deleteByPd_id(int id) throws SQLException {
         String sql = "DELETE FROM category WHERE Pd_id = ?";
 
         return queryRunner.update(connection, sql, new BeanHandler<>(Category.class), id);
     }
 
+    // 修改一筆書籍資料
     @Override
     public int update(Category category) throws SQLException {
         String sql = "UPDATE category SET name =?, title =?, content =?, type =?, picture =?, price =?," +
@@ -67,10 +90,10 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public Category select(int id) throws SQLException {
+    public Category selectByPd_id(int Pd_id) throws SQLException {
         String sql = "SELECT * FROM category WHERE Pd_id = ?";
 
-        return queryRunner.query(connection, sql, new BeanHandler<>(Category.class), id);
+        return queryRunner.query(connection, sql, new BeanHandler<>(Category.class), Pd_id);
     }
 
     @Override

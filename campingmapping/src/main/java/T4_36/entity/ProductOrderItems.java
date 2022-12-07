@@ -10,18 +10,44 @@ public class ProductOrderItems {
 	// 產品編號(fk)
 	private String Pd_name;
 	// 產品名稱(fk)
-	private String od_shipping_name;
+	private String discount ;
 	// 折扣
-	private int Pd_price;
+	private Double Pd_price;
 	// 單價
-	public ProductOrderItems(int seqno, int orderID, int pd_id, String pd_name, String od_shipping_name, int pd_price) {
+	private Integer quantity;
+	// 數量
+	
+	private String title;
+	
+	
+	public ProductOrderItems(int seqno, int orderID, int pd_id, String pd_name, String discount, Double pd_price,
+			Integer quantity) {
 		super();
 		this.seqno = seqno;
 		this.orderID = orderID;
-		Pd_id = pd_id;
-		Pd_name = pd_name;
-		this.od_shipping_name = od_shipping_name;
-		Pd_price = pd_price;
+		this.Pd_id = pd_id;
+		this.Pd_name = pd_name;
+		this.discount = discount;
+		this.Pd_price = pd_price;
+		this.quantity = quantity;
+	}
+	public ProductOrderItems(int seqno, int orderID, int pd_id, String pd_name, String discount, Double pd_price,
+			Integer quantity, String title) {
+		super();
+		this.seqno = seqno;
+		this.orderID = orderID;
+		this.Pd_id = pd_id;
+		this.Pd_name = pd_name;
+		this.discount = discount;
+		this.Pd_price = pd_price;
+		this.quantity = quantity;
+		this.title = title;
+	}
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	public int getSeqno() {
 		return seqno;
@@ -47,22 +73,23 @@ public class ProductOrderItems {
 	public void setPd_name(String pd_name) {
 		Pd_name = pd_name;
 	}
-	public String getOd_shipping_name() {
-		return od_shipping_name;
+	public String getDiscount() {
+		return discount;
 	}
-	public void setOd_shipping_name(String od_shipping_name) {
-		this.od_shipping_name = od_shipping_name;
+	public void setDiscount(String discount) {
+		this.discount = discount;
 	}
-	public int getPd_price() {
+	public Double getPd_price() {
 		return Pd_price;
 	}
-	public void setPd_price(int pd_price) {
+	public void setPd_price(Double pd_price) {
 		Pd_price = pd_price;
 	}
-	@Override
-	public String toString() {
-		return "productOrderItems [seqno=" + seqno + ", orderID=" + orderID + ", Pd_id=" + Pd_id + ", Pd_name="
-				+ Pd_name + ", od_shipping_name=" + od_shipping_name + ", Pd_price=" + Pd_price + "]";
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

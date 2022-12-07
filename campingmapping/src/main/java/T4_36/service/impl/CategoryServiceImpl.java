@@ -17,7 +17,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void create(Category category) {
         try {
             DbUtils.begin();
-            if (categoryDao.insert(category)) {
+            if (categoryDao.inserttest(category)) {
                 DbUtils.commit();
             }
         } catch (SQLException e) {
@@ -25,12 +25,24 @@ public class CategoryServiceImpl implements CategoryService {
             e.printStackTrace();
         }
     }
+//    @Override
+//    public void create(Category category) {
+//    	try {
+//    		DbUtils.begin();
+//    		if (categoryDao.insert(category)) {
+//    			DbUtils.commit();
+//    		}
+//    	} catch (SQLException e) {
+//    		DbUtils.rollbacl();
+//    		e.printStackTrace();
+//    	}
+//    }
 
     @Override
     public void delete(int id) {
         try {
             DbUtils.begin();
-            categoryDao.delete(id);
+            categoryDao.deleteByPd_id(id);
             DbUtils.commit();
         } catch (SQLException e) {
             DbUtils.rollbacl();
@@ -55,7 +67,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = null;
         try {
             DbUtils.begin();
-            category = categoryDao.select(id);
+            category = categoryDao.selectByPd_id(id);
             DbUtils.commit();
         } catch (SQLException e) {
             DbUtils.rollbacl();

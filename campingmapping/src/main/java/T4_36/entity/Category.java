@@ -6,8 +6,8 @@ public class Category {
 
 	private Integer Pd_id;
 	// 產品編號(pk)
-	private int UID;
-	// 會員 id(fk)
+	private String userID;
+	// 會員 ID(fk)
 	private String name;
 	// 產品名稱
 	private String title;
@@ -31,11 +31,25 @@ public class Category {
 		return Pd_id;
 	}
 
-	public Category(Integer pd_id, int uID, String name, String title, String content, String type, String picture,
+	public Category(Integer pd_id, String userID, String name, String title, String content, String type,
+			String picture, int price, int inventory) {
+		super();
+		this.Pd_id = pd_id;
+		this.userID = userID;
+		this.name = name;
+		this.title = title;
+		this.content = content;
+		this.type = type;
+		this.picture = picture;
+		this.price = price;
+		this.inventory = inventory;
+	}
+
+	public Category(Integer pd_id, String userID, String name, String title, String content, String type, String picture,
 					int price, int inventory, Date pd_date, Date pd_last_update) {
 		super();
-		Pd_id = pd_id;
-		UID = uID;
+		this.Pd_id = pd_id;
+		this.userID = userID;
 		this.name = name;
 		this.title = title;
 		this.content = content;
@@ -51,12 +65,12 @@ public class Category {
 		Pd_id = pd_id;
 	}
 
-	public int getUID() {
-		return UID;
+	public String getuserID() {
+		return userID;
 	}
 
-	public void setUID(int uID) {
-		UID = uID;
+	public void setID(String userID) {
+		this.userID = userID;
 	}
 
 	public String getName() {
@@ -133,7 +147,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "category [Pd_id=" + Pd_id + ", UID=" + UID + ", name=" + name + ", title=" + title + ", content="
+		return "category [Pd_id=" + Pd_id + ", userID=" + userID + ", name=" + name + ", title=" + title + ", content="
 				+ content + ", type=" + type + ", picture=" + picture + ", price=" + price + ", inventory=" + inventory
 				+ ", Pd_date=" + Pd_date + ", Pd_last_update=" + Pd_last_update + "]";
 	}

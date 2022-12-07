@@ -18,7 +18,7 @@ public class ProductOrder {
 	// 會員 id(fk)
 	private String od_shipping_name;
 	// 顧客姓名(fk)
-	private int Pd_price;
+	private Double Pd_price;
 	// 價格
 	private String od_shipping_address;
 	// 運送位置
@@ -28,7 +28,7 @@ public class ProductOrder {
 	// 顧客電話(fk)
 	private String od_shipping_postal_code;
 	// 郵遞區號
-	private int od_shipping_cost;
+	private Double od_shipping_cost;
 	// 運送費用
 	Set<ProductOrder> items = new LinkedHashSet<>();
 
@@ -36,17 +36,17 @@ public class ProductOrder {
 
 	}
 
-	public ProductOrder(int orderID, String od_status, Date od_date, Date od_last_update, String user_id,
-			String od_shipping_name, int pd_price, String od_shipping_address, String od_shipping_email,
-			String od_shipping_phone, String od_shipping_postal_code, int od_shipping_cost, Set<ProductOrder> items) {
+	public ProductOrder(Integer no, String od_status, Date od_date, Date od_last_update, String user_id,
+			String od_shipping_name, Double pd_price, String od_shipping_address, String od_shipping_email,
+			String od_shipping_phone, String od_shipping_postal_code, Double od_shipping_cost, Set<ProductOrder> items) {
 		super();
-		this.orderID = orderID;
-		Od_status = od_status;
+		this.orderID = no;
+		this.Od_status = od_status;
 		this.od_date = od_date;
 		this.od_last_update = od_last_update;
 		this.user_id = user_id;
 		this.od_shipping_name = od_shipping_name;
-		Pd_price = pd_price;
+		this.Pd_price = pd_price;
 		this.od_shipping_address = od_shipping_address;
 		this.od_shipping_email = od_shipping_email;
 		this.od_shipping_phone = od_shipping_phone;
@@ -83,7 +83,7 @@ public class ProductOrder {
 		return orderID;
 	}
 
-	public void setOrderID(int orderID) {
+	public void setOrderID(Integer orderID) {
 		this.orderID = orderID;
 	}
 
@@ -111,11 +111,11 @@ public class ProductOrder {
 		this.od_shipping_name = od_shipping_name;
 	}
 
-	public int getPd_price() {
+	public Double getPd_price() {
 		return Pd_price;
 	}
 
-	public void setPd_price(int pd_price) {
+	public void setPd_price(Double pd_price) {
 		Pd_price = pd_price;
 	}
 
@@ -151,11 +151,11 @@ public class ProductOrder {
 		this.od_shipping_postal_code = od_shipping_postal_code;
 	}
 
-	public int getOd_shipping_cost() {
+	public Double getOd_shipping_cost() {
 		return od_shipping_cost;
 	}
 
-	public void setOd_shipping_cost(int od_shipping_cost) {
+	public void setOd_shipping_cost(Double od_shipping_cost) {
 		this.od_shipping_cost = od_shipping_cost;
 	}
 

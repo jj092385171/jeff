@@ -1,11 +1,15 @@
 package T4_36.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.naming.Context;
@@ -36,16 +40,13 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 	@Override
 	public void save(ProductOrder productOrder) {
 		log.info("儲存訂單(OrderDaoImpl)之Dao: ");
-		String sqlOrder = "Insert Into productOrder "
-				+ " (Od_status, od_date,"
-				+ " od_last_update, user_id, od_shipping_name,"
-				+ "Pd_price, od_shipping_address, od_shipping_email,"
+		String sqlOrder = "Insert Into productOrder " + " (Od_status, od_date,"
+				+ " od_last_update, user_id, od_shipping_name," + "Pd_price, od_shipping_address, od_shipping_email,"
 				+ "od_shipping_phone, od_shipping_postal_code, od_shipping_cost) "
 				+ " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
 		String sqlItem = "Insert Into productOrderItems (seqno, orderID,"
-				+ " Pd_id, Pd_name, od_shipping_name, Pd_price) "
-				+ " values(?, ?, ?, ?, ?, ?) ";
+				+ " Pd_id, Pd_name, od_shipping_name, Pd_price) " + " values(?, ?, ?, ?, ?, ?) ";
 
 		ResultSet generatedKeys = null;
 
@@ -58,12 +59,12 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 			ps.setTimestamp(4, tsolu);
 			ps.setString(5, productOrder.getUser_id());
 			ps.setString(6, productOrder.getOd_shipping_name());
-			ps.setInt(7, productOrder.getPd_price());
+			ps.setDouble(7, productOrder.getPd_price());
 			ps.setString(8, productOrder.getOd_shipping_address());
 			ps.setString(9, productOrder.getOd_shipping_email());
 			ps.setString(10, productOrder.getOd_shipping_phone());
 			ps.setString(11, productOrder.getOd_shipping_postal_code());
-			ps.setInt(12, productOrder.getOd_shipping_cost());
+			ps.setDouble(12, productOrder.getOd_shipping_cost());
 			ps.executeUpdate();
 			log.info("處理訂單之Dao: 新增一筆訂單到orders表格= " + productOrder);
 			int id = 0;
@@ -81,8 +82,8 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 					ps2.setInt(1, id);
 					ps2.setInt(2, oib.getPd_id());
 					ps2.setString(3, oib.getPd_name());
-					ps2.setString(4, oib.getOd_shipping_name());
-					ps2.setInt(5, oib.getPd_price());
+					ps2.setString(4, oib.getDiscount());
+					ps2.setDouble(5, oib.getPd_price());
 					ps2.executeUpdate();
 					log.info("處理訂單之Dao: 新增一筆OrderItemBean到OrderItemBean表格= " + oib);
 					ps2.clearParameters();
@@ -100,47 +101,54 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 		ProductOrder ob = null;
 		DataSource ds = null;
 		Set<ProductOrderItems> set = null;
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup(DBService.JNDI_DB_NAME);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("OrderDaoImpl類別#getOrder()-1發生例外: " + ex.getMessage());
-		}
+//		try {
+//			Context ctx = new InitialContext();
+//			ds = (DataSource) ctx.lookup(DBService.JNDI_DB_NAME);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("OrderDaoImpl類別#getOrder()-1發生例外: " + ex.getMessage());
+//		}
 
-		String sql = "SELECT * FROM Orders WHERE orderno = ? ";
-		String sql1 = "SELECT * FROM OrderItems WHERE orderno = ? ";
+		String sql = "SELECT * FROM productOrder WHERE orderID = ? ";
+		String sql1 = "SELECT * FROM productOrderItems WHERE orderID = ? ";
 		try (Connection con = ds.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql);
 				PreparedStatement ps1 = con.prepareStatement(sql1);) {
 			ps.setInt(1, orderNo);
 			try (ResultSet rs = ps.executeQuery();) {
 				if (rs.next()) {
-					Integer no = rs.getInt("orderNo");
-					String bno = rs.getString("bno");
-					String title = rs.getString("invoiceTitle");
-					String id = rs.getString("memberId");
-					Timestamp orderDate = rs.getTimestamp("orderDate");
-					String shipAddr = rs.getString("shippingAddress");
-					Date shipDate = rs.getDate("shippingDate");
-					double totalAmount = rs.getDouble("totalAmount");
-					ob = new OrderBean(no, id, totalAmount, shipAddr, bno, title, orderDate, shipDate, null);
+					Integer no = rs.getInt("orderID");
+					String user_id = rs.getString("user_id");
+					Timestamp od_last_update = rs.getTimestamp("od_last_update");
+					Timestamp od_date = rs.getTimestamp("od_date");
+					String od_status = rs.getString("Od_status");
+					String od_shipping_name = rs.getString("od_shipping_name");
+					double Pd_price = rs.getDouble("Pd_price");
+					String od_shipping_address = rs.getString("od_shipping_address");
+					String od_shipping_email = rs.getString("od_shipping_email");
+					String od_shipping_phone = rs.getString("od_shipping_phone");
+					String od_shipping_postal_code = rs.getString("od_shipping_postal_code");
+					double od_shipping_cost = rs.getDouble("od_shipping_cost");
+					ob = new ProductOrder(no, user_id, od_last_update, od_date, od_status, od_shipping_name, Pd_price,
+							od_shipping_address, od_shipping_email, od_shipping_phone, od_shipping_postal_code,
+							od_shipping_cost, null);
 				}
 			}
-			ps1.setInt(1, orderNo);
-			try (ResultSet rs = ps1.executeQuery();) {
+			ps1.setInt(1, orderID);
+			try (
+					ResultSet rs = ps1.executeQuery();
+					) {
 				set = new HashSet<>();
 				while (rs.next()) {
-					int seqNo = rs.getInt("seqNo");
-					int orderNo2 = rs.getInt("orderNo");
-					int bookId = rs.getInt("bookId");
-					String description = rs.getString("description");
+					int seqNo = rs.getInt("seqno");
+					int orderNo2 = rs.getInt("orderID");
+					int Pd_id = rs.getInt("Pd_id");
+					String Pd_name = rs.getString("Pd_name");
 					Integer amount = rs.getInt("amount");
-					Double uPrice = rs.getDouble("unitPrice");
-					Double discount = rs.getDouble("discount");
-					OrderItemBean oib = new OrderItemBean(seqNo, orderNo2, bookId, description, amount, uPrice,
-							discount, null, null, null);
-					set.add(oib);
+					Double Pd_price = rs.getDouble("Pd_price");
+					ProductOrderItems poi = new ProductOrderItems(seqNo, orderNo2, Pd_id, Pd_name, amount, Pd_price,
+							null);
+					set.add(poi);
 				}
 				ob.setItems(set);
 				log.info("依照orderNo編號讀取特定一筆訂單的所有資料之Dao, 讀取完畢, ob=" + ob);
@@ -152,23 +160,20 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 		return ob;
 	}
 
-	public void setConnection(Connection con) {
-		this.con = con;
-	}
 
 	@Override
-	public List<OrderBean> findByMemberId(String memberId) {
+	public List<ProductOrder> findByMemberId(String memberId) {
 		log.info("讀取某位會員所有訂單之Dao: 開始");
 		DataSource ds = null;
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup(DBService.JNDI_DB_NAME);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("OrderDaoImpl類別#getOrder()-1發生例外: " + ex.getMessage());
-		}
-		List<OrderBean> list = new ArrayList<OrderBean>();
-		String sql = "SELECT OrderNo FROM Orders where memberId = ? Order by orderDate desc ";
+//		try {
+//			Context ctx = new InitialContext();
+//			ds = (DataSource) ctx.lookup(DBService.JNDI_DB_NAME);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//			throw new RuntimeException("OrderDaoImpl類別#getOrder()-1發生例外: " + ex.getMessage());
+//		}
+		List<ProductOrder> list = new ArrayList<ProductOrder>();
+		String sql = "SELECT orderID FROM productOrder where user_id = ? Order by od_date desc ";
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 			ps.setString(1, memberId);
 			try (ResultSet rs = ps.executeQuery();) {
@@ -182,42 +187,6 @@ public class ProductOrderDaoImpl implements ProductOrderDao {
 		}
 		log.info("讀取某位會員所有訂單之Dao: 讀取完畢");
 		return list;
-	}
-
-	@Override
-	public OrderBean findById(int orderNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<OrderBean> findByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save(ProductOrder ob) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public ProductOrder findById(int orderNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public java.util.List<ProductOrder> findByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setConnection(Connection con) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
