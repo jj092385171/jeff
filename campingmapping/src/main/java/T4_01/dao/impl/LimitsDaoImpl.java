@@ -15,12 +15,10 @@ public class LimitsDaoImpl implements LimitsDao {
 	private QueryRunner queryRunner = new QueryRunner();
 
 	@Override
-	public Limits insert(Limits limits) {
+	public int insert(Limits limits) {
 		try {
-			Limits insert = queryRunner.insert(DbUtils.getConnection(),
+			int insert = queryRunner.update(DbUtils.getConnection(),
 					"INSERT INTO limits (UID,account,nomore,buy,sell,publisher,message,enterprise,applier,mainhoster,attender,campingowner,customer)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-					new BeanHandler<Limits>(Limits.class), limits.getUID(),
-					limits.getAccount(), limits.getNomore(), limits.getBuy(),
 					limits.getSell(), limits.getPublisher(),
 					limits.getMessage(), limits.getEnterprise(),
 					limits.getApplier(), limits.getMainhoster(),
@@ -29,7 +27,7 @@ public class LimitsDaoImpl implements LimitsDao {
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return 0;
 		}
 	}
 

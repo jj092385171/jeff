@@ -1,21 +1,5 @@
 USE [campDB]
 GO
-
-UPDATE limits
-SET UID = <UID, int,>
-,account = <account, nvarchar(50),>
-,nomore = <nomore, char(1),>
-,buy = <buy, char(1),>
-,sell = <sell, char(1),>
-,publisher = <publisher, char(1),>
-,message = <message, char(1),>
-,enterprise = <enterprise, char(1),>
-,applier = <applier, char(1),>
-,mainhoster = <mainhoster, char(1),>
-,attender = <attender, char(1),>
-,campingowner = <campingowner, char(1),>
-,customer = <customer, char(1),>
-WHERE <搜尋條件,,>
-GO
-
+ UPDATE limits SET UID = ? ,account = ? ,nomore = ? ,buy = ? ,sell = ? ,publisher = ? ,message = ? ,enterprise = ? ,applier = ? ,mainhoster = ? ,attender = ? ,campingowner = ? ,customer = ? WHERE ?
+GO UPDATE limits SET   account] = ? , nomore] = ? , buy] = ? , sell] = ? , publisher] = ? , message] = ? , enterprise] = ? , applier] = ? , mainhoster] = ? , attender] = ? , campingowner] = ? , customer] = ? WHERE UID = ?
 

@@ -15,17 +15,16 @@ public class CouponWalletDaoImpl implements CouponWalletDao {
 	private QueryRunner queryRunner = new QueryRunner();
 
 	@Override
-	public CouponWallet insert(CouponWallet couponWallet) {
+	public int insert(CouponWallet couponWallet) {
 		try {
-			CouponWallet insert = queryRunner.insert(DbUtils.getConnection(),
+			int insert = queryRunner.update(DbUtils.getConnection(),
 					"INSERT INTO couponWallet ( UID , couponID , state ) VALUES ( ? , ? , ? )",
-					new BeanHandler<CouponWallet>(CouponWallet.class),
 					couponWallet.getUID(), couponWallet.getCouponID(),
 					couponWallet.getState());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return 0;
 		}
 	}
 
@@ -59,8 +58,9 @@ public class CouponWalletDaoImpl implements CouponWalletDao {
 	@Override
 	public CouponWallet select(int CWID) {
 		try {
-			 CouponWallet query = queryRunner.query(DbUtils.getConnection(), "SELECT * FROM couponWallet where CWID = ?",
-					new BeanHandler<CouponWallet>(CouponWallet.class),CWID);
+			CouponWallet query = queryRunner.query(DbUtils.getConnection(),
+					"SELECT * FROM couponWallet where CWID = ?",
+					new BeanHandler<CouponWallet>(CouponWallet.class), CWID);
 			return query;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +72,8 @@ public class CouponWalletDaoImpl implements CouponWalletDao {
 	public List<CouponWallet> selectAll() {
 		List<CouponWallet> query;
 		try {
-			query = queryRunner.query(DbUtils.getConnection(), "SELECT * FROM couponWallet",
+			query = queryRunner.query(DbUtils.getConnection(),
+					"SELECT * FROM couponWallet",
 					new BeanListHandler<CouponWallet>(CouponWallet.class));
 			return query;
 		} catch (SQLException e) {

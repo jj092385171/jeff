@@ -5,7 +5,7 @@ import java.util.List;
 import T4_01.beans.Member;
 
 public interface MemberDao {
-	public Member insert(Member member);
+	public int insert(Member member);
 
 	public int delete(String account);
 

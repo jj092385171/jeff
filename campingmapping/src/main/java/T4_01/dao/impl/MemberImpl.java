@@ -12,20 +12,20 @@ import utils.DbUtils;
 public class MemberImpl implements MemberDao {
 	private QueryRunner queryRunner = new QueryRunner();
 	@Override
-	public Member insert(Member member) {
+	public int insert(Member member) {
 		try {
-			Member insert = queryRunner.insert(DbUtils.getConnection(),
-					"INSERT INTO member (account,Nickname,firstname ,lastname,exp,leavel,point,phone,birthday,address ,email,gender ,subscribed ,shot)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-					new BeanHandler<Member>(Member.class), member.getAccount(),
-					member.getNickname(), member.getFirstname(),
-					member.getLastname(), member.getExp(), member.getLeavel(),
-					member.getPoint(), member.getPhone(), member.getBirthday(),
+			int insert = queryRunner.update(DbUtils.getConnection(),
+					"INSERT INTO member (account,Nickname,firstname ,lastname,exp,leavel,point,phone,birthday,address ,email,gender ,subscribed ,shot,registerdata)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?, default )",
+					member.getAccount(), member.getNickname(),
+					member.getFirstname(), member.getLastname(),
+					member.getExp(), member.getLeavel(), member.getPoint(),
+					member.getPhone(), member.getBirthday(),
 					member.getAddress(), member.getEmail(), member.getGender(),
 					member.getSubscribed(), member.getShot());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return 0;
 		}
 	}
 
@@ -45,13 +45,13 @@ public class MemberImpl implements MemberDao {
 	public int update(Member member) {
 		try {
 			int update = queryRunner.update(DbUtils.getConnection(),
-					"UPDATE member SET account = ?,Nickname = ?,firstname = ?,lastname = ?,exp = ?,leavel = ?,point = ?,phone = ?,birthday = ?,address = ?,email = ?,gender = ?,subscribed = ?,shot = ? WHERE account = ?",
-					member.getNickname(), member.getFirstname(),
-					member.getLastname(), member.getExp(), member.getLeavel(),
-					member.getPoint(), member.getPhone(), member.getBirthday(),
+					"UPDATE member SET account = ?,Nickname = ?,firstname = ?,lastname = ?,exp = ?,leavel = ?,point = ?,phone = ?,birthday = ?,address = ?,email = ?,gender = ?,subscribed = ?,shot = ? WHERE UID = ?",
+					member.getAccount(), member.getNickname(),
+					member.getFirstname(), member.getLastname(),
+					member.getExp(), member.getLeavel(), member.getPoint(),
+					member.getPhone(), member.getBirthday(),
 					member.getAddress(), member.getEmail(), member.getGender(),
-					member.getSubscribed(), member.getShot(),
-					member.getAccount());
+					member.getSubscribed(), member.getShot(), member.getUID());
 			return update;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -16,17 +16,16 @@ public class LoginHistoryDaoImpl implements LoginHistoryDao {
 
 	private QueryRunner queryRunner = new QueryRunner();
 	@Override
-	public LoginHistory insert(LoginHistory loginHistory) {
+	public int insert(LoginHistory loginHistory) {
 		try {
-			LoginHistory insert = queryRunner.insert(DbUtils.getConnection(),
+			int insert = queryRunner.update(DbUtils.getConnection(),
 					"INSERT INTO LoginHistory (UID ,account ,IP ) VALUES (? ,? ,? )",
-					new BeanHandler<LoginHistory>(LoginHistory.class),
 					loginHistory.getUID(), loginHistory.getAccount(),
 					loginHistory.getIP());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return 0;
 		}
 	}
 
