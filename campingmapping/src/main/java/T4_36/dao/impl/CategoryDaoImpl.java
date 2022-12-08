@@ -113,4 +113,9 @@ public class CategoryDaoImpl implements CategoryDao {
 
         return queryRunner.query(connection, sql, new BeanListHandler<>(Category.class));
     }
+
+	public List<Category> findbyPd_id(String Pd_id) throws SQLException {
+		String sql = "select * from category where Pd_id = ?";
+		return queryRunner.query(connection, sql, new BeanListHandler<>(Category.class), Pd_id);
+    }
 }

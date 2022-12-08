@@ -33,6 +33,7 @@ public class testinsertServlet extends HttpServlet {
 			String content = request.getParameter("content");
 			String type = request.getParameter("type");
 			Blob picture = request.getParameter("picture");
+			String picture_name = request.getParameter("picture_name");
 			int price = Integer.parseInt(request.getParameter("price"));
 			int inventory = Integer.parseInt(request.getParameter("inventory"));
 //			Date date = new Date(1345434534);
@@ -42,7 +43,7 @@ public class testinsertServlet extends HttpServlet {
 			Date Pd_last_update = datelastup;
 			CategoryDaoImpl cdaoImpl = new CategoryDaoImpl();
 			Category bean = new Category( userID, name, title, content, 
-					type, picture,  price, inventory,Pd_date,Pd_last_update);
+					type, picture, picture_name, price, inventory,Pd_date,Pd_last_update);
 //					,Pd_date, Pd_last_update
 
 			try {

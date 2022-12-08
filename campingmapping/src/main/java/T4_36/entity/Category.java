@@ -19,6 +19,8 @@ public class Category {
 	// 產品類型
 	private Blob picture;
 	// 照片 vinbinary
+	private String picture_name;
+	// 產品類型
 	private int price;
 	// 價位
 	private int inventory;
@@ -27,13 +29,39 @@ public class Category {
 	// 商品建立日期
 	private Date Pd_last_update;
 	// 商品更新日期
+	
 
 	public int getPd_id() {
 		return Pd_id;
 	}
 
 
-	public Category(String userID, String name, String title, String content, String type, Blob picture, int price,
+	public String getUserID() {
+		return userID;
+	}
+
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+
+	public String getPicture_name() {
+		return picture_name;
+	}
+
+
+	public void setPicture_name(String picture_name) {
+		this.picture_name = picture_name;
+	}
+
+
+	public void setPd_id(Integer pd_id) {
+		Pd_id = pd_id;
+	}
+
+
+	public Category(String userID, String name, String title, String content, String type, Blob picture, String picture_name, int price,
 			int inventory, Date pd_date, Date pd_last_update) {
 		super();
 		this.userID = userID;
@@ -42,6 +70,7 @@ public class Category {
 		this.content = content;
 		this.type = type;
 		this.picture = picture;
+		this.picture_name = picture_name;
 		this.price = price;
 		this.inventory = inventory;
 		this.Pd_date = pd_date;
@@ -49,7 +78,7 @@ public class Category {
 	}
 
 
-	public Category(Integer pd_id, String userID, String name, String title, String content, String type, Blob picture,
+	public Category(Integer pd_id, String userID, String name, String title, String content, String type, Blob picture, String picture_name,
 					int price, int inventory, Date pd_date, Date pd_last_update) {
 		super();
 		this.Pd_id = pd_id;
@@ -59,6 +88,7 @@ public class Category {
 		this.content = content;
 		this.type = type;
 		this.picture = picture;
+		this.picture_name = picture_name;
 		this.price = price;
 		this.inventory = inventory;
 		Pd_date = pd_date;
@@ -149,11 +179,6 @@ public class Category {
 		Pd_last_update = pd_last_update;
 	}
 
-	@Override
-	public String toString() {
-		return "category [Pd_id=" + Pd_id + ", userID=" + userID + ", name=" + name + ", title=" + title + ", content="
-				+ content + ", type=" + type + ", picture=" + picture + ", price=" + price + ", inventory=" + inventory
-				+ ", Pd_date=" + Pd_date + ", Pd_last_update=" + Pd_last_update + "]";
-	}
+	
 
 }
