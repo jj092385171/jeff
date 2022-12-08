@@ -3,11 +3,11 @@ package T4_24.Models;
 import java.sql.Blob;
 import java.util.List;
 
-public class CampPlusCityBean {
+public class CampPlusCityPlusTagsBean {
 
 	private Integer campID;
 	private String campName;
-	private int cityID;
+	private Integer cityID;
 	private String cityName;
 	private String location;
 	private java.sql.Blob campPictures;
@@ -15,20 +15,19 @@ public class CampPlusCityBean {
 	private List<TagPlusCampBean> tagList;
 	
 	
-	public CampPlusCityBean() {
+	public CampPlusCityPlusTagsBean() {
 	}
 
 
-	public CampPlusCityBean(Integer campID, String campName, int cityID, String cityName, String location,
-			Blob campPictures, String discription) {
+	public CampPlusCityPlusTagsBean(String campName, Integer cityID, String location, Blob campPictures,
+			String discription, List<TagPlusCampBean> tagList) {
 		super();
-		this.campID = campID;
 		this.campName = campName;
 		this.cityID = cityID;
-		this.cityName = cityName;
 		this.location = location;
 		this.campPictures = campPictures;
 		this.discription = discription;
+		this.tagList = tagList;
 	}
 
 
@@ -52,12 +51,12 @@ public class CampPlusCityBean {
 	}
 
 
-	public int getCityID() {
+	public Integer getCityID() {
 		return cityID;
 	}
 
 
-	public void setCityID(int cityID) {
+	public void setCityID(Integer cityID) {
 		this.cityID = cityID;
 	}
 
@@ -100,14 +99,18 @@ public class CampPlusCityBean {
 	public void setDiscription(String discription) {
 		this.discription = discription;
 	}
-	
+
+
 	public List<TagPlusCampBean> getTagList() {
 		return tagList;
 	}
 
+
 	public void setTagList(List<TagPlusCampBean> tagList) {
 		this.tagList = tagList;
 	}
+
+	
 	
 	
 	

@@ -16,8 +16,8 @@ import T4_24.Dao.CityDao;
 import T4_24.Models.CityBean;
 
 
-@WebServlet("/T4_24/QueryCampPageServlet")
-public class QueryCampPageServlet extends HttpServlet {
+@WebServlet("/T4_24/QueryPageServlet")
+public class QueryPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	//顯示所有city
@@ -27,7 +27,7 @@ public class QueryCampPageServlet extends HttpServlet {
 		try {
 			List<CityBean> cityList = cityDao.showAll();
 			request.setAttribute("cityList", cityList);
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/QueryByCityNameForm.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/QueryPageForm.jsp");
 			rd.forward(request, response);
 			return;
 			

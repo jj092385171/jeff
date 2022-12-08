@@ -58,14 +58,18 @@ form {
 			</tbody>
 		</table>
 	</form>
-	<c:forEach var='cpc' items='${cpcList}'>
-		營地編號: ${ cpc.campID }<br>
-		營地: ${ cpc.campName }<br>
-		縣市編號: ${ cpc.cityID }<br>
-		縣市名: ${ cpc.cityName }<br>
-		地址: ${ cpc.location }<br>
+	
+	<c:forEach var='cct' items='${cctList}'>
+		營地編號: ${ cct.campID }<br>
+		營地: ${ cct.campName }<br>
+		縣市編號: ${ cct.cityID }<br>
+		縣市名: ${ cct.cityName }<br>
+		地址: ${ cct.location }<br>
 <!-- 							圖片: <br> -->
-		簡介: ${ cpc.discription }<br>
+		簡介: ${ cct.discription }<br>
+		<c:forEach var='tag' items='${cct.tagList}'>
+			標籤: ${tag.tagName}<br>
+		</c:forEach>
 	</c:forEach>
 
 </body>

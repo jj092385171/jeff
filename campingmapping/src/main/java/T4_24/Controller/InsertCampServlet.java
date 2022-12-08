@@ -24,98 +24,86 @@ import javax.sql.rowset.serial.SerialException;
 import org.hibernate.Hibernate;
 
 import T4_24.Dao.CampDao;
-import T4_24.Dao.CampPlusCityDao;
-import T4_24.Dao.CityDao;
-import T4_24.Dao.TagDao;
+import T4_24.Dao.CampPlusCityPlusTagsDao;
 import T4_24.Dao.TagOfCampDao;
-import T4_24.Dao.TagPlusCampDao;
 import T4_24.Models.CampBean;
-import T4_24.Models.CampPlusCityBean;
-import T4_24.Models.CityBean;
-import T4_24.Models.TagBean;
-import T4_24.Models.TagOfCampBean;
+import T4_24.Models.CampPlusCityPlusTagsBean;
 import T4_24.Models.TagPlusCampBean;
-
 
 @MultipartConfig
 @WebServlet("/T4_24/InsertCampServlet")
 public class InsertCampServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HashMap<String, String> errorMsg = new HashMap<>();
 		request.setAttribute("ErrorMsg", errorMsg);
-		
+
 		HttpSession session = request.getSession();
-		
+
 		request.setCharacterEncoding("UTF-8");
-		//營地名
+		// 營地名
 		String campName = request.getParameter("campName");
-		if(campName == null  ||  campName.trim().length() == 0) {
+		if (campName == null || campName.trim().length() == 0) {
 			errorMsg.put("campName", "必須輸入營地名稱");
 		}
-		//縣市
+		// 縣市
 		String cityID = request.getParameter("cityID");
-		
-		//地址
+
+		// 地址
 		String location = request.getParameter("location");
-		if(location == null  ||  location.trim().length() == 0) {
+		if (location == null || location.trim().length() == 0) {
 			errorMsg.put("location", "必須輸入地址");
-		}	
-		//讀圖
+		}
+		// 讀圖
 		Part part = request.getPart("campPictures");
 		InputStream is = part.getInputStream();
-		if(is.read() == -1) {
+		if (is.read() == -1) {
 			errorMsg.put("campPictures", "必須選擇圖片");
 		}
 		Blob blob = Hibernate.createBlob(is);
-		
-		//簡介
+		// 簡介
 		String discription = request.getParameter("discription");
-		//標籤
+		// 標籤
 		String[] tagIDs = request.getParameterValues("tagID");
-		
-		
-		//錯誤返回呼叫jsp
-		if(!errorMsg.isEmpty()) {
+
+		// 錯誤返回呼叫jsp
+		if (!errorMsg.isEmpty()) {
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/InsertCamp");
 			rd.forward(request, response);
 			return;
-			
+
 		}
-		
+
 		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location, blob, discription);
 		CampDao campDao = new CampDao();
+
 		TagOfCampDao tagOfCampDao = new TagOfCampDao();
-		TagPlusCampDao tagPlusCampDao = new TagPlusCampDao();
-		CampPlusCityDao campPlusCityDao = new CampPlusCityDao();
-		List<TagPlusCampBean> tagList = new ArrayList<>();
-		
+		CampPlusCityPlusTagsDao campPlusCityPlusTagsDao = new CampPlusCityPlusTagsDao();
+
 		try {
+			// 新增到camp回傳campID
 			BigDecimal campID = campDao.Add(cb);
-			
-			//利用campID和tagID新增營地的標籤
-			for(String tagID : tagIDs) {
-				tagOfCampDao.Add( Integer.valueOf(tagID) ,campID.intValueExact() );
-				tagList.add( tagPlusCampDao.findTagNameByTagID(Integer.valueOf(tagID) ) );
+
+			// 利用campID和tagID新增到營地的標籤
+			for (String tagID : tagIDs) {
+				tagOfCampDao.Add(Integer.valueOf(tagID), campID.intValueExact());
 			}
 			
-			CampPlusCityBean cpcBean = campPlusCityDao.findCampByID(campID.intValueExact());
+			CampPlusCityPlusTagsBean cctBean = campPlusCityPlusTagsDao.findCampByID(campID.intValueExact());
 			
 			session.setAttribute("campID", campID.toString());
-			session.setAttribute("cpcBean", cpcBean);
-			session.setAttribute("tagList", tagList);
-			
-			
+			session.setAttribute("cctBean", cctBean);
+
 			String contextPath = request.getContextPath();
-			response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/InsertCampSuccess.jsp") ); 
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/InsertCampSuccess.jsp"));
 			return;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

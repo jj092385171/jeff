@@ -13,13 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampDao;
-import T4_24.Dao.CampPlusCityDao;
-import T4_24.Dao.CityDao;
-import T4_24.Dao.TagPlusCampDao;
-import T4_24.Models.CampBean;
-import T4_24.Models.CampPlusCityBean;
-import T4_24.Models.CityBean;
+import T4_24.Dao.CampPlusCityPlusTagsDao;
+import T4_24.Models.CampPlusCityPlusTagsBean;
 import T4_24.Models.TagPlusCampBean;
 
 
@@ -33,39 +28,28 @@ public class QueryCampsByCityIDsServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		
-		CampPlusCityDao campPlusCityDao = new CampPlusCityDao();
-		TagPlusCampDao tagPlusCampDao = new TagPlusCampDao();
 		
 		String[] cityIDs = request.getParameterValues("cityID");
-		List<CampPlusCityBean> cpcList = new ArrayList<CampPlusCityBean>();
-		List<TagPlusCampBean> tagList = new ArrayList<>();
+		System.out.println(cityIDs);
+		
+		CampPlusCityPlusTagsDao campPlusCityPlusTagsDao = new CampPlusCityPlusTagsDao();
+	
+		List<CampPlusCityPlusTagsBean> cctAllList = new ArrayList<CampPlusCityPlusTagsBean>();
 		
 		for(String cityID : cityIDs) {
 			try {
-				List<CampPlusCityBean> findCampsByCityID = campPlusCityDao.findCampsByCityID( Integer.valueOf(cityID));
-				cpcList.addAll(findCampsByCityID);
-				
+				List<CampPlusCityPlusTagsBean> cctLIst = campPlusCityPlusTagsDao.findCampsByCityID( Integer.valueOf(cityID));
+				cctAllList.addAll(cctLIst);
 				
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		for(CampPlusCityBean cpcBean : cpcList) {
-			try {
-				tagList = tagPlusCampDao.findTagNameByCampID(cpcBean.getCampID());
-				cpcBean.setTagList(tagList);
-				
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		session.setAttribute("cpcList", cpcList);
+		session.setAttribute("cctAllList", cctAllList);
 		
 		String contextPath = request.getContextPath();
-		response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/QueryByCityNameResult.jsp") ); 
+		response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/QueryByCityIDsResult.jsp") ); 
 		return;
 				
 				

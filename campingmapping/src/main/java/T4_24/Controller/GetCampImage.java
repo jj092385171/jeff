@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import T4_24.Dao.CampDao;
-import T4_24.Dao.CampPlusCityDao;
+import T4_24.Dao.CampPlusCityPlusTagsDao;
 import T4_24.Models.CampBean;
-import T4_24.Models.CampPlusCityBean;
+import T4_24.Models.CampPlusCityPlusTagsBean;
 
 @WebServlet("/T4_24/GetCampImage")
 public class GetCampImage extends HttpServlet {
@@ -35,9 +35,9 @@ public class GetCampImage extends HttpServlet {
 			String id = request.getParameter("id");
 			System.out.println("id:"+id);
 			// 讀取瀏覽器傳送來的type，以分辨要處理哪個表格
-			CampPlusCityDao campPlusCityDao = new CampPlusCityDao();
+			CampPlusCityPlusTagsDao campPlusCityDao = new CampPlusCityPlusTagsDao();
 			
-			CampPlusCityBean cpcBean = campPlusCityDao.findCampByID(Integer.valueOf(id));
+			CampPlusCityPlusTagsBean cpcBean = campPlusCityDao.findCampByID(Integer.valueOf(id));
 			campPictures = cpcBean.getCampPictures();
 			is = campPictures.getBinaryStream();
 			System.out.println("is:"+is);

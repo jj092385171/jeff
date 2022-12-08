@@ -2,7 +2,6 @@ package T4_24.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,13 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampDao;
-import T4_24.Dao.CampPlusCityDao;
-import T4_24.Dao.CityDao;
-import T4_24.Dao.TagPlusCampDao;
-import T4_24.Models.CampBean;
-import T4_24.Models.CampPlusCityBean;
-import T4_24.Models.CityBean;
+import T4_24.Dao.CampPlusCityPlusTagsDao;
+import T4_24.Models.CampPlusCityPlusTagsBean;
 import T4_24.Models.TagPlusCampBean;
 
 
@@ -33,17 +27,13 @@ public class QueryCampByCampIDServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		
-		CampPlusCityDao campPlusCityDao = new CampPlusCityDao();
-		TagPlusCampDao tagPlusCampDao = new TagPlusCampDao();
+		CampPlusCityPlusTagsDao campPlusCityPlusTagsDao = new CampPlusCityPlusTagsDao();
 		
 		String campID = request.getParameter("campID");
-		CampPlusCityBean cpcBean = null;
-		List<TagPlusCampBean> tagList = null;
+		CampPlusCityPlusTagsBean cctBean = null;
 		
 		try {
-			cpcBean = campPlusCityDao.findCampByID(Integer.valueOf(campID));
-			tagList = tagPlusCampDao.findTagNameByCampID(Integer.valueOf(campID));
-			cpcBean.setTagList(tagList);
+			cctBean = campPlusCityPlusTagsDao.findCampByID(Integer.valueOf(campID));
 			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -51,7 +41,7 @@ public class QueryCampByCampIDServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 			
-		session.setAttribute("cpcBean", cpcBean);
+		session.setAttribute("cctBean", cctBean);
 		
 	
 		String contextPath = request.getContextPath();

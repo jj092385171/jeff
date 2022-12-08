@@ -9,16 +9,16 @@
 <title>Success</title>
 </head>
 <body>
-營地編號: ${cpcBean.campID} 的資料新增成功<br>
-營地: ${ cpcBean.campName } <br>
-縣市編號: ${ cpcBean.cityID }<br>
-縣市名: ${ cpcBean.cityName }<br>
-地址: ${ cpcBean.location }<br>
+營地編號: ${cctBean.campID} 的資料新增成功<br>
+營地: ${ cctBean.campName } <br>
+縣市編號: ${ cctBean.cityID }<br>
+縣市名: ${ cctBean.cityName }<br>
+地址: ${ cctBean.location }<br>
 <%-- 圖片: <img height='200' width='200' src="<c:url value='/T4_24/GetCampImage?id=${campID}' />"/><br> --%>
-圖片: <img height='200' width='200' src="${pageContext.servletContext.contextPath}/T4_24/GetCampImage?id=${campID}"/><br>
+<%-- 圖片: <img height='200' width='200' src="${pageContext.servletContext.contextPath}/T4_24/GetCampImage?id=${campID}"/><br> --%>
 <%-- 圖片: <img height='200' width='200' src="data:image/png;base64,${CampBean.getBase64String()} }"/><br> --%>
-簡介: ${ cpcBean.discription }<br>
-<c:forEach var='tag' items='${tagList}'>
+簡介: ${ cctBean.discription }<br>
+<c:forEach var='tag' items='${cctBean.tagList}'>
 	標籤: ${ tag.tagName }<br>
 </c:forEach>
 

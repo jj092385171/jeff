@@ -10,14 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import T4_24.Dao.CityDao;
 import T4_24.Dao.TagDao;
-import T4_24.Dao.TagPlusCampDao;
 import T4_24.Models.CityBean;
 import T4_24.Models.TagBean;
-import T4_24.Models.TagPlusCampBean;
 
 
 @WebServlet("/T4_24/InsertCampPageServlet")
