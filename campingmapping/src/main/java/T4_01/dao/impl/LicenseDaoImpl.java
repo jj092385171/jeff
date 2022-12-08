@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import T4_01.beans.License;
 import T4_01.dao.LicenseDao;
@@ -29,15 +30,14 @@ public class LicenseDaoImpl implements LicenseDao {
 
 	@Override
 	public int delete(String account) {
-try {
-	int update = queryRunner.update(DbUtils.getConnection(),
-			"DELETE FROM license WHERE account =?",account
-			);
-	return update;
-} catch (SQLException e) {
-	e.printStackTrace();
-	return 0;
-}
+		try {
+			int update = queryRunner.update(DbUtils.getConnection(),
+					"DELETE FROM license WHERE account =?", account);
+			return update;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	@Override
@@ -57,7 +57,16 @@ try {
 
 	@Override
 	public License select(String account) {
-		return null;
+		try {
+			License query = queryRunner.query(DbUtils.getConnection(),
+					"SELECT * FROM license WHERE account = ?",
+					new BeanHandler<License>(License.class), account);
+			return query;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	@Override

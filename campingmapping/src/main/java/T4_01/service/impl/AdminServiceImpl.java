@@ -1,11 +1,11 @@
-package T4_01.servlerProject.service.impl;
+package T4_01.service.impl;
 
 import java.util.List;
 
+import T4_01.service.AdminService;
 import T4_01.servlerProject.dao.AdminDao;
 import T4_01.servlerProject.dao.impl.AdminDaoImpl;
 import T4_01.servlerProject.entity.Admin;
-import T4_01.servlerProject.service.AdminService;
 import utils.DbUtils;
 
 

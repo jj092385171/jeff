@@ -7,9 +7,9 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="../assets/css/main.css" />
-	<noscript>
+	<!--  <noscript>
 		<link rel="stylesheet" href="../assets/css/noscript.css" />
-	</noscript>
+	</noscript> -->
 	<script src="https://kit.fontawesome.com/c5dcdb1f13.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="../T4_01/css/login.css">
 
@@ -38,34 +38,47 @@
 
 
 		<div class="container">
+
 			<div class="form">
+				<!-- <div style="display: flex;"> -->
 				<h2>登入</h2>
-				<form action="/campingmapping/login" method="post">
+
+				<!-- </div> -->
+				<form action="/campingmapping/login" name="loginform" id="loginform" method="post">
 					<div class="inputBox">
-						<input type="text"  name="account" placeholder="帳號">
+						<input type="text" name="account" id="account" placeholder="帳號">
 
 					</div>
 					<div class="inputBox">
-						<input type="password" name="password"   placeholder="密碼">
+						<input type="password" name="password" id="password" placeholder="密碼">
 
 					</div>
 					<div class="inputBox">
-						<input type="text" id="canvasValue" placeholder="認證碼">
+						<!-- onclick="window.location.reload()" -->
+						<div class="" id="canvasBox" style="float: left; width: 50%;">
+							<canvas id="canvas" style="background-color: #ffffffaf; padding: 0px;width: 99%;"></canvas>
+
+						</div>
+						<input type="text" id="canvasValue" placeholder="認證碼" style="float: right; width: 47%;">
+					</div>
+
+					<div class="inputBox">
+						<!--  style="display: flex;"-->
+						<input type="button" id="Submit" value="登入">
 
 					</div>
-					<div class="inputBox" onclick="window.location.reload()">
-						<canvas id="canvas" style="background-color: #ffffffaf;"></canvas>
-					</div>
-					<div class="inputBox">
-						<input type="submit" id="submit" value="登入">
-					</div>
+					<!-- <div style="display: flex; justify-content: center; align-content: center;flex-wrap: wrap;"> -->
+					<p class="loginError" id="loginError"></p></a>
+					<!-- 						</div> -->
 					<p class="forget">忘記密碼?<a href="#">
 							點選這裡
 						</a></p>
 					<p class="forget">沒有賬戶?<a href="#">
 							註冊
 						</a></p>
+
 				</form>
+
 			</div>
 		</div>
 
@@ -90,65 +103,151 @@
 	<script src="../assets/js/breakpoints.min.js"></script>
 	<script src="../assets/js/util.js"></script>
 	<script src="../assets/js/main.js"></script>
+
 	<script>
-		function getRandom(min, max) {
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		};
+		$(function () {
+			var gRandom;
 
-		//--隨機生成RGB顏色
-		function randomRgbColor(xV) {
-			var r = Math.floor(Math.random() * xV); //隨機生成256以內r值
-			var g = Math.floor(Math.random() * xV); //隨機生成256以內g值
-			var b = Math.floor(Math.random() * xV); //隨機生成256以內b值
-			return "rgb(" + r + "," + g + "," + b + ")"; //返回rgb(r,g,b)格式顏色
-		}
+			$(function () {
+				$("#Submit").click(function () {
+					validate('#canvasValue', gRandom)
+				}).on('click', function () {
+					draw_Captcha();
+					$('#canvasValue').val("");
+				})
+			})
 
-		var gRandom = '';
-		function draw_Captcha() {
-			gRandom = getRandom(10000, 99999);
-			var canvas = document.getElementById("canvas");
-			var context = canvas.getContext("2d");
-			canvas.width = 110;
-			canvas.height = 38;
-			context.strokeRect(0, 0, canvas.width, canvas.height);
-			//console.log('gRandom = ',gRandom);
+			function getRandom(min, max) {
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			};
 
-			//---驗証數字
-			for (var i = 0; i < gRandom.toString().length; i++) {
-				var x = 5 + i * 20;
-				var y = 26;
-				//var deg = Math.random() * 70 * Math.PI / 180;//隨機弧度
-				var deg = Math.random() * 38 * Math.PI / 160;//隨機弧度
-				var txt = gRandom.toString()[i];
-				context.fillStyle = randomRgbColor(100);
-				context.font = "bold 25px Arial";
-				//修改座標原點和旋轉角度
-				context.translate(x, y);
-				context.rotate(deg);
-				context.fillText(txt, 0, 0);
-				//恢復座標原點和旋轉角度
-				context.rotate(-deg);
-				context.translate(-x, -y);
-
+			//--隨機生成RGB顏色
+			function randomRgbColor(xV) {
+				let r = Math.floor(Math.random() * xV); //隨機生成256以內r值
+				let g = Math.floor(Math.random() * xV); //隨機生成256以內g值
+				let b = Math.floor(Math.random() * xV); //隨機生成256以內b值
+				return "rgb(" + r + "," + g + "," + b + ")"; //返回rgb(r,g,b)格式顏色
 			}
 
-			//---干擾線
-			for (var i = 0; i < 6; i++) {
-				context.strokeStyle = randomRgbColor(256);
-				context.beginPath();
-				context.moveTo(Math.random() * 120, Math.random() * 40);
-				context.lineTo(Math.random() * 120, Math.random() * 40);
-				context.stroke();
+			function draw_Captcha() {
+				gRandom = getRandom(10000, 99999);
+				let canvas = document.getElementById("canvas");
+				let context = canvas.getContext("2d");
+				canvas.width = 110;
+				canvas.height = 38;
+				context.strokeRect(0, 0, canvas.width, canvas.height);
+				// console.log('gRandom = ', gRandom);
+
+				//---驗証數字
+				for (let i = 0; i < gRandom.toString().length; i++) {
+					let x = 5 + i * 20;
+					let y = 26;
+					//let deg = Math.random() * 70 * Math.PI / 180;//隨機弧度
+					let deg = Math.random() * 38 * Math.PI / 160;//隨機弧度
+					let txt = gRandom.toString()[i];
+					context.fillStyle = randomRgbColor(100);
+					context.font = "bold 25px Arial";
+					//修改座標原點和旋轉角度
+					context.translate(x, y);
+					context.rotate(deg);
+					context.fillText(txt, 0, 0);
+					//恢復座標原點和旋轉角度
+					context.rotate(-deg);
+					context.translate(-x, -y);
+
+				}
+
+				//---干擾線
+				for (let i = 0; i < 6; i++) {
+					context.strokeStyle = randomRgbColor(256);
+					context.beginPath();
+					context.moveTo(Math.random() * 120, Math.random() * 40);
+					context.lineTo(Math.random() * 120, Math.random() * 40);
+					context.stroke();
+				}
+				//---干擾點
+				for (let i = 0; i < 50; i++) {
+					context.fillStyle = randomRgbColor(256);
+					context.beginPath();
+					context.arc(Math.random() * 120, Math.random() * 40, 1, 0, 2 * Math.PI);
+					context.fill();
+				}
 			}
-			//---干擾點
-			for (var i = 0; i < 50; i++) {
-				context.fillStyle = randomRgbColor(256);
-				context.beginPath();
-				context.arc(Math.random() * 120, Math.random() * 40, 1, 0, 2 * Math.PI);
-				context.fill();
-			}
-		}
-		draw_Captcha();  
+			draw_Captcha();
+			$('#canvas').on('click', function () {
+				draw_Captcha();
+				$('#canvasValue').val("");
+			})
+
+
+			function validate(txtinput, code1) {
+				let inputCode = $(txtinput).val();
+				// console.log(inputCode);
+				if (inputCode.length <= 0) {
+					$('#loginError').text("輸入驗證碼");
+					// draw_Captcha();
+
+				} else if (inputCode != code1) {
+					$('#loginError').text("驗證碼錯誤");
+					// draw_Captcha();
+					// $('#canvasValue').val("");
+
+				} else {
+					$(function loginSubmit() {
+						// alert('ok'); //獲取使用者名稱和密碼: 
+						let account = $('#account').val();
+						let password = $('#password').val();
+						let rember = $('#rember').val();
+						// alert(rember); 
+						$.ajax({
+							url: "/campingmapping/login",
+							type: "POST",
+							//提交方式
+							data: { "account": account, "password": password, "rember": rember },
+							dataType: "json",
+						}).done(function (data) {
+							if (data.res == 1) {
+								// alert('username') 
+								location.href = "/campingmapping/index.html";
+								rel = "external nofollow";
+							} else {
+								// alert('username'); 
+								$('#loginError').text('帳號密碼錯誤');
+								// draw_Captcha();
+								// $('#canvasValue').val("");
+
+							}
+						})
+					});
+				}
+
+
+
+			};
+		});
+		// $(function loginSubmit() {
+		// 	// alert('ok'); //獲取使用者名稱和密碼:
+		// 	let account = $('#account').val();
+		// 	let password = $('#password').val();
+		// 	let rember = $('#rember').val();
+		// 	// alert(rember);
+		// 	$.ajax({
+		// 		url: "/campingmapping/login",
+		// 		type: "POST",
+		// 		//提交方式
+		// 		data: { "account": account, "password": password, "rember": rember },
+		// 		dataType: "json",
+		// 	}).done(function (data) {
+		// 		if (data.res == 1) {
+		// 			// alert('username')
+		// 			location.href = "/index"
+		// 			rel = "external nofollow"
+		// 		} else {
+		// 			// alert('username');
+		// 			$('.loginError').show().html('使用者名稱或密碼輸入錯誤')
+		// 		}
+		// 	})
+		// });
 	</script>
 
 </body>
