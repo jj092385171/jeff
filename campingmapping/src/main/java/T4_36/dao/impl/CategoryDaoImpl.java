@@ -78,7 +78,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public int deleteByPd_id(int id) throws SQLException {
         String sql = "DELETE FROM category WHERE Pd_id = ?";
 
-        return queryRunner.update(connection, sql, new BeanHandler<>(Category.class), id);
+        return queryRunner.update(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class), id);
     }
 
     // 修改一筆書籍資料
@@ -87,7 +87,7 @@ public class CategoryDaoImpl implements CategoryDao {
         String sql = "UPDATE category SET name =?, title =?, content =?, type =?, picture =?, price =?," +
                 "inventory =?, Pd_date =?, Pd_last_update =?, WHERE Pd_id = ?";
 
-        return queryRunner.update(connection, sql, new BeanHandler<>(Category.class),
+        return queryRunner.update(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
                 category.getName(),
                 category.getTitle(),
                 category.getContent(),
@@ -104,13 +104,13 @@ public class CategoryDaoImpl implements CategoryDao {
     public Category selectByPd_id(int Pd_id) throws SQLException {
         String sql = "SELECT * FROM category WHERE Pd_id = ?";
 
-        return queryRunner.query(connection, sql, new BeanHandler<>(Category.class), Pd_id);
+        return queryRunner.query(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class), Pd_id);
     }
 
     @Override
     public List<Category> selectAll() throws SQLException {
         String sql = "SELECT * FROM category";
 
-        return queryRunner.query(connection, sql, new BeanListHandler<>(Category.class));
+        return queryRunner.query(DbUtils.getConnection(), sql, new BeanListHandler<>(Category.class));
     }
 }

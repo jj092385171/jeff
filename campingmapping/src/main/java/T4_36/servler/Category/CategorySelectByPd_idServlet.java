@@ -1,24 +1,23 @@
 package T4_36.servler.Category;
 
-import T4_36.entity.Category;
-import T4_36.service.CategoryService;
-import T4_36.service.impl.CategoryServiceImpl;
-
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/CategorySelectServlet.do")
-public class CategorySelectAllServlet extends HttpServlet {
+import T4_36.entity.Category;
+import T4_36.service.CategoryService;
+import T4_36.service.impl.CategoryServiceImpl;
+
+public class CategorySelectByPd_idServlet extends HttpServlet{
+
 	private static final long serialVersionUID = 1L;
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
     	req.setCharacterEncoding("UTF-8");
 		String id = req.getParameter("id");
 		CategoryService cgS = new CategoryServiceImpl();
@@ -33,4 +32,5 @@ public class CategorySelectAllServlet extends HttpServlet {
         
         
     }
+
 }

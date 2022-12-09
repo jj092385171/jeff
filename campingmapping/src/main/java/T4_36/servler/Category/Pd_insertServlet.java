@@ -22,35 +22,32 @@ import T4_36.entity.Category;
 import utils.ImageUtil;
 
 @MultipartConfig()
-@WebServlet("/testinsertServlet.do")
-public class testinsertServlet extends HttpServlet {
+@WebServlet("/Pd_insertServlet.do")
+public class Pd_insertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		try {
 			request.setCharacterEncoding("UTF-8");
-//		String shoppingCartId = request.getParameter("shoppingCartId");
-//			int Pd_id = Integer.parseInt(request.getParameter("Pd_id"));
 			String userID = request.getParameter("userID");
 			String name = request.getParameter("name");
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
 			String type = request.getParameter("type");
-//			String picture = request.getParameter("picture");
 			int price = Integer.parseInt(request.getParameter("price"));
 			int inventory = Integer.parseInt(request.getParameter("inventory"));
 //			Date date = new Date(1345434534);
-			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd  HH:MI:SS");
+			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			try {
-				Date datePd = new Date(Long.parseLong(request.getParameter("Pd_date")));
-				Date Pd_date = datePd;
+				Category.setPd_date(sd.parse(request.getParameter("Pd_date")));
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
-			SimpleDateFormat sd1 = new SimpleDateFormat("yyyy-MM-dd  HH:MI:SS");
+			SimpleDateFormat sd1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			try {
-				Date datelastup = new Date(Long.parseLong(request.getParameter("Pd_last_update")));
-				Date Pd_last_update = datelastup;
+				Category.setPd_last_update(sd1.parse(request.getParameter("Pd_last_update")));
+//				Date datelastup = new Date(Long.parseLong(request.getParameter("Pd_last_update")));
+//				Date Pd_last_update = datelastup;
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
@@ -72,7 +69,7 @@ public class testinsertServlet extends HttpServlet {
 			Blob picture = ImageUtil.fileToBlob(is, sizeInBytes);
 
 			CategoryDaoImpl cdaoImpl = new CategoryDaoImpl();
-			Category bean = new Category(userID, name, title, content, type, picture, price, inventory, sd,
+			Category bean = new Category(userID, name, title, content, type, picture, price, inventory, Pd_date,
 					Pd_last_update);
 //					,Pd_date, Pd_last_update
 
@@ -84,11 +81,7 @@ public class testinsertServlet extends HttpServlet {
 			}
 
 			String contextPath = request.getContextPath();
-			response.sendRedirect(contextPath + "/T4_36/test2.jsp");
-//		RequestDispatcher rd = 
-//     			request.getRequestDispatcher("/Cart/NewFile.jsp");
-//		
-//		rd.forward(request, response);
+			response.sendRedirect(contextPath + "/T4_36/html5up-editorial/Pd_ok.jsp");
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

@@ -39,7 +39,7 @@ public class CategoryUpdateServlet extends HttpServlet {
 		Category category = (Category) req.getAttribute("category");
 
 		CategoryService categoryService = new CategoryServiceImpl();
-		categoryService.update(category);
+		CategoryService.update(category, 0);
 		log.info("更新產品之Controller, 開始");
 
 		HttpSession session = req.getSession();

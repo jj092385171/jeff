@@ -1,6 +1,7 @@
 package T4_36.entity;
 
 import java.sql.Blob;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -24,9 +25,9 @@ public class Category {
 	// 價位
 	private int inventory;
 	// 庫存數量
-	private Date Pd_date;
+	private static Date Pd_date;
 	// 商品建立日期
-	private Date Pd_last_update;
+	private static Date Pd_last_update;
 	// 商品更新日期
 
 	public int getPd_id() {
@@ -49,8 +50,8 @@ public class Category {
 		this.picture = picture;
 		this.price = price;
 		this.inventory = inventory;
-		this.Pd_date = pd_date;
-		this.Pd_last_update = pd_last_update;
+		Pd_date = pd_date;
+		Pd_last_update = pd_last_update;
 	}
 
 
@@ -68,6 +69,11 @@ public class Category {
 		this.inventory = inventory;
 		Pd_date = pd_date;
 		Pd_last_update = pd_last_update;
+	}
+
+	public Category(String userID2, String name2, String title2, String content, String type2, Blob picture2,
+			int price2, int inventory2, SimpleDateFormat sd, SimpleDateFormat sd1) {
+		// TODO Auto-generated constructor stub
 	}
 
 	private String priceStr = null;
@@ -152,7 +158,7 @@ public class Category {
 		return Pd_date;
 	}
 
-	public void setPd_date(Date pd_date) {
+	public static void setPd_date(Date pd_date) {
 		Pd_date = pd_date;
 	}
 
@@ -160,7 +166,7 @@ public class Category {
 		return Pd_last_update;
 	}
 
-	public void setPd_last_update(Date pd_last_update) {
+	public static void setPd_last_update(Date pd_last_update) {
 		Pd_last_update = pd_last_update;
 	}
 

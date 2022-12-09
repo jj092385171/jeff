@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
 <html>
 
 <head>
-	<title>Editorial by HTML5 UP</title>
+	<title>新增商品</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -30,26 +33,27 @@
 					</ul>
 				</header>
 
+<form action="<c:url value='/testinsertServlet.do'/>" method="POST"
+		enctype="multipart/form-data">
+		會員ID<br>
+		<input type="text" value='1' name="userID"> 產品名稱<br>
+		<input type="text" value='1' name="name"> 品牌名稱<br> 
+		<input type="text" value='1' name="title">產品規格<br> 
+		<input type="text" value='1' name="content">產品類型<br>
+		<input type="text" value='1' name="type">照片<br>
+		<input type="file" name="picture" /> 價位<br> 
+		<input type="text" value='1' name="price">庫存數量<br> 
+		<input type="text" value='1' name="inventory">商品建立日期<br> 
+		<input type="datetime-local" name="Pd_date">商品更新日期<br>
+		<input type="datetime-local" name="Pd_last_update"> <br>
+		<input type="submit" value="提交">
+	</form>
 				<!-- Banner -->
 				<section id="banner">
 					<div class="content">
 						<header>
-							<h1>測試用商城主頁(檔名index.html)
-<!-- 							<br />by HTML5 UP -->
-							</h1>
-<!-- 							<p>A free and fully responsive site template</p> -->
 						</header>
-<!-- 						<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante -->
-<!-- 							interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet -->
-<!-- 							egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. -->
-<!-- 							Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p> -->
-<!-- 						<ul class="actions"> -->
-<!-- 							<li><a href="#" class="button big">Learn More</a></li> -->
-<!-- 						</ul> -->
 					</div>
-<!-- 					<span class="image object"> -->
-<!-- 						<img src="images/pic10.jpg" alt="" /> -->
-<!-- 					</span> -->
 				</section>
 
 
@@ -73,10 +77,8 @@
 						<h2>商城</h2>
 					</header>
 					<ul>
-						<li><a href="index.html">首頁</a></li>
-<!-- 						<li><a href="generic.html">全站商品</a></li> -->
-<!-- 						<li><a href="elements.html">睡袋</a></li> -->
-						<li><a href="#">商城</a></li>
+						<li><a href="Pd_index.jsp">首頁</a></li>
+						<li><a href="Pd_Allproduct.jsp">商城</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>
@@ -90,18 +92,7 @@
 								<li><a href="#">登山鞋</a></li>
 							</ul>
 						</li>
-<!-- 						<li><a href="#">Adipiscing</a></li> -->
-<!-- 						<li> -->
-<!-- 							<span class="opener">Another Submenu</span> -->
-<!-- 							<ul> -->
-<!-- 								<li><a href="#">Lorem Dolor</a></li> -->
-<!-- 								<li><a href="#">Ipsum Adipiscing</a></li> -->
-<!-- 								<li><a href="#">Tempus Magna</a></li> -->
-<!-- 								<li><a href="#">Feugiat Veroeros</a></li> -->
-<!-- 							</ul> -->
-<!-- 						</li> -->
-<!-- 						<li><a href="#">Maximus Erat</a></li> -->
-<!-- 						<li><a href="#">Sapien Mauris</a></li> -->
+						<li><a href="#">購物車</a></li>
 						<li><a href="#">登入</a></li>
 					</ul>
 				</nav>
