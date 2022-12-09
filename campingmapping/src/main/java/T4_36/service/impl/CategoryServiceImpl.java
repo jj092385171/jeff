@@ -50,11 +50,10 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    @Override
-    public void update(Category category) {
+    public void update(Category category, long sizeInBytes) {
         try {
             DbUtils.begin();
-            categoryDao.update(category);
+            categoryDao.update(category, sizeInBytes);
             DbUtils.commit();
         } catch (SQLException e) {
             DbUtils.rollbacl();

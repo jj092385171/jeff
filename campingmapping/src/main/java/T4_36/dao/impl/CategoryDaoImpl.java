@@ -20,8 +20,8 @@ public class CategoryDaoImpl implements CategoryDao {
 
     private final QueryRunner queryRunner = new QueryRunner();
 
-    private final Connection connection = DbUtils.getConnection();
-    
+    private final Connection connection = null;
+
 //     新增一筆記錄---
     @Override
     public boolean insert(Category category) throws SQLException {
@@ -29,7 +29,7 @@ public class CategoryDaoImpl implements CategoryDao {
                 " ( userID, name, title, content, type, picture, price, inventory, Pd_date, Pd_last_update) " +
                 "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            Category result = queryRunner.insert(connection, sql, new BeanHandler<>(Category.class),
+            Category result = queryRunner.insert(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
                     category.getuserID(),
                     category.getName(),
                     category.getTitle(),
@@ -54,10 +54,10 @@ public class CategoryDaoImpl implements CategoryDao {
 //			e.printStackTrace();
 //		}
         String sql = "INSERT INTO " + "category" +
-                " (userID, name, title, content, type, picture,  price, inventory, Pd_date ,Pd_last_update) " +
+                " (userID, name, title, Pd_content, type, picture,  price, inventory, Pd_date ,Pd_last_update) " +
                 "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            Category resulttest = queryRunner.insert(connection, sql, new BeanHandler<>(Category.class),
+            Category resulttest = queryRunner.insert(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
                     category.getuserID(),
                     category.getName(),
                     category.getTitle(),
@@ -83,7 +83,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     // 修改一筆書籍資料
     @Override
-    public int update(Category category) throws SQLException {
+    public int update(Category category, long sizeInBytes) throws SQLException {
         String sql = "UPDATE category SET name =?, title =?, content =?, type =?, picture =?, price =?," +
                 "inventory =?, Pd_date =?, Pd_last_update =?, WHERE Pd_id = ?";
 
@@ -112,10 +112,5 @@ public class CategoryDaoImpl implements CategoryDao {
         String sql = "SELECT * FROM category";
 
         return queryRunner.query(connection, sql, new BeanListHandler<>(Category.class));
-    }
-
-	public List<Category> findbyPd_id(String Pd_id) throws SQLException {
-		String sql = "select * from category where Pd_id = ?";
-		return queryRunner.query(connection, sql, new BeanListHandler<>(Category.class), Pd_id);
     }
 }

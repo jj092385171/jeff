@@ -10,7 +10,10 @@ public interface CategoryService {
 
     void delete(int id);
 
-    void update(Category category);
+    static void update(Category category, long sizeInBytes) {
+		// TODO Auto-generated method stub
+		
+	}
 
     Category select(int id);
 

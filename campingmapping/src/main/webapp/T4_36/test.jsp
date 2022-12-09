@@ -20,8 +20,8 @@
 <input type="file" name="picture"/>照片<br>
 <input type="text" value='1' name="price">價位<br>
 <input type="text" value='1' name="inventory">庫存數量<br>
-<input type="text" value='202212070000' name="Pd_date">商品建立日期<br>
-<input type="text" value='202212070000' name="Pd_last_update">商品更新日期<br>
+<input type="datetime-local"  name="Pd_date">商品建立日期<br>
+<input type="datetime-local"  name="Pd_last_update">商品更新日期<br>
 <br>
 <input type="submit"  value="提交">
 </form>

@@ -53,7 +53,7 @@ CREATE TABLE [dbo].[category](
 	[userID] [nvarchar](max) NOT NULL,
 	[name] [nvarchar](max) NULL,
 	[title] [nvarchar](max) NOT NULL,
-	[content] [nvarchar](max) NOT NULL,
+	[Pd_content] [nvarchar](max) NOT NULL,
 	[type] [nvarchar](max) NOT NULL,
 	[picture] [varbinary](max) NULL,
 	[price] [int] NOT NULL,
