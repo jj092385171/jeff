@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampPlusCityPlusTagsDao;
-import T4_24.Models.CampPlusCityPlusTagsBean;
+import T4_24.Dao.CampSiteCityTagsDao;
+import T4_24.Models.CampSiteCityTagsBean;
 import T4_24.Models.TagPlusCampBean;
 
 
@@ -27,10 +27,10 @@ public class QueryCampByCampIDServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		
-		CampPlusCityPlusTagsDao campPlusCityPlusTagsDao = new CampPlusCityPlusTagsDao();
+		CampSiteCityTagsDao campPlusCityPlusTagsDao = new CampSiteCityTagsDao();
 		
 		String campID = request.getParameter("campID");
-		CampPlusCityPlusTagsBean cctBean = null;
+		CampSiteCityTagsBean cctBean = null;
 		
 		try {
 			cctBean = campPlusCityPlusTagsDao.findCampByID(Integer.valueOf(campID));

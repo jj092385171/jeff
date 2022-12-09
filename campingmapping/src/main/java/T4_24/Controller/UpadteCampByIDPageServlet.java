@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampPlusCityPlusTagsDao;
+import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Dao.CityDao;
 import T4_24.Dao.TagDao;
-import T4_24.Models.CampPlusCityPlusTagsBean;
+import T4_24.Models.CampSiteCityTagsBean;
 import T4_24.Models.CityBean;
 import T4_24.Models.TagBean;
 import T4_24.Models.TagPlusCampBean;
@@ -32,10 +32,10 @@ public class UpadteCampByIDPageServlet extends HttpServlet {
 		
 		String campID = request.getParameter("campID");
 		
-		CampPlusCityPlusTagsDao campPlusCityDao = new CampPlusCityPlusTagsDao();
+		CampSiteCityTagsDao campPlusCityDao = new CampSiteCityTagsDao();
 		TagDao tagDao = new TagDao();
 		CityDao cityDao = new CityDao();
-		CampPlusCityPlusTagsBean cctBean = null;
+		CampSiteCityTagsBean cctBean = null;
 		List<TagBean> tagList = null;
 		List<CityBean> cityList = null;
 		

@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import T4_24.Dao.CampDao;
-import T4_24.Dao.CampPlusCityPlusTagsDao;
+import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Models.CampBean;
-import T4_24.Models.CampPlusCityPlusTagsBean;
+import T4_24.Models.CampSiteCityTagsBean;
 import T4_24.Models.TagPlusCampBean;
 
 
@@ -33,18 +33,18 @@ public class IndexShowAllPageServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		CampPlusCityPlusTagsDao campPlusCityPlusTagsDao = new CampPlusCityPlusTagsDao();
-		List<CampPlusCityPlusTagsBean> cctList = null;
+		CampSiteCityTagsDao campPlusCityPlusTagsDao = new CampSiteCityTagsDao();
+		List<CampSiteCityTagsBean> showAll = null;
 		
 		try {
-			cctList = campPlusCityPlusTagsDao.showAll();
+			showAll = campPlusCityPlusTagsDao.showAll();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 
-		session.setAttribute("cctList", cctList);
+		session.setAttribute("showALL", showAll);
 		RequestDispatcher rd = request.getRequestDispatcher("/T4_24/CampIndex.jsp");
 		rd.forward(request, response);
 		

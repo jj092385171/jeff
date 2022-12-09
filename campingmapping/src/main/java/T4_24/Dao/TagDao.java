@@ -19,10 +19,10 @@ public class TagDao {
 	Connection conn = DbUtils.getConnection();
 	QueryRunner qr = new QueryRunner();
 	
-	//搜尋全部
+	//搜尋全部標籤
 	public List<TagBean> showAll() throws SQLException {
 		String sql = "select * from tag";
 		return qr.query(conn, sql, new BeanListHandler<TagBean>(TagBean.class));	
 	}
-
+	
 }

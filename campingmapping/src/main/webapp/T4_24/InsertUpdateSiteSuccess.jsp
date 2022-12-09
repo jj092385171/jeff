@@ -6,21 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Success</title>
+<title>新增營區位結果</title>
 </head>
 <body>
-營地編號: ${cctBean.campID} 的資料新增成功<br>
-營地: ${ cctBean.campName } <br>
-縣市編號: ${ cctBean.cityID }<br>
-縣市名: ${ cctBean.cityName }<br>
-地址: ${ cctBean.location }<br>
+<%-- 營區位編號: ${siteBean.siteID} 的資料 ${what} 成功<br> --%>
+
 <%-- 圖片: <img height='200' width='200' src="<c:url value='/T4_24/GetCampImage?id=${campID}' />"/><br> --%>
 <%-- 圖片: <img height='200' width='200' src="${pageContext.servletContext.contextPath}/T4_24/GetCampImage?id=${campID}"/><br> --%>
 <%-- 圖片: <img height='200' width='200' src="data:image/png;base64,${CampBean.getBase64String()} }"/><br> --%>
-簡介: ${ cctBean.discription }<br>
-<c:forEach var='tag' items='${cctBean.tagList}'>
-	標籤: ${ tag.tagName }<br>
-</c:forEach>
+營區位名: ${ siteBean.siteName } <br>
+總營位: ${ siteBean.totalSites } <br>
+營位金額: ${ siteBean.siteMoney }<br>
+營地編號: ${ campID }<br>
+
 
 
 <p>

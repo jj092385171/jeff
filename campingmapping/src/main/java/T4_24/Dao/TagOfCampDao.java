@@ -24,7 +24,7 @@ public class TagOfCampDao {
 		qr.update(conn,sql,tagID,campID);
 	}
 	
-	//刪除營地的標籤(刪除營地的前置)
+	//刪除營地的標籤(刪除. 更新營地的前置)
 	public void deletdByCampID(int campID) throws SQLException {
 		String sql = "delete from tagOfCamp where campID = ?";
 		qr.update(conn,sql,campID);

@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Success</title>
+<title>刪除營地結果</title>
 </head>
 <body>
-<h1>CampID刪除結果</h1>
+<h1>campID刪除結果</h1>
 ${ campID }<br>
 
 <p>

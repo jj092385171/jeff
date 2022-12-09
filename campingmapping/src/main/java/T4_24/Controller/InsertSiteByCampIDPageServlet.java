@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampPlusCityPlusTagsDao;
+import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Dao.CityDao;
 import T4_24.Dao.TagDao;
-import T4_24.Models.CampPlusCityPlusTagsBean;
+import T4_24.Models.CampSiteCityTagsBean;
 import T4_24.Models.CityBean;
 import T4_24.Models.TagBean;
 import T4_24.Models.TagPlusCampBean;
@@ -32,10 +32,10 @@ public class InsertSiteByCampIDPageServlet extends HttpServlet {
 		
 		String campID = request.getParameter("campID");
 		
-		CampPlusCityPlusTagsDao campPlusCityDao = new CampPlusCityPlusTagsDao();
+		CampSiteCityTagsDao campPlusCityDao = new CampSiteCityTagsDao();
 		TagDao tagDao = new TagDao();
 		CityDao cityDao = new CityDao();
-		CampPlusCityPlusTagsBean cctBean = null;
+		CampSiteCityTagsBean cctBean = null;
 		List<TagBean> tagList = null;
 		List<CityBean> cityList = null;
 		
@@ -53,8 +53,9 @@ public class InsertSiteByCampIDPageServlet extends HttpServlet {
 		session.setAttribute("tagList", tagList);
 		session.setAttribute("cityList", cityList);
 		
+		
 		String contextPath = request.getContextPath();
-		response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/InsertSiteByCampIDForm.jsp"));
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/InsertSiteByIDForm.jsp"));
 		
 		return;
 		

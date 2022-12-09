@@ -10,7 +10,7 @@
 		<html>
 
 		<head>
-			<title>Generic - Editorial by HTML5 UP</title>
+			<title>首頁</title>
 			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 			<link rel="stylesheet" href="assets/css/main.css" />
@@ -55,29 +55,45 @@
 									<th>營地</th>
 									<th>縣市編號</th>
 									<th>縣市名</th>
-									<th>地址</th>
-									<th>圖片</th>
-									<th>簡介</th>
-									<th>標籤</th>
+									<th>營地地址</th>
+									<th>營地圖片</th>
+									<th>營地簡介</th>
+									<th>營地標籤</th>
+								</tr>
+								<tr>
+									<th>&emsp;&emsp;營位區編號</th>
+									<th>&emsp;營位區名</th>
+									<th>&emsp;營區位圖片</th>
+									<th>&emsp;總營位</th>
+									<th>&emsp;營位金額</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var='cct' items='${cctList}'>
-									<tr>
-										<td>${ cct.campID }</td>
-										<td>${ cct.campName }</td>
-										<td>${ cct.cityID }</td>
-										<td>${ cct.cityName }</td>
-										<td>${ cct.location }</td>
-										<td>圖片: </td>
-										<td>${ cct.discription }</td>
-										<td>
-											<c:forEach var='tag' items='${cct.tagList}'>
-												${tag.tagName} &nbsp; / &nbsp;
-											</c:forEach>
-										</td>
-									</tr>
-
+								<c:forEach var='all' items='${showALL}'>
+										<tr>
+											<td>${ all.campID }</td>
+											<td>${ all.campName }</td>
+											<td>${ all.cityID }</td>
+											<td>${ all.cityName }</td>
+											<td>${ all.location }</td>
+											<td>圖片: </td>
+											<td>${ all.discription }</td>
+											<td>
+												<c:forEach var='tag' items='${all.tagList}'>
+													${tag.tagName} &nbsp; / &nbsp;
+												</c:forEach>
+											</td>
+										</tr>
+										<c:forEach var='site' items='${all.siteList}'>
+											<tr>
+												<td>&emsp;&emsp;${ site.siteID }</td>
+												<td>&emsp;${ site.siteName }</td>
+												<td>&emsp;圖片:</td>
+												<td>&emsp;${ site.totalSites }</td>
+												<td>&emsp;${ site.siteMoney }</td>
+											</tr>
+<!-- 											<tr></tr> -->
+										</c:forEach>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -106,10 +122,9 @@
 
 							<ul>
 								<li><a href="<c:url value='/T4_24/QueryPageServlet' />">查詢營地</a></li>
-								<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">新增營地</a></li>
-								<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">新增營位區</a></li>
-								<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">修改營地</a></li>
-								<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">刪除營地</a></li>
+								<li><a href="<c:url value='/T4_24/InsertCampPageServlet' />">新增營地營位區</a></li>
+								<li><a href="<c:url value='/T4_24/UpdateCampSitePage.jsp' />">修改營地</a></li>
+								<li><a href="<c:url value='/T4_24/deleteCampSitePage.jsp' />">刪除營地</a></li>
 							</ul>
 <!-- 								<li> -->
 <!-- 									<span class="opener">Submenu</span> -->

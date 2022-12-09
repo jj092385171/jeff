@@ -11,7 +11,7 @@
 <html>
 
 <head>
-<title>Generic - Editorial by HTML5 UP</title>
+<title>搜尋營地頁面</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -135,16 +135,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var='cct' items='${cctList}'>
+						<c:forEach var='all' items='${showALL}'>
 							<tr>
-								<td>${ cct.campID }</td>
-								<td>${ cct.campName }</td>
-								<td>${ cct.cityID }</td>
-								<td>${ cct.cityName }</td>
-								<td>${ cct.location }</td>
+								<td>${ all.campID }</td>
+								<td>${ all.campName }</td>
+								<td>${ all.cityID }</td>
+								<td>${ all.cityName }</td>
+								<td>${ all.location }</td>
 								<td>圖片:</td>
-								<td>${ cct.discription }</td>
-								<td><c:forEach var='tag' items='${cct.tagList}'>
+								<td>${ all.discription }</td>
+								<td><c:forEach var='tag' items='${all.tagList}'>
 												${tag.tagName}&nbsp;
 											</c:forEach></td>
 							</tr>
@@ -172,11 +172,11 @@
 					</header>
 
 					<ul>
-						<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">查詢營地</a></li>
-						<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">新增營地</a></li>
-						<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">新增營位區</a></li>
-						<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">修改營地</a></li>
-						<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">刪除營地</a></li>
+				<li><a href="<c:url value='/T4_24/QueryPageServlet' />">查詢營地</a></li>
+								<li><a href="<c:url value='/T4_24/InsertCampPageServlet' />">新增營地</a></li>
+								<li><a href="<c:url value='/T4_24/ShowAllPageServlet' />">新增營位區</a></li>
+								<li><a href="<c:url value='/T4_24/Update_DeleteCampByIDForm.jsp' />">修改營地</a></li>
+								<li><a href="<c:url value='/T4_24/Update_DeleteCampByIDForm.jsp' />">刪除營地</a></li>
 					</ul>
 					<!-- <li>
 									<span class="opener">Submenu</span>

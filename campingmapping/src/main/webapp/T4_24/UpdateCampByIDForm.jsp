@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>刪除營地</title>
+<title>更新營地表單</title>
 <style>
 form {
 	margin: 0 auto;
@@ -21,19 +21,19 @@ form {
 		營地: <input type="text" name='campName' value='${ cctBean.campName }'><br>
 		縣市編號: <input type="text" name='cityID'  value='${ cctBean.cityID }'><br>
 		縣市名: <input type="text" name='cityName'  value='${ cctBean.cityName }'><br>
-		縣市:<c:forEach var='city' items='${cityList}'>
-			   	<input type="radio" name="cityID" checked value="${city.cityID}" />${city.cityName}
-			</c:forEach><br>
 		縣市XXX:<c:forEach var='city' items='${cityList}'>
+			   	<input type="radio" name="cityIDXXX" checked value="${city.cityID}" />${city.cityName}
+			</c:forEach><br>
+		縣市:<c:forEach var='city' items='${cityList}'>
 			   		<input type="radio" name="cityID" value="${city.cityID}" />${city.cityName}
 			   </c:forEach><br>
 		地址: <input type="text" name='location'  value='${ cctBean.location }'><br>
 	    圖片: <input type="file" name="campPictures"><br>
 		簡介: <input type="text" name='discription' value='${ cctBean.discription }'><br>
-		標籤: <c:forEach var='tag' items='${cctBean.tagList}'>
-				<input type="checkbox" name="tagID" checked value="${tag.tagID}" />${tag.tagName}
+		標籤XXX: <c:forEach var='tag' items='${cctBean.tagList}'>
+				<input type="checkbox" name="tagIDXXX" checked value="${tag.tagID}" />${tag.tagName}
 			 </c:forEach><br>
-		標籤XXX: <c:forEach var='tag' items='${tagList}'>
+		標籤: <c:forEach var='tag' items='${tagList}'>
 					<input type="checkbox" name="tagID" value="${tag.tagID}" />${tag.tagName}
 			 	</c:forEach>
 		

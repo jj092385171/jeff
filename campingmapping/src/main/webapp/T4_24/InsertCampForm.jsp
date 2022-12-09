@@ -95,15 +95,15 @@ form {
 		</table>
 	</form>
 	
-	<c:forEach var='cct' items='${cctList}'>
-			營地編號: ${ cct.campID }<br>
-			營地: ${ cct.campName }<br>
-			縣市編號: ${ cct.cityID }<br>
-			縣市名: ${ cct.cityName }<br>
-			地址: ${ cct.location }<br>
+		<c:forEach var='all' items='${showALL}'>
+			營地編號: ${ all.campID }<br>
+			營地: ${ all.campName }<br>
+			縣市編號: ${ all.cityID }<br>
+			縣市名: ${ all.cityName }<br>
+			地址: ${ all.location }<br>
 	<!-- 							圖片: <br> -->
-			簡介: ${ cct.discription }<br>
-			<c:forEach var='tag' items='${cct.tagList}'>
+			簡介: ${ all.discription }<br>
+			<c:forEach var='tag' items='${all.tagList}'>
 				標籤: ${tag.tagName}<br>
 			</c:forEach>
 		</c:forEach>
