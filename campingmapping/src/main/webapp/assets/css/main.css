@@ -1252,10 +1252,10 @@ button {
 	-webkit-transition: background-color 2.5s ease-in-out;
 	-ms-transition: background-color 2.5s ease-in-out;
 	transition: background-color 2.5s ease-in-out;
-	-moz-transition-delay: 0.75s;
-	-webkit-transition-delay: 0.75s;
-	-ms-transition-delay: 0.75s;
-	transition-delay: 0.75s;
+	-moz-transition-delay: 0.1s;
+	-webkit-transition-delay: 0.1s;
+	-ms-transition-delay: 0.1s;
+	transition-delay: 0.1s;
 	background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("../../images/overlay.png");
 	background-size: auto,
 		256px 256px;
@@ -1271,10 +1271,10 @@ button {
 	-webkit-transform: scale(1.125);
 	-ms-transform: scale(1.125);
 	transform: scale(1.125);
-	-moz-transition: -moz-transform 0.325s ease-in-out, -moz-filter 0.325s ease-in-out;
-	-webkit-transition: -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out;
-	-ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
-	transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
+	-moz-transition: -moz-transform 0.3s ease-in-out, -moz-filter 0.3s ease-in-out;
+	-webkit-transition: -webkit-transform 0.3s ease-in-out, -webkit-filter 0.3s ease-in-out;
+	-ms-transition: -ms-transform 0.3s ease-in-out, -ms-filter 0.3s ease-in-out;
+	transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 	background-image: url("../../images/bg.jpg");
 	background-position: center;
 	background-size: cover;

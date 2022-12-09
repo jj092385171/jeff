@@ -11,7 +11,195 @@
 		<link rel="stylesheet" href="../assets/css/noscript.css" />
 	</noscript> -->
 	<script src="https://kit.fontawesome.com/c5dcdb1f13.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="../T4_01/css/login.css">
+	<!-- <link rel="stylesheet" href="../T4_01/css/login.css"> -->
+	<style>
+		/* 登入框樣式 */
+
+		.container {
+
+			position: relative;
+			width: 300px;
+			min-height: 300px;
+			border-radius: 30px;
+			background: rgba(255, 255, 255, 0.1);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			backdrop-filter: blur(5px);
+			box-shadow: 0 25px 45px rgba(0, 0, 0, 0.863);
+			border: 1px solid rgba(255, 255, 255, 0);
+			border-right: 1px solid rgba(255, 255, 255, 0);
+			border-bottom: 1px solid rgba(255, 255, 255, 0);
+			margin-top: 10px;
+		}
+
+		.form {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			padding: 50px;
+		}
+
+		/* 登入標題樣式 */
+
+		.form h2 {
+			position: relative;
+			color: #fff;
+			font-size: 24px;
+			font-weight: 600;
+			letter-spacing: 5px;
+			margin-bottom: 1px;
+			cursor: pointer;
+		}
+
+		/* 登入標題的下劃線樣式 */
+
+		.form h2::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: -10px;
+			width: 0px;
+			height: 3px;
+			background: #fff;
+			transition: 0.5s;
+		}
+
+		.form h2:hover:before {
+			width: 53px;
+		}
+
+		.form .inputBox {
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		.form .inputBox2 {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		/* 輸入框樣式 */
+
+		.form .inputBox input {
+			width: 100%;
+			padding: 10px 20px;
+			background: rgba(255, 255, 255, 0.2);
+			outline: none;
+			border: none;
+			border-radius: 130px;
+			border: 1px solid rgba(255, 255, 255, 0);
+			border-right: 1px solid rgba(255, 255, 255, 0);
+			border-bottom: 1px solid rgba(255, 255, 255, 0);
+			font-size: 16px;
+			vertical-align: middle;
+			line-height: 0px;
+			letter-spacing: 1px;
+			color: #fff;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.199);
+		}
+
+		.form .inputBox2 input {
+			width: 100%;
+			padding: 10px 20px;
+			background: rgba(255, 255, 255, 0.2);
+			outline: none;
+			border: none;
+			border-radius: 130px;
+			border: 1px solid rgba(255, 255, 255, 0);
+			border-right: 1px solid rgba(255, 255, 255, 0);
+			border-bottom: 1px solid rgba(255, 255, 255, 0);
+			font-size: 14px;
+			vertical-align: middle;
+			line-height: 20px;
+			letter-spacing: 1px;
+			color: #fff;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.199);
+		}
+
+		.form .inputBox input::placeholder {
+			color: rgba(255, 255, 255, 0.568);
+		}
+
+		.form .inputBox2 input::placeholder {
+			color: rgba(255, 255, 255, 0.582);
+		}
+
+		/* 登入按鈕樣式 */
+
+		/*.form .inputBox input[type="button"]*/
+		#sign {
+			background: rgba(255, 255, 255, 0.575);
+			color: rgba(102, 102, 102, 1);
+			max-width: 100px;
+			margin-bottom: 1px;
+			font-weight: 600;
+			cursor: pointer;
+			margin-top: 1px;
+		}
+
+		#join {
+			background: rgba(255, 255, 255, 0.575);
+			color: rgba(102, 102, 102, 1);
+			max-width: 100px;
+			margin-bottom: 20px;
+			font-weight: 600;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+
+		.forget {
+			margin-top: 6px;
+			color: #fff;
+			letter-spacing: 1px;
+		}
+
+		.forget a {
+			color: #fff;
+			font-weight: 600;
+			text-decoration: none;
+		}
+
+		/* 錯誤訊息 */
+		#loginError {
+			display: inline;
+			font-size: 16px;
+			color: rgb(255, 69, 69);
+			/*     width: 1%; */
+			/*     height: 1%; */
+
+
+		}
+
+		#joinError {
+			display: inline;
+			font-size: 16px;
+			color: rgb(255, 69, 69);
+			/*     width: 1%; */
+			/*     height: 1%; */
+			margin: 0;
+
+
+		}
+
+		#acok,
+		#psok {
+			margin: 0;
+			float: right;
+			display: none;
+			color: green;
+		}
+
+		#acno,
+		#psno {
+			margin: 0;
+			float: right;
+			display: none;
+			color: red;
+		}
+
+		#remberbox {}
+	</style>
 
 </head>
 
@@ -35,9 +223,10 @@
 				</ul>
 			</nav>
 		</header>
+		<!-- -------------------------登入------------------------------------ -->
 
-
-		<div class="container">
+		<div class="container" id="signbox" style="display:block">
+			<!-- <div class="container" style="visibility:hidden"> -->
 
 			<div class="form">
 				<!-- <div style="display: flex;"> -->
@@ -46,11 +235,11 @@
 				<!-- </div> -->
 				<form action="/campingmapping/login" name="loginform" id="loginform" method="post">
 					<div class="inputBox">
-						<input type="text" name="account" id="account" placeholder="帳號">
+						<input type="text" name="account" id="account" placeholder="帳號" required="required">
 
 					</div>
 					<div class="inputBox">
-						<input type="password" name="password" id="password" placeholder="密碼">
+						<input type="password" name="password" id="password" placeholder="密碼" required="required">
 
 					</div>
 					<div class="inputBox">
@@ -59,12 +248,16 @@
 							<canvas id="canvas" style="background-color: #ffffffaf; padding: 0px;width: 99%;"></canvas>
 
 						</div>
-						<input type="text" id="canvasValue" placeholder="認證碼" style="float: right; width: 47%;">
+						<input type="text" id="canvasValue" placeholder="認證碼" style="float: right; width: 47%;"
+							required="required">
 					</div>
-
+					<div class="inputBox" id="remberbox">
+						<input class="rember" id="rember" type="checkbox" name="rember" value="rember">
+						<label class="rember" for="rember">記住我</label>
+					</div>
 					<div class="inputBox">
 						<!--  style="display: flex;"-->
-						<input type="button" id="Submit" value="登入">
+						<input type="button" id="sign" value="登入">
 
 					</div>
 					<!-- <div style="display: flex; justify-content: center; align-content: center;flex-wrap: wrap;"> -->
@@ -73,7 +266,7 @@
 					<p class="forget">忘記密碼?<a href="#">
 							點選這裡
 						</a></p>
-					<p class="forget">沒有賬戶?<a href="#">
+					<p class="forget">沒有賬戶?<a href="#" id="tojoin">
 							註冊
 						</a></p>
 
@@ -81,8 +274,67 @@
 
 			</div>
 		</div>
+		<!-- --------------------------------註冊---------------------------------- -->
 
+		<div class="container" id="joinbox" style="display:none">
 
+			<div class="form">
+				<!-- <div style="display: flex;"> -->
+				<h2>註冊</h2>
+				<p class="joinError" id="joinError" style="margin: 0; float: left;"></p>
+				<p class="fa-solid fa-circle-check " id="acok">
+				</p>
+				<p class="fa-solid fa-circle-xmark " id="acno"></p>
+				<!-- </div> -->
+				<form action="/campingmapping/join" name="joinform" id="joinform" method="post">
+					<div class="inputBox2">
+						<input type="text" name="account" id="joinAccount" placeholder="帳號" required="required"
+							minlength="6">
+					</div>
+					<div class="inputBox2">
+						<input type="password" name="password" id="joinPassword" placeholder="密碼" required="required">
+
+					</div>
+					<div class="inputBox2">
+						<input type="password" name="password" id="joinPasswordCheck" placeholder="確認密碼"
+							required="required">
+						<p class="fa-solid fa-circle-check " id="psok"></p>
+						<p class="fa-solid fa-circle-xmark " id="psno"></p>
+					</div>
+					<div class="inputBox2">
+						<input type="email" name="email" id="joinEmail" placeholder="電子信箱" required="required">
+
+					</div>
+					<div class="inputBox2">
+						<input type="date" name="birthday" id="joinBirthday" placeholder="生日" required="required">
+
+					</div>
+					<div class="inputBox2">
+						<!-- onclick="window.location.reload()" -->
+						<div class="" id="canvasBox2" style="float: left; width: 50%;">
+							<canvas id="canvas2" style="background-color: #ffffffaf; padding: 0px;width: 99%;"></canvas>
+
+						</div>
+						<input type="text" id="canvasValue2" placeholder="認證碼" style="float: right; width: 47%;"
+							required="required">
+					</div>
+
+					<div class="inputBox">
+						<!--  style="display: flex;"-->
+						<input type="button" id="join" value="註冊">
+
+					</div>
+					<!-- <div style="display: flex; justify-content: center; align-content: center;flex-wrap: wrap;"> -->
+
+					<!-- 						</div> -->
+					<p class="forget">已有帳戶?<a href="#" id="tosign">
+							登入
+						</a></p>
+
+				</form>
+
+			</div>
+		</div>
 
 
 
@@ -97,25 +349,66 @@
 	<div id="bg"></div>
 
 	<!-- Scripts -->
-	<script src="../T4_01/js/login.js"></script>
 	<script src="../assets/js/jquery.min.js"></script>
 	<script src="../assets/js/browser.min.js"></script>
 	<script src="../assets/js/breakpoints.min.js"></script>
 	<script src="../assets/js/util.js"></script>
 	<script src="../assets/js/main.js"></script>
+	<!-- <script src="../T4_01/js/login.js"></script> -->
 
 	<script>
+		// 判斷密碼格式
+
+
+		function checkPass(s) {
+			if (s.length < 8) {
+				return 0;
+			}
+			let ls = 0;
+			if (s.match(/([a-z])+/)) {
+				ls++;
+			}
+			if (s.match(/([0-9])+/)) {
+				ls++;
+			}
+			if (s.match(/([A-Z])+/)) {
+				ls++;
+			}
+			if (s.match(/[^a-zA-Z0-9]+/)) {
+				ls++;
+			}
+			return ls
+		}
+		// if ("" == jtrim($("#joinPassword").val())) {
+		// 	alert("密码不能为空");
+		// 	form1.userPassword.focus();
+		// 	return false;
+		// }
+		// if (jtrim($("#joinPassword").val()).length < 8) {
+		// 	alert("新密码必须为八位以上(不含空格)");
+		// 	form1.userPassword.focus();
+		// 	return false;
+		// }
+		// if (checkPass(jtrim($("#joinPassword").val())) < 3) {
+		// 	alert("密码必须是字母大写，字母小写，数字，特殊字符中任意两种组合");
+		// 	form1.userPassword.focus();
+		// 	return false;
+		// }
+
+
+
+		// 登入驗證碼
 		$(function () {
 			var gRandom;
 
-			$(function () {
-				$("#Submit").click(function () {
-					validate('#canvasValue', gRandom)
-				}).on('click', function () {
-					draw_Captcha();
-					$('#canvasValue').val("");
-				})
-			})
+			// $(function () {
+			// 	$("#sign").click(function () {
+			// 		validate('#canvasValue', gRandom)
+			// 	}).on('click', function () {
+			// 		draw_Captcha();
+			// 		$('#canvasValue').val("");
+			// 	})
+			// })
 
 			function getRandom(min, max) {
 				return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -199,6 +492,7 @@
 						let password = $('#password').val();
 						let rember = $('#rember').val();
 						// alert(rember); 
+						$("#sign").submit();
 						$.ajax({
 							url: "/campingmapping/login",
 							type: "POST",
@@ -224,7 +518,256 @@
 
 
 			};
+		})
+		// 註冊驗證碼
+		$(function () {
+			$(function () {
+				$("#joinAccount").on("keyup", function () {
+					// console.log($("#joinAccount").val());
+					let account = $('#joinAccount').val();
+					$.ajax({
+						url: "/campingmapping/accountsame",
+						type: "POST",
+						//提交方式
+						data: {
+							"account": account
+						},
+						dataType: "json"
+					}).done(function (data) {
+						if (data.res == 1) {
+							acno();
+						} else {
+							acok();
+
+						}
+
+					})
+
+				})
+
+			});
+
+
+			var gRandom;
+
+			$(function () {
+				$("#join").click(function () {
+					validate('#canvasValue2', gRandom)
+				})
+				// .on('click', function () {
+				// 	draw_Captcha();
+				// 	$('#canvasValue2').val("");
+				// })
+			})
+
+			function getRandom(min, max) {
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			};
+
+			//--隨機生成RGB顏色
+			function randomRgbColor(xV) {
+				let r = Math.floor(Math.random() * xV); //隨機生成256以內r值
+				let g = Math.floor(Math.random() * xV); //隨機生成256以內g值
+				let b = Math.floor(Math.random() * xV); //隨機生成256以內b值
+				return "rgb(" + r + "," + g + "," + b + ")"; //返回rgb(r,g,b)格式顏色
+			}
+
+			function draw_Captcha() {
+				gRandom = getRandom(10000, 99999);
+				let canvas = document.getElementById("canvas2");
+				let context = canvas.getContext("2d");
+				canvas.width = 110;
+				canvas.height = 38;
+				context.strokeRect(0, 0, canvas.width, canvas.height);
+				// console.log('gRandom = ', gRandom);
+
+				//---驗証數字
+				for (let i = 0; i < gRandom.toString().length; i++) {
+					let x = 5 + i * 20;
+					let y = 26;
+					//let deg = Math.random() * 70 * Math.PI / 180;//隨機弧度
+					let deg = Math.random() * 38 * Math.PI / 160;//隨機弧度
+					let txt = gRandom.toString()[i];
+					context.fillStyle = randomRgbColor(100);
+					context.font = "bold 25px Arial";
+					//修改座標原點和旋轉角度
+					context.translate(x, y);
+					context.rotate(deg);
+					context.fillText(txt, 0, 0);
+					//恢復座標原點和旋轉角度
+					context.rotate(-deg);
+					context.translate(-x, -y);
+
+				}
+
+				//---干擾線
+				for (let i = 0; i < 6; i++) {
+					context.strokeStyle = randomRgbColor(256);
+					context.beginPath();
+					context.moveTo(Math.random() * 120, Math.random() * 40);
+					context.lineTo(Math.random() * 120, Math.random() * 40);
+					context.stroke();
+				}
+				//---干擾點
+				for (let i = 0; i < 50; i++) {
+					context.fillStyle = randomRgbColor(256);
+					context.beginPath();
+					context.arc(Math.random() * 120, Math.random() * 40, 1, 0, 2 * Math.PI);
+					context.fill();
+				}
+			}
+			draw_Captcha();
+			$('#canvasBox2').on('click', function () {
+				draw_Captcha();
+				$('#canvasValue2').val("");
+			})
+
+
+			function validate(txtinput, code1) {
+				let inputCode = $(txtinput).val();
+				// console.log(inputCode);
+				if (inputCode.length <= 0) {
+					$('#joinError').text("輸入驗證碼");
+					draw_Captcha();
+
+				} else if (inputCode != code1) {
+					$('#joinError').text("驗證碼錯誤");
+					draw_Captcha();
+					$('#canvasValue').val("");
+				}
+				else if ($("#joinPassword").val().trim().replace(/\s/g, "") == "") {
+					alert("密码不能为空");
+					c
+				}
+				else if ($("#joinPassword").val().trim().replace(/\s/g, "").length < 8) {
+					alert("新密码必须为八位以上(不含空格)");
+				}
+				else if (checkPass($("#joinPassword").val().trim().replace(/\s/g, "")) < 3) {
+					alert("密码必须是字母大写，字母小写，数字，特殊字符中任意两种组合");
+				} else {
+					$("#join").on('click', function () {
+						if ($("#joinPassword").val() !== $("#joinPasswordCheck").val()) {
+							$('#joinError').text("密碼與驗證密碼不一致");
+						} else if (checkPass($("#joinPassword").val())) {
+
+							$('#joinError').text("");
+							// 	// alert('ok'); //獲取使用者名稱和密碼:
+							let account = $('#joinAccount').val();
+							let password = $('#joinPassword').val();
+							let email = $('#joinEmail').val();
+							let birthday = new Date($('#joinBirthday').val()).getTime();
+							// console.log(birthday);
+							$("#join").submit();
+							// alert(rember);
+							$.ajax({
+								url: "/campingmapping/join",
+								type: "POST",
+								//提交方式
+								data: {
+									"account": account,
+									"password": password,
+									"email": email,
+									"birthday": birthday
+								},
+								dataType: "json",
+							}).done(function (data) {
+								if (data.res == 1) {
+									// alert('username')
+									location.href = "/index"
+									rel = "external nofollow"
+								} else {
+									// alert('username');
+									$('.joinError').show().html('註冊會員失敗')
+								}
+							})
+						}
+					}
+					)
+				}
+			};
+		})
+		// 切換登入註冊
+		$(function () {
+			$("#tojoin").on("click", function () {
+				$("#joinbox").css("display", "block");
+				$("#signbox").css("display", "none");
+			})
+			$("#tosign").on("click", function () {
+				$("#joinbox").css("display", "none");
+				$("#signbox").css("display", "block");
+			})
+
+		})
+		// 密碼確認
+		$(function samepass() {
+			$("#joinPasswordCheck").on("keyup", function () {
+				let inputpass = $("#joinPassword").val();
+				let inputcheck = $("#joinPasswordCheck").val();
+
+				if (inputpass === inputcheck) {
+					psok();
+					return true;
+				} else {
+					psno();
+					return false;
+				}
+			})
+
 		});
+		// password icon v 
+		function psok() {
+			$('#psno').css("display", "none")
+			$('#psok').css("display", "block")
+		}
+		// password icon x 
+		function psno() {
+			$('#psno').css("display", "block")
+			$('#psok').css("display", "none")
+		}
+		// account icon v 
+		function acok() {
+			$('#acno').css("display", "none")
+			$('#acok').css("display", "block")
+		}
+		// account icon x 
+		function cano() {
+			$('#acno').css("display", "block")
+			$('#acok').css("display", "none")
+		}
+		// function Jtrim(str) //去空隔函数
+		// {
+		// 	var i = 0;
+		// 	var len = str.length;
+		// 	if (str == "") return (str);
+		// 	j = len - 1;
+		// 	flagbegin = true;
+		// 	flagend = true;
+		// 	while (flagbegin == true && i < len) {
+		// 		if (str.charAt(i) == " ") {
+		// 			i = i + 1;
+		// 			flagbegin = true;
+		// 		}
+		// 		else {
+		// 			flagbegin = false;
+		// 		}
+		// 	}
+
+		// 	while (flagend == true && j >= 0) {
+		// 		if (str.charAt(j) == " ") {
+		// 			j = j - 1;
+		// 			flagend = true;
+		// 		}
+		// 		else {
+		// 			flagend = false;
+		// 		}
+		// 	}
+
+		// 	if (i > j) return ("")
+
+		// 	trimstr = str.substring(i, j + 1);
+		// 	return trimstr;
+		// }
+
 		// $(function loginSubmit() {
 		// 	// alert('ok'); //獲取使用者名稱和密碼:
 		// 	let account = $('#account').val();
@@ -249,6 +792,7 @@
 		// 	})
 		// });
 	</script>
+
 
 </body>
 

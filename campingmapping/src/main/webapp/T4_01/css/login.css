@@ -11,10 +11,10 @@
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(5px);
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.863);
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-right: 1px solid rgba(255, 255, 255, 0);
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
     margin-top: 10px;
 }
 
@@ -33,7 +33,7 @@
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 1px;
     cursor: pointer;
 }
 
@@ -59,6 +59,11 @@
     margin-top: 20px;
 }
 
+.form .inputBox2 {
+    width: 100%;
+    margin-top: 10px;
+}
+
 /* 輸入框樣式 */
 
 .form .inputBox input {
@@ -68,19 +73,41 @@
     outline: none;
     border: none;
     border-radius: 130px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-right: 1px solid rgba(255, 255, 255, 0);
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
     font-size: 16px;
     vertical-align: middle;
     line-height: 0px;
     letter-spacing: 1px;
     color: #fff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.199);
+}
+
+.form .inputBox2 input {
+    width: 100%;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border: none;
+    border-radius: 130px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-right: 1px solid rgba(255, 255, 255, 0);
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+    font-size: 14px;
+    vertical-align: middle;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.199);
 }
 
 .form .inputBox input::placeholder {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.568);
+}
+
+.form .inputBox2 input::placeholder {
+    color: rgba(255, 255, 255, 0.582);
 }
 
 /* 登入按鈕樣式 */
@@ -117,4 +144,29 @@
     /*     height: 1%; */
 
 
+}
+
+#joinError {
+    display: inline;
+    font-size: 16px;
+    color: rgb(255, 69, 69);
+    /*     width: 1%; */
+    /*     height: 1%; */
+    margin: 0;
+
+
+}
+
+#acok {
+    margin: 0;
+    float: right;
+    display: none;
+    color: green;
+}
+
+#acno {
+    margin: 0;
+    float: right;
+    display: none;
+    color: red;
 }

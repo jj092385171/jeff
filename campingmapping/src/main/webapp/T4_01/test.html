@@ -7,12 +7,29 @@
 </head>
 
 <body>
-<!-- 	<form action="/campingmapping/showallcontroller" method="post"> -->
-<!-- 		帳號:<input type="text" name="UID" /><br /> 密碼:<input type="password" name="password" /><br /> <input -->
-<!-- 			type="submit" value="查詢" /> -->
 
-<!-- 	</form><input type="checkbox">11 -->
-<form  action="/campingmapping//ttttt" method="post"   >
+	<form action="">
+		<input type="date" id="d">
+		<input type="button" value="" id="b">
+	</form>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script>
+		let d = $("#d");
+		$("#b").on("click", function () {
+			console.log(d.val())
+			let dd = new Date(d.val()).getTime();
+			console.log(dd)
+
+		})
+
+	</script>
+
+	<!-- 	<form action="/campingmapping/showallcontroller" method="post"> -->
+	<!-- 		帳號:<input type="text" name="UID" /><br /> 密碼:<input type="password" name="password" /><br /> <input -->
+	<!-- 			type="submit" value="查詢" /> -->
+
+	<!-- 	</form><input type="checkbox">11 -->
+	<!-- <form  action="/campingmapping//ttttt" method="post"   >
 
 <input name="t" value="like" type="hidden">
 
@@ -26,9 +43,9 @@
 <input type="submit"  >
 
 </form>
-<p>
+<p> -->
 
-	
+
 </body>
 
 </html>
