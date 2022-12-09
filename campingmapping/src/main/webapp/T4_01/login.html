@@ -236,17 +236,14 @@
 				<form action="/campingmapping/login" name="loginform" id="loginform" method="post">
 					<div class="inputBox">
 						<input type="text" name="account" id="account" placeholder="帳號" required="required">
-
 					</div>
 					<div class="inputBox">
 						<input type="password" name="password" id="password" placeholder="密碼" required="required">
-
 					</div>
 					<div class="inputBox">
 						<!-- onclick="window.location.reload()" -->
 						<div class="" id="canvasBox" style="float: left; width: 50%;">
 							<canvas id="canvas" style="background-color: #ffffffaf; padding: 0px;width: 99%;"></canvas>
-
 						</div>
 						<input type="text" id="canvasValue" placeholder="認證碼" style="float: right; width: 47%;"
 							required="required">
@@ -258,7 +255,6 @@
 					<div class="inputBox">
 						<!--  style="display: flex;"-->
 						<input type="button" id="sign" value="登入">
-
 					</div>
 					<!-- <div style="display: flex; justify-content: center; align-content: center;flex-wrap: wrap;"> -->
 					<p class="loginError" id="loginError"></p></a>
@@ -269,15 +265,11 @@
 					<p class="forget">沒有賬戶?<a href="#" id="tojoin">
 							註冊
 						</a></p>
-
 				</form>
-
 			</div>
 		</div>
 		<!-- --------------------------------註冊---------------------------------- -->
-
 		<div class="container" id="joinbox" style="display:none">
-
 			<div class="form">
 				<!-- <div style="display: flex;"> -->
 				<h2>註冊</h2>
@@ -293,46 +285,37 @@
 					</div>
 					<div class="inputBox2">
 						<input type="password" name="password" id="joinPassword" placeholder="密碼" required="required">
-
 					</div>
 					<div class="inputBox2">
-						<input type="password" name="password" id="joinPasswordCheck" placeholder="確認密碼"
+						<input type="password" name="passwordCheck" id="joinPasswordCheck" placeholder="確認密碼"
 							required="required">
 						<p class="fa-solid fa-circle-check " id="psok"></p>
 						<p class="fa-solid fa-circle-xmark " id="psno"></p>
 					</div>
 					<div class="inputBox2">
 						<input type="email" name="email" id="joinEmail" placeholder="電子信箱" required="required">
-
 					</div>
 					<div class="inputBox2">
 						<input type="date" name="birthday" id="joinBirthday" placeholder="生日" required="required">
-
 					</div>
 					<div class="inputBox2">
 						<!-- onclick="window.location.reload()" -->
 						<div class="" id="canvasBox2" style="float: left; width: 50%;">
 							<canvas id="canvas2" style="background-color: #ffffffaf; padding: 0px;width: 99%;"></canvas>
-
 						</div>
 						<input type="text" id="canvasValue2" placeholder="認證碼" style="float: right; width: 47%;"
 							required="required">
 					</div>
-
 					<div class="inputBox">
 						<!--  style="display: flex;"-->
 						<input type="button" id="join" value="註冊">
-
 					</div>
 					<!-- <div style="display: flex; justify-content: center; align-content: center;flex-wrap: wrap;"> -->
-
 					<!-- 						</div> -->
 					<p class="forget">已有帳戶?<a href="#" id="tosign">
 							登入
 						</a></p>
-
 				</form>
-
 			</div>
 		</div>
 
@@ -401,14 +384,15 @@
 		$(function () {
 			var gRandom;
 
-			// $(function () {
-			// 	$("#sign").click(function () {
-			// 		validate('#canvasValue', gRandom)
-			// 	}).on('click', function () {
-			// 		draw_Captcha();
-			// 		$('#canvasValue').val("");
-			// 	})
-			// })
+			$(function () {
+				$("#sign").click(function () {
+					validate('#canvasValue', gRandom)
+				})
+				// .on('click', function () {
+				// 	draw_Captcha();
+				// 	$('#canvasValue').val("");
+				// })
+			})
 
 			function getRandom(min, max) {
 				return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -478,15 +462,16 @@
 				// console.log(inputCode);
 				if (inputCode.length <= 0) {
 					$('#loginError').text("輸入驗證碼");
-					// draw_Captcha();
+					draw_Captcha();
 
 				} else if (inputCode != code1) {
 					$('#loginError').text("驗證碼錯誤");
-					// draw_Captcha();
-					// $('#canvasValue').val("");
+					draw_Captcha();
+					$('#canvasValue').val("");
 
 				} else {
 					$(function loginSubmit() {
+						$('#loginError').text("");
 						// alert('ok'); //獲取使用者名稱和密碼: 
 						let account = $('#account').val();
 						let password = $('#password').val();
@@ -521,6 +506,8 @@
 		})
 		// 註冊驗證碼
 		$(function () {
+			var acsame = 1;
+			// 帳號重複比對
 			$(function () {
 				$("#joinAccount").on("keyup", function () {
 					// console.log($("#joinAccount").val());
@@ -536,9 +523,10 @@
 					}).done(function (data) {
 						if (data.res == 1) {
 							acno();
+							acsame = 1 ;
 						} else {
 							acok();
-
+    						acsame = 0;
 						}
 
 					})
@@ -635,15 +623,18 @@
 					draw_Captcha();
 					$('#canvasValue').val("");
 				}
+				else if(acsame==1){
+					$('#joinError').text("帳號重複");
+				}
 				else if ($("#joinPassword").val().trim().replace(/\s/g, "") == "") {
-					alert("密码不能为空");
-					c
+					$('#joinError').text("密碼不能為空");
+					
 				}
 				else if ($("#joinPassword").val().trim().replace(/\s/g, "").length < 8) {
-					alert("新密码必须为八位以上(不含空格)");
+					$('#joinError').text("密碼(不含空格)必須8位以上");
 				}
 				else if (checkPass($("#joinPassword").val().trim().replace(/\s/g, "")) < 3) {
-					alert("密码必须是字母大写，字母小写，数字，特殊字符中任意两种组合");
+					$('#joinError').text("密碼必須是 字母大寫，字母小寫，數字，特殊符號 任兩種組合");
 				} else {
 					$("#join").on('click', function () {
 						if ($("#joinPassword").val() !== $("#joinPasswordCheck").val()) {
@@ -730,7 +721,7 @@
 			$('#acok').css("display", "block")
 		}
 		// account icon x 
-		function cano() {
+		function acno() {
 			$('#acno').css("display", "block")
 			$('#acok').css("display", "none")
 		}
