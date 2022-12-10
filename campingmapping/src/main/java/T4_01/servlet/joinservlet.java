@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 
 import T4_01.service.impl.JoinServiceImpl;
+import T4_01.service.impl.ToolServiceImpl;
 
 @WebServlet("/join")
 public class joinservlet extends HttpServlet {
@@ -31,10 +31,10 @@ public class joinservlet extends HttpServlet {
 			PrintWriter printWriter = resp.getWriter();
 			String account = req.getParameter("account");
 			String passwordInput = req.getParameter("password");
-			String sha1Hex1 = DigestUtils.sha1Hex(passwordInput);
-			String password = DigestUtils.sha1Hex(sha1Hex1);
+			String password = new ToolServiceImpl().loginsha1Hex(passwordInput);
 			String email = req.getParameter("email");
 			String birthday = req.getParameter("birthday");
+//			System.out.println(password);
 			JoinServiceImpl joinServiceImpl = new JoinServiceImpl();
 			int joinNewMember = joinServiceImpl.joinNewMember(account, password,
 					email, birthday);

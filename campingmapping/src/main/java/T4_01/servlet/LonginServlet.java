@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,13 +21,14 @@ import com.alibaba.fastjson.JSONObject;
 import T4_01.beans.License;
 import T4_01.service.LoginService;
 import T4_01.service.impl.LoginServiceImpl;
+import T4_01.service.impl.ToolServiceImpl;
 
 @WebServlet("/login")
 public class LonginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger log = LoggerFactory.getLogger(LonginServlet.class);
 	Map<String, Object> userInfoMap = new HashMap<String, Object>();
-
+	
 	protected void processRequest(HttpServletRequest req,
 
 			HttpServletResponse resp) {
@@ -42,8 +42,7 @@ public class LonginServlet extends HttpServlet {
 			// 1.拿資料
 			String account = req.getParameter("account");
 			String passwordInput = req.getParameter("password");
-			String sha1Hex1 = DigestUtils.sha1Hex(passwordInput);
-			String password = DigestUtils.sha1Hex(sha1Hex1);
+			String password =new ToolServiceImpl().loginsha1Hex(passwordInput);
 			String rember = req.getParameter("rember");
 			log.info(account + "  " + password + " " + rember);
 			String ipAddress = req.getHeader("X-FORWARDED-FOR");
@@ -93,7 +92,7 @@ public class LonginServlet extends HttpServlet {
 			cookieUser.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
 			cookieUser.setPath(req.getContextPath());
 
-			String Password = DigestUtils.sha1Hex(passwordInput);
+			String Password = new ToolServiceImpl().rembersha1Hex(passwordInput);
 			cookiePassword = new Cookie("password", Password);
 			cookiePassword.setMaxAge(30 * 24 * 60 * 60);
 			cookiePassword.setPath(req.getContextPath());
@@ -106,7 +105,7 @@ public class LonginServlet extends HttpServlet {
 			cookieUser.setMaxAge(0); // MaxAge==0 表示要請瀏覽器刪除此Cookie
 			cookieUser.setPath(req.getContextPath());
 
-			String Password = DigestUtils.sha1Hex(passwordInput);
+			String Password = new ToolServiceImpl().rembersha1Hex(passwordInput);
 			cookiePassword = new Cookie("password", Password);
 			cookiePassword.setMaxAge(0);
 			cookiePassword.setPath(req.getContextPath());

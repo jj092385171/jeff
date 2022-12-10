@@ -1,6 +1,8 @@
-package _02_login.filter;
+package T4_01.filter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSONObject;
+
+import T4_01.service.impl.ToolServiceImpl;
 
 
 @WebFilter("/T4_01/login.htm")
@@ -34,38 +40,45 @@ public class FindMemberPassword implements Filter {
 			HttpServletRequest req = (HttpServletRequest) request;
 			// **********Remember Me****************
 			String cookieName = "";
-			String user = "";
+			String account = "";
 			String password = "";
-			String rememberMe = "";
+			String rember = "";
 			// 取出瀏覽器送來的Cookie
 			Cookie[] cookies = req.getCookies();
 			if (cookies != null) {   						// 如果含有Cookie
 				for (int i = 0; i < cookies.length; i++) {	// 檢視每個Cookie
 					cookieName = cookies[i].getName();
 					if (cookieName.equals("account")) {
-						//找到user這個Cookie
-						user = cookies[i].getValue();
+						//找到account這個Cookie
+						account = cookies[i].getValue();
 					} else if (cookieName.equals("password")) {
 						//找到password這個Cookie						
 						String tmp  = cookies[i].getValue();
 						// 將密碼解密
-//						if (tmp!= null){
-//							password = 	GlobalService.decryptString(
-//									        GlobalService.KEY, tmp);
-//						}
+						if (tmp!= null){
+							password = 	new ToolServiceImpl().remberloginsha1Hex(tmp);
+						}
 					} 
 					else if (cookieName.equals("rember")) {
-						//找到rm這個Cookie(rm: rememberMe)
-						rememberMe = cookies[i].getValue();
+						//找到rember這個Cookie("rember": rember)
+						rember = cookies[i].getValue();
 					}
 				}
 			} else {
 				// 找不到Cookie，沒有關係，讓使用者輸入資料即可。
 			}
-			log.info("user=" + user + ", password=" + password);
+			log.info("account=" + account + ", password=" + password);
 			// 將這三項資料存入request物件內，接下來執行的login.jsp就能取得這三份資料
-			request.setAttribute("rememberMe", rememberMe);
-			request.setAttribute("user", user);
+			HashMap<String, Object> hashMap = new HashMap<>();
+			hashMap.put("rember", rember);    
+			hashMap.put("account", account);  
+			hashMap.put("password", password);
+			JSONObject jsonObject = new JSONObject(hashMap);
+			PrintWriter writer = response.getWriter();
+			writer.println(jsonObject);
+			
+			request.setAttribute("rember", rember);
+			request.setAttribute("account", account);
 			request.setAttribute("password", password);
 		}
 		chain.doFilter(request, response);   // 請容器找出下一棒程式: login.jsp，然後執行它
