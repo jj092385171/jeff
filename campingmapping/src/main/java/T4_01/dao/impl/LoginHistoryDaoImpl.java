@@ -19,7 +19,7 @@ public class LoginHistoryDaoImpl implements LoginHistoryDao {
 	public LoginHistory insert(LoginHistory loginHistory) {
 		try {
 			LoginHistory insert = queryRunner.insert(DbUtils.getConnection(),
-					"INSERT INTO LoginHistory (UID ,account ,IP ) VALUES (? ,? ,? )",
+					"INSERT INTO LoginHistory (UID ,account ,IP ,LoginDate ) VALUES (? ,? ,? ,default)",
 					new BeanHandler<LoginHistory>(LoginHistory.class),
 					loginHistory.getUID(), loginHistory.getAccount(),
 					loginHistory.getIP());

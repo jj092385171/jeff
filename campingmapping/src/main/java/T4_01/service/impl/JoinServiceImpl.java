@@ -5,7 +5,6 @@ import java.util.Map;
 
 import T4_01.beans.License;
 import T4_01.beans.Limits;
-import T4_01.beans.LoginHistory;
 import T4_01.beans.Member;
 import T4_01.dao.impl.LicenseDaoImpl;
 import T4_01.dao.impl.LimitsDaoImpl;
@@ -31,28 +30,25 @@ public class JoinServiceImpl implements JoinService {
 
 	@Override
 	public int joinNewMember(String account, String password, String email,
-			String birthday, String ip) {
+			String birthday) {
 		try {
 			Member member = new Member();
 			License license = new License();
 			Limits limits = new Limits();
-			LoginHistory loginHistory = new LoginHistory();
 			MemberImpl memberImpl = new MemberImpl();
 			member.setAccount(account);
 			member.setEmail(email);
 			member.setStringBirthday(birthday);;
-			Member insertMember = memberImpl.insert(member);
+			memberImpl.insert(member);
 			int uid = memberImpl.select(account).getUID();
 			license.setUID(uid);
 			license.setAccount(account);
 			license.setPassword(password);
-			License insertLicense = new LicenseDaoImpl().insert(license);
+			new LicenseDaoImpl().insert(license);
 			limits.setUID(uid);
 			limits.setAccount(account);
-			Limits insertLimits = new LimitsDaoImpl().insert(limits);
-			loginHistory.setUID(uid);
-			loginHistory.setAccount(account);
-			loginHistory.setIP(ip);
+			new LimitsDaoImpl().insert(limits);
+			
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -10,15 +10,21 @@
 
 	<form action="">
 		<input type="date" id="d">
+		<input type="checkbox" name="" id="c">
 		<input type="button" value="" id="b">
+		<input type="submit" id="s">
 	</form>
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
 		let d = $("#d");
+		let c = $('#c')
 		$("#b").on("click", function () {
 			console.log(d.val())
 			let dd = new Date(d.val()).getTime();
 			console.log(dd)
+			if (c.prop('checked')) {
+				console.log(c.val())
+			} else { console.log("no") }
 
 		})
 
