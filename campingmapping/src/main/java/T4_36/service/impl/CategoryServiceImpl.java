@@ -17,7 +17,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void create(Category category) {
         try {
             DbUtils.begin();
-            if (categoryDao.inserttest(category)) {
+            if (categoryDao.insert(category)) {
                 DbUtils.commit();
             }
         } catch (SQLException e) {

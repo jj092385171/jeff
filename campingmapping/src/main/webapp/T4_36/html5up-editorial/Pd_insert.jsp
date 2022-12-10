@@ -33,8 +33,9 @@
 					</ul>
 				</header>
 
-<form action="<c:url value='/Pd_insertServlet.do'/>" method="POST"
-		enctype="multipart/form-data">
+<!-- 	<form action="<c:url value='/T4_36/servler/Category/insertServlet.do'/>" method="GET"
+	enctype="multipart/form-data"> -->
+	<form action="<c:url value='/Pd_insertServlet.do'/>" method="POST" enctype="multipart/form-data">
 		<input type="text" value='1' name="userID">會員ID<br> 
 		<input type="text" value='1' name="Pd_name">產品名稱<br> 
 		<input type="text" value='1' name="Pd_title">品牌名稱<br> 

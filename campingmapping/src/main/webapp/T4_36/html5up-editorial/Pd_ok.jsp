@@ -33,15 +33,14 @@
 					</ul>
 				</header>
 
-<form action="<c:url value='/testinsertServlet.do'/>" method="POST"
-		enctype="multipart/form-data">
-	</form>
+<!-- <form action="<c:url value='/Pd_insertServlet.do'/>" method="POST" --!>
+<!-- 		enctype="multipart/form-data"> -->
+<!-- 	</form> -->
 				<!-- Banner -->
 				<section id="banner">
 					<div class="content">
 						<header>
-							<h1>執行成功
-							</h1>
+							<h1>執行成功</h1>
 						</header>
 					</div>
 				</section>

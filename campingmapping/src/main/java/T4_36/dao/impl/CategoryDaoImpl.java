@@ -24,11 +24,11 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public boolean insert(Category category) throws SQLException {
         String sql = "INSERT INTO " + "category" +
-                " ( userID, name, title, content, type, picture, price, inventory, Pd_date, Pd_last_update) " +
+                " ( userID, Pd_name, Pd_title, Pd_content, Pd_type, Pd_picture, Pd_price, Pd_inventory, Pd_date, Pd_last_update) " +
                 "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Category result = queryRunner.insert(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
-                    category.getPd_id(),
+                    category.getUserID(),
                     category.getPd_name(),
                     category.getPd_title(),
                     category.getPd_content(),
@@ -52,11 +52,11 @@ public class CategoryDaoImpl implements CategoryDao {
 //			e.printStackTrace();
 //		}
         String sql = "INSERT INTO " + "category" +
-                " (userID, name, title, Pd_content, type, picture,  price, inventory, Pd_date ,Pd_last_update) " +
+                " (userID, Pd_name, Pd_title, Pd_content, Pd_type, Pd_picture,  Pd_price, Pd_inventory, Pd_date ,Pd_last_update) " +
                 "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Category resulttest = queryRunner.insert(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
-                    category.getPd_id(),
+                    category.getUserID(),
                     category.getPd_name(),
                     category.getPd_title(),
                     category.getPd_content(),
@@ -81,8 +81,8 @@ public class CategoryDaoImpl implements CategoryDao {
     // 修改一筆書籍資料
     @Override
     public int update(Category category, long sizeInBytes) throws SQLException {
-        String sql = "UPDATE category SET name =?, title =?, content =?, type =?, picture =?, price =?," +
-                "inventory =?, Pd_date =?, Pd_last_update =?, WHERE Pd_id = ?";
+        String sql = "UPDATE category SET Pd_name =?, Pd_title =?, Pd_content =?, Pd_type =?, Pd_picture =?, Pd_price =?," +
+                "Pd_inventory =?, Pd_date =?, Pd_last_update =?, WHERE Pd_id = ?";
 
         return queryRunner.update(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
                 category.getPd_name(),
