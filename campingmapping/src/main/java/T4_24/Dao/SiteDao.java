@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import T4_24.Models.CampBean;
 import T4_24.Models.SiteBean;
 import utils.DbUtils;
 
@@ -59,8 +60,9 @@ public class SiteDao {
 	public SiteBean findSiteBySiteID(int siteID) throws SQLException {
 		String sql = "select * from site where siteID = ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
-		ResultSet rs = preState.executeQuery();
 		
+		preState.setInt(1, siteID);
+		ResultSet rs = preState.executeQuery();
 		rs.next();
 		
 		SiteBean siteBean = new SiteBean();
@@ -79,9 +81,36 @@ public class SiteDao {
 	
 	//透過siteID修改site
 	public void updateBySiteID(String siteName, Blob sitePictures, int totalSites, int siteMoney, int siteID) throws SQLException {
-		String sql = "update camp set siteName = ?, sitePictures = ?, totalSites = ?, siteMoney = ? where siteID = ?";
+		String sql = "update site set siteName = ?, sitePictures = ?, totalSites = ?, siteMoney = ? where siteID = ?";
 		qr.update(conn,sql,siteName, sitePictures, totalSites, siteMoney, siteID);
 	}
 	
+	//透過siteID刪除site
+	public void deleteBySiteID(int siteID) throws SQLException {
+		String sql = "delete from site where siteID = ?";
+		qr.update(conn, sql, siteID);
+	}
+	
+	//透過campID刪除site, 刪除營地的前置
+	public void deleteByCampID(int campID) throws SQLException {
+		String sql = "delete from site where campID = ?";
+		qr.update(conn, sql, campID);
+	}
+	
+	//透過id找圖片
+	public CampBean findPictures(int id) throws SQLException {
+		String sql = "select campPictures from camp where siteID = ?";
+		PreparedStatement preState = conn.prepareStatement(sql);
+		preState.setInt(1, id);
+		
+		ResultSet rs = preState.executeQuery();
+		rs.next();
+		
+		CampBean campBean = new CampBean();
+		campBean.setCampPictures(rs.getBlob("campPictures"));
+		
+		return campBean;
+		
+	}
 
 }

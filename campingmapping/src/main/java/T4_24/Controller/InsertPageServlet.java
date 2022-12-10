@@ -17,8 +17,8 @@ import T4_24.Models.CityBean;
 import T4_24.Models.TagBean;
 
 
-@WebServlet("/T4_24/InsertCampPageServlet")
-public class InsertCampPageServlet extends HttpServlet {
+@WebServlet("/T4_24/InsertPageServlet")
+public class InsertPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

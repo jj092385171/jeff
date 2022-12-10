@@ -48,79 +48,80 @@
 					</div>
 
 					
-						<h2>結果:&emsp;${siteBean.siteID} 的資料 ${what} 成功</h2>
-						<table>
-							<thead>
-								<tr>
-									<th>營位區編號</th>
-									<th>營位區名</th>
-									<th>營區位圖片</th>
-									<th>總營位</th>
-									<th>營位金額</th>
-									<th>營地編號</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>${ siteBean.siteID }</td>
-									<td>${ siteBean.siteName }</td>
-									<td>圖片:</td>
-<%-- 									<td>圖片:<img height='100' width='80' src="<c:url value='/T4_24/GetCampImage?id=${siteBean.siteID}' />"></td> --%>
-									<td>${ siteBean.totalSites }</td>
-									<td>${ siteBean.siteMoney }</td>
-									<td>${ siteBean.campID }</td>
-								</tr>
-							</tbody>
-						</table>
-						<br><br><br>
-						<table>
-							<thead>
-								<tr>
-									<th>營地編號</th>
-									<th>營地</th>
-									<th>縣市編號</th>
-									<th>縣市名</th>
-									<th>地址</th>
-									<th>圖片</th>
-									<th>簡介</th>
-									<th>標籤</th>
-								</tr>
-								<tr>
-									<th>&emsp;&emsp;營位區編號</th>
-									<th>&emsp;營位區名</th>
-									<th>&emsp;營區位圖片</th>
-									<th>&emsp;總營位</th>
-									<th>&emsp;營位金額</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var='all' items='${showALL}'>
-									<tr>
-										<td>${ all.campID }</td>
-										<td>${ all.campName }</td>
-										<td>${ all.cityID }</td>
-										<td>${ all.cityName }</td>
-										<td>${ all.location }</td>
-										<td>圖片: </td>
-										<td>${ all.discription }</td>
-										<td>
-											<c:forEach var='tag' items='${all.tagList}'>
-												${tag.tagName} &nbsp; / &nbsp;
-											</c:forEach>
-										</td>
-									</tr>
-								<c:forEach var='site' items='${all.siteList}'>
-											<tr>
-												<td>&emsp;&emsp;${ site.siteID }</td>
-												<td>&emsp;${ site.siteName }</td>
-												<td>&emsp;圖片:</td>
-												<td>&emsp;${ site.totalSites }</td>
-												<td>&emsp;${ site.siteMoney }</td>
-											</tr>
-										</c:forEach>
-								</c:forEach>
-							</tbody>
-						</table>
+						<h2>刪除營地結果</h2>
+						${ ID }
+<!-- 						<table> -->
+<!-- 							<thead> -->
+<!-- 								<tr> -->
+<!-- 									<th>營位區編號</th> -->
+<!-- 									<th>營位區名</th> -->
+<!-- 									<th>營區位圖片</th> -->
+<!-- 									<th>總營位</th> -->
+<!-- 									<th>營位金額</th> -->
+<!-- 									<th>營地編號</th> -->
+<!-- 								</tr> -->
+<!-- 							</thead> -->
+<!-- 							<tbody> -->
+<!-- 								<tr> -->
+<%-- 									<td>${ siteBean.siteID }</td> --%>
+<%-- 									<td>${ siteBean.siteName }</td> --%>
+<!-- 									<td>圖片:</td> -->
+<%--  									<td>圖片:<img height='100' width='80' src="<c:url value='/T4_24/GetCampImage?id=${siteBean.siteID}' />"></td> --%> 
+<%-- 									<td>${ siteBean.totalSites }</td> --%>
+<%-- 									<td>${ siteBean.siteMoney }</td> --%>
+<%-- 									<td>${ siteBean.campID }</td> --%>
+<!-- 								</tr> -->
+<!-- 							</tbody> -->
+<!-- 						</table> -->
+<!-- 						<br><br><br> -->
+<!-- 						<table> -->
+<!-- 							<thead> -->
+<!-- 								<tr> -->
+<!-- 									<th>營地編號</th> -->
+<!-- 									<th>營地</th> -->
+<!-- 									<th>縣市編號</th> -->
+<!-- 									<th>縣市名</th> -->
+<!-- 									<th>地址</th> -->
+<!-- 									<th>圖片</th> -->
+<!-- 									<th>簡介</th> -->
+<!-- 									<th>標籤</th> -->
+<!-- 								</tr> -->
+<!-- 								<tr> -->
+<!-- 									<th>&emsp;&emsp;營位區編號</th> -->
+<!-- 									<th>&emsp;營位區名</th> -->
+<!-- 									<th>&emsp;營區位圖片</th> -->
+<!-- 									<th>&emsp;總營位</th> -->
+<!-- 									<th>&emsp;營位金額</th> -->
+<!-- 								</tr> -->
+<!-- 							</thead> -->
+<!-- 							<tbody> -->
+<%-- 								<c:forEach var='all' items='${showALL}'> --%>
+<!-- 									<tr> -->
+<%-- 										<td>${ all.campID }</td> --%>
+<%-- 										<td>${ all.campName }</td> --%>
+<%-- 										<td>${ all.cityID }</td> --%>
+<%-- 										<td>${ all.cityName }</td> --%>
+<%-- 										<td>${ all.location }</td> --%>
+<!-- 										<td>圖片: </td> -->
+<%-- 										<td>${ all.discription }</td> --%>
+<!-- 										<td> -->
+<%-- 											<c:forEach var='tag' items='${all.tagList}'> --%>
+<%-- 												${tag.tagName} &nbsp; / &nbsp; --%>
+<%-- 											</c:forEach> --%>
+<!-- 										</td> -->
+<!-- 									</tr> -->
+<%-- 								<c:forEach var='site' items='${all.siteList}'> --%>
+<!-- 											<tr> -->
+<%-- 												<td>&emsp;&emsp;${ site.siteID }</td> --%>
+<%-- 												<td>&emsp;${ site.siteName }</td> --%>
+<!-- 												<td>&emsp;圖片:</td> -->
+<%-- 												<td>&emsp;${ site.totalSites }</td> --%>
+<%-- 												<td>&emsp;${ site.siteMoney }</td> --%>
+<!-- 											</tr> -->
+<%-- 										</c:forEach> --%>
+<%-- 								</c:forEach> --%>
+<!-- 							</tbody> -->
+<!-- 						</table> -->
 					</body>
 
 

@@ -11,7 +11,7 @@
 <html>
 
 <head>
-<title>搜尋頁面</title>
+<title>刪除頁面</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -52,34 +52,29 @@
 				<!-- Section -->
 				<section>
 					<header class="major">
-						<h2>查詢&emsp;營地_營區位</h2>
+						<h2>刪除&emsp;營地_營區位</h2>
 					</header>
 					<div class="mini-posts">
 
 						<article>
-							<form name="QueryCampByCityNameForm"
-								action="<c:url value='/T4_24/QueryCampsByCityIDsServlet' />"
+							<form name="deleteCampSitePage"
+								action="<c:url value='/T4_24/DeleteCampByIDServlet' />"
 								method="POST">
 								<table border="1">
 									<thead>
 										<tr bgcolor='lightblue'>
 											<th height="60" colspan="2" align="center">
-												<h2>縣市查詢營地資料</h2>
+												<h2>刪除營地資料</h2>
 											</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr bgcolor='lightgreen'>
-											<td width="120" height="40">縣市:</td>
-											<td width="600" height="40" align="left">
-											<c:forEach 	var='city' items='${cityList}'>
-												<label for="${city.cityID}">${city.cityName} 
-													<input
-														type="checkbox" name="cityID"
-														id="${city.cityID}" value="${city.cityID}">
-												</label>
-											</c:forEach>
-											</td>
+											<td width="120" height="40">請輸入營地 ID:</td>
+													<td width="600" height="40" align="left"><input id='campID'
+													style="text-align: left" name="campID" value="${param.campID}" type="text" size="14">
+													<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.campID}</div>
+												</td>
 										<tr bgcolor='lightblue'>
 											<td height="50" colspan="2" align="center"><input
 												type="submit" value="送出"></td>
@@ -89,23 +84,24 @@
 							</form>
 						</article>
 						<article>
-							<form name="QueryCampByCampIDForm"
-								action="<c:url value='/T4_24/QueryCampByCampIDServlet' />"
+							<form name="deleteCampSitePage"
+								action="<c:url value='/T4_24/DeleteSiteByIDServlet' />"
 								method="POST">
 								<table border="1">
 									<thead>
 										<tr bgcolor='lightblue'>
 											<th height="60" colspan="2" align="center">
-												<h2>ID查詢營地資料</h2>
+												<h2>刪除營區位資料</h2>
 											</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr bgcolor='lightgreen'>
-											<td width="120" height="40">營地ID:</td>
-											<td width="600" height="40" align="left"><input
-												id='campID' style="text-align: left" name="campID" value=""
-												type="text" size="14"></td>
+											<td width="120" height="40">請輸入營區位 ID:</td>
+												<td width="600" height="40" align="left"><input id='siteID'
+												style="text-align: left" name="siteID" value="${param.siteID}" type="text" size="14">
+												<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.siteID}</div>
+											</td>
 										<tr bgcolor='lightblue'>
 											<td height="50" colspan="2" align="center"><input
 												type="submit" value="送出"></td>

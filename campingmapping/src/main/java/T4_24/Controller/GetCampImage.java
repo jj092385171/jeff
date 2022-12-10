@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,10 +34,10 @@ public class GetCampImage extends HttpServlet {
 			String id = request.getParameter("id");
 			System.out.println("id:"+id);
 			// 讀取瀏覽器傳送來的type，以分辨要處理哪個表格
-			CampSiteCityTagsDao campPlusCityDao = new CampSiteCityTagsDao();
+			CampDao campDao = new CampDao();
+			CampBean findPictures = campDao.findPictures(Integer.valueOf(id));
 			
-			CampSiteCityTagsBean cpcBean = campPlusCityDao.findCampByID(Integer.valueOf(id));
-			campPictures = cpcBean.getCampPictures();
+			campPictures = findPictures.getCampPictures();
 			is = campPictures.getBinaryStream();
 			System.out.println("is:"+is);
 			

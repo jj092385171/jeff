@@ -13,6 +13,13 @@ form {
 	margin: 0 auto;
 	width: 600px;
 }
+.class1{
+	border: 1px solid black;
+	width: 500px;
+	padding: 20px;
+	
+}
+
 </style>
 </head>
 <body>
@@ -66,6 +73,7 @@ form {
 		</table>
 	</form>
 
+<div class='class1'>
 	<form name="InsertSiteByIDForm">
 		營地編號: <input type="text" name='campID' readonly="readonly" value='${ cctBean.campID }'><br>
 		營地: <input type="text" name='campName' readonly="readonly" value='${ cctBean.campName }'><br>
@@ -87,6 +95,8 @@ form {
 					<input type="checkbox" name="tagID" readonly="readonly" value="${tag.tagID}" />${tag.tagName}
 			 	</c:forEach>
 	</form>
+</div>
 
+<a href="<c:url value='IndexShowAllPageServlet' />" >回首頁</a>
 </body>
 </html>

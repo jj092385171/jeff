@@ -2,7 +2,6 @@ package T4_24.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Models.CampSiteCityTagsBean;
-import T4_24.Models.TagPlusCampBean;
 
 
 @WebServlet("/T4_24/QueryCampByCampIDServlet")
@@ -30,10 +28,10 @@ public class QueryCampByCampIDServlet extends HttpServlet {
 		CampSiteCityTagsDao campPlusCityPlusTagsDao = new CampSiteCityTagsDao();
 		
 		String campID = request.getParameter("campID");
-		CampSiteCityTagsBean cctBean = null;
+		CampSiteCityTagsBean csctBean = new CampSiteCityTagsBean();
 		
 		try {
-			cctBean = campPlusCityPlusTagsDao.findCampByID(Integer.valueOf(campID));
+			csctBean = campPlusCityPlusTagsDao.findCampByID(Integer.valueOf(campID));
 			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -41,7 +39,7 @@ public class QueryCampByCampIDServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 			
-		session.setAttribute("cctBean", cctBean);
+		session.setAttribute("csctBean", csctBean);
 		
 	
 		String contextPath = request.getContextPath();

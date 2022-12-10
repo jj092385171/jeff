@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,15 +19,8 @@ import javax.servlet.http.Part;
 
 import org.hibernate.Hibernate;
 
-import T4_24.Dao.CampSiteCityTagsDao;
-import T4_24.Dao.CityDao;
 import T4_24.Dao.SiteDao;
-import T4_24.Dao.TagDao;
-import T4_24.Models.CampSiteCityTagsBean;
-import T4_24.Models.CityBean;
 import T4_24.Models.SiteBean;
-import T4_24.Models.TagBean;
-import T4_24.Models.TagPlusCampBean;
 
 
 @MultipartConfig
@@ -82,13 +74,13 @@ public class InsertSiteByIDServlet extends HttpServlet {
 		SiteBean siteBean = new SiteBean(siteName, blob, Integer.valueOf(totalSites), Integer.valueOf(siteMoney), Integer.valueOf(campID));
 		try {
 			BigDecimal siteID = siteDao.AddSite(siteBean);
+			siteBean = siteDao.findSiteBySiteID(siteID.intValueExact());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		session.setAttribute("siteBean", siteBean);
-		session.setAttribute("campID", campID);
 		session.setAttribute("what", "新增");
 		
 		String contextPath = request.getContextPath();

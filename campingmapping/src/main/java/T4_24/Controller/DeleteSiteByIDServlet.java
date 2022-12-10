@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import T4_24.Dao.CampDao;
+import T4_24.Dao.SiteDao;
 
 
-@WebServlet("/T4_24/DeleteCampByIDServlet")
-public class DeleteCampByIDServlet extends HttpServlet {
+@WebServlet("/T4_24/DeleteSiteByIDServlet")
+public class DeleteSiteByIDServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
@@ -24,11 +25,11 @@ public class DeleteCampByIDServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String campID = request.getParameter("campID");
-		CampDao campDao = new CampDao();
+		String siteID = request.getParameter("siteID");
+		SiteDao siteDao = new SiteDao();
 		
 		try {
-			campDao.deletdByCampID(Integer.valueOf(campID));
+			siteDao.deleteBySiteID(Integer.valueOf(siteID));
 			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -36,7 +37,7 @@ public class DeleteCampByIDServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	
-		session.setAttribute("ID","campID: " + campID + " 刪除成功");
+		session.setAttribute("ID","siteID: " + siteID + " 刪除成功");
 		
 		String contextPath = request.getContextPath();
 		response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/DeleteByIDSuccess.jsp"));

@@ -19,7 +19,6 @@ import org.hibernate.Hibernate;
 import T4_24.Dao.CampDao;
 import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Dao.TagOfCampDao;
-import T4_24.Models.CampBean;
 import T4_24.Models.CampSiteCityTagsBean;
 
 

@@ -94,19 +94,56 @@ form {
 			</tbody>
 		</table>
 	</form>
-	
-		<c:forEach var='all' items='${showALL}'>
-			營地編號: ${ all.campID }<br>
-			營地: ${ all.campName }<br>
-			縣市編號: ${ all.cityID }<br>
-			縣市名: ${ all.cityName }<br>
-			地址: ${ all.location }<br>
-	<!-- 							圖片: <br> -->
-			簡介: ${ all.discription }<br>
-			<c:forEach var='tag' items='${all.tagList}'>
-				標籤: ${tag.tagName}<br>
+	<table border='1'>
+		<thead>
+			<tr>
+				<th>營地編號</th>
+				<th>營地</th>
+				<th>縣市編號</th>
+				<th>縣市名</th>
+				<th>地址</th>
+				<th>圖片</th>
+				<th>簡介</th>
+				<th class='class1'>標籤</th>
+			</tr>
+			<tr>
+				<th>&emsp;&emsp;營位區編號</th>
+				<th>&emsp;營位區名</th>
+				<th>&emsp;營區位圖片</th>
+				<th>&emsp;總營位</th>
+				<th>&emsp;營位金額</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var='all' items='${showALL}'>
+				<tr>
+					<td>${ all.campID }</td>
+					<td>${ all.campName }</td>
+					<td>${ all.cityID }</td>
+					<td>${ all.cityName }</td>
+					<td>${ all.location }</td>
+					<td>圖片: </td>
+					<td>${ all.discription }</td>
+					<td class='class1'>
+						<c:forEach var='tag' items='${all.tagList}'>
+							${tag.tagName}&nbsp; / &nbsp;
+						</c:forEach>
+					</td>
+				</tr>
+				<c:forEach var='site' items='${all.siteList}'>
+					<tr>
+						<td>&emsp;&emsp;${ site.siteID }</td>
+						<td>&emsp;${ site.siteName }</td>
+						<td>&emsp;圖片:</td>
+						<td>&emsp;${ site.totalSites }</td>
+						<td>&emsp;${ site.siteMoney }</td>
+					</tr>
+				</c:forEach>
 			</c:forEach>
-		</c:forEach>
-	</body>
+		</tbody>
+	</table>
+<hr>
+<a href="<c:url value='IndexShowAllPageServlet' />" >回首頁</a>
+</body>
 	
 </html>

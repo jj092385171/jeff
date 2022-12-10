@@ -11,11 +11,14 @@
 <style>
 form {
 	margin: 0 auto;
-	width: 600px;
+	width: 35%;
+	border: 1px solid black;
+	padding: 20px;
 }
 </style>
 </head>
 <body>
+<h2>修改營地</h2>
 	<form name="UpdateCampByIDForm" action="<c:url value='/T4_24/UpdateCampByIDServlet' />" method="POST" enctype="multipart/form-data">
 		營地編號: <input type="text" name='campID' readonly="readonly" value='${ cctBean.campID }'><br>
 		營地: <input type="text" name='campName' value='${ cctBean.campName }'><br>
@@ -41,6 +44,6 @@ form {
 		<input type="submit" value="修改">
 
 	</form>
-
+<a href="<c:url value='IndexShowAllPageServlet' />" >回首頁</a>
 </body>
 </html>

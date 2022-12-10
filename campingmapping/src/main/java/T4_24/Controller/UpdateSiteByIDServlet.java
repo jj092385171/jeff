@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,12 +16,7 @@ import javax.servlet.http.Part;
 
 import org.hibernate.Hibernate;
 
-import T4_24.Dao.CampDao;
-import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Dao.SiteDao;
-import T4_24.Dao.TagOfCampDao;
-import T4_24.Models.CampBean;
-import T4_24.Models.CampSiteCityTagsBean;
 import T4_24.Models.SiteBean;
 
 
@@ -41,9 +35,8 @@ public class UpdateSiteByIDServlet extends HttpServlet {
 		//新值
 		//營區位編號
 		String siteID = request.getParameter("siteID");	
-		
 		//舊值
-		SiteBean siteBean = null;
+		SiteBean siteBean = new SiteBean();
 		try {
 			siteBean = siteDao.findSiteBySiteID(Integer.valueOf(siteID));
 			
@@ -66,7 +59,6 @@ public class UpdateSiteByIDServlet extends HttpServlet {
 			siteDao.updateBySiteID(siteName, blob, Integer.valueOf(totalSites), Integer.valueOf(siteMoney), Integer.valueOf(siteID));
 			//新值
 			siteBean = siteDao.findSiteBySiteID(Integer.valueOf(siteID));
-
 			
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();

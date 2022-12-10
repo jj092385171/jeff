@@ -29,7 +29,7 @@
 
 						<!-- Header -->
 						<header id="header">
-							<a href="<c:url value='/T4_24/ShowAllPageServlet' />" class="logo"><strong>營地管理</strong></a>
+							<a href="<c:url value='IndexShowAllPageServlet' />" class="logo"><strong>營地_營區位管理</strong></a>
 							<ul class="icons">
 								<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
 								</li>
@@ -92,7 +92,6 @@
 												<td>&emsp;${ site.totalSites }</td>
 												<td>&emsp;${ site.siteMoney }</td>
 											</tr>
-<!-- 											<tr></tr> -->
 										</c:forEach>
 								</c:forEach>
 							</tbody>
@@ -121,10 +120,10 @@
 							</header>
 
 							<ul>
-								<li><a href="<c:url value='/T4_24/QueryPageServlet' />">查詢營地</a></li>
-								<li><a href="<c:url value='/T4_24/InsertCampPageServlet' />">新增營地營位區</a></li>
-								<li><a href="<c:url value='/T4_24/UpdateCampSitePage.jsp' />">修改營地</a></li>
-								<li><a href="<c:url value='/T4_24/deleteCampSitePage.jsp' />">刪除營地</a></li>
+								<li><a href="<c:url value='/T4_24/QueryPageServlet' />">&emsp;查詢&emsp;營地_營區位</a></li>
+								<li><a href="<c:url value='/T4_24/InsertPageServlet' />">&emsp;新增&emsp;營地_營位區</a></li>
+								<li><a href="<c:url value='/T4_24/UpdatePage.jsp' />">&emsp;修改&emsp;營地_營區位</a></li>
+								<li><a href="<c:url value='/T4_24/deletePage.jsp' />">&emsp;刪除&emsp;營地_營區位</a></li>
 							</ul>
 <!-- 								<li> -->
 <!-- 									<span class="opener">Submenu</span> -->

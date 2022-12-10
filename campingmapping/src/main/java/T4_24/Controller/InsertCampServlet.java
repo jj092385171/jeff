@@ -5,9 +5,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.Hibernate;
 
@@ -28,7 +24,6 @@ import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Dao.TagOfCampDao;
 import T4_24.Models.CampBean;
 import T4_24.Models.CampSiteCityTagsBean;
-import T4_24.Models.TagPlusCampBean;
 
 @MultipartConfig
 @WebServlet("/T4_24/InsertCampServlet")
