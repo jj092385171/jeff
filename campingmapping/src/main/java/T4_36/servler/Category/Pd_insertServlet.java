@@ -41,6 +41,7 @@ public class Pd_insertServlet extends HttpServlet {
 			int Pd_price = Integer.parseInt(request.getParameter("Pd_price"));
 			int Pd_inventory = Integer.parseInt(request.getParameter("Pd_inventory"));
 //			Date date = new Date(1345434534);
+			
 			Date datePd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(request.getParameter("Pd_date"));
 			Date Pd_date = datePd;
 			Date datelastup = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(request.getParameter("Pd_last_update"));

@@ -14,23 +14,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/CategorySelectServlet.do")
+@WebServlet("/SelectAllServlet.do")
 public class CategorySelectAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	@Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
     	req.setCharacterEncoding("UTF-8");
-		String id = req.getParameter("id");
 		CategoryService cgS = new CategoryServiceImpl();
 		
 		List<Category> list = cgS.selectAll();
-		
-		req.setAttribute("querybyproductno", list);
+		System.out.println(list+"list");
+		req.setAttribute("AllList", list);
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/T4_36/html5up-editorial/Pd_Allproduct.jsp");
 		rd.forward(req, resp);
 		return;
         
         
+    }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    	doPost(req, resp);
+//    	req.setCharacterEncoding("UTF-8");
+//		CategoryService cgS = new CategoryServiceImpl();
+//		
+//		List<Category> list = cgS.selectAll();
+//		
+//		req.setAttribute("AllList", list);
+//		
+//		RequestDispatcher rd = req.getRequestDispatcher("/T4_36/html5up-editorial/Pd_Allproduct.jsp");
+//		rd.forward(req, resp);
+//		return;
     }
 }

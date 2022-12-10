@@ -67,7 +67,7 @@
 					</header>
 					<ul>
 						<li><a href="Pd_index.jsp">首頁</a></li>
-						<li><a href="Pd_Allproduct.jsp">商城</a></li>
+						<li><a href="Pd_Allproduct.jsp">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>
@@ -81,7 +81,7 @@
 								<li><a href="#">登山鞋</a></li>
 							</ul>
 						</li>
-						<li><a href="#">購物車</a></li>
+						<li><a href="#">訂單管理</a></li>
 						<li><a href="#">登入</a></li>
 					</ul>
 				</nav>

@@ -101,13 +101,24 @@ public class CategoryDaoImpl implements CategoryDao {
     public Category selectByPd_id(int Pd_id) throws SQLException {
         String sql = "SELECT * FROM category WHERE Pd_id = ?";
 
-        return queryRunner.query(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class), Pd_id);
+        return queryRunner.query(DbUtils.getConnection(), sql, new BeanHandler<Category>(Category.class), Pd_id);
     }
 
     @Override
-    public List<Category> selectAll() throws SQLException {
+    public List<Category> selectAll()  {
         String sql = "SELECT * FROM category";
 
-        return queryRunner.query(DbUtils.getConnection(), sql, new BeanListHandler<>(Category.class));
+        try {
+        	System.out.println("s");
+			List<Category> query = queryRunner.query(DbUtils.getConnection(), sql, new BeanListHandler<Category>(Category.class));
+			query.forEach(a -> System.out.println(a.toString()));	
+			System.out.println("a");
+			
+			return query;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     }
 }

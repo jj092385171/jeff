@@ -226,7 +226,7 @@ display:inline;
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">商城管理</h1>
-					<%-- <a href="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp' />">新增產品</a> --%>
+					<a href="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp' />">新增產品</a>
 					<div>
 						<form action="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp'/>"
 							method="POST">

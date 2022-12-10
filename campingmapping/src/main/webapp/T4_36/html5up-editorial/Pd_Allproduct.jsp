@@ -8,7 +8,7 @@
 	<title>camp 商城首頁</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/assets/css/main.css" />
 </head>
 
 <body class="is-preload">
@@ -35,19 +35,83 @@
 
 
 				<!-- Banner -->
-				<section id="banner">
-					<div class="content">
-						<header>
-							<h1>所有產品
+<!-- 				<section id="banner"> -->
+<!-- 					<div class="content"> -->
+<!-- 						<header> -->
+<!-- 							<h1>所有產品 -->
 <!-- 							<br />by HTML5 UP -->
-							</h1>
-						</header>
-					</div>
-				</section>
 
+<!-- 							</h1> -->
+<!-- 						</header> -->
+<!-- 					</div> -->
+<!-- 				</section> -->
+
+<!-- Begin Page Content 內容 -->
+				<div class="container">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">商城維護</h1>
+					<div>
+						<form action="<c:url value='/SelectAllServlet.do'/>" method="POST">
+							<input type="submit" value="測試按鈕"  style="width:100px;height:45px;">
+						</form>
+						<form action="<c:url value='#'/>"
+							method="POST">
+							<input type="submit" value="購物車測試"  style="width:100px;height:45px;">
+						</form>
+						<p>
+					</div>
+
+					<table id="productlist" style="width:1000px;">
+						<thead>
+							<tr>
+								<th>產品編號</th>
+								<th>會員ID</th>
+								<th>產品名稱</th>
+								<th>品牌</th>
+								<th>規格</th>
+								<th>類型</th>
+								<th>照片</th>
+								<th>價格</th>
+								<th>庫存數量</th>
+								<th>商品發售日期</th>
+								<th>商品修改日期</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var='Category' items='${AllList}' varStatus="statusX">
+								<tr>
+									
+									<td id="productno">${Category.Pd_id}</td>
+									<td>${Category.userID}</td>
+									<td>${Category.Pd_name}</td>
+									<td>${Category.Pd_title}</td>
+									<td>${Category.Pd_content}</td>
+									<td>${Category.Pd_type}</td>
+									<td>${Category.Pd_picture}</td>
+									<td>${Category.Pd_price}</td>
+									<td>${Category.Pd_inventory}</td>
+									<td>${Category.Pd_date}</td>
+									<td>${Category.Pd_last_update}</td>
+<%-- 									<td><textarea readonly>${Category.productinfo}</textarea></td> --%>
+<%-- 									<td><img src="<c:url value='/ProductImgServlet?productno=${product.productno}'/>" --%>
+<!-- 										width="180" height="180" /></td> -->
+<!-- 									<td><input type="button" id="btn1" value="修改" -->
+<!-- 										onclick="location.href='http://localhost:8080/iSpanCarShop/SHOP_DETAIL/UpdateProduct_form.jsp';"></td> -->
+									<td><input style="border-radius:80%;width:50px;height:50px" type="submit" id="btn1" value="修改" formaction="<c:url value='/SendIdToUpdate.do?productno=${product.productno}'/>"></td>
+									<td><input style="border-radius:80%;width:50px;height:50px" type="button" id="btn2" value="刪除"></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.container-fluid -->
 
 			</div>
 		</div>
+
+
 
 		<!-- Sidebar -->
 		<div id="sidebar">
@@ -66,8 +130,8 @@
 						<h2>商城</h2>
 					</header>
 					<ul>
-						<li><a href="Pd_index.jsp">首頁</a></li>
-						<li><a href="Pd_Allproduct.jsp">商城</a></li>
+						<li><a href="http://localhost:8080/campingmapping/T4_36/html5up-editoria/Pd_index.jsp">首頁</a></li>
+						<li><a href="http://localhost:8080/campingmapping/T4_36/html5up-editoria/Pd_Allproduct.jsp">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>
@@ -81,7 +145,7 @@
 								<li><a href="#">登山鞋</a></li>
 							</ul>
 						</li>
-						<li><a href="#">購物車</a></li>
+						<li><a href="#">訂單管理</a></li>
 						<li><a href="#">登入</a></li>
 					</ul>
 				</nav>
@@ -100,12 +164,12 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/jquery.min.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/browser.min.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/breakpoints.min.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/util.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/main.js"></script>
+	
 </body>
 
 </html>

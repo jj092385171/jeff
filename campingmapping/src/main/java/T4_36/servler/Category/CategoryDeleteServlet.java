@@ -33,6 +33,5 @@ public class CategoryDeleteServlet extends HttpServlet {
 			session.setAttribute("BookDeleteMsg", "產品(" + title + ")刪除失敗");
 			log.info("刪除產品功能之Controller，產品(" + title + ")刪除失敗，ex=" + ex);
 		}
-        return;
     }
 }

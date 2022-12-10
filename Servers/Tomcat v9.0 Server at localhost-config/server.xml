@@ -156,7 +156,7 @@
       
       
       
-      <Context docBase="campingmapping" path="/campingmapping" reloadable="true" source="org.eclipse.jst.jee.server:campingmapping"/></Host>
+      <Context docBase="campingmapping" path="/campingmapping" reloadable="true" source="org.eclipse.jst.jee.server:campingmapping"/><Context docBase="dmoe" path="/dmot" reloadable="true" source="org.eclipse.jst.jee.server:dmoe"/></Host>
     </Engine>
   </Service>
 </Server>
