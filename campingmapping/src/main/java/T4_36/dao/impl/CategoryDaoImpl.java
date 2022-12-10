@@ -20,9 +20,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     private final QueryRunner queryRunner = new QueryRunner();
 
-    private final Connection connection = null;
-
-//     新增一筆記錄---
+    //     新增一筆記錄---
     @Override
     public boolean insert(Category category) throws SQLException {
         String sql = "INSERT INTO " + "category" +
@@ -30,14 +28,14 @@ public class CategoryDaoImpl implements CategoryDao {
                 "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Category result = queryRunner.insert(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
-                    category.getuserID(),
-                    category.getName(),
-                    category.getTitle(),
-                    category.getContent(),
-                    category.getType(),
-                    category.getPicture(),
-                    category.getPrice(),
-                    category.getInventory(),
+                    category.getPd_id(),
+                    category.getPd_name(),
+                    category.getPd_title(),
+                    category.getPd_content(),
+                    category.getPd_type(),
+                    category.getPd_picture(),
+                    category.getPd_price(),
+                    category.getPd_inventory(),
                     category.getPd_date(),
                     category.getPd_last_update());
 
@@ -58,15 +56,14 @@ public class CategoryDaoImpl implements CategoryDao {
                 "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Category resulttest = queryRunner.insert(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
-                    category.getuserID(),
-                    category.getName(),
-                    category.getTitle(),
-                    category.getContent(),
-                    category.getType(),
-                    category.getPicture(),
-//                    in,
-                    category.getPrice(),
-                    category.getInventory(),
+                    category.getPd_id(),
+                    category.getPd_name(),
+                    category.getPd_title(),
+                    category.getPd_content(),
+                    category.getPd_type(),
+                    category.getPd_picture(),
+                    category.getPd_price(),
+                    category.getPd_inventory(),
             		category.getPd_date(),
             		category.getPd_last_update());
 
@@ -88,13 +85,13 @@ public class CategoryDaoImpl implements CategoryDao {
                 "inventory =?, Pd_date =?, Pd_last_update =?, WHERE Pd_id = ?";
 
         return queryRunner.update(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
-                category.getName(),
-                category.getTitle(),
-                category.getContent(),
-                category.getType(),
-                category.getPicture(),
-                category.getPicture(),
-                category.getInventory(),
+                category.getPd_name(),
+                category.getPd_title(),
+                category.getPd_content(),
+                category.getPd_type(),
+                category.getPd_picture(),
+                category.getPd_picture(),
+                category.getPd_inventory(),
                 category.getPd_date(),
                 category.getPd_last_update(),
                 category.getPd_id());

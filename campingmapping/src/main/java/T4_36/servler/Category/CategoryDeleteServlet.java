@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/delete/category.do")
+@WebServlet("/CategoryDeleteServlet.do")
 public class CategoryDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -20,7 +20,6 @@ public class CategoryDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
     	log.info("刪除書籍功能之Controller: 開始");
-    	String contextPath = req.getContextPath();
     	HttpSession session = req.getSession();
         String id = req.getParameter("id");
         String title = req.getParameter("title");

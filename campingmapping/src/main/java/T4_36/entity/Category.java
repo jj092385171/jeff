@@ -1,7 +1,6 @@
 package T4_36.entity;
 
 import java.sql.Blob;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -11,23 +10,23 @@ public class Category {
 	// 產品編號(pk)
 	private String userID;
 	// 會員 ID(fk)
-	private String name;
+	private String Pd_name;
 	// 產品名稱
-	private String title;
+	private String Pd_title;
 	// 品牌名稱
 	private String Pd_content;
 	// 產品規格
-	private String type;
+	private String Pd_type;
 	// 產品類型
-	private Blob picture;
+	private Blob Pd_picture;
 	// 照片 vinbinary
-	private int price;
+	private int Pd_price;
 	// 價位
-	private int inventory;
+	private int Pd_inventory;
 	// 庫存數量
-	private static Date Pd_date;
+	private Date Pd_date;
 	// 商品建立日期
-	private static Date Pd_last_update;
+	private Date Pd_last_update;
 	// 商品更新日期
 
 	public int getPd_id() {
@@ -39,44 +38,102 @@ public class Category {
 	}
 	
 	
-	public Category(String userID, String name, String title, String Pd_content, String type, Blob picture, int price,
-			int inventory, Date pd_date, Date pd_last_update) {
+	public Category(String userID, String pd_name, String pd_title, String pd_content, String pd_type, Blob pd_picture, int pd_price,
+			int pd_inventory, Date pd_date, Date pd_last_update) {
 		super();
 		this.userID = userID;
-		this.name = name;
-		this.title = title;
-		this.Pd_content = Pd_content;
-		this.type = type;
-		this.picture = picture;
-		this.price = price;
-		this.inventory = inventory;
+		this.Pd_name = pd_name;
+		this.Pd_title = pd_title;
+		this.Pd_content = pd_content;
+		this.Pd_type = pd_type;
+		this.Pd_picture = pd_picture;
+		this.Pd_price = pd_price;
+		this.Pd_inventory = pd_inventory;
 		Pd_date = pd_date;
 		Pd_last_update = pd_last_update;
 	}
 
 
-	public Category(Integer pd_id, String userID, String name, String title, String Pd_content, String type, Blob picture,
-					int price, int inventory, Date pd_date, Date pd_last_update) {
-		super();
-		this.Pd_id = pd_id;
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
 		this.userID = userID;
-		this.name = name;
-		this.title = title;
-		this.Pd_content = Pd_content;
-		this.type = type;
-		this.picture = picture;
-		this.price = price;
-		this.inventory = inventory;
+	}
+
+	public String getPd_name() {
+		return Pd_name;
+	}
+
+	public void setPd_name(String pd_name) {
+		Pd_name = pd_name;
+	}
+
+	public String getPd_title() {
+		return Pd_title;
+	}
+
+	public void setPd_title(String pd_title) {
+		Pd_title = pd_title;
+	}
+
+	public String getPd_content() {
+		return Pd_content;
+	}
+
+	public void setPd_content(String pd_content) {
+		Pd_content = pd_content;
+	}
+
+	public String getPd_type() {
+		return Pd_type;
+	}
+
+	public void setPd_type(String pd_type) {
+		Pd_type = pd_type;
+	}
+
+	public Blob getPd_picture() {
+		return Pd_picture;
+	}
+
+	public void setPd_picture(Blob pd_picture) {
+		Pd_picture = pd_picture;
+	}
+
+	public int getPd_price() {
+		return Pd_price;
+	}
+
+	public void setPd_price(int pd_price) {
+		Pd_price = pd_price;
+	}
+
+	public int getPd_inventory() {
+		return Pd_inventory;
+	}
+
+	public void setPd_inventory(int pd_inventory) {
+		Pd_inventory = pd_inventory;
+	}
+
+	public Date getPd_date() {
+		return Pd_date;
+	}
+
+	public void setPd_date(Date pd_date) {
 		Pd_date = pd_date;
+	}
+
+	public Date getPd_last_update() {
+		return Pd_last_update;
+	}
+
+	public void setPd_last_update(Date pd_last_update) {
 		Pd_last_update = pd_last_update;
 	}
-
-	public Category(String userID2, String name2, String title2, String content, String type2, Blob picture2,
-			int price2, int inventory2, SimpleDateFormat sd, SimpleDateFormat sd1) {
-		// TODO Auto-generated constructor stub
-	}
-
-	private String priceStr = null;
 
 	public String getPriceStr() {
 		return priceStr;
@@ -85,96 +142,24 @@ public class Category {
 	public void setPriceStr(String priceStr) {
 		this.priceStr = priceStr;
 	}
-	
-	public void setPd_id(int pd_id) {
+
+	public void setPd_id(Integer pd_id) {
 		Pd_id = pd_id;
 	}
 
-	public String getuserID() {
-		return userID;
-	}
 
-	public void setID(String userID) {
-		this.userID = userID;
-	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return Pd_content;
-	}
-
-	public void setContent(String Pd_content) {
-		this.Pd_content = Pd_content;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Blob getPicture() {
-		return picture;
-	}
-
-	public void setPicture(Blob picture) {
-		this.picture = picture;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(int inventory) {
-		this.inventory = inventory;
-	}
-
-	public Date getPd_date() {
-		return Pd_date;
-	}
-
-	public static void setPd_date(Date pd_date) {
-		Pd_date = pd_date;
-	}
-
-	public Date getPd_last_update() {
-		return Pd_last_update;
-	}
-
-	public static void setPd_last_update(Date pd_last_update) {
-		Pd_last_update = pd_last_update;
-	}
+	private String priceStr = null;
 
 	@Override
 	public String toString() {
-		return "category [Pd_id=" + Pd_id + ", userID=" + userID + ", name=" + name + ", title=" + title + ", content="
-				+ Pd_content + ", type=" + type + ", picture=" + picture + ", price=" + price + ", inventory=" + inventory
-				+ ", Pd_date=" + Pd_date + ", Pd_last_update=" + Pd_last_update + "]";
+		return "Category [Pd_id=" + Pd_id + ", userID=" + userID + ", Pd_name=" + Pd_name + ", Pd_title=" + Pd_title
+				+ ", Pd_content=" + Pd_content + ", Pd_type=" + Pd_type + ", Pd_picture=" + Pd_picture + ", Pd_price="
+				+ Pd_price + ", Pd_inventory=" + Pd_inventory + ", Pd_date=" + Pd_date + ", Pd_last_update="
+				+ Pd_last_update + ", priceStr=" + priceStr + "]";
 	}
+
+
+
 
 }

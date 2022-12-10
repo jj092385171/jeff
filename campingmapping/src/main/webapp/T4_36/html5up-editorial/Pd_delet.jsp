@@ -33,7 +33,7 @@
 					</ul>
 				</header>
 
-<form action="<c:url value='/testinsertServlet.do'/>" method="POST"
+<form action="<c:url value='/CategoryDeleteServlet.do'/>" method="POST"
 		enctype="multipart/form-data">
 		會員ID<br>
 		<input type="text" value='1' name="userID"> 產品名稱<br>

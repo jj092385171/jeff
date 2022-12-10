@@ -29,48 +29,36 @@ public class Pd_insertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		try {
 			request.setCharacterEncoding("UTF-8");
-			String userID = request.getParameter("userID");
-			String name = request.getParameter("name");
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			String type = request.getParameter("type");
-			int price = Integer.parseInt(request.getParameter("price"));
-			int inventory = Integer.parseInt(request.getParameter("inventory"));
+//		String shoppingCartId = request.getParameter("shoppingCartId");
+//			int Pd_id = Integer.parseInt(request.getParameter("Pd_id"));
+			String userID = request.getParameter("Pd_userID");
+			String Pd_name = request.getParameter("Pd_name");
+			String Pd_title = request.getParameter("Pd_title");
+			String Pd_content = request.getParameter("Pd_content");
+			String Pd_type = request.getParameter("Pd_type");
+//			String picture = request.getParameter("picture");
+			int Pd_price = Integer.parseInt(request.getParameter("Pd_price"));
+			int Pd_inventory = Integer.parseInt(request.getParameter("Pd_inventory"));
 //			Date date = new Date(1345434534);
-			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			try {
-				Category.setPd_date(sd.parse(request.getParameter("Pd_date")));
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-			SimpleDateFormat sd1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			try {
-				Category.setPd_last_update(sd1.parse(request.getParameter("Pd_last_update")));
-//				Date datelastup = new Date(Long.parseLong(request.getParameter("Pd_last_update")));
-//				Date Pd_last_update = datelastup;
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
 //			Date datePd = new Date(Long.parseLong(request.getParameter("Pd_date")));
 //			Date Pd_date = datePd;
 //			Date datelastup = new Date(Long.parseLong(request.getParameter("Pd_last_update")));
 //			Date Pd_last_update = datelastup;
-//			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-//			try {
-//				jobBean.setRackUp(sd.parse(request.getParameter("rackUp")));
-//			} catch (ParseException e1) {
-//				e1.printStackTrace();
-//			}
+			Date datePd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(request.getParameter("Pd_date"));
+			Date Pd_date = datePd;
+			Date datelastup = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(request.getParameter("Pd_last_update"));
+			Date Pd_last_update = datelastup;
 
-			// 圖片
+			//圖片
 			Part part = request.getPart("picture");
 			long sizeInBytes = part.getSize();
 			InputStream is = part.getInputStream();
-			Blob picture = ImageUtil.fileToBlob(is, sizeInBytes);
+			Blob Pd_picture = ImageUtil.fileToBlob(is, sizeInBytes);
+
 
 			CategoryDaoImpl cdaoImpl = new CategoryDaoImpl();
-			Category bean = new Category(userID, name, title, content, type, picture, price, inventory, Pd_date,
-					Pd_last_update);
+			Category bean = new Category( userID, Pd_name, Pd_title, Pd_content, 
+					Pd_type, Pd_picture,  Pd_price, Pd_inventory,Pd_date,Pd_last_update);
 //					,Pd_date, Pd_last_update
 
 			try {
@@ -81,7 +69,11 @@ public class Pd_insertServlet extends HttpServlet {
 			}
 
 			String contextPath = request.getContextPath();
-			response.sendRedirect(contextPath + "/T4_36/html5up-editorial/Pd_ok.jsp");
+			response.sendRedirect(contextPath + "/T4_36/Pd_ok.jsp");
+//		RequestDispatcher rd = 
+//     			request.getRequestDispatcher("/Cart/NewFile.jsp");
+//		
+//		rd.forward(request, response);
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -89,6 +81,9 @@ public class Pd_insertServlet extends HttpServlet {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 
