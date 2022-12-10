@@ -35,15 +35,5 @@ public class CategorySelectAllServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
     	doPost(req, resp);
-//    	req.setCharacterEncoding("UTF-8");
-//		CategoryService cgS = new CategoryServiceImpl();
-//		
-//		List<Category> list = cgS.selectAll();
-//		
-//		req.setAttribute("AllList", list);
-//		
-//		RequestDispatcher rd = req.getRequestDispatcher("/T4_36/html5up-editorial/Pd_Allproduct.jsp");
-//		rd.forward(req, resp);
-//		return;
     }
 }

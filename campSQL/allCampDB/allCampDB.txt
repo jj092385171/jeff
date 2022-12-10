@@ -49,17 +49,17 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[category](
-	[Pd_id] [int] IDENTITY(1,1) NOT NULL,
+	[Pdid] [int] IDENTITY(1,1) NOT NULL,
 	[userID] [nvarchar](max) NOT NULL,
-	[Pd_name] [nvarchar](max) NULL,
-	[Pd_title] [nvarchar](max) NOT NULL,
-	[Pd_content] [nvarchar](max) NOT NULL,
-	[Pd_type] [nvarchar](max) NOT NULL,
-	[Pd_picture] [varbinary](max) NULL,
-	[Pd_price] [int] NOT NULL,
-	[Pd_inventory] [int] NOT NULL,
-	[Pd_date] [datetime] NOT NULL,
-	[Pd_last_update] [datetime] NOT NULL,
+	[Pdname] [nvarchar](max) NULL,
+	[Pdtitle] [nvarchar](max) NOT NULL,
+	[Pdcontent] [nvarchar](max) NOT NULL,
+	[Pdtype] [nvarchar](max) NOT NULL,
+	[Pdpicture] [varbinary](max) NULL,
+	[Pdprice] [int] NOT NULL,
+	[Pdinventory] [int] NOT NULL,
+	[Pddate] [datetime] NOT NULL,
+	[Pdlastupdate] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Pd_id] ASC

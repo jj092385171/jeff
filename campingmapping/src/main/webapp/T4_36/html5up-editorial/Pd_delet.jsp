@@ -37,15 +37,15 @@
 		enctype="multipart/form-data">
 		會員ID<br>
 		<input type="text" value='1' name="userID"> 產品名稱<br>
-		<input type="text" value='1' name="name"> 品牌名稱<br> 
-		<input type="text" value='1' name="title">產品規格<br> 
-		<input type="text" value='1' name="content">產品類型<br>
-		<input type="text" value='1' name="type">照片<br>
-		<input type="file" name="picture" /> 價位<br> 
-		<input type="text" value='1' name="price">庫存數量<br> 
-		<input type="text" value='1' name="inventory">商品建立日期<br> 
-		<input type="datetime-local" name="Pd_date">商品更新日期<br>
-		<input type="datetime-local" name="Pd_last_update"> <br>
+		<input type="text" value='1' name="Pdname"> 品牌名稱<br> 
+		<input type="text" value='1' name="Pdtitle">產品規格<br> 
+		<input type="text" value='1' name="Pdcontent">產品類型<br>
+		<input type="text" value='1' name="Pdtype">照片<br>
+		<input type="file" name="Pdpicture" /> 價位<br> 
+		<input type="text" value='1' name="Pdprice">庫存數量<br> 
+		<input type="text" value='1' name="Pdinventory">商品建立日期<br> 
+		<input type="datetime-local" name="Pddate">商品更新日期<br>
+		<input type="datetime-local" name="Pdlastupdate"> <br>
 		<input type="submit" value="提交">
 	</form>
 				<!-- Banner -->

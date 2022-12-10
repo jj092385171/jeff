@@ -5,9 +5,6 @@ import T4_36.service.CategoryService;
 import T4_36.service.impl.CategoryServiceImpl;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

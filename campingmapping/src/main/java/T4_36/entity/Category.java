@@ -5,73 +5,39 @@ import java.util.Date;
 
 public class Category {
 
-	private Integer Pd_id;
+	private Integer pdid;
 	// 產品編號(pk)
 	private String userID;
 	// 會員 ID(fk)
-	private String Pd_name;
+	private String pdname;
 	// 產品名稱
-	private String Pd_title;
+	private String pdtitle;
 	// 品牌名稱
-	private String Pd_content;
+	private String pdcontent;
 	// 產品規格
-	private String Pd_type;
+	private String pdtype;
 	// 產品類型
-	private String Pd_picture;
+	private Blob pdpicture;
 	// 照片 vinbinary
-	private int Pd_price;
+	private int pdprice;
 	// 價位
-	private int Pd_inventory;
+	private int pdinventory;
 	// 庫存數量
-	private Date Pd_date;
+	private Date pddate;
 	// 商品建立日期
-	private Date Pd_last_update;
+	private Date pdlastupdate;
 	// 商品更新日期
-
-	public Category(Integer pd_id, String userID, String pd_name, String pd_title, String pd_content, String pd_type,
-			String pd_picture, int pd_price, int pd_inventory, Date pd_date, Date pd_last_update, String priceStr) {
-		super();
-		Pd_id = pd_id;
-		this.userID = userID;
-		Pd_name = pd_name;
-		Pd_title = pd_title;
-		Pd_content = pd_content;
-		Pd_type = pd_type;
-		Pd_picture = pd_picture;
-		Pd_price = pd_price;
-		Pd_inventory = pd_inventory;
-		Pd_date = pd_date;
-		Pd_last_update = pd_last_update;
-		this.priceStr = priceStr;
-	}
 
 	public Category() {
 
 	}
 
-//	public Category(String userID, String pd_name, String pd_title, String pd_content, String pd_type, Blob pd_picture, int pd_price,
-//			int pd_inventory, Date pd_date, Date pd_last_update) {
-//		super();
-//		this.userID = userID;
-//		this.Pd_name = pd_name;
-//		this.Pd_title = pd_title;
-//		this.Pd_content = pd_content;
-//		this.Pd_type = pd_type;
-//		this.Pd_picture = pd_picture;
-//		this.Pd_price = pd_price;
-//		this.Pd_inventory = pd_inventory;
-//		Pd_date = pd_date;
-//		Pd_last_update = pd_last_update;
-//	}
-	
-	private String priceStr = null;
-
-	public Integer getPd_id() {
-		return Pd_id;
+	public Integer getPdid() {
+		return pdid;
 	}
 
-	public void setPd_id(Integer pd_id) {
-		Pd_id = pd_id;
+	public void setPdid(Integer pdid) {
+		this.pdid = pdid;
 	}
 
 	public String getUserID() {
@@ -82,76 +48,76 @@ public class Category {
 		this.userID = userID;
 	}
 
-	public String getPd_name() {
-		return Pd_name;
+	public String getPdname() {
+		return pdname;
 	}
 
-	public void setPd_name(String pd_name) {
-		Pd_name = pd_name;
+	public void setPdname(String pdname) {
+		this.pdname = pdname;
 	}
 
-	public String getPd_title() {
-		return Pd_title;
+	public String getPdtitle() {
+		return pdtitle;
 	}
 
-	public void setPd_title(String pd_title) {
-		Pd_title = pd_title;
+	public void setPdtitle(String pdtitle) {
+		this.pdtitle = pdtitle;
 	}
 
-	public String getPd_content() {
-		return Pd_content;
+	public String getPdcontent() {
+		return pdcontent;
 	}
 
-	public void setPd_content(String pd_content) {
-		Pd_content = pd_content;
+	public void setPdcontent(String pdcontent) {
+		this.pdcontent = pdcontent;
 	}
 
-	public String getPd_type() {
-		return Pd_type;
+	public String getPdtype() {
+		return pdtype;
 	}
 
-	public void setPd_type(String pd_type) {
-		Pd_type = pd_type;
+	public void setPdtype(String pdtype) {
+		this.pdtype = pdtype;
 	}
 
-	public String getPd_picture() {
-		return Pd_picture;
+	public Blob getPdpicture() {
+		return pdpicture;
 	}
 
-	public void setPd_picture(String pd_picture) {
-		Pd_picture = pd_picture;
+	public void setPdpicture(Blob pdpicture) {
+		this.pdpicture = pdpicture;
 	}
 
-	public int getPd_price() {
-		return Pd_price;
+	public int getPdprice() {
+		return pdprice;
 	}
 
-	public void setPd_price(int pd_price) {
-		Pd_price = pd_price;
+	public void setPdprice(int pdprice) {
+		this.pdprice = pdprice;
 	}
 
-	public int getPd_inventory() {
-		return Pd_inventory;
+	public int getPdinventory() {
+		return pdinventory;
 	}
 
-	public void setPd_inventory(int pd_inventory) {
-		Pd_inventory = pd_inventory;
+	public void setPdinventory(int pdinventory) {
+		this.pdinventory = pdinventory;
 	}
 
-	public Date getPd_date() {
-		return Pd_date;
+	public Date getPddate() {
+		return pddate;
 	}
 
-	public void setPd_date(Date pd_date) {
-		Pd_date = pd_date;
+	public void setPddate(Date pddate) {
+		this.pddate = pddate;
 	}
 
-	public Date getPd_last_update() {
-		return Pd_last_update;
+	public Date getPdlastupdate() {
+		return pdlastupdate;
 	}
 
-	public void setPd_last_update(Date pd_last_update) {
-		Pd_last_update = pd_last_update;
+	public void setPdlastupdate(Date pdlastupdate) {
+		this.pdlastupdate = pdlastupdate;
 	}
 
 	public String getPriceStr() {
@@ -162,12 +128,49 @@ public class Category {
 		this.priceStr = priceStr;
 	}
 
+	private String priceStr = null;
+	
+	
+	public Category(String userID, String pdname, String pdtitle, String pdcontent, String pdtype, Blob pdpicture,
+			int pdprice, int pdinventory, Date pddate, Date pdlastupdate) {
+		super();
+		this.userID = userID;
+		this.pdname = pdname;
+		this.pdtitle = pdtitle;
+		this.pdcontent = pdcontent;
+		this.pdtype = pdtype;
+		this.pdpicture = pdpicture;
+		this.pdprice = pdprice;
+		this.pdinventory = pdinventory;
+		this.pddate = pddate;
+		this.pdlastupdate = pdlastupdate;
+	}
+
+	public Category(Integer pdid, String userID, String pdname, String pdtitle, String pdcontent, String pdtype,
+			Blob pdpicture, int pdprice, int pdinventory, Date pddate, Date pdlastupdate, String priceStr) {
+		super();
+		this.pdid = pdid;
+		this.userID = userID;
+		this.pdname = pdname;
+		this.pdtitle = pdtitle;
+		this.pdcontent = pdcontent;
+		this.pdtype = pdtype;
+		this.pdpicture = pdpicture;
+		this.pdprice = pdprice;
+		this.pdinventory = pdinventory;
+		this.pddate = pddate;
+		this.pdlastupdate = pdlastupdate;
+		this.priceStr = priceStr;
+	}
+
 	@Override
 	public String toString() {
-		return "Category [Pd_id=" + Pd_id + ", userID=" + userID + ", Pd_name=" + Pd_name + ", Pd_title=" + Pd_title
-				+ ", Pd_content=" + Pd_content + ", Pd_type=" + Pd_type + ", Pd_picture=" + Pd_picture + ", Pd_price="
-				+ Pd_price + ", Pd_inventory=" + Pd_inventory + ", Pd_date=" + Pd_date + ", Pd_last_update="
-				+ Pd_last_update + ", priceStr=" + priceStr + "]";
+		return "Category [pdid=" + pdid + ", userID=" + userID + ", pdname=" + pdname + ", pdtitle=" + pdtitle
+				+ ", pdcontent=" + pdcontent + ", pdtype=" + pdtype + ", pdpicture=" + pdpicture + ", pdprice="
+				+ pdprice + ", pdinventory=" + pdinventory + ", pddate=" + pddate + ", pdlast_update=" + pdlastupdate
+				+ ", priceStr=" + priceStr + "]";
 	}
+	
+	
 
 }

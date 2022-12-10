@@ -37,15 +37,15 @@
 	enctype="multipart/form-data"> -->
 	<form action="<c:url value='/Pd_insertServlet.do'/>" method="POST" enctype="multipart/form-data">
 		<input type="text" value='1' name="userID">會員ID<br> 
-		<input type="text" value='1' name="Pd_name">產品名稱<br> 
-		<input type="text" value='1' name="Pd_title">品牌名稱<br> 
-		<input type="text" value='1' name="Pd_content">產品規格<br> 
-		<input type="text" value='1' name="Pd_type">產品類型<br>
+		<input type="text" value='1' name="Pdname">產品名稱<br> 
+		<input type="text" value='1' name="Pdtitle">品牌名稱<br> 
+		<input type="text" value='1' name="Pdcontent">產品規格<br> 
+		<input type="text" value='1' name="Pdtype">產品類型<br>
 		<input type="file" name="picture" />照片<br> 
-		<input type="text" value='1' name="Pd_price">價位<br> 
-		<input type="text" value='1' name="Pd_inventory">庫存數量<br> 
-		<input type="text" value ="2020-12-23 15:40:45" name="Pd_date">商品建立日期<br> 
-		<input type="text" value ="2020-12-23 15:40:45" name="Pd_last_update">商品更新日期<br> <br>
+		<input type="text" value='1' name="Pdprice">價位<br> 
+		<input type="text" value='1' name="Pdinventory">庫存數量<br> 
+		<input type="text" value ="2020-12-23 15:40:45" name="Pddate">商品建立日期<br> 
+		<input type="text" value ="2020-12-23 15:40:45" name="Pdlastupdate">商品更新日期<br> <br>
 		<input type="submit" value="提交">
 	</form>
 				<!-- Banner -->

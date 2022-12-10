@@ -7,10 +7,8 @@ import java.util.List;
 
 public interface CategoryDao {
 	
-//	// 新增一筆記錄
+	// 新增一筆記錄
     boolean insert(Category category) throws SQLException;
-    // 新增一筆記錄
-    boolean inserttest(Category category) throws SQLException;
     // 依Pd_id來刪除單筆記錄
     int deleteByPd_id(int id) throws SQLException;
 
@@ -19,4 +17,5 @@ public interface CategoryDao {
     Category selectByPd_id(int Pd_id) throws SQLException;
 
     List<Category> selectAll() throws SQLException;
+    
 }

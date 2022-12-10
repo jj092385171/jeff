@@ -35,16 +35,6 @@
 
 
 				<!-- Banner -->
-<!-- 				<section id="banner"> -->
-<!-- 					<div class="content"> -->
-<!-- 						<header> -->
-<!-- 							<h1>所有產品 -->
-<!-- 							<br />by HTML5 UP -->
-
-<!-- 							</h1> -->
-<!-- 						</header> -->
-<!-- 					</div> -->
-<!-- 				</section> -->
 
 <!-- Begin Page Content 內容 -->
 				<div class="container">
@@ -94,11 +84,6 @@
 									<td>${Category.Pd_inventory}</td>
 									<td>${Category.Pd_date}</td>
 									<td>${Category.Pd_last_update}</td>
-<%-- 									<td><textarea readonly>${Category.productinfo}</textarea></td> --%>
-<%-- 									<td><img src="<c:url value='/ProductImgServlet?productno=${product.productno}'/>" --%>
-<!-- 										width="180" height="180" /></td> -->
-<!-- 									<td><input type="button" id="btn1" value="修改" -->
-<!-- 										onclick="location.href='http://localhost:8080/iSpanCarShop/SHOP_DETAIL/UpdateProduct_form.jsp';"></td> -->
 									<td><input style="border-radius:80%;width:50px;height:50px" type="submit" id="btn1" value="修改" formaction="<c:url value='/SendIdToUpdate.do?productno=${product.productno}'/>"></td>
 									<td><input style="border-radius:80%;width:50px;height:50px" type="button" id="btn2" value="刪除"></td>
 								</tr>
@@ -130,8 +115,8 @@
 						<h2>商城</h2>
 					</header>
 					<ul>
-						<li><a href="http://localhost:8080/campingmapping/T4_36/html5up-editoria/Pd_index.jsp">首頁</a></li>
-						<li><a href="http://localhost:8080/campingmapping/T4_36/html5up-editoria/Pd_Allproduct.jsp">商城維護</a></li>
+						<li><a href="Pd_index.jsp">首頁</a></li>
+						<li><a href="Pd_Allproduct.jsp">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>

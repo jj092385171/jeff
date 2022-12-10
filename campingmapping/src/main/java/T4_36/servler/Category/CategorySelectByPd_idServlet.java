@@ -19,7 +19,6 @@ public class CategorySelectByPd_idServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
     	req.setCharacterEncoding("UTF-8");
-		String id = req.getParameter("id");
 		CategoryService cgS = new CategoryServiceImpl();
 		
 		List<Category> list = cgS.selectAll();

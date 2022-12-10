@@ -25,18 +25,6 @@ public class CategoryServiceImpl implements CategoryService {
             e.printStackTrace();
         }
     }
-//    @Override
-//    public void create(Category category) {
-//    	try {
-//    		DbUtils.begin();
-//    		if (categoryDao.insert(category)) {
-//    			DbUtils.commit();
-//    		}
-//    	} catch (SQLException e) {
-//    		DbUtils.rollbacl();
-//    		e.printStackTrace();
-//    	}
-//    }
 
     @Override
     public void delete(int id) {
