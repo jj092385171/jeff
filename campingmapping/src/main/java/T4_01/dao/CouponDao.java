@@ -6,7 +6,7 @@ import T4_01.beans.Coupon;
 
 
 public interface CouponDao {
-	public int insert(Coupon coupon);
+	public Coupon insert(Coupon coupon);
 
 	public int delete(int couponID);
 

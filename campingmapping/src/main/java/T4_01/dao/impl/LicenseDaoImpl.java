@@ -14,17 +14,17 @@ public class LicenseDaoImpl implements LicenseDao {
 	private QueryRunner queryRunner = new QueryRunner();
 
 	@Override
-	public int insert(License license) {
+	public License insert(License license) {
 		try {
-			int insert = queryRunner.update(DbUtils.getConnection(),
+			License insert = queryRunner.insert(DbUtils.getConnection(),
 					"INSERT INTO license (UID ,account ,FaceBookID ,GoogleID ,LineID ,password) VALUES (?,?,?,?,?,?)",
-					license.getUID(), license.getAccount(),
+					new BeanHandler<License>(License.class),license.getUID(), license.getAccount(),
 					license.getFaceBookID(), license.getGoogleID(),
 					license.getLineID(), license.getPassword());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 

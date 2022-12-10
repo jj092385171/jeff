@@ -1,7 +1,7 @@
 package T4_01.beans;
 
 public class License {
-	private String UID;
+	private int UID;
 	private String account;
 	private String FaceBookID;
 	private String GoogleID;
@@ -10,7 +10,7 @@ public class License {
 	public License() {
 		
 	}
-	public License(String uID, String account, String faceBookID,
+	public License(int uID, String account, String faceBookID,
 			String googleID, String lineID, String password) {
 		
 		UID = uID;
@@ -20,10 +20,10 @@ public class License {
 		LineID = lineID;
 		this.password = password;
 	}
-	public String getUID() {
+	public int getUID() {
 		return UID;
 	}
-	public void setUID(String uID) {
+	public void setUID(int uID) {
 		UID = uID;
 	}
 	public String getAccount() {

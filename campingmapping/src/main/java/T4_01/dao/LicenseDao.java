@@ -7,7 +7,7 @@ import T4_01.beans.License;
 
 
 public interface LicenseDao {
-	public int insert(License license);
+	public License insert(License license);
 
 	public int delete(String account);
 

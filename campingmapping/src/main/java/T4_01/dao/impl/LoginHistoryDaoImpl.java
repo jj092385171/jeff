@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import T4_01.beans.LoginHistory;
@@ -15,16 +16,17 @@ public class LoginHistoryDaoImpl implements LoginHistoryDao {
 
 	private QueryRunner queryRunner = new QueryRunner();
 	@Override
-	public int insert(LoginHistory loginHistory) {
+	public LoginHistory insert(LoginHistory loginHistory) {
 		try {
-			int insert = queryRunner.update(DbUtils.getConnection(),
+			LoginHistory insert = queryRunner.insert(DbUtils.getConnection(),
 					"INSERT INTO LoginHistory (UID ,account ,IP ) VALUES (? ,? ,? )",
+					new BeanHandler<LoginHistory>(LoginHistory.class),
 					loginHistory.getUID(), loginHistory.getAccount(),
 					loginHistory.getIP());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 

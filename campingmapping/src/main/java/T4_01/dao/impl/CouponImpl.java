@@ -15,11 +15,11 @@ public class CouponImpl implements CouponDao {
 	private QueryRunner queryRunner = new QueryRunner();
 
 	@Override
-	public int insert(Coupon coupon) {
+	public Coupon insert(Coupon coupon) {
 		try {
-			int insert = queryRunner.update(DbUtils.getConnection(),
+			Coupon insert = queryRunner.insert(DbUtils.getConnection(),
 					"UPDATE coupon SET couponCode = ?, couponName = ?, couponType = ?, couponAmount = ?, couponUsed = ?, couponRule = ?, startDate = ?, endDate = ? WHERE couponID = ?",
-					 coupon.getCouponID(),
+					 new BeanHandler<Coupon>(Coupon.class),coupon.getCouponID(),
 					coupon.getCouponCode(), coupon.getCouponName(),
 					coupon.getCouponType(), coupon.getCouponAmount(),
 					coupon.getCouponUsed(), coupon.getCouponRule(),
@@ -27,7 +27,7 @@ public class CouponImpl implements CouponDao {
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 	@Override

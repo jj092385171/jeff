@@ -15,16 +15,17 @@ public class CouponWalletDaoImpl implements CouponWalletDao {
 	private QueryRunner queryRunner = new QueryRunner();
 
 	@Override
-	public int insert(CouponWallet couponWallet) {
+	public CouponWallet insert(CouponWallet couponWallet) {
 		try {
-			int insert = queryRunner.update(DbUtils.getConnection(),
+			CouponWallet insert = queryRunner.insert(DbUtils.getConnection(),
 					"INSERT INTO couponWallet ( UID , couponID , state ) VALUES ( ? , ? , ? )",
+					new BeanHandler<CouponWallet>(CouponWallet.class),
 					couponWallet.getUID(), couponWallet.getCouponID(),
 					couponWallet.getState());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 

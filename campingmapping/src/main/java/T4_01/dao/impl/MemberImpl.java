@@ -12,20 +12,21 @@ import utils.DbUtils;
 public class MemberImpl implements MemberDao {
 	private QueryRunner queryRunner = new QueryRunner();
 	@Override
-	public int insert(Member member) {
+	public Member insert(Member member) {
 		try {
-			int insert = queryRunner.update(DbUtils.getConnection(),
-					"INSERT INTO member (account,Nickname,firstname ,lastname,exp,leavel,point,phone,birthday,address ,email,gender ,subscribed ,shot,registerdata)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?, default )",
-					member.getAccount(), member.getNickname(),
+			Member insert = queryRunner.insert(DbUtils.getConnection(),
+					"INSERT INTO member (account,Nickname,firstname ,lastname,exp,leavel,point,phone,birthday,address ,email,gender ,subscribed ,shot,registerdata)VALUES(?,?,?,?,default ,default ,default ,?,?,?,?,?,default ,?, default )",
+					new BeanHandler<Member>(Member.class),member.getAccount(), member.getNickname(),
 					member.getFirstname(), member.getLastname(),
-					member.getExp(), member.getLeavel(), member.getPoint(),
+//					member.getExp(), member.getLeavel(), member.getPoint(),
 					member.getPhone(), member.getBirthday(),
 					member.getAddress(), member.getEmail(), member.getGender(),
-					member.getSubscribed(), member.getShot());
+//					member.getSubscribed(),
+					member.getShot());
 			return insert;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 

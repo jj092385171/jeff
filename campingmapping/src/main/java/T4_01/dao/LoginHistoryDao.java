@@ -6,7 +6,7 @@ import java.util.List;
 import T4_01.beans.LoginHistory;
 
 public interface LoginHistoryDao {
-	public int insert(LoginHistory loginHistory);
+	public LoginHistory insert(LoginHistory loginHistory);
 
 	public int delete(int UID, Date LoginDate);
 

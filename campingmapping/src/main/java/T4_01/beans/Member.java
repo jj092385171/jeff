@@ -157,6 +157,15 @@ public class Member {
 	public void setShot(Blob shot) {
 		this.shot = shot;
 	}
+	public void setStringBirthday(String birthday) {
+		System.out.println(birthday);
+		long birthdayTime = Long.parseLong(birthday);
+		System.out.println(birthdayTime);
+		Date date = new Date(birthdayTime);
+		System.out.println(date);
+		this.birthday=date;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format(
