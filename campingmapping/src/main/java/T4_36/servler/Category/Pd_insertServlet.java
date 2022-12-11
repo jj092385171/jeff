@@ -30,8 +30,6 @@ public class Pd_insertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		try {
 			request.setCharacterEncoding("UTF-8");
-//		String shoppingCartId = request.getParameter("shoppingCartId");
-//			int Pd_id = Integer.parseInt(request.getParameter("Pd_id"));
 			String userID = request.getParameter("userID");
 			String Pdname = request.getParameter("Pdname");
 			String Pdtitle = request.getParameter("Pdtitle");
@@ -39,32 +37,26 @@ public class Pd_insertServlet extends HttpServlet {
 			String Pdtype = request.getParameter("Pdtype");
 			int Pdprice = Integer.parseInt(request.getParameter("Pdprice"));
 			int Pdinventory = Integer.parseInt(request.getParameter("Pdinventory"));
-//			Date date = new Date(1345434534);
-			
+
 			Date datePd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(request.getParameter("Pddate"));
 			Date Pddate = datePd;
 			Date datelastup = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(request.getParameter("Pdlastupdate"));
 			Date Pdlastupdate = datelastup;
 
-			//圖片
+			// 圖片
 			Part part = request.getPart("picture");
 			long sizeInBytes = part.getSize();
 			InputStream is = part.getInputStream();
 			Blob Pdpicture = ImageUtil.fileToBlob(is, sizeInBytes);
 
-
 			CategoryService categoryService = new CategoryServiceImpl();
-			Category bean = new Category( userID, Pdname, Pdtitle, Pdcontent, 
-					Pdtype, Pdpicture,  Pdprice, Pdinventory,Pddate,Pdlastupdate);
+			Category bean = new Category(userID, Pdname, Pdtitle, Pdcontent, Pdtype, Pdpicture, Pdprice, Pdinventory,
+					Pddate, Pdlastupdate);
 
 			categoryService.create(bean);
 
 			String contextPath = request.getContextPath();
 			response.sendRedirect(contextPath + "/T4_36/html5up-editorial/Pd_ok.jsp");
-//		RequestDispatcher rd = 
-//     			request.getRequestDispatcher("/Cart/NewFile.jsp");
-//		
-//		rd.forward(request, response);
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -73,7 +65,6 @@ public class Pd_insertServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

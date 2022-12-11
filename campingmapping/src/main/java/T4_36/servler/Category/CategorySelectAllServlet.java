@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/SelectAllServlet.do")
 public class CategorySelectAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Override
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
     	req.setCharacterEncoding("UTF-8");
 		CategoryService cgS = new CategoryServiceImpl();
@@ -28,11 +28,8 @@ public class CategorySelectAllServlet extends HttpServlet {
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/T4_36/html5up-editorial/Pd_Allproduct.jsp");
 		rd.forward(req, resp);
-		return;
-        
-        
-    }
-    @Override
+	}
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
     	doPost(req, resp);
     }

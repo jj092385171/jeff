@@ -18,12 +18,14 @@
 
 		<!-- Main -->
 		<div id="main">
+		<section></section>
 			<div class="inner">
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+					<a href="#" class="logo"><strong>商城維護</strong> by team4</a>
 					<ul class="icons">
+					
 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 						<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a>
@@ -32,27 +34,23 @@
 						<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
 					</ul>
 				</header>
-
-
-				<!-- Banner -->
-
-<!-- Begin Page Content 內容 -->
-				<div class="container">
+<div class="container">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">商城維護</h1>
+<!-- 					<h1 class="h3 mb-4 text-gray-800">商城維護</h1> -->
 					<div>
 						<form action="<c:url value='/SelectAllServlet.do'/>" method="POST">
-							<input type="submit" value="測試按鈕"  style="width:100px;height:45px;">
+							<input type="submit" value="輸入資料庫內產品"  style="width:170px;height:50px;">
 						</form>
-						<form action="<c:url value='#'/>"
-							method="POST">
-							<input type="submit" value="購物車測試"  style="width:100px;height:45px;">
+						<form action="<c:url value='http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_insert.jsp'/>" method="POST">
+							<input type="submit" value="新增產品"  style="width:105px;height:50px;">
 						</form>
-						<p>
+<%-- 						<form action="<c:url value='#'/>" --%>
+<!-- 							method="POST"> -->
+<!-- 							<input type="submit" value="購物車測試"  style="width:100px;height:45px;"> -->
+<!-- 						</form> -->
 					</div>
-
-					<table id="productlist" style="width:1000px;">
+					<table id="productlist" style="width:1050px;">
 						<thead>
 							<tr>
 								<th>產品編號</th>
@@ -66,6 +64,8 @@
 								<th>庫存數量</th>
 								<th>商品發售日期</th>
 								<th>商品修改日期</th>
+								<th>修改產品</th>
+								<th>刪除產品</th>
 
 							</tr>
 						</thead>
@@ -73,24 +73,43 @@
 							<c:forEach var='Category' items='${AllList}' varStatus="statusX">
 								<tr>
 									
-									<td id="productno">${Category.Pd_id}</td>
+									<td id="productno">${Category.pdid}</td>
 									<td>${Category.userID}</td>
-									<td>${Category.Pd_name}</td>
-									<td>${Category.Pd_title}</td>
-									<td>${Category.Pd_content}</td>
-									<td>${Category.Pd_type}</td>
-									<td>${Category.Pd_picture}</td>
-									<td>${Category.Pd_price}</td>
-									<td>${Category.Pd_inventory}</td>
-									<td>${Category.Pd_date}</td>
-									<td>${Category.Pd_last_update}</td>
-									<td><input style="border-radius:80%;width:50px;height:50px" type="submit" id="btn1" value="修改" formaction="<c:url value='/SendIdToUpdate.do?productno=${product.productno}'/>"></td>
-									<td><input style="border-radius:80%;width:50px;height:50px" type="button" id="btn2" value="刪除"></td>
+									<td>${Category.pdname}</td>
+									<td>${Category.pdtitle}</td>
+									<td>${Category.pdcontent}</td>
+									<td>${Category.pdtype}</td>
+									<td>${Category.pdpicture}</td>
+									<td>${Category.pdprice}</td>
+									<td>${Category.pdinventory}</td>
+									<td>${Category.pddate}</td>
+									<td>${Category.pdlastupdate}</td>
+									
+									<td>
+									<form>
+									<input style="border-radius:60%;width:50px;height:50px" type="submit" id="btn1" value="修改" 
+									formaction="<c:url value='http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'/>">
+									</form>
+									</td>
+									<td>
+									<form action="<c:url value='/CategoryDeleteServlet.do'/>" method="POST">
+									<input type="submit" value="刪除"  style="border-radius:60%;width:50px;height:50px;">
+<!-- 									<input style="border-radius:60%;width:50px;height:50px" type="button" id="btn2" value="刪除" -->
+<%-- 									formaction="<c:url value='/http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'/>"> --%>
+									</form>
+									</td>
+									
+									
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
+
+				<!-- Banner -->
+
+<!-- Begin Page Content 內容 -->
+				
 				<!-- /.container-fluid -->
 
 			</div>
@@ -115,8 +134,9 @@
 						<h2>商城</h2>
 					</header>
 					<ul>
-						<li><a href="Pd_index.jsp">首頁</a></li>
-						<li><a href="Pd_Allproduct.jsp">商城維護</a></li>
+						<li><a href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_index.jsp">首頁</a></li>
+						<li>
+						<a href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_Allproduct.jsp">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>
@@ -149,12 +169,45 @@
 	</div>
 
 	<!-- Scripts -->
+	<script src="https://kit.fontawesome.com/cb6b6ec1ab.js" crossorigin="anonymous"></script>
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/jquery.min.js"></script>
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/browser.min.js"></script>
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/breakpoints.min.js"></script>
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/util.js"></script>
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/main.js"></script>
-	
+	<script>
+		$('#btn2').on('click',function() {
+					$.ajax({
+						type : "POST",
+						url : "<c:url value='/CategoryDeleteServlet.do'/>",
+						context : this,
+						dataType : "text",
+						data : {
+							"pdid" : $(this).parent().parent().children(
+									'#productno').text()
+						},
+						success : function(response) {
+							console.log("OK")
+							alert("刪除成功!");
+							$(this).parent().parent().remove();
+						}
+					})
+				});
+	</script>
+	<script>
+	var aa;
+	$("#btn1").on('click',function(){
+		aa = $(this).parent().parent().children('#productno').text();
+		console.log(aa)
+	});
+
+// 	function foredit(){
+// 		console.log(aa);
+// 		let bb = $(this).parent().parent().children('#productno').text();
+// 		window.open("http://localhost:8080/iSpanCarShop/SendIdToUpdate.do?productno=" + aa);
+
+// }
+	</script>
 </body>
 
 </html>

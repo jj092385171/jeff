@@ -4,10 +4,13 @@ import T4_36.dao.CategoryDao;
 import T4_36.entity.Category;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 import utils.DbUtils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,18 +53,16 @@ public class CategoryDaoImpl implements CategoryDao {
     // 修改一筆書籍資料
     @Override
     public int update(Category category, long sizeInBytes) throws SQLException {
-        String sql = "UPDATE category SET Pdname =?, Pdtitle =?, Pdcontent =?, Pdtype =?, Pdpicture =?, Pdprice =?," +
-                "Pdinventory =?, Pddate =?, Pdlastupdate =?, WHERE Pdid = ?";
+        String sql = "UPDATE category SET Pdname =?, Pdtitle =?, Pdcontent =?, Pdtype =?, Pdprice =?," +
+                "Pdinventory =?, Pdlastupdate =?, WHERE Pdid = ?";
 
         return queryRunner.update(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
-                category.getPdname(),
                 category.getPdtitle(),
                 category.getPdcontent(),
+                category.getPdname(),
                 category.getPdtype(),
-                category.getPdpicture(),
-                category.getPdpicture(),
+                category.getPdprice(),
                 category.getPdinventory(),
-                category.getPddate(),
                 category.getPdlastupdate(),
                 category.getPdid());
     }
@@ -75,20 +76,42 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public List<Category> selectAll()  {
+
+        List<Category> categoryList = new ArrayList<>();
+
         String sql = "SELECT * FROM category";
 
-        try {
-        	System.out.println("s");
-			List<Category> query = queryRunner.query(DbUtils.getConnection(), sql, new BeanListHandler<Category>(Category.class));
-			query.forEach(a -> System.out.println(a.toString()));	
-			System.out.println("a");
-			
-			return query;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-    }
+        try (
+                Connection connection = DbUtils.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+        ) {
+            try (
+                    ResultSet rs = ps.executeQuery();
+            ) {
+                // 只要還有紀錄未取出，rs.next()會傳回true
+                // 迴圈內將逐筆取出ResultSet內的紀錄
+                while (rs.next()) {
+                    // 準備一個新的BookBean，將ResultSet內的一筆紀錄移植到BookBean內
+                    Category category = new Category();
+                    category.setPdid(rs.getInt("Pdid"));
+                    category.setUserID(rs.getString("userID"));
+                    category.setPdname(rs.getString("Pdname"));
+                    category.setPdtitle(rs.getString("Pdtitle"));
+                    category.setPdcontent(rs.getString("Pdcontent"));
+                    category.setPdtype(rs.getString("Pdtype"));
+                    category.setPdpicture(rs.getBlob("Pdpicture"));
+                    category.setPdprice(rs.getInt("Pdprice"));
+                    category.setPdinventory(rs.getInt("Pdinventory"));
+                    category.setPddate(rs.getDate("Pddate"));
+                    category.setPdlastupdate(rs.getDate("Pdlastupdate"));
+                    // 最後將BookBean物件放入大的容器內
+                    categoryList.add(category);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
+        return categoryList;
+    }
 }

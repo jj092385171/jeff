@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryDao categoryDao = new CategoryDaoImpl();
+    private final CategoryDao categoryDao = new CategoryDaoImpl();
 
     @Override
     public void create(Category category) {

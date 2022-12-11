@@ -21,6 +21,8 @@
 <link
 	href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
 	rel="stylesheet">
+
+
 <style>
 textarea {
 	background:transparent; 
@@ -226,15 +228,15 @@ display:inline;
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">商城管理</h1>
-					<a href="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp' />">新增產品</a>
+					<%-- <a href="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp' />">新增產品</a> --%>
 					<div>
 						<form action="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp'/>"
 							method="POST">
-							<input type="submit" value="新增產品"  style="width:100px;height:45px;">
+							<input type="submit" value="新增產品"  style="width:100px;height:45px;text-align:center">
 						</form>
 						<form action="<c:url value='/Shop_CartServlet.do'/>"
 							method="POST">
-							<input type="submit" value="購物車測試"  style="width:100px;height:45px;">
+							<input type="submit" value="購物車測試"  style="width:100px;height:45px;text-align:center">
 						</form>
 						<p>
 					</div>
@@ -261,27 +263,29 @@ display:inline;
 								varStatus="vs">
 								<tr>
 									<form method="POST" action="">
-									<td id="productno">${product.productno}</td>
-									<td>${product.productname}</td>
+									<td id="productno" style="text-align:center;">${product.productno}</td>
+									<td style="width:80px">${product.productname}</td>
 									<td>${product.type}</td>
 									<td>${product.spec}</td>
 									<td>${product.price}</td>
-									<td>${product.stock}</td>
+									<td style="text-align:center;">${product.stock}</td>
 									<td>${product.uptime}</td>
 									<td><textarea readonly>${product.productinfo}</textarea></td>
-									<td><img
+									<td ><img style="border-radius:10%;"
 										src="<c:url value='/ProductImgServlet?productno=${product.productno}'/>"
 										width="180" height="180" /></td>
-<!-- 									<td><input type="button" id="btn1" value="修改" -->
-<!-- 										onclick="location.href='http://localhost:8080/iSpanCarShop/SHOP_DETAIL/UpdateProduct_form.jsp';"></td> -->
-									<td><input style="border-radius:80%;width:50px;height:50px" type="submit" id="btn1" value="修改" formaction="<c:url value='/SendIdToUpdate.do?productno=${product.productno}'/>"></td>
-									<td><input style="border-radius:80%;width:50px;height:50px" type="button" id="btn2" value="刪除"></td>
+<%-- 									<td><input style="border-radius:80%;width:50px;height:50px" type="submit" id="btn11" value="修改" formaction="<c:url value='/SendIdToUpdate.do?productno=${product.productno}'/>"></td> --%>
+									<td><button type="submit" class="btn1" id="btn1" onclick="foredit()" style="border-radius:80%;width:40px;height:40px"><i class="fa-solid fa-pen fa-lg"></i></button></td>
+<!-- 									
+<td><input type="button" id="btn2" value="刪除" ></td> -->
+									<td><button type="button" id="btn2" style="border-radius:80%;width:40px;height:40px"><i class="fa-sharp fa-solid fa-trash-can fa-lg" ></i></button></td>
 									</form>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
+				<script src="https://kit.fontawesome.com/f9c412c6fd.js" crossorigin="anonymous"></script>
 				<!-- /.container-fluid -->
 
 			</div>
@@ -381,8 +385,27 @@ display:inline;
 					})
 				});
 	</script>
+<!-- <script> -->
+// $("#btn1").click(function() {
+// 	let bb = $(this).parent().parent().children('#productno').text();
+	
+	
+// 	});
+<!-- </script> -->
+<script>
+var aa;
+$(".btn1").on('mouseover',function(){
+	aa = $(this).parent().parent().children('#productno').text();
+	console.log(aa)
+});
 
+function foredit(){
+	console.log(aa);
+	let bb = $(this).parent().parent().children('#productno').text();
+	window.open("http://localhost:8080/iSpanCarShop/SendIdToUpdate.do?productno=" + aa);
 
+}
+</script>
 </body>
 
 </html>

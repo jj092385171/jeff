@@ -22,7 +22,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+					<a href="#" class="logo"><strong>修改商品細項</strong> by team4</a>
 					<ul class="icons">
 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -33,18 +33,20 @@
 					</ul>
 				</header>
 
-<form action="<c:url value='/testinsertServlet.do'/>" method="POST"
+<form action="<c:url value='CategoryUpdateServlet.do'/>" method="POST"
 		enctype="multipart/form-data">
-		<input type="text" value='1' name="userID">會員ID<br> 
-		<input type="text" value='1' name="name">產品名稱<br> 
-		<input type="text" value='1' name="title">品牌名稱<br> 
-		<input type="text" value='1' name="content">產品規格<br> 
-		<input type="text" value='1' name="type">產品類型<br>
-		<input type="file" name="picture" />照片<br> 
-		<input type="text" value='1' name="price">價位<br> 
-		<input type="text" value='1' name="inventory">庫存數量<br> 
-		<input type="datetime-local" name="Pd_date">商品建立日期<br> 
-		<input type="datetime-local" name="Pd_last_update">商品更新日期<br> <br>
+		產品編號(pk)<br> 
+		<input type="text" value='${Category.pdid}' name="pdid" readonly="readonly" />會員ID<br> 
+		<input type="text" value='1' name="userID">產品名稱<br> 
+		<input type="text" value='${Category.pdname}' name="name">品牌名稱<br> 
+		<input type="text" value='${Category.pdtitle}' name="title">產品規格<br> 
+		<input type="text" value='${Category.pdcontent}' name="content">產品類型<br>
+		<input type="text" value='${Category.pdtype}' name="type">照片<br>
+		<input type="text" value='${Category.pdpicture}' name="pdpicture" readonly="readonly" />價位<br> 
+		<input type="text" value='${Category.pdprice}' name="price">庫存數量<br> 
+		<input type="text" value='${Category.pdinventory}' name="inventory">上架日期<br> 
+		<input type="text" value='${Category.pddate}' name="pddate" readonly="readonly" />商品更新日期<br>
+		<input type="text" value="2020-12-23 15:40:45" name="Pdlastupdate">
 		<input type="submit" value="提交">
 	</form>
 				<!-- Banner -->
