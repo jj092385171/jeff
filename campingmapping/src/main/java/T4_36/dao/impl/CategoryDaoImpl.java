@@ -47,16 +47,17 @@ public class CategoryDaoImpl implements CategoryDao {
     public int deleteByPd_id(int id) throws SQLException {
         String sql = "DELETE FROM category WHERE Pdid = ?";
 
-        return queryRunner.update(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class), id);
+        return queryRunner.update(DbUtils.getConnection(), sql, id);
     }
 
     // 修改一筆書籍資料
     @Override
-    public int update(Category category, long sizeInBytes) throws SQLException {
-        String sql = "UPDATE category SET Pdname =?, Pdtitle =?, Pdcontent =?, Pdtype =?, Pdprice =?," +
-                "Pdinventory =?, Pdlastupdate =?, WHERE Pdid = ?";
+    public int update(Category category) throws SQLException {
+        String sql = "UPDATE category SET userID=?, Pdname =?, Pdtitle =?, Pdcontent =?, Pdtype =?, "
+        		+ "Pdprice =?, Pdinventory =?, Pdlastupdate =? WHERE Pdid = ?";
 
-        return queryRunner.update(DbUtils.getConnection(), sql, new BeanHandler<>(Category.class),
+        return queryRunner.update(DbUtils.getConnection(), sql,
+        		category.getUserID(),
                 category.getPdtitle(),
                 category.getPdcontent(),
                 category.getPdname(),

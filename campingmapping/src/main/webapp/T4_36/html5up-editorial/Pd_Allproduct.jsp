@@ -73,7 +73,7 @@
 							<c:forEach var='Category' items='${AllList}' varStatus="statusX">
 								<tr>
 									
-									<td id="productno">${Category.pdid}</td>
+									<td>${Category.pdid}</td>
 									<td>${Category.userID}</td>
 									<td>${Category.pdname}</td>
 									<td>${Category.pdtitle}</td>
@@ -86,17 +86,19 @@
 									<td>${Category.pdlastupdate}</td>
 									
 									<td>
-									<form>
-									<input style="border-radius:60%;width:50px;height:50px" type="submit" id="btn1" value="修改" 
-									formaction="<c:url value='http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'/>">
-									</form>
+									<input name="pdid" type="hidden" id="pdid" value="${Category.pdid}>" /> 
+									 <input type="button" style="border-radius:60%" name="delete" value="修改" onclick="updateProduct()" />
+<!-- 									<form> -->
+<!-- 									<input style="border-radius:60%;width:50px;height:50px" type="submit" id="btn1" value="修改"  -->
+<%-- 									formaction="<c:url value='http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'/>"> --%>
+<!-- 									</form> -->
 									</td>
 									<td>
-									<form action="<c:url value='/CategoryDeleteServlet.do'/>" method="POST">
-									<input type="submit" value="刪除"  style="border-radius:60%;width:50px;height:50px;">
-<!-- 									<input style="border-radius:60%;width:50px;height:50px" type="button" id="btn2" value="刪除" -->
-<%-- 									formaction="<c:url value='/http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'/>"> --%>
-									</form>
+<%-- 									<form action="<c:url value='/CategoryDeleteServlet.do'/>" method="POST">  --%>
+									<input name="pdid" type="hidden" id="pdid" value="${Category.pdid}>" />
+									<input type="button" style="border-radius:60%" name="delete" value="刪除" onclick="confirmDelete()" />
+<!--      								</form> -->
+<!-- 									 <input type="button" style="border-radius:60%" name="delete" value="刪除" onclick="confirmDelete()" /> -->
 									</td>
 									
 									
@@ -175,38 +177,22 @@
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/breakpoints.min.js"></script>
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/util.js"></script>
 	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/main.js"></script>
-	<script>
-		$('#btn2').on('click',function() {
-					$.ajax({
-						type : "POST",
-						url : "<c:url value='/CategoryDeleteServlet.do'/>",
-						context : this,
-						dataType : "text",
-						data : {
-							"pdid" : $(this).parent().parent().children(
-									'#productno').text()
-						},
-						success : function(response) {
-							console.log("OK")
-							alert("刪除成功!");
-							$(this).parent().parent().remove();
-						}
-					})
-				});
-	</script>
-	<script>
-	var aa;
-	$("#btn1").on('click',function(){
-		aa = $(this).parent().parent().children('#productno').text();
-		console.log(aa)
-	});
-
-// 	function foredit(){
-// 		console.log(aa);
-// 		let bb = $(this).parent().parent().children('#productno').text();
-// 		window.open("http://localhost:8080/iSpanCarShop/SendIdToUpdate.do?productno=" + aa);
-
-// }
+	<script type="text/javascript">
+	function confirmDelete() {
+		if (confirm("確定刪除此項產品資料(編號:${Category.pdid})?") ) {
+			document.forms[0].action="CategoryDeleteServlet.do" ;
+			document.forms[0].method="POST";
+			document.forms[0].submit();
+		} else {
+		}
+	}
+	function updateProduct(){
+		if (confirm("確定修改此項產品資料(編號:${Category.pdid})?") ) {
+			window.location.replace("http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp");
+		} else {
+		}
+	}
+// 	value='http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'
 	</script>
 </body>
 

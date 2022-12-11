@@ -42,16 +42,17 @@ public class CategoryUpdateServlet extends HttpServlet {
 
 			Date datelastup = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(req.getParameter("Pdlastupdate"));
 			Date Pdlastupdate = datelastup;
+			Integer Pdid = Integer.parseInt(req.getParameter("Pdid"));
 
 			CategoryService categoryService = new CategoryServiceImpl();
-			Category bean = new Category(userID, Pdname, Pdtitle, Pdcontent, Pdtype, Pdprice, Pdinventory,
+			Category bean = new Category(Pdid, userID, Pdname, Pdtitle, Pdcontent, Pdtype, Pdprice, Pdinventory,
 					Pdlastupdate);
 
-			categoryService.create(bean);
+			categoryService.update(bean);
 
 			String contextPath = req.getContextPath();
 			resp.sendRedirect(contextPath + "/T4_36/html5up-editorial/Pd_ok.jsp");
-			log.info("更新書籍之Controller, 成功，newBean=" + bean);
+			log.info("更新產品之Controller, 成功，newBean=" + bean);
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

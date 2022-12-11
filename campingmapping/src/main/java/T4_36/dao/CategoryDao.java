@@ -12,7 +12,7 @@ public interface CategoryDao {
     // 依Pd_id來刪除單筆記錄
     int deleteByPd_id(int id) throws SQLException;
 
-    int update(Category category, long sizeInBytes) throws SQLException;
+    int update(Category category) throws SQLException;
 
     Category selectByPd_id(int Pd_id) throws SQLException;
 

@@ -22,7 +22,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+					<a href="index.html" class="logo"><strong>新增商品</strong></a>
 					<ul class="icons">
 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -33,19 +33,11 @@
 					</ul>
 				</header>
 
-<form action="<c:url value='/CategoryDeleteServlet.do'/>" method="POST"
-		enctype="multipart/form-data">
-		會員ID<br>
-		<input type="text" value='1' name="userID"> 產品名稱<br>
-		<input type="text" value='1' name="Pdname"> 品牌名稱<br> 
-		<input type="text" value='1' name="Pdtitle">產品規格<br> 
-		<input type="text" value='1' name="Pdcontent">產品類型<br>
-		<input type="text" value='1' name="Pdtype">照片<br>
-		<input type="file" name="Pdpicture" /> 價位<br> 
-		<input type="text" value='1' name="Pdprice">庫存數量<br> 
-		<input type="text" value='1' name="Pdinventory">商品建立日期<br> 
-		<input type="datetime-local" name="Pddate">商品更新日期<br>
-		<input type="datetime-local" name="Pdlastupdate"> <br>
+<!-- 	<form action="<c:url value='/T4_36/servler/Category/insertServlet.do'/>" method="GET"
+	enctype="multipart/form-data"> -->
+	<form action="<c:url value='/CategoryDeleteServlet.do'/>" method="POST" enctype="multipart/form-data">
+		產品編號<br>
+		<input type="text" value='1' name="ProductId"><br> 
 		<input type="submit" value="提交">
 	</form>
 				<!-- Banner -->

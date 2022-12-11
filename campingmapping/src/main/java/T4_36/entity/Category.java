@@ -131,6 +131,20 @@ public class Category {
 	private String priceStr = null;
 	
 	
+	public Category(Integer pdid, String userID, String pdname, String pdtitle, String pdcontent, String pdtype,
+			int pdprice, int pdinventory, Date pdlastupdate) {
+		super();
+		this.pdid = pdid;
+		this.userID = userID;
+		this.pdname = pdname;
+		this.pdtitle = pdtitle;
+		this.pdcontent = pdcontent;
+		this.pdtype = pdtype;
+		this.pdprice = pdprice;
+		this.pdinventory = pdinventory;
+		this.pdlastupdate = pdlastupdate;
+	}
+
 	public Category(String userID, String pdname, String pdtitle, String pdcontent, String pdtype, int pdprice,
 			int pdinventory, Date pdlastupdate) {
 		super();

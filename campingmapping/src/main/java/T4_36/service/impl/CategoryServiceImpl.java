@@ -38,10 +38,10 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    public void update(Category category, long sizeInBytes) {
+    public void update(Category category) {
         try {
             DbUtils.begin();
-            categoryDao.update(category, sizeInBytes);
+            categoryDao.update(category);
             DbUtils.commit();
         } catch (SQLException e) {
             DbUtils.rollbacl();
