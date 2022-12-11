@@ -14,7 +14,7 @@ import T4_09._01_job.model.JobBean;
 import T4_09._01_job.service.JobServiceDAOImpl;
 @MultipartConfig()
 @WebServlet("/JobServletFindBean")
-public class JobServletFindBean extends HttpServlet {
+public class JobServletFindBeanByRackID extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 

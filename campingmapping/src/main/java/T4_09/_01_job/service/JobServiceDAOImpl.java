@@ -159,5 +159,21 @@ public class JobServiceDAOImpl implements JobServiceDAO {
 		
 		
 	}
+	
+	//透過會員id找資料
+	@Override
+	public List<JobBean> findBeanByuID(int uID) {
+		List<JobBean> jb = null;
+		try {
+			DbUtils.begin();
+			jb = jobDAO.findBeanByuID(uID);
+			DbUtils.commit();
+			return jb;
+		} catch (Exception e) {
+			DbUtils.rollbacl();
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

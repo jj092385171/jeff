@@ -160,4 +160,34 @@ public class JobDAOimpl implements JobDAO {
 		return j;
 	}
 
+	@Override
+	public List<JobBean> findBeanByuID(int uID) throws SQLException {
+		String sql = "select* from job where uID=?";
+		
+		Connection connection = DbUtils.getConnection();
+		PreparedStatement pre = connection.prepareStatement(sql);
+	
+		pre.setInt(1,uID );
+		ResultSet rs = pre.executeQuery();
+		
+		List<JobBean> list = new ArrayList<JobBean>();	
+		while (rs.next()) {	
+			JobBean jb = new JobBean();
+			jb.setuID(rs.getInt("uID"));
+			jb.setRackID(rs.getInt("rackID"));
+			jb.setJob(rs.getString("job"));
+			jb.setSalary(rs.getString("salary"));
+			jb.setQuantity(rs.getInt("quantity"));
+			jb.setPlace(rs.getString("place"));
+			jb.setTime(rs.getString("time"));
+			jb.setDate(rs.getString("date"));
+			jb.setImg(rs.getBlob("img"));
+			jb.setRemark(rs.getString("remark"));
+			jb.setRackUp(rs.getDate("rackUp"));
+			jb.setRackDown(rs.getDate("rackDown"));
+			list.add(jb);
+		}
+		return list;
+	}
+
 }

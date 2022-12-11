@@ -21,7 +21,7 @@
 		<div class="c1">
 
 			<p>
-				會員id <input type="text" name="id">
+				會員id <input type="text" name="id" required>>
 			</p>
 			<hr>
 			<p>
@@ -43,42 +43,42 @@
 			</p>
 			<hr>
 			<p>
-				薪資 <input type="text" name="salary">
+				薪資 <input type="text" name="salary" required>>
 			</p>
 			<hr>
 
 			<p>
-				人數 <input type="text" name="quantity">
+				人數 <input type="text" name="quantity" required>>
 			</p>
 			<hr>
 
 			<p>
-				地點 <input type="text" name="place">
+				地點 <input type="text" name="place" required>>
 			</p>
 			<hr>
 
 			<p>
-				可上班時段 <input type="text" name="time">
+				可上班時段 <input type="text" name="time" required>>
 			</p>
 			<hr>
 
 			<p>
-				可上班日期 <input type="text" name="date">
+				可上班日期 <input type="text" name="date" required>>
 			</p>
 			<hr>
 
 			<p>
-				上架日期 <input type="date" name="rackUp">
+				上架日期 <input type="date" name="rackUp" required>>
 			</p>
 			<hr>
 
 			<p>
-				下架日期 <input type="date" name="rackDown">
+				下架日期 <input type="date" name="rackDown" required>>
 			</p>
 			<hr>
 
 			<p>
-				照片上傳 <input type="file" name="img">
+				照片上傳 <input type="file" name="img" required>>
 			</p>
 			<hr>
 

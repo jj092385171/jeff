@@ -5,10 +5,8 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -41,7 +39,9 @@ public class JobServletAdd extends HttpServlet {
 		Map<String, String> errorMessage = new HashMap<>();
 		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
 		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
+		System.out.println(findBeanByRackID);
 		if (findBeanByRackID != null) {
+			System.out.println("111111");
 			errorMessage.put("rackID", "編號重複,新增失敗");
 		}
 		request.setAttribute("ErrorMsg", errorMessage);

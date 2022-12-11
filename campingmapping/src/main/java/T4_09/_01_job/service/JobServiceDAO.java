@@ -33,6 +33,11 @@ public interface JobServiceDAO {
 	//透過rackID抓一筆資料
 	public JobBean findBeanByRackID(int rackID);
 	
+	//透過會員id找資料
+	public List<JobBean> findBeanByuID(int uID);
+	
+	
+	
 	// 判斷時間
 //	public boolean selectTime(Date rackUp, Date rackDown);
 
