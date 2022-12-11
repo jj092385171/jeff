@@ -22,14 +22,12 @@ public class CategoryQueryServlet extends HttpServlet {
 		String id = req.getParameter("id");
 		CategoryService cgS = new CategoryServiceImpl();
 		
-		Category category = cgS.select(Integer.getInteger(id));
+		Category category = cgS.select(Integer.parseInt(id));
 		
 		req.setAttribute("querybyproductno", category);
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/SHOP_DETAIL/ProductQuery_Result.jsp");
 		rd.forward(req, resp);
 		return;
-        
-        
     }
 }

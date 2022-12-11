@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @MultipartConfig()
 @WebServlet("/CategoryDeleteServlet.do")
@@ -16,13 +17,19 @@ public class CategoryDeleteServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+		try {
 		System.out.println("123");
 		String ProductId = req.getParameter("ProductId");
 		System.out.println(ProductId);
 
 		CategoryService categoryService = new CategoryServiceImpl();
 //		categoryService.delete(Integer.getInteger(id));
-		categoryService.delete(Integer.getInteger(ProductId));
-		req.getRequestDispatcher("/T4_36/html5up-editorial/Pd_ok.jsp");
+		categoryService.delete(Integer.parseInt(ProductId));
+
+		String contextPath = req.getContextPath();
+		resp.sendRedirect(contextPath + "/T4_36/html5up-editorial/Pd_ok.jsp");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
