@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import T4_01.service.impl.JoinServiceImpl;
+import utils.DbUtils;
 
 @WebServlet("/accountsame")
 public class AccountsameServlet extends HttpServlet {
@@ -21,14 +22,19 @@ public class AccountsameServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest req,
 			HttpServletResponse resp) {
 		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter printWriter = resp.getWriter();
 			String account = req.getParameter("account");
 //			System.out.println("req "+account);
+			DbUtils.begin();
 			Map<String, Object> accountsame = new JoinServiceImpl().accountsame(account);
+			DbUtils.commit();
 			String json = new Gson().toJson(accountsame);
 			printWriter.println(json);
 			
 		} catch (IOException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 		

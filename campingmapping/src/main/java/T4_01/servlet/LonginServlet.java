@@ -28,7 +28,7 @@ public class LonginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger log = LoggerFactory.getLogger(LonginServlet.class);
 	Map<String, Object> userInfoMap = new HashMap<String, Object>();
-	
+
 	protected void processRequest(HttpServletRequest req,
 
 			HttpServletResponse resp) {
@@ -42,7 +42,7 @@ public class LonginServlet extends HttpServlet {
 			// 1.拿資料
 			String account = req.getParameter("account");
 			String passwordInput = req.getParameter("password");
-			String password =new ToolServiceImpl().loginsha1Hex(passwordInput);
+			String password = new ToolServiceImpl().loginsha1Hex(passwordInput);
 			String rember = req.getParameter("rember");
 			log.info(account + "  " + password + " " + rember);
 			String ipAddress = req.getHeader("X-FORWARDED-FOR");
@@ -54,7 +54,7 @@ public class LonginServlet extends HttpServlet {
 			LoginService loginService = new LoginServiceImpl();
 			License license = loginService.login(account, password);
 			// 3.處理結果
-
+			
 			if (license != null) {
 				// 成功
 				// 寫入登入歷史
@@ -63,7 +63,11 @@ public class LonginServlet extends HttpServlet {
 				// 成功建構要回傳JSON物件和session
 				session = loginService.loginSession(account, session);
 				processCookies(req, resp, account, passwordInput, rember);
-
+				
+//				System.out.println(rember);
+//				System.out.println(rember != "");
+//				System.out.println(rember == null);
+				
 				userInfoMap.put("res", 1);
 				JSONObject reUser = new JSONObject(userInfoMap);
 				printWriter.println(reUser);
@@ -87,12 +91,15 @@ public class LonginServlet extends HttpServlet {
 		Cookie cookiePassword = null;
 		Cookie cookieRememberMe = null;
 		// rm存放瀏覽器送來之RememberMe的選項，如果使用者對RememberMe打勾，rm就不會是null
-		if (rember != null) {
+		if (rember != "") {
+//			System.out.println("記住");
 			cookieUser = new Cookie("account", account);
 			cookieUser.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
 			cookieUser.setPath(req.getContextPath());
 
-			String Password = new ToolServiceImpl().rembersha1Hex(passwordInput);
+			String Password = new ToolServiceImpl()
+					.rembersha1Hex(passwordInput);
+//			System.out.println(Password);
 			cookiePassword = new Cookie("password", Password);
 			cookiePassword.setMaxAge(30 * 24 * 60 * 60);
 			cookiePassword.setPath(req.getContextPath());
@@ -100,12 +107,14 @@ public class LonginServlet extends HttpServlet {
 			cookieRememberMe = new Cookie("rember", "true");
 			cookieRememberMe.setMaxAge(30 * 24 * 60 * 60);
 			cookieRememberMe.setPath(req.getContextPath());
-		} else { // 使用者沒有對 RememberMe 打勾
+		} else if(rember == ""){ // 使用者沒有對 RememberMe 打勾
+//			System.out.println("取消");
 			cookieUser = new Cookie("account", account);
 			cookieUser.setMaxAge(0); // MaxAge==0 表示要請瀏覽器刪除此Cookie
 			cookieUser.setPath(req.getContextPath());
 
-			String Password = new ToolServiceImpl().rembersha1Hex(passwordInput);
+			String Password = new ToolServiceImpl()
+					.rembersha1Hex(passwordInput);
 			cookiePassword = new Cookie("password", Password);
 			cookiePassword.setMaxAge(0);
 			cookiePassword.setPath(req.getContextPath());

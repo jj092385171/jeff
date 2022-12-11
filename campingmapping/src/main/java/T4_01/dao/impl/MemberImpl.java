@@ -80,6 +80,7 @@ public class MemberImpl implements MemberDao {
 			List<Member> members = queryRunner.query(DbUtils.getConnection(),
 					"SELECT * FROM member ",
 					new BeanListHandler<Member>(Member.class));
+//			members.forEach(aa->System.out.println(aa.toString()));
 			return members;
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -10,6 +10,7 @@ import T4_01.dao.impl.LicenseDaoImpl;
 import T4_01.dao.impl.LimitsDaoImpl;
 import T4_01.dao.impl.MemberImpl;
 import T4_01.service.JoinService;
+import utils.DbUtils;
 
 public class JoinServiceImpl implements JoinService {
 
@@ -26,12 +27,14 @@ public class JoinServiceImpl implements JoinService {
 			return res;
 
 		}
+
 	}
 
 	@Override
 	public int joinNewMember(String account, String password, String email,
 			String birthday) {
 		try {
+			DbUtils.begin();
 			Member member = new Member();
 			License license = new License();
 			Limits limits = new Limits();
@@ -48,9 +51,10 @@ public class JoinServiceImpl implements JoinService {
 			limits.setUID(uid);
 			limits.setAccount(account);
 			new LimitsDaoImpl().insert(limits);
-			
+			DbUtils.commit();
 			return 1;
 		} catch (Exception e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 			return 0;
 		}

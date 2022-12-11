@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import T4_01.service.impl.ToolServiceImpl;
 
 
-@WebFilter("/T4_01/login.htm")
+@WebFilter("/T4_01/login/login.html")
 public class FindMemberPassword implements Filter {
 	String requestURI;
 	
@@ -56,7 +57,7 @@ public class FindMemberPassword implements Filter {
 						String tmp  = cookies[i].getValue();
 						// 將密碼解密
 						if (tmp!= null){
-							password = 	new ToolServiceImpl().remberloginsha1Hex(tmp);
+							password = 	new ToolServiceImpl().remberloginsha1Hex(ToolServiceImpl.KEY,tmp);
 						}
 					} 
 					else if (cookieName.equals("rember")) {
@@ -74,8 +75,10 @@ public class FindMemberPassword implements Filter {
 			hashMap.put("account", account);  
 			hashMap.put("password", password);
 			JSONObject jsonObject = new JSONObject(hashMap);
-			PrintWriter writer = response.getWriter();
-			writer.println(jsonObject);
+//			PrintWriter writer = response.getWriter();
+//			writer.println(jsonObject);
+			HttpSession session = req.getSession();
+			session.setAttribute("membercookie", jsonObject);
 			
 			request.setAttribute("rember", rember);
 			request.setAttribute("account", account);

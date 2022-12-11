@@ -5,40 +5,41 @@ import java.util.Date;
 
 //會員
 public class Member {
-//	UID
+	// UID
 	private int UID;
-//	帳號
+	// 帳號
 	private String account;
-//	暱稱
+	// 暱稱
 	private String Nickname;
-//	名
+	// 名
 	private String firstname;
-//	姓
+	// 姓
 	private String lastname;
-//	經驗
+	// 經驗
 	private int exp;
-//	等級()
+	// 等級()
 	private int leavel;
-//	點數
+	// 點數
 	private int point;
-//	手機
+	// 手機
 	private String phone;
-//	生日
+	// 生日
 	private Date birthday;
-//	居住地
+	// 居住地
 	private String address;
-//	電子信箱
+	// 電子信箱
 	private String email;
-//	性別
+	// 性別
 	private int gender;
-//	註冊日期
+	// 註冊日期
 	private Date registerdata;
-//	訂閱(Y y/N n)
+	// 訂閱(Y y/N n)
 	private String subscribed;
-//	大頭像
+	// 大頭像
 	private Blob shot;
-	
-	public Member() {}
+
+	public Member() {
+	}
 	public Member(int uID, String account, String nickname, String firstname,
 			String lastname, int exp, int leavel, int point, String phone,
 			Date birthday, String address, String email, int gender,
@@ -158,14 +159,14 @@ public class Member {
 		this.shot = shot;
 	}
 	public void setStringBirthday(String birthday) {
-		System.out.println(birthday);
+		// System.out.println(birthday);
 		long birthdayTime = Long.parseLong(birthday);
-		System.out.println(birthdayTime);
+		// System.out.println(birthdayTime);
 		Date date = new Date(birthdayTime);
-		System.out.println(date);
-		this.birthday=date;
+		// System.out.println(date);
+		this.birthday = date;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format(
@@ -174,6 +175,5 @@ public class Member {
 				phone, birthday, address, email, gender, registerdata,
 				subscribed, shot);
 	}
-	
 
 }

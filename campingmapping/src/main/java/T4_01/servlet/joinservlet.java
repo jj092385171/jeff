@@ -28,6 +28,8 @@ public class joinservlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest req,
 			HttpServletResponse resp) {
 		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			req.setCharacterEncoding("UTF-8");
 			PrintWriter printWriter = resp.getWriter();
 			String account = req.getParameter("account");
 			String passwordInput = req.getParameter("password");
