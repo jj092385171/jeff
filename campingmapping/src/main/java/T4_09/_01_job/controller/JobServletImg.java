@@ -39,7 +39,6 @@ public class JobServletImg extends HttpServlet {
 			JobBean jobBean = jsdi.findImgByRackID(parseID);
 			blob = jobBean.getImg();
 			is = blob.getBinaryStream();
-//			response.setContentType("jpg/png/jfif/jpeg");
 			os = response.getOutputStream();
 			int len = 0;
 			byte[] bytes = new byte[8000];

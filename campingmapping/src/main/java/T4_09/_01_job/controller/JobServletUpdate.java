@@ -5,11 +5,6 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,48 +15,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import T4_09._01_job.model.JobBean;
-
 import T4_09._01_job.service.JobServiceDAOImpl;
 
 @MultipartConfig()
-@WebServlet("/T4_09/JobServletAdd")
-public class JobServletAdd extends HttpServlet {
+@WebServlet("/JobServletUpdate")
+public class JobServletUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
 		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();
 		JobBean jobBean = new JobBean();
 
 		Integer uID = Integer.parseInt(request.getParameter("id"));
-		jobBean.setuID(uID);
-
-		Map<String, String> errorMessage = new HashMap<>();
 		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
-		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
-		if (findBeanByRackID != null) {
-			errorMessage.put("rackID", "編號重複,新增失敗");
-		}
-		request.setAttribute("ErrorMsg", errorMessage);
-
-		jobBean.setRackID(rackID);
 		String job = request.getParameter("job");
-		jobBean.setJob(job);
 		String salary = request.getParameter("salary");
-		jobBean.setSalary(salary);
 		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-		jobBean.setQuantity(quantity);
 		String place = request.getParameter("place");
-		jobBean.setPlace(place);
 		String time = request.getParameter("time");
-		jobBean.setTime(time);
 		String date = request.getParameter("date");
-		jobBean.setDate(date);
 		String remark = request.getParameter("remark");
-		jobBean.setRemark(remark);
 
+		InputStream in = request.getPart("img").getInputStream();
+		long size = request.getPart("img").getSize();
+		try {
+			Blob image = jobServiceImpl.fileToBlob(in, size);
+			JobServiceDAOImpl jsi = new JobServiceDAOImpl();
+			jobBean = jsi.findBeanByRackID(rackID);
+			if (size != 0) {
+				jobBean.setImg(image);
+			}
+		} catch (Exception e) {		
+		}
+		
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			jobBean.setRackUp(sd.parse(request.getParameter("rackUp")));
@@ -76,25 +68,22 @@ public class JobServletAdd extends HttpServlet {
 			e1.printStackTrace();
 		}
 
-		InputStream in = request.getPart("img").getInputStream();
-		long size = request.getPart("img").getSize();
-		try {
-			Blob image = jobServiceImpl.fileToBlob(in, size);
-			jobBean.setImg(image);
-		} catch (Exception e) {
-		}
-
-		if (!errorMessage.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/insert.jsp");
-			rd.forward(request, response);
-			return;
-		}
-
-		jobServiceImpl.addJob(jobBean);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/addSuccess.jsp");
+		jobBean.setuID(uID);
+		jobBean.setRackID(rackID);
+		jobBean.setJob(job);
+		jobBean.setSalary(salary);
+		jobBean.setQuantity(quantity);
+		jobBean.setPlace(place);
+		jobBean.setTime(time);
+		jobBean.setDate(date);
+		jobBean.setRemark(remark);
+		
+		jobServiceImpl.updateJob(jobBean);
+//		System.out.println(jobBean);
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/updateSucces.jsp");
 		rd.forward(request, response);
 		return;
+
 	}
 
 }

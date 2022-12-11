@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>insert</title>
+<title>Update</title>
 
 <style>
 .c1 {
@@ -16,21 +16,24 @@
 </style>
 </head>
 <body>
-	<form action="<c:url value='/T4_09/JobServletAdd'/>" method="POST"
+	<form action="<c:url value='/JobServletUpdate'/>" method="POST"
 		enctype="multipart/form-data">
 		<div class="c1">
 
+
 			<p>
-				會員id <input type="text" name="id">
+				會員id <input type="text" name="id" value="${JobBean.uID}">
 			</p>
-			<hr>
+
 			<p>
-				刊登編號 <input class="cl" type="text" name="rackID" required></p>
-				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.rackID}</div>
+				刊登編號 <input type="text" name="rackID" value="${JobBean.rackID}" readonly>
+			</p>
 			
 			<hr>
+
 			<p>職缺
-			<select name="job">
+				<%-- 				職缺 <input type="text" name="job" value="${JobBean.job}"> --%>
+			<select name="job" value="${JobBean.job}">
 			<option value="廚師">廚師</option>
 			<option value="廚助">廚助</option>
 			<option value="房務員">房務員</option>
@@ -42,38 +45,45 @@
 			</select>
 			</p>
 			<hr>
+
 			<p>
-				薪資 <input type="text" name="salary">
+				薪資 <input type="text" name="salary" value="${JobBean.salary}">
 			</p>
 			<hr>
 
+
 			<p>
-				人數 <input type="text" name="quantity">
+				人數 <input type="text" name="quantity" value="${JobBean.quantity}">
 			</p>
 			<hr>
 
+
 			<p>
-				地點 <input type="text" name="place">
+				地點 <input type="text" name="place" value="${JobBean.place}">
 			</p>
 			<hr>
 
+
 			<p>
-				可上班時段 <input type="text" name="time">
+				可上班時段 <input type="text" name="time" value="${JobBean.date}">
 			</p>
 			<hr>
 
+
 			<p>
-				可上班日期 <input type="text" name="date">
+				可上班日期 <input type="text" name="date" value="${JobBean.time}">
 			</p>
 			<hr>
 
+
 			<p>
-				上架日期 <input type="date" name="rackUp">
+				上架日期 <input type="date" name="rackUp" value="${JobBean.rackUp}">
 			</p>
 			<hr>
 
+
 			<p>
-				下架日期 <input type="date" name="rackDown">
+				下架日期 <input type="date" name="rackDown" value="${JobBean.rackDown}">
 			</p>
 			<hr>
 
@@ -81,26 +91,19 @@
 				照片上傳 <input type="file" name="img">
 			</p>
 			<hr>
-
 			<p>
 				備註
-				<textarea name="remark" cols="20" rows="5"></textarea>
+				<textarea value="${JobBean.img}" name="remark" cols="20" rows="5" ></textarea>
 			</p>
 
-			<input type="submit" value="送出"> <input type="reset"
-				value="取消">
+			<input type="submit" value="儲存"> 
+			<input type="reset"value="取消">
+
 		</div>
+
 	</form>
 	<form action="<c:url value='/T4_09/job/jobIndex.jsp' />">
 		<button>回首頁</button>
 	</form>
-	
-	<script src="https://code.jquery.com/jquery-3.6.1.js">
-	
-		$('input').attr('required',true)},	
-	
-	</script>
-	
-	
 </body>
 </html>

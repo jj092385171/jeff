@@ -2,7 +2,6 @@ package T4_09._01_job.service;
 
 import java.io.InputStream;
 import java.sql.Blob;
-import java.util.Date;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -76,18 +75,20 @@ public class JobServiceDAOImpl implements JobServiceDAO {
 	}
 
 	// 改職缺內容
+
 	@Override
 	public void updateJob(JobBean jobBean) {
-		int row = 0;
 		try {
 			DbUtils.begin();
 			jobDAO.updateJob(jobBean);
 			DbUtils.commit();
+
 		} catch (Exception e) {
 			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 	}
+
 
 	// 上傳圖片
 	@Override
@@ -110,17 +111,53 @@ public class JobServiceDAOImpl implements JobServiceDAO {
 	}
 
 	// 判斷時間
+//	@Override
+//	public boolean selectTime(Date rackUp, Date rackDown) {
+//		try {
+//			DbUtils.begin();
+//
+//			DbUtils.commit();
+//
+//		} catch (Exception e) {
+//			DbUtils.rollbacl();
+//			e.printStackTrace();
+//		}
+//		return false;
+//	}
+
+	// 透過rackID抓一筆資料
 	@Override
-	public boolean selectTime(Date rackUp, Date rackDown) {
+	public JobBean findBeanByRackID(int rackID) {
+		JobBean jBean = null;
 		try {
 			DbUtils.begin();
+			jBean = jobDAO.findBeanByRackID(rackID);
 			DbUtils.commit();
-
+			return jBean;
 		} catch (Exception e) {
 			DbUtils.rollbacl();
 			e.printStackTrace();
+			return null;
 		}
-		return false;
+	}
+	
+	//查職缺
+	@Override
+	public List<JobBean> findJobByJobLike(String job) {
+		List<JobBean> jb = null;
+		try {
+			DbUtils.begin();
+			jb = jobDAO.findJobByJobLike(job);
+			DbUtils.commit();
+			return jb;
+		} catch (Exception e) {
+			DbUtils.rollbacl();
+			e.printStackTrace();
+			return null;
+		
+		}
+		
+		
 	}
 
 }

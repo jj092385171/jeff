@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>showAll</title>
+<title>Show Select</title>
 <style>
 .t1 {
 	border: 2px solid;
@@ -13,8 +13,7 @@
 </style>
 </head>
 <body>
-
-	<table class="t1">
+<table class="t1">
 		<thead>
 			<tr>
 				<th>uID</th>
@@ -32,7 +31,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="JobBean" items="${showAllJob}">
+			<c:forEach var="JobBean" items="${jobBean}">
 				<tr>
 
 					<td>${JobBean.uID}</td>
@@ -48,8 +47,6 @@
 					<td>${JobBean.remark}</td>
 					<td>${JobBean.rackUp}</td>
 					<td>${JobBean.rackDown}</td>
-
-
 					<td>
 						<form
 							action="<c:url value='/JobServletDelete?de=${JobBean.rackID}'/>"
@@ -60,17 +57,14 @@
 							action="<c:url value='/JobServletFindBean?up=${JobBean.rackID}'/>"
 							method="POST" enctype="multipart/form-data">
 							<button>修改</button>
-						</form> 
-
+						</form>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<!-- 		</form> -->
 	<form action="<c:url value='/T4_09/job/jobIndex.jsp' />">
 		<button>回首頁</button>
 	</form>
-
 </body>
 </html>
