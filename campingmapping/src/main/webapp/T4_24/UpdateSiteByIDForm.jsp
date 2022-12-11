@@ -17,7 +17,7 @@
 			<link rel="stylesheet" href="assets/js/jquery-ui-1.13.2/jquery-ui.css" />
 			<style>
 				form{
-					width: 35%;
+					width: 40%;
 					margin-left: 100px;
 					border: 1px solid lightgray;
 					padding: 15px;
@@ -61,10 +61,18 @@
 							<br>
 							<form name="UpdateSiteCampByIDForm" action="<c:url value='/T4_24/UpdateSiteByIDServlet' />" method="POST" enctype="multipart/form-data">
 								營區位編號: <input type="text" name= 'siteID' readonly="readonly" value='${ siteBean.siteID }'><br>
-								營區位名: <input type="text" name='siteName' value='${ siteBean.siteName }'><br>
-							    圖片: <input type="file" name="sitePictures"><br>
-								總營位: <input type="text" name='totalSites'  value='${ siteBean.totalSites }'><br>
-								營位金額: <input type="text" name='siteMoney'  value='${ siteBean.siteMoney }'><br>
+								營區位名: <input type="text" name='siteName' value='${ siteBean.siteName }'>
+										<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.siteName}</div>
+								        <br>
+							    圖片: <input type="file" name="sitePictures">
+							    	 <div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.sitePictures}</div>
+							    	 <br>
+								總營位: <input type="text" name='totalSites'  value='${ siteBean.totalSites }'>
+								      <div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.totalSites}</div>
+									  <br>
+								營位金額: <input type="text" name='siteMoney'  value='${ siteBean.siteMoney }'>
+										<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.siteMoney}</div>
+								        <br>
 								營地編號: <input type="text" name='campID' readonly="readonly" value='${ siteBean.campID }'><br>
 								<input type="submit" value="修改">
 							</form>

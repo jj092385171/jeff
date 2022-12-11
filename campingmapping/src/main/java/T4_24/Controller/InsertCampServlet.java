@@ -30,6 +30,7 @@ import T4_24.Models.CampSiteCityTagsBean;
 public class InsertCampServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	//新增camp
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 
 		CampDao campDao = new CampDao();
@@ -39,9 +40,11 @@ public class InsertCampServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
+		//存錯誤的map
 		HashMap<String, String> errorMsg = new HashMap<>();
 		request.setAttribute("ErrorMsg", errorMsg);
 
+		
 		// 營地名
 		String campName = request.getParameter("campName");
 		if (campName == null || campName.trim().length() == 0) {
@@ -49,6 +52,9 @@ public class InsertCampServlet extends HttpServlet {
 		}
 		// 縣市
 		String cityID = request.getParameter("cityID");
+		if (cityID == null || cityID.trim().length() == 0) {
+			errorMsg.put("cityID", "必須輸入縣市");
+		}
 		// 地址
 		String location = request.getParameter("location");
 		if (location == null || location.trim().length() == 0) {
@@ -65,10 +71,13 @@ public class InsertCampServlet extends HttpServlet {
 		String discription = request.getParameter("discription");
 		// 標籤
 		String[] tagIDs = request.getParameterValues("tagID");
+		if (tagIDs == null || tagIDs.length == 0) {
+			errorMsg.put("tagIDs", "必須選擇標籤");
+		}
 
 		// 錯誤返回呼叫jsp
 		if (!errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/InsertCampForm.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/InsertPageServlet");
 			rd.forward(request, response);
 			return;
 		}
@@ -80,14 +89,16 @@ public class InsertCampServlet extends HttpServlet {
 			BigDecimal campID = campDao.AddCamp(cb);
 
 			// 利用campID和tagID新增到營地的標籤
-			for (String tagID : tagIDs) {
-				tagOfCampDao.Add(Integer.valueOf(tagID), campID.intValueExact());
+			if(tagIDs != null  ||  tagIDs.length != 0) {
+				for (String tagID : tagIDs) {
+					tagOfCampDao.Add(Integer.valueOf(tagID), campID.intValueExact());
+				}
 			}
 			
-			CampSiteCityTagsBean cctBean = campPlusCityPlusTagsDao.findCampByID(campID.intValueExact());
+			CampSiteCityTagsBean csctBean = campPlusCityPlusTagsDao.findCampByID(campID.intValueExact());
 			
 			session.setAttribute("campID", campID.toString());
-			session.setAttribute("cctBean", cctBean);
+			session.setAttribute("csctBean", csctBean);
 			session.setAttribute("what", "新增");
 
 			String contextPath = request.getContextPath();

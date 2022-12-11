@@ -148,7 +148,7 @@
 								<td>圖片:</td>
 								<td>${ all.discription }</td>
 								<td><c:forEach var='tag' items='${all.tagList}'>
-										${tag.tagName}&nbsp;
+										${tag.tagName}&nbsp; / &nbsp;
 									</c:forEach>
 								</td>
 							</tr>

@@ -67,7 +67,7 @@ public class CampSiteCityTagsDao {
 
 	}
 
-	// 透過cmapID查camp和cityName和tags
+	// 透過cmapID查CampSiteCityTags
 	public CampSiteCityTagsBean findCampByID(int campID) throws SQLException {
 		String sql = "select * from CampPlusCity where campID = ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
@@ -78,8 +78,12 @@ public class CampSiteCityTagsDao {
 		
 		preState.setInt(1, campID);
 		ResultSet rs = preState.executeQuery();
-		rs.next();
+			
 
+		if( !rs.next() ) {
+			return null;
+		}
+		
 		CampSiteCityTagsBean cctBean = new CampSiteCityTagsBean();
 		cctBean.setCampID(rs.getInt("campID"));
 		cctBean.setCampName(rs.getString("campName"));
@@ -103,7 +107,7 @@ public class CampSiteCityTagsDao {
 
 	}
 
-	// 透過cityID查camps和cityName和tags
+	// 透過cityID查CampSiteCityTags
 	public List<CampSiteCityTagsBean> findCampsByCityID(int cityID) throws SQLException {
 		String sql = "select * from CampPlusCity where cityID like ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
@@ -115,6 +119,7 @@ public class CampSiteCityTagsDao {
 		
 		preState.setInt(1, cityID);
 		ResultSet rs = preState.executeQuery();
+		
 		while (rs.next()) {
 			CampSiteCityTagsBean cctBean = new CampSiteCityTagsBean();
 			cctBean.setCampID(rs.getInt("campID"));

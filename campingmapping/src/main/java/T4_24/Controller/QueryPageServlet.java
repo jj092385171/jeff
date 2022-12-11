@@ -10,9 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampDao;
 import T4_24.Dao.CityDao;
 import T4_24.Models.CityBean;
 
@@ -21,7 +19,7 @@ import T4_24.Models.CityBean;
 public class QueryPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	//顯示所有city
+	//查詢頁面, 顯示所有city
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		CityDao cityDao = new CityDao();

@@ -2,10 +2,11 @@ package T4_24.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import T4_24.Models.SiteBean;
 public class UpadteSiteByIDPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
+	//更新頁面, site ,顯示父營地
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		SiteDao siteDao = new SiteDao();
@@ -28,11 +29,29 @@ public class UpadteSiteByIDPageServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		
-		String campID = request.getParameter("campID");
+		//存錯誤的map
+		HashMap<String, String> errorMsg = new HashMap<>();
+		request.setAttribute("ErrorMsg", errorMsg);
+				
+		//營地編號
+		String campIDSite = request.getParameter("campIDSite");
+		if (campIDSite == null || campIDSite.trim().length() == 0) {
+			errorMsg.put("campIDSite", "必須輸入營地編號");
+		}
+		
+		
+		// 錯誤返回呼叫jsp
+		if (!errorMsg.isEmpty()) {
+			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/UpdatePage.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		
+		
 		List<SiteBean> siteList = null;
 		
 		try {
-			siteList = siteDao.findSitesByCampID(Integer.valueOf(campID));
+			siteList = siteDao.findSitesByCampID(Integer.valueOf(campIDSite));
 			
 			
 		} catch (NumberFormatException | SQLException e) {

@@ -42,7 +42,7 @@ form {
 					<td width="120" height="40">選擇營區位圖片:</td>
 					<td width="600" height="40" align="left"><input id='sitePictures' name="sitePictures" 
 						type="file" size="20">
-						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.sitePicture}</div>
+						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.sitePictures}</div>
 					</td>
 				</tr>
 				<tr bgcolor='lightgreen'>

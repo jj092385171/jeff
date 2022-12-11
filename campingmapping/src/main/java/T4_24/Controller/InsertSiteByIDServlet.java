@@ -28,7 +28,7 @@ import T4_24.Models.SiteBean;
 public class InsertSiteByIDServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
+	//新增site
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		SiteDao siteDao = new SiteDao();

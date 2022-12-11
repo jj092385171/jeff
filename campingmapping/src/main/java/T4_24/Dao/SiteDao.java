@@ -63,7 +63,11 @@ public class SiteDao {
 		
 		preState.setInt(1, siteID);
 		ResultSet rs = preState.executeQuery();
-		rs.next();
+		
+		if( !rs.next() ) {
+			return null;
+		}
+		
 		
 		SiteBean siteBean = new SiteBean();
 		siteBean.setSiteID(rs.getInt("siteID"));

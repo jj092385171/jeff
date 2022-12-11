@@ -25,7 +25,7 @@ public class InsertPageServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	//顯示所有tag
+	//新增頁面, 顯示所有citys, tags
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		TagDao tagDao = new TagDao();

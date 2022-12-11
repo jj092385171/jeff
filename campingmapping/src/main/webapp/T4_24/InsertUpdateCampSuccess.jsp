@@ -64,15 +64,15 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>${ cctBean.campID }</td>
-									<td>${ cctBean.campName }</td>
-									<td>${ cctBean.cityID }</td>
-									<td>${ cctBean.cityName }</td>
-									<td>${ cctBean.location }</td>
+									<td>${ csctBean.campID }</td>
+									<td>${ csctBean.campName }</td>
+									<td>${ csctBean.cityID }</td>
+									<td>${ csctBean.cityName }</td>
+									<td>${ csctBean.location }</td>
 									<td>圖片: </td>
-									<td>${ cctBean.discription }</td>
+									<td>${ csctBean.discription }</td>
 									<td>
-										<c:forEach var='tag' items='${cctBean.tagList}'>
+										<c:forEach var='tag' items='${csctBean.tagList}'>
 											${tag.tagName} &nbsp; / &nbsp;
 										</c:forEach>
 									</td>

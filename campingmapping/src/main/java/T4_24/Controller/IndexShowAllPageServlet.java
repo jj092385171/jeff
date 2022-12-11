@@ -26,6 +26,7 @@ public class IndexShowAllPageServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	//showAll
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();

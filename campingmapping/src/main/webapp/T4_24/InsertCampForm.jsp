@@ -36,6 +36,7 @@ form {
 						<c:forEach var='city' items='${cityList}'>
 							<input type="radio" name="cityID" value="${city.cityID}" />${city.cityName}
 						</c:forEach>
+					<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.cityID}</div>
 					</td>
 				</tr>
 				<tr bgcolor='lightgreen'>
@@ -64,6 +65,7 @@ form {
 						<c:forEach var='tag' items='${tagList}'>
 							<input type="checkbox" name="tagID" value="${tag.tagID}" />${tag.tagName}
 						</c:forEach>
+						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.tagIDs}</div>
 					</td>
 				</tr>
 				<tr bgcolor='lightblue'>
