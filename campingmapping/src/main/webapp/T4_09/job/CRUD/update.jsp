@@ -22,8 +22,9 @@
 
 
 			<p>
-				會員id <input type="text" name="id" value="${JobBean.uID}">
-			</p>
+				會員id <input type="text" name="id" value="${JobBean.uID}"></p>
+				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.id}</div>
+			
 
 			<p>
 				刊登編號 <input type="text" name="rackID" value="${JobBean.rackID}" readonly>
@@ -32,8 +33,8 @@
 			<hr>
 
 			<p>職缺
-				<%-- 				職缺 <input type="text" name="job" value="${JobBean.job}"> --%>
-			<select name="job" value="${JobBean.job}">
+			<input type="hidden" value="${JobBean.job}">
+			<select name="job" >
 			<option value="廚師">廚師</option>
 			<option value="廚助">廚助</option>
 			<option value="房務員">房務員</option>
@@ -41,6 +42,7 @@
 			<option value="櫃台">櫃台</option>
 			<option value="假日工讀生">假日工讀生</option>
 			<option value="行政管理人員">行政管理人員</option>
+			<option value="夜班保全">夜班保全</option>	
 			<option value="其他">其他</option>
 			</select>
 			</p>
@@ -93,7 +95,7 @@
 			<hr>
 			<p>
 				備註
-				<textarea value="${JobBean.img}" name="remark" cols="20" rows="5" ></textarea>
+				<textarea  name="remark" cols="20" rows="5" >${JobBean.remark}</textarea>
 			</p>
 
 			<input type="submit" value="儲存"> 
@@ -105,5 +107,20 @@
 	<form action="<c:url value='/T4_09/job/jobIndex.jsp' />">
 		<button>回首頁</button>
 	</form>
+
+<script>
+
+
+
+
+
+
+
+</script>
+
 </body>
+
+
+
+
 </html>

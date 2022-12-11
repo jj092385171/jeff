@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,10 +31,13 @@ public class JobServletUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		Map<String, String> errorMessage = new HashMap<>();
 		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();
 		JobBean jobBean = new JobBean();
 
-		Integer uID = Integer.parseInt(request.getParameter("id"));
+		
+		
+//		Integer uID = Integer.parseInt(request.getParameter("id"));
 		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
 		String job = request.getParameter("job");
 		String salary = request.getParameter("salary");
@@ -41,7 +46,7 @@ public class JobServletUpdate extends HttpServlet {
 		String time = request.getParameter("time");
 		String date = request.getParameter("date");
 		String remark = request.getParameter("remark");
-
+		// 處理照片格式
 		InputStream in = request.getPart("img").getInputStream();
 		long size = request.getPart("img").getSize();
 		try {
@@ -53,22 +58,32 @@ public class JobServletUpdate extends HttpServlet {
 			}
 		} catch (Exception e) {		
 		}
-		
+		//驗證會員id輸入格式
+		try {
+			Integer uID = Integer.parseInt(request.getParameter("id"));
+			jobBean.setuID(uID);
+
+		} catch (Exception e) {
+			errorMessage.put("id", "輸入格式錯誤");
+		}
+		request.setAttribute("ErrorMsg", errorMessage);
+		// 轉日期格式
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			jobBean.setRackUp(sd.parse(request.getParameter("rackUp")));
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-
+		// 轉日期格式
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			jobBean.setRackDown(sdf.parse(request.getParameter("rackDown")));
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
+		
 
-		jobBean.setuID(uID);
+//		jobBean.setuID(uID);
 		jobBean.setRackID(rackID);
 		jobBean.setJob(job);
 		jobBean.setSalary(salary);
@@ -77,6 +92,12 @@ public class JobServletUpdate extends HttpServlet {
 		jobBean.setTime(time);
 		jobBean.setDate(date);
 		jobBean.setRemark(remark);
+		
+		if (!errorMessage.isEmpty()) {
+			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/update.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		
 		jobServiceImpl.updateJob(jobBean);
 //		System.out.println(jobBean);

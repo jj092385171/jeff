@@ -29,24 +29,27 @@ public class JobServletAdd extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
+		Map<String, String> errorMessage = new HashMap<>();
 		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();
 		JobBean jobBean = new JobBean();
+		//驗證會員id輸入格式
+		try {
+			Integer uID = Integer.parseInt(request.getParameter("id"));
+			jobBean.setuID(uID);
 
-		Integer uID = Integer.parseInt(request.getParameter("id"));
-		jobBean.setuID(uID);
-
-		Map<String, String> errorMessage = new HashMap<>();
-		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
-		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
-		System.out.println(findBeanByRackID);
-		if (findBeanByRackID != null) {
-			System.out.println("111111");
-			errorMessage.put("rackID", "編號重複,新增失敗");
+		} catch (Exception e) {
+			errorMessage.put("id", "輸入格式錯誤");
 		}
 		request.setAttribute("ErrorMsg", errorMessage);
 
+		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
+		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
+		if (findBeanByRackID.getRackID() != 0) {
+			errorMessage.put("rackID", "編號重複,新增失敗");
+		}
+		request.setAttribute("ErrorMsg", errorMessage);
 		jobBean.setRackID(rackID);
+
 		String job = request.getParameter("job");
 		jobBean.setJob(job);
 		String salary = request.getParameter("salary");
@@ -62,20 +65,21 @@ public class JobServletAdd extends HttpServlet {
 		String remark = request.getParameter("remark");
 		jobBean.setRemark(remark);
 
+		// 轉日期格式
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			jobBean.setRackUp(sd.parse(request.getParameter("rackUp")));
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-
+		// 轉日期格式
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			jobBean.setRackDown(sdf.parse(request.getParameter("rackDown")));
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-
+		// 處理照片格式
 		InputStream in = request.getPart("img").getInputStream();
 		long size = request.getPart("img").getSize();
 		try {

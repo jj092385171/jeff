@@ -21,8 +21,9 @@
 		<div class="c1">
 
 			<p>
-				會員id <input type="text" name="id" required>>
-			</p>
+				會員id <input type="text" name="id" required></p>
+				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.id}</div>
+			
 			<hr>
 			<p>
 				刊登編號 <input class="cl" type="text" name="rackID" required></p>
@@ -38,6 +39,7 @@
 			<option value="櫃台">櫃台</option>
 			<option value="假日工讀生">假日工讀生</option>
 			<option value="行政管理人員">行政管理人員</option>
+			<option value="夜班保全">夜班保全</option>	
 			<option value="其他">其他</option>
 			</select>
 			</p>

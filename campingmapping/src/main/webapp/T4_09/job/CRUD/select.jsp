@@ -21,6 +21,7 @@
 			<option value="櫃台">櫃台</option>
 			<option value="假日工讀生">假日工讀生</option>
 			<option value="行政管理人員">行政管理人員</option>
+			<option value="夜班保全">夜班保全</option>	
 			<option value="其他">其他</option>
 		</select> <input type="submit" value="查詢">
 	</form>
