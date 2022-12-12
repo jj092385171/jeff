@@ -1,1 +1,68 @@
-﻿{"metadata":{"kernel_spec":{"name":"SQL","language":"sql","display_name":"SQL"},"language_info":{"name":"sql","version":""}},"nbformat":4,"nbformat_minor":2,"cells":[{"cell_type":"markdown","source":["# [dbo].[initiating]"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='initiating' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["USE [campDB]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='initiating' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[initiating]    Script Date: 2022/12/6 下午 01:13:38 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[initiating](\r\n\t[initiatingnum] [int] IDENTITY(1,1) NOT NULL,\r\n\t[postmember] [int] NOT NULL,\r\n\t[postdate] [datetime2](7) NOT NULL,\r\n\t[startdate] [datetime2](7) NOT NULL,\r\n\t[enddate] [datetime2](7) NOT NULL,\r\n\t[currentnum] [int] NOT NULL,\r\n\t[acceptablenum] [int] NOT NULL,\r\n\t[camparea] [nvarchar](max) NULL,\r\n\t[pair] [int] NOT NULL,\r\n CONSTRAINT [PK__initiati__4F887109F8CEB269] PRIMARY KEY CLUSTERED \r\n(\r\n\t[initiatingnum] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='initiating' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[joinlist]"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='joinlist' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[joinlist]    Script Date: 2022/12/6 下午 01:13:38 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[joinlist](\r\n\t[joinlistnum] [int] IDENTITY(1,1) NOT NULL,\r\n\t[initiating_num] [int] NOT NULL,\r\n\t[joinmember] [int] NOT NULL,\r\n\t[joinpeoplenum] [int] NOT NULL,\r\n\t[accept] [int] NOT NULL,\r\n CONSTRAINT [PK__joinlist__046EE309CEC8D01A] PRIMARY KEY CLUSTERED \r\n(\r\n\t[joinlistnum] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='joinlist' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[messagelist]"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='messagelist' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[messagelist]    Script Date: 2022/12/6 下午 01:13:38 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[messagelist](\r\n\t[messagelistnum] [int] IDENTITY(1,1) NOT NULL,\r\n\t[initiating_num] [int] NOT NULL,\r\n\t[messagemember] [int] NOT NULL,\r\n\t[messagetext] [nvarchar](max) NOT NULL,\r\n CONSTRAINT [PK__messagel__95A4F31F22D2BC40] PRIMARY KEY CLUSTERED \r\n(\r\n\t[messagelistnum] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='messagelist' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [FK__joinlist__initia__29572725]"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='joinlist' and @Schema='dbo']/ForeignKey[@Name='FK__joinlist__initia__29572725']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[joinlist]  WITH CHECK ADD  CONSTRAINT [FK__joinlist__initia__29572725] FOREIGN KEY([initiating_num])\r\nREFERENCES [dbo].[initiating] ([initiatingnum])\r\n","GO\r\n","ALTER TABLE [dbo].[joinlist] CHECK CONSTRAINT [FK__joinlist__initia__29572725]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='joinlist' and @Schema='dbo']/ForeignKey[@Name='FK__joinlist__initia__29572725']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__messageli__initi__267ABA7A]"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='messagelist' and @Schema='dbo']/ForeignKey[@Name='FK__messageli__initi__267ABA7A']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[messagelist]  WITH CHECK ADD  CONSTRAINT [FK__messageli__initi__267ABA7A] FOREIGN KEY([initiating_num])\r\nREFERENCES [dbo].[initiating] ([initiatingnum])\r\n","GO\r\n","ALTER TABLE [dbo].[messagelist] CHECK CONSTRAINT [FK__messageli__initi__267ABA7A]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='LAPTOP-ORVBU6B8']/Database[@Name='campDB']/Table[@Name='messagelist' and @Schema='dbo']/ForeignKey[@Name='FK__messageli__initi__267ABA7A']","object_type":"ForeignKey"}}]}
+USE [campDB]
+GO
+/****** Object:  Table [dbo].[initiating]    Script Date: 2022/12/12 上午 11:49:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[initiating](
+	[initiatingnum] [int] IDENTITY(1,1) NOT NULL,
+	[postmember] [int] NOT NULL,
+	[postdate] [datetime2](7) NOT NULL,
+	[startdate] [datetime2](0) NOT NULL,
+	[enddate] [datetime2](0) NOT NULL,
+	[currentnum] [int] NOT NULL,
+	[acceptablenum] [int] NOT NULL,
+	[camparea] [nvarchar](max) NOT NULL,
+	[pair] [int] NOT NULL,
+ CONSTRAINT [PK__initiati__4F88710965AAA22A] PRIMARY KEY CLUSTERED 
+(
+	[initiatingnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[joinlist]    Script Date: 2022/12/12 上午 11:49:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[joinlist](
+	[joinlistnum] [int] NOT NULL,
+	[initiating_num] [int] NOT NULL,
+	[joinmember] [int] NOT NULL,
+	[joinpeoplenum] [int] NOT NULL,
+	[accept] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[joinlistnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[messagelist]    Script Date: 2022/12/12 上午 11:49:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[messagelist](
+	[messagelistnum] [int] NOT NULL,
+	[initiating_num] [int] NOT NULL,
+	[messagemember] [int] NOT NULL,
+	[messagetext] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK__messagel__95A4F31FAE28FD07] PRIMARY KEY CLUSTERED 
+(
+	[messagelistnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[initiating] ADD  CONSTRAINT [DF_initiating_postdate]  DEFAULT (getdate()) FOR [postdate]
+GO
+ALTER TABLE [dbo].[joinlist]  WITH CHECK ADD  CONSTRAINT [FK__joinlist__initia__02084FDA] FOREIGN KEY([initiating_num])
+REFERENCES [dbo].[initiating] ([initiatingnum])
+GO
+ALTER TABLE [dbo].[joinlist] CHECK CONSTRAINT [FK__joinlist__initia__02084FDA]
+GO
+ALTER TABLE [dbo].[messagelist]  WITH CHECK ADD  CONSTRAINT [FK__messageli__initi__7F2BE32F] FOREIGN KEY([initiating_num])
+REFERENCES [dbo].[initiating] ([initiatingnum])
+GO
+ALTER TABLE [dbo].[messagelist] CHECK CONSTRAINT [FK__messageli__initi__7F2BE32F]
+GO
