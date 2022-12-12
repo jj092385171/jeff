@@ -33,7 +33,7 @@ public class JobDAOimpl implements JobDAO {
 	// 搜尋全部
 	@Override
 	public List<JobBean> selectAll() throws SQLException {
-		String sql = "select* from job order by uID ASC";
+		String sql = "select* from job order by rackID ASC";
 
 		Connection connection = DbUtils.getConnection();
 		PreparedStatement pre = connection.prepareStatement(sql);

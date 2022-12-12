@@ -21,17 +21,18 @@
 		<div class="c1">
 
 			<p>
-				會員id <input type="text" name="id" required></p>
+				會員id <input type="text" name="id" value='${param.id}' required></p>
 				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.id}</div>
 			
 			<hr>
 			<p>
-				刊登編號 <input class="cl" type="text" name="rackID" required></p>
+				刊登編號 <input class="cl" type="text" name="rackID" value='${param.rackID}'required></p>
 				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.rackID}</div>
 			
 			<hr>
 			<p>職缺
-			<select name="job">
+			<input type="hidden" id="ii" value="${param.ii}">
+			<select>
 			<option value="廚師">廚師</option>
 			<option value="廚助">廚助</option>
 			<option value="房務員">房務員</option>
@@ -45,48 +46,48 @@
 			</p>
 			<hr>
 			<p>
-				薪資 <input type="text" name="salary" required>
+				薪資 <input type="text" name="salary" value='${param.salary}' required>
 			</p>
 			<hr>
 
 			<p>
-				人數 <input type="text" name="quantity" required></p>
+				人數 <input type="text" name="quantity" value='${param.quantity}' required></p>
 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
 			<hr>
 
 			<p>
-				地點 <input type="text" name="place" required>
+				地點 <input type="text" name="place" value='${param.place}' required>
 			</p>
 			<hr>
 
 			<p>
-				可上班時段 <input type="text" name="time" required>
+				可上班時段 <input type="text" name="time" value='${param.time}' required>
 			</p>
 			<hr>
 
 			<p>
-				可上班日期 <input type="text" name="date" required>
+				可上班日期 <input type="text" name="date" value='${param.date}' required>
 			</p>
 			<hr>
 
 			<p>
-				上架日期 <input type="date" name="rackUp" required>
+				上架日期 <input type="date" name="rackUp" value='${param.rackUp}' required>
 			</p>
 			<hr>
 
 			<p>
-				下架日期 <input type="date" name="rackDown" required>
+				下架日期 <input type="date" name="rackDown" value='${param.rackDown}' required>
 			</p>
 			<hr>
 
 			<p>
-				照片上傳 <input type="file" name="img" required>
+				照片上傳 <input type="file" name="img" value='${param.img}' required>
 			</p>
 			<hr>
 
 			<p>
 				備註
-				<textarea name="remark" cols="20" rows="5"></textarea>
+				<textarea name="remark" cols="20" rows="5">${param.remark}</textarea>
 			</p>
 
 			<input type="submit" value="送出"> <input type="reset"

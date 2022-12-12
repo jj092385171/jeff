@@ -22,19 +22,20 @@
 
 
 			<p>
-				會員id <input type="text" name="id" value="${JobBean.uID}" required>
+				會員id <input type="text" name="id" value="${JobBean.uID}${param.id}" required>
 			</p>
 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.id}</div>
 			<hr>
 
 			<p>
-				刊登編號 <input type="text" name="rackID" value="${JobBean.rackID} "
+				刊登編號 <input type="text" name="rackID" value="${JobBean.rackID}${param.rackID} "
 					readonly>
 			</p>
 			<hr>
 
 			<p>
-				職缺 <input type="hidden" id="ii" value="${JobBean.job}"> <select>
+				職缺 <input type="hidden" id="ii" value="${JobBean.job}${param.ii}"> 
+				<select>
 					<option class="1" value="廚師">廚師</option>
 					<option class="2" value="廚助">廚助</option>
 					<option class="3" value="房務員">房務員</option>
@@ -49,13 +50,13 @@
 			<hr>
 
 			<p>
-				薪資 <input type="text" name="salary" value="${JobBean.salary}"
+				薪資 <input type="text" name="salary" value="${JobBean.salary}${param.salary}"
 					required>
 			</p>
 			<hr>
 
 			<p>
-				人數 <input type="text" name="quantity" value="${JobBean.quantity}"
+				人數 <input type="text" name="quantity" value="${JobBean.quantity}${param.quantity}"
 					required>
 			</p>
 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
@@ -63,30 +64,30 @@
 
 
 			<p>
-				地點 <input type="text" name="place" value="${JobBean.place}" required>
+				地點 <input type="text" name="place" value="${JobBean.place}${param.place}" required>
 			</p>
 			<hr>
 
 			<p>
-				可上班時段 <input type="text" name="time" value="${JobBean.date}"
+				可上班時段 <input type="text" name="time" value="${JobBean.date}${param.time}"
 					required>
 			</p>
 			<hr>
 
 			<p>
-				可上班日期 <input type="text" name="date" value="${JobBean.time}"
+				可上班日期 <input type="text" name="date" value="${JobBean.time}${param.date}"
 					required>
 			</p>
 			<hr>
 
 			<p>
-				上架日期 <input type="date" name="rackUp" value="${JobBean.rackUp}"
+				上架日期 <input type="date" name="rackUp" value="${JobBean.rackUp}${param.rackUp}"
 					required>
 			</p>
 			<hr>
 
 			<p>
-				下架日期 <input type="date" name="rackDown" value="${JobBean.rackDown}"
+				下架日期 <input type="date" name="rackDown" value="${JobBean.rackDown}${param.rackDown}"
 					required>
 			</p>
 			<hr>
@@ -97,7 +98,7 @@
 			<hr>
 			<p>
 				備註
-				<textarea name="remark" cols="20" rows="5">${JobBean.remark}</textarea>
+				<textarea name="remark" cols="20" rows="5">${JobBean.remark}${param.remark}</textarea>
 			</p>
 
 			<input type="submit" value="儲存"> <input type="reset"

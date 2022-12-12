@@ -35,10 +35,13 @@ public class JobServletFindBeanByuID extends HttpServlet {
 			String str = request.getParameter("uID");
 			int uID = Integer.parseInt(str);
 			List<JobBean> jobBean = jsi.findBeanByuID(uID);
-			if (jobBean.size()==0) {
-				errorMessage.put("uID", "無此會員ID,請重新輸入");
+			try {
+				if (jobBean.size()==0) {
+					errorMessage.put("uID", "無此會員ID,請重新輸入");
+				}
+				request.setAttribute("ErrorMsg", errorMessage);
+			} catch (Exception e) {
 			}
-			request.setAttribute("ErrorMsg", errorMessage);
 			
 		} catch (Exception e) {
 			errorMessage.put("uID", "輸入格式錯誤");
@@ -52,7 +55,9 @@ public class JobServletFindBeanByuID extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
-		
+		String str = request.getParameter("uID");
+		int uID = Integer.parseInt(str);
+		List<JobBean> jobBean = jsi.findBeanByuID(uID);
 		request.setAttribute("jobBean", jobBean);
 		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/showSelect.jsp");
 		rd.forward(request, response);

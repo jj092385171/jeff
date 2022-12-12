@@ -29,14 +29,17 @@
 	
 	<form action="<c:url value='/JobServletFindBeanByuID'/>" method="POST"
 		enctype="multipart/form-data">
-		會員ID:<input type="text" name="uID"> <input type="submit" value="查詢">
+		會員ID:<input type="text" name="uID" required> <input type="submit" value="查詢">
 		<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.uID}</div>
+		
 	</form>
 	<hr>
 
 	<form action="<c:url value='/T4_09/job/jobIndex.jsp' />">
 		<button>回首頁</button>
 	</form>
-
+<script src="https://code.jquery.com/jquery-3.6.1.js">
+		$('input').attr('required',true),	
+	</script>
 </body>
 </html>
