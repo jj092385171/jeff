@@ -88,7 +88,7 @@ public class LoginCheckingFilter implements Filter {
 						session.setAttribute("requestURI", requestURI);
 					}
 					resp.sendRedirect(resp.encodeRedirectURL(
-							contextPath + "/T4_01/login.htm"));
+							contextPath + "/T4_01/login.html"));
 					return;
 				}
 			} else { //

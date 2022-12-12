@@ -151,7 +151,7 @@ $(function () {
 				}).done(function (data) {
 					if (data.res == 1) {
 						// alert('username') 
-						location.href = "/campingmapping/index.html";
+						location.href = "/campingmapping/index.jsp";
 						rel = "external nofollow";
 					} else {
 						// alert('username'); 
