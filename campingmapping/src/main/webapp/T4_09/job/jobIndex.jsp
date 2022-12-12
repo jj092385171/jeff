@@ -14,6 +14,9 @@
 <form action="<c:url value='CRUD/insert.jsp'/>">
 <button>新增</button>
 </form>
+<%-- <form action="<c:url value='/SelectAllServlet.do'/>" method="POST"> --%>
+<!-- <input type="submit" value="輸入資料庫內產品" style="width:70px;height:50px;"> -->
+<!-- </form> -->
 <form action="<c:url value='CRUD/select.jsp'/>">
 <button>查詢</button>
 </form>

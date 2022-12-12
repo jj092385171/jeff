@@ -26,6 +26,7 @@
 		</select> <input type="submit" value="查詢">
 	</form>
 	<hr>
+	
 	<form action="<c:url value='/JobServletFindBeanByuID'/>" method="POST"
 		enctype="multipart/form-data">
 		會員ID:<input type="text" name="uID"> <input type="submit" value="查詢">
