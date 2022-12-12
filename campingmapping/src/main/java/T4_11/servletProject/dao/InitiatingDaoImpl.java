@@ -314,7 +314,7 @@ public class InitiatingDaoImpl implements InitiatingDao{
 				initiatingBean.setCamparea(result);
 				break;
 			case "pair":
-				initiatingBean.setPair(0);
+				initiatingBean.setPair(Integer.valueOf(result));
 				break;
 			}
 		}

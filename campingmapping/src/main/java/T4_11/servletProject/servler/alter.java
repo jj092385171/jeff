@@ -32,13 +32,11 @@ public class alter extends HttpServlet {
 		String alter = request.getParameter("alter");
 		if (alter != null) {
 			request.setAttribute("initiatingnum", alter);
-			System.out.println(alter);
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_11/Alter.jsp");
 			rd.forward(request, response);
 		}else {
-			String num = request.getParameter("initiatingnum");
-			System.out.println(num);
 			System.out.println("innn");
+			System.out.println(request.getParameter("pair"));
 			Map<String, String[]> params = request.getParameterMap();
 			InitiatingBean initiatingBean = iDao.setInitiatingBean(params);
 			iDao.updateInitiating(initiatingBean);

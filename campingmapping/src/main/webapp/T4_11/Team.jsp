@@ -13,10 +13,10 @@
 				<!-- 	<link rel="stylesheet" href="../T4_11/background/assets/css/main.css" /> -->
 				<link rel="stylesheet" href="<%=basePath%>" />
 				<style>
-					hr {
-						margin: 10px;
-						border-color: transparent;
-					}
+ 					hr { 
+ 						margin: 10px; 
+ 						border-color: transparent; 
+ 					} 
 
 				</style>
 			</head>
@@ -109,19 +109,19 @@
 											<tr>
 												<td>${bean.initiatingnum}</td>
 												<td>${bean.postmember}</td>
-												<td>${bean.postdate}</td>
-												<td>${bean.startdate}</td>
-												<td>${bean.enddate}</td>
+												<td class="tendigits">${bean.postdate}</td>
+												<td class="tendigits">${bean.startdate}</td>
+												<td class="tendigits">${bean.enddate}</td>
 												<td>${bean.currentnum}</td>
 												<td>${bean.acceptablenum}</td>
 												<td>${bean.camparea}</td>
-												<td>${bean.pair}</td>
+												<td class="pair">${bean.pair}</td>
 											</tr>
 										</c:forEach>
 									</table>
 								</div>
 								<div class="image object">
-									<table>
+									<table id="table">
 										<thead>
 											<tr>
 												<td><a href="/campingmapping/T4_11/insert.jsp" class="button big">新增</a></td>
@@ -151,13 +151,13 @@
 												</td>
 												<td>${bean.initiatingnum}</td>
 												<td>${bean.postmember}</td>
-												<td>${bean.postdate}</td>
-												<td>${bean.startdate}</td>
-												<td>${bean.enddate}</td>
+												<td class="tendigits">${bean.postdate}</td>
+												<td class="tendigits">${bean.startdate}</td>
+												<td class="tendigits">${bean.enddate}</td>
 												<td>${bean.currentnum}</td>
 												<td>${bean.acceptablenum}</td>
 												<td>${bean.camparea}</td>
-												<td>${bean.pair}</td>
+												<td class="pair">${bean.pair}</td>
 											</tr>
 										</c:forEach>
 									</table>
@@ -275,6 +275,7 @@
 				</div>
 
 				<!-- Scripts -->
+				<script src="../jquery-3.6.1.js"></script>
 				<% String basePath2=request.getScheme() + "://" + request.getServerName() + ":" +
 					request.getServerPort() + path + "assets/js/jquery.min.js" ; %>
 					<% String basePath3=request.getScheme() + "://" + request.getServerName() + ":" +
@@ -291,6 +292,22 @@
 									<script src="<%=basePath5%>"></script>
 									<script src="<%=basePath6%>"></script>
 				<script>
+				var el = document.querySelectorAll('.pair');
+				console.log(el.length);
+				for(var i = 0; i<el.length ; i++) {
+					console.log(el[i].innerText);
+					if(el[i].innerText == 0){
+						el[i].innerText = "可配對";
+					}else{
+						el[i].innerText = "不可配對";
+					}
+				}
+				var date = document.querySelectorAll('.tendigits');
+				console.log(date.length);
+				for(var j = 0; j < date.length; j++){
+					var tendigitsdate = date[j].innerText.substr(0,10);
+					date[j].innerText = tendigitsdate;
+				}
 				</script>
 			</body>
 
