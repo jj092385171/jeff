@@ -54,7 +54,7 @@
 							<button>刪除</button>
 						</form>
 						<form
-							action="<c:url value='/JobServletFindBean?up=${JobBean.rackID}'/>"
+							action="<c:url value='/JobServletFindBeanByRackID?up=${JobBean.rackID}'/>"
 							method="POST" enctype="multipart/form-data">
 							<button>修改</button>
 						</form>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import T4_09._01_job.model.JobBean;
 import T4_09._01_job.service.JobServiceDAOImpl;
 @MultipartConfig()
-@WebServlet("/JobServletFindBean")
+@WebServlet("/JobServletFindBeanByRackID")
 public class JobServletFindBeanByRackID extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,8 +25,8 @@ public class JobServletFindBeanByRackID extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String rackID = request.getParameter("up");
-		int rint = Integer.parseInt(rackID);
+//		String rackID = request.getParameter("up");
+		int rint = Integer.parseInt(request.getParameter("up"));
 		JobServiceDAOImpl jsi = new JobServiceDAOImpl();
 		JobBean JobBean = jsi.findBeanByRackID(rint);
 //		System.out.println(JobBean);

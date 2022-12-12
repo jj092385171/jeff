@@ -35,38 +35,47 @@ public class JobServletUpdate extends HttpServlet {
 		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();
 		JobBean jobBean = new JobBean();
 
-		
-		
-//		Integer uID = Integer.parseInt(request.getParameter("id"));
-		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
+		String str=request.getParameter("rackID");
+		Integer rackID = Integer.parseInt(str.trim());
 		String job = request.getParameter("job");
 		String salary = request.getParameter("salary");
-		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 		String place = request.getParameter("place");
 		String time = request.getParameter("time");
 		String date = request.getParameter("date");
 		String remark = request.getParameter("remark");
+
 		// 處理照片格式
 		InputStream in = request.getPart("img").getInputStream();
 		long size = request.getPart("img").getSize();
 		try {
 			Blob image = jobServiceImpl.fileToBlob(in, size);
 			JobServiceDAOImpl jsi = new JobServiceDAOImpl();
+
 			jobBean = jsi.findBeanByRackID(rackID);
 			if (size != 0) {
 				jobBean.setImg(image);
 			}
-		} catch (Exception e) {		
+		} catch (Exception e) {
 		}
-		//驗證會員id輸入格式
+
+		// 驗證會員id輸入格式
 		try {
 			Integer uID = Integer.parseInt(request.getParameter("id"));
 			jobBean.setuID(uID);
-
 		} catch (Exception e) {
 			errorMessage.put("id", "輸入格式錯誤");
 		}
 		request.setAttribute("ErrorMsg", errorMessage);
+
+		// 驗證人數輸入格式
+		try {
+			Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+			jobBean.setQuantity(quantity);
+		} catch (Exception e) {
+			errorMessage.put("quantity", "輸入格式錯誤");
+		}
+		request.setAttribute("ErrorMsg", errorMessage);
+
 		// 轉日期格式
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -74,6 +83,7 @@ public class JobServletUpdate extends HttpServlet {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
+
 		// 轉日期格式
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -81,26 +91,23 @@ public class JobServletUpdate extends HttpServlet {
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		
 
-//		jobBean.setuID(uID);
 		jobBean.setRackID(rackID);
 		jobBean.setJob(job);
 		jobBean.setSalary(salary);
-		jobBean.setQuantity(quantity);
 		jobBean.setPlace(place);
 		jobBean.setTime(time);
 		jobBean.setDate(date);
 		jobBean.setRemark(remark);
-		
+
 		if (!errorMessage.isEmpty()) {
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/update.jsp");
 			rd.forward(request, response);
 			return;
 		}
-		
+System.out.println(jobBean);
 		jobServiceImpl.updateJob(jobBean);
-//		System.out.println(jobBean);
+		System.out.println(jobBean);
 		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/updateSucces.jsp");
 		rd.forward(request, response);
 		return;

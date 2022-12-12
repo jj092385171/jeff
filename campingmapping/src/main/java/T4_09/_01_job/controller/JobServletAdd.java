@@ -32,16 +32,17 @@ public class JobServletAdd extends HttpServlet {
 		Map<String, String> errorMessage = new HashMap<>();
 		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();
 		JobBean jobBean = new JobBean();
-		//驗證會員id輸入格式
+
+		// 驗證會員id輸入格式
 		try {
 			Integer uID = Integer.parseInt(request.getParameter("id"));
 			jobBean.setuID(uID);
-
 		} catch (Exception e) {
 			errorMessage.put("id", "輸入格式錯誤");
 		}
 		request.setAttribute("ErrorMsg", errorMessage);
 
+		// 驗證刊登編號是否重複
 		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
 		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
 		if (findBeanByRackID.getRackID() != 0) {
@@ -54,8 +55,17 @@ public class JobServletAdd extends HttpServlet {
 		jobBean.setJob(job);
 		String salary = request.getParameter("salary");
 		jobBean.setSalary(salary);
-		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-		jobBean.setQuantity(quantity);
+
+		// 驗證人數輸入格式
+		try {
+			Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+			jobBean.setuID(quantity);
+
+		} catch (Exception e) {
+			errorMessage.put("quantity", "輸入格式錯誤");
+		}
+		request.setAttribute("ErrorMsg", errorMessage);
+
 		String place = request.getParameter("place");
 		jobBean.setPlace(place);
 		String time = request.getParameter("time");

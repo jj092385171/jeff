@@ -45,42 +45,42 @@
 			</p>
 			<hr>
 			<p>
-				薪資 <input type="text" name="salary" required>>
+				薪資 <input type="text" name="salary" required>
 			</p>
 			<hr>
 
 			<p>
-				人數 <input type="text" name="quantity" required>>
+				人數 <input type="text" name="quantity" required></p>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
+			<hr>
+
+			<p>
+				地點 <input type="text" name="place" required>
 			</p>
 			<hr>
 
 			<p>
-				地點 <input type="text" name="place" required>>
+				可上班時段 <input type="text" name="time" required>
 			</p>
 			<hr>
 
 			<p>
-				可上班時段 <input type="text" name="time" required>>
+				可上班日期 <input type="text" name="date" required>
 			</p>
 			<hr>
 
 			<p>
-				可上班日期 <input type="text" name="date" required>>
+				上架日期 <input type="date" name="rackUp" required>
 			</p>
 			<hr>
 
 			<p>
-				上架日期 <input type="date" name="rackUp" required>>
+				下架日期 <input type="date" name="rackDown" required>
 			</p>
 			<hr>
 
 			<p>
-				下架日期 <input type="date" name="rackDown" required>>
-			</p>
-			<hr>
-
-			<p>
-				照片上傳 <input type="file" name="img" required>>
+				照片上傳 <input type="file" name="img" required>
 			</p>
 			<hr>
 
@@ -98,9 +98,7 @@
 	</form>
 	
 	<script src="https://code.jquery.com/jquery-3.6.1.js">
-	
-		$('input').attr('required',true)},	
-	
+		$('input').attr('required',true),	
 	</script>
 	
 	
