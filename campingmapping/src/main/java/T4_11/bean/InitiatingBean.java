@@ -17,6 +17,7 @@ public class InitiatingBean {
 	public InitiatingBean() {
 		
 	}
+	
 	public int getInitiatingnum() {
 		return initiatingnum;
 	}
@@ -88,12 +89,30 @@ public class InitiatingBean {
 	public void setPair(int pair) {
 		this.pair = pair;
 	}
+	
+	public InitiatingBean(int initiatingnum, int postmember, Date postdate, Date startdate, Date enddate,
+			int currentnum, int acceptablenum, String camparea, int pair, String startdatestr, String enddatestr) {
+		super();
+		this.initiatingnum = initiatingnum;
+		this.postmember = postmember;
+		this.postdate = postdate;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.currentnum = currentnum;
+		this.acceptablenum = acceptablenum;
+		this.camparea = camparea;
+		this.pair = pair;
+	}
+
 	@Override
 	public String toString() {
 		return "InitiatingBean [initiatingnum=" + initiatingnum + ", postmember=" + postmember + ", postdate="
 				+ postdate + ", startdate=" + startdate + ", enddate=" + enddate + ", currentnum=" + currentnum
 				+ ", acceptablenum=" + acceptablenum + ", camparea=" + camparea + ", pair=" + pair + "]";
 	}
-
+	
+	
+	
+	
 }
 

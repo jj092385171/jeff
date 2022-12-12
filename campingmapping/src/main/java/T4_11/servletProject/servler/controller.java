@@ -1,10 +1,7 @@
 package T4_11.servletProject.servler;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,15 +25,14 @@ public class controller extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-//		String parameter = request.getParameter("member");
 		InitiatingDaoImpl iDao = new InitiatingDaoImpl();
 		Map<String, String[]> params = request.getParameterMap();
+		
 		InitiatingBean initiatingBean = iDao.setInitiatingBean(params);
 		iDao.insertInitiating(initiatingBean);
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_11/TestResult.jsp");
 			rd.forward(request, response);
 		
-
 		return;
 	}
 	

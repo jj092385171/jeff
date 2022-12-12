@@ -25,13 +25,17 @@ public class view extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		InitiatingDaoImpl iDao = new InitiatingDaoImpl();
-//		System.out.println(request.getParameter("view"));
 		List<InitiatingBean> view = iDao.selectAllInitiating();
-
+		List<InitiatingBean> camparea = iDao.selectAllCamparea();
+		List<InitiatingBean> postmember = iDao.selectAllMember();
+		
 		request.setAttribute("view",view);
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_11/Initiating.jsp");
+		request.setAttribute("camparea", camparea);
+		request.setAttribute("postmember", postmember);
+		System.out.println("in");
+
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_11/Team.jsp");
 		rd.forward(request, response);
-		System.out.println("0");
 	}
 	
 

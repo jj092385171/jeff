@@ -9,6 +9,8 @@ import T4_11.bean.MessagelistBean;
 
 public interface InitiatingDao {
 	
+	public String sqlCommand(String startdate, String enddate, String initiatingnum, String postmember, String camparea);
+	
 	public InitiatingBean setInitiatingBean(Map<String,String[]> initiatingBean);
 	
 	public int insertInitiating(InitiatingBean initiatingBean);
@@ -17,9 +19,19 @@ public interface InitiatingDao {
 	
 	public int updateInitiating(InitiatingBean initiatingnum);
 	
-	public InitiatingBean selectInitiating(int initiatingnum);
+	public List<InitiatingBean> selectInitiating(String sql);
 	
+	public List<InitiatingBean> selectMember(InitiatingBean initiatingBean);
+	
+	public List<InitiatingBean> selectCamparea(InitiatingBean initiatingBean);
+	
+	public List<InitiatingBean> selectMemberAndCamparea(InitiatingBean initiatingBean);
+
 	public List<InitiatingBean> selectAllInitiating();
+	
+	public List<InitiatingBean> selectAllCamparea();
+	
+	public List<InitiatingBean> selectAllMember();
 	
 	public int insertJoin(JoinBean joinBean);
 	
