@@ -42,7 +42,7 @@ form {
 	         <br>
 		簡介: <input type="text" name='discription' value='${ csctBean.discription }'><br>
 		標籤XXX: <c:forEach var='tag' items='${csctBean.tagList}'>
-				<input type="checkbox" name="tagIDXXX" checked value="${tag.tagID}" />${tag.tagName}
+				<input id='${tag.tagID}' type="checkbox" name="tagIDXXX" checked value="${tag.tagID}" />${tag.tagName}
 			 </c:forEach><br>
 		標籤: <c:forEach var='tag' items='${tagList}'>
 					<input type="checkbox" name="tagID" value="${tag.tagID}" />${tag.tagName}
@@ -54,5 +54,11 @@ form {
 
 	</form>
 <a href="<c:url value='IndexShowAllPageServlet' />" >回首頁</a>
+<script src='https://code.jquery.com/jquery-3.6.1.min.js'></script>
+<script>
+	$(function(){
+		
+	})
+</script>
 </body>
 </html>

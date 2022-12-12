@@ -27,6 +27,10 @@ import T4_24.Models.SiteBean;
 @WebServlet("/T4_24/InsertSiteByIDServlet")
 public class InsertSiteByIDServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
 
 	//新增site
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,12 +49,12 @@ public class InsertSiteByIDServlet extends HttpServlet {
 			errorMsg.put("siteName", "必須輸入營區位名稱");
 		}
 		// 讀圖
-		Part part = request.getPart("sitePictures");
-		InputStream is = part.getInputStream();
-		if (is.read() == -1) {
-			errorMsg.put("sitePictures", "必須選擇圖片");
-		}
-		Blob blob = Hibernate.createBlob(is);
+//		Part part = request.getPart("sitePictures");
+//		InputStream is = part.getInputStream();
+//		if (is.read() == -1) {
+//			errorMsg.put("sitePictures", "必須選擇圖片");
+//		}
+//		Blob blob = Hibernate.createBlob(is);
 		// 總營位
 		String totalSites = request.getParameter("totalSites");
 		if (totalSites == null || totalSites.trim().length() == 0) {
@@ -71,7 +75,7 @@ public class InsertSiteByIDServlet extends HttpServlet {
 			return;
 		}
 		
-		SiteBean siteBean = new SiteBean(siteName, blob, Integer.valueOf(totalSites), Integer.valueOf(siteMoney), Integer.valueOf(campID));
+		SiteBean siteBean = new SiteBean(siteName, Integer.valueOf(totalSites), Integer.valueOf(siteMoney), Integer.valueOf(campID));
 		try {
 			BigDecimal siteID = siteDao.AddSite(siteBean);
 			siteBean = siteDao.findSiteBySiteID(siteID.intValueExact());

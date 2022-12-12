@@ -29,10 +29,13 @@ import T4_24.Models.CampSiteCityTagsBean;
 @WebServlet("/T4_24/InsertCampServlet")
 public class InsertCampServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		doPost(request, response);
+	}
 
 	//新增camp
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-
 		CampDao campDao = new CampDao();
 		TagOfCampDao tagOfCampDao = new TagOfCampDao();
 		CampSiteCityTagsDao campPlusCityPlusTagsDao = new CampSiteCityTagsDao();
@@ -60,13 +63,21 @@ public class InsertCampServlet extends HttpServlet {
 		if (location == null || location.trim().length() == 0) {
 			errorMsg.put("location", "必須輸入地址");
 		}
-		// 讀圖
-		Part part = request.getPart("campPictures");
-		InputStream is = part.getInputStream();
-		if (is.read() == -1) {
-			errorMsg.put("campPictures", "必須選擇圖片");
-		}
-		Blob blob = Hibernate.createBlob(is);
+		//讀圖
+//		Blob blob = null;
+//		Part part = request.getPart("campPictures");
+//		InputStream is = part.getInputStream();
+//		long size = part.getSize();
+//		try {
+//			blob = campDao.fileToBlob(is, size);
+//		} catch (Exception e) {
+//			System.out.println("錯誤");
+//		}
+//		if (part.getSize() == 0) {
+//			errorMsg.put("campPictures", "必須選擇圖片");
+//			System.out.println("圖片異常");
+//		}
+//		Blob blob = Hibernate.createBlob(is);
 		// 簡介
 		String discription = request.getParameter("discription");
 		// 標籤
@@ -82,8 +93,7 @@ public class InsertCampServlet extends HttpServlet {
 			return;
 		}
 
-		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location, blob, discription);
-
+		CampBean cb = new CampBean(campName, Integer.valueOf(cityID), location,  discription);
 		try {
 			// 新增到camp回傳campID
 			BigDecimal campID = campDao.AddCamp(cb);
