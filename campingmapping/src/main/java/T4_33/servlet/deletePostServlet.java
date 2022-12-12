@@ -37,7 +37,6 @@ public class deletePostServlet extends HttpServlet {
 			
 			PostDao dao = new PostDao(DbUtils.getConnection()); //送postId到資料庫
 			String deleteResult = dao.deletePost(postId); //回傳刪除貼文結果
-			String deleteResult = dao.deletePost(postId); //回傳刪除結果
 			
 			request.setAttribute("postId", postId); //送postId出去
 			request.setAttribute("deleteResult", deleteResult); //顯示刪除結果
