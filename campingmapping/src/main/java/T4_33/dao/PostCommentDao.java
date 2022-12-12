@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import T4_01.ch01.registerServler;
 import T4_33.bean.PostBean;
 import T4_33.bean.PostCommentBean;
 

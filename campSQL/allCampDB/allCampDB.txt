@@ -1,4 +1,4 @@
-USE [campDB]
+﻿USE [campDB]
 GO
 /****** Object:  Table [dbo].[camp]    Script Date: 2022/12/6 下午 01:39:38 ******/
 SET ANSI_NULLS ON
