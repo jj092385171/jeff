@@ -78,11 +78,11 @@
 						<h2>商城</h2>
 					</header>
 					<ul>
-						<li><a href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_index.jsp">首頁</a></li>
+						<li><a href="/campingmapping/index.jsp">首頁</a></li>
 						<li><a href="<c:url value='/SelectAllServlet.do'/>">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
-							<ul>
+							<ul>	
 								<li><a href="#">睡袋</a></li>
 								<li><a href="#">燈具</a></li>
 								<li><a href="#">桌椅</a></li>

@@ -88,7 +88,9 @@
 										<td>${Category.pdtitle}</td>
 										<td>${Category.pdcontent}</td>
 										<td>${Category.pdtype}</td>
-										<td>${Category.pdpicture}</td>
+										<td><img width="80" height="100"
+						src="<c:url value='/CategoryImgSelectByPdid?pdid=${Category.pdpicture}'/>" /></td>
+<%-- 										<td>${Category.pdpicture}</td> --%>
 										<td>${Category.pdprice}</td>
 										<td>${Category.pdinventory}</td>
 										<td>${Category.pddate}</td>
@@ -139,8 +141,7 @@
 						<h2>商城</h2>
 					</header>
 					<ul>
-						<li><a
-							href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_index.jsp">首頁</a>
+						<li><a href="/campingmapping/index.jsp">首頁</a>
 						</li>
 						<li><a href="<c:url value='/SelectAllServlet.do'/>">商城維護</a>
 						</li>
@@ -201,11 +202,11 @@
 				}
 				function updateProduct(id) {
 					if (confirm("確定修改此項產品資料(編號:" + id + ")?")) {
-						document.forms[0].action="http://localhost:8080/campingmapping/CategorySelectByPdidServlet.do?querybyproductno="+id;
-						document.forms[0].method="POST";
-						document.forms[0].submit();
+// 						document.forms[0].action="http://localhost:8080/campingmapping/CategorySelectByPdidServlet.do?pdid="+id;
+// 						document.forms[0].method="POST";
+// 						document.forms[0].submit();
 						
-// 						window.location.replace("http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp");
+						window.location.replace("http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp");
 					} else {
 					}
 				}
