@@ -54,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = null;
 		try {
 			DbUtils.begin();
-			category = categoryDao.selectByPd_id(id);
+			category = categoryDao.selectByPdid(id);
 			DbUtils.commit();
 		} catch (SQLException e) {
 			DbUtils.rollbacl();

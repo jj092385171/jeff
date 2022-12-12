@@ -33,16 +33,16 @@
 					</ul>
 				</header>
 
-<form action="<c:url value='/CategoryUpdateServlet.do'/>" method="POST"
-		enctype="multipart/form-data">
+<form action="<c:url value='/CategoryUpdateServlet.do'/>"  method="POST"	enctype="multipart/form-data">
 		產品編號(pk)<br> 
-		<input type="text" value='${Category.pdid}' name="Pdid"  />會員ID<br> 
+		<input type="text" value='${Category.pdid}' name="Pdid" readonly="readonly" />會員ID<br> 
 		<input type="text" value='${Category.userID}' name="userID">產品名稱<br> 
 		<input type="text" value='${Category.pdname}' name="Pdname">品牌名稱<br> 
 		<input type="text" value='${Category.pdtitle}' name="Pdtitle">產品規格<br> 
 		<input type="text" value='${Category.pdcontent}' name="Pdcontent">產品類型<br>
 		<input type="text" value='${Category.pdtype}' name="Pdtype">照片<br>
-		<input type="text" value='${Category.pdpicture}' name="Pdpicture" readonly="readonly" />價位<br> 
+		<td><img width="80" height="100"
+						src="<c:url value='/CategoryImgSelectByPdid?pdid=${Category.pdid}'/>" /></td>僅供預覽，不可修改<br>價位<br> 
 		<input type="text" value='${Category.pdprice}' name="Pdprice">庫存數量<br> 
 		<input type="text" value='${Category.pdinventory}' name="Pdinventory">上架日期<br> 
 		<input type="text" value='${Category.pddate}' name="Pddate" readonly="readonly" />商品更新日期<br>

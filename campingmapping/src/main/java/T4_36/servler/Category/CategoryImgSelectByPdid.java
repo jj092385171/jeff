@@ -25,7 +25,7 @@ public class CategoryImgSelectByPdid extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException{
 
 		OutputStream os = null;
 		InputStream is = null;

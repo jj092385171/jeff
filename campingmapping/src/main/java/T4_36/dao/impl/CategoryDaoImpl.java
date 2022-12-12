@@ -54,8 +54,8 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public Category selectByPd_id(int id) throws SQLException {
-		String sql = "SELECT * FROM category WHERE Pdid = ?";
+	public Category selectByPdid(int id) throws SQLException {
+		String sql = "SELECT Pdid,userID,Pdname,Pdtitle,Pdcontent,Pdtype,Pdprice,Pdinventory,Pddate,Pdlastupdate FROM category WHERE Pdid = ?";
 
 		return queryRunner.query(DbUtils.getConnection(), sql, new BeanHandler<Category>(Category.class), id);
 	}
@@ -70,7 +70,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		ResultSet rs = pre.executeQuery();
 		rs.next();
 		Category cg = new Category();
-		cg.setPdpicture(rs.getBlob("img"));
+		cg.setPdpicture(rs.getBlob("Pdpicture"));
 
 		return cg;
 

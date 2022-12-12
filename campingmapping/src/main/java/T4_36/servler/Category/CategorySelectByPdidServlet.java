@@ -22,11 +22,12 @@ public class CategorySelectByPdidServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		req.setCharacterEncoding("UTF-8");
 		int parameter = Integer.parseInt(req.getParameter("pdid"));
+		System.out.println(parameter);
 		CategoryServiceImpl cgS = new CategoryServiceImpl();
 
 		Category select = cgS.select(parameter);
 
-		req.setAttribute("querybyproductno", select);
+		req.setAttribute("Category", select);
 		System.out.println(select.toString());
 		RequestDispatcher rd = req.getRequestDispatcher("/T4_36/html5up-editorial/Pd_update.jsp");
 		rd.forward(req, resp);

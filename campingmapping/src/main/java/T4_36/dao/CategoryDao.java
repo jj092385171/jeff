@@ -15,7 +15,7 @@ public interface CategoryDao {
 
 	int update(Category category) throws SQLException;
 
-	Category selectByPd_id(int Pd_id) throws SQLException;
+	Category selectByPdid(int Pdid) throws SQLException;
 
 	List<Category> selectAll() throws SQLException;
 

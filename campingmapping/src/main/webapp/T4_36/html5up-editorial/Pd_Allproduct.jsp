@@ -89,7 +89,7 @@
 										<td>${Category.pdcontent}</td>
 										<td>${Category.pdtype}</td>
 										<td><img width="80" height="100"
-						src="<c:url value='/CategoryImgSelectByPdid?pdid=${Category.pdpicture}'/>" /></td>
+						src="<c:url value='/CategoryImgSelectByPdid?pdid=${Category.pdid}'/>" /></td>
 <%-- 										<td>${Category.pdpicture}</td> --%>
 										<td>${Category.pdprice}</td>
 										<td>${Category.pdinventory}</td>
@@ -202,11 +202,11 @@
 				}
 				function updateProduct(id) {
 					if (confirm("確定修改此項產品資料(編號:" + id + ")?")) {
-// 						document.forms[0].action="http://localhost:8080/campingmapping/CategorySelectByPdidServlet.do?pdid="+id;
-// 						document.forms[0].method="POST";
-// 						document.forms[0].submit();
+						document.forms[0].action="http://localhost:8080/campingmapping/CategorySelectByPdidServlet.do?pdid="+id;
+						document.forms[0].method="POST";
+						document.forms[0].submit();
 						
-						window.location.replace("http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp");
+// 						window.location.replace("http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp");
 					} else {
 					}
 				}
