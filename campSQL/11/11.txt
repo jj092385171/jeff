@@ -1,26 +1,69 @@
-CREATE TABLE initiating(
-initiatingnum INT NOT NULL PRIMARY KEY,
-postmember INT NOT NULL,
-postdate DATETIME2  NOT NULL,
-startdate DATETIME2 NOT NULL,
-enddate DATETIME2 NOT NULL,
-currentnum INT NOT NULL,
-acceptablenum INT NOT NULL,
-camparea NVARCHAR NOT NULL,
-pair INT NOT NULL
-);
-
-CREATE TABLE messagelist(
-messagelistnum INT NOT NULL PRIMARY KEY,
-initiating_num INT NOT NULL REFERENCES initiating(initiatingnum),
-messagemember  INT NOT NULL,
-messagetext NVARCHAR NOT NULL,
-);
-
-CREATE TABLE joinlist(
-joinlistnum INT NOT NULL PRIMARY KEY,
-initiating_num INT NOT NULL REFERENCES initiating(initiatingnum),
-joinmember INT NOT NULL,
-joinpeoplenum INT NOT NULL,
-accept INT NOT NULL
-);
+USE [campDB]
+GO
+/****** Object:  Table [dbo].[initiating]    Script Date: 2022/12/12 上午 11:49:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[initiating](
+	[initiatingnum] [int] IDENTITY(1,1) NOT NULL,
+	[postmember] [int] NOT NULL,
+	[postdate] [datetime2](7) NOT NULL,
+	[startdate] [datetime2](0) NOT NULL,
+	[enddate] [datetime2](0) NOT NULL,
+	[currentnum] [int] NOT NULL,
+	[acceptablenum] [int] NOT NULL,
+	[camparea] [nvarchar](max) NOT NULL,
+	[pair] [int] NOT NULL,
+ CONSTRAINT [PK__initiati__4F88710965AAA22A] PRIMARY KEY CLUSTERED 
+(
+	[initiatingnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[joinlist]    Script Date: 2022/12/12 上午 11:49:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[joinlist](
+	[joinlistnum] [int] NOT NULL,
+	[initiating_num] [int] NOT NULL,
+	[joinmember] [int] NOT NULL,
+	[joinpeoplenum] [int] NOT NULL,
+	[accept] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[joinlistnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[messagelist]    Script Date: 2022/12/12 上午 11:49:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[messagelist](
+	[messagelistnum] [int] NOT NULL,
+	[initiating_num] [int] NOT NULL,
+	[messagemember] [int] NOT NULL,
+	[messagetext] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK__messagel__95A4F31FAE28FD07] PRIMARY KEY CLUSTERED 
+(
+	[messagelistnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[initiating] ADD  CONSTRAINT [DF_initiating_postdate]  DEFAULT (getdate()) FOR [postdate]
+GO
+ALTER TABLE [dbo].[joinlist]  WITH CHECK ADD  CONSTRAINT [FK__joinlist__initia__02084FDA] FOREIGN KEY([initiating_num])
+REFERENCES [dbo].[initiating] ([initiatingnum])
+GO
+ALTER TABLE [dbo].[joinlist] CHECK CONSTRAINT [FK__joinlist__initia__02084FDA]
+GO
+ALTER TABLE [dbo].[messagelist]  WITH CHECK ADD  CONSTRAINT [FK__messageli__initi__7F2BE32F] FOREIGN KEY([initiating_num])
+REFERENCES [dbo].[initiating] ([initiatingnum])
+GO
+ALTER TABLE [dbo].[messagelist] CHECK CONSTRAINT [FK__messageli__initi__7F2BE32F]
+GO
+>>>>>>> 11
