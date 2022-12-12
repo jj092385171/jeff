@@ -27,7 +27,7 @@ import T4_01.beans.Limits;
 
 		initParams = {
 				@WebInitParam(name = "mustLogin1", value = "/T4_01/member/member.html"),
-//				@WebInitParam(name = "mustLogin2", value = ""),
+				@WebInitParam(name = "mustLogin2", value = "/ShowMemberServlet"),
 //				@WebInitParam(name = "mustLogin3", value = ""),
 //				@WebInitParam(name = "mustLogin4", value = ""),
 //				@WebInitParam(name = "mustLogin5", value = ""),
@@ -61,13 +61,15 @@ public class MemberFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		// System.out.println("f");
+		 System.out.println("f");
 		boolean isRequestedSessionIdValid = false;
 		if (request instanceof HttpServletRequest
 				&& response instanceof HttpServletResponse) {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse resp = (HttpServletResponse) response;
 			servletPath = req.getServletPath();
+//			監聽路徑
+//			System.out.println(servletPath);
 			contextPath = req.getContextPath();
 			requestURI = req.getRequestURI();
 			isRequestedSessionIdValid = req.isRequestedSessionIdValid();
@@ -110,8 +112,10 @@ public class MemberFilter implements Filter {
 		if (loginToken == null) {
 			return false;
 		} else if (loginToken.getNomore().toUpperCase().equals("M")) {
+		
 			return true;
 		} else {
+			
 			return false;
 		}
 	}

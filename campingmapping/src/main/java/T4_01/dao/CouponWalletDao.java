@@ -13,5 +13,6 @@ public interface CouponWalletDao {
 
 	public CouponWallet select(int CWID);
 
+
 	public List<CouponWallet> selectAll();
 }

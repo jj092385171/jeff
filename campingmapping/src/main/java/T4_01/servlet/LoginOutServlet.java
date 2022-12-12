@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class LoginOutServlet
- */
+
 @WebServlet("/LoginOutServlet")
 public class LoginOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +16,11 @@ public class LoginOutServlet extends HttpServlet {
 			HttpServletResponse resp) {
 		try {
 			HttpSession session = req.getSession();
-			session.invalidate();
+			session.removeAttribute("limits");
+			session.removeAttribute("member");
+			session.removeAttribute("license");
+			session.invalidate();			
+			
 			resp.sendRedirect("/campingmapping/index.jsp");
 		} catch (IOException e) {
 			e.printStackTrace();

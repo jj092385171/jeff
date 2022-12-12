@@ -39,7 +39,7 @@ public class LimitsDaoImpl implements LimitsDao {
 	public int delete(String account) {
 		try {
 			int delete = queryRunner.update(DbUtils.getConnection(),
-					"DELETE FROM limints WHERE account = ?", account);
+					"DELETE FROM limits WHERE account = ?", account);
 			return delete;
 		} catch (SQLException e) {
 			e.printStackTrace();
