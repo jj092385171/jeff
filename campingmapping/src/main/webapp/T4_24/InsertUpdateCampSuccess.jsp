@@ -69,7 +69,7 @@
 									<td>${ csctBean.cityID }</td>
 									<td>${ csctBean.cityName }</td>
 									<td>${ csctBean.location }</td>
-									<td><img width="80" height="100" src="<c:url value='/T4_24/GetCampImage?id=${campID}'/>" /></td>
+<%-- 									<td><img width="80" height="100" src="<c:url value='/T4_24/GetCampImage?id=${campID}'/>" /></td> --%>
 									<td>${ csctBean.discription }</td>
 									<td>
 										<c:forEach var='tag' items='${csctBean.tagList}'>
