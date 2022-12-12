@@ -30,7 +30,7 @@ public class controller extends HttpServlet {
 		
 		InitiatingBean initiatingBean = iDao.setInitiatingBean(params);
 		iDao.insertInitiating(initiatingBean);
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_11/TestResult.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/view");
 			rd.forward(request, response);
 		
 		return;
