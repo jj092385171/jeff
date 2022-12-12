@@ -27,9 +27,11 @@ public class deletePostServlet extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			request.setCharacterEncoding("UTF-8");
+			DbUtils.begin();
+			request.setCharacterEncoding("UTF-8");			
 			int postId = Integer.parseInt(request.getParameter("postId")) ; //取得postId
 			PostDao dao = new PostDao(DbUtils.getConnection()); //送postId到資料庫
+//			刪除留言
 			String deleteResult = dao.deletePost(postId); //回傳刪除結果
 			
 			request.setAttribute("postId", postId); //送postId出去
@@ -37,9 +39,11 @@ public class deletePostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showDiscussionServlet");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 			
 		} catch (IOException | SQLException | ServletException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 	}

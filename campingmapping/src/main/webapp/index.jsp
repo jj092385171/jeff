@@ -36,12 +36,12 @@
 			<nav>
 				<ul class="header-nav1">
 					<li class="nav1-li"><a href="#about">About</a></li>
-					<li class="nav1-li"><a href="<c:url value='/view'/>">Team</a></li>
-					<li class="nav1-li"><a href="#work">Camp</a></li>
-					<li class="nav1-li"><a href="#contact">Forum</a></li>
-					<li class="nav1-li"><a href="#contact">Shop</a></li>
-					<li class="nav1-li"><a href="#contact">Job</a></li>
-					<li class="nav1-li"><a href="#contact">Member</a></li>
+					<li class="nav1-li"><a href="<c:url value='/T4_11/TeamUser.jsp'/>">Team</a></li>
+					<li class="nav1-li"><a href="<c:url value='/T4_24/campUser/CampUser.jsp'/>">Camp</a></li>
+					<li class="nav1-li"><a href="<c:url value='/T4_33/forum/ForumUser.jsp'/>">Forum</a></li>
+					<li class="nav1-li"><a href="<c:url value='/T4_36/shopUser/ShopUser.jsp'/>">Shop</a></li>
+					<li class="nav1-li"><a href="<c:url value='/T4_09/jobUser/JobUser.jsp'/>">Job</a></li>
+					<li class="nav1-li"><a href="<c:url value='/T4_09/jobUser/JobUser.jsp'/>">Member</a></li>
 					<!--<li><a href="#elements">Elements</a></li>-->
 				</ul>
 			</nav>
