@@ -4,13 +4,13 @@
 
 		<html>
 		<% String path=request.getContextPath(); String basePath=request.getScheme() + "://" + request.getServerName()
-			+ ":" + request.getServerPort() + path + "/T4_11/background/assets/css/main.css" ; %>
+ 			+ ":" + request.getServerPort() + path + "/T4_11/background/assets/css/main.css" ; %>
 
 			<head>
 				<title>揪團管理</title>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-				<!-- 	<link rel="stylesheet" href="../T4_11/background/assets/css/main.css" /> -->
+<!-- 					<link rel="stylesheet" href="../T4_11/background/assets/css/main.css" /> -->
 				<link rel="stylesheet" href="<%=basePath%>" />
 				<style>
 					hr {
@@ -157,7 +157,7 @@
 												<td>${bean.currentnum}</td>
 												<td>${bean.acceptablenum}</td>
 												<td>${bean.camparea}</td>
-												<td>${bean.pair}</td>
+												<td id="pair">${bean.pair}</td>
 											</tr>
 										</c:forEach>
 									</table>
@@ -170,51 +170,50 @@
 						</div>
 					</div>
 
-					<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
 
 							<!-- Search -->
 							<section id="search" class="alt">
-								<form method="post" action="#">
-									<input type="text" name="query" id="query" placeholder="Search" />
-								</form>
-							</section>
+					<form method="post" action="#">
+						<input type="text" name="query" id="query" placeholder="Search" />
+					</form>
+				</section>
 
 							<!-- Menu -->
 							<nav id="menu">
-								<header class="major">
-									<h2>主選單</h2>
-								</header>
-								<ul>
-									<li><a href="/campingmapping/index.jsp"">首頁</a></li>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<span class="opener">Submenu</span>
-										<ul>
-											<li><a href="#">Lorem Dolor</a></li>
-											<li><a href="#">Ipsum Adipiscing</a></li>
-											<li><a href="#">Tempus Magna</a></li>
-											<li><a href="#">Feugiat Veroeros</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Etiam Dolore</a></li>
-									<li><a href="#">Adipiscing</a></li>
-									<li>
-										<span class="opener">Another Submenu</span>
-										<ul>
-											<li><a href="#">Lorem Dolor</a></li>
-											<li><a href="#">Ipsum Adipiscing</a></li>
-											<li><a href="#">Tempus Magna</a></li>
-											<li><a href="#">Feugiat Veroeros</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Maximus Erat</a></li>
-									<li><a href="#">Sapien Mauris</a></li>
-									<li><a href="#">Amet Lacinia</a></li>
-								</ul>
-							</nav>
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Homepage</a></li>
+						<li><a href="generic.html">Generic</a></li>
+						<li><a href="elements.html">Elements</a></li>
+						<li>
+							<span class="opener">Submenu</span>
+							<ul>
+								<li><a href="#">Lorem Dolor</a></li>
+								<li><a href="#">Ipsum Adipiscing</a></li>
+								<li><a href="#">Tempus Magna</a></li>
+								<li><a href="#">Feugiat Veroeros</a></li>
+							</ul>
+						</li>
+						<li><a href="#">Etiam Dolore</a></li>
+						<li><a href="#">Adipiscing</a></li>
+						<li>
+							<span class="opener">Another Submenu</span>
+							<ul>
+								<li><a href="#">Lorem Dolor</a></li>
+								<li><a href="#">Ipsum Adipiscing</a></li>
+								<li><a href="#">Tempus Magna</a></li>
+								<li><a href="#">Feugiat Veroeros</a></li>
+							</ul>
+						</li>
+						<li><a href="#">Maximus Erat</a></li>
+						<li><a href="#">Sapien Mauris</a></li>
+						<li><a href="#">Amet Lacinia</a></li>
+					</ul>
+				</nav>
 
 							<!-- Section -->
 							<section>
@@ -291,6 +290,7 @@
 									<script src="<%=basePath5%>"></script>
 									<script src="<%=basePath6%>"></script>
 				<script>
+				console.log($(“#pair”));
 				</script>
 			</body>
 
