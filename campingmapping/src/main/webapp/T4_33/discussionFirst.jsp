@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>discussion First</title>
 <style>
+	body{
+		background-color: blanchedalmond;;
+	}
 	h2{
 		color: brown;
 	}
@@ -21,6 +24,7 @@
 		border: 1px solid black;
 		border-radius: 3%;
 		box-shadow: 3px 3px 5px 5px slategray;
+		background-color: white;
 	}
 </style>
 </head>
@@ -35,12 +39,12 @@
         	<tbody>
         	<c:forEach var="post" items="${postList}">
         		<tr>
-        			<td>
-        				<h3>${post.title}</h3>
-        				${post.content}<br><br>
-        				最後更新日期:${post.releaseDate}<br>
-        				<input type="submit" formaction="<c:url value='/T4_33/showPostServlet?postId=${post.postId}' />" value="查看貼文">
-        			</td>
+        		<td>
+        			<h3>${post.title}</h3>
+        			${post.content}<br><br>
+        			最後更新日期:${post.releaseDate}<br>
+        			<input type="submit" formaction="<c:url value='/T4_33/showPostServlet?postId=${post.postId}' />" value="查看貼文">
+        		</td>
         		</tr>
         	</c:forEach>
         	</tbody>

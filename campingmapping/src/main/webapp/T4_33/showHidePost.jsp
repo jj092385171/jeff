@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>show HidePost</title>
 <style>
+	body{
+		background-color: azure;
+	}
 	.titleh3{
 		color: brown;
 	}
@@ -21,6 +24,7 @@
 		border: 1px solid black;
 		border-radius: 3%;
 		box-shadow: 0px 0px 3px 3px slategray;
+		background-color: white;
 	}
 	.contenth3{
 		margin: 5px 0px;
