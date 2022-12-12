@@ -29,8 +29,8 @@ public class showHidePostServlet extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
-			
 			PostDao dao = new PostDao(DbUtils.getConnection()); // 送postId到資料庫
 			List<PostBean> list = dao.selectPostHide(); // 回傳隱藏貼文list
 			
@@ -38,9 +38,11 @@ public class showHidePostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showHidePost.jsp");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 		
 		} catch (IOException | ServletException | SQLException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 		

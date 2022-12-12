@@ -1,11 +1,6 @@
 package T4_33.servlet;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,6 +33,7 @@ public class updatePostServlet extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			PostBean bean = new PostBean();
 			String postId = request.getParameter("postId"); //取得傳送來的postId
@@ -107,9 +103,11 @@ public class updatePostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPostServlet");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 			
 		} catch (IOException | ParseException | SQLException | ServletException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 		

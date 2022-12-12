@@ -143,11 +143,9 @@ public class PostDao {
 		PreparedStatement preState = conn.prepareStatement(getPostReport);
 		preState.setInt(1, postId);
 		ResultSet rs = preState.executeQuery();
-		PostBean bean = new PostBean();
 		rs.next();
 		String reportResult = null;
 		if (rs.getInt("postReport") != 1) {
-			bean.setPostReport(rs.getInt("postReport"));
 			String sql = "update post set postReport = ? where postId = ?";
 			preState = conn.prepareStatement(sql);
 			preState.setInt(1, 1);
@@ -167,11 +165,9 @@ public class PostDao {
 		PreparedStatement preState = conn.prepareStatement(getPostHide);
 		preState.setInt(1, postId);
 		ResultSet rs = preState.executeQuery();
-		PostBean bean = new PostBean();
 		rs.next();
 		String hideResult = null;
 		if(rs.getInt("postHide") != 1) {
-			bean.setPostHide(rs.getInt("postHide"));
 			String sql = "update post set postHide = ? where postId = ?";
 			preState = conn.prepareStatement(sql);
 			preState.setInt(1, 1);
@@ -183,7 +179,6 @@ public class PostDao {
 		}
 		preState.close();
 		return hideResult;
-		
 	}
 
 	// 刪除貼文(OK)

@@ -91,12 +91,17 @@
         <label>新增留言:</label>
         <input type="text" name="postComment" maxlength="100" size="100" required="required">
         <input type="submit" value="送出留言"><br>
+    </form>
+    <form method="POST">
+		<input type="hidden" name="postId" value="${postId}">
 		<table>
 			<c:forEach var="postComment" items="${comList}">
         		<tr>
         			<td>
         				留言者ID：${postComment.userId}<br>
         				留言內容：${postComment.postComment}
+        				<input type="submit" formaction="<c:url value='/T4_33/hidePostCommentServlet?postCommentId=${postComment.postCommentId}' />" value="隱藏留言">
+        				<input type="submit" formaction="<c:url value='/T4_33/deletePostCommentServlet?postCommentId=${postComment.postCommentId}' />" value="刪除留言">
         			</td>
         		</tr>
         	</c:forEach>

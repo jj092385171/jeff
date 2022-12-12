@@ -27,6 +27,7 @@ public class hidePostServlet extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			int postId = Integer.parseInt(request.getParameter("postId")) ; //取得postId
 			PostDao dao = new PostDao(DbUtils.getConnection()); //送postId到資料庫
@@ -37,9 +38,11 @@ public class hidePostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPostServlet");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 			
 		} catch (IOException | SQLException | ServletException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 	}
