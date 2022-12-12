@@ -1,0 +1,18 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[postLikeOrUnlike](
+	[postId] [int] NOT NULL,
+	[userId] [int] NOT NULL,
+	[likeOrUnlike] [int] NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[postLikeOrUnlike]  WITH CHECK ADD FOREIGN KEY([postId])
+REFERENCES [dbo].[post] ([postId])
+GO
+ALTER TABLE [dbo].[postLikeOrUnlike]  WITH CHECK ADD FOREIGN KEY([userId])
+REFERENCES [dbo].[member] ([UID])
+GO
+
+
