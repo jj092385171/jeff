@@ -93,6 +93,15 @@ public class PostCommentDao {
 		System.out.println("刪除留言完成");
 		preState.close();
 	}
+	
+	// 刪除所有留言
+		public void deletePostALLComment(Integer postId) throws SQLException {
+			String sql = "delete from postComment where postId = ?";
+			PreparedStatement preState = conn.prepareStatement(sql);
+			preState.setInt(1, postId);
+			preState.executeUpdate();
+			preState.close();
+		}
 
 	// 依貼文查詢留言(OK)
 	public List<PostCommentBean> selectPostComment(Integer postId) throws SQLException {
