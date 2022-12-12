@@ -1,14 +1,14 @@
 
 //記住我
-$(function() {
-	$(document).ready(function() {
+$(function () {
+	$(document).ready(function () {
 		$.ajax({
 			url: "/campingmapping/RemberServlet",
 			type: "POST",
 			//提交方式
 			data: { "rm": "rm" },
 			dataType: "json",
-		}).done(function(data) {
+		}).done(function (data) {
 			let account = data.account;
 			let password = data.password;
 			let rember = data.rember;
@@ -42,11 +42,11 @@ function checkPass(s) {
 	return ls
 }
 // 登入驗證碼
-$(function() {
+$(function () {
 	var gRandom;
 
-	$(function() {
-		$("#sign").click(function() {
+	$(function () {
+		$("#sign").click(function () {
 			validate('#canvasValue', gRandom)
 		})
 		// .on('click', function () {
@@ -112,7 +112,7 @@ $(function() {
 		}
 	}
 	draw_Captcha();
-	$('body').off('click').on('click', '#canvas', function() {
+	$('body').off('click').on('click', '#canvas', function () {
 		draw_Captcha();
 		$('#canvasValue').val("");
 	})
@@ -148,7 +148,7 @@ $(function() {
 					//提交方式
 					data: { "account": account, "password": password, "rember": rember },
 					dataType: "json",
-				}).done(function(data) {
+				}).done(function (data) {
 					if (data.res == 1) {
 						// alert('username') 
 						location.href = "/campingmapping/index.html";
@@ -169,14 +169,15 @@ $(function() {
 	};
 })
 // 註冊驗證碼
-$(function() {
+$(function () {
 	var acsame = 1;
 	// 帳號重複比對
-	$(function() {
-		$("#joinAccount").on("keyup", function() {
-			// console.log($("#joinAccount").val());
+	$(function () {
+		$("#joinAccount").on("keyup", function () {
+			console.log($("#joinAccount").val());
 
 			let account = $('#joinAccount').val();
+
 			$.ajax({
 				url: "/campingmapping/accountsame",
 				type: "POST",
@@ -185,7 +186,7 @@ $(function() {
 					"account": account
 				},
 				dataType: "json"
-			}).done(function(data) {
+			}).done(function (data) {
 				if (data.res == 1) {
 					acno();
 					acsame = 1;
@@ -197,8 +198,8 @@ $(function() {
 		})
 	});
 	var gRandom;
-	$(function() {
-		$("#join").click(function() {
+	$(function () {
+		$("#join").click(function () {
 			validate('#canvasValue2', gRandom)
 		})
 		// .on('click', function () {
@@ -261,7 +262,7 @@ $(function() {
 		}
 	}
 	draw_Captcha();
-	$('body').off('click').on('click', '#canvasBox2', function() {
+	$('body').off('click').on('click', '#canvasBox2', function () {
 		draw_Captcha();
 		$('#canvasValue2').val("");
 	})
@@ -278,7 +279,7 @@ $(function() {
 		let inputCode = $(txtinput).val();
 
 
-		$("body").off('click').on('click', "#join", function() {
+		$("body").off('click').on('click', "#join", function () {
 			//			console.log(IsEmail($("#joinEmail").val()));
 			console.log($("#joinBirthday").val());
 			//			console.log("----------------------");
@@ -342,7 +343,7 @@ $(function() {
 						"birthday": birthday
 					},
 					dataType: "json",
-				}).done(function(data) {
+				}).done(function (data) {
 					if (data.res == 1) {
 						alert('註冊會員成功')
 						location.href = "/campingmapping/T4_01/login/login.html"
@@ -359,12 +360,12 @@ $(function() {
 }
 )
 // 切換登入註冊
-$(function() {
-	$("body").on("click", "#tojoin", function() {
+$(function () {
+	$("body").on("click", "#tojoin", function () {
 		$("#joinbox").css("display", "block");
 		$("#signbox").css("display", "none");
 	})
-	$("body").on("click", "#tosign", function() {
+	$("body").on("click", "#tosign", function () {
 		$("#joinbox").css("display", "none");
 		$("#signbox").css("display", "block");
 	})
@@ -372,7 +373,7 @@ $(function() {
 })
 // 密碼確認
 $(function samepass() {
-	$("#joinPasswordCheck").on("keyup", function() {
+	$("#joinPasswordCheck").on("keyup", function () {
 		let inputpass = $("#joinPassword").val();
 		let inputcheck = $("#joinPasswordCheck").val();
 
