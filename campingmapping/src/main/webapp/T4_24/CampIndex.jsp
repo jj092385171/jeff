@@ -69,7 +69,17 @@
 								</tr>
 							</thead>
 							<tbody>
+								<li>
+									<span class="opener">Submenu</span>
+									<ul>
+										<li><a href="#">Lorem Dolor</a></li>
+										<li><a href="#">Ipsum Adipiscing</a></li>
+										<li><a href="#">Tempus Magna</a></li>
+										<li><a href="#">Feugiat Veroeros</a></li>
+									</ul>
+								</li>
 								<c:forEach var='all' items='${showALL}'>
+								
 										<tr>
 											<td>${ all.campID }</td>
 											<td>${ all.campName }</td>
