@@ -1,6 +1,8 @@
 package T4_01.service.impl;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import T4_01.beans.License;
@@ -41,7 +43,7 @@ public class LoginServiceImpl implements LoginService {
 		Limits limits = limitsDaoImpl.select(account);
 		Member member = memberImpl.select(account);
 		License license = licenseDaoImpl.select(account);
-		session.setAttribute("Limits", limits);
+		session.setAttribute("limits", limits);
 		session.setAttribute("member", member);
 		session.setAttribute("license", license);
 
@@ -67,6 +69,10 @@ public class LoginServiceImpl implements LoginService {
 	public Cookie rember(String rember) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int LoginState(HttpServletRequest req, HttpServletResponse resp) {
+		return 0;
 	}
 
 }

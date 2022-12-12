@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+
+<head>
+
+	<title>CampingMapping</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<!--  <noscript>
+		<link rel="stylesheet" href="../assets/css/noscript.css" />
+	</noscript> -->
+
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<div>
+
+		</div>
+		<!-- Header -->
+		<header id="header" style="position: absolute;; top: 1%;">
+
+			<nav>
+				<ul class="header-nav1">
+					<li class="nav1-li"><a href="#about">About</a></li>
+					<li class="nav1-li"><a href="/campingmapping/T4_11/TeamUser.jsp">Team</a></li>
+					<li class="nav1-li"><a href="/campingmapping/T4_24/campUser/CampUser.jsp">Camp</a></li>
+					<li class="nav1-li"><a href="/campingmapping/T4_33/forum/ForumUser.jsp">Forum</a></li>
+					<li class="nav1-li"><a href="/campingmapping/T4_36/shopUser/ShopUser.jsp">Shop</a></li>
+					<li class="nav1-li"><a href="/campingmapping/T4_09/jobUser/JobUser.jsp">Job</a></li>
+					<li class="nav1-li"><a href="/campingmapping/T4_01/userMember/userMamber.html">Member</a></li>
+
+					<li><a href="" id="inout">登入</a></li>
+
+
+
+
+				</ul>
+			</nav>
+		</header>
+
+		<li class="nav1-li"><a href="/campingmapping/T4_01/member/member.html">Member</a></li>
+
+
+		<!-- Footer -->
+		<footer id="footer">
+			<p class="copyright">footer</p>
+		</footer>
+
+	</div>
+
+	<!-- BG -->
+	<div id="bg"></div>
+
+	<!-- Scripts -->
+	<script src="https://kit.fontawesome.com/c5dcdb1f13.js" crossorigin="anonymous"></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script>
+		$(function () {
+			$(document).ready(function () {
+				$.ajax({
+					url: "/campingmapping/LoginStateServlet",
+					type: "POST",
+					//提交方式
+					data: { "inoutstate": "inoutstate" },
+					dataType: "text",
+				}).done(function (data) {
+					if (data == 1) {
+						$("#inout").attr("href", "/campingmapping/T4_01/login/login.html").html("登入")
+					} else {
+						$("#inout").attr("href", "/campingmapping/T4_01/login/login.html").html("登出")
+					}
+
+				})
+			})
+
+
+
+		})
+
+	</script>
+</body>
+
+</html>
