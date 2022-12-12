@@ -50,6 +50,11 @@
 <!-- 							<input type="submit" value="購物車測試"  style="width:100px;height:45px;"> -->
 <!-- 						</form> -->
 					</div>
+					<form id="form1" name="form1" 
+      method="post" action="SelectAllServlet.do" 
+      enctype="multipart/form-data"
+>
+					
 					<table id="productlist" style="width:1050px;">
 						<thead>
 							<tr>
@@ -88,17 +93,10 @@
 									<td>
 									<input name="pdid" type="hidden" id="pdid" value="${Category.pdid}>" /> 
 									 <input type="button" style="border-radius:60%" name="delete" value="修改" onclick="updateProduct()" />
-<!-- 									<form> -->
-<!-- 									<input style="border-radius:60%;width:50px;height:50px" type="submit" id="btn1" value="修改"  -->
-<%-- 									formaction="<c:url value='http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'/>"> --%>
-<!-- 									</form> -->
 									</td>
 									<td>
-<%-- 									<form action="<c:url value='/CategoryDeleteServlet.do'/>" method="POST">  --%>
 									<input name="pdid" type="hidden" id="pdid" value="${Category.pdid}>" />
 									<input type="button" style="border-radius:60%" name="delete" value="刪除" onclick="confirmDelete()" />
-<!--      								</form> -->
-<!-- 									 <input type="button" style="border-radius:60%" name="delete" value="刪除" onclick="confirmDelete()" /> -->
 									</td>
 									
 									
@@ -106,6 +104,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					</form>
 				</div>
 
 				<!-- Banner -->
@@ -180,9 +179,10 @@
 	<script type="text/javascript">
 	function confirmDelete() {
 		if (confirm("確定刪除此項產品資料(編號:${Category.pdid})?") ) {
-			document.forms[0].action="CategoryDeleteServlet.do" ;
-			document.forms[0].method="POST";
-			document.forms[0].submit();
+// 			document.forms[0].action="CategoryDeleteServlet.do" ;
+// 			document.forms[0].method="POST";
+// 			document.forms[0].submit();
+			window.location.replace("http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_delet.jsp");
 		} else {
 		}
 	}

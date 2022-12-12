@@ -1,239 +1,396 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html>
 
 <head>
-<title>搜尋頁面</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/js/jquery-ui-1.13.2/jquery-ui.css" />
+<meta charset="UTF-8">
+<title>所有產品列表</title>
+<!-- Custom fonts for this template-->
+<link
+	href="http://localhost:8080/iSpanCarShop/SHOP_DETAIL/vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<!-- Custom styles for this template-->
+<link
+	href="http://localhost:8080/iSpanCarShop/SHOP_DETAIL/css/sb-admin-2.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
+	rel="stylesheet">
 
+
+<style>
+textarea {
+	background: transparent;
+	border-style: none;
+	text-indent: 75px;
+}
+
+.container {
+	margin: 30px;
+	padding: 0;
+}
+
+input {
+	border: 0;
+	background-color: #2db5c2;
+	color: #fff;
+	border-radius: 10px;
+	opacity: 1;
+}
+
+input:hover {
+	opacity: 0.6;
+}
+
+form {
+	display: inline;
+}
+</style>
 </head>
 
-<body class="is-preload">
-	<!-- Wrapper -->
+<body id="page-top">
+
+	<!-- Page Wrapper -->
 	<div id="wrapper">
 
-		<!-- Main -->
-		<div id="main">
-			<div class="inner">
+		<!-- Sidebar -->
+		<ul
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion bg-gradient-info"
+			id="accordionSidebar">
 
-				<!-- Header -->
-				<header id="header">
-					<a href="<c:url value='IndexShowAllPageServlet' />" class="logo"><strong>營地管理</strong></a>
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span
-								class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span
-								class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-snapchat-ghost"><span
-								class="label">Snapchat</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span
-								class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-medium-m"><span
-								class="label">Medium</span></a></li>
-					</ul>
-				</header>
+			<!-- Sidebar - Brand 左上標誌 -->
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				href="index.html">
+				<div class="sidebar-brand-icon rotate-n-15">
+					<i class="fa-solid fa-car-rear"></i>
+				</div>
+				<div class="sidebar-brand-text mx-3">
+					資車會<sup></sup>
+				</div>
+			</a>
 
-				<!-- Content -->
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item"><a class="nav-link" href="index.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
+			</a></li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider">
+
+			<!-- Heading -->
+			<div class="sidebar-heading">功能列表</div>
+
+			<li class="nav-item"><a class="nav-link" href="tables.html">
+					<i class="fa-solid fa-user"></i> <span>會員</span>
+			</a></li>
+
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link" href="tables.html">
+					<i class="fa-solid fa-car"></i> <span>車廠</span>
+			</a></li>
+
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link" href="tables.html">
+					<i class="fa-solid fa-screwdriver-wrench"></i> <span>保養廠</span>
+			</a></li>
+
+			<!-- Nav Item - Charts -->
+			<li class="nav-item"><a class="nav-link" href="charts.html">
+					<i class="fa-brands fa-rocketchat"></i> <span>論壇</span>
+			</a></li>
+
+			<!-- Nav Item - Tables -->
+			<li class="nav-item"><a class="nav-link"
+				href="<c:url value='/ProductListServlet.do'/>"> <i
+					class="fa-sharp fa-solid fa-cart-shopping"></i> <span>商城</span></a></li>
+
+			<li class="nav-item"><a class="nav-link" href="tables.html">
+					<i class="fa-solid fa-coins"></i> <span>訂單</span>
+			</a></li>
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
 			</div>
 
-			<body>
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>查詢&emsp;營地_營區位</h2>
-					</header>
-					<div class="mini-posts">
+		</ul>
+		<!-- End of Sidebar -->
 
-						<article>
-							<form name="QueryCampByCityNameForm"
-								action="<c:url value='/T4_24/QueryCampsByCityIDsServlet' />"
-								method="POST">
-								<table border="1">
-									<thead>
-										<tr bgcolor='lightblue'>
-											<th height="60" colspan="2" align="center">
-												<h2>縣市查詢營地資料</h2>
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr bgcolor='lightgreen'>
-											<td width="120" height="40">縣市:</td>
-											<td width="600" height="40" align="left">
-											<c:forEach 	var='city' items='${cityList}'>
-												<label for="${city.cityID}">${city.cityName} 
-													<input
-														type="checkbox" name="cityID"
-														id="${city.cityID}" value="${city.cityID}">
-												</label>
-											</c:forEach>
-											</td>
-										<tr bgcolor='lightblue'>
-											<td height="50" colspan="2" align="center"><input
-												type="submit" value="送出"></td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
-						</article>
-						<article>
-							<form name="QueryCampByCampIDForm"
-								action="<c:url value='/T4_24/QueryCampByCampIDServlet' />"
-								method="POST">
-								<table border="1">
-									<thead>
-										<tr bgcolor='lightblue'>
-											<th height="60" colspan="2" align="center">
-												<h2>ID查詢營地資料</h2>
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr bgcolor='lightgreen'>
-											<td width="120" height="40">營地ID:</td>
-											<td width="600" height="40" align="left"><input
-												id='campID' style="text-align: left" name="campID" value=""
-												type="text" size="14"></td>
-										<tr bgcolor='lightblue'>
-											<td height="50" colspan="2" align="center"><input
-												type="submit" value="送出"></td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
-						</article>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+
+				<!-- Topbar -->
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+					<div class="h4 mt-2 text-gray-800">資車國際</div>
+
+
+					<!-- Topbar Navbar 右邊頭像 -->
+					<ul class="navbar-nav ml-auto">
+
+						<!-- Nav Item - Search Dropdown (Visible Only XS) -->
+						<li class="nav-item dropdown no-arrow d-sm-none"><a
+							class="nav-link dropdown-toggle" href="#" id="searchDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <i class="fas fa-search fa-fw"></i>
+						</a> <!-- Dropdown - Messages -->
+							<div
+								class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+								aria-labelledby="searchDropdown">
+								<form class="form-inline mr-auto w-100 navbar-search">
+									<div class="input-group">
+										<input type="text"
+											class="form-control bg-light border-0 small"
+											placeholder="Search for..." aria-label="Search"
+											aria-describedby="basic-addon2">
+										<div class="input-group-append">
+											<button class="btn btn-primary" type="button">
+												<i class="fas fa-search fa-sm"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div></li>
+
+						<div class="topbar-divider d-none d-sm-block"></div>
+
+						<!-- Nav Item - User Information -->
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span
+								class="mr-2 d-none d-lg-inline text-gray-600 small">帳號</span> <img
+								class="img-profile rounded-circle"
+								src="<c:url value='/ImageServletforPage.do'/>">
+						</a> <!-- Dropdown - User Information -->
+							<div
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+								aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="#"> <i
+									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+								</a>
+
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#" data-toggle="modal"
+									data-target="#logoutModal"> <i
+									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Logout
+								</a>
+							</div></li>
+
+					</ul>
+
+				</nav>
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content 內容 -->
+				<div class="container">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">商城管理</h1>
+					<%-- <a href="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp' />">新增產品</a> --%>
+					<div>
+						<form action="<c:url value='/SHOP_DETAIL/iSpanShopInsert.jsp'/>"
+							method="POST">
+							<input type="submit" value="新增產品"
+								style="width: 100px; height: 45px; text-align: center">
+						</form>
+						<form action="<c:url value='/Shop_CartServlet.do'/>" method="POST">
+							<input type="submit" value="購物車測試"
+								style="width: 100px; height: 45px; text-align: center">
+						</form>
+						<p>
 					</div>
-<!-- 					<ul class="actions"> -->
-<!-- 						<li><a href="#" class="button">More</a></li> -->
-<!-- 					</ul> -->
-				</section>
 
-
-				<table>
-					<thead>
-						<tr>
-							<th>營地編號</th>
-							<th>營地</th>
-							<th>縣市編號</th>
-							<th>縣市名</th>
-							<th>地址</th>
-							<th>圖片</th>
-							<th>簡介</th>
-							<th>標籤</th>
-						</tr>
-						<tr>
-							<th>&emsp;&emsp;營位區編號</th>
-							<th>&emsp;營位區名</th>
-							<th>&emsp;營區位圖片</th>
-							<th>&emsp;總營位</th>
-							<th>&emsp;營位金額</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var='all' items='${showALL}'>
+					<table id="productlist" style="width: 1270px;">
+						<thead>
 							<tr>
-								<td>${ all.campID }</td>
-								<td>${ all.campName }</td>
-								<td>${ all.cityID }</td>
-								<td>${ all.cityName }</td>
-								<td>${ all.location }</td>
-								<td>圖片:</td>
-								<td>${ all.discription }</td>
-								<td><c:forEach var='tag' items='${all.tagList}'>
-										${tag.tagName}&nbsp;
-									</c:forEach>
-								</td>
+								<th>產品編號</th>
+								<th>產品名稱</th>
+								<th>種類</th>
+								<th>規格</th>
+								<th>價格</th>
+								<th>庫存數量</th>
+								<th>發售日期</th>
+								<th>產品資訊</th>
+								<th>產品圖片</th>
+								<th>修改</th>
+								<th>刪除</th>
+
 							</tr>
-							<c:forEach var='site' items='${all.siteList}'>
+						</thead>
+						<tbody>
+							<c:forEach var='product' items='${queryallproduct}'
+								varStatus="vs">
 								<tr>
-									<td>&emsp;&emsp;${ site.siteID }</td>
-									<td>&emsp;${ site.siteName }</td>
-									<td>&emsp;圖片:</td>
-									<td>&emsp;${ site.totalSites }</td>
-									<td>&emsp;${ site.siteMoney }</td>
+									<form method="POST" action="">
+										<td id="productno" style="text-align: center;">${product.productno}</td>
+										<td style="width: 80px">${product.productname}</td>
+										<td>${product.type}</td>
+										<td>${product.spec}</td>
+										<td>${product.price}</td>
+										<td style="text-align: center;">${product.stock}</td>
+										<td>${product.uptime}</td>
+										<td><textarea readonly>${product.productinfo}</textarea></td>
+										<td><img style="border-radius: 10%;"
+											src="<c:url value='/ProductImgServlet?productno=${product.productno}'/>"
+											width="180" height="180" /></td>
+										<%-- 									<td><input style="border-radius:80%;width:50px;height:50px" type="submit" id="btn11" value="修改" formaction="<c:url value='/SendIdToUpdate.do?productno=${product.productno}'/>"></td> --%>
+										<td><button type="submit" class="btn1" id="btn1"
+												onclick="foredit()"
+												style="border-radius: 80%; width: 40px; height: 40px">
+												<i class="fa-solid fa-pen fa-lg"></i>
+											</button></td>
+										<!-- 									
+<td><input type="button" id="btn2" value="刪除" ></td> -->
+										<td><button type="button" id="btn2"
+												style="border-radius: 80%; width: 40px; height: 40px">
+												<i class="fa-sharp fa-solid fa-trash-can fa-lg"></i>
+											</button></td>
+									</form>
 								</tr>
 							</c:forEach>
-						</c:forEach>
-					</tbody>
-				</table>
-			</body>
-		</div>
-
-		<!-- Sidebar -->
-		<div id="sidebar">
-			<div class="inner">
-
-				<!-- Search
-						<section id="search" class="alt">
-							<form method="post" action="#">
-								<input type="text" name="query" id="query" placeholder="Search" />
-							</form>
-						</section> -->
-
-				<!-- Menu -->
-				<nav id="menu">
-					<header class="major">
-						<h2>目錄</h2>
-					</header>
-
-				<ul>
-					<li><a href="<c:url value='/T4_24/QueryPageServlet' />">&emsp;查詢&emsp;營地_營區位</a></li>
-					<li><a href="<c:url value='/T4_24/InsertPageServlet' />">&emsp;新增&emsp;營地_營位區</a></li>
-					<li><a href="<c:url value='/T4_24/UpdatePage.jsp' />">&emsp;修改&emsp;營地_營區位</a></li>
-					<li><a href="<c:url value='/T4_24/deletePage.jsp' />">&emsp;刪除&emsp;營地_營區位</a></li>
-				</ul>
-					<!-- <li>
-									<span class="opener">Submenu</span>
-									<ul>
-										<li><a href="#">Lorem Dolor</a></li>
-										<li><a href="#">Ipsum Adipiscing</a></li>
-										<li><a href="#">Tempus Magna</a></li>
-										<li><a href="#">Feugiat Veroeros</a></li>
-									</ul>
-								</li> -->
-				</nav>
-
-
-
-				<!-- Footer -->
-				<footer id="footer">
-					<p class="copyright">
-						&copy; Untitled. All rights reserved. Demo Images: <a
-							href="https://unsplash.com">Unsplash</a>. Design: <a
-							href="https://html5up.net">HTML5 UP</a>.
-					</p>
-				</footer>
+						</tbody>
+					</table>
+				</div>
+				<script src="https://kit.fontawesome.com/f9c412c6fd.js"
+					crossorigin="anonymous"></script>
+				<!-- /.container-fluid -->
 
 			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+			<footer class="sticky-footer bg-white">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright &copy; Your Website 2020</span>
+					</div>
+				</div>
+			</footer>
+			<!-- End of Footer -->
+
 		</div>
+		<!-- End of Content Wrapper -->
 
-	</div> . 
+	</div>
+	<!-- End of Page Wrapper -->
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery-ui-1.13.2/jquery-ui.js"></script>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
 
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script
+		src="http://localhost:8080/iSpanCarShop/SHOP_DETAIL/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="http://localhost:8080/iSpanCarShop/SHOP_DETAIL/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script
+		src="http://localhost:8080/iSpanCarShop/SHOP_DETAIL/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script
+		src="http://localhost:8080/iSpanCarShop/SHOP_DETAIL/js/sb-admin-2.min.js"></script>
+
+	<script src="https://kit.fontawesome.com/dbb4662278.js"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 	<script>
-		$("input").checkboxradio();
-		console.log($('input'))
+		$(document).ready(function() {
+			$('#productlist').DataTable();
+		});
 	</script>
+	<script>
+		$('.container').on(
+				'click',
+				'#btn2',
+				function() {
 
+					//			let a = $(this).parent().parent().children('#productno').text() ;
+					// 			console.log(a)
+
+					$.ajax({
+						type : "POST",
+						url : "<c:url value='/DeleteShopDetailServlet.do'/>",
+						//contentType:"text",
+						context : this,
+						dataType : "text",
+						data : {
+							"productno" : $(this).parent().parent().children(
+									'#productno').text()
+						},
+						success : function(response) {
+							console.log("OK")
+							alert("刪除成功!");
+							$(this).parent().parent().remove();
+						}
+					})
+				});
+	</script>
+	<!-- <script> -->
+	// $("#btn1").click(function() { // let bb =
+	$(this).parent().parent().children('#productno').text(); // });
+	<!-- </script> -->
+	<script>
+		var aa;
+		$(".btn1").on('mouseover', function() {
+			aa = $(this).parent().parent().children('#productno').text();
+			console.log(aa)
+		});
+
+		function foredit() {
+			console.log(aa);
+			let bb = $(this).parent().parent().children('#productno').text();
+			window
+					.open("http://localhost:8080/iSpanCarShop/SendIdToUpdate.do?productno="
+							+ aa);
+
+		}
+	</script>
 </body>
 
 </html>
