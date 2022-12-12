@@ -1,1 +1,151 @@
-453453453
+﻿USE [campDB]
+GO
+/****** Object:  Table [dbo].[camp]    Script Date: 2022/12/6 下午 01:36:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[camp](
+	[campID] [int] IDENTITY(1,1) NOT NULL,
+	[campName] [nvarchar](50) NOT NULL,
+	[cityID] [int] NOT NULL,
+	[location] [nvarchar](50) NOT NULL,
+	[campPictures] [varbinary](max) NOT NULL,
+	[discription] [nvarchar](max) NULL,
+ CONSTRAINT [PK_camp] PRIMARY KEY CLUSTERED 
+(
+	[campID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[city]    Script Date: 2022/12/6 下午 01:36:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[city](
+	[cityID] [int] IDENTITY(1,1) NOT NULL,
+	[cityName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_city] PRIMARY KEY CLUSTERED 
+(
+	[cityID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[orderList]    Script Date: 2022/12/6 下午 01:36:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[orderList](
+	[listID] [int] IDENTITY(1,1) NOT NULL,
+	[UID] [int] NOT NULL,
+	[phone] [nvarchar](50) NOT NULL,
+	[orderTime] [datetime2](7) NOT NULL,
+	[goingTime] [date] NOT NULL,
+	[leaveTime] [date] NOT NULL,
+	[siteID] [int] NOT NULL,
+	[numbers] [int] NOT NULL,
+	[statusID] [int] NOT NULL,
+ CONSTRAINT [PK_orderList] PRIMARY KEY CLUSTERED 
+(
+	[listID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[site]    Script Date: 2022/12/6 下午 01:36:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[site](
+	[siteID] [int] IDENTITY(1,1) NOT NULL,
+	[siteName] [nvarchar](50) NOT NULL,
+	[sitePictures] [nvarchar](50) NOT NULL,
+	[totalSites] [int] NOT NULL,
+	[siteMoney] [int] NOT NULL,
+	[campID] [int] NOT NULL,
+ CONSTRAINT [PK_site] PRIMARY KEY CLUSTERED 
+(
+	[siteID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[situation]    Script Date: 2022/12/6 下午 01:36:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[situation](
+	[statusID] [int] IDENTITY(1,1) NOT NULL,
+	[status] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_situation] PRIMARY KEY CLUSTERED 
+(
+	[statusID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tag]    Script Date: 2022/12/6 下午 01:36:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tag](
+	[tagID] [int] IDENTITY(1,1) NOT NULL,
+	[tagName] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_tag] PRIMARY KEY CLUSTERED 
+(
+	[tagID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tagOfCamp]    Script Date: 2022/12/6 下午 01:36:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tagOfCamp](
+	[tagID] [int] NOT NULL,
+	[campID] [int] NOT NULL,
+ CONSTRAINT [PK_tagOFcamp] PRIMARY KEY CLUSTERED 
+(
+	[tagID] ASC,
+	[campID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[camp]  WITH CHECK ADD  CONSTRAINT [FK_camp_city] FOREIGN KEY([cityID])
+REFERENCES [dbo].[city] ([cityID])
+GO
+ALTER TABLE [dbo].[camp] CHECK CONSTRAINT [FK_camp_city]
+GO
+ALTER TABLE [dbo].[orderList]  WITH CHECK ADD  CONSTRAINT [FK_orderList_site] FOREIGN KEY([siteID])
+REFERENCES [dbo].[site] ([siteID])
+GO
+ALTER TABLE [dbo].[orderList] CHECK CONSTRAINT [FK_orderList_site]
+GO
+ALTER TABLE [dbo].[orderList]  WITH CHECK ADD  CONSTRAINT [FK_orderList_situation] FOREIGN KEY([statusID])
+REFERENCES [dbo].[situation] ([statusID])
+GO
+ALTER TABLE [dbo].[orderList] CHECK CONSTRAINT [FK_orderList_situation]
+GO
+ALTER TABLE [dbo].[site]  WITH CHECK ADD  CONSTRAINT [FK_site_camp] FOREIGN KEY([campID])
+REFERENCES [dbo].[camp] ([campID])
+GO
+ALTER TABLE [dbo].[site] CHECK CONSTRAINT [FK_site_camp]
+GO
+ALTER TABLE [dbo].[situation]  WITH CHECK ADD  CONSTRAINT [FK_situation_situation] FOREIGN KEY([statusID])
+REFERENCES [dbo].[situation] ([statusID])
+GO
+ALTER TABLE [dbo].[situation] CHECK CONSTRAINT [FK_situation_situation]
+GO
+ALTER TABLE [dbo].[tagOfCamp]  WITH CHECK ADD  CONSTRAINT [FK_tagOFcamp_camp] FOREIGN KEY([campID])
+REFERENCES [dbo].[camp] ([campID])
+GO
+ALTER TABLE [dbo].[tagOfCamp] CHECK CONSTRAINT [FK_tagOFcamp_camp]
+GO
+ALTER TABLE [dbo].[tagOfCamp]  WITH CHECK ADD  CONSTRAINT [FK_tagOFcamp_tag] FOREIGN KEY([tagID])
+REFERENCES [dbo].[tag] ([tagID])
+GO
+ALTER TABLE [dbo].[tagOfCamp] CHECK CONSTRAINT [FK_tagOFcamp_tag]
+GO

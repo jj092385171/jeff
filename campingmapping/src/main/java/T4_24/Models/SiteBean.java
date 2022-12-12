@@ -1,30 +1,39 @@
 package T4_24.Models;
 
-import java.util.Date;
-
-import com.mysql.cj.jdbc.Blob;
 
 public class SiteBean {
 	
+	private int siteID;
 	private String siteName;
-	private Blob sitePictures;
+	private java.sql.Blob sitePictures;
 	private int totalSites;
 	private int siteMoney;
 	private int campID;
 	
-	
+
 	public SiteBean() {
 
 	}
 
 
-	public SiteBean(String siteName, Blob sitePictures, int totalSites, int siteMoney, int campID) {
+	public SiteBean(String siteName, java.sql.Blob blob, int totalSites, int siteMoney, int campID) {
 		super();
 		this.siteName = siteName;
-		this.sitePictures = sitePictures;
+		this.sitePictures = blob;
 		this.totalSites = totalSites;
 		this.siteMoney = siteMoney;
 		this.campID = campID;
+	}
+
+	
+
+	public int getSiteID() {
+		return siteID;
+	}
+
+
+	public void setSiteID(int siteID) {
+		this.siteID = siteID;
 	}
 
 
@@ -38,12 +47,12 @@ public class SiteBean {
 	}
 
 
-	public Blob getSitePictures() {
+	public java.sql.Blob getSitePictures() {
 		return sitePictures;
 	}
 
 
-	public void setSitePictures(Blob sitePictures) {
+	public void setSitePictures(java.sql.Blob sitePictures) {
 		this.sitePictures = sitePictures;
 	}
 

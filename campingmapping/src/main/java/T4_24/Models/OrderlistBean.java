@@ -2,9 +2,10 @@ package T4_24.Models;
 
 import java.util.Date;
 
-public class orderlistBean {
+public class OrderlistBean {
 
-	//private int UID;
+	private int listID;
+	private int UID;
 	private String phone;
 	private Date orderTime;
 	private Date goingTime;
@@ -14,10 +15,10 @@ public class orderlistBean {
 	private int statusID;
 	
 	
-	public orderlistBean() {
+	public OrderlistBean() {
 	}
 
-
+	
 	
 	
 	
