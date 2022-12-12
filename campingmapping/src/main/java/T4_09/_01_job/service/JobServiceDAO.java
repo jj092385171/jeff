@@ -2,7 +2,7 @@ package T4_09._01_job.service;
 
 import java.io.InputStream;
 import java.sql.Blob;
-
+import java.sql.SQLException;
 import java.util.List;
 
 import T4_09._01_job.model.JobBean;
@@ -36,7 +36,9 @@ public interface JobServiceDAO {
 	//透過會員id找資料
 	public List<JobBean> findBeanByuID(int uID);
 	
-	
+	//模糊搜尋全部
+	List<JobBean> findJobSelectLike(int uID, int rackID, String job, String salary, int quantity, String place,
+				String time, String date, String remark, String rackUp, String rackDown) throws SQLException;
 	
 	// 判斷時間
 //	public boolean selectTime(Date rackUp, Date rackDown);

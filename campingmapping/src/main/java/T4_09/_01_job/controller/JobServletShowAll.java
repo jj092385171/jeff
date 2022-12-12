@@ -26,7 +26,7 @@ public class JobServletShowAll extends HttpServlet {
 		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();		
 		List<JobBean> showAllJob = jobServiceImpl.showAllJob();
 		request.setAttribute("showAllJob", showAllJob);		
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/showAll.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/showAll.jsp");
 		rd.forward(request, response);
 		return;
 	}

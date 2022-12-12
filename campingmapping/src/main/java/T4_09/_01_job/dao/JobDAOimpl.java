@@ -20,10 +20,10 @@ public class JobDAOimpl implements JobDAO {
 	public void addJob(JobBean jobBean) throws SQLException {
 		String sql = "insert into job values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
-			queryRunner.update(DbUtils.getConnection(), sql, jobBean.getuID(), jobBean.getRackID(), jobBean.getJob(),
-					jobBean.getSalary(), jobBean.getQuantity(), jobBean.getPlace(), jobBean.getTime(),
-					jobBean.getDate(), jobBean.getImg(), jobBean.getRemark(), jobBean.getRackUp(),
-					jobBean.getRackDown());
+			queryRunner.update(DbUtils.getConnection(), sql, jobBean.getuID(), jobBean.getRackID(), 
+					jobBean.getJob(),jobBean.getSalary(), jobBean.getQuantity(), jobBean.getPlace(),
+					jobBean.getTime(),jobBean.getDate(), jobBean.getImg(), jobBean.getRemark(), 
+					jobBean.getRackUp(),jobBean.getRackDown());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,7 +59,47 @@ public class JobDAOimpl implements JobDAO {
 		}
 		return list;
 	}
-
+	//模糊搜尋全部
+	public List<JobBean> findJobSelectLike(int uID,int rackID, String job,String salary,int quantity,
+			String place,String time,String date,String remark,String rackUp,String rackDown ) throws SQLException {
+		String sql = "select* from job where uID like ? or rackID like? or job like? "
+				+ "or salary like? or quantity like? or place like? or time like?"
+				+ "or date like?or remark like?or rackUp like?or rackDown like?";
+		Connection connection = DbUtils.getConnection();
+		PreparedStatement pre = connection.prepareStatement(sql);
+		pre.setString(1, "%" + uID + "%");
+		pre.setString(2, "%" + rackID + "%");
+		pre.setString(3, "%" + job + "%");
+		pre.setString(4, "%" + salary + "%");
+		pre.setString(5, "%" + quantity + "%");
+		pre.setString(6, "%" + place + "%");
+		pre.setString(7, "%" + time + "%");
+		pre.setString(8, "%" + date + "%");
+		pre.setString(9, "%" + remark + "%");
+		pre.setString(10, "%" + rackUp + "%");
+		pre.setString(11, "%" + rackDown + "%");
+		ResultSet rs = pre.executeQuery();
+		
+		List<JobBean> list = new ArrayList<JobBean>();	
+		while (rs.next()) {	
+			JobBean jb = new JobBean();
+			jb.setuID(rs.getInt("uID"));
+			jb.setRackID(rs.getInt("rackID"));
+			jb.setJob(rs.getString("job"));
+			jb.setSalary(rs.getString("salary"));
+			jb.setQuantity(rs.getInt("quantity"));
+			jb.setPlace(rs.getString("place"));
+			jb.setTime(rs.getString("time"));
+			jb.setDate(rs.getString("date"));
+			jb.setImg(rs.getBlob("img"));
+			jb.setRemark(rs.getString("remark"));
+			jb.setRackUp(rs.getDate("rackUp"));
+			jb.setRackDown(rs.getDate("rackDown"));
+			list.add(jb);
+		}
+		return list;
+	}
+	
 	// 透過rackID找圖片
 	@Override
 	public JobBean findImgByRackID(int rackID) throws SQLException {
@@ -159,7 +199,7 @@ public class JobDAOimpl implements JobDAO {
 		}
 		return j;
 	}
-
+	// 透過會員id找資料
 	@Override
 	public List<JobBean> findBeanByuID(int uID) throws SQLException {
 		String sql = "select* from job where uID=?";

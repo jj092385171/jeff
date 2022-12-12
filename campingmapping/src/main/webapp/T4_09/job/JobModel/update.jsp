@@ -12,6 +12,15 @@
 	width: 500px;
 	border: 2px solid black;
 	left: 500px;
+	background-color: lightgray;
+	color: blue;
+	justify-content: center;
+	align-items: center;
+	margin: auto
+}
+
+.b {
+	text-align: center;
 }
 </style>
 </head>
@@ -35,7 +44,7 @@
 
 			<p>
 				職缺 <input type="hidden" id="ii" value="${JobBean.job}${param.ii}"> 
-				<select>
+				<select  name="job">
 					<option class="1" value="廚師">廚師</option>
 					<option class="2" value="廚助">廚助</option>
 					<option class="3" value="房務員">房務員</option>
@@ -105,8 +114,10 @@
 				value="取消">
 		</div>
 	</form>
-	<form action="<c:url value='/T4_09/job/jobIndex.jsp' />">
-		<button>回首頁</button>
+	<form action="<c:url value='/T4_09/job/JobModel/jobCRUD.jsp' />">		
+			<div class="b">
+			<button>回首頁</button>
+			</div>
 	</form>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.6.1.js"></script>

@@ -3,117 +3,125 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-<title>Editorial by HTML5 UP</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="assets/css/main.css" />
+<meta charset="UTF-8">
+<title>insert</title>
+
+<style>
+.c1 {
+	width: 500px;
+	border: 2px solid black;
+	left: 500px;
+	background-color: lightgray;
+	color: blue;
+	justify-content: center;
+	align-items: center;
+	margin: auto
+}
+
+.b {
+	text-align: center;
+}
+</style>
 </head>
+<body>
+	<form action="<c:url value='/T4_09/JobServletAdd'/>" method="POST"
+		enctype="multipart/form-data">
+		<div class="c1">
 
-<body class="is-preload">
+			<p>
+				會員id <input type="text" name="id" value='${param.id}'  required >
+			</p>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.id}</div>
 
-	<!-- Wrapper -->
-	<div id="wrapper">
-
-		<!-- Main -->
-		<div id="main">
-			<div class="inner">
-				<!-- Banner -->
-				<section id="banner">
-					<div class="content">
-						<header>
-							<h1>徵才區</h1>
-							<h2>夥伴你好~</h2>
-						</header>
-						<p></p>
-						<form action="<c:url value='/T4_09/job/CRUD/insert.jsp'/>">
-							<button>新增職缺</button>
-						</form>
-						<form action="<c:url value='/T4_09/job/CRUD/select.jsp'/>">
-							<button>查詢</button>
-						</form>
-						<form action="<c:url value='/JobServletShowAll' />">
-							<button>全部資料</button>
-						</form>
-					</div>
-				</section>
-			</div>
 			<hr>
+			<p>
+				刊登編號 <input class="cl" type="text" name="rackID"
+					value='${param.rackID}' required>
+			</p>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.rackID}</div>
+
+			<hr>
+			<p>
+				職缺 <input type="hidden" id="ii" value="${param.ii}"> <select
+					name="job">
+					<option value="廚師">廚師</option>
+					<option value="廚助">廚助</option>
+					<option value="房務員">房務員</option>
+					<option value="會計">會計</option>
+					<option value="櫃台">櫃台</option>
+					<option value="假日工讀生">假日工讀生</option>
+					<option value="行政管理人員">行政管理人員</option>
+					<option value="夜班保全">夜班保全</option>
+					<option value="其他">其他</option>
+				</select>
+			</p>
+			<hr>
+			<p>
+				薪資 <input type="text" name="salary" value='${param.salary}' required>
+			</p>
+			<hr>
+
+			<p>
+				人數 <input type="text" name="quantity" value='${param.quantity}' 
+					required>
+			</p>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
+			<hr>
+
+			<p>
+				地點 <input type="text" name="place" value='${param.place}' required>
+			</p>
+			<hr>
+
+			<p>
+				可上班時段 <input type="text" name="time" value='${param.time}' required>
+			</p>
+			<hr>
+
+			<p>
+				可上班日期 <input type="text" name="date" value='${param.date}' required>
+			</p>
+			<hr>
+
+			<p>
+				上架日期 <input type="date" name="rackUp" value='${param.rackUp}'
+					required>
+			</p>
+			<hr>
+
+			<p>
+				下架日期 <input type="date" name="rackDown" value='${param.rackDown}'
+					required>
+			</p>
+			<hr>
+
+			<p>
+				照片上傳 <input type="file" name="img" value='${param.img}' >
+			</p>
+			<hr>
+
+			<p>
+				備註
+				<textarea name="remark" cols="20" rows="5">${param.remark}</textarea>
+			</p>
+
+			<input type="submit" value="送出"> <input type="reset"
+				value="取消">
 		</div>
-		
-		<!-- Form -->
-		<h3>Form</h3>
-
-		<form method="post" action="#">
-			<div class="row gtr-uniform">
-				<div class="col-6 col-12-xsmall">
-					<input type="text" name="demo-name" id="demo-name" value=""
-						placeholder="Name" />
-				</div>
-
-				<div class="col-12">
-					<select name="demo-category" id="demo-category">
-						<option value="">- Category -</option>
-						<option value="1">Manufacturing</option>
-						<option value="1">Shipping</option>
-						<option value="1">Administration</option>
-						<option value="1">Human Resources</option>
-					</select>
-				</div>
+	</form>
+	
+		<form action="<c:url value='/T4_09/job/JobModel/jobCRUD.jsp' />">
 			
-			
-				
-			
-			
-				<!-- Break -->
-				<div class="col-12">
-					<textarea name="demo-message" id="demo-message"
-						placeholder="Enter your message" rows="6"></textarea>
-				</div>
-				<!-- Break -->
-				<div class="col-12">
-					<ul class="actions">
-						<li><input type="submit" value="Send Message" class="primary" /></li>
-						<li><input type="reset" value="Reset" /></li>
-					</ul>
-				</div>
+			<div class="b">
+			<button>回首頁</button>
 			</div>
 		</form>
-		<!-- Sidebar -->
-		<div id="sidebar">
-			<div class="inner">
-				<!-- Search -->
-				<section id="search" class="alt">
-					<form method="post" action="#">
-						<input type="text" name="query" id="query" placeholder="Search" />
-					</form>
-				</section>
-				<!-- Menu -->
-				<nav id="menu">
-					<header class="major">
-						<h2>Menu</h2>
-					</header>
-					<ul>
-						<li><a
-							href="http://localhost:8080/campingmapping/T4_09/job/JobModel/jobCRUD.jsp">職缺刊登</a></li>
-						<li><a href=" ">人才查詢</a></li>
-						<li><a href=" ">刊登方案</a></li>
-						<li><a href="#">證照中心</a></li>
-						<li><a href="#">履歷</a></li>
-					</ul>
-				</nav>
-			</div>
+	
+	<script src="https://code.jquery.com/jquery-3.6.1.js">
+	
+	</script>
 
-		</div>
-	</div>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
 </body>
 </html>

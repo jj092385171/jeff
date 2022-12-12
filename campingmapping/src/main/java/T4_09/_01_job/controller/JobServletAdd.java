@@ -41,18 +41,37 @@ public class JobServletAdd extends HttpServlet {
 			errorMessage.put("id", "輸入格式錯誤");
 		}
 		request.setAttribute("ErrorMsg", errorMessage);
-
-		// 驗證刊登編號是否重複
-		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
-		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
-		if (findBeanByRackID.getRackID() != 0) {
-			errorMessage.put("rackID", "編號重複,新增失敗");
+		// 驗證刊登id輸入格式
+		try {
+			Integer rackID = Integer.parseInt(request.getParameter("rackID"));
+			jobBean.setRackID(rackID);
+			System.out.println(jobBean.getuID());
+			try {
+				JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
+				if (findBeanByRackID.getRackID() == rackID) {
+					errorMessage.put("rackID", "編號重複,新增失敗");
+					request.setAttribute("ErrorMsg", errorMessage);
+				}
+			} catch (Exception e) {
+			}
+			
+		} catch (Exception e) {
+			errorMessage.put("rackID", "輸入格式錯誤");
+			request.setAttribute("ErrorMsg", errorMessage);
 		}
-		request.setAttribute("ErrorMsg", errorMessage);
-		jobBean.setRackID(rackID);
+
+//		// 驗證刊登編號是否重複
+//		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
+//		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
+//		if (findBeanByRackID.getRackID() != 0) {
+//			errorMessage.put("rackID", "編號重複,新增失敗");
+//		}
+//		request.setAttribute("ErrorMsg", errorMessage);
+//		jobBean.setRackID(rackID);
 
 		String job = request.getParameter("job");
 		jobBean.setJob(job);
+		System.out.println(jobBean);
 		String salary = request.getParameter("salary");
 		jobBean.setSalary(salary);
 
@@ -99,14 +118,14 @@ public class JobServletAdd extends HttpServlet {
 		}
 
 		if (!errorMessage.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/insert.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/insert.jsp");
 			rd.forward(request, response);
 			return;
 		}
-
+		System.out.println(jobBean.getuID());
 		jobServiceImpl.addJob(jobBean);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/addSuccess.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/addSuccess.jsp");
 		rd.forward(request, response);
 		return;
 	}

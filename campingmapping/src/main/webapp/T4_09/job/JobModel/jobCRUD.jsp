@@ -5,7 +5,7 @@
 <html>
 
 <head>
-<title>Editorial by HTML5 UP</title>
+<title>Job CRUD</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -28,10 +28,10 @@
 							<h2>夥伴你好~</h2>
 						</header>
 						<p></p>
-						<form action="<c:url value='/T4_09/job/CRUD/insert.jsp'/>">
+						<form action="<c:url value='/T4_09/job/JobModel/insert.jsp'/>">
 							<button>新增職缺</button>
 						</form>
-						<form action="<c:url value='/T4_09/job/CRUD/select.jsp'/>">
+						<form action="<c:url value='/T4_09/job/JobModel/select.jsp'/>">
 							<button>查詢</button>
 						</form>
 						<form action="<c:url value='/JobServletShowAll' />">

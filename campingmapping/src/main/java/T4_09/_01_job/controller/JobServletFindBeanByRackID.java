@@ -31,7 +31,7 @@ public class JobServletFindBeanByRackID extends HttpServlet {
 		JobBean JobBean = jsi.findBeanByRackID(rint);
 //		System.out.println(JobBean);
 		request.setAttribute("JobBean", JobBean);
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/update.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/update.jsp");
 		rd.forward(request, response);
 		return;
 	}
