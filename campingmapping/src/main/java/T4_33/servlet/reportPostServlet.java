@@ -29,8 +29,8 @@ public class reportPostServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			int postId = Integer.parseInt(request.getParameter("postId"));//取得postId
-			PostDao dao = new PostDao(DbUtils.getConnection());
-			String reportResult = dao.reportPost(postId);
+			PostDao dao = new PostDao(DbUtils.getConnection()); //送postId到資料庫
+			String reportResult = dao.reportPost(postId); //回傳檢舉結果
 			
 			request.setAttribute("postId", postId); //送postId出去
 			request.setAttribute("reportResult", reportResult); //顯示檢舉結果

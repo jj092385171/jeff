@@ -31,10 +31,10 @@ public class showHidePostServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			
-			PostDao postDao = new PostDao(DbUtils.getConnection());
-			List<PostBean> list = postDao.selectPostHide();
+			PostDao dao = new PostDao(DbUtils.getConnection()); // 送postId到資料庫
+			List<PostBean> list = dao.selectPostHide(); // 回傳隱藏貼文list
 			
-			request.setAttribute("postHideList", list);
+			request.setAttribute("postHideList", list); // 送list到showHidePost
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showHidePost.jsp");
 			rd.forward(request, response);

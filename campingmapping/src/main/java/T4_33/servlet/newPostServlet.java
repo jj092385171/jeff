@@ -19,7 +19,7 @@ import T4_33.bean.PostBean;
 import T4_33.dao.PostDao;
 import utils.DbUtils;
 
-@WebServlet("/T4_33/servlet/newPostServlet")
+@WebServlet("/T4_33/newPostServlet")
 public class newPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,16 +37,27 @@ public class newPostServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			PostBean bean = new PostBean();
+			
 			String title = request.getParameter("title"); //取得輸入的title
 			bean.setTitle(title);
 			String content = request.getParameter("content"); //取得輸入的content
 			bean.setContent(content);
-			String stringPicture = request.getParameter("picture"); //取得輸入的picture
-			InputStream isPicture = null;
-			if(stringPicture != null) {
-				isPicture = new ByteArrayInputStream(stringPicture.getBytes()); //String要轉成inputStream
+//			String stringPicture = request.getParameter("picture"); //取得輸入的picture
+//			InputStream isPicture = null;
+//			if(stringPicture != "") {
+//				isPicture = new ByteArrayInputStream(stringPicture.getBytes()); //--> String轉成inputStream
+//			}
+//			bean.setPicture(isPicture);
+			
+			
+			String picture = request.getParameter("picture"); //取得輸入的picture
+			if(picture != "") {
+				picture = "/imgs/" + picture; //
 			}
-			bean.setPicture(isPicture);
+			bean.setPicture(picture);
+			System.out.println(picture);
+			
+			
 			String stringPeople = request.getParameter("people"); //取得輸入的people
 			int people = 0;
 			if(stringPeople != "") {
@@ -62,15 +73,15 @@ public class newPostServlet extends HttpServlet {
 			String county = request.getParameter("county"); //取得輸入的county
 			bean.setCounty(county);
 			String stringStartDate = request.getParameter("startDate"); //取得輸入的startDate
-			Date startDate = new Date(1970-01-01);
+			Date startDate = null;
 			if(stringStartDate != "") {
-				startDate = date.parse(stringStartDate);
+				startDate = date.parse(stringStartDate); //--> String轉成utilDate
 			}
 			bean.setStartDate(startDate);
 			String stringEndDate = request.getParameter("endDate"); //取得輸入的endDate
-			Date endDate = new Date(1970-01-01);
+			Date endDate = null;
 			if(stringEndDate != "") {
-				endDate = date.parse(stringEndDate);
+				endDate = date.parse(stringEndDate); //--> String轉成utilDate
 			}
 			bean.setEndDate(endDate);
 			String stringScore = request.getParameter("score"); //取得輸入的score
@@ -80,14 +91,13 @@ public class newPostServlet extends HttpServlet {
 			}
 			bean.setScore(score);
 			
-			PostDao Dao = new PostDao(DbUtils.getConnection());
-			int postId = Dao.insertPost(bean);
+			PostDao dao = new PostDao(DbUtils.getConnection()); //送到資料庫建立post
+			int postId = dao.insertPost(bean); //回傳建立的postId
 			
 			request.setAttribute("postId", postId); //傳postId到showPostServlet
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPostServlet");
 			rd.forward(request, response);
-			
 			return;
 			
 		} catch (IOException | ParseException | SQLException | ServletException e) {

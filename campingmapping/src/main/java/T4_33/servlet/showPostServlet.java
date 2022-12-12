@@ -3,6 +3,8 @@ package T4_33.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import T4_33.bean.PostBean;
+import T4_33.bean.PostCommentBean;
+import T4_33.dao.PostCommentDao;
 import T4_33.dao.PostDao;
 import utils.DbUtils;
 
@@ -32,18 +36,24 @@ public class showPostServlet extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
-			int postId = 0;
+			
+			int postId = 0; //取得postId
 			if(request.getParameter("postId") != null) {
 				postId = Integer.parseInt(request.getParameter("postId"));
 			}else {
 				postId = Integer.parseInt(request.getAttribute("postId").toString());
-			}
-			PostDao dao = new PostDao(DbUtils.getConnection());
-			PostBean bean = dao.showPost(postId);
+			}	
+			
+			PostDao dao = new PostDao(DbUtils.getConnection()); //送postId到資料庫取貼文內容
+			PostBean bean = dao.showPost(postId); //回傳bean
+			
+			PostCommentDao comDao = new PostCommentDao(DbUtils.getConnection()); //送postId到資料庫取留言
+			List<PostCommentBean> comList = comDao.selectPostComment(postId); //回傳list
+			
 			request.setAttribute("title", bean.getTitle()); //顯示title
 			request.setAttribute("content", bean.getContent()); //顯示content
 			if(bean.getPicture() != null) { //顯示picture
-				request.setAttribute("picture", bean.getPicture());
+				request.setAttribute("picture", bean.getPicture()); //--> 顯示圖片還沒做！！！！！！！！！！！！！！！！！！！！！
 			}
 			if(bean.getPeople() != 0) { //顯示people
 				request.setAttribute("people", bean.getPeople());
@@ -51,14 +61,14 @@ public class showPostServlet extends HttpServlet {
 			if(bean.getPrice() != 0) { //顯示price
 				request.setAttribute("price", bean.getPrice());
 			}
-			if(bean.getCounty() != "") { //顯示county
+			if(bean.getCounty() != null) { //顯示county
 				request.setAttribute("county", bean.getCounty());
 			}
-			if(!(date.format(bean.getStartDate()).equals("1970-01-01"))) { //顯示startDate
-				request.setAttribute("startDate", date.format(bean.getStartDate()) );
+			if(bean.getStartDate() != null) { //顯示startDate
+				request.setAttribute("startDate", date.format(bean.getStartDate())); //--> utilDate轉成String
 			}
-			if(!(date.format(bean.getEndDate())).equals("1970-01-01")) { //顯示endDate
-				request.setAttribute("endDate", date.format(bean.getEndDate()));
+			if(bean.getEndDate() != null) { //顯示endDate
+				request.setAttribute("endDate", date.format(bean.getEndDate())); //--> utilDate轉成String
 			}
 			if(bean.getScore() != 0) { //顯示score
 				request.setAttribute("score", bean.getScore());
@@ -68,6 +78,7 @@ public class showPostServlet extends HttpServlet {
 			request.setAttribute("userUnlike", bean.getUserUnlike()); //顯示userUnlike
 			
 			request.setAttribute("postId", postId); //送postId到showPost
+			request.setAttribute("comList", comList); //送comList到showPost
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPost.jsp");
 			rd.forward(request, response);

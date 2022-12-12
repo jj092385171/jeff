@@ -30,14 +30,23 @@ public class PostDao {
 		preState.setInt(1, 1); // 設定userId
 		preState.setString(2, bean.getTitle()); // 設定title
 		preState.setString(3, bean.getContent()); // 設定content
-		preState.setBinaryStream(4, bean.getPicture()); // 設定picture
+//		preState.setBinaryStream(4, bean.getPicture()); // 設定picture
+		preState.setString(4, bean.getPicture()); // 修改picture
 		preState.setInt(5, bean.getPeople()); // 設定people
 		preState.setInt(6, bean.getPrice()); // 設定price
 		preState.setString(7, bean.getCounty()); // 設定county
-		java.sql.Date startDate = new java.sql.Date(bean.getStartDate().getTime()); // 設定startDate
-		preState.setDate(8, startDate); 
-		java.sql.Date endDate = new java.sql.Date(bean.getEndDate().getTime()); // 設定endDate
-		preState.setDate(9, endDate); 
+		if(bean.getStartDate() != null) { // 設定startDate
+			java.sql.Date startDate = new java.sql.Date(bean.getStartDate().getTime()); 
+			preState.setDate(8, startDate); 
+		}else {
+			preState.setDate(8, null);
+		}
+		if(bean.getEndDate() != null) { // 設定endDate
+			java.sql.Date endDate = new java.sql.Date(bean.getEndDate().getTime());
+			preState.setDate(9, endDate); 
+		}else {
+			preState.setDate(9, null);
+		}
 		preState.setInt(10, bean.getScore()); // 設定score
 		String stringReleaseDate = dateTime.format(new Date()); // 設定releaseDate
 		Date utilReleaseDate = dateTime.parse(stringReleaseDate);
@@ -64,17 +73,26 @@ public class PostDao {
 	public void updatePost(PostBean bean)throws SQLException, ParseException {
 		String sql = "update post set title = ?, content = ?, picture = ?, people = ?, price = ?, county = ?, startDate = ?, endDate = ?, score = ?, releaseDate = ?, postReport = ? where postId = ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
-		preState.setString(1, bean.getTitle()); //修改title
-		preState.setString(2, bean.getContent()); //修改content
-		preState.setBinaryStream(3, bean.getPicture()); //修改picture
-		preState.setInt(4, bean.getPeople()); //修改people
-		preState.setInt(5, bean.getPrice()); //修改price
-		preState.setString(6, bean.getCounty()); //修改county
-		java.sql.Date startDate = new java.sql.Date(bean.getStartDate().getTime()); //修改startDate
-		preState.setDate(7, startDate);
-		java.sql.Date endDate = new java.sql.Date(bean.getEndDate().getTime()); //修改endDate
-		preState.setDate(8, endDate);
-		preState.setInt(9, bean.getScore()); //修改score
+		preState.setString(1, bean.getTitle()); // 修改title
+		preState.setString(2, bean.getContent()); // 修改content
+//		preState.setBinaryStream(3, bean.getPicture()); // 修改picture
+		preState.setString(3, bean.getPicture()); // 修改picture
+		preState.setInt(4, bean.getPeople()); // 修改people
+		preState.setInt(5, bean.getPrice()); // 修改price
+		preState.setString(6, bean.getCounty()); // 修改county
+		if(bean.getStartDate() != null) { // 修改startDate
+			java.sql.Date startDate = new java.sql.Date(bean.getStartDate().getTime()); 
+			preState.setDate(7, startDate);
+		}else {
+			preState.setDate(7, null);
+		}
+		if(bean.getEndDate() != null) { // 修改endDate
+			java.sql.Date endDate = new java.sql.Date(bean.getEndDate().getTime());
+			preState.setDate(8, endDate); 
+		}else {
+			preState.setDate(8, null);
+		}
+		preState.setInt(9, bean.getScore()); // 修改score
 		String stringReleaseDate = dateTime.format(new Date()); // 修改releaseDate
 		Date utilReleaseDate = dateTime.parse(stringReleaseDate);
 		java.sql.Timestamp releaseDate = new java.sql.Timestamp(utilReleaseDate.getTime());
@@ -143,41 +161,53 @@ public class PostDao {
 		return reportResult;
 	}
 
-	// 隱藏貼文
+	// 隱藏貼文(OK)
 	public String hidePost(Integer postId) throws SQLException {
-		String sql = "update post set postHide = ? where postId = ?";
-		PreparedStatement preState = conn.prepareStatement(sql);
-		preState.setInt(1, 1);
-		preState.setInt(2, postId);
-		preState.executeUpdate();
+		String getPostHide = "select postHide from post where postId = ?";
+		PreparedStatement preState = conn.prepareStatement(getPostHide);
+		preState.setInt(1, postId);
+		ResultSet rs = preState.executeQuery();
+		PostBean bean = new PostBean();
+		rs.next();
+		String hideResult = null;
+		if(rs.getInt("postHide") != 1) {
+			bean.setPostHide(rs.getInt("postHide"));
+			String sql = "update post set postHide = ? where postId = ?";
+			preState = conn.prepareStatement(sql);
+			preState.setInt(1, 1);
+			preState.setInt(2, postId);
+			preState.executeUpdate();
+			hideResult = "隱藏貼文成功";
+		}else {
+			hideResult = "貼文已被隱藏";
+		}
 		preState.close();
-		return "隱藏貼文成功";
+		return hideResult;
+		
 	}
 
-	// 刪除貼文
-	public void deletePost(Integer postId) throws SQLException {
+	// 刪除貼文(OK)
+	public String deletePost(Integer postId) throws SQLException {
 		String sql = "delete from post where postId = ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
 		preState.setInt(1, postId);
-		preState.executeUpdate();
-		System.out.println("刪除貼文完成");
+		int deleteReturen = preState.executeUpdate();
+		String deleteResult = null;
+		if(deleteReturen == 1) {
+			deleteResult = "刪除貼文成功";
+		}else {
+			deleteResult = "貼文已被刪除";
+		}
 		preState.close();
+		return deleteResult;
 	}
 
-	//顯示所有貼文(OK)
+	// 顯示所有貼文(OK)
 	public List<PostBean> showDiscussionPost() throws SQLException {
-		String sql = "select * from post order by releaseDate";
+		String sql = "select * from post where postHide != 1 order by releaseDate desc";
 		PreparedStatement preState = conn.prepareStatement(sql);
 		ResultSet rs = preState.executeQuery();
-		List<PostBean> list = new LinkedList<>();
-		while(rs.next()) {
-			PostBean bean = new PostBean();
-			bean.setPostId(rs.getInt("postId"));
-			bean.setTitle(rs.getString("title"));
-			if(rs.getInt("postHide") != 1) {
-				list.add(bean);
-			}
-		}
+		List<PostBean> list = selectPostList(rs);
 		rs.close();
 		preState.close();
 		return list;
@@ -195,19 +225,25 @@ public class PostDao {
 		bean.setUserId(rs.getInt("userId")); // 取userId
 		bean.setTitle(rs.getString("title")); // 取title
 		bean.setContent(rs.getString("content")); // 取content
-		bean.setPicture(rs.getBinaryStream("picture")); // 取picture
+//		bean.setPicture(rs.getBinaryStream("picture")); // 取picture
+		bean.setPicture(rs.getString("picture")); // 取picture
 		bean.setPeople(rs.getInt("people")); // 取people
 		bean.setPrice(rs.getInt("price")); // 取price
 		bean.setCounty(rs.getString("county")); // 取county
-		java.sql.Date sqlStartDate = rs.getDate("startDate"); // 取startDate
-		Date utilStartDate = new Date(sqlStartDate.getTime());
+		Date utilStartDate = null; // 取startDate
+		if(rs.getDate("startDate") != null) {
+			java.sql.Date sqlStartDate = rs.getDate("startDate"); 
+			utilStartDate = new Date(sqlStartDate.getTime());
+		}
 		bean.setStartDate(utilStartDate);
-		java.sql.Date sqlEndDate = rs.getDate("endDate"); // 取endDate
-		Date utilEndDate = new Date(sqlEndDate.getTime());
+		Date utilEndDate = null; // 取endDate
+		if(rs.getDate("endDate") != null) {
+			java.sql.Date sqlEndDate = rs.getDate("endDate"); 
+			utilEndDate = new Date(sqlEndDate.getTime());
+		}
 		bean.setEndDate(utilEndDate);
 		bean.setScore(rs.getInt("score")); // 取score
-		java.sql.Timestamp sqlReleaseDate = rs.getTimestamp("releaseDate"); // 取releaseDate
-		Date utilReleaseDate = new Date(sqlReleaseDate.getTime());
+		Date utilReleaseDate = new Date(rs.getTimestamp("releaseDate").getTime()); // 取releaseDate
 		bean.setReleaseDate(utilReleaseDate);
 		bean.setUserLike(rs.getInt("userLike")); // 取userLike
 		bean.setUserUnlike(rs.getInt("userUnlike")); // 取userUnlike
@@ -229,17 +265,18 @@ public class PostDao {
 		preState.close();
 	}
 
-	// 查詢被檢舉貼文
-	public void selectPostReport() throws SQLException {
+	// 查詢被檢舉貼文(OK)
+	public List<PostBean> selectPostReport() throws SQLException {
 		String sql = "select * from post where postReport = 1";
 		PreparedStatement preState = conn.prepareStatement(sql);
 		ResultSet rs = preState.executeQuery();
 		List<PostBean> list = selectPostList(rs);
 		rs.close();
 		preState.close();
+		return list;
 	}
 	
-	//查詢隱藏貼文
+	// 查詢隱藏貼文(OK)
 	public List<PostBean> selectPostHide() throws SQLException {
 		String sql = "select * from post where postHide = 1";
 		PreparedStatement preState = conn.prepareStatement(sql);
@@ -259,19 +296,24 @@ public class PostDao {
 			bean.setUserId(rs.getInt("userId")); // 取userId
 			bean.setTitle(rs.getString("title")); // 取title
 			bean.setContent(rs.getString("content")); // 取content
-			bean.setPicture(rs.getBinaryStream("picture")); // 取picture
+//			bean.setPicture(rs.getBinaryStream("picture")); // 取picture
 			bean.setPeople(rs.getInt("people")); // 取people
 			bean.setPrice(rs.getInt("price")); // 取price
 			bean.setCounty(rs.getString("county")); // 取county
-			java.sql.Date sqlStartDate = rs.getDate("startDate"); // 取startDate
-			Date utilStartDate = new Date(sqlStartDate.getTime());
+			Date utilStartDate = null; // 取startDate
+			if(rs.getDate("startDate") != null) {
+				java.sql.Date sqlStartDate = rs.getDate("startDate"); 
+				utilStartDate = new Date(sqlStartDate.getTime());
+			}
 			bean.setStartDate(utilStartDate);
-			java.sql.Date sqlEndDate = rs.getDate("endDate"); // 取endDate
-			Date utilEndDate = new Date(sqlEndDate.getTime());
+			Date utilEndDate = null; // 取endDate
+			if(rs.getDate("endDate") != null) {
+				java.sql.Date sqlEndDate = rs.getDate("endDate"); 
+				utilEndDate = new Date(sqlEndDate.getTime());
+			}
 			bean.setEndDate(utilEndDate);
 			bean.setScore(rs.getInt("score")); // 取score
-			java.sql.Timestamp sqlReleaseDate = rs.getTimestamp("releaseDate"); // 取releaseDate
-			Date utilReleaseDate = new Date(sqlReleaseDate.getTime());
+			Date utilReleaseDate = new Date(rs.getTimestamp("releaseDate").getTime()); // 取releaseDate
 			bean.setReleaseDate(utilReleaseDate);
 			bean.setUserLike(rs.getInt("userLike")); // 取userLike
 			bean.setUserUnlike(rs.getInt("userUnlike")); // 取userUnlike

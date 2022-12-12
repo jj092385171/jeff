@@ -9,7 +9,7 @@ public class PostBean {
 	private int userId;
 	private String title;
 	private String content;
-	private InputStream picture; // 照片格式須確認
+	private String picture; // 照片格式須確認
 	private int people;
 	private int price;
 	private String county;
@@ -54,11 +54,11 @@ public class PostBean {
 		this.content = content;
 	}
 
-	public InputStream getPicture() {
+	public String getPicture() {
 		return picture;
 	}
 
-	public void setPicture(InputStream picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 

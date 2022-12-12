@@ -30,9 +30,8 @@ public class showDiscussionServlet extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
-			PostDao postDao = new PostDao(DbUtils.getConnection());
-			List<PostBean> list = postDao.showDiscussionPost();
-			
+			PostDao dao = new PostDao(DbUtils.getConnection());
+			List<PostBean> list = dao.showDiscussionPost();
 			
 			request.setAttribute("postList", list);
 			

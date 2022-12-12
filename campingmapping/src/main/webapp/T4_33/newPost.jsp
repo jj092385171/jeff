@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<!DOCTYPE html>
 		<html>
 
 		<head>
 			<meta charset="UTF-8">
-			<title>new discussion</title>
+			<title>new Post</title>
 			<style>
 				h3 {
 					color: brown;
 				}
-
 				.disBlock {
 					padding: 5px 5px;
 					margin: 5px 5px;
@@ -23,7 +22,7 @@
 				<h3>新增貼文</h3>
 			</header>
 			<article>
-				<form action="<c:url value='/T4_33/servlet/newPostServlet' />" method="POST">
+				<form action="<c:url value='/T4_33/newPostServlet' />" method="POST">
 					<div class="disBlock">
 						<label for="">*標題</label>
 						<input type="text" name="title" maxlength="30" size="80" required="required">
@@ -32,10 +31,10 @@
 						<label for="">*內容</label>
 						<textarea name="content" id="" cols="66" rows="10" required="required"></textarea>
 					</div>
-					<div class="disBlock">
-						<label for="">上傳照片</label>
-						<input type="file" name="picture">
-					</div>
+<!-- 					<div class="disBlock"> -->
+<!-- 						<label for="">上傳照片</label> -->
+<!-- 						<input type="file" name="picture" accept="image/*"> -->
+<!-- 					</div> -->
 					<div class="disBlock">
 						<label for="">露營人數</label>
 						<select name="people" id="people">
@@ -44,7 +43,7 @@
 					</div>
 					<div class="disBlock">
 						<label for="">露營費用</label>
-						<input type="number" name="price">
+						<input type="number" name="price" min="1">
 					</div>
 					<div class="disBlock">
 						<label for="">露營城市</label>
@@ -67,8 +66,9 @@
 						</select>
 					</div>
 					<div class="disBlock">
-						<input type="submit">
-						<input type="reset" name="" id="">
+						<input type="submit" value="送出">
+						<input type="reset" name="" id="" value="清除">
+						<input type="button" value="回討論區" onclick="history.back()">
 					</div>
 				</form>
 			</article>
@@ -80,7 +80,7 @@
 				}
 				
 				function showPeople() {
-					var peopleMax = 5;
+					var peopleMax = 10;
 					for (let i = 1; i <= peopleMax; i++) {
 						var option = document.createElement("option");
 						option.value = i;
