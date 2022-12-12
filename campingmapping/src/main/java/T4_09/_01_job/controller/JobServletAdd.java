@@ -59,7 +59,7 @@ public class JobServletAdd extends HttpServlet {
 		// 驗證人數輸入格式
 		try {
 			Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-			jobBean.setuID(quantity);
+			jobBean.setQuantity(quantity);
 
 		} catch (Exception e) {
 			errorMessage.put("quantity", "輸入格式錯誤");
