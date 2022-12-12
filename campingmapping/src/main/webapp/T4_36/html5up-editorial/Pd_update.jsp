@@ -8,7 +8,7 @@
 	<title>修改商品細項</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/assets/css/main.css" />
 </head>
 
 <body class="is-preload">
@@ -37,7 +37,7 @@
 		enctype="multipart/form-data">
 		產品編號(pk)<br> 
 		<input type="text" value='${Category.pdid}' name="Pdid"  />會員ID<br> 
-		<input type="text" value='1' name="userID">產品名稱<br> 
+		<input type="text" value='${Category.userID}' name="userID">產品名稱<br> 
 		<input type="text" value='${Category.pdname}' name="Pdname">品牌名稱<br> 
 		<input type="text" value='${Category.pdtitle}' name="Pdtitle">產品規格<br> 
 		<input type="text" value='${Category.pdcontent}' name="Pdcontent">產品類型<br>
@@ -78,8 +78,8 @@
 						<h2>商城</h2>
 					</header>
 					<ul>
-						<li><a href="Pd_index.jsp">首頁</a></li>
-						<li><a href="Pd_Allproduct.jsp">商城維護</a></li>
+						<li><a href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_index.jsp">首頁</a></li>
+						<li><a href="<c:url value='/SelectAllServlet.do'/>">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>
@@ -112,11 +112,11 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/jquery.min.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/browser.min.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/breakpoints.min.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/util.js"></script>
+	<script src="http://localhost:8080/campingmapping/T4_36/html5up-editoria/js/main.js"></script>
 
 </body>
 

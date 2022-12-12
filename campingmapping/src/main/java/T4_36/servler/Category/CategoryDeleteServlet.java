@@ -18,12 +18,10 @@ public class CategoryDeleteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-		System.out.println("123");
 		String ProductId = req.getParameter("ProductId");
 		System.out.println(ProductId);
 
 		CategoryService categoryService = new CategoryServiceImpl();
-//		categoryService.delete(Integer.getInteger(id));
 		categoryService.delete(Integer.parseInt(ProductId));
 
 		String contextPath = req.getContextPath();

@@ -67,7 +67,7 @@
 					</header>
 					<ul>
 						<li><a href="Pd_index.jsp">首頁</a></li>
-						<li><a href="Pd_Allproduct.jsp">商城維護</a></li>
+						<li><a href="<c:url value='/SelectAllServlet.do'/>">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>
