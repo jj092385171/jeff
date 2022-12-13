@@ -7,8 +7,8 @@
 <head>
 	<title>修改商品細項</title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/assets/css/main.css" />
+<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" /> -->
+<!-- 	<link rel="stylesheet" href="http://localhost:8080/campingmapping/T4_36/html5up-editorial/assets/css/main.css" /> -->
 </head>
 
 <body class="is-preload">
@@ -23,14 +23,14 @@
 				<!-- Header -->
 				<header id="header">
 					<a href="#" class="logo"><strong>修改商品細項</strong> by team4</a>
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a>
-						</li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-					</ul>
+<!-- 					<ul class="icons"> -->
+<!-- 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li> -->
+<!-- 						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li> -->
+<!-- 						<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a> -->
+<!-- 						</li> -->
+<!-- 						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li> -->
+<!-- 						<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li> -->
+<!-- 					</ul> -->
 				</header>
 
 <form action="<c:url value='/CategoryUpdateServlet.do'/>"  method="POST"	enctype="multipart/form-data">
@@ -100,11 +100,11 @@
 
 
 				<!-- Footer -->	
-				<footer id="footer">
-					<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a
-							href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5
-							UP</a>.</p>
-				</footer>
+<!-- 				<footer id="footer"> -->
+<!-- 					<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a -->
+<!-- 							href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 -->
+<!-- 							UP</a>.</p> -->
+<!-- 				</footer> -->
 
 			</div>
 		</div>
