@@ -54,10 +54,10 @@ public class JobServletFindBeanByuID extends HttpServlet {
 		}
 		
 //		request.setAttribute("jobBean", jobBean);
-//		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/showSelect.jsp");
-//		rd.forward(request, response);
-//		return;
-//	
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/showSelect.jsp");
+		rd.forward(request, response);
+		return;
+	
 	}
 
 }

@@ -32,7 +32,6 @@ public class view extends HttpServlet {
 		request.setAttribute("view",view);
 		request.setAttribute("camparea", camparea);
 		request.setAttribute("postmember", postmember);
-		System.out.println("in");
 
 		RequestDispatcher rd = request.getRequestDispatcher("/T4_11/Team.jsp");
 		rd.forward(request, response);
