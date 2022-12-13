@@ -77,7 +77,7 @@
 											<td>${ all.cityID }</td>
 											<td>${ all.cityName }</td>
 											<td>${ all.location }</td>
-											<td>圖片: </td>
+											<td><img width="80" height="100" src="<c:url value='/T4_24/GetCampImage?id=${all.campID}'/>" /></td>
 											<td>${ all.discription }</td>
 											<td>
 												<c:forEach var='tag' items='${all.tagList}'>

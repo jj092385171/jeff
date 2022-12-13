@@ -100,7 +100,6 @@ public class InsertCampServlet extends HttpServlet {
 		try {
 			// 新增到camp回傳campID
 			BigDecimal campID = campDao.AddCamp(cb);
-
 			// 利用campID和tagID新增到營地的標籤
 			if(tagIDs != null  ||  tagIDs.length != 0) {
 				for (String tagID : tagIDs) {

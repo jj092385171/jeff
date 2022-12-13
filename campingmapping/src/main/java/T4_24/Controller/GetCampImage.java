@@ -49,7 +49,6 @@ public class GetCampImage extends HttpServlet {
 			byte[] bytes = new byte[8192];
 			while ((len = is.read(bytes)) != -1) {
 				os.write(bytes, 0, len);
-				
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
