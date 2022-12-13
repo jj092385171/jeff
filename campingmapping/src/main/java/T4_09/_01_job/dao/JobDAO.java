@@ -32,8 +32,8 @@ public interface JobDAO {
 	// 透過會員id找資料
 	public List<JobBean> findBeanByuID(int uID) throws SQLException;
 
-	//模糊搜尋全部
-	List<JobBean> findJobSelectLike(int uID, int rackID, String job, String salary, int quantity, String place,
-			String time, String date, String remark, String rackUp, String rackDown) throws SQLException;
+//	//模糊搜尋全部
+//	List<JobBean> findJobSelectLike(int uID, int rackID, String job, String salary, int quantity, String place,
+//			String time, String date, String remark, String rackUp, String rackDown) throws SQLException;
 
 }

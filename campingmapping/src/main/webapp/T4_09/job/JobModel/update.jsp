@@ -114,7 +114,8 @@
 				value="取消">
 		</div>
 	</form>
-	<form action="<c:url value='/T4_09/job/JobModel/jobCRUD.jsp' />">		
+	<form action="<c:url value='/T4_09/job/JobModel/jobCRUD.jsp' />" method="POST"
+							enctype="multipart/form-data">		
 			<div class="b">
 			<button>回首頁</button>
 			</div>

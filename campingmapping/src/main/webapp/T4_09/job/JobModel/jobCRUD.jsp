@@ -28,22 +28,25 @@
 							<h2>夥伴你好~</h2>
 						</header>
 						<p></p>
-						<form action="<c:url value='/T4_09/job/JobModel/insert.jsp'/>">
+						<form action="<c:url value='/T4_09/job/JobModel/insert.jsp'/>" method="POST"
+							enctype="multipart/form-data">
 							<button>新增職缺</button>
 						</form>
-						<form action="<c:url value='/T4_09/job/JobModel/select.jsp'/>">
+						<form action="<c:url value='/T4_09/job/JobModel/select.jsp'/>" method="POST"
+							enctype="multipart/form-data">
 							<button>查詢</button>
 						</form>
-						<form action="<c:url value='/JobServletShowAll' />">
+						<form action="<c:url value='/JobServletShowAll' />" method="POST"
+							enctype="multipart/form-data">
 							<button>全部資料</button>
-						</form>					
+						</form>
 					</div>
 				</section>
 
 			</div>
 		</div>
 		<!-- Sidebar -->
-		<div id="sidebar">
+		<div id="sideba  r">
 			<div class="inner">
 				<!-- Search -->
 				<section id="search" class="alt">
@@ -57,13 +60,14 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
-						<li><a href="http://localhost:8080/campingmapping/T4_09/job/JobModel/jobCRUD.jsp">職缺刊登</a></li>
+						<li><a
+							href="http://localhost:8080/campingmapping/T4_09/job/JobModel/jobCRUD.jsp">職缺刊登</a></li>
 						<li><a href=" ">人才查詢</a></li>
 						<li><a href=" ">刊登方案</a></li>
 						<li><a href="#">證照中心</a></li>
 						<li><a href="#">履歷</a></li>
 					</ul>
-				</nav>		
+				</nav>
 			</div>
 		</div>
 	</div>

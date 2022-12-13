@@ -177,20 +177,20 @@ public class JobServiceDAOImpl implements JobServiceDAO {
 		}
 	}
 	//模糊搜尋全部
-	@Override
-	public List<JobBean> findJobSelectLike(int uID, int rackID, String job, String salary, int quantity, String place,
-			String time, String date, String remark, String rackUp, String rackDown) throws SQLException {
-		List<JobBean> jb = null;
-		try {
-			DbUtils.begin();
-			jb = jobDAO.findJobSelectLike(uID,quantity, job, rackDown, quantity, rackDown, rackDown, rackDown, rackDown, rackDown, rackDown);
-			DbUtils.commit();
-			return jb;
-		} catch (Exception e) {
-			DbUtils.rollbacl();
-			e.printStackTrace();
-			return null;
-		}
-
-	}
+//	@Override
+//	public List<JobBean> findJobSelectLike(int uID, int rackID, String job, String salary, int quantity, String place,
+//			String time, String date, String remark, String rackUp, String rackDown) throws SQLException {
+//		List<JobBean> jb = null;
+//		try {
+//			DbUtils.begin();
+//			jb = jobDAO.findJobSelectLike(uID,quantity, job, rackDown, quantity, rackDown, rackDown, rackDown, rackDown, rackDown, rackDown);
+//			DbUtils.commit();
+//			return jb;
+//		} catch (Exception e) {
+//			DbUtils.rollbacl();
+//			e.printStackTrace();
+//			return null;
+//		}
+//
+//	}
 	}

@@ -49,7 +49,7 @@
 						<h2>Menu</h2>
 					</header>
 					<ul>
-						<li><a href="http://localhost:8080/campingmapping/T4_09/job/JobModel/jobCRUD.jsp">職缺刊登</a></li>
+						<li><a href="http://localhost:8080/campingmapping/T4_09/job/JobModel/jobCRUD.jsp" >職缺刊登</a></li>
 						<li><a href=" ">人才查詢</a></li>
 						<li><a href=" ">刊登方案</a></li>
 						<li><a href="#">證照中心</a></li>
