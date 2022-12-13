@@ -109,7 +109,7 @@
 											<tr>
 												<td>${bean.initiatingnum}</td>
 												<td>${bean.postmember}</td>
-												<td class="tendigits">${bean.postdate}</td>
+												<td class="nineteendigits">${bean.postdate}</td>
 												<td class="tendigits">${bean.startdate}</td>
 												<td class="tendigits">${bean.enddate}</td>
 												<td>${bean.currentnum}</td>
@@ -151,13 +151,12 @@
 												</td>
 												<td>${bean.initiatingnum}</td>
 												<td>${bean.postmember}</td>
-												<td class="tendigits">${bean.postdate}</td>
+												<td class="nineteendigits">${bean.postdate}</td>
 												<td class="tendigits">${bean.startdate}</td>
 												<td class="tendigits">${bean.enddate}</td>
 												<td>${bean.currentnum}</td>
 												<td>${bean.acceptablenum}</td>
 												<td>${bean.camparea}</td>
-												<td id="pair">${bean.pair}</td>
 												<td class="pair">${bean.pair}</td>
 											</tr>
 										</c:forEach>
@@ -183,7 +182,6 @@
 
 							<!-- Menu -->
 							<nav id="menu">
-<<<<<<< HEAD
 								<header class="major">
 									<h2>主選單</h2>
 								</header>
@@ -213,7 +211,6 @@
 									<li><a href="<c:url value='/view'/>">我要揪團</a></li>
 								</ul>
 							</nav>
-=======
 					<header class="major">
 						<h2>Menu</h2>
 					</header>
@@ -246,7 +243,6 @@
 						<li><a href="#">Amet Lacinia</a></li>
 					</ul>
 				</nav>
->>>>>>> 31907255abb1d3db72b2f53417b4717491202186
 
 							<!-- Section -->
 							<section>
@@ -324,11 +320,8 @@
 									<script src="<%=basePath5%>"></script>
 									<script src="<%=basePath6%>"></script>
 				<script>
-				console.log($(“#pair”));
 				var el = document.querySelectorAll('.pair');
-				console.log(el.length);
 				for(var i = 0; i<el.length ; i++) {
-					console.log(el[i].innerText);
 					if(el[i].innerText == 0){
 						el[i].innerText = "可配對";
 					}else{
@@ -336,10 +329,14 @@
 					}
 				}
 				var date = document.querySelectorAll('.tendigits');
-				console.log(date.length);
 				for(var j = 0; j < date.length; j++){
 					var tendigitsdate = date[j].innerText.substr(0,10);
 					date[j].innerText = tendigitsdate;
+				}
+				var time = document.querySelectorAll('.nineteendigits');
+				for(var k = 0; k < time.length; k++){
+					var nineteendigits = time[k].innerText.substr(0,19);
+					time[k].innerText = nineteendigits;
 				}
 				</script>
 			</body>
