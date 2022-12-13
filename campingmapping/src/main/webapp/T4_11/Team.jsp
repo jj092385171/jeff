@@ -188,38 +188,35 @@
 								</header>
 								<ul>
 									<li><a href="/campingmapping/index.jsp"">首頁</a></li>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="elements.html">Elements</a></li>
+									<li><a href="generic.html">露友專區</a></li>
+									<li><a href="elements.html">徵才專區</a></li>
 									<li>
-										<span class="opener">Submenu</span>
+										<span class="opener">營區預定</span>
 										<ul>
-											<li><a href="#">Lorem Dolor</a></li>
+											<li><a href="#">裝備交流</a></li>
+											<li><a href="<c:url value='/view'/>">我要揪團</a></li>
+											<li><a href="#">論壇社群</a></li>
+											<li><a href="#">關於我們</a></li>
+										</ul>
+									</li>
+									<li><a href="#">裝備交流</a></li>
+									<li><a href="#">論壇社群</a></li>
+									<li>
+										<span class="opener">關於我們</span>
+										<ul>
 											<li><a href="#">Ipsum Adipiscing</a></li>
 											<li><a href="#">Tempus Magna</a></li>
 											<li><a href="#">Feugiat Veroeros</a></li>
 										</ul>
 									</li>
-									<li><a href="#">Etiam Dolore</a></li>
-									<li><a href="#">Adipiscing</a></li>
-									<li>
-										<span class="opener">Another Submenu</span>
-										<ul>
-											<li><a href="#">Lorem Dolor</a></li>
-											<li><a href="#">Ipsum Adipiscing</a></li>
-											<li><a href="#">Tempus Magna</a></li>
-											<li><a href="#">Feugiat Veroeros</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Maximus Erat</a></li>
-									<li><a href="#">Sapien Mauris</a></li>
-									<li><a href="#">Amet Lacinia</a></li>
+									<li><a href="<c:url value='/view'/>">我要揪團</a></li>
 								</ul>
 							</nav>
 
 							<!-- Section -->
 							<section>
 								<header class="major">
-									<h2>Ante interdum</h2>
+									<h2>CampingMapping</h2>
 								</header>
 								<div class="mini-posts">
 									<article>
@@ -255,7 +252,7 @@
 									tempus aliquam.</p>
 								<ul class="contact">
 									<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-									<li class="icon solid fa-phone">(000) 000-0000</li>
+									<li class="icon solid fa-phone">(0800) 761-761</li>
 									<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
 										Nashville, TN 00000-0000</li>
 								</ul>

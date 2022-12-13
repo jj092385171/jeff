@@ -36,8 +36,6 @@ public class select extends HttpServlet {
 		
 
 		request.setAttribute("view",view);
-		Map<String, String[]> params = request.getParameterMap();
-		InitiatingBean initiatingBean = iDao.setInitiatingBean(params);
 		
 		String startdate = request.getParameter("startdate");
 		String enddate = request.getParameter("enddate");

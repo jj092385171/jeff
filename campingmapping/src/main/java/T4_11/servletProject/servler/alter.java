@@ -35,8 +35,6 @@ public class alter extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_11/Alter.jsp");
 			rd.forward(request, response);
 		}else {
-			System.out.println("innn");
-			System.out.println(request.getParameter("pair"));
 			Map<String, String[]> params = request.getParameterMap();
 			InitiatingBean initiatingBean = iDao.setInitiatingBean(params);
 			iDao.updateInitiating(initiatingBean);
