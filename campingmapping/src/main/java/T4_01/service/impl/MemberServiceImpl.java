@@ -2,7 +2,6 @@ package T4_01.service.impl;
 
 import java.util.List;
 
-import T4_01.beans.CouponWallet;
 import T4_01.beans.Member;
 import T4_01.dao.impl.CouponWalletDaoImpl;
 import T4_01.dao.impl.LicenseDaoImpl;

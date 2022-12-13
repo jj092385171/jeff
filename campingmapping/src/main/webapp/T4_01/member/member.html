@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+
 	<style>
 		div.container {
 			max-width: 400px
@@ -296,7 +297,22 @@
 
 	</div>
 
-
+	<div id="edform" title="新建公文" style="display: none">
+		<form>
+			<p>檔名：<input type="text" id="create_name" /></p>
+			<p>作&nbsp;&nbsp;者&nbsp;&nbsp;：<input type="text" id="create_author" /></p>
+			<p>文&nbsp;&nbsp;種&nbsp;&nbsp;：<select id="create_type">
+					<option value="總結報告">總結報告</option>
+					<option value="輔助授課">輔助授課</option>
+					<option value="其他">其他</option>
+				</select>
+			</p>
+			<div style="float: right;">
+				<button class="my-btn-gray" ng-click="create_paper_cancel()">取消</button>
+				<button class="my-btn-blue" ng-click="create_paper_save()">儲存</button>
+			</div>
+		</form>
+	</div>
 
 
 
@@ -313,10 +329,12 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+
 
 <!-- <script src="assets/js/tableClass.js"></script> -->
 <script>
+
 
 	function delmember(account) {
 
@@ -349,10 +367,14 @@
 
 
 
-	function editmember(id) {
+	function editmember(vallist) {
+
+		$("#edform").
+
+	}
 
 
-	};
+
 
 
 	$(function () {
@@ -363,6 +385,7 @@
 			.ready(
 				function () {
 					let i = 0;
+					let vallist = [];
 					$('#memberlist')
 						.DataTable(
 							{
@@ -381,6 +404,14 @@
 								"columns": [
 									{
 										"data": 'UID'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'account'
@@ -395,30 +426,87 @@
 									},
 									{
 										"data": 'Nickname'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'firstname'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'lastname'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'exp'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'leavel'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'point'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'phone'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'birthday',
 										"render": function (
 											data, type,
 											row, meta) {
+											vallist.push(moment(Date.parse(data)).format('YYYY-MM-DD'))
 											data = moment(Date.parse(data)).format('YYYY/MM/DD')
 											return data
 
@@ -426,19 +514,43 @@
 									},
 									{
 										"data": 'address'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'email'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'gender'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": "registerdata"
 										, "render": function (
 											data, type,
 											row, meta) {
-
+											vallist.push(moment(Date.parse(data)).format('YYYY-MM-DD'))
 											data = moment(Date.parse(data)).format('YYYY/MM/DD')
 											return data
 
@@ -446,17 +558,33 @@
 									},
 									{
 										"data": 'subscribed'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": 'shot'
+										, "render": function (
+											data, type,
+											row, meta) {
+											vallist.push(data)
+
+											return data
+
+										}
 									},
 									{
 										"data": "address",
 										render: function (data, type, row) {
 
 
-											return '<button type="button" class="btn btn-warning btn-sm" id=' + "'" + "edit" + i + "'" + ' onclick= "editmember( ' + "'" + i + "'" + ')">編輯</button> ' +
-												'<button type="button" class="btn btn-danger btn-sm"id=' + "'" + "del" + i + "'" + 'onclick= "delmember( ' + "'" + i + "'" + ')" >刪除</button>'
+											return '<button type="button" class="btn btn-warning btn-sm" id=' + "'" + "edit" + i + "'" + ' onclick= "editmember( ' + "'" + vallist + "'" + ')">編輯</button> ' +
+												'<button type="button" class="btn btn-danger btn-sm"id=' + "'" + "del" + i + "'" + 'onclick= "delmember(' + "'" + i + "'" + ' )" >刪除</button>'
 										}
 									}
 
