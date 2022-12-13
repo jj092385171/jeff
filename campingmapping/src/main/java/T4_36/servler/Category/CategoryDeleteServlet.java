@@ -19,7 +19,6 @@ public class CategoryDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 		String ProductId = req.getParameter("ProductId");
-		System.out.println(ProductId);
 
 		CategoryService categoryService = new CategoryServiceImpl();
 		categoryService.delete(Integer.parseInt(ProductId));

@@ -81,7 +81,6 @@
 							<tbody>
 								<c:forEach var='Category' items='${AllList}' varStatus="statusX">
 									<tr>
-
 										<td>${Category.pdid}</td>
 										<td>${Category.userID}</td>
 										<td>${Category.pdname}</td>
@@ -104,7 +103,6 @@
 											id="${Category.pdid}" value="${Category.pdid}" /> <input
 											type="button" style="border-radius: 60%" name="delete"
 											value="刪除" onclick="confirmDelete(${Category.pdid})" /></td>
-
 
 									</tr>
 								</c:forEach>
@@ -206,11 +204,9 @@
 						document.forms[0].method="POST";
 						document.forms[0].submit();
 						
-// 						window.location.replace("http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp");
 					} else {
 					}
 				}
-// 	value='http://localhost:8080/campingmapping/T4_36/html5up-editorial/Pd_update.jsp'
 			</script>
 </body>
 

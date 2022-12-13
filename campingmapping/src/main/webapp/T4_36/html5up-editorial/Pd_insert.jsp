@@ -22,7 +22,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>新增商品</strong></a>
+					<a href="#" class="logo"><strong>新增商品</strong></a>
 					<ul class="icons">
 						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -36,16 +36,28 @@
 <!-- 	<form action="<c:url value='/T4_36/servler/Category/insertServlet.do'/>" method="GET"
 	enctype="multipart/form-data"> -->
 	<form action="<c:url value='/Pd_insertServlet.do'/>" method="POST" enctype="multipart/form-data">
-		<input type="text" value='1' name="userID">會員ID<br> 
-		<input type="text" value='1' name="Pdname">產品名稱<br> 
-		<input type="text" value='1' name="Pdtitle">品牌名稱<br> 
-		<input type="text" value='1' name="Pdcontent">產品規格<br> 
-		<input type="text" value='1' name="Pdtype">產品類型<br>
-		<input type="file" name="picture" />照片<br> 
-		<input type="text" value='1' name="Pdprice">價位<br> 
-		<input type="text" value='1' name="Pdinventory">庫存數量<br> 
-		<input type="text" value ="2020-12-23 15:40:45" name="Pddate">商品建立日期<br> 
-		<input type="text" value ="2020-12-23 15:40:45" name="Pdlastupdate">商品更新日期<br> <br>
+		會員ID<br> 
+		<input type="text" value='1' name="userID">產品名稱<br> 
+		<input type="text" value='1' name="Pdname">品牌名稱<br> 
+		<input type="text" value='1' name="Pdtitle">產品規格<br> 
+		<input type="text" value='1' name="Pdcontent">產品類型<br>
+		<select name="Pdtype">
+    	<option>請選擇產品類別</option>
+   	 	<option>睡袋</option>
+   	 	<option>燈具</option>
+   	 	<option>桌椅</option>
+   		 <option>火爐/炊具</option>
+   		 <option>保冷箱</option>
+   		 <option>登山包</option>
+  		  <option>戶外服裝</option>
+  		  <option>登山鞋</option>
+  		  <option>其他</option>
+		</select>照片<br> 
+		<input type="file" name="picture"/><br>價位<br>
+		<input type="text" value='1' name="Pdprice"> 庫存數量<br> 
+		<input type="text" value='1' name="Pdinventory">商品建立日期<br> 
+		<input type="text" value ="2020-12-23 15:40:45" name="Pddate">商品更新日期<br>
+		<input type="text" value ="2020-12-23 15:40:45" name="Pdlastupdate"> <br>
 		<input type="submit" value="提交">
 	</form>
 				<!-- Banner -->
