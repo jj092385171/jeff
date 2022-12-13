@@ -66,21 +66,11 @@ public class InsertCampServlet extends HttpServlet {
 		//讀圖
 		Blob blob = null;
 		Part part = request.getPart("campPictures");
+		if(part.getSize() == 0) {
+			errorMsg.put("campPictures", "必須選擇圖片");
+		}
 		InputStream is = part.getInputStream();
-//		if(is.read() == -1) {
-//			errorMsg.put("campPictures", "必須選擇圖片");
-//		}
 		blob = Hibernate.createBlob(is);
-//		long size = part.getSize();
-//		try {
-//			blob = campDao.fileToBlob(is, size);
-//		} catch (Exception e) {
-//			System.out.println("錯誤");
-//		}
-//		if (part.getSize() == 0) {
-//			errorMsg.put("campPictures", "必須選擇圖片");
-//			System.out.println("圖片異常");
-//		}
 		// 簡介
 		String discription = request.getParameter("discription");
 		// 標籤

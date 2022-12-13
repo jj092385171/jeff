@@ -1,5 +1,4 @@
 package T4_24.Dao;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -7,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -59,25 +57,6 @@ public class CampDao {
 			return campBean;
 			
 		}
-		
-		public Blob fileToBlob(InputStream is, long size) {
-			try {
-				DbUtils.begin();
-
-				byte[] b = new byte[(int) size];
-				SerialBlob sb = null;
-				is.read(b);
-				sb = new SerialBlob(b);
-				DbUtils.commit();
-				return sb;
-
-			} catch (Exception e) {
-				DbUtils.rollbacl();
-				e.printStackTrace();
-				return null;
-			}
-		}
-		
-		
+			
 
 }
