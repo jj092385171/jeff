@@ -37,8 +37,8 @@ public interface JobServiceDAO {
 	public List<JobBean> findBeanByuID(int uID);
 	
 	//模糊搜尋全部
-	List<JobBean> findJobSelectLike(int uID, int rackID, String job, String salary, int quantity, String place,
-				String time, String date, String remark, String rackUp, String rackDown) throws SQLException;
+//	List<JobBean> findJobSelectLike(int uID, int rackID, String job, String salary, int quantity, String place,
+//				String time, String date, String remark, String rackUp, String rackDown) throws SQLException;
 	
 	// 判斷時間
 //	public boolean selectTime(Date rackUp, Date rackDown);

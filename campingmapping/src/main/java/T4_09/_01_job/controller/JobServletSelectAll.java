@@ -37,16 +37,16 @@ public class JobServletSelectAll extends HttpServlet {
 		String s11 = request.getParameter("rackDown");
 		
 		
-		JobServiceDAOImpl jsi = new JobServiceDAOImpl();
-		List<JobBean> jobBean = jsi.findJobSelectLike(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11);
-
-		request.setAttribute("jobBean", jobBean);
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/showSelect.jsp");
-		rd.forward(request, response);
-		return;
-		
-		
-		
+//		JobServiceDAOImpl jsi = new JobServiceDAOImpl();
+//		List<JobBean> jobBean = jsi.findJobSelectLike(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11);
+//
+//		request.setAttribute("jobBean", jobBean);
+//		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/showSelect.jsp");
+//		rd.forward(request, response);
+//		return;
+//		
+//		
+//		
 		}
 	}
 

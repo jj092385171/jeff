@@ -40,7 +40,7 @@
 					<li class="nav1-li"><a href="#work">Camp</a></li>
 					<li class="nav1-li"><a href="#contact">Forum</a></li>
 					<li class="nav1-li"><a href="#contact">Shop</a></li>
-					<li class="nav1-li"><a href="http://localhost:8080/campingmapping/T4_09/job/JobModel/jobIndex2.jsp">Job</a></li>
+					<li class="nav1-li"><a href="T4_09\job\JobModel\jobCRUD.jsp">Job</a></li>
 					<li class="nav1-li"><a href="#contact">Member</a></li>
 					<!--<li><a href="#elements">Elements</a></li>-->
 				</ul>
