@@ -117,5 +117,4 @@ jdk11
 apache-tomcat-*
 Servers
 spring-tool-suite-4-4.16.1.RELEASE-e4.25.0-win32.win32.x86_64.self-extracting
-.gitignore
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,maven,java
