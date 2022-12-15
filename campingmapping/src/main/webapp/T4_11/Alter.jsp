@@ -36,19 +36,21 @@
             <form action="<c:url value='/alter'/>" method="POST">
 				<h2>修改</h2>
 				<input type="hidden" id="initiatingnum" name="initiatingnum" value="${initiatingnum}"><br>
-				起始日期:<input type="date" id="startdate" name="startdate"><br>
-				結束日期:<input type="date" id="enddate" name="enddate"><br>
-				現有人數:<input type="text" id="currentnum" name="currentnum" onkeyup="value=value.replace(/[^\d]/g,'') " placeholder="請輸入現有人數,僅限數字"><br>
-				接受人數:<input type="text" id="acceptnum" name="acceptnum" onkeyup="value=value.replace(/[^\d]/g,'') " placeholder="請輸入接受人數,僅限數字"><br>
-				露營地點:<input type="text" id="camparea" name="camparea" placeholder="請輸入露營地點"><br>
-				配對狀態:<input type="text" id="pair" name="pair" onkeyup="value=value.replace(/[^\d]/g,'') "><br>
+				起始日期:<input type="date" id="startdate" name="startdate" required><br>
+				結束日期:<input type="date" id="enddate" name="enddate" required><br>
+				現有人數:<input type="text" id="currentnum" name="currentnum" required onkeyup="value=value.replace(/[^\d]/g,'') " 
+				placeholder="請輸入現有人數,僅限數字"><br>
+				接受人數:<input type="text" id="acceptnum" name="acceptnum" required onkeyup="value=value.replace(/[^\d]/g,'') " 
+				placeholder="請輸入接受人數,僅限數字"><br>
+				露營地點:<input type="text" id="camparea" name="camparea" required placeholder="請輸入露營地點"><br>
+				配對狀態:<input type="radio" id="pair" name="pair" value="0" checked>可配對<br>
+				配對狀態:<input type="radio" id="pair" name="pair" value="1">不可配對<br>
 				<input type="submit" id="test" value="送出">
 			</form>
 
             
     </div>
     <script type=“text/javascript” src="../jquery-3.6.1.js"></script>
-<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     
 </body>
 </html>

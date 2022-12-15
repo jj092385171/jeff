@@ -3,50 +3,29 @@
 		<!DOCTYPE HTML>
 
 		<html>
-		<% String path=request.getContextPath(); String basePath=request.getScheme() + "://" + request.getServerName()
-			+ ":" + request.getServerPort() + path + "/T4_11/background/assets/css/main.css" ; %>
 
 			<head>
 				<title>揪團管理</title>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-				<!-- 	<link rel="stylesheet" href="../T4_11/background/assets/css/main.css" /> -->
-				<link rel="stylesheet" href="<%=basePath%>" />
 				<style>
-					hr {
-						margin: 10px;
-						border-color: transparent;
-					}
+ 					hr { 
+ 						margin: 10px; 
+ 						border-color: transparent; 
+ 					} 
 
 				</style>
 			</head>
 
 			<body class="is-preload">
 
-				<!-- Wrapper -->
-				<div id="wrapper">
 
-					<!-- Main -->
 					<div id="main">
 						<div class="inner">
 
 							<!-- Header -->
-							<header id="header">
 								<a href="index.html" class="logo"><strong>揪團</strong> 管理者</a>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span
-												class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span
-												class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-snapchat-ghost"><span
-												class="label">Snapchat</span></a>
-									</li>
-									<li><a href="#" class="icon brands fa-instagram"><span
-												class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-medium-m"><span
-												class="label">Medium</span></a></li>
-								</ul>
-							</header>
+							
 
 							<!-- Banner -->
 							
@@ -109,19 +88,19 @@
 											<tr>
 												<td>${bean.initiatingnum}</td>
 												<td>${bean.postmember}</td>
-												<td>${bean.postdate}</td>
-												<td>${bean.startdate}</td>
-												<td>${bean.enddate}</td>
+												<td class="nineteendigits">${bean.postdate}</td>
+												<td class="tendigits">${bean.startdate}</td>
+												<td class="tendigits">${bean.enddate}</td>
 												<td>${bean.currentnum}</td>
 												<td>${bean.acceptablenum}</td>
 												<td>${bean.camparea}</td>
-												<td>${bean.pair}</td>
+												<td class="pair">${bean.pair}</td>
 											</tr>
 										</c:forEach>
 									</table>
 								</div>
 								<div class="image object">
-									<table>
+									<table id="table">
 										<thead>
 											<tr>
 												<td><a href="/campingmapping/T4_11/insert.jsp" class="button big">新增</a></td>
@@ -151,13 +130,13 @@
 												</td>
 												<td>${bean.initiatingnum}</td>
 												<td>${bean.postmember}</td>
-												<td>${bean.postdate}</td>
-												<td>${bean.startdate}</td>
-												<td>${bean.enddate}</td>
+												<td class="nineteendigits">${bean.postdate}</td>
+												<td class="tendigits">${bean.startdate}</td>
+												<td class="tendigits">${bean.enddate}</td>
 												<td>${bean.currentnum}</td>
 												<td>${bean.acceptablenum}</td>
 												<td>${bean.camparea}</td>
-												<td>${bean.pair}</td>
+												<td class="pair">${bean.pair}</td>
 											</tr>
 										</c:forEach>
 									</table>
@@ -170,127 +149,29 @@
 						</div>
 					</div>
 
-					<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
-
-							<!-- Search -->
-							<section id="search" class="alt">
-								<form method="post" action="#">
-									<input type="text" name="query" id="query" placeholder="Search" />
-								</form>
-							</section>
-
-							<!-- Menu -->
-							<nav id="menu">
-								<header class="major">
-									<h2>主選單</h2>
-								</header>
-								<ul>
-									<li><a href="/campingmapping/index.jsp"">首頁</a></li>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<span class="opener">Submenu</span>
-										<ul>
-											<li><a href="#">Lorem Dolor</a></li>
-											<li><a href="#">Ipsum Adipiscing</a></li>
-											<li><a href="#">Tempus Magna</a></li>
-											<li><a href="#">Feugiat Veroeros</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Etiam Dolore</a></li>
-									<li><a href="#">Adipiscing</a></li>
-									<li>
-										<span class="opener">Another Submenu</span>
-										<ul>
-											<li><a href="#">Lorem Dolor</a></li>
-											<li><a href="#">Ipsum Adipiscing</a></li>
-											<li><a href="#">Tempus Magna</a></li>
-											<li><a href="#">Feugiat Veroeros</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Maximus Erat</a></li>
-									<li><a href="#">Sapien Mauris</a></li>
-									<li><a href="#">Amet Lacinia</a></li>
-								</ul>
-							</nav>
-
-							<!-- Section -->
-							<section>
-								<header class="major">
-									<h2>Ante interdum</h2>
-								</header>
-								<div class="mini-posts">
-									<article>
-										<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-										<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.
-										</p>
-									</article>
-									<article>
-										<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
-										<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.
-										</p>
-									</article>
-									<article>
-										<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
-										<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.
-										</p>
-									</article>
-								</div>
-								<ul class="actions">
-									<li><a href="#" class="button">More</a></li>
-								</ul>
-							</section>
-
-							<!-- Section -->
-							<section>
-								<header class="major">
-									<h2>Get in touch</h2>
-								</header>
-								<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius
-									enim lorem
-									ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem
-									feugiat
-									tempus aliquam.</p>
-								<ul class="contact">
-									<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-									<li class="icon solid fa-phone">(000) 000-0000</li>
-									<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-										Nashville, TN 00000-0000</li>
-								</ul>
-							</section>
-
-							<!-- Footer -->
-							<footer id="footer">
-								<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a
-										href="https://unsplash.com">Unsplash</a>. Design: <a
-										href="https://html5up.net">HTML5
-										UP</a>.</p>
-							</footer>
-
-						</div>
-					</div>
-
-				</div>
-
+					
+							
 				<!-- Scripts -->
-				<% String basePath2=request.getScheme() + "://" + request.getServerName() + ":" +
-					request.getServerPort() + path + "assets/js/jquery.min.js" ; %>
-					<% String basePath3=request.getScheme() + "://" + request.getServerName() + ":" +
-						request.getServerPort() + path + "assets/js/browser.min.js" ; %>
-						<% String basePath4=request.getScheme() + "://" + request.getServerName() + ":" +
-							request.getServerPort() + path + "assets/js/breakpoints.min.js" ; %>
-							<% String basePath5=request.getScheme() + "://" + request.getServerName() + ":" +
-								request.getServerPort() + path + "assets/js/util.js" ; %>
-								<% String basePath6=request.getScheme() + "://" + request.getServerName() + ":" +
-									request.getServerPort() + path + "assets/js/main.js" ; %>
-									<script src="<%=basePath2%>"></script>
-									<script src="<%=basePath3%>"></script>
-									<script src="<%=basePath4%>"></script>
-									<script src="<%=basePath5%>"></script>
-									<script src="<%=basePath6%>"></script>
+				<script src="../jquery-3.6.1.js"></script>
 				<script>
+				var el = document.querySelectorAll('.pair');
+				for(var i = 0; i<el.length ; i++) {
+					if(el[i].innerText == 0){
+						el[i].innerText = "可配對";
+					}else{
+						el[i].innerText = "不可配對";
+					}
+				}
+				var date = document.querySelectorAll('.tendigits');
+				for(var j = 0; j < date.length; j++){
+					var tendigitsdate = date[j].innerText.substr(0,10);
+					date[j].innerText = tendigitsdate;
+				}
+				var time = document.querySelectorAll('.nineteendigits');
+				for(var k = 0; k < time.length; k++){
+					var nineteendigits = time[k].innerText.substr(0,19);
+					time[k].innerText = nineteendigits;
+				}
 				</script>
 			</body>
 

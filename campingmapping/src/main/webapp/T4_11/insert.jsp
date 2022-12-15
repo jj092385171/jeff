@@ -24,16 +24,13 @@
 		<body class="is-preload">
 			<div id="model">
 
-				<!-- Wrapper -->
 				<div id="wrapper">
 
-					<!-- Main -->
 					<div id="main">
 						<div class="inner">
 
 
 
-							<!-- Content -->
 								<header class="main">
 									<h1>新增</h1>
 								</header>
@@ -44,13 +41,16 @@
 
 									<!-- Form -->
 									<form action="<c:url value='/controller'/>" method="POST">
-										發文會員:<input type="text" id="postmember" name="postmember" onkeyup="value=value.replace(/[^\d]/g,'') " required placeholder="請輸入會員編號,僅限數字"><br>
+										發文會員:<input type="text" id="postmember" name="postmember" onkeyup="value=value.replace(/[^\d]/g,'') " 
+										required placeholder="請輸入會員編號,僅限數字"><br>
 										起始日期:<input type="date" id="startdate" name="startdate" required><br>
 										結束日期:<input type="date" id="enddate" name="enddate" required><br>
-										現有人數:<input type="text" id="currentnum" name="currentnum" onkeyup="value=value.replace(/[^\d]/g,'') " required placeholder="請輸入現有人數,僅限數字"><br>
-										接受人數:<input type="text" id="acceptnum" name="acceptnum" onkeyup="value=value.replace(/[^\d]/g,'') " required placeholder="請輸入接受人數,僅限數字"><br>
-										露營地點:<input type="text" id="camparea" name="camparea" required placeholder="請輸入露營地點"><br>
-										配對狀態:<input type="text" id="pair" required><br> 
+										現有人數:<input type="text" id="currentnum" name="currentnum" onkeyup="value=value.replace(/[^\d]/g,'') " 
+										required placeholder="請輸入現有人數,僅限數字"><br>
+										接受人數:<input type="text" id="acceptnum" name="acceptnum" onkeyup="value=value.replace(/[^\d]/g,'') " 
+										required placeholder="請輸入接受人數,僅限數字"><br>
+										露營地點:<input type="text" id="camparea" name="camparea"  required placeholder="請輸入露營地點"><br>
+										配對狀態:<input type="hidden" id="pair" name="pair" value="0" required><br> 
 										<input type="submit" id="test"	value="送出">
 									</form>
 
@@ -65,12 +65,6 @@
 
 
 
-			<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
 
 		</body>
 
