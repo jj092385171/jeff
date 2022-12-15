@@ -23,7 +23,6 @@ public class CategorySelectAllServlet extends HttpServlet {
 		CategoryService cgS = new CategoryServiceImpl();
 		
 		List<Category> list = cgS.selectAll();
-		System.out.println(list+"list");
 		req.setAttribute("AllList", list);
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/T4_36/html5up-editorial/Pd_Allproduct.jsp");

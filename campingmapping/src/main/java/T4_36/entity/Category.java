@@ -129,8 +129,7 @@ public class Category {
 	}
 
 	private String priceStr = null;
-	
-	
+
 	public Category(Integer pdid, String userID, String pdname, String pdtitle, String pdcontent, String pdtype,
 			int pdprice, int pdinventory, Date pdlastupdate) {
 		super();
@@ -197,7 +196,5 @@ public class Category {
 				+ pdprice + ", pdinventory=" + pdinventory + ", pddate=" + pddate + ", pdlast_update=" + pdlastupdate
 				+ ", priceStr=" + priceStr + "]";
 	}
-	
-	
 
 }
