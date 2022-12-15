@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import T4_33.dao.PostCommentDao;
 import T4_33.dao.PostDao;
 import utils.DbUtils;
 
@@ -30,9 +31,12 @@ public class deletePostServlet extends HttpServlet {
 			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");			
 			int postId = Integer.parseInt(request.getParameter("postId")) ; //取得postId
+			
+			PostCommentDao comDao = new PostCommentDao(DbUtils.getConnection()); //送postId到資料庫
+			comDao.deletePostALLComment(postId);
+			
 			PostDao dao = new PostDao(DbUtils.getConnection()); //送postId到資料庫
-//			刪除留言
-			String deleteResult = dao.deletePost(postId); //回傳刪除結果
+			String deleteResult = dao.deletePost(postId); //回傳刪除貼文結果
 			
 			request.setAttribute("postId", postId); //送postId出去
 			request.setAttribute("deleteResult", deleteResult); //顯示刪除結果

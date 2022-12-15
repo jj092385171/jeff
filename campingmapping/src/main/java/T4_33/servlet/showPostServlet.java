@@ -35,6 +35,7 @@ public class showPostServlet extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			
 			int postId = 0; //取得postId
@@ -82,9 +83,11 @@ public class showPostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPost.jsp");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 			
 		} catch (IOException | SQLException | ServletException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 	}

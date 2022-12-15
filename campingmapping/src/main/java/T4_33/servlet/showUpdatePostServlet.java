@@ -30,6 +30,7 @@ public class showUpdatePostServlet extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			int postId = Integer.parseInt(request.getParameter("postId")) ; //取得postId
 			PostDao dao = new PostDao(DbUtils.getConnection());	//送postId到資料庫取貼文內容	
@@ -67,9 +68,11 @@ public class showUpdatePostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/updatePost.jsp");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 			
 		} catch (IOException | SQLException | ServletException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 	}

@@ -27,6 +27,7 @@ public class newPostCommentServlet extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			PostCommentBean bean = new PostCommentBean(); 
 			
@@ -44,10 +45,11 @@ public class newPostCommentServlet extends HttpServlet {
 			request.setAttribute("postId", postId); //傳postId到showPostServlet			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPostServlet");
 			rd.forward(request, response);
-			
+			DbUtils.commit();
 			return;
 			
 		} catch (IOException | SQLException | ServletException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 		

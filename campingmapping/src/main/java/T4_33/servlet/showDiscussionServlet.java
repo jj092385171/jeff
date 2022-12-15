@@ -29,6 +29,7 @@ public class showDiscussionServlet extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			PostDao dao = new PostDao(DbUtils.getConnection());
 			List<PostBean> list = dao.showDiscussionPost();
@@ -37,9 +38,11 @@ public class showDiscussionServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/discussionFirst.jsp");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 		
 		} catch (IOException | ServletException | SQLException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 		

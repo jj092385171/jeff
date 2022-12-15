@@ -33,6 +33,7 @@ public class newPostServlet extends HttpServlet {
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			PostBean bean = new PostBean();
 			
@@ -46,7 +47,6 @@ public class newPostServlet extends HttpServlet {
 //				isPicture = new ByteArrayInputStream(stringPicture.getBytes()); //--> String轉成inputStream
 //			}
 //			bean.setPicture(isPicture);
-			
 			
 			String picture = request.getParameter("picture"); //取得輸入的picture
 			if(picture != "") {
@@ -96,9 +96,11 @@ public class newPostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPostServlet");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 			
 		} catch (IOException | ParseException | SQLException | ServletException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 		

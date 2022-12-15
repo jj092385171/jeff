@@ -72,30 +72,50 @@ public class PostCommentDao {
 		preState.close();
 	}
 
-	// 隱藏留言
-	public void hidePostComment(Integer postCommentId) throws SQLException {
-		String sql = "update postComment set postCommentHide = ? where postCommentId = ?";
-		PreparedStatement preState = conn.prepareStatement(sql);
-		preState.setInt(1, 1);
-		preState.setInt(2, postCommentId);
-		preState.executeUpdate();
-		System.out.println("隱藏留言完成");
+	// 隱藏留言(OK)
+	public String hidePostComment(Integer postCommentId) throws SQLException {
+		String getPostCommentHide = "select postCommentHide from postComment where postCommentId = ?";
+		PreparedStatement preState = conn.prepareStatement(getPostCommentHide);
+		preState.setInt(1, postCommentId);
+		ResultSet rs = preState.executeQuery();
+		rs.next();
+		String hideResult = null;
+		if(rs.getInt("postCommentHide") != 1) {
+			String sql = "update postComment set postCommentHide = ? where postCommentId = ?";
+			preState = conn.prepareStatement(sql);
+			preState.setInt(1, 1);
+			preState.setInt(2, postCommentId);
+			preState.executeUpdate();
+			hideResult = "隱藏貼文成功";
+		}else {
+			hideResult = "貼文已被隱藏";
+		}
 		preState.close();
+		return hideResult;
 	}
 
-	// 刪除留言
-	public void deletePostComment(Integer postCommentId) throws SQLException {
+	// 刪除某留言(OK)
+	public String deletePostComment(Integer postCommentId) throws SQLException {
 		String sql = "delete from postComment where postCommentId = ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
 		preState.setInt(1, postCommentId);
 		preState.executeUpdate();
-		System.out.println("刪除留言完成");
 		preState.close();
+		return "刪除留言完成";
 	}
+	
+	// 刪除所有留言
+		public void deletePostALLComment(Integer postId) throws SQLException {
+			String sql = "delete from postComment where postId = ?";
+			PreparedStatement preState = conn.prepareStatement(sql);
+			preState.setInt(1, postId);
+			preState.executeUpdate();
+			preState.close();
+		}
 
 	// 依貼文查詢留言(OK)
 	public List<PostCommentBean> selectPostComment(Integer postId) throws SQLException {
-		String sql = "select * from postComment where postId = ?";
+		String sql = "select * from postComment where postId = ? and postCommentHide != 1";
 		PreparedStatement preState = conn.prepareStatement(sql);
 		preState.setInt(1, postId);
 		ResultSet rs = preState.executeQuery();
@@ -105,9 +125,7 @@ public class PostCommentDao {
 			bean.setPostCommentId(rs.getInt("postCommentId"));
 			bean.setUserId(rs.getInt("userId"));
 			bean.setPostComment(rs.getString("postComment"));
-			if(rs.getInt("postCommentHide") != 1) {
-				list.add(bean);
-			}
+			list.add(bean);
 		}
 		rs.close();
 		preState.close();
