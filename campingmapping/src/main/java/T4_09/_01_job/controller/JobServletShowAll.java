@@ -22,18 +22,18 @@ public class JobServletShowAll extends HttpServlet {
     
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();		
-		List<JobBean> showAllJob = jobServiceImpl.showAllJob();
-		request.setAttribute("showAllJob", showAllJob);		
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/showAll.jsp");
-		rd.forward(request, response);
-		return;
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	
+		request.setCharacterEncoding("UTF-8");
+		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();		
+		List<JobBean> showAllJob = jobServiceImpl.showAllJob();
+		request.setAttribute("showAllJob", showAllJob);		
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/showAll.jsp");
+		rd.forward(request, response);
+		return;
 	}
 
 }

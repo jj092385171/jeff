@@ -67,4 +67,18 @@ public class LoginHistoryDaoImpl implements LoginHistoryDao {
 		}
 	}
 
+	@Override
+	public int deleteUID(int uid) {
+
+		try {
+			int update = queryRunner.update(DbUtils.getConnection(),
+					"DELETE FROM LoginHistory WHERE UID =?", uid);
+			return update;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+
 }

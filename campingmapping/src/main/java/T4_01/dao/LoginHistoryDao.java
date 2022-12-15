@@ -15,4 +15,6 @@ public interface LoginHistoryDao {
 	public List<LoginHistory> select(int UID);
 
 	public List<LoginHistory> selectAll();
+	
+	public int deleteUID(int uid);
 }

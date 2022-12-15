@@ -26,7 +26,13 @@ public class CampBean {
 		this.discription = discription;
 	}
 
-
+	public CampBean(String campName, int cityID, String location , String discription) {
+		super();
+		this.campName = campName;
+		this.cityID = cityID;
+		this.location = location;
+		this.discription = discription;
+	}
 	
 	public Integer getCampID() {
 		return campID;

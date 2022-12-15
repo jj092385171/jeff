@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampSiteCityTagsDao;
 import T4_24.Dao.SiteDao;
-import T4_24.Models.CampSiteCityTagsBean;
 
 
 @WebServlet("/T4_24/DeleteSiteByIDServlet")

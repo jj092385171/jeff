@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -14,14 +15,14 @@ import utils.DbUtils;
 
 public class CampDao {
 	
-		Connection conn = DbUtils.getConnection();
+//		Connection conn = DbUtils.getConnection();
 		QueryRunner qr = new QueryRunner();
 		
 		//新增營地
 		public BigDecimal AddCamp(CampBean bean) throws SQLException {
 			String sql = "insert into camp(campName, cityID, location, campPictures, discription) values(?,?,?,?,?)";
 			Object[] params = { bean.getCampName(), bean.getCityID(), bean.getLocation(), bean.getCampPictures(), bean.getDiscription() };
-			return qr.insert(conn, sql, new ScalarHandler<>(), params);	
+			return qr.insert(DbUtils.getConnection(), sql, new ScalarHandler<>(), params);	
 		}
 		
 		//刪除營地, 要先刪除營地的標籤 , 刪除包含的營區位
@@ -31,17 +32,18 @@ public class CampDao {
 			SiteDao siteDao = new SiteDao();
 			siteDao.deleteByCampID(campID);
 			String sql = "delete from camp where campID = ?";
-			qr.update(conn,sql,campID);
+			qr.update(DbUtils.getConnection(),sql,campID);
 		}
 
 		//透過campID更新
 		public void updateByCampID(String campName, int cityID, String location, Blob campPictures, String discription, int campID) throws SQLException {
 			String sql = "update camp set campName = ?, cityID = ?, location = ?, campPictures = ?, discription = ? where campID = ?";
-			qr.update(conn,sql,campName, cityID, location, campPictures, discription, campID);
+			qr.update(DbUtils.getConnection(),sql,campName, cityID, location, campPictures, discription, campID);
 		}
 		
 		//透過id找圖片
 		public CampBean findPictures(int id) throws SQLException {
+			Connection conn = DbUtils.getConnection();
 			String sql = "select campPictures from camp where campID = ?";
 			PreparedStatement preState = conn.prepareStatement(sql);
 			preState.setInt(1, id);
@@ -55,7 +57,6 @@ public class CampDao {
 			return campBean;
 			
 		}
-		
-		
+			
 
 }

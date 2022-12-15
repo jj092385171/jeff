@@ -1,8 +1,9 @@
 package T4_09._01_job.controller;
 
 import java.io.IOException;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +30,7 @@ public class JobServletSelectLike extends HttpServlet {
 	List<JobBean> jobBean = jsi.findJobByJobLike(st);
 
 	request.setAttribute("jobBean", jobBean);
-	RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/showSelect.jsp");
+	RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/showSelect.jsp");
 	rd.forward(request, response);
 	return;
 	

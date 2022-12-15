@@ -13,6 +13,8 @@ public interface CategoryService {
     void update(Category category);
 
     Category select(int id);
+    
+    Category findImgByPdiD(int id);
 
     List<Category> selectAll();
 }

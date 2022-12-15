@@ -29,6 +29,7 @@ public class showReportPostServlet extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			DbUtils.begin();
 			request.setCharacterEncoding("UTF-8");
 			
 			PostDao postDao = new PostDao(DbUtils.getConnection()); // 送postId到資料庫
@@ -38,9 +39,11 @@ public class showReportPostServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showReportPost.jsp");
 			rd.forward(request, response);
+			DbUtils.commit();
 			return;
 		
 		} catch (IOException | ServletException | SQLException e) {
+			DbUtils.rollbacl();
 			e.printStackTrace();
 		}
 		
