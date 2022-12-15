@@ -21,7 +21,7 @@ public class JobServletDelete extends HttpServlet {
 		int parseID = Integer.parseInt(rackID);
 		JobServiceDAOImpl jsdi = new JobServiceDAOImpl();
 		jsdi.deleteJob(parseID);
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/CRUD/deleteSucces.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/deleteSucces.jsp");
 		rd.forward(request, response);
 		return;
 	}
