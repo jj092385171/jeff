@@ -27,6 +27,10 @@ import T4_24.Models.SiteBean;
 @WebServlet("/T4_24/InsertSiteByIDServlet")
 public class InsertSiteByIDServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
 
 	//新增site
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,12 +48,13 @@ public class InsertSiteByIDServlet extends HttpServlet {
 		if (siteName == null || siteName.trim().length() == 0) {
 			errorMsg.put("siteName", "必須輸入營區位名稱");
 		}
+		System.out.println(siteName);
 		// 讀圖
 		Part part = request.getPart("sitePictures");
-		InputStream is = part.getInputStream();
-		if (is.read() == -1) {
+		if (part.getSize() == 0) {
 			errorMsg.put("sitePictures", "必須選擇圖片");
 		}
+		InputStream is = part.getInputStream();
 		Blob blob = Hibernate.createBlob(is);
 		// 總營位
 		String totalSites = request.getParameter("totalSites");
@@ -72,14 +77,17 @@ public class InsertSiteByIDServlet extends HttpServlet {
 		}
 		
 		SiteBean siteBean = new SiteBean(siteName, blob, Integer.valueOf(totalSites), Integer.valueOf(siteMoney), Integer.valueOf(campID));
+		BigDecimal siteID = null;
 		try {
-			BigDecimal siteID = siteDao.AddSite(siteBean);
+			System.out.println(siteID);
+			siteID = siteDao.AddSite(siteBean);
+			System.out.println(siteID);
 			siteBean = siteDao.findSiteBySiteID(siteID.intValueExact());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		session.setAttribute("siteID", siteID.toString());
 		session.setAttribute("siteBean", siteBean);
 		session.setAttribute("what", "新增");
 		

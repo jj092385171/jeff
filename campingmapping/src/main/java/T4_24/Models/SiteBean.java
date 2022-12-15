@@ -25,6 +25,13 @@ public class SiteBean {
 		this.campID = campID;
 	}
 
+	public SiteBean(String siteName, int totalSites, int siteMoney, int campID) {
+		super();
+		this.siteName = siteName;
+		this.totalSites = totalSites;
+		this.siteMoney = siteMoney;
+		this.campID = campID;
+	}
 	
 
 	public int getSiteID() {

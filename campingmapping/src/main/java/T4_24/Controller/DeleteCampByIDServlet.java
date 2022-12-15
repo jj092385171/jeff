@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import T4_24.Dao.CampDao;
 import T4_24.Dao.CampSiteCityTagsDao;
-import T4_24.Models.CampSiteCityTagsBean;
 
 
 @WebServlet("/T4_24/DeleteCampByIDServlet")

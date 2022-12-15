@@ -18,7 +18,7 @@ import utils.DbUtils;
 
 public class CampSiteCityTagsDao {
 
-	Connection conn = DbUtils.getConnection();
+//	Connection conn = DbUtils.getConnection();
 	QueryRunner qr = new QueryRunner();
 	
 	
@@ -26,13 +26,15 @@ public class CampSiteCityTagsDao {
 	//透過campID 查詢tags
 	public List<TagPlusCampBean> findTagsByCampID(int campID) throws SQLException {
 		String sql = "select * from TagPlusCamp where campID = ?";
-		return qr.query(conn, sql, new BeanListHandler<TagPlusCampBean>(TagPlusCampBean.class), campID);
+		return qr.query(DbUtils.getConnection(), sql, new BeanListHandler<TagPlusCampBean>(TagPlusCampBean.class), campID);
 	}
 	
 	
 	
 	//查全部CampSiteCityTags
 	public List<CampSiteCityTagsBean> showAll() throws SQLException {
+		Connection conn = DbUtils.getConnection();
+		
 		String sql = "select * from CampPlusCity";
 		PreparedStatement preState = conn.prepareStatement(sql);
 		List<CampSiteCityTagsBean> cctList = new ArrayList<>();
@@ -69,6 +71,8 @@ public class CampSiteCityTagsDao {
 
 	// 透過cmapID查CampSiteCityTags
 	public CampSiteCityTagsBean findCampByID(int campID) throws SQLException {
+		Connection conn = DbUtils.getConnection();
+		
 		String sql = "select * from CampPlusCity where campID = ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
 
@@ -109,6 +113,8 @@ public class CampSiteCityTagsDao {
 
 	// 透過cityID查CampSiteCityTags
 	public List<CampSiteCityTagsBean> findCampsByCityID(int cityID) throws SQLException {
+		Connection conn = DbUtils.getConnection();
+		
 		String sql = "select * from CampPlusCity where cityID like ?";
 		PreparedStatement preState = conn.prepareStatement(sql);
 		

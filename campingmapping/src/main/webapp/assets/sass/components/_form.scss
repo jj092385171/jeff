@@ -157,7 +157,7 @@
 		opacity: 0;
 		width: 1rem;
 		z-index: -1;
-
+	
 		& + label {
 			@include icon(false, solid);
 			@include vendor('user-select', 'none');

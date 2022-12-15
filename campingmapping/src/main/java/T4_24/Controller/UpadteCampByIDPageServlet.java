@@ -19,6 +19,7 @@ import T4_24.Dao.TagDao;
 import T4_24.Models.CampSiteCityTagsBean;
 import T4_24.Models.CityBean;
 import T4_24.Models.TagBean;
+import T4_24.Models.TagPlusCampBean;
 
 
 @WebServlet("/T4_24/UpadteCampByIDPageServlet")
@@ -39,6 +40,7 @@ public class UpadteCampByIDPageServlet extends HttpServlet {
 		if (campID == null || campID.trim().length() == 0) {
 			errorMsg.put("campID", "必須輸入營地編號");
 		}
+		
 		
 		
 		// 錯誤返回呼叫jsp
@@ -64,7 +66,7 @@ public class UpadteCampByIDPageServlet extends HttpServlet {
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 		}
-	
+
 		session.setAttribute("csctBean", csctBean);
 		session.setAttribute("tagList", tagList);
 		session.setAttribute("cityList", cityList);

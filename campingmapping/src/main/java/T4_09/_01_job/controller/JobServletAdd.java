@@ -111,10 +111,10 @@ public class JobServletAdd extends HttpServlet {
 		// 處理照片格式
 		InputStream in = request.getPart("img").getInputStream();
 		long size = request.getPart("img").getSize();
-		try {
-			Blob image = jobServiceImpl.fileToBlob(in, size);
-			jobBean.setImg(image);
-		} catch (Exception e) {
+			try {
+				Blob image = jobServiceImpl.fileToBlob(in, size);
+				jobBean.setImg(image);
+			} catch (Exception e) {
 		}
 
 		if (!errorMessage.isEmpty()) {

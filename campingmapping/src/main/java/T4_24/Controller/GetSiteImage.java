@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import T4_24.Dao.CampDao;
-import T4_24.Models.CampBean;
+import T4_24.Dao.SiteDao;
+import T4_24.Models.SiteBean;
 
 @MultipartConfig()
-@WebServlet("/T4_24/GetCampImage")
-public class GetCampImage extends HttpServlet {
+@WebServlet("/T4_24/GetSiteImage")
+public class GetSiteImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,10 +32,10 @@ public class GetCampImage extends HttpServlet {
 			// 讀取瀏覽器傳送來的主鍵
 			String id = request.getParameter("id");
 			// 讀取瀏覽器傳送來的type，以分辨要處理哪個表格
-			CampDao campDao = new CampDao();
-			CampBean findPictures = campDao.findPictures(Integer.valueOf(id));
+			SiteDao siteDao = new SiteDao();
+			SiteBean findPictures = siteDao.findPictures(Integer.valueOf(id));
 			
-			campPictures = findPictures.getCampPictures();
+			campPictures = findPictures.getSitePictures();
 			is = campPictures.getBinaryStream();
 			
 			// 由圖片檔的檔名來得到檔案的MIME型態
