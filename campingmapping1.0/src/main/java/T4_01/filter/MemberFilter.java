@@ -61,7 +61,7 @@ public class MemberFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		 System.out.println("f");
+//		 System.out.println("f");
 		boolean isRequestedSessionIdValid = false;
 		if (request instanceof HttpServletRequest
 				&& response instanceof HttpServletResponse) {

@@ -1,4 +1,4 @@
-package t4_01Member.bean;
+package t4_01Member.model.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import t4_01Member.model.entity.License;
 
 public class LogoutBean {
 	private static Logger log = LoggerFactory.getLogger(LogoutBean.class);

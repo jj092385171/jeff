@@ -1,0 +1,130 @@
+package t4_01Member.model.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+//票券夾
+// couponwallet
+@Entity
+@Table(name = "couponwallet")
+public class CouponWallet {
+
+	// cwid
+	// 票券夾ID
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cwid")
+	private int cwid;
+	// uid
+	// 擁有者ID
+	@Column(name = "uid")
+	private int uid;
+	// couponid
+	// 票券ID
+	@Column(name = "couponid")
+	private int couponid;
+	// state
+	// 狀態(1.未使用 2.已使用 3.已過期 4.暫停)
+	@Column(name = "state")
+	private int state;
+	// show
+	@Column(name = "show")
+	private String show;
+	// ALTER TABLE [dbo].[couponwallet] WITH CHECK ADD CONSTRAINT
+	// [fk_coupon_couponWallet_couponid] FOREIGN KEY([couponid])
+	// REFERENCES [dbo].[coupon] ([couponid])
+	@ManyToOne
+	@JoinColumn(name = "fk_coupon_couponWallet_couponid")
+	private Coupon coupon;
+	// ALTER TABLE [dbo].[couponwallet] WITH CHECK ADD CONSTRAINT
+	// [fk_member_couponWallet_uid] FOREIGN KEY([uid])
+	// REFERENCES [dbo].[member] ([uid])
+	@ManyToOne
+	@JoinColumn(name = "fk_member_couponWallet_uid")
+	private Member member;
+
+	public CouponWallet() {
+	}
+
+	public CouponWallet(int cwid, int uid, int couponid, int state, String show,
+			Coupon coupon, Member member) {
+		super();
+		this.cwid = cwid;
+		this.uid = uid;
+		this.couponid = couponid;
+		this.state = state;
+		this.show = show;
+		this.coupon = coupon;
+		this.member = member;
+	}
+
+	public int getCwid() {
+		return cwid;
+	}
+
+	public void setCwid(int cwid) {
+		this.cwid = cwid;
+	}
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
+	public int getCouponid() {
+		return couponid;
+	}
+
+	public void setCouponid(int couponid) {
+		this.couponid = couponid;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public String getShow() {
+		return show;
+	}
+
+	public void setShow(String show) {
+		this.show = show;
+	}
+
+	public Coupon getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(Coupon coupon) {
+		this.coupon = coupon;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"CouponWallet [cwid=%s, uid=%s, couponid=%s, state=%s, show=%s, coupon=%s, member=%s]",
+				cwid, uid, couponid, state, show, coupon, member);
+	}
+
+}
