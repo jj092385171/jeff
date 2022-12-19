@@ -23,7 +23,7 @@ public class Coupon {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "couponid")
-	private int couponid;
+	private Integer couponid;
 	// couponcode
 	// 折扣碼
 	@Column(name = "couponcode")
@@ -75,31 +75,11 @@ public class Coupon {
 	public Coupon() {
 	}
 
-	public Coupon(int couponid, String couponcode, String couponname,
-			int coupontype, int couponamount, int couponused, String couponrule,
-			Date startdate, Date enddate, Date show, String state,
-			String couponphoto, Set<CouponWallet> couponWallet) {
-		super();
-		this.couponid = couponid;
-		this.couponcode = couponcode;
-		this.couponname = couponname;
-		this.coupontype = coupontype;
-		this.couponamount = couponamount;
-		this.couponused = couponused;
-		this.couponrule = couponrule;
-		this.startdate = startdate;
-		this.enddate = enddate;
-		this.show = show;
-		this.state = state;
-		this.couponphoto = couponphoto;
-		this.couponWallet = couponWallet;
-	}
-
-	public int getCouponid() {
+	public Integer getCouponid() {
 		return couponid;
 	}
 
-	public void setCouponid(int couponid) {
+	public void setCouponid(Integer couponid) {
 		this.couponid = couponid;
 	}
 
@@ -199,14 +179,9 @@ public class Coupon {
 		this.couponWallet = couponWallet;
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"Coupon [couponid=%s, couponcode=%s, couponname=%s, coupontype=%s, couponamount=%s, couponused=%s, couponrule=%s, startdate=%s, enddate=%s, show=%s, state=%s, couponphoto=%s, couponWallet=%s]",
-				couponid, couponcode, couponname, coupontype, couponamount,
-				couponused, couponrule, startdate, enddate, show, state,
-				couponphoto, couponWallet);
-	}
+
+
+	
 	
 
 }

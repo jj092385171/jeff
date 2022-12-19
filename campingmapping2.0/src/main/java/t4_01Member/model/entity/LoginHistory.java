@@ -22,10 +22,10 @@ public class LoginHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "lhid")
-	private int lhid; 
+	private Integer lhid; 
 	//uid
 	@Column(name = "uid")
-	private int uid;
+	private Integer uid;
 	// account 
 	//帳號
 	@Column(name = "account")
@@ -46,38 +46,26 @@ public class LoginHistory {
 	// ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [fk_member_loginhistory_uid] FOREIGN KEY([UID])
 	// REFERENCES [dbo].[member] ([uid])
 	@ManyToOne
-	@JoinColumn(name = "fk_member_loginhistory_account")
+//	@JoinColumn(name = "fk_member_loginhistory_account")
 	@JoinColumn(name = "fk_member_loginhistory_uid")
 	private Member member;
 
 	public LoginHistory() {
 	}
 
-	public LoginHistory(int lhid, int uid, String account, String ip,
-			Date logindate, String show, Member member) {
-		super();
-		this.lhid = lhid;
-		this.uid = uid;
-		this.account = account;
-		this.ip = ip;
-		this.logindate = logindate;
-		this.show = show;
-		this.member = member;
-	}
-
-	public int getLhid() {
+	public Integer getLhid() {
 		return lhid;
 	}
 
-	public void setLhid(int lhid) {
+	public void setLhid(Integer lhid) {
 		this.lhid = lhid;
 	}
 
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
 
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 
@@ -121,12 +109,7 @@ public class LoginHistory {
 		this.member = member;
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"LoginHistory [lhid=%s, uid=%s, account=%s, ip=%s, logindate=%s, show=%s, member=%s]",
-				lhid, uid, account, ip, logindate, show, member);
-	}
+
 	
 	
 

@@ -1,12 +1,10 @@
 package t4_01Member.model.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,15 +12,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "license")
 public class License {
-	
-
 	// uid 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "uid")
-	private int uid;
+	private Integer uid;
 	// account 
-	@Column(name = "account")
+	@Column(name = "account",insertable = false, updatable = false)
 	private String account;
 	// facebookid
 	@Column(name = "facebookid")
@@ -44,33 +39,27 @@ public class License {
 	// ALTER TABLE [dbo].[license]  WITH NOCHECK ADD  CONSTRAINT [fk_member_license_uid] FOREIGN KEY([UID])
 	// REFERENCES [dbo].[member] ([uid])
 	// NOT FOR REPLICATION 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_member_license_account")
-	@JoinColumn(name = "fk_member_license_uid")
-	private Member memberBean;
+//	@JoinColumn(name = "fk_member_license_account")
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "uid")
+	private Member member;
+	
+	@OneToOne
+	@JoinColumn(name = "account")
+	private Member memberA;
+
+//	@OneToOne(mappedBy = "license")
 	
 	public License() {
 
 	}
 
-	public License(int uid, String account, String facebookid, String googleid,
-			String lineid, String password, String show, Member memberBean) {
-		super();
-		this.uid = uid;
-		this.account = account;
-		this.facebookid = facebookid;
-		this.googleid = googleid;
-		this.lineid = lineid;
-		this.password = password;
-		this.show = show;
-		this.memberBean = memberBean;
-	}
-
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
 
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 
@@ -122,20 +111,16 @@ public class License {
 		this.show = show;
 	}
 
-	public Member getMemberBean() {
-		return memberBean;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberBean(Member memberBean) {
-		this.memberBean = memberBean;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"License [uid=%s, account=%s, facebookid=%s, googleid=%s, lineid=%s, password=%s, show=%s, memberBean=%s]",
-				uid, account, facebookid, googleid, lineid, password, show,
-				memberBean);
-	}
+
+
+	
 
 }

@@ -4,7 +4,7 @@
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
 		<property name="hibernate.connection.password">0000</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=hibernateDB;trustServerCertificate=true</property>
+		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2016Dialect</property>
 		<!-- 後面學到 current  Session 再打開 -->
@@ -14,7 +14,7 @@
 		<!-- 上述 SQL 指令是否排版-->
 		<property name="format_sql">true</property>
 		<!-- hibernate 內建 連線池 -->
-		<property name="connection.pool_size">2</property>
+		<property name="connection.pool_size">10</property>
 		<!-- setting auto generate table: update/validate  -->
 		<!--         <property name="hbm2ddl.auto">update</property> -->
 		<!--  source mapping in xml file -->
@@ -26,6 +26,6 @@
 		<mapping class="t4_01Member.model.entity.License" />
 		<mapping class="t4_01Member.model.entity.Limits" />
 		<mapping class="t4_01Member.model.entity.Member" />
-		<mapping class="t4_01Member.model.entity.LoginHistory.java" />
+		<mapping class="t4_01Member.model.entity.LoginHistory" />
 	</session-factory>
 </hibernate-configuration>

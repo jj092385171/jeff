@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -24,7 +23,7 @@ public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "uid")
-	private int uid;
+	private Integer uid;
 	// account
 	// 帳號
 	@Column(name = "account")
@@ -44,15 +43,15 @@ public class Member {
 	// exp
 	// 經驗
 	@Column(name = "exp")
-	private int exp;
+	private Integer exp;
 	// leavel
 	// 等級()
 	@Column(name = "leavel")
-	private int leavel;
+	private Integer leavel;
 	// point
 	// 點數
 	@Column(name = "point")
-	private int point;
+	private Integer point;
 	// phone
 	// 手機
 	@Column(name = "phone")
@@ -72,7 +71,7 @@ public class Member {
 	// gender
 	// 性別
 	@Column(name = "gender")
-	private int gender;
+	private Integer gender;
 	// registerdata
 	// 註冊日期
 	@Column(name = "registerdata")
@@ -88,17 +87,25 @@ public class Member {
 	// show
 	@Column(name = "show")
 	private String show;
+	// show
+	@Column(name = "about")
+	private String about;
+
+//	@OneToOne(mappedBy = "member")
+////	@PrimaryKeyJoinColumn
+//	private Limits limits;
+//
+//	@OneToOne(mappedBy = "member")
+//	private Limits limitsA;
+	
+//	@OneToOne(mappedBy = "member")
+//	@PrimaryKeyJoinColumn
+//	private License license;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
 	@OrderBy("logindate desc")
 	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
 
-	@OneToOne(mappedBy = "member")
-	private Limits limits;
-
-	@OneToOne(mappedBy = "member")
-	private License license;
-	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
 	@OrderBy("cwid desc")
 	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
@@ -106,41 +113,11 @@ public class Member {
 	public Member() {
 	}
 
-	public Member(int uid, String account, String nickname, String firstname,
-			String lastname, int exp, int leavel, int point, String phone,
-			Date birthday, String address, String email, int gender,
-			Date registerdata, String subscribed, Blob shot, String show,
-			Set<LoginHistory> loginHistories, Limits limits, License license,
-			Set<CouponWallet> couponWallet) {
-		super();
-		this.uid = uid;
-		this.account = account;
-		this.nickname = nickname;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.exp = exp;
-		this.leavel = leavel;
-		this.point = point;
-		this.phone = phone;
-		this.birthday = birthday;
-		this.address = address;
-		this.email = email;
-		this.gender = gender;
-		this.registerdata = registerdata;
-		this.subscribed = subscribed;
-		this.shot = shot;
-		this.show = show;
-		this.loginHistories = loginHistories;
-		this.limits = limits;
-		this.license = license;
-		this.couponWallet = couponWallet;
-	}
-
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
 
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 
@@ -176,27 +153,27 @@ public class Member {
 		this.lastname = lastname;
 	}
 
-	public int getExp() {
+	public Integer getExp() {
 		return exp;
 	}
 
-	public void setExp(int exp) {
+	public void setExp(Integer exp) {
 		this.exp = exp;
 	}
 
-	public int getLeavel() {
+	public Integer getLeavel() {
 		return leavel;
 	}
 
-	public void setLeavel(int leavel) {
+	public void setLeavel(Integer leavel) {
 		this.leavel = leavel;
 	}
 
-	public int getPoint() {
+	public Integer getPoint() {
 		return point;
 	}
 
-	public void setPoint(int point) {
+	public void setPoint(Integer point) {
 		this.point = point;
 	}
 
@@ -232,11 +209,11 @@ public class Member {
 		this.email = email;
 	}
 
-	public int getGender() {
+	public Integer getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 
@@ -272,28 +249,36 @@ public class Member {
 		this.show = show;
 	}
 
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+//	public Limits getLimits() {
+//		return limits;
+//	}
+//
+//	public void setLimits(Limits limits) {
+//		this.limits = limits;
+//	}
+
+//	public License getLicense() {
+//		return license;
+//	}
+//
+//	public void setLicense(License license) {
+//		this.license = license;
+//	}
+
 	public Set<LoginHistory> getLoginHistories() {
 		return loginHistories;
 	}
 
 	public void setLoginHistories(Set<LoginHistory> loginHistories) {
 		this.loginHistories = loginHistories;
-	}
-
-	public Limits getLimits() {
-		return limits;
-	}
-
-	public void setLimits(Limits limits) {
-		this.limits = limits;
-	}
-
-	public License getLicense() {
-		return license;
-	}
-
-	public void setLicense(License license) {
-		this.license = license;
 	}
 
 	public Set<CouponWallet> getCouponWallet() {
@@ -307,11 +292,10 @@ public class Member {
 	@Override
 	public String toString() {
 		return String.format(
-				"Member [uid=%s, account=%s, nickname=%s, firstname=%s, lastname=%s, exp=%s, leavel=%s, point=%s, phone=%s, birthday=%s, address=%s, email=%s, gender=%s, registerdata=%s, subscribed=%s, shot=%s, show=%s, loginHistories=%s, limits=%s, license=%s, couponWallet=%s]",
+				"Member [uid=%s, account=%s, nickname=%s, firstname=%s, lastname=%s, exp=%s, leavel=%s, point=%s, phone=%s, birthday=%s, address=%s, email=%s, gender=%s, registerdata=%s, subscribed=%s, shot=%s, show=%s, about=%s]",
 				uid, account, nickname, firstname, lastname, exp, leavel, point,
 				phone, birthday, address, email, gender, registerdata,
-				subscribed, shot, show, loginHistories, limits, license,
-				couponWallet);
+				subscribed, shot, show, about);
 	}
 
 }

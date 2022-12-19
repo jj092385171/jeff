@@ -20,19 +20,19 @@ public class CouponWallet {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cwid")
-	private int cwid;
+	private Integer cwid;
 	// uid
 	// 擁有者ID
 	@Column(name = "uid")
-	private int uid;
+	private Integer uid;
 	// couponid
 	// 票券ID
 	@Column(name = "couponid")
-	private int couponid;
+	private Integer couponid;
 	// state
 	// 狀態(1.未使用 2.已使用 3.已過期 4.暫停)
 	@Column(name = "state")
-	private int state;
+	private Integer state;
 	// show
 	@Column(name = "show")
 	private String show;
@@ -52,47 +52,35 @@ public class CouponWallet {
 	public CouponWallet() {
 	}
 
-	public CouponWallet(int cwid, int uid, int couponid, int state, String show,
-			Coupon coupon, Member member) {
-		super();
-		this.cwid = cwid;
-		this.uid = uid;
-		this.couponid = couponid;
-		this.state = state;
-		this.show = show;
-		this.coupon = coupon;
-		this.member = member;
-	}
-
-	public int getCwid() {
+	public Integer getCwid() {
 		return cwid;
 	}
 
-	public void setCwid(int cwid) {
+	public void setCwid(Integer cwid) {
 		this.cwid = cwid;
 	}
 
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
 
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 
-	public int getCouponid() {
+	public Integer getCouponid() {
 		return couponid;
 	}
 
-	public void setCouponid(int couponid) {
+	public void setCouponid(Integer couponid) {
 		this.couponid = couponid;
 	}
 
-	public int getState() {
+	public Integer getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 
@@ -120,11 +108,9 @@ public class CouponWallet {
 		this.member = member;
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"CouponWallet [cwid=%s, uid=%s, couponid=%s, state=%s, show=%s, coupon=%s, member=%s]",
-				cwid, uid, couponid, state, show, coupon, member);
-	}
+
+
+	
+	
 
 }

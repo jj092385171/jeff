@@ -1,12 +1,10 @@
 package t4_01Member.model.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,110 +13,88 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "limits")
 public class Limits {
-	// uid 
+	// uid
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "uid")
-	private int uid;
-	// account 
+	private Integer uid;
+	// account
 	// 帳號
-	@Column(name = "account")
+	@Column(name = "account", insertable = false, updatable = false)
 	private String account;
 	// nomore
 	// 一般
 	@Column(name = "nomore")
 	private String nomore;
-	// buy 
+	// buy
 	// 買家
 	@Column(name = "buy")
 	private String buy;
-	// sell 
+	// sell
 	// 賣家
 	@Column(name = "sell")
 	private String sell;
-	// publisher 
+	// publisher
 	// 發文
 	@Column(name = "publisher")
 	private String publisher;
-	// message 
+	// message
 	// 留言
 	@Column(name = "message")
 	private String message;
-	// enterprise 
+	// enterprise
 	// 雇主
 	@Column(name = "enterprise")
 	private String enterprise;
-	// applier 
+	// applier
 	// 應徵者
 	@Column(name = "applier")
 	private String applier;
-	// mainhoster 
+	// mainhoster
 	// 揪團主
 	@Column(name = "mainhoster")
 	private String mainhoster;
-	// attender 
+	// attender
 	// 參加者
 	@Column(name = "attender")
 	private String attender;
-	// campingowner 
+	// campingowner
 	// 營主
 	@Column(name = "campingowner")
 	private String campingowner;
-	// customer 
+	// customer
 	// 營地預定
 	@Column(name = "customer")
 	private String customer;
-	// admin 
+	// admin
 	@Column(name = "admin")
 	private String admin;
-	// member 
-	@Column(name = "member")
-	private String member;
-	// show 
+	// member
+	@Column(name = "members")
+	private String members;
+	// show
 	@Column(name = "show")
 	private String show;
-	// 	ALTER TABLE [dbo].[limits]  WITH CHECK ADD  CONSTRAINT [fk_member_limits_account] FOREIGN KEY([account])
-	// 	REFERENCES [dbo].[member] ([account])
-	// 	ALTER TABLE [dbo].[limits]  WITH CHECK ADD  CONSTRAINT [fk_member_limits_uid] FOREIGN KEY([uid])
-	// 	REFERENCES [dbo].[member] ([uid])
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_member_limits_account")
-	@JoinColumn(name = "fk_member_limits_uid")
-	private Member memberBean;
+	// ALTER TABLE [dbo].[limits] WITH CHECK ADD CONSTRAINT
+	// [fk_member_limits_account] FOREIGN KEY([account])
+	// REFERENCES [dbo].[member] ([account])
+	// ALTER TABLE [dbo].[limits] WITH CHECK ADD CONSTRAINT
+	// [fk_member_limits_uid] FOREIGN KEY([uid])
+	// REFERENCES [dbo].[member] ([uid])
+	// @JoinColumn(name = "fk_member_limits_account")
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "uid")
+	private Member member;
 	
-	public Limits() {
-	}
+	@OneToOne
+	@JoinColumn(name = "account")
+	private Member memberA;
 
-	public Limits(int uid, String account, String nomore, String buy,
-			String sell, String publisher, String message, String enterprise,
-			String applier, String mainhoster, String attender,
-			String campingowner, String customer, String admin, String member,
-			String show, Member memberBean) {
-		super();
-		this.uid = uid;
-		this.account = account;
-		this.nomore = nomore;
-		this.buy = buy;
-		this.sell = sell;
-		this.publisher = publisher;
-		this.message = message;
-		this.enterprise = enterprise;
-		this.applier = applier;
-		this.mainhoster = mainhoster;
-		this.attender = attender;
-		this.campingowner = campingowner;
-		this.customer = customer;
-		this.admin = admin;
-		this.member = member;
-		this.show = show;
-		this.memberBean = memberBean;
-	}
-
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
 
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 
@@ -226,12 +202,12 @@ public class Limits {
 		this.admin = admin;
 	}
 
-	public String getMember() {
-		return member;
+	public String getMembers() {
+		return members;
 	}
 
-	public void setMember(String member) {
-		this.member = member;
+	public void setMembers(String members) {
+		this.members = members;
 	}
 
 	public String getShow() {
@@ -242,23 +218,12 @@ public class Limits {
 		this.show = show;
 	}
 
-	public Member getMemberBean() {
-		return memberBean;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberBean(Member memberBean) {
-		this.memberBean = memberBean;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-				"Limits [uid=%s, account=%s, nomore=%s, buy=%s, sell=%s, publisher=%s, message=%s, enterprise=%s, applier=%s, mainhoster=%s, attender=%s, campingowner=%s, customer=%s, admin=%s, member=%s, show=%s, memberBean=%s]",
-				uid, account, nomore, buy, sell, publisher, message, enterprise,
-				applier, mainhoster, attender, campingowner, customer, admin,
-				member, show, memberBean);
-	}
-	
-
-	
 }
