@@ -3,20 +3,39 @@ package T4_09._01_job.model;
 import java.sql.Blob;
 import java.util.Date;
 
-public class JobBean {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="job")
+
+public class JobBean {
+	@Column(name = "uID")
 	private int uID;//會員
+	@Column(name = "rackID")
 	private int rackID;//刊登編號
+	@Column(name = "job")
 	private String job;//職缺
+	@Column(name = "salary")
 	private String salary;//薪資
+	@Column(name = "quantity")
 	private int quantity;//人數
+	@Column(name = "place")
 	private String place;//地點
+	@Column(name = "date")
 	private String date;//上班日期
+	@Column(name = "time")
 	private String time;//上班時段
+	@Column(name = "img")
 	private Blob img;//圖片
+	@Column(name = "remark")
 	private String remark;//備註
+	@Column(name = "rackUp")
 	private Date rackUp;//上架日期
+	@Column(name = "rackDown")
 	private Date rackDown;//下架日期
+	
 	public int getuID() {
 		return uID;
 	}
