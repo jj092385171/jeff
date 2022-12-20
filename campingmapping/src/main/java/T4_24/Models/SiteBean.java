@@ -8,7 +8,7 @@ public class SiteBean {
 	private java.sql.Blob sitePictures;
 	private int totalSites;
 	private int siteMoney;
-	private int campID;
+	private int fk_campID;
 	
 
 	public SiteBean() {
@@ -22,7 +22,7 @@ public class SiteBean {
 		this.sitePictures = blob;
 		this.totalSites = totalSites;
 		this.siteMoney = siteMoney;
-		this.campID = campID;
+		this.fk_campID = campID;
 	}
 
 	public SiteBean(String siteName, int totalSites, int siteMoney, int campID) {
@@ -30,7 +30,7 @@ public class SiteBean {
 		this.siteName = siteName;
 		this.totalSites = totalSites;
 		this.siteMoney = siteMoney;
-		this.campID = campID;
+		this.fk_campID = campID;
 	}
 	
 
@@ -85,12 +85,12 @@ public class SiteBean {
 
 
 	public int getCampID() {
-		return campID;
+		return fk_campID;
 	}
 
 
 	public void setCampID(int campID) {
-		this.campID = campID;
+		this.fk_campID = campID;
 	}
 
 

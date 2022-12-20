@@ -39,7 +39,7 @@
 							</td>
 							<td>${ siteBean.totalSites }</td>
 							<td>${ siteBean.siteMoney }</td>
-							<td>${ siteBean.campID }</td>
+							<td>${ siteBean.fk_campID }</td>
 						</tr>
 					</tbody>
 				</table>
