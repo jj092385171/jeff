@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- LogProvider logProvider = new LogProvider(); -->
+	<bean id="logProvider" class="tw.leonchen.util.LogProvider"/>
+	
+	<!-- LoginDao loginDao = new LoginDao(); -->
+	<bean id="loginDao" class="tw.leonchen.model.LoginDao"/>
+	
+	<!-- LoginService loginService1 = new LoginService(loginDao); -->
+	<bean id="loginService1" class="tw.leonchen.model.LoginService">
+	    <constructor-arg ref="loginDao"/>
+	</bean>
+	
+	<!-- LoginService loginService2 = new LoginService(); -->
+	<!-- loginService2.setLoginDao(loginDao); -->
+	<bean id="loginService2" class="tw.leonchen.model.LoginService">
+	    <property name="loginDao" ref="loginDao"/>
+	</bean>
+	
+	<!-- Room room1 = new Room("1001","war room","small"); -->
+	<bean id="room1" class="tw.leonchen.model.Room">
+	    <constructor-arg index="0" value="1001"/>
+	    <constructor-arg index="1" value="war room"/>
+	    <constructor-arg index="2" value="small"/>
+	</bean>
+	
+	<!-- Date date1 = new Date(); -->
+	<bean id="date1" class="java.util.Date"/>
+	
+	<!-- Room room2 = new Room(); -->
+	<!-- room2.setId(1002); -->
+	<!-- room2.setName("funnyroom"); -->
+	<!-- room2.setSize("medium"); -->
+	<!-- room2.setDate(date1); -->
+	<bean id="room2" class="tw.leonchen.model.Room">
+	    <property name="id" value="1002"/>
+	    <property name="name" value="funnyroom"/>
+	    <property name="size" value="medium"/>
+	    <property name="date" ref="date1"/>
+	</bean>
+	
+</beans>
+
