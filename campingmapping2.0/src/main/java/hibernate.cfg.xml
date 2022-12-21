@@ -21,11 +21,12 @@
 		<!--        <mapping resource="tw/hibernatedemo/model/CompanyBean.hbm.xml"/>-->
 		<!--  class mapping -->
 		<!--        <mapping class="tw.hibernatedemo.model.Member"/>    -->
-		<mapping class="t4_01Member.model.entity.Coupon" />
-		<mapping class="t4_01Member.model.entity.CouponWallet" />
-		<mapping class="t4_01Member.model.entity.License" />
-		<mapping class="t4_01Member.model.entity.Limits" />
-		<mapping class="t4_01Member.model.entity.Member" />
-		<mapping class="t4_01Member.model.entity.LoginHistory" />
+<!-- 		<mapping class="t4_01Member.model.entity.Coupon" /> -->
+<!-- 		<mapping class="t4_01Member.model.entity.CouponWallet" /> -->
+<!-- 		<mapping class="t4_01Member.model.entity.License" /> -->
+<!-- 		<mapping class="t4_01Member.model.entity.Limits" /> -->
+<!-- 		<mapping class="t4_01Member.model.entity.Member" /> -->
+<!-- 		<mapping class="t4_01Member.model.entity.LoginHistory" /> -->
+		<mapping class="com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean" />
 	</session-factory>
 </hibernate-configuration>
