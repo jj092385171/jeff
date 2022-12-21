@@ -21,12 +21,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.9.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
-		<dependency>
-			<groupId>commons-dbutils</groupId>
-			<artifactId>commons-dbutils</artifactId>
-			<version>1.7</version>
-		</dependency>
+	
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -95,7 +90,7 @@
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
-			<version>11.2.1.jre17</version>
+			<version>11.2.1.jre11</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -104,7 +99,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>17</release>
+					<release>11</release>
 				</configuration>
 			</plugin>
 			<plugin>

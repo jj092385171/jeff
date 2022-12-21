@@ -1,4 +1,4 @@
-package com.campingmapping.team4;
+package com.campingmapping.team4.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
