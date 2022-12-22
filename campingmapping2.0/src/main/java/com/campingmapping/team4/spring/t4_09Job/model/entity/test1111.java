@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t4_09Job.model.entity;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -15,6 +14,7 @@ public class test1111 {
 	public static void main(String[] args) {
 		SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 		Session currentSession = sessionFactory.getCurrentSession();
+		
 		try {
 			currentSession.beginTransaction();
 
@@ -24,7 +24,6 @@ public class test1111 {
 			for (JobBean emp : selectAll) {
 				System.out.println(emp);
 			}
-		
 			currentSession.getTransaction().commit();
 
 		} catch (Exception e) {

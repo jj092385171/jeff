@@ -5,14 +5,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="job")
 
 public class JobBean {
+	
 	@Column(name = "uID")
 	private int uID;//會員
+	@Id 
 	@Column(name = "rackID")
 	private int rackID;//刊登編號
 	@Column(name = "job")

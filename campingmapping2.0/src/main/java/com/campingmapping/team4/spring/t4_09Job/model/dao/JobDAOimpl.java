@@ -21,6 +21,7 @@ public class JobDAOimpl implements JobDAO {
 	@Override
 	public void addJob(JobBean jobBean) {
 		Session session = factory.getCurrentSession();
+		System.out.println(jobBean);
 		session.save(jobBean);
 
 		
@@ -81,6 +82,7 @@ public class JobDAOimpl implements JobDAO {
 	public JobBean findBeanByRackID(int rackID) {
 		Session session = factory.getCurrentSession();
 		JobBean jbean = session.get(JobBean.class, rackID);
+		System.out.println(jbean);
 		return jbean;
 	}
 
@@ -97,9 +99,10 @@ public class JobDAOimpl implements JobDAO {
 	@Override
 	public List<JobBean> findJobByJobLike(String job) {
 		Session session = factory.getCurrentSession();
-		List<JobBean> result = session.createQuery("from JobBean where = :j", JobBean.class)
+		List<JobBean> result = session.createQuery("from JobBean where job like :j", JobBean.class)
 		.setParameter("j", "%"+job+"%")
 		.getResultList();
+		System.out.println(result);
 		return result;
 	}
 
@@ -107,7 +110,7 @@ public class JobDAOimpl implements JobDAO {
 	@Override
 	public List<JobBean> findBeanByuID(int uID)  {
 		Session session = factory.getCurrentSession();
-		List<JobBean> result = session.createQuery("from JobBean where = :u",JobBean.class)
+		List<JobBean> result = session.createQuery("from JobBean where uID = :u",JobBean.class)
 		.setParameter("u", uID)
 		.getResultList();
 		return result;

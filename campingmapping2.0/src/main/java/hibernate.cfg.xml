@@ -16,7 +16,7 @@
 		<!-- hibernate 內建 連線池 -->
 		<property name="connection.pool_size">10</property>
 		<!-- setting auto generate table: update/validate  -->
-		<!--         <property name="hbm2ddl.auto">update</property> -->
+		<property name="hbm2ddl.auto">update</property>
 		<!--  source mapping in xml file -->
 		<!--        <mapping resource="tw/hibernatedemo/model/CompanyBean.hbm.xml"/>-->
 		<!--  class mapping -->
@@ -34,6 +34,6 @@
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Limits" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.oginHistory" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Cccc" /> -->
-		<mapping class="com/campingmapping/team4/spring/t4_09Job/model/entity/JobBean" />
+		<mapping class="com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean" />
 	</session-factory>
 </hibernate-configuration>
