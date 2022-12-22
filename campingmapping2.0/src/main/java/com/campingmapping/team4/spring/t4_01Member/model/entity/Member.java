@@ -2,27 +2,27 @@ package com.campingmapping.team4.spring.t4_01Member.model.entity;
 
 import java.sql.Blob;
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //會員
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "member")
-//@Component(value = "member")
+// @Component(value = "member")
 public class Member {
 	// uid
 	@Id
@@ -95,205 +95,12 @@ public class Member {
 	// show
 	@Column(name = "about")
 	private String about;
-	
 
-//	@OneToOne(mappedBy = "member")
-//	private Limits limits;
-//
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-//	@OrderBy("logindate desc")
-//	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-//	@OrderBy("cwid desc")
-//	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
-
-	public Member() {
-	}
-
-	public Integer getUid() {
-		return uid;
-	}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	public Integer getExp() {
-		return exp;
-	}
-
-	public void setExp(Integer exp) {
-		this.exp = exp;
-	}
-
-	public Integer getLeavel() {
-		return leavel;
-	}
-
-	public void setLeavel(Integer leavel) {
-		this.leavel = leavel;
-	}
-
-	public Integer getPoint() {
-		return point;
-	}
-
-	public void setPoint(Integer point) {
-		this.point = point;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Integer getGender() {
-		return gender;
-	}
-
-	public void setGender(Integer gender) {
-		this.gender = gender;
-	}
-
-	public Date getRegisterdata() {
-		return registerdata;
-	}
-
-	public void setRegisterdata(Date registerdata) {
-		this.registerdata = registerdata;
-	}
-
-	public String getSubscribed() {
-		return subscribed;
-	}
-
-	public void setSubscribed(String subscribed) {
-		this.subscribed = subscribed;
-	}
-
-	public Blob getShot() {
-		return shot;
-	}
-
-	public void setShot(Blob shot) {
-		this.shot = shot;
-	}
-
-	public String getShow() {
-		return show;
-	}
-
-	public void setShow(String show) {
-		this.show = show;
-	}
-
-	public String getAbout() {
-		return about;
-	}
-
-	public void setAbout(String about) {
-		this.about = about;
-	}
-
-//	public Limits getLimits() {
-//		return limits;
-//	}
-//
-//	public void setLimits(Limits limits) {
-//		this.limits = limits;
-//	}
-
-//	public License getLicense() {
-//		return license;
-//	}
-//
-//	public void setLicense(License license) {
-//		this.license = license;
-//	}
-
-//	public Set<LoginHistory> getLoginHistories() {
-//		return loginHistories;
-//	}
-//
-//	public void setLoginHistories(Set<LoginHistory> loginHistories) {
-//		this.loginHistories = loginHistories;
-//	}
-//
-//	public Set<CouponWallet> getCouponWallet() {
-//		return couponWallet;
-//	}
-//
-//	public void setCouponWallet(Set<CouponWallet> couponWallet) {
-//		this.couponWallet = couponWallet;
-//	}
-
-	@Override
-	public String toString() {
-		return String.format(
-				"Member [uid=%s, account=%s, nickname=%s, firstname=%s, lastname=%s, exp=%s, leavel=%s, point=%s, phone=%s, birthday=%s, address=%s, email=%s, gender=%s, registerdata=%s, subscribed=%s, shot=%s, show=%s, about=%s]",
-				uid, account, nickname, firstname, lastname, exp, leavel, point, phone, birthday, address, email,
-				gender, registerdata, subscribed, shot, show, about);
-	}
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Limits limits;
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private License license;
 
 }

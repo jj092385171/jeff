@@ -31,8 +31,8 @@
 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Member" />
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Coupon" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.CouponWallet" /> -->
-<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.License" /> -->
-<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Limits" /> -->
+		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.License" />
+		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Limits" />
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.oginHistory" /> -->
 	</session-factory>
 </hibernate-configuration>

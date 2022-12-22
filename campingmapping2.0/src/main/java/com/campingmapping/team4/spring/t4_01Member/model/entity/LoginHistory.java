@@ -11,8 +11,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.core.style.ToStringCreator;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 // loginhistory
 //登入歷史
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "loginhistory")
 public class LoginHistory {
@@ -49,69 +60,12 @@ public class LoginHistory {
 //	@JoinColumn(name = "fk_member_loginhistory_account")
 	@JoinColumn(name = "fk_member_loginhistory_uid")
 	private Member member;
-
-	public LoginHistory() {
+	@Override
+	public String toString() {
+		return String.format(
+				"LoginHistory [lhid=%s, uid=%s, account=%s, ip=%s, logindate=%s, show=%s]",
+				lhid, uid, account, ip, logindate, show);
 	}
-
-	public Integer getLhid() {
-		return lhid;
-	}
-
-	public void setLhid(Integer lhid) {
-		this.lhid = lhid;
-	}
-
-	public Integer getUid() {
-		return uid;
-	}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public Date getLogindate() {
-		return logindate;
-	}
-
-	public void setLogindate(Date logindate) {
-		this.logindate = logindate;
-	}
-
-	public String getShow() {
-		return show;
-	}
-
-	public void setShow(String show) {
-		this.show = show;
-	}
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-
 	
-	
-
 	
 }

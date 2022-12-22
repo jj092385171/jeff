@@ -8,7 +8,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 // license
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "license")
 public class License {
@@ -41,91 +46,9 @@ public class License {
 	// NOT FOR REPLICATION 
 //	@JoinColumn(name = "fk_member_license_account")
 	@OneToOne
-	@MapsId
 	@JoinColumn(name = "uid")
 	private Member member;
 	
-	@OneToOne
-	@JoinColumn(name = "account")
-	private Member memberA;
-
-//	@OneToOne(mappedBy = "license")
-	
-	public License() {
-
-	}
-
-	public Integer getUid() {
-		return uid;
-	}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getFacebookid() {
-		return facebookid;
-	}
-
-	public void setFacebookid(String facebookid) {
-		this.facebookid = facebookid;
-	}
-
-	public String getGoogleid() {
-		return googleid;
-	}
-
-	public void setGoogleid(String googleid) {
-		this.googleid = googleid;
-	}
-
-	public String getLineid() {
-		return lineid;
-	}
-
-	public void setLineid(String lineid) {
-		this.lineid = lineid;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getShow() {
-		return show;
-	}
-
-	public void setShow(String show) {
-		this.show = show;
-	}
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-	@Override
-	public String toString() {
-		return String.format(
-				"License [uid=%s, account=%s, facebookid=%s, googleid=%s, lineid=%s, password=%s, show=%s]", uid,
-				account, facebookid, googleid, lineid, password, show);
-	}
-
 
 
 	
