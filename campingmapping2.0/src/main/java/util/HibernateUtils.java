@@ -12,11 +12,15 @@ public class HibernateUtils {
 	
 	private static SessionFactory createSessionFactory(){
 		StandardServiceRegistry service = new StandardServiceRegistryBuilder().configure().build();
+		System.out.println("11111111111111");
 		SessionFactory factory = new MetadataSources(service).buildMetadata().buildSessionFactory();
+		System.out.println("222222222");
+		
 		return factory;
 	}
 	
 	public static SessionFactory getSessionFactory() {
+		System.out.println("33333333333333333");
 		return factory;
 	}
 	
@@ -24,5 +28,5 @@ public class HibernateUtils {
 		if (factory != null) {
 			factory.close();
 		}
-	}
+		}
 }
