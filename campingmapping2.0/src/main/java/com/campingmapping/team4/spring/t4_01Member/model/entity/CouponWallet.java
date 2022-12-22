@@ -40,13 +40,13 @@ public class CouponWallet {
 	// [fk_coupon_couponWallet_couponid] FOREIGN KEY([couponid])
 	// REFERENCES [dbo].[coupon] ([couponid])
 	@ManyToOne
-	@JoinColumn(name = "fk_coupon_couponWallet_couponid")
+	@JoinColumn(name = "couponid")
 	private Coupon coupon;
 	// ALTER TABLE [dbo].[couponwallet] WITH CHECK ADD CONSTRAINT
 	// [fk_member_couponWallet_uid] FOREIGN KEY([uid])
 	// REFERENCES [dbo].[member] ([uid])
 	@ManyToOne
-	@JoinColumn(name = "fk_member_couponWallet_uid")
+	@JoinColumn(name = "uid")
 	private Member member;
 
 	public CouponWallet() {
@@ -106,6 +106,12 @@ public class CouponWallet {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("CouponWallet [cwid=%s, uid=%s, couponid=%s, state=%s, show=%s]", cwid, uid, couponid,
+				state, show);
 	}
 
 

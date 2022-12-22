@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.t4_01Member.model.service;
+package com.campingmapping.team4.spring.t4_01Member.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

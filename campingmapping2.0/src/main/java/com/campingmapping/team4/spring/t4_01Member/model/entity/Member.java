@@ -12,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
 //會員
 @Entity
 @Table(name = "member")
-@Component(value = "animal")
+//@Component(value = "member")
 public class Member {
 	// uid
 	@Id
@@ -93,25 +95,19 @@ public class Member {
 	// show
 	@Column(name = "about")
 	private String about;
+	
 
 //	@OneToOne(mappedBy = "member")
-////	@PrimaryKeyJoinColumn
 //	private Limits limits;
 //
-//	@OneToOne(mappedBy = "member")
-//	private Limits limitsA;
-	
-//	@OneToOne(mappedBy = "member")
-//	@PrimaryKeyJoinColumn
-//	private License license;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-	@OrderBy("logindate desc")
-	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-	@OrderBy("cwid desc")
-	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+//	@OrderBy("logindate desc")
+//	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+//	@OrderBy("cwid desc")
+//	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
 
 	public Member() {
 	}
@@ -276,29 +272,28 @@ public class Member {
 //		this.license = license;
 //	}
 
-	public Set<LoginHistory> getLoginHistories() {
-		return loginHistories;
-	}
-
-	public void setLoginHistories(Set<LoginHistory> loginHistories) {
-		this.loginHistories = loginHistories;
-	}
-
-	public Set<CouponWallet> getCouponWallet() {
-		return couponWallet;
-	}
-
-	public void setCouponWallet(Set<CouponWallet> couponWallet) {
-		this.couponWallet = couponWallet;
-	}
+//	public Set<LoginHistory> getLoginHistories() {
+//		return loginHistories;
+//	}
+//
+//	public void setLoginHistories(Set<LoginHistory> loginHistories) {
+//		this.loginHistories = loginHistories;
+//	}
+//
+//	public Set<CouponWallet> getCouponWallet() {
+//		return couponWallet;
+//	}
+//
+//	public void setCouponWallet(Set<CouponWallet> couponWallet) {
+//		this.couponWallet = couponWallet;
+//	}
 
 	@Override
 	public String toString() {
 		return String.format(
 				"Member [uid=%s, account=%s, nickname=%s, firstname=%s, lastname=%s, exp=%s, leavel=%s, point=%s, phone=%s, birthday=%s, address=%s, email=%s, gender=%s, registerdata=%s, subscribed=%s, shot=%s, show=%s, about=%s]",
-				uid, account, nickname, firstname, lastname, exp, leavel, point,
-				phone, birthday, address, email, gender, registerdata,
-				subscribed, shot, show, about);
+				uid, account, nickname, firstname, lastname, exp, leavel, point, phone, birthday, address, email,
+				gender, registerdata, subscribed, shot, show, about);
 	}
 
 }

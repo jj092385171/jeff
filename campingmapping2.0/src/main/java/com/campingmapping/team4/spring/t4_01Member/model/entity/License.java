@@ -119,6 +119,13 @@ public class License {
 		this.member = member;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"License [uid=%s, account=%s, facebookid=%s, googleid=%s, lineid=%s, password=%s, show=%s]", uid,
+				account, facebookid, googleid, lineid, password, show);
+	}
+
 
 
 	

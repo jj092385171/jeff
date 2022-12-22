@@ -82,14 +82,10 @@ public class Limits {
 	// REFERENCES [dbo].[member] ([uid])
 	// @JoinColumn(name = "fk_member_limits_account")
 	@OneToOne
-	@MapsId
 	@JoinColumn(name = "uid")
 	private Member member;
 	
-	@OneToOne
-	@JoinColumn(name = "account")
-	private Member memberA;
-
+	
 	public Integer getUid() {
 		return uid;
 	}
@@ -224,6 +220,14 @@ public class Limits {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Limits [uid=%s, account=%s, nomore=%s, buy=%s, sell=%s, publisher=%s, message=%s, enterprise=%s, applier=%s, mainhoster=%s, attender=%s, campingowner=%s, customer=%s, admin=%s, members=%s, show=%s]",
+				uid, account, nomore, buy, sell, publisher, message, enterprise, applier, mainhoster, attender,
+				campingowner, customer, admin, members, show);
 	}
 
 }

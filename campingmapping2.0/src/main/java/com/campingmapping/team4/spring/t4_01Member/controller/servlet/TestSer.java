@@ -29,6 +29,7 @@ public class TestSer extends HttpServlet {
 		System.out.println("in");
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		
 		List<Member> all = new MemberDaoImpl().getAll();
 		PrintWriter writer = response.getWriter();
 		String jsonString = new GsonBuilder().serializeNulls().create().toJson(all);

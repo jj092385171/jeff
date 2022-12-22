@@ -180,6 +180,14 @@ public class Coupon {
 		this.couponWallet = couponWallet;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"Coupon [couponid=%s, couponcode=%s, couponname=%s, coupontype=%s, couponamount=%s, couponused=%s, couponrule=%s, startdate=%s, enddate=%s, show=%s, state=%s]",
+				couponid, couponcode, couponname, coupontype, couponamount, couponused, couponrule, startdate, enddate,
+				show, state);
+	}
+
 
 
 	
