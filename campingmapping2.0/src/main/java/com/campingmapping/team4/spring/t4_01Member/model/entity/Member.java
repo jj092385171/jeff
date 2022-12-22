@@ -15,9 +15,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 //會員
 @Entity
 @Table(name = "member")
+@Component(value = "animal")
 public class Member {
 	// uid
 	@Id

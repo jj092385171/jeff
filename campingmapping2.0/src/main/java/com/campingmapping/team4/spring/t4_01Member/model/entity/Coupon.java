@@ -17,6 +17,7 @@ import javax.persistence.Table;
 //折價券
 @Entity
 @Table(name = "coupon")
+
 public class Coupon {
 	// couponid
 	// ID
