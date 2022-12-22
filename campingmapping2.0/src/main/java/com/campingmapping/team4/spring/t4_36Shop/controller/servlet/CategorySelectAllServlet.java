@@ -33,7 +33,7 @@ public class CategorySelectAllServlet extends HttpServlet {
 		}
 		req.setAttribute("AllList", list);
 		
-		RequestDispatcher rd = req.getRequestDispatcher("/Hibernate_web/Pd_Allproduct.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/Pd_Allproduct.jsp");
 		rd.forward(req, resp);
 	}
 

@@ -87,8 +87,8 @@
 										<td>${Category.pdtitle}</td>
 										<td>${Category.pdcontent}</td>
 										<td>${Category.pdtype}</td>
-										<td><img width="80" height="100"
-						src="<c:url value='/CategoryImgSelectByPdid?pdid=${Category.pdid}'/>" /></td>
+<!-- 										<td><img width="80" height="100" -->
+<%-- 						src="<c:url value='/CategoryImgSelectByPdid?pdid=${Category.pdid}'/>" /></td> --%>
 <%-- 										<td>${Category.pdpicture}</td> --%>
 										<td>${Category.pdprice}</td>
 										<td>${Category.pdinventory}</td>

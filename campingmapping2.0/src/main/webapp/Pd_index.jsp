@@ -67,7 +67,7 @@
 					</header>
 					<ul>
 						<li><a href="/campingmapping/index.jsp">首頁</a></li>
-						<li><a href="http://localhost:8080/Hibernate_web/SelectAllServlet.do'/>">商城維護</a></li>
+						<li><a href="<c:url value='/SelectAllServlet.do'/>">商城維護</a></li>
 						<li>
 							<span class="opener">商品分類</span>
 							<ul>

@@ -11,7 +11,7 @@ import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 
 import util.HibernateUtils;
 
-public class T36 {
+public class T36testSelectall {
 	public static void main(String[] args) {
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();

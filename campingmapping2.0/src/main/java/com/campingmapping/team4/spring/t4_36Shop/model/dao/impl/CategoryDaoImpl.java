@@ -6,8 +6,6 @@ import org.hibernate.query.Query;
 import com.campingmapping.team4.spring.t4_36Shop.model.dao.CategoryDao;
 import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 
-import java.sql.Blob;
-import java.util.Date;
 import java.util.List;
 
 public class CategoryDaoImpl implements CategoryDao {
