@@ -1,4 +1,4 @@
-package controller;
+package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import T4_24.dao.CampDao;
-import T4_24.model.Camp;
-import tw.hibernatedemo.util.HibernateUtil;
+import com.campingmapping.team4.spring.t4_24Camp.model.dao.CampDao;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+
+import util.HibernateUtils;
+
 
 
 @MultipartConfig()
@@ -29,7 +31,7 @@ public class GetCampImage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		SessionFactory factory = HibernateUtil.getSessionFactory();
+		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
 		
 		OutputStream os = null;

@@ -1,12 +1,13 @@
-package T4_24.dao;
+package com.campingmapping.team4.spring.t4_24Camp.model.dao;
 
 import java.sql.Blob;
 import java.util.Set;
 
 import org.hibernate.Session;
 
-import T4_24.model.Camp;
-import T4_24.model.Site;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
+
 
 
 public class SiteDao {
@@ -26,7 +27,7 @@ private Session session;
 	}
 	
 	//透過campID查site
-	public Set<Site> findSitesByCampID(Integer campID) {
+	public Set<Site> findSitesByCampID(int campID) {
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null ) {
@@ -40,7 +41,7 @@ private Session session;
 	}
 	
 	//透過siteID查詢site
-	public Site findSiteByID(Integer siteID) {
+	public Site findSiteByID(int siteID) {
 		Site site = session.get(Site.class, siteID);
 		
 		if(site != null) {
@@ -51,7 +52,7 @@ private Session session;
 	}
 	
 	//更新營區位
-	public Site updateBySiteID(Integer siteID, String siteName, Blob sitePictures, Integer totalSites, Integer siteMoney) {
+	public Site updateBySiteID(int siteID, String siteName, Blob sitePictures, int totalSites, int siteMoney) {
 		Site site = session.get(Site.class, siteID);
 		
 		if(site != null) {
@@ -66,7 +67,17 @@ private Session session;
 		return  null;
     }
 	
-	
+	//刪除營區地
+	public boolean deletdBySiteID(int siteID){
+		Site site = session.get(Site.class, siteID);
+			
+		if(site != null) {
+			session.delete(site);
+			return true;
+		}
+		
+		return false;
+	}
 
 	
 }

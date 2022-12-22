@@ -1,4 +1,4 @@
-package T4_24.model;
+package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
 import java.sql.Blob;
 
@@ -87,25 +87,6 @@ public class Site {
 
 	public void setCamp(Camp camp) {
 		this.camp = camp;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Site [siteID=");
-		builder.append(siteID);
-		builder.append(", siteName=");
-		builder.append(siteName);
-		builder.append(", sitePictures=");
-		builder.append(sitePictures);
-		builder.append(", totalSites=");
-		builder.append(totalSites);
-		builder.append(", siteMoney=");
-		builder.append(siteMoney);
-		builder.append(", fk_camp=");
-		builder.append(camp.getCampID());
-		builder.append("]");
-		return builder.toString();
 	}
 
 

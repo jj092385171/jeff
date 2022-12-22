@@ -1,10 +1,12 @@
-package controller;
+package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-import T4_24.Dao.CampDao;
-import T4_24.Dao.CampSiteCityTagsDao;
-import T4_24.Dao.TagOfCampDao;
-import T4_24.Models.CampSiteCityTagsBean;
+import com.campingmapping.team4.spring.t4_24Camp.model.dao.CampDao;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Tag;
+import com.campingmapping.team4.spring.t4_24Camp.model.service.ImgService;
+
+import util.HibernateUtils;
+
+
 
 
 @MultipartConfig
@@ -32,17 +39,16 @@ public class UpdateCampByIDServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
+		HttpSession httpSession = request.getSession();
+
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+		Session session = factory.getCurrentSession();
 		
 		//存錯誤的map
 		HashMap<String, String> errorMsg = new HashMap<>();
 		request.setAttribute("ErrorMsg", errorMsg);
-		
-		CampSiteCityTagsDao campPlusCityPlusTagsDao = new CampSiteCityTagsDao();
-		TagOfCampDao tagOfCampDao = new TagOfCampDao();
-		CampDao campDao = new CampDao();
-		CampSiteCityTagsBean csctBean = new CampSiteCityTagsBean();
-		
+		// 存tags
+		Set<Tag> tagSet = new HashSet<Tag>();
 		
 		//新值
 		//營地編號
@@ -65,14 +71,23 @@ public class UpdateCampByIDServlet extends HttpServlet {
 		}
 		//讀圖
 		Part part = request.getPart("campPictures");
-		InputStream is = part.getInputStream();
-		Blob blob = Hibernate.createBlob(is);
-		if (blob == null) {
+		if (part.getSize() == 0) {
 			errorMsg.put("campPictures", "必須選擇圖片");
 		}
+		InputStream is = part.getInputStream();
+		long size = part.getSize();
+		Blob blob = null;
+		try {
+			blob = ImgService.fileToBlob(is, size);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		//簡介
-		String discription = request.getParameter("discription");
-		if (discription == null || discription.trim().length() == 0) {
+		String description = request.getParameter("description");
+		if (description == null || description.trim().length() == 0) {
 			errorMsg.put("discription", "必須輸入描述");
 		}
 		//標籤
@@ -80,40 +95,31 @@ public class UpdateCampByIDServlet extends HttpServlet {
 		if (tagIDs == null || tagIDs.length == 0) {
 			errorMsg.put("tagIDs", "必須選擇標籤");
 		}
+		Tag tag = null;
+		for (String tagID : tagIDs) {
+			tag = session.get(Tag.class, Integer.valueOf(tagID));
+			tagSet.add(tag);
+		}
 		
 		
 		// 錯誤返回呼叫jsp
 		if (!errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/UpdateCampByIDForm.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/UpdateCampByIDForm.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		
+		CampDao campDao = new CampDao(session);
+
+		//執行更新
+		Camp camp = campDao.updateByCampID(Integer.valueOf(campID), campName, Integer.valueOf(cityID), location, blob, description, tagSet);
+
 		
-		try {
-			//執行更新
-			campDao.updateByCampID(campName, Integer.valueOf(cityID), location, blob, discription, Integer.valueOf(campID));
-			
-			//刪除舊值 營地的標籤
-			csctBean = campPlusCityPlusTagsDao.findCampByID(Integer.valueOf(campID));
-			tagOfCampDao.deletdByCampID(Integer.valueOf(campID));
-			//新增新標籤
-			for (String tagID : tagIDs) {
-				tagOfCampDao.Add(Integer.valueOf(tagID), Integer.valueOf(campID));
-			}
-			
-			//更新後
-			csctBean = campPlusCityPlusTagsDao.findCampByID(Integer.valueOf(campID));
-			
-		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
-		}
-		
-		session.setAttribute("csctBean", csctBean);
-		session.setAttribute("what", "更新");
+		httpSession.setAttribute("camp", camp);
+		httpSession.setAttribute("what", "更新");
 		
 		String contextPath = request.getContextPath();
-		response.sendRedirect(response.encodeRedirectURL( contextPath + "/T4_24/InsertUpdateCampSuccess.jsp" )); 
+		response.sendRedirect(response.encodeRedirectURL( contextPath + "/t4_24camp/admin/InsertUpdateCampSuccess.jsp" )); 
 		return;
 		
 	}

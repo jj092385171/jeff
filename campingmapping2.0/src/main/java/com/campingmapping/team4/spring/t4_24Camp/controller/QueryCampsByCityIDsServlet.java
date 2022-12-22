@@ -1,7 +1,6 @@
-package controller;
+package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampSiteCityTagsDao;
-import T4_24.Models.CampSiteCityTagsBean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.campingmapping.team4.spring.t4_24Camp.model.dao.CityDao;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+
+import util.HibernateUtils;
+
 
 
 @WebServlet("/T4_24/QueryCampsByCityIDsServlet")
@@ -25,8 +30,11 @@ public class QueryCampsByCityIDsServlet extends HttpServlet {
 	//透過cityIDs搜尋營地
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
+		HttpSession httpSession = request.getSession();
+
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+		Session session = factory.getCurrentSession();
 		
 		//存錯誤的map
 		HashMap<String, String> errorMsg = new HashMap<>();
@@ -41,28 +49,22 @@ public class QueryCampsByCityIDsServlet extends HttpServlet {
 		
 		// 錯誤返回呼叫jsp
 		if (!errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/QueryPageServlet");
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/QueryPageForm.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		
-		CampSiteCityTagsDao campPlusCityPlusTagsDao = new CampSiteCityTagsDao();
-		List<CampSiteCityTagsBean> cctAllList = new ArrayList<CampSiteCityTagsBean>();
+		CityDao cityDao = new CityDao(session);
+		List<Camp> camps = new ArrayList<Camp>();
 		
 		for(String cityID : cityIDs) {
-			try {
-				List<CampSiteCityTagsBean> cctLIst = campPlusCityPlusTagsDao.findCampsByCityID( Integer.valueOf(cityID));
-				cctAllList.addAll(cctLIst);
-				
-			} catch (NumberFormatException | SQLException e) {
-				e.printStackTrace();
-			}
+			 camps.addAll(cityDao.findCampsByCityID(Integer.valueOf(cityID)));
 		}
 		
-		session.setAttribute("cctAllList", cctAllList);
+		httpSession.setAttribute("camps", camps);
 		
 		String contextPath = request.getContextPath();
-		response.sendRedirect( response.encodeRedirectURL(contextPath + "/T4_24/QueryByCityIDsResult.jsp") ); 
+		response.sendRedirect( response.encodeRedirectURL(contextPath + "/t4_24camp/admin/QueryByCityIDsResult.jsp") ); 
 		return;
 				
 				

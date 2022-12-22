@@ -1,4 +1,4 @@
-package controller;
+package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,10 +16,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-import T4_24.Dao.SiteDao;
-import T4_24.Models.SiteBean;
+import com.campingmapping.team4.spring.t4_24Camp.model.dao.SiteDao;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
+import com.campingmapping.team4.spring.t4_24Camp.model.service.ImgService;
+
+import util.HibernateUtils;
+
+
 
 
 @MultipartConfig
@@ -32,8 +38,10 @@ public class UpdateSiteByIDServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		SiteDao siteDao = new SiteDao();
+		HttpSession httpSession = request.getSession();
+
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+		Session session = factory.getCurrentSession();
 		
 		//存錯誤的map
 		HashMap<String, String> errorMsg = new HashMap<>();
@@ -43,15 +51,6 @@ public class UpdateSiteByIDServlet extends HttpServlet {
 		//新值
 		//營區位編號
 		String siteID = request.getParameter("siteID");
-
-		//舊值
-		SiteBean siteBean = new SiteBean();
-		try {
-			siteBean = siteDao.findSiteBySiteID(Integer.valueOf(siteID));
-			
-		} catch (NumberFormatException | SQLException e1) {
-			e1.printStackTrace();
-		}
 	
 		//營區位名
 		String siteName = request.getParameter("siteName");
@@ -60,46 +59,56 @@ public class UpdateSiteByIDServlet extends HttpServlet {
 		}
 		//讀圖
 		Part part = request.getPart("sitePictures");
-		InputStream is = part.getInputStream();
-		Blob blob = Hibernate.createBlob(is);
-		if (blob == null) {
-			errorMsg.put("sitePictures", "必須選擇圖片");
-			System.out.println(errorMsg.get("blob"));
+		if (part.getSize() == 0) {
+			errorMsg.put("campPictures", "必須選擇圖片");
 		}
+		InputStream is = part.getInputStream();
+		long size = part.getSize();
+		Blob blob = null;
+		try {
+			blob = ImgService.fileToBlob(is, size);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		// 總營位
 		String totalSites = request.getParameter("totalSites");
-		if (totalSites == null || totalSites.trim().length() == 0) {
-			errorMsg.put("totalSites", "必須輸入總營位");
+		try {
+			if (totalSites == null || totalSites.trim().length() == 0) {
+				errorMsg.put("totalSites", "必須輸入總營位");
+			}
+		} catch (NumberFormatException e) {
+			errorMsg.put("totalSites", "請輸入數字");
 		}
 		// 營位金額
 		String siteMoney = request.getParameter("siteMoney");
-		if (siteMoney == null || siteMoney.trim().length() == 0) {
-			errorMsg.put("siteMoney", "必須輸入營位金額");
+		try {
+			if (siteMoney == null || siteMoney.trim().length() == 0) {
+				errorMsg.put("siteMoney", "必須輸入營位金額");
+			}
+		} catch (NumberFormatException e) {
+			errorMsg.put("siteMoney", "請輸入數字");
 		}
 		
 		
 		// 錯誤返回呼叫jsp
 		if (!errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/UpdateSiteByIDForm.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/UpdateSiteByIDForm.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		
-		
-		try {
-			siteDao.updateBySiteID(siteName, blob, Integer.valueOf(totalSites), Integer.valueOf(siteMoney), Integer.valueOf(siteID));
-			//新值
-			siteBean = siteDao.findSiteBySiteID(Integer.valueOf(siteID));
+		SiteDao siteDao = new SiteDao(session);
+		Site site = siteDao.updateBySiteID(Integer.valueOf(siteID), siteName, blob, Integer.valueOf(totalSites), Integer.valueOf(siteMoney));
 			
-		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
-		}
 		
-		session.setAttribute("siteBean", siteBean);
-		session.setAttribute("what", "更新");
+		httpSession.setAttribute("site", site);
+		httpSession.setAttribute("what", "更新");
 		
 		String contextPath = request.getContextPath();
-		response.sendRedirect(response.encodeRedirectURL( contextPath + "/T4_24/InsertUpdateSiteSuccess.jsp" )); 
+		response.sendRedirect(response.encodeRedirectURL( contextPath + "/t4_24camp/admin/InsertUpdateSiteSuccess.jsp" )); 
 		return;
 		
 	}

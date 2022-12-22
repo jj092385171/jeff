@@ -1,13 +1,17 @@
-package T4_24.dao;
+package com.campingmapping.team4.spring.t4_24Camp.model.dao;
 
 import java.sql.Blob;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import T4_24.model.Camp;
-import T4_24.model.City;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.City;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Tag;
+
 
 public class CampDao {
 	
@@ -34,7 +38,7 @@ public class CampDao {
 	}	
 	
 	//透過campID查詢camp
-	public Camp findCampByID(Integer campID) {
+	public Camp findCampByID(int campID) {
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null) {
@@ -45,7 +49,7 @@ public class CampDao {
 	}
 	
 	//更新營地
-	public Camp updateByCampID(Integer campID , String campName, Integer cityID, String location, Blob campPictures, String description) {
+	public Camp updateByCampID(int campID , String campName, int cityID, String location, Blob campPictures, String description, Set<Tag> tags) {
 		Camp campBean = session.get(Camp.class, campID);
 		
 		if(campBean != null) {
@@ -54,6 +58,7 @@ public class CampDao {
 			campBean.setLocation(location);
 			campBean.setCampPictures(campPictures);
 			campBean.setDescription(description);
+			campBean.setTags(tags);
 			
 			return campBean;
 		}
@@ -61,16 +66,33 @@ public class CampDao {
 		return null;
 	}
 	
-	//刪除營地, 要先刪除營地的標籤 , 刪除包含的營區位
+	//刪除營地
 	public boolean deletdByCampID(int campID){
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null) {
+			deletdTagsByID(campID);
+			SiteDao siteDao = new SiteDao(session);
+			Set<Site> sites = siteDao.findSitesByCampID(campID);
+			session.delete(sites);
 			session.delete(camp);
 			return true;
 		}
 		
 		return false;
 	}
+	
+	//刪除TagOfCamp
+	public boolean deletdTagsByID(int campID){
+		Camp camp = session.get(Camp.class, campID);
+		
+		if(camp != null) {
+			session.delete(camp.getTags());
+			return true;
+		}
+		
+		return false;
+	}
+	
 	
 }

@@ -1,4 +1,4 @@
-package T4_24.service;
+package com.campingmapping.team4.spring.t4_24Camp.model.service;
 
 import java.io.IOException;
 import java.io.InputStream;

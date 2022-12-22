@@ -1,4 +1,4 @@
-package T4_24.model;
+package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -57,20 +57,5 @@ public class Tag {
 		this.camps = camps;
 	}
 
-
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Tag [tagID=");
-		builder.append(tagID);
-		builder.append(", tagName=");
-		builder.append(tagName);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	
-	
 
 }

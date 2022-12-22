@@ -1,9 +1,7 @@
-package controller;
+package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampSiteCityTagsDao;
-import T4_24.Dao.CityDao;
-import T4_24.Dao.TagDao;
-import T4_24.Models.CampSiteCityTagsBean;
-import T4_24.Models.CityBean;
-import T4_24.Models.TagBean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.campingmapping.team4.spring.t4_24Camp.model.dao.CampDao;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+
+import util.HibernateUtils;
+
 
 
 @WebServlet("/T4_24/InsertSiteByCampIDPageServlet")
@@ -29,67 +29,40 @@ public class InsertSiteByCampIDPageServlet extends HttpServlet {
 	//展示父營地, 新增site頁面
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
-		CampSiteCityTagsDao campSiteCityTagsDao = new CampSiteCityTagsDao();
-		CampSiteCityTagsBean bean = new CampSiteCityTagsBean();
-		CampSiteCityTagsDao campPlusCityPlusTagsDao = new CampSiteCityTagsDao();
+		HttpSession httpSession = request.getSession();
 
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+		Session session = factory.getCurrentSession();
 		
 		//存錯誤的map
 		HashMap<String, String> errorMsg = new HashMap<>();
 		request.setAttribute("ErrorMsg", errorMsg);
 
+		CampDao campDao = new CampDao(session);
+		
 		//營地編號
 		String campIDSite = request.getParameter("campIDSite");
 		if (campIDSite == null || campIDSite.trim().length() == 0) {
 			errorMsg.put("campIDSite", "必須輸入營地編號");
 		}
-		try {
-			if(campPlusCityPlusTagsDao.findCampByID(Integer.valueOf(campIDSite)) == null) {
-				errorMsg.put("campIDSite", "查無此營地");
-			}
-		} catch (NumberFormatException e1) {
-			errorMsg.put("campIDSite", "請輸入數字");
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+		Camp camp = campDao.findCampByID(Integer.valueOf(campIDSite));
+		if(camp == null) {
+			errorMsg.put("campIDSite", "查無此營地");
 		}
-		
 		
 		// 錯誤返回呼叫jsp
 		if (!errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/InsertPageServlet");
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/InsertCampForm.jsp");
 			rd.forward(request, response);
 			return;
 		}
-
-		
-		CampSiteCityTagsDao campPlusCityDao = campSiteCityTagsDao;
-		TagDao tagDao = new TagDao();
-		CityDao cityDao = new CityDao();
-		CampSiteCityTagsBean cctBean = null;
-		List<TagBean> tagList = null;
-		List<CityBean> cityList = null;
-		
-		try {
-			//展示父營地
-			cctBean = campPlusCityDao.findCampByID(Integer.valueOf(campIDSite));
-			tagList = tagDao.showAll();
-			cityList = cityDao.showAll();
-			
-			
-		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
-		}
 	
-		session.setAttribute("cctBean", cctBean);
-		session.setAttribute("tagList", tagList);
-		session.setAttribute("cityList", cityList);
+		httpSession.setAttribute("camp", camp);
 		
 		
 		String contextPath = request.getContextPath();
-		response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/InsertSiteByIDForm.jsp"));
-		
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_24camp/admin/InsertSiteByIDForm.jsp"));
 		return;
 		
 	}

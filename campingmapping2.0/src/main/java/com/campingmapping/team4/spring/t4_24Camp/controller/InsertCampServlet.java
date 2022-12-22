@@ -1,4 +1,4 @@
-package controller;
+package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,33 +23,30 @@ import javax.servlet.http.Part;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import T4_24.dao.CampDao;
-import T4_24.model.Camp;
-import T4_24.model.City;
-import T4_24.model.Tag;
-import T4_24.service.ImgService;
-import tw.hibernatedemo.util.HibernateUtil;
+import com.campingmapping.team4.spring.t4_24Camp.model.dao.CampDao;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Tag;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.City;
+import com.campingmapping.team4.spring.t4_24Camp.model.service.ImgService;
+
+import util.HibernateUtils;
+
 
 @MultipartConfig
 @WebServlet("/T4_24/InsertCampServlet")
 public class InsertCampServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
-
-	SessionFactory factory = HibernateUtil.getSessionFactory();
-	Session session = factory.getCurrentSession();
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
-	}
 
 	// 新增camp
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CampDao campDao = new CampDao(session);
 
 		request.setCharacterEncoding("UTF-8");
 		HttpSession httpSession = request.getSession();
+
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+		Session session = factory.getCurrentSession();
 
 		// 存錯誤的map
 		Map<String, String> errorMsg = new HashMap<>();
@@ -95,35 +92,37 @@ public class InsertCampServlet extends HttpServlet {
 		if (tagIDs == null || tagIDs.length == 0) {
 			errorMsg.put("tagIDs", "必須選擇標籤");
 		}
+		Tag tag = null;
 		for (String tagID : tagIDs) {
-			Tag tag = session.get(Tag.class, tagID);
+			tag = session.get(Tag.class, Integer.valueOf(tagID));
 			tagSet.add(tag);
 		}
 
 		// 錯誤返回呼叫jsp
 		if (!errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/InsertPageServlet");
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/InsertCampForm.jsp");
 			rd.forward(request, response);
 			return;
 		}
 
 		Camp cb = new Camp();
 		cb.setCampName(campName);
-		cb.setCity(session.get(City.class, cityID));
+		cb.setCity(session.get(City.class, Integer.valueOf(cityID)));
 		cb.setLocation(location);
 		cb.setCampPictures(blob);
 		cb.setDescription(description);
 		cb.setTags(tagSet);
 
 		Serializable campID = session.save(cb);
+		
+		CampDao campDao = new CampDao(session);
 		Camp camp = campDao.findCampByID((Integer) campID);
 
-		httpSession.setAttribute("campID", campID.toString());
 		httpSession.setAttribute("camp", camp);
 		httpSession.setAttribute("what", "新增");
 
 		String contextPath = request.getContextPath();
-		response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/InsertUpdateCampSuccess.jsp"));
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_24camp/admin/InsertUpdateCampSuccess.jsp"));
 		return;
 
 	}

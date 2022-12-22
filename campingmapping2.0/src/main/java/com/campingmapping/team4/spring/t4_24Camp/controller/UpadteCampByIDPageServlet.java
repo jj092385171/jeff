@@ -1,9 +1,7 @@
-package controller;
+package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,69 +11,60 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import T4_24.Dao.CampSiteCityTagsDao;
-import T4_24.Dao.CityDao;
-import T4_24.Dao.TagDao;
-import T4_24.Models.CampSiteCityTagsBean;
-import T4_24.Models.CityBean;
-import T4_24.Models.TagBean;
-import T4_24.Models.TagPlusCampBean;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import com.campingmapping.team4.spring.t4_24Camp.model.dao.CampDao;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+
+import util.HibernateUtils;
 
 
 @WebServlet("/T4_24/UpadteCampByIDPageServlet")
 public class UpadteCampByIDPageServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-	//更新頁面, camp, 顯示所有citys, tags
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// 更新頁面, camp, 顯示所有citys, tags
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
-		
-		//存錯誤的map
+		HttpSession httpSession = request.getSession();
+
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+		Session session = factory.getCurrentSession();
+
+		// 存錯誤的map
 		HashMap<String, String> errorMsg = new HashMap<>();
 		request.setAttribute("ErrorMsg", errorMsg);
-		
+
 		String campID = request.getParameter("campID");
-		if (campID == null || campID.trim().length() == 0) {
-			errorMsg.put("campID", "必須輸入營地編號");
+		try {
+			if (campID == null || campID.trim().length() == 0) {
+				errorMsg.put("campID", "必須輸入營地編號");
+			}
+		} catch (NumberFormatException e) {
+			errorMsg.put("campID", "請輸入數字");
 		}
-		
-		
-		
+
 		// 錯誤返回呼叫jsp
 		if (!errorMsg.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_24/UpdatePage.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/UpdatePage.jsp");
 			rd.forward(request, response);
 			return;
 		}
-		
-		CampSiteCityTagsDao campPlusCityDao = new CampSiteCityTagsDao();
-		TagDao tagDao = new TagDao();
-		CityDao cityDao = new CityDao();
-		CampSiteCityTagsBean csctBean = new CampSiteCityTagsBean();
-		List<TagBean> tagList = null;
-		List<CityBean> cityList = null;
-		
-		try {
-			csctBean = campPlusCityDao.findCampByID(Integer.valueOf(campID));
-			tagList = tagDao.showAll();
-			cityList = cityDao.showAll();
-			
-			
-		} catch (NumberFormatException | SQLException e) {
-			e.printStackTrace();
-		}
 
-		session.setAttribute("csctBean", csctBean);
-		session.setAttribute("tagList", tagList);
-		session.setAttribute("cityList", cityList);
-		
+		CampDao campDao = new CampDao(session);
+		Camp camp = campDao.findCampByID(Integer.valueOf(campID));
+
+		httpSession.setAttribute("camp", camp);
+
 		String contextPath = request.getContextPath();
-		response.sendRedirect(response.encodeRedirectURL(contextPath + "/T4_24/UpdateCampByIDForm.jsp"));
-		
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_24camp/admin/UpdateCampByIDForm.jsp"));
+
 		return;
-		
+
 	}
 
 }

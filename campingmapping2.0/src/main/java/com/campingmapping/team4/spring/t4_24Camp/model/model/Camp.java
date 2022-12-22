@@ -1,4 +1,4 @@
-package T4_24.model;
+package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,14 +43,14 @@ public class Camp {
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "TagOfCamp",
 	joinColumns = {@JoinColumn(name = "fk_campID", referencedColumnName = "campID")},
 	inverseJoinColumns = {@JoinColumn(name = "fk_tagID", referencedColumnName = "tagID")})
-	private Set<Tag>tags = new HashSet<>();
+	private Set<Tag> tags = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp", cascade = CascadeType.ALL)
-	private Set<Site>sites = new HashSet<Site>();
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp", cascade = CascadeType.ALL)
+	private Set<Site> sites = new HashSet<Site>();
 	
 
 	public Camp() {
@@ -124,29 +124,6 @@ public class Camp {
 	public void setSites(Set<Site> sites) {
 		this.sites = sites;
 	}
-
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Camp [campID=");
-		builder.append(campID);
-		builder.append(", campName=");
-		builder.append(campName);
-//		builder.append(", cityID=");
-//		builder.append(city);
-		builder.append(", location=");
-		builder.append(location);
-		builder.append(", campPictures=");
-		builder.append(campPictures);
-		builder.append(", description=");
-		builder.append(description);
-//		builder.append(", sites=");
-//		builder.append(sites);
-		builder.append("]");
-		return builder.toString();
-	}
-
 
 	
 }

@@ -1,4 +1,4 @@
-package T4_24.model;
+package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +25,7 @@ public class City {
 	@Column(name = "cityName")
 	private String cityName;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "city", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city", cascade = CascadeType.ALL)
 	private Set<Camp>camps = new HashSet<Camp>();
 
 	public City() {
@@ -54,22 +54,6 @@ public class City {
 	public void setCamps(Set<Camp> camps) {
 		this.camps = camps;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("City [cityID=");
-		builder.append(cityID);
-		builder.append(", cityName=");
-		builder.append(cityName);
-//		builder.append(", camps=");
-//		builder.append(camps);
-		builder.append("]");
-		return builder.toString();
-	}
-
-	
-	
 	
 
 }

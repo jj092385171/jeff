@@ -33,6 +33,10 @@
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.License" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Limits" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.oginHistory" /> -->
-		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Cccc" />
+<!--		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Cccc" /> -->
+		<mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Camp"/>
+        <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Site"/>
+        <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Tag"/>
+        <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.City"/>
 	</session-factory>
 </hibernate-configuration>

@@ -1,4 +1,4 @@
-package T4_24.dao;
+package com.campingmapping.team4.spring.t4_24Camp.model.dao;
 
 import java.util.List;
 import java.util.Set;
@@ -6,8 +6,9 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import T4_24.model.Camp;
-import T4_24.model.City;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.City;
+
 
 
 public class CityDao {
@@ -27,7 +28,7 @@ public class CityDao {
 	}
 	
 	//透過cityID搜尋camps
-	public Set<Camp> findCampsByCityID(Integer cityID) {
+	public Set<Camp> findCampsByCityID(int cityID) {
 		City city = session.get(City.class, cityID);
 		
 		if(city != null) {
