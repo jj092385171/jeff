@@ -1,7 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="tw.leonchen"/>
+
+    <bean id="truckBeanFactory" class="tw.leonchen.model.TruckBeanFactory">
+        <property name="map">
+           <map>
+              <entry key="5">
+                 <bean class="tw.leonchen.model.TruckBean">
+                     <property name="id" value="7"/>
+                     <property name="brand" value="bmw"/>
+                 </bean>
+              </entry>
+              <entry key="6">
+                 <bean class="tw.leonchen.model.TruckBean">
+                     <property name="id" value="8"/>
+                     <property name="brand" value="mercedes-benz"/>
+                 </bean>
+              </entry>
+           </map>
+        </property>
+    </bean>
+    
+    <bean id="bmwTruck" factory-bean="truckBeanFactory" factory-method="getTruckBean">
+       <constructor-arg value="5"/>
+    </bean>
+
+    <bean id="benzTruck" factory-bean="truckBeanFactory" factory-method="getTruckBean">
+       <constructor-arg value="6"/>
+    </bean>
+
+    <bean id="nissanTruck" class="tw.leonchen.model.TruckBeanStaticFactory" factory-method="getTruckBean">
+       <constructor-arg value="1"/>
+    </bean>
+    
+    <bean id="fordTruck" class="tw.leonchen.model.TruckBeanStaticFactory" factory-method="getTruckBean">
+       <constructor-arg value="2"/>
+    </bean>
 
     <!-- LogProvider logProvider = new LogProvider(); -->
 	<bean id="logProvider" class="tw.leonchen.util.LogProvider"/>
@@ -42,5 +83,6 @@
 	    <property name="date" ref="date1"/>
 	</bean>
 	
+	<bean id="room3" class="tw.leonchen.model.Room" p:id="1003" p:name="june" p:size="large" p:date-ref="date1"/>
+	
 </beans>
-
