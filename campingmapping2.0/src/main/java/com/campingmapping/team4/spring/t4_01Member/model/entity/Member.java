@@ -2,15 +2,21 @@ package com.campingmapping.team4.spring.t4_01Member.model.entity;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -96,11 +102,23 @@ public class Member {
 	@Column(name = "about")
 	private String about;
 
-	@OneToOne
-	@PrimaryKeyJoinColumn
+	@OneToOne(mappedBy = "member")
 	private Limits limits;
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private License license;
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+	// @JoinTable(name = "Member_LoginHistory",
+	// joinColumns = {@JoinColumn(name = "memberid", referencedColumnName =
+	// "uid")},
+	// inverseJoinColumns = {@JoinColumn(name = "loginhistoryId",
+	// referencedColumnName = "uid")})
+	@OneToMany(mappedBy = "member")
+	 @OrderBy("logindate desc")
+	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+	@OrderBy("cwid desc")
+	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
 
 }

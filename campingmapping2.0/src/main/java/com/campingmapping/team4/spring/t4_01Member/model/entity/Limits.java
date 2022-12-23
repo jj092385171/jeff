@@ -4,16 +4,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 // limits
 //權限
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "limits")
@@ -22,10 +26,10 @@ public class Limits {
 	@Id
 	@Column(name = "uid")
 	private Integer uid;
-	// account
-	// 帳號
-	@Column(name = "account", insertable = false, updatable = false)
-	private String account;
+//	// account
+//	// 帳號
+//	@Column(name = "account", insertable = false, updatable = false)
+//	private String account;
 	// nomore
 	// 一般
 	@Column(name = "nomore")
@@ -82,7 +86,17 @@ public class Limits {
 	
 	@OneToOne
 	@JoinColumn(name = "uid")
-	private Member member; 
+	private Member member;
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Limits [uid=%s ,account=%s ,nomore=%s, buy=%s, sell=%s, publisher=%s, message=%s, enterprise=%s, applier=%s, mainhoster=%s, attender=%s, campingowner=%s, customer=%s, admin=%s, members=%s, show=%s]",
+				uid, member.getAccount(),nomore, buy, sell, publisher, message, enterprise, applier,
+				mainhoster, attender, campingowner, customer, admin, members,
+				show);
+	} 
+	
 	// ALTER TABLE [dbo].[limits] WITH CHECK ADD CONSTRAINT
 	// [fk_member_limits_account] FOREIGN KEY([account])
 	// REFERENCES [dbo].[member] ([account])

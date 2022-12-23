@@ -11,13 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.core.style.ToStringCreator;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 // loginhistory
 //登入歷史
@@ -35,8 +31,8 @@ public class LoginHistory {
 	@Column(name = "lhid")
 	private Integer lhid; 
 	//uid
-	@Column(name = "uid")
-	private Integer uid;
+//	@Column(name = "uid")
+//	private Integer uid;
 	// account 
 	//帳號
 	@Column(name = "account")
@@ -52,20 +48,22 @@ public class LoginHistory {
 	// show 
 	@Column(name = "show")
 	private String show;
-	// ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [fk_member_loginhistory_account] FOREIGN KEY([account])
-	// REFERENCES [dbo].[member] ([account])
-	// ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [fk_member_loginhistory_uid] FOREIGN KEY([UID])
-	// REFERENCES [dbo].[member] ([uid])
 	@ManyToOne
-//	@JoinColumn(name = "fk_member_loginhistory_account")
-	@JoinColumn(name = "fk_member_loginhistory_uid")
+	@JoinColumn(name = "uid")
 	private Member member;
 	@Override
 	public String toString() {
 		return String.format(
 				"LoginHistory [lhid=%s, uid=%s, account=%s, ip=%s, logindate=%s, show=%s]",
-				lhid, uid, account, ip, logindate, show);
+				lhid, member.getUid(), account, ip, logindate, show);
 	}
+	
+//	@ManyToOne
+//	@JoinColumn(name = "member_uid")
+//	private Member member;
+	
+	
+	
 	
 	
 }

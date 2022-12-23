@@ -13,8 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 // coupon
 //折價券
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "coupon")
 
@@ -73,113 +80,7 @@ public class Coupon {
 	@OrderBy("cwid desc")
 	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
 
-	public Coupon() {
-	}
-
-	public Integer getCouponid() {
-		return couponid;
-	}
-
-	public void setCouponid(Integer couponid) {
-		this.couponid = couponid;
-	}
-
-	public String getCouponcode() {
-		return couponcode;
-	}
-
-	public void setCouponcode(String couponcode) {
-		this.couponcode = couponcode;
-	}
-
-	public String getCouponname() {
-		return couponname;
-	}
-
-	public void setCouponname(String couponname) {
-		this.couponname = couponname;
-	}
-
-	public int getCoupontype() {
-		return coupontype;
-	}
-
-	public void setCoupontype(int coupontype) {
-		this.coupontype = coupontype;
-	}
-
-	public int getCouponamount() {
-		return couponamount;
-	}
-
-	public void setCouponamount(int couponamount) {
-		this.couponamount = couponamount;
-	}
-
-	public int getCouponused() {
-		return couponused;
-	}
-
-	public void setCouponused(int couponused) {
-		this.couponused = couponused;
-	}
-
-	public String getCouponrule() {
-		return couponrule;
-	}
-
-	public void setCouponrule(String couponrule) {
-		this.couponrule = couponrule;
-	}
-
-	public Date getStartdate() {
-		return startdate;
-	}
-
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
-	}
-
-	public Date getEnddate() {
-		return enddate;
-	}
-
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
-	}
-
-	public Date getShow() {
-		return show;
-	}
-
-	public void setShow(Date show) {
-		this.show = show;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCouponphoto() {
-		return couponphoto;
-	}
-
-	public void setCouponphoto(String couponphoto) {
-		this.couponphoto = couponphoto;
-	}
-
-	public Set<CouponWallet> getCouponWallet() {
-		return couponWallet;
-	}
-
-	public void setCouponWallet(Set<CouponWallet> couponWallet) {
-		this.couponWallet = couponWallet;
-	}
-
+	
 	@Override
 	public String toString() {
 		return String.format(
