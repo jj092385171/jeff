@@ -27,7 +27,17 @@
 <!-- 		<mapping class="t4_01Member.model.entity.Limits" /> -->
 <!-- 		<mapping class="t4_01Member.model.entity.Member" /> -->
 <!-- 		<mapping class="t4_01Member.model.entity.LoginHistory" /> -->
+<<<<<<< HEAD
  		 <mapping class="com.campingmapping.team4.spring.t4_33Forum.model.entity.Post" /> 
  		 <mapping class="com.campingmapping.team4.spring.t4_33Forum.model.entity.PostComment" /> 
+=======
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Member" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Coupon" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.CouponWallet" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.License" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Limits" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.oginHistory" /> -->
+		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Cccc" />
+>>>>>>> 1edc6aa13cc424c6648e032aabe537062ae5343c
 	</session-factory>
 </hibernate-configuration>
