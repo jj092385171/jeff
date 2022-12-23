@@ -11,7 +11,7 @@
 
 <body>
 
-	<a href="<c:url value='/T4_09/job/JobModel/jobIndex2.jsp'/>">Job</a>
+	<a href="<c:url value='/t4_09job/job/JobModel/jobIndex2.jsp'/>">Job</a>
 <!-- 	<input type="button" value="<c:url value='/view'/>"> -->
 </body>
 

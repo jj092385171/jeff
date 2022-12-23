@@ -45,7 +45,7 @@
 							<li class="nav1-li"><a href="<c:url value='/T4_24/campUser/CampUser.jsp'/>">Camp</a></li>
 							<li class="nav1-li"><a href="<c:url value='/T4_33/forum/ForumUser.jsp'/>">Forum</a></li>
 							<li class="nav1-li"><a href="<c:url value='/T4_36/shopUser/ShopUser.jsp'/>">Shop</a></li>
-							<li class="nav1-li"><a href="<c:url value='/T4_09/jobUser/JobUser.jsp'/>">Job</a></li>
+							<li class="nav1-li"><a href="<c:url value='/t4_09job/jobUser/JobUser.jsp'/>">Job</a></li>
 							<li class="nav1-li"><a href="<c:url value='/T4_01/userMember/userMamber.html'/>">Member</a>
 							</li>
 							<!--<li><a href="#elements">Elements</a></li>-->
