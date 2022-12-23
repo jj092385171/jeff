@@ -17,10 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import T4_36.entity.Category;
-import T4_36.service.CategoryService;
-import T4_36.service.impl.CategoryServiceImpl;
-import utils.ImageUtil;
+import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
+import com.campingmapping.team4.spring.t4_36Shop.model.service.CategoryService;
+import com.campingmapping.team4.spring.t4_36Shop.model.service.impl.CategoryServiceImpl;
+
+import util.ImageUtil;
+
 
 @MultipartConfig()
 @WebServlet("/Pd_insertServlet.do")
@@ -50,7 +52,7 @@ public class Pd_insertServlet extends HttpServlet {
 			Blob Pdpicture = ImageUtil.fileToBlob(is, sizeInBytes);
 
 			CategoryService categoryService = new CategoryServiceImpl();
-			Category bean = new Category(userID, Pdname, Pdtitle, Pdcontent, Pdtype, Pdpicture, Pdprice, Pdinventory,
+			Category bean = new Category(null,userID, Pdname, Pdtitle, Pdcontent, Pdtype, Pdpicture, Pdprice, Pdinventory,
 					Pddate, Pdlastupdate);
 
 			categoryService.create(bean);

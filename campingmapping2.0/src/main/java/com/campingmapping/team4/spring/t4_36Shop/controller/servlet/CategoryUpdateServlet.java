@@ -47,7 +47,7 @@ public class CategoryUpdateServlet extends HttpServlet {
 			categoryService.update(bean);
 
 			String contextPath = req.getContextPath();
-			resp.sendRedirect(contextPath + "/T4_36/html5up-editorial/Pd_ok.jsp");
+			resp.sendRedirect(contextPath + "http://localhost:8080/campingmapping2.0/t4_36shop/admin/Pd_ok.jsp");
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

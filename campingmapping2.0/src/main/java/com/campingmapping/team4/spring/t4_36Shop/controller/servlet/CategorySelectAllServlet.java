@@ -21,7 +21,6 @@ public class CategorySelectAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-    	System.out.println("123");
     	req.setCharacterEncoding("UTF-8");
 		CategoryService cgS = new CategoryServiceImpl();
 		
@@ -34,7 +33,7 @@ public class CategorySelectAllServlet extends HttpServlet {
 		}
 		req.setAttribute("AllList", list);
 		
-		RequestDispatcher rd = req.getRequestDispatcher("http://localhost:8080/campingmapping2.0/Pd_Allproduct.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("http://localhost:8080/campingmapping2.0/t4_36shop/admin/Pd_Allproduct.jsp");
 		rd.forward(req, resp);
 	}
 
