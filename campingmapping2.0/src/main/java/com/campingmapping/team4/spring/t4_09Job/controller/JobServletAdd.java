@@ -45,11 +45,9 @@ public class JobServletAdd extends HttpServlet {
 		try {
 			Integer rackID = Integer.parseInt(request.getParameter("rackID"));
 			jobBean.setRackID(rackID);
-<<<<<<< HEAD
-			System.out.println(jobBean.getuID());
-=======
+
 //			System.out.println(jobBean.getuID());
->>>>>>> 09
+
 			try {
 				JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
 				if (findBeanByRackID.getRackID() == rackID) {
@@ -122,16 +120,7 @@ public class JobServletAdd extends HttpServlet {
 		}
 
 		if (!errorMessage.isEmpty()) {
-<<<<<<< HEAD
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/insert.jsp");
-			rd.forward(request, response);
-			return;
-		}
-		System.out.println(jobBean.getuID());
-		jobServiceImpl.addJob(jobBean);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/addSuccess.jsp");
-=======
 			RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/insert.jsp");
 			rd.forward(request, response);
 			return;
@@ -140,7 +129,7 @@ public class JobServletAdd extends HttpServlet {
 		jobServiceImpl.addJob(jobBean);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/addSuccess.jsp");
->>>>>>> 09
+
 		rd.forward(request, response);
 		return;
 	}

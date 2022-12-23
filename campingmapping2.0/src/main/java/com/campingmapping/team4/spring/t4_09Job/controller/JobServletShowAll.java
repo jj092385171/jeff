@@ -31,11 +31,9 @@ public class JobServletShowAll extends HttpServlet {
 		JobServiceImpl jobServiceImpl = new JobServiceImpl();		
 		List<JobBean> showAllJob = jobServiceImpl.showAllJob();
 		request.setAttribute("showAllJob", showAllJob);		
-<<<<<<< HEAD
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/showAll.jsp");
-=======
+
 		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/showAll.jsp");
->>>>>>> 09
+
 		rd.forward(request, response);
 		return;
 	}

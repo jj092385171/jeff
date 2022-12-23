@@ -5,27 +5,20 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-=======
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
->>>>>>> 09
 import javax.persistence.Table;
 
 @Entity
 @Table(name="job")
 
 public class JobBean {
-<<<<<<< HEAD
-	@Column(name = "uID")
-	private int uID;//會員
-=======
+
 	
 	@Column(name = "uID")
 	private int uID;//會員
 	@Id 
->>>>>>> 09
+
 	@Column(name = "rackID")
 	private int rackID;//刊登編號
 	@Column(name = "job")

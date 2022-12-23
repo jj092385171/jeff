@@ -27,8 +27,7 @@
 <!-- 		<mapping class="t4_01Member.model.entity.Limits" /> -->
 <!-- 		<mapping class="t4_01Member.model.entity.Member" /> -->
 <!-- 		<mapping class="t4_01Member.model.entity.LoginHistory" /> -->
-<<<<<<< HEAD
-=======
+
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Member" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Coupon" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.CouponWallet" /> -->
@@ -36,7 +35,6 @@
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Limits" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.oginHistory" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Cccc" /> -->
->>>>>>> 09
 		<mapping class="com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean" />
 	</session-factory>
 </hibernate-configuration>
