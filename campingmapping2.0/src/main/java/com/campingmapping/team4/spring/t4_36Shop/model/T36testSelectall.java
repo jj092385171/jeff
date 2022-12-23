@@ -20,12 +20,6 @@ public class T36testSelectall {
 			session.beginTransaction();
 
 			CategoryDao dao = new CategoryDaoImpl(session);
-//			MemberDaoImpl testDao = new MemberDaoImpl();
-//			Member byId = testDao.getById();
-//			System.out.println(byId.toString());
-//			List<Member> all = testDao.getAll();
-//			ListIterator<Member> listIterator = all.listIterator();
-//			listIterator.forEachRemaining(m->System.out.println(m));
 			List<Category> result = dao.selectAll();
 
 			for (Category com : result) {

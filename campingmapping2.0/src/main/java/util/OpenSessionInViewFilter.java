@@ -12,7 +12,7 @@ import javax.servlet.http.HttpFilter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/123ASD")
 public class OpenSessionInViewFilter extends HttpFilter implements Filter {
        
 	

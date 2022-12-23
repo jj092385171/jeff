@@ -141,7 +141,7 @@
 					<ul>
 						<li><a href="/campingmapping/index.jsp">首頁</a>
 						</li>
-						<li><a href="<c:url value='/SelectAllServlet.do'/>">商城維護</a>
+						<li><a href="<c:url value='/SelectAllServlet'/>">商城維護</a>
 						</li>
 						<li><span class="opener">商品分類</span>
 							<ul>
