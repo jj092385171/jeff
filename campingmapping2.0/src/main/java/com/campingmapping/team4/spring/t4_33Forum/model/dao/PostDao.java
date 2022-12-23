@@ -70,6 +70,7 @@ public class PostDao {
 	
 	// 不喜歡貼文
 	
+	
 	// 檢舉貼文
 	public Boolean reportPost(Post post) throws SQLException {
 		Session session = factory.getCurrentSession();

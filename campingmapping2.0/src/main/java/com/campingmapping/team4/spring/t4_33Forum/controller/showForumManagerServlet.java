@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 import com.campingmapping.team4.spring.t4_33Forum.model.entity.Post;
 import com.campingmapping.team4.spring.t4_33Forum.model.service.PostService;
 
-@WebServlet("/T4_33/showDiscussionServlet")
-public class showDiscussionServlet extends HttpServlet {
+@WebServlet("/T4_33/showForumManagerServlet")
+public class showForumManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class showDiscussionServlet extends HttpServlet {
 //			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/discussionFirst.jsp");
 //			rd.forward(request, response);
 			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_33forum/guest/discussionFirst.jsp"));
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_33forum/admin/ForumManagerFirst.jsp"));
 			return;
 			
 		} catch (IOException | SQLException e) {
