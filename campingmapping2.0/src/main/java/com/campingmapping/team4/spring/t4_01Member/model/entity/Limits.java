@@ -17,7 +17,6 @@ import lombok.Setter;
 // limits
 //權限
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "limits")
@@ -28,8 +27,8 @@ public class Limits {
 	private Integer uid;
 //	// account
 //	// 帳號
-//	@Column(name = "account", insertable = false, updatable = false)
-//	private String account;
+	@Column(name = "account")
+	private String account;
 	// nomore
 	// 一般
 	@Column(name = "nomore")
@@ -92,9 +91,77 @@ public class Limits {
 	public String toString() {
 		return String.format(
 				"Limits [uid=%s ,account=%s ,nomore=%s, buy=%s, sell=%s, publisher=%s, message=%s, enterprise=%s, applier=%s, mainhoster=%s, attender=%s, campingowner=%s, customer=%s, admin=%s, members=%s, show=%s]",
-				uid, member.getAccount(),nomore, buy, sell, publisher, message, enterprise, applier,
+				uid, account,nomore, buy, sell, publisher, message, enterprise, applier,
 				mainhoster, attender, campingowner, customer, admin, members,
 				show);
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public void setAccount() {
+		this.account = member.getAccount();
+	}
+
+	public void setNomore(String nomore) {
+		this.nomore = nomore;
+	}
+
+	public void setBuy(String buy) {
+		this.buy = buy;
+	}
+
+	public void setSell(String sell) {
+		this.sell = sell;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setEnterprise(String enterprise) {
+		this.enterprise = enterprise;
+	}
+
+	public void setApplier(String applier) {
+		this.applier = applier;
+	}
+
+	public void setMainhoster(String mainhoster) {
+		this.mainhoster = mainhoster;
+	}
+
+	public void setAttender(String attender) {
+		this.attender = attender;
+	}
+
+	public void setCampingowner(String campingowner) {
+		this.campingowner = campingowner;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+
+	public void setMembers(String members) {
+		this.members = members;
+	}
+
+	public void setShow(String show) {
+		this.show = show;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	} 
 	
 	// ALTER TABLE [dbo].[limits] WITH CHECK ADD CONSTRAINT

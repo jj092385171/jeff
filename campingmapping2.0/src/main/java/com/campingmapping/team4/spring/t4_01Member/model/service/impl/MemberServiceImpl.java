@@ -18,7 +18,7 @@
 //	}
 //
 //	@Override
-//	public int delte(String account) {
+//	public int delete(String account) {
 //		try {
 //			DbUtils.commit();
 //			Member select = new MemberImpl().select(account);

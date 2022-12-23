@@ -30,20 +30,27 @@ public class Testbean {
 //			
 //			listIterator.forEachRemaining(l ->System.out.println(l.toString()));
 //			System.out.println("----------------------------------");
+			Member member = new Member();
+			member.setAccount("11");
+			member.setEmail("11");
+			
 			MemberDaoImpl memberDaoImpl = new MemberDaoImpl();
+			Member insert = memberDaoImpl.insert(member);
+			System.out.println(insert.toString());
+			
 //			List<Member> all = memberDaoImpl.getAll();
 //			ListIterator<Member> listIterator = all.listIterator();
-			Member byId = memberDaoImpl.getById(23);
-			String string = byId.getLimits().toString();
-			System.out.println(string);
+//			Member byId = memberDaoImpl.getById(23);
+//			String string = byId.getLimits().toString();
+//			System.out.println(string);
 //			System.out.println(byId.getAccount());
 //			listIterator.forEachRemaining(m->System.out.println(m.toString()));
 //	System.out.println(byId.getEmail());
 //			System.out.println(byId.getLimits().getAccount());
 //			System.out.println(byId.getLicense().getPassword());
-			Set<LoginHistory> loginHistories = byId.getLoginHistories();
+//			Set<LoginHistory> loginHistories = byId.getLoginHistories();
 //			System.out.println(loginHistories);
-			loginHistories.forEach(s->System.out.println(s.toString()));
+//			loginHistories.forEach(s->System.out.println(s.toString()));
 			
 			
 			
@@ -51,6 +58,7 @@ public class Testbean {
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 		
