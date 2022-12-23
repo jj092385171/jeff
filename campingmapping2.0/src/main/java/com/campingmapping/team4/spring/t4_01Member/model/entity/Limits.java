@@ -4,12 +4,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 // limits
 //權限
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "limits")
 public class Limits {
@@ -17,9 +25,9 @@ public class Limits {
 	@Id
 	@Column(name = "uid")
 	private Integer uid;
-	// account
-	// 帳號
-	@Column(name = "account", insertable = false, updatable = false)
+//	// account
+//	// 帳號
+	@Column(name = "account")
 	private String account;
 	// nomore
 	// 一般
@@ -74,6 +82,88 @@ public class Limits {
 	// show
 	@Column(name = "show")
 	private String show;
+	
+	@OneToOne
+	@JoinColumn(name = "uid")
+	private Member member;
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Limits [uid=%s ,account=%s ,nomore=%s, buy=%s, sell=%s, publisher=%s, message=%s, enterprise=%s, applier=%s, mainhoster=%s, attender=%s, campingowner=%s, customer=%s, admin=%s, members=%s, show=%s]",
+				uid, account,nomore, buy, sell, publisher, message, enterprise, applier,
+				mainhoster, attender, campingowner, customer, admin, members,
+				show);
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public void setAccount() {
+		this.account = member.getAccount();
+	}
+
+	public void setNomore(String nomore) {
+		this.nomore = nomore;
+	}
+
+	public void setBuy(String buy) {
+		this.buy = buy;
+	}
+
+	public void setSell(String sell) {
+		this.sell = sell;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setEnterprise(String enterprise) {
+		this.enterprise = enterprise;
+	}
+
+	public void setApplier(String applier) {
+		this.applier = applier;
+	}
+
+	public void setMainhoster(String mainhoster) {
+		this.mainhoster = mainhoster;
+	}
+
+	public void setAttender(String attender) {
+		this.attender = attender;
+	}
+
+	public void setCampingowner(String campingowner) {
+		this.campingowner = campingowner;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+
+	public void setMembers(String members) {
+		this.members = members;
+	}
+
+	public void setShow(String show) {
+		this.show = show;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	} 
+	
 	// ALTER TABLE [dbo].[limits] WITH CHECK ADD CONSTRAINT
 	// [fk_member_limits_account] FOREIGN KEY([account])
 	// REFERENCES [dbo].[member] ([account])
@@ -81,149 +171,9 @@ public class Limits {
 	// [fk_member_limits_uid] FOREIGN KEY([uid])
 	// REFERENCES [dbo].[member] ([uid])
 	// @JoinColumn(name = "fk_member_limits_account")
-	@OneToOne
-	@MapsId
-	@JoinColumn(name = "uid")
-	private Member member;
 	
-	@OneToOne
-	@JoinColumn(name = "account")
-	private Member memberA;
-
-	public Integer getUid() {
-		return uid;
-	}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getNomore() {
-		return nomore;
-	}
-
-	public void setNomore(String nomore) {
-		this.nomore = nomore;
-	}
-
-	public String getBuy() {
-		return buy;
-	}
-
-	public void setBuy(String buy) {
-		this.buy = buy;
-	}
-
-	public String getSell() {
-		return sell;
-	}
-
-	public void setSell(String sell) {
-		this.sell = sell;
-	}
-
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getEnterprise() {
-		return enterprise;
-	}
-
-	public void setEnterprise(String enterprise) {
-		this.enterprise = enterprise;
-	}
-
-	public String getApplier() {
-		return applier;
-	}
-
-	public void setApplier(String applier) {
-		this.applier = applier;
-	}
-
-	public String getMainhoster() {
-		return mainhoster;
-	}
-
-	public void setMainhoster(String mainhoster) {
-		this.mainhoster = mainhoster;
-	}
-
-	public String getAttender() {
-		return attender;
-	}
-
-	public void setAttender(String attender) {
-		this.attender = attender;
-	}
-
-	public String getCampingowner() {
-		return campingowner;
-	}
-
-	public void setCampingowner(String campingowner) {
-		this.campingowner = campingowner;
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
-	public String getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(String admin) {
-		this.admin = admin;
-	}
-
-	public String getMembers() {
-		return members;
-	}
-
-	public void setMembers(String members) {
-		this.members = members;
-	}
-
-	public String getShow() {
-		return show;
-	}
-
-	public void setShow(String show) {
-		this.show = show;
-	}
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
+	
+	
+	
 
 }

@@ -1,5 +1,8 @@
 package com.campingmapping.team4.spring.t4_01Member.model.entity;
 
+import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 //票券夾
 // couponwallet
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "couponwallet")
 public class CouponWallet {
@@ -40,72 +50,20 @@ public class CouponWallet {
 	// [fk_coupon_couponWallet_couponid] FOREIGN KEY([couponid])
 	// REFERENCES [dbo].[coupon] ([couponid])
 	@ManyToOne
-	@JoinColumn(name = "fk_coupon_couponWallet_couponid")
+	@JoinColumn(name = "coupon_couponid")
 	private Coupon coupon;
 	// ALTER TABLE [dbo].[couponwallet] WITH CHECK ADD CONSTRAINT
 	// [fk_member_couponWallet_uid] FOREIGN KEY([uid])
 	// REFERENCES [dbo].[member] ([uid])
 	@ManyToOne
-	@JoinColumn(name = "fk_member_couponWallet_uid")
+	@JoinColumn(name = "member_uid")
 	private Member member;
 
-	public CouponWallet() {
-	}
 
-	public Integer getCwid() {
-		return cwid;
-	}
-
-	public void setCwid(Integer cwid) {
-		this.cwid = cwid;
-	}
-
-	public Integer getUid() {
-		return uid;
-	}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-
-	public Integer getCouponid() {
-		return couponid;
-	}
-
-	public void setCouponid(Integer couponid) {
-		this.couponid = couponid;
-	}
-
-	public Integer getState() {
-		return state;
-	}
-
-	public void setState(Integer state) {
-		this.state = state;
-	}
-
-	public String getShow() {
-		return show;
-	}
-
-	public void setShow(String show) {
-		this.show = show;
-	}
-
-	public Coupon getCoupon() {
-		return coupon;
-	}
-
-	public void setCoupon(Coupon coupon) {
-		this.coupon = coupon;
-	}
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
+	@Override
+	public String toString() {
+		return String.format("CouponWallet [cwid=%s, uid=%s, couponid=%s, state=%s, show=%s]", cwid, uid, couponid,
+				state, show);
 	}
 
 

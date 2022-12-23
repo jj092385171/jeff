@@ -11,8 +11,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 // loginhistory
 //登入歷史
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "loginhistory")
 public class LoginHistory {
@@ -24,8 +31,8 @@ public class LoginHistory {
 	@Column(name = "lhid")
 	private Integer lhid; 
 	//uid
-	@Column(name = "uid")
-	private Integer uid;
+//	@Column(name = "uid")
+//	private Integer uid;
 	// account 
 	//帳號
 	@Column(name = "account")
@@ -41,77 +48,22 @@ public class LoginHistory {
 	// show 
 	@Column(name = "show")
 	private String show;
-	// ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [fk_member_loginhistory_account] FOREIGN KEY([account])
-	// REFERENCES [dbo].[member] ([account])
-	// ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [fk_member_loginhistory_uid] FOREIGN KEY([UID])
-	// REFERENCES [dbo].[member] ([uid])
 	@ManyToOne
-//	@JoinColumn(name = "fk_member_loginhistory_account")
-	@JoinColumn(name = "fk_member_loginhistory_uid")
+	@JoinColumn(name = "uid")
 	private Member member;
-
-	public LoginHistory() {
+	@Override
+	public String toString() {
+		return String.format(
+				"LoginHistory [lhid=%s, uid=%s, account=%s, ip=%s, logindate=%s, show=%s]",
+				lhid, member.getUid(), account, ip, logindate, show);
 	}
-
-	public Integer getLhid() {
-		return lhid;
-	}
-
-	public void setLhid(Integer lhid) {
-		this.lhid = lhid;
-	}
-
-	public Integer getUid() {
-		return uid;
-	}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public Date getLogindate() {
-		return logindate;
-	}
-
-	public void setLogindate(Date logindate) {
-		this.logindate = logindate;
-	}
-
-	public String getShow() {
-		return show;
-	}
-
-	public void setShow(String show) {
-		this.show = show;
-	}
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-
+	
+//	@ManyToOne
+//	@JoinColumn(name = "member_uid")
+//	private Member member;
 	
 	
-
+	
+	
 	
 }

@@ -18,6 +18,13 @@ public class DemoRoomAction {
 		Room room3 = context.getBean("room3", Room.class);
 		System.out.println(room3.getId() + " " + room3.getName() + " " + room3.getSize() + " " + room3.getDate());
 		
+		Room room4 = context.getBean("room1", Room.class);
+		
+		Room room5 = context.getBean("room1", Room.class);
+		
+		System.out.println(room4.hashCode());
+		System.out.println(room5.hashCode());
+		
 		context.close();
 
 	}
