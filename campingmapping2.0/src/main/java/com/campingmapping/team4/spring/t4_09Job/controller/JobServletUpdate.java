@@ -101,12 +101,20 @@ public class JobServletUpdate extends HttpServlet {
 		jobBean.setRemark(remark);
 
 		if (!errorMessage.isEmpty()) {
+<<<<<<< HEAD
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/update.jsp");
+=======
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/update.jsp");
+>>>>>>> 09
 			rd.forward(request, response);
 			return;
 		}
 		jobServiceImpl.updateJob(jobBean);
+<<<<<<< HEAD
 		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/updateSucces.jsp");
+=======
+		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/updateSucces.jsp");
+>>>>>>> 09
 		rd.forward(request, response);
 		return;
 

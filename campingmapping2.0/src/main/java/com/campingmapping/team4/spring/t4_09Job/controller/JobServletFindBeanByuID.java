@@ -36,6 +36,7 @@ public class JobServletFindBeanByuID extends HttpServlet {
 			String str = request.getParameter("uID");
 			int uID = Integer.parseInt(str);
 			List<JobBean> jobBean = jsi.findBeanByuID(uID);
+<<<<<<< HEAD
 			try {
 				if (jobBean.size() == 0) {
 					errorMessage.put("uID", "無此會員ID,請重新輸入");
@@ -52,13 +53,26 @@ public class JobServletFindBeanByuID extends HttpServlet {
 			} catch (Exception e) {
 			}
 
+=======
+			try {						
+						if (jobBean.size() == 0) {
+							errorMessage.put("uID", "查無資料");
+						}					
+				request.setAttribute("ErrorMsg", errorMessage);
+			} catch (Exception e) {
+			}
+>>>>>>> 09
 		} catch (Exception e) {
 			errorMessage.put("uID", "輸入格式錯誤");
 		}
 		request.setAttribute("ErrorMsg", errorMessage);
 
 		if (!errorMessage.isEmpty()) {
+<<<<<<< HEAD
 			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/select.jsp");
+=======
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/select.jsp");
+>>>>>>> 09
 			rd.forward(request, response);
 			return;
 		}
@@ -66,7 +80,11 @@ public class JobServletFindBeanByuID extends HttpServlet {
 		int uID = Integer.parseInt(str);
 		List<JobBean> jobBean = jsi.findBeanByuID(uID);
 		request.setAttribute("jobBean", jobBean);
+<<<<<<< HEAD
 		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/showSelect.jsp");
+=======
+		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/showSelect.jsp");
+>>>>>>> 09
 		rd.forward(request, response);
 		return;
 
