@@ -1,18 +1,24 @@
-package T4_09._01_job.model;
+package com.campingmapping.team4.spring.t4_09Job.model.entity;
 
 import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="job")
 
 public class JobBean {
+
+	
 	@Column(name = "uID")
 	private int uID;//會員
+	@Id 
+
 	@Column(name = "rackID")
 	private int rackID;//刊登編號
 	@Column(name = "job")

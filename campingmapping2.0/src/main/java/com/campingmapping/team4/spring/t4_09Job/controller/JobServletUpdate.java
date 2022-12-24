@@ -1,6 +1,5 @@
-package T4_09._01_job.controller;
+package com.campingmapping.team4.spring.t4_09Job.controller;
 
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -17,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import T4_09._01_job.model.JobBean;
-import T4_09._01_job.service.JobServiceDAOImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
 
 @MultipartConfig()
 @WebServlet("/JobServletUpdate")
@@ -33,10 +32,10 @@ public class JobServletUpdate extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Map<String, String> errorMessage = new HashMap<>();
-		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();
+		JobServiceImpl jobServiceImpl = new JobServiceImpl();
 		JobBean jobBean = new JobBean();
-		
-		String str=request.getParameter("rackID");
+
+		String str = request.getParameter("rackID");
 		Integer rackID = Integer.parseInt(str.trim());
 		String job = request.getParameter("job");
 		String salary = request.getParameter("salary");
@@ -50,7 +49,7 @@ public class JobServletUpdate extends HttpServlet {
 		long size = request.getPart("img").getSize();
 		try {
 			Blob image = jobServiceImpl.fileToBlob(in, size);
-			JobServiceDAOImpl jsi = new JobServiceDAOImpl();
+			JobServiceImpl jsi = new JobServiceImpl();
 
 			jobBean = jsi.findBeanByRackID(rackID);
 			if (size != 0) {
@@ -102,14 +101,16 @@ public class JobServletUpdate extends HttpServlet {
 		jobBean.setRemark(remark);
 
 		if (!errorMessage.isEmpty()) {
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/update.jsp");
+
+			RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/update.jsp");
+
 			rd.forward(request, response);
 			return;
 		}
-System.out.println(jobBean);
 		jobServiceImpl.updateJob(jobBean);
-		System.out.println(jobBean);
-		RequestDispatcher rd = request.getRequestDispatcher("/T4_09/job/JobModel/updateSucces.jsp");
+
+		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/updateSucces.jsp");
+
 		rd.forward(request, response);
 		return;
 
