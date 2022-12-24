@@ -72,7 +72,8 @@ public class PostService {
 	}
 	
 	// 查詢被檢舉貼文
-	public List<Post> selectReportPost(Post post) throws SQLException{
+	public List<Post> selectReportPost() throws SQLException{
+		Post post = new Post();
 		post.setPostReport(1);
 		return postDao.selectReportPost(post);
 	}
@@ -84,13 +85,27 @@ public class PostService {
 	}
 	
 	// 隱藏貼文
-	public void hidePost(Post post) throws SQLException{
+	public void hidePost(Post post) throws SQLException, ParseException{
+		// 設定現在時間
+		Date utilReleaseDate = dateTime.parse(dateTime.format(new Date()));
+		post.setReleaseDate(new Timestamp(utilReleaseDate.getTime()));
 		post.setPostHide(1);
 		postDao.changeHidePost(post);
 	}
-		
+	
+	// 查詢隱藏貼文
+	public List<Post> selectHidePost() throws SQLException{
+		Post post = new Post();
+		post.setPostHide(1);
+		return postDao.selectHidePost(post);
+	}
+	
 	// 取消隱藏貼文
-	public void cancelHidePost(Post post) throws SQLException{
+	public void cancelHidePost(Post post) throws SQLException, ParseException{
+		// 設定現在時間
+		Date utilReleaseDate = dateTime.parse(dateTime.format(new Date()));
+		post.setReleaseDate(new Timestamp(utilReleaseDate.getTime()));
+		post.setPostReport(2);
 		post.setPostHide(0);
 		postDao.changeHidePost(post);
 	}

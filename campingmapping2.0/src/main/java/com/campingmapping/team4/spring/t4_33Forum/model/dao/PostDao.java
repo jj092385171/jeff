@@ -81,7 +81,7 @@ public class PostDao {
 	
 	// 查詢被檢舉貼文
 	public List<Post> selectReportPost(Post post) throws SQLException {
-		String hql = "from Post where postReport = ?1";
+		String hql = "from Post where postReport = ?1 order by releaseDate desc";
 		List<Post> resultList = this.session.createQuery(hql, Post.class).setParameter(1, post.getPostReport()).getResultList();
 		return resultList;
 	}
@@ -100,7 +100,15 @@ public class PostDao {
 	public void changeHidePost(Post post) throws SQLException {
 		Post result = this.session.get(Post.class, post.getPostId());
 		if(result != null) {
+			result.setReleaseDate(post.getReleaseDate());
 			result.setPostHide(post.getPostHide());
 		}
+	}
+	
+	// 查詢隱藏貼文
+	public List<Post> selectHidePost(Post post) throws SQLException {
+		String hql = "from Post where postHide = ?1 order by releaseDate desc";
+		List<Post> resultList = this.session.createQuery(hql, Post.class).setParameter(1, post.getPostHide()).getResultList();
+		return resultList;
 	}
 }

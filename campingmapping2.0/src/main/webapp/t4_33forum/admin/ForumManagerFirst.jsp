@@ -31,8 +31,8 @@
 
 <body>
 	<h2>討論區管理者首頁</h2>
-	<form method="POST" id="postForm">
-<!--         <input type="submit" value="新增貼文"> -->
+	<form action="<c:url value='/t4_33forum/guest/newPost.jsp' />" method="POST" id="postForm">
+        <input type="submit" value="新增貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showHidePostServlet' />" value="查詢隱藏貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showReportPostServlet' />" value="查詢被檢舉的貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showDiscussionServlet' />" value="回討論區首頁">
@@ -74,7 +74,10 @@
         		<td>${post.userUnlike}</td>
         		<td>${post.postReport}</td>
         		<td>${post.postHide}</td>
-        		<td><input type="submit" formaction="<c:url value='/T4_33/hidePostServlet' />" value="隱藏貼文"></td>
+        		<td>
+        			<input type="submit" formaction="<c:url value='/T4_33/showUpdatePostServlet?postId=${post.postId}' />" value="修改貼文">
+        			<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet?postId=${post.postId}' />" value="隱藏貼文">
+        		</td>
         		</tr>
         	</c:forEach>
         	</tbody>
