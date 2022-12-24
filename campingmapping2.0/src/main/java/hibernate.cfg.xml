@@ -3,7 +3,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.password">0000</property>
+		<property name="hibernate.connection.password">P@ssw0rd</property>
 		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2016Dialect</property>
@@ -43,5 +43,9 @@
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.oginHistory" /> -->
 <!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Cccc" /> -->
 		<mapping class="com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean" />
+ 		 <mapping class="com.campingmapping.team4.spring.t4_33Forum.model.entity.Post" /> 
+ 		 <mapping class="com.campingmapping.team4.spring.t4_33Forum.model.entity.PostComment" /> 
+
+
 	</session-factory>
 </hibernate-configuration>
