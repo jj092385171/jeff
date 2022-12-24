@@ -1,4 +1,4 @@
-package T4_33.servlet;
+package com.campingmapping.team4.spring.t4_33Forum.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
