@@ -12,7 +12,7 @@
 
 		<body>
 			<div>
-				<a href="<c:url value='IndexShowAllPageServlet' />"><strong>營地_營區位管理</strong></a>
+				<a href="<c:url value='/IndexShowAllPageServlet' />"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>
@@ -54,7 +54,7 @@
 				<br>
 				<a href="<c:url value='/t4_24camp/admin/deletePage.jsp' />">&emsp;刪除&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='IndexShowAllPageServlet' />">回首頁</a>
+				<a href="<c:url value='/IndexShowAllPageServlet' />">回首頁</a>
 			</div>
 
 		</body>

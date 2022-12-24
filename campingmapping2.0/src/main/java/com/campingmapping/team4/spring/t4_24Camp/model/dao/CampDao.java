@@ -69,9 +69,11 @@ public class CampDao {
 	//刪除營地
 	public boolean deletdByCampID(int campID){
 		Camp camp = session.get(Camp.class, campID);
+		System.out.println(camp);
 		
 		if(camp != null) {
-			deletdTagsByID(campID);
+			System.out.println(deletdTagsByID(campID));
+			
 			SiteDao siteDao = new SiteDao(session);
 			Set<Site> sites = siteDao.findSitesByCampID(campID);
 			session.delete(sites);
