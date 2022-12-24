@@ -24,7 +24,7 @@ import util.*;
 
 
 
-@WebServlet("/T4_24/IndexShowAllPageServlet")
+@WebServlet("/IndexShowAllPageServlet")
 public class IndexShowAllPageServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

@@ -11,7 +11,7 @@
 
 		<body>
 			<div>
-				<a href="<c:url value='IndexShowAllPageServlet' />"><strong>營地_營區位管理</strong></a>
+				<a href="<c:url value='/IndexShowAllPageServlet' />"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>

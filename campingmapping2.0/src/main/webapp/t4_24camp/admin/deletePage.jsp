@@ -12,7 +12,7 @@
 
 		<body>
 			<div>
-				<a href="<c:url value='IndexShowAllPageServlet' />" class="logo"><strong>營地管理</strong></a>
+				<a href="<c:url value='/IndexShowAllPageServlet' />" class="logo"><strong>營地管理</strong></a>
 			</div>
 
 			<hr>
