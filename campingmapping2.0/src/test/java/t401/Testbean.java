@@ -30,13 +30,13 @@ public class Testbean {
 //			
 //			listIterator.forEachRemaining(l ->System.out.println(l.toString()));
 //			System.out.println("----------------------------------");
-			Member member = new Member();
-			member.setAccount("11");
-			member.setEmail("11");
-			
-			MemberDaoImpl memberDaoImpl = new MemberDaoImpl();
-			Member insert = memberDaoImpl.insert(member);
-			System.out.println(insert.toString());
+//			Member member = new Member();
+//			member.setAccount("11");
+//			member.setEmail("11");
+//			
+//			MemberDaoImpl memberDaoImpl = new MemberDaoImpl();
+//			Member insert = memberDaoImpl.insert(member);
+//			System.out.println(insert.toString());
 			
 //			List<Member> all = memberDaoImpl.getAll();
 //			ListIterator<Member> listIterator = all.listIterator();
