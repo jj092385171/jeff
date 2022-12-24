@@ -1,5 +1,6 @@
 package T4_09._01_job.controller;
 
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -34,7 +35,7 @@ public class JobServletUpdate extends HttpServlet {
 		Map<String, String> errorMessage = new HashMap<>();
 		JobServiceDAOImpl jobServiceImpl = new JobServiceDAOImpl();
 		JobBean jobBean = new JobBean();
-
+		
 		String str=request.getParameter("rackID");
 		Integer rackID = Integer.parseInt(str.trim());
 		String job = request.getParameter("job");

@@ -17,20 +17,44 @@
 		<!-- hibernate 內建 連線池 -->
 		<property name="connection.pool_size">10</property>
 		<!-- setting auto generate table: update/validate  -->
-		<!--         <property name="hbm2ddl.auto">update</property> -->
+		<property name="hbm2ddl.auto">update</property>
 		<!--  source mapping in xml file -->
 		<!--        <mapping resource="tw/hibernatedemo/model/CompanyBean.hbm.xml"/>-->
 		<!--  class mapping -->
-		<!--        <mapping class="tw.hibernatedemo.model.Member"/>    -->
-<!-- 		<mapping class="t4_01Member.model.entity.Coupon" /> -->
-<!-- 		<mapping class="t4_01Member.model.entity.CouponWallet" /> -->
-<!-- 		<mapping class="t4_01Member.model.entity.License" /> -->
-<!-- 		<mapping class="t4_01Member.model.entity.Limits" /> -->
-<!-- 		<mapping class="t4_01Member.model.entity.Member" /> -->
-<!-- 		<mapping class="t4_01Member.model.entity.LoginHistory" /> -->
-		<mapping class="com.campingmapping.team4.spring.t4_36Shop.model.entity.Category" />
+		
+<!-- ==================================================== -->
+
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Member" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Coupon" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.CouponWallet" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.License" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.Limits" /> -->
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_01Member.model.entity.oginHistory" /> -->
+
+<!-- ==================================================== -->
+
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean" /> -->
+
+<!-- ==================================================== -->
+
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Camp"/> -->
+<!--         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Site"/> -->
+<!--         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Tag"/> -->
+<!--         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.City"/> -->
+
+<!-- ==================================================== -->
+
+<!--  		 <mapping class="com.campingmapping.team4.spring.t4_33Forum.model.entity.Post" />  -->
+<!--  		 <mapping class="com.campingmapping.team4.spring.t4_33Forum.model.entity.PostComment" />  -->
+
+<!-- ==================================================== -->
+
+<!-- 		<mapping class="com.campingmapping.team4.spring.t4_36Shop.model.entity.Category" /> -->
 <!-- 		<mapping class="t4_36Shop.model.entity.Category" /> -->
 <!-- 		<mapping class="t4_36Shop.model.entity.ProductOrder" /> -->
 <!-- 		<mapping class="t4_36Shop.model.entity.ProductOrderItems" /> -->
+
+<!-- ==================================================== -->
+
 	</session-factory>
 </hibernate-configuration>
