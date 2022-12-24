@@ -37,10 +37,10 @@
 
 <!-- ==================================================== -->
 
-<!-- 		<mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Camp"/> -->
-<!--         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Site"/> -->
-<!--         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Tag"/> -->
-<!--         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.City"/> -->
+ 		<mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Camp"/> 
+         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Site"/> 
+         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.Tag"/> 
+         <mapping class="com.campingmapping.team4.spring.t4_24Camp.model.model.City"/> 
 
 <!-- ==================================================== -->
 

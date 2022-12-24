@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.hibernate.Session;
@@ -29,8 +28,9 @@ import util.HibernateUtils;
 
 
 @MultipartConfig
-@WebServlet("/T4_24/InsertSiteByIDServlet")
+@WebServlet("/InsertSiteByIDServlet.do")
 public class InsertSiteByIDServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
 	// 新增site
@@ -38,7 +38,6 @@ public class InsertSiteByIDServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		HttpSession httpSession = request.getSession();
 
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
@@ -108,11 +107,11 @@ public class InsertSiteByIDServlet extends HttpServlet {
 		SiteDao siteDao = new SiteDao(session);
 		Site site = siteDao.findSiteByID((Integer) siteID);
 
-		httpSession.setAttribute("site", site);
-		httpSession.setAttribute("what", "新增");
+		request.setAttribute("site", site);
+		request.setAttribute("what", "新增");
 
-		String contextPath = request.getContextPath();
-		response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_24camp/admin/InsertUpdateSiteSuccess.jsp"));
+		RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/InsertUpdateSiteSuccess.jsp");
+		rd.forward(request, response);
 		return;
 
 	}

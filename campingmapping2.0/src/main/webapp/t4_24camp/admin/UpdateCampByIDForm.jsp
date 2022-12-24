@@ -12,7 +12,7 @@
 
 		<body>
 			<div>
-				<a href="<c:url value='/IndexShowAllPageServlet' />"><strong>營地_營區位管理</strong></a>
+				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>
@@ -64,13 +64,9 @@
 			<div>
 				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營位區</a>
+				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/t4_24camp/admin/UpdatePage.jsp' />">&emsp;修改&emsp;營地_營區位</a>
-				<br>
-				<a href="<c:url value='/t4_24camp/admin/deletePage.jsp' />">&emsp;刪除&emsp;營地_營區位</a>
-				<br>
-				<a href="<c:url value='IndexShowAllPageServlet' />">回首頁</a>
+				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
 		</body>
