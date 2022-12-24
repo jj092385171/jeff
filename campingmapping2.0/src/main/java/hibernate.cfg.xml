@@ -3,7 +3,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.password">P@ssw0rd</property>
+		<property name="hibernate.connection.password">0000</property>
 		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2016Dialect</property>
