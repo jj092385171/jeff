@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2016Dialect</property>
 		<!-- 後面學到 current  Session 再打開 -->
-		
+
 		<property name="current_session_context_class">thread</property>
 		<!-- 是否在 console 顯示經由 hibernate 產生的 SQL 指令-->
 		<property name="show_sql">true</property>

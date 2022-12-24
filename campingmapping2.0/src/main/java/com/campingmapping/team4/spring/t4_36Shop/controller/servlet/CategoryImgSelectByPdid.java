@@ -35,8 +35,8 @@ public class CategoryImgSelectByPdid extends HttpServlet {
 			String pdid = request.getParameter("pdid");
 			int Pdid = Integer.parseInt(pdid);
 			CategoryServiceImpl jsdi = new CategoryServiceImpl();
-			Category category = jsdi.findImgByPdiD(Pdid);
-			blob = category.getPdpicture();
+//			Category category = jsdi.findImgByPdiD(Pdid);
+//			blob = category.getPdpicture();
 			is = blob.getBinaryStream();
 			os = response.getOutputStream();
 			int len = 0;
