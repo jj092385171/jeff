@@ -38,13 +38,13 @@
 							<p></p>
 						</div>
 					</div>
-							<form action="<c:url value='/T4_33/showDiscussionServlet'/>" method="POST">
+							<form method="POST">
 					<nav>
 						<ul class="header-nav1">
 							<li class="nav1-li"><a href="#about">About</a></li>
 							<li class="nav1-li"><a href="<c:url value='/T4_11/TeamUser.jsp'/>">Team</a></li>
 							<li class="nav1-li"><a href="<c:url value='/T4_24/campUser/CampUser.jsp'/>">Camp</a></li>
-								<button>Forum</button>
+							<input type="submit" formaction="<c:url value='/T4_33/showDiscussionServlet' />" value="Forum">
 							<li class="nav1-li"><a href="<c:url value='/T4_33/showDiscussionServlet'/>">Forum</a></li>
 							<li class="nav1-li"><a href="<c:url value='/T4_36/shopUser/ShopUser.jsp'/>">Shop</a></li>
 							<li class="nav1-li"><a href="<c:url value='/t4_09job/jobUser/JobUser.jsp'/>">Job</a></li>

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.bytecode.internal.bytebuddy.PassThroughInterceptor;
 
 import com.campingmapping.team4.spring.t4_33Forum.controller.newPostServlet;
@@ -18,8 +19,8 @@ public class PostService {
 
 	private PostDao postDao;
 	
-	public PostService() {
-		this.postDao = new PostDao();
+	public PostService(Session session) {
+		this.postDao = new PostDao(session);
 	}
 	
 	SimpleDateFormat dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -39,6 +40,8 @@ public class PostService {
 	
 	// 新增貼文
 	public void insertPost(Post post) throws SQLException, ParseException{
+		// 設定userId
+		post.setUserId(9);
 		// 設定現在時間
 		Date utilReleaseDate = dateTime.parse(dateTime.format(new Date()));
 		post.setReleaseDate(new Timestamp(utilReleaseDate.getTime()));

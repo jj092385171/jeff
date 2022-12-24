@@ -34,7 +34,7 @@
 	<form action="<c:url value='/t4_33forum/guest/newPost.jsp' />" method="POST" id="postForm">
         <input type="submit" value="新增貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showForumManagerServlet' />" value="管理者首頁">
-        <input type="submit" formaction="<c:url value='/index.jsp' />" value="回首頁">
+        <input type="submit" formaction="<c:url value='/testIndex.jsp' />" value="回首頁">
         <table>
         	<tbody>
         	<c:forEach var="post" items="${postList}">

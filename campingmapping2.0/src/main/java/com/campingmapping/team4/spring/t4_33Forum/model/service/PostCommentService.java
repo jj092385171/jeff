@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.campingmapping.team4.spring.t4_33Forum.model.dao.PostCommentDao;
+import com.campingmapping.team4.spring.t4_33Forum.model.entity.Post;
 import com.campingmapping.team4.spring.t4_33Forum.model.entity.PostComment;
 
 public class PostCommentService {
@@ -15,8 +16,8 @@ public class PostCommentService {
 	}
 	
 	// 依貼文查所有留言
-	public List<PostComment> selectPostComment(PostComment postComment) throws SQLException{
-		return postCommentDao.selectPostComment(postComment);
+	public List<PostComment> selectPostComment(Post post) throws SQLException{
+		return postCommentDao.selectPostComment(post);
 	}
 	
 	// 新增留言

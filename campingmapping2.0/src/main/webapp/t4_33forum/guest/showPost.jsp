@@ -24,59 +24,59 @@
 </head>
 <body>
 	<form action="<c:url value='/T4_33/likePostServlet' />" method="POST">
-		<input type="hidden" name="postId" value="${newPost.postId}">
+		<input type="hidden" name="postId" value="${sessionScope.postId}">
 		<h3>貼文</h3>
 		<div>
 			<label>標題:</label>
-			<input type="text" name="title" value="${newPost.title}" size="80" disabled>
+			<input type="text" name="title" value="${sessionScope.title}" size="80" disabled>
 		</div>
 		<div>
 			<label>內容:</label>
-			<textarea name="content" id="" cols="66" rows="10" disabled>${newPost.content}</textarea>
+			<textarea name="content" id="" cols="66" rows="10" disabled>${sessionScope.content}</textarea>
 		</div>
 		<div>
 			<label>露營人數:</label>
-			<input type="text" name="people" value="${newPost.people}" size="30" disabled>
+			<input type="text" name="people" value="${sessionScope.people}" size="30" disabled>
 		</div>
 		<div>
 			<label>露營費用:</label>
-			<input type="text" name="price" value="${newPost.price}" size="30" disabled>
+			<input type="text" name="price" value="${sessionScope.price}" size="30" disabled>
 		</div>
 		<div>
 			<label>露營城市:</label>
-			<input type="text" name="county" value="${newPost.county}" size="30" disabled>
+			<input type="text" name="county" value="${sessionScope.county}" size="30" disabled>
 		</div>
 		<div>
 			<label>開始露營日期:</label>
-			<input type="text" name="startDate" value="${newPost.startDate}" size="30" disabled>
+			<input type="text" name="startDate" value="${sessionScope.startDate}" size="30" disabled>
 		</div>
 		<div>
 			<label>結束露營日期:</label>
-			<input type="text" name="endDate" value="${newPost.endDate}" size="30" disabled>
+			<input type="text" name="endDate" value="${sessionScope.endDate}" size="30" disabled>
 		</div>
 		<div>
 			<label>評分:</label>
-			<input type="text" name="score" value="${newPost.score}" size="30" disabled>
+			<input type="text" name="score" value="${sessionScope.score}" size="30" disabled>
 		</div>
 		<div>
 			<label>最後更新日期:</label>
-			<input type="text" name="releaseDate" value="${newPost.releaseDate}" size="30" disabled>
+			<input type="text" name="releaseDate" value="${sessionScope.releaseDate}" size="30" disabled>
 		</div>
 		<div>
 			<label>喜歡本貼文人數:</label>
-			<input type="text" name="userLike" value="${newPost.userLike}" size="30" disabled>
+			<input type="text" name="userLike" value="${sessionScope.userLike}" size="30" disabled>
 			<input type="submit" value="喜歡">
 		</div>
 		<div>	
 			<label>不喜歡本貼文人數:</label>
-			<input type="text" name="userUnlike" value="${newPost.userUnlike}" size="30" disabled>
+			<input type="text" name="userUnlike" value="${sessionScope.userUnlike}" size="30" disabled>
 			<input type="submit" formaction="<c:url value='/T4_33/unlikePostServlet' />" value="不喜歡">
 		</div>
 		<div>
 			<input type="submit" formaction="<c:url value='/T4_33/showUpdatePostServlet' />" value="修改貼文">
-			<input type="submit" formaction="<c:url value='/T4_33/reportPostServlet' />" value="檢舉貼文">${reportResult}
-			<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet' />" value="隱藏貼文">${hideResult}
-			<input type="submit" formaction="<c:url value='/T4_33/deletePostServlet' />" value="刪除貼文">${deleteResult}
+			<input type="submit" formaction="<c:url value='/T4_33/reportPostServlet' />" value="檢舉貼文">
+<%-- 			<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet' />" value="隱藏貼文"> --%>
+<%-- 			<input type="submit" formaction="<c:url value='/T4_33/deletePostServlet' />" value="刪除貼文"> --%>
 			<input type="submit" formaction="<c:url value='/T4_33/showDiscussionServlet' />" value="回討論區">
 		</div>
 	</form>
