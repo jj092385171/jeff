@@ -1,0 +1,2 @@
+campingmapping-bootstrapvue
+npx @vue/cli create my-project
