@@ -9,6 +9,13 @@
 	<context:annotation-config />
 	<context:component-scan base-package="tw.leonchen" />
 	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	   <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+	   <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=LeonPower"/>
+	   <property name="username" value="watcher"/>
+	   <property name="password" value="P@ssw0rd"/>
+	</bean>
+	
 	<bean id="props" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 	   <property name="location">
 	      <value>classpath:tree.properties</value>
