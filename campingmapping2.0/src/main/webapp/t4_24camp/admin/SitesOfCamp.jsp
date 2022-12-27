@@ -38,22 +38,24 @@
 							<td>${ site.totalSites }</td>
 							<td>${ site.siteMoney }</td>
 							<td>
-								<form action="<c:url value='/PageUpadteSiteByIDServlet?siteID=${site.siteID }'/>" method="POST">
-									<button>更新</button>
+								<form action="<c:url value='/PageUpadteSiteByIDServlet?siteID=${site.siteID }'/>"
+									method="POST">
+									<button onclick="check()">更新</button>
 								</form>
 							</td>
 							<td>
-								<form action="<c:url value='/DeleteCampByIDServlet.do?siteID=${site.siteID }'/>" method="POST">
-									<button>刪除</button>
+								<form action="<c:url value='/DeleteCampByIDServlet.do?siteID=${site.siteID }'/>"
+									method="POST">
+									<button onclick="check()">刪除</button>
 								</form>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
+
 			<hr>
-			
+
 			<div>
 				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
@@ -62,6 +64,15 @@
 				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
+			<script>
+				function check() {
+					if (confirm('確定執行?') == true) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			</script>
 		</body>
 
 		</html>

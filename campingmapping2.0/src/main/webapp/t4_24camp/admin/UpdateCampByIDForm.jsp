@@ -56,7 +56,7 @@
 
 
 				<br>
-				<input type="submit" value="修改">
+				<input type="submit" value="更新">
 
 			</form>
 			<hr>

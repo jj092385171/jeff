@@ -36,7 +36,8 @@
 					<c:forEach var='camp' items='${allCamps}'>
 						<tr>
 							<td>${ camp.campID }</td>
-							<td><a href="<c:url value='/SitesOfCampServlet.do?campID=${ camp.campID }' />">${ camp.campName }</a></td>
+							<td><a href="<c:url value='/SitesOfCampServlet.do?campID=${ camp.campID }' />">${
+									camp.campName }</a></td>
 							<td>${ camp.city.cityID }</td>
 							<td>${ camp.city.cityName }</td>
 							<td>${ camp.location }</td>
@@ -51,17 +52,21 @@
 								</c:forEach>
 							</td>
 							<td>
-								<form action="<c:url value='/UpadteCampByIDPageServlet.do?campID=${camp.campID }'/>" method="POST">
-									<button>更新</button>
+								<form action="<c:url value='/UpadteCampByIDPageServlet.do?campID=${camp.campID }'/>"
+									method="POST">
+									<button onclick="check()">更新</button>
+								</form>
+
+							</td>
+							<td>
+								<form action="<c:url value='/DeleteSiteByIDServlet.do?campID=${camp.campID }'/>"
+									method="POST">
+									<button onclick="check()">刪除</button>
 								</form>
 							</td>
 							<td>
-								<form action="<c:url value='/DeleteSiteByIDServlet.do?campID=${camp.campID }'/>" method="POST">
-									<button>刪除</button>
-								</form>
-							</td>
-							<td>
-								<form action="<c:url value='/InsertSiteGetCampIDServlet?campID=${camp.campID }'/>" method="POST">
+								<form action="<c:url value='/InsertSiteGetCampIDServlet?campID=${camp.campID }'/>"
+									method="POST">
 									<button>新增營區位</button>
 								</form>
 							</td>
@@ -69,9 +74,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			
+
 			<hr>
-			
+
 			<div>
 				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
@@ -80,6 +85,17 @@
 				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
+			<script>
+				function check() {
+					if (confirm('確定執行?') == true) {
+						action = "<c:url value='/UpadteCampByIDPageServlet.do?campID=${camp.campID }'/>"
+						method = "POST"
+						return true;
+					} else {
+						return false;
+					}
+				}
+			</script>
 		</body>
 
 		</html>
