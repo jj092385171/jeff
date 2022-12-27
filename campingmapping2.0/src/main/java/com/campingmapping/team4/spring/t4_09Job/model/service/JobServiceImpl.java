@@ -18,6 +18,7 @@ import util.HibernateUtils;
 
 public class JobServiceImpl implements JobService {
 	private JobDAO jobDAO = new JobDAOimpl();
+	
 	private SessionFactory factory;
 
 	public JobServiceImpl() {

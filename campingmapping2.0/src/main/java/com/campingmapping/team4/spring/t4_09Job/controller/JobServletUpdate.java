@@ -57,11 +57,12 @@ public class JobServletUpdate extends HttpServlet {
 			}
 		} catch (Exception e) {
 		}
-
-		// 驗證會員id輸入格式
+		// 驗證uid輸入格式
 		try {
-			Integer uID = Integer.parseInt(request.getParameter("id"));
+			Integer uID = Integer.parseInt(request.getParameter("uid"));
+			System.out.println(uID);
 			jobBean.setuID(uID);
+			System.out.println(uID);
 		} catch (Exception e) {
 			errorMessage.put("id", "輸入格式錯誤");
 		}
@@ -92,7 +93,7 @@ public class JobServletUpdate extends HttpServlet {
 			e1.printStackTrace();
 		}
 
-		jobBean.setRackID(rackID);
+//		jobBean.setRackID(rackID);
 		jobBean.setJob(job);
 		jobBean.setSalary(salary);
 		jobBean.setPlace(place);
@@ -107,8 +108,9 @@ public class JobServletUpdate extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
+		System.out.println(jobBean);
 		jobServiceImpl.updateJob(jobBean);
-
+//		System.out.println(jobBean);
 		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/updateSucces.jsp");
 
 		rd.forward(request, response);

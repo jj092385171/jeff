@@ -52,34 +52,27 @@ public class JobDAOimpl implements JobDAO {
 		}
 	}
 
-	// 透過刊登id更改職缺等
+	// 透過rackID更改職缺等
 	@Override
 	public void updateJob(JobBean jobBean) {
 		Session session = factory.getCurrentSession();
 		JobBean jbean = session.get(JobBean.class, jobBean.getRackID());
-		if (jbean!=null) {
-			jbean = jobBean ;
-		}
-//		String hql = "update JobBean set uID=?1,job=?2,salary=?3,quantity=?4"
-//				+ ",place=?5,time=?6,date=?7,img=?8,remark=?9,rackUp=?10,rackDown=?11"
-//				+ " where rackID=?12";	
-//		Session session = factory.getCurrentSession();
-//		session.createQuery(hql)
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
-//		.setParameter("",);
+		jbean.setuID(jobBean.getuID());
+		jbean.setJob(jobBean.getJob());
+		jbean.setPlace(jobBean.getPlace());
+		jbean.setQuantity(jobBean.getQuantity());
+		jbean.setRackDown(jobBean.getRackDown());
+		jbean.setRackUp(jobBean.getRackUp());
+		jbean.setRemark(jobBean.getRemark());
+		jbean.setSalary(jobBean.getSalary());
+		jbean.setImg(jobBean.getImg());
+		jbean.setDate(jobBean.getDate());
+		jbean.setTime(jobBean.getTime());
+	
 		
 	}
 
-	// 透過刊登編號找一筆資料
+	// 透過rackID找一筆資料
 	@Override
 	public JobBean findBeanByRackID(int rackID) {
 		Session session = factory.getCurrentSession();
@@ -105,12 +98,11 @@ public class JobDAOimpl implements JobDAO {
 		List<JobBean> result = session.createQuery("from JobBean where job like :j", JobBean.class)
 		.setParameter("j", "%"+job+"%")
 		.getResultList();
-		System.out.println(result);
 
 		return result;
 	}
 
-	// 透過會員id找資料
+	// 透過uID找資料
 	@Override
 	public List<JobBean> findBeanByuID(int uID)  {
 		Session session = factory.getCurrentSession();

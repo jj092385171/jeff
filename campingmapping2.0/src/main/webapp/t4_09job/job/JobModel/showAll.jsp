@@ -42,8 +42,9 @@
 				<table class="t1">
 					<thead>
 						<tr>
-							<th>uID</th>
+							
 							<th>刊登編號</th>
+							<th>uID</th>
 							<th>職缺</th>
 							<th>薪水</th>
 							<th>人數</th>
@@ -60,8 +61,9 @@
 						<c:forEach var="JobBean" items="${showAllJob}">
 							<tr>
 
-								<td>${JobBean.uID}</td>
+								
 								<td>${JobBean.rackID}</td>
+								<td>${JobBean.uID}</td>
 								<td>${JobBean.job}</td>
 								<td>${JobBean.salary}</td>
 								<td>${JobBean.quantity}</td>
