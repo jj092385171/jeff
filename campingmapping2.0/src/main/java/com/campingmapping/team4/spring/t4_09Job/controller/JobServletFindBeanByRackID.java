@@ -26,11 +26,9 @@ public class JobServletFindBeanByRackID extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-//		String rackID = request.getParameter("up");
 		int rint = Integer.parseInt(request.getParameter("up"));
 		JobServiceImpl jsi = new JobServiceImpl();
 		JobBean JobBean = jsi.findBeanByRackID(rint);
-//		System.out.println(JobBean);
 		request.setAttribute("JobBean", JobBean);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/update.jsp");
