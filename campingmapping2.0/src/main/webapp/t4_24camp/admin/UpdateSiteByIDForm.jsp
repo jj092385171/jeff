@@ -21,20 +21,22 @@
 			<div>
 				<form name="UpdateSiteCampByIDForm" action="<c:url value='/T4_24/UpdateSiteByIDServlet' />"
 					method="POST" enctype="multipart/form-data">
-					營區位編號: <input type="text" name='siteID' readonly="readonly" value='${ site.siteID }'><br>
-					營區位名: <input type="text" name='siteName' value='${ site.siteName }'>
+					營區位編號: <input type="text" name='siteID' readonly="readonly"
+						value='${ site.siteID }${param.siteID}'><br>
+					營區位名: <input type="text" name='siteName' value='${ site.siteName }${param.siteName}'>
 					<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.siteName}</div>
 					<br>
 					<!-- 圖片: <input type="file" name="sitePictures">
 						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.sitePictures}</div>
 						<br> -->
-					總營位: <input type="text" name='totalSites' value='${ site.totalSites }'>
+					總營位: <input type="text" name='totalSites' value='${ site.totalSites }${param.totalSites}'>
 					<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.totalSites}</div>
 					<br>
-					營位金額: <input type="text" name='siteMoney' value='${ site.siteMoney }'>
+					營位金額: <input type="text" name='siteMoney' value='${ site.siteMoney }${param.siteMoney}'>
 					<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.siteMoney}</div>
 					<br>
-					營地編號: <input type="text" name='campID' readonly="readonly" value='${ site.camp.campID }'><br>
+					營地編號: <input type="text" name='campID' readonly="readonly"
+						value='${ site.camp.campID }${param.campID}'><br>
 					<input type="submit" value="更新">
 				</form>
 			</div>

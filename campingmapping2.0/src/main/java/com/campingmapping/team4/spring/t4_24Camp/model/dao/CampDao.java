@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.dao;
 
 import java.sql.Blob;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -69,28 +70,46 @@ public class CampDao {
 	//刪除營地
 	public boolean deletdByCampID(int campID){
 		Camp camp = session.get(Camp.class, campID);
-		System.out.println(camp);
-		
+
 		if(camp != null) {
-			System.out.println(deletdTagsByID(campID));
-			
-			SiteDao siteDao = new SiteDao(session);
-			Set<Site> sites = siteDao.findSitesByCampID(campID);
-			session.delete(sites);
+			deletdTagsByID(campID);
+			deleteSitesbyCampID(campID);
 			session.delete(camp);
 			return true;
 		}
 		
 		return false;
 	}
-	
+
 	//刪除TagOfCamp
 	public boolean deletdTagsByID(int campID){
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null) {
-			session.delete(camp.getTags());
-			return true;
+			Set<Tag> tags = camp.getTags();
+			Iterator<Tag> it = tags.iterator();
+			while (it.hasNext()) {
+				Tag tag = (Tag) it.next();
+				it.remove();
+//					session.delete(tag);
+			}
+		}
+		
+		return false;
+	}
+	
+	//刪除SitebyCampID
+	public boolean deleteSitesbyCampID(int campID){
+		Camp camp = session.get(Camp.class, campID);
+		
+		if(camp != null) {
+			Set<Site> sites = camp.getSites();
+			Iterator<Site> it = sites.iterator();
+			while (it.hasNext()) {
+				Site site = (Site) it.next();
+				it.remove();
+				session.delete(site);
+			}
 		}
 		
 		return false;

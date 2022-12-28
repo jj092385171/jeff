@@ -3,12 +3,12 @@ package com.campingmapping.team4.spring.t4_24Camp.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,6 +27,7 @@ public class DeleteCampByIDServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		HttpSession httpSession = request.getSession();
 
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
@@ -37,15 +38,15 @@ public class DeleteCampByIDServlet extends HttpServlet {
 		
 		CampDao campDao = new CampDao(session);
 		
-		String campID = request.getParameter("siteID");
-		
+		String campID = request.getParameter("campID");
+		System.out.println(campID);
 		campDao.deletdByCampID(Integer.valueOf(campID));
 	
-		request.setAttribute("ID","campID: " + campID + " 刪除成功");
+		httpSession.setAttribute("ID","campID: " + campID + " 刪除成功");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/DeleteByIDSuccess.jsp");
-		rd.forward(request, response);
-		return;
+//		String contextPath = request.getContextPath();
+//		response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_24camp/admin/DeleteByIDSuccess.jsp"));
+//		return;
 		
 	}
 

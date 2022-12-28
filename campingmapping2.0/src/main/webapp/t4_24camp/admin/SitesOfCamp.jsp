@@ -38,15 +38,15 @@
 							<td>${ site.totalSites }</td>
 							<td>${ site.siteMoney }</td>
 							<td>
-								<form action="<c:url value='/PageUpadteSiteByIDServlet?siteID=${site.siteID }'/>"
-									method="POST">
-									<button onclick="check()">更新</button>
+								<form action="<c:url value='/PageUpadteSiteByIDServlet'/>" method="POST">
+									<button onclick="return check()" type="submit" name="siteID"
+										value="${site.siteID }">更新</button>
 								</form>
 							</td>
 							<td>
-								<form action="<c:url value='/DeleteCampByIDServlet.do?siteID=${site.siteID }'/>"
-									method="POST">
-									<button onclick="check()">刪除</button>
+								<form action="<c:url value='/DeleteCampByIDServlet.do'/>" method="POST">
+									<button id="a" onclick="return check()" type="submit" name="siteID"
+										value="${site.siteID }">刪除</button>
 								</form>
 							</td>
 						</tr>
@@ -64,11 +64,18 @@
 				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
+
+			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 			<script>
 				function check() {
-					if (confirm('確定執行?') == true) {
+					var conf = confirm("確定執行?");
+					if (conf == true) {
+						alert("執行!!");
 						return true;
-					} else {
+					}
+					else {
+						alert("取消執行!");
+						// return false here
 						return false;
 					}
 				}

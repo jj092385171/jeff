@@ -7,6 +7,7 @@
 		<head>
 			<meta charset="utf-8" />
 			<title>EEIT56_露營</title>
+			<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		</head>
 
 		<body>
@@ -52,16 +53,19 @@
 								</c:forEach>
 							</td>
 							<td>
-								<form action="<c:url value='/UpadteCampByIDPageServlet.do?campID=${camp.campID }'/>"
-									method="POST">
-									<button onclick="check()">更新</button>
+								<form action="<c:url value='/UpadteCampByIDPageServlet.do'/>" method="POST">
+									<button onclick="return check()" type="submit" name="campID"
+										value="${camp.campID }">更新</button>
 								</form>
-
 							</td>
 							<td>
-								<form action="<c:url value='/DeleteSiteByIDServlet.do?campID=${camp.campID }'/>"
-									method="POST">
-									<button onclick="check()">刪除</button>
+								<!-- <form action="<c:url value='/DeleteCampByIDServlet.do'/>" method="POST">
+									<button onclick="return check()" type="submit" name="campID"
+										value="${camp.campID }">刪除</button>
+								</form> -->
+								<form>
+									<button class="delete" value="${camp.campID}" name="campID"
+										type="button">刪除</button>
 								</form>
 							</td>
 							<td>
@@ -85,13 +89,54 @@
 				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
+
+			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 			<script>
+				$(function () {
+					$('.delete').click(function () {
+						let id = $(this).attr("value");
+						Swal.fire({
+							title: 'Are you sure?',
+							text: "You won't be able to revert this!",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes, delete it!'
+						}).then((result) => {
+							console.log(result)
+							if (result.isConfirmed) {
+								$.ajax({
+									url: '/campingmapping2.0/DeleteCampByIDServlet.do',
+									method: "post",
+									dataType: "text",
+									data: { "campID": id },
+								})
+									.done(function () {
+										console.log("del")
+										// $(location).attr("href", "/campingmapping2.0/t4_24camp/admin/QueryPageForm.jsp")
+									})//done
+									.fail(function (error) {
+										console.log(error)
+									})//fail end
+							}//if
+						})//then
+
+					})//click end
+				});
+				//function end
+
+
 				function check() {
-					if (confirm('確定執行?') == true) {
-						action = "<c:url value='/UpadteCampByIDPageServlet.do?campID=${camp.campID }'/>"
-						method = "POST"
+					var conf = confirm("確定執行?");
+					if (conf == true) {
+						alert("執行!!");
 						return true;
-					} else {
+					}
+					else {
+						alert("取消執行!");
+						// return false here
 						return false;
 					}
 				}
