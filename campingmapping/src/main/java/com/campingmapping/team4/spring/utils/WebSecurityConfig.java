@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.utils;
+package com.campingmapping.team4.spring.Global;
 
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
