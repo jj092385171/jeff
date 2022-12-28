@@ -1,0 +1,17 @@
+server:
+  servlet:
+    context-path: /campingmapping
+  port: 8080
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.SQLServer2016Dialect
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True
+    username: sa
+    password: "0000"
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+
