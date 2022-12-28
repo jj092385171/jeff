@@ -12,7 +12,7 @@ import javax.servlet.http.HttpFilter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-@WebFilter(urlPatterns = "/456465")
+@WebFilter(urlPatterns = "/*")
 public class OpenSessionInViewFilter extends HttpFilter implements Filter {
        
 	
@@ -40,6 +40,5 @@ public class OpenSessionInViewFilter extends HttpFilter implements Filter {
 			System.out.println("Session Close!");
 		}
 	}
-
 
 }

@@ -33,7 +33,8 @@
 
 <!-- ==================================================== -->
 
-<!-- 		<mapping class="com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean" /> -->
+		<mapping class="com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean" />
+		<mapping class="com.campingmapping.team4.spring.t4_11Team.model.Initiating" />
 
 <!-- ==================================================== -->
 
