@@ -1,6 +1,6 @@
-  =>  Template Name    : Tourist - Travel Agency HTML Template
+  =>  Template Name    : Loft City - HTML Travel & Tourism Template
 
-  =>  Template Link    : https://htmlcodex.com/travel-agency-html-template
+  =>  Template Link    : https://htmlcodex.com/html-travel-tourism-template
 
   =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
 
