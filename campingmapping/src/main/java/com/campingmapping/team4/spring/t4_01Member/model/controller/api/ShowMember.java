@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring;
+package com.campingmapping.team4.spring.t4_01Member.model.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
