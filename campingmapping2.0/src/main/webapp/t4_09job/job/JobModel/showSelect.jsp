@@ -37,7 +37,7 @@
 				}
 			</style>
 		</head>
-
+<h2 class="b">修改成功！</h2>
 		<body>
 			<div class="c1">
 				<table class="t1">

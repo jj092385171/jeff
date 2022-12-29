@@ -110,7 +110,8 @@ public class JobServletUpdate extends HttpServlet {
 		}
 		System.out.println(jobBean);
 		jobServiceImpl.updateJob(jobBean);
-		RequestDispatcher rd = request.getRequestDispatcher("/JobServletShowAll");
+		request.setAttribute("JobBean", jobBean);
+		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/updateSucces.jsp");
 
 		rd.forward(request, response);
 		return;
