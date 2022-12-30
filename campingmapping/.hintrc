@@ -16,6 +16,14 @@
       {
         "image-alt": "off"
       }
-    ]
+    ],
+    "axe/time-and-media": "off",
+    "meta-viewport": "off",
+    "axe/forms": "off",
+    "button-type": "off",
+    "axe/structure": "off",
+    "axe/aria": "off",
+    "axe/parsing": "off",
+    "disown-opener": "off"
   }
 }

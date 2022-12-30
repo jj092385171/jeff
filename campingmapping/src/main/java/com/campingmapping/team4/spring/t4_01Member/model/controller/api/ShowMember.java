@@ -12,7 +12,7 @@ public class ShowMember {
 	@Autowired
 	MemberServiceImpl memberServiceImpl;
 
-	@GetMapping(  "/ShowMember")
+	@GetMapping("/showmemberapi")
 	@ResponseBody
 	public Iterable<Member> getMemberList() {
 		return memberServiceImpl.showMember();
