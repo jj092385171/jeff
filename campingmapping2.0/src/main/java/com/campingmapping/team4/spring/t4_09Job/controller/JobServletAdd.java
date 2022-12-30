@@ -35,32 +35,31 @@ public class JobServletAdd extends HttpServlet {
 
 		// 驗證會員id輸入格式
 		try {
-			Integer uID = Integer.parseInt(request.getParameter("id"));
+			Integer uID = Integer.parseInt(request.getParameter("uid"));
 			jobBean.setuID(uID);
 		} catch (Exception e) {
 			errorMessage.put("id", "輸入格式錯誤");
 		}
 		request.setAttribute("ErrorMsg", errorMessage);
 		// 驗證刊登id輸入格式
-		try {
-			Integer rackID = Integer.parseInt(request.getParameter("rackID"));
-			jobBean.setRackID(rackID);
-
-//			System.out.println(jobBean.getuID());
-
-			try {
-				JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
-				if (findBeanByRackID.getRackID() == rackID) {
-					errorMessage.put("rackID", "編號重複,新增失敗");
-					request.setAttribute("ErrorMsg", errorMessage);
-				}
-			} catch (Exception e) {
-			}
-			
-		} catch (Exception e) {
-			errorMessage.put("rackID", "輸入格式錯誤");
-			request.setAttribute("ErrorMsg", errorMessage);
-		}
+//		try {
+//			Integer rackID = Integer.parseInt(request.getParameter("rackID"));
+//			jobBean.setRackID(rackID);
+//
+//
+//			try {
+//				JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
+//				if (findBeanByRackID.getRackID() == rackID) {
+//					errorMessage.put("rackID", "編號重複,新增失敗");
+//					request.setAttribute("ErrorMsg", errorMessage);
+//				}
+//			} catch (Exception e) {
+//			}
+//			
+//		} catch (Exception e) {
+//			errorMessage.put("rackID", "輸入格式錯誤");
+//			request.setAttribute("ErrorMsg", errorMessage);
+//		}
 
 //		// 驗證刊登編號是否重複
 //		Integer rackID = Integer.parseInt(request.getParameter("rackID"));

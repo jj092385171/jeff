@@ -5,7 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,13 +15,12 @@ import javax.persistence.Table;
 
 public class JobBean {
 
-	
-	@Column(name = "uID")
-	private int uID;//會員
 	@Id 
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rackID")
 	private int rackID;//刊登編號
+	@Column(name = "uID")
+	private int uID;//會員
 	@Column(name = "job")
 	private String job;//職缺
 	@Column(name = "salary")
@@ -42,85 +42,32 @@ public class JobBean {
 	@Column(name = "rackDown")
 	private Date rackDown;//下架日期
 	
-	public int getuID() {
-		return uID;
-	}
-	public void setuID(int uID) {
-		this.uID = uID;
-	}
-	public int getRackID() {
-		return rackID;
-	}
-	public void setRackID(int rackID) {
+	
+	public JobBean(int rackID, int uID, String job, String salary, int quantity, String place, String date, String time,
+			Blob img, String remark, Date rackUp, Date rackDown) {
+		super();
 		this.rackID = rackID;
-	}
-	public String getJob() {
-		return job;
-	}
-	public void setJob(String job) {
+		this.uID = uID;
 		this.job = job;
-	}
-	public String getSalary() {
-		return salary;
-	}
-	public void setSalary(String salary) {
 		this.salary = salary;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-	public String getPlace() {
-		return place;
-	}
-	public void setPlace(String place) {
 		this.place = place;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
 		this.date = date;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
 		this.time = time;
-	}
-	public Blob getImg() {
-		return img;
-	}
-	public void setImg(Blob img) {
 		this.img = img;
-	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-	public Date getRackUp() {
-		return rackUp;
-	}
-	public void setRackUp(Date rackUp) {
 		this.rackUp = rackUp;
-	}
-	public Date getRackDown() {
-		return rackDown;
-	}
-	public void setRackDown(Date rackDown) {
 		this.rackDown = rackDown;
 	}
+
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("JobBean [uID=");
-		builder.append(uID);
-		builder.append(", rackID=");
+		builder.append("JobBean [rackID=");
 		builder.append(rackID);
+		builder.append(", uID=");
+		builder.append(uID);
 		builder.append(", job=");
 		builder.append(job);
 		builder.append(", salary=");
@@ -144,22 +91,123 @@ public class JobBean {
 		builder.append("]");
 		return builder.toString();
 	}
-	public JobBean(int uID, int rackID, String job, String salary, int quantity, String place, String date, String time,
-			Blob img, String remark, Date rackUp, Date rackDown) {
-		super();
+
+
+	public int getuID() {
+		return uID;
+	}
+
+
+	public void setuID(int uID) {
 		this.uID = uID;
-		this.rackID = rackID;
+	}
+
+
+	public String getJob() {
+		return job;
+	}
+
+
+	public void setJob(String job) {
 		this.job = job;
+	}
+
+
+	public String getSalary() {
+		return salary;
+	}
+
+
+	public void setSalary(String salary) {
 		this.salary = salary;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+
+	public String getPlace() {
+		return place;
+	}
+
+
+	public void setPlace(String place) {
 		this.place = place;
+	}
+
+
+	public String getDate() {
+		return date;
+	}
+
+
+	public void setDate(String date) {
 		this.date = date;
+	}
+
+
+	public String getTime() {
+		return time;
+	}
+
+
+	public void setTime(String time) {
 		this.time = time;
+	}
+
+
+	public Blob getImg() {
+		return img;
+	}
+
+
+	public void setImg(Blob img) {
 		this.img = img;
+	}
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+
+	public Date getRackUp() {
+		return rackUp;
+	}
+
+
+	public void setRackUp(Date rackUp) {
 		this.rackUp = rackUp;
+	}
+
+
+	public Date getRackDown() {
+		return rackDown;
+	}
+
+
+	public void setRackDown(Date rackDown) {
 		this.rackDown = rackDown;
 	}
+
+
+	public int getRackID() {
+		return rackID;
+	}
+
+
 	public JobBean() {
 	}
 	

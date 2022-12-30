@@ -30,16 +30,16 @@
 		<div class="c1">
 
 			<p>
-				會員id <input type="text" name="id" value='${param.id}'  required >
+				會員id <input type="text" name="uid" value='${param.uid}' required>
 			</p>
 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.id}</div>
 
-			<hr>
-			<p>
-				刊登編號 <input class="cl" type="text" name="rackID"
-					value='${param.rackID}' required>
-			</p>
-			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.rackID}</div>
+			<!-- 			<hr> -->
+			<!-- 			<p> -->
+			<!-- 				刊登編號 <input class="cl" type="text" name="rackID" -->
+			<%-- 					value='${param.rackID}' required> --%>
+			<!-- 			</p> -->
+			<%-- 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.rackID}</div> --%>
 
 			<hr>
 			<p>
@@ -63,7 +63,7 @@
 			<hr>
 
 			<p>
-				人數 <input type="text" name="quantity" value='${param.quantity}' 
+				人數 <input type="text" name="quantity" value='${param.quantity}'
 					required>
 			</p>
 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
@@ -97,7 +97,7 @@
 			<hr>
 
 			<p>
-				照片上傳 <input type="file" name="img" value='${param.img}' >
+				照片上傳 <input type="file" name="img" value='${param.img}'>
 			</p>
 			<hr>
 
@@ -110,17 +110,17 @@
 				value="取消">
 		</div>
 	</form>
-	
-		<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />" method="POST"
-							enctype="multipart/form-data">
-			
-			<div class="b">
+
+	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"
+		method="POST" enctype="multipart/form-data">
+
+		<div class="b">
 			<button>回首頁</button>
-			</div>
-		</form>
-	
+		</div>
+	</form>
+
 	<script src="https://code.jquery.com/jquery-3.6.1.js">
-	
+		
 	</script>
 
 
