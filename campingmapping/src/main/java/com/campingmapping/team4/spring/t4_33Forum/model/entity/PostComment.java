@@ -1,37 +1,35 @@
 package com.campingmapping.team4.spring.t4_33Forum.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.campingmapping.team4.spring.t4_01Member.model.entity.Member;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name="postComment")
+@Table(name = "postComment")
 public class PostComment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="postCommentId")
+	@Column(name = "postCommentId")
 	private int postCommentId;
 	@ManyToOne
-	@JoinColumn(name="postId")
+	@JoinColumn(name = "postId")
 	private Post post;
-//	@ManyToOne
-//	@JoinColumn(name="userId")
-//	private Member member;
-	@Column(name="postComment")
+	// @ManyToOne
+	// @JoinColumn(name="userId")
+	// private Member member;
+	@Column(name = "postComment")
 	private String postComment;
-	@Column(name="postCommentReport")
+	@Column(name = "postCommentReport")
 	private int postCommentReport;
-	@Column(name="postCommentHide")
+	@Column(name = "postCommentHide")
 	private int postCommentHide;
-	
+
 	public PostComment() {
 	}
 
@@ -42,7 +40,7 @@ public class PostComment {
 	public void setPostCommentId(int postCommentId) {
 		this.postCommentId = postCommentId;
 	}
-	
+
 	public Post getPost() {
 		return post;
 	}
@@ -51,13 +49,13 @@ public class PostComment {
 		this.post = post;
 	}
 
-//	public Member getMember() {
-//		return member;
-//	}
-//
-//	public void setMember(Member member) {
-//		this.member = member;
-//	}
+	// public Member getMember() {
+	// return member;
+	// }
+	//
+	// public void setMember(Member member) {
+	// this.member = member;
+	// }
 
 	public String getPostComment() {
 		return postComment;
@@ -83,5 +81,4 @@ public class PostComment {
 		this.postCommentHide = postCommentHide;
 	}
 
-	
 }

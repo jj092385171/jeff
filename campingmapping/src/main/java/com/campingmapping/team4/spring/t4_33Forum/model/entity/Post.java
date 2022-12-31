@@ -3,58 +3,54 @@ package com.campingmapping.team4.spring.t4_33Forum.model.entity;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.campingmapping.team4.spring.t4_01Member.model.entity.Member;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name="post")
+@Table(name = "post")
 public class Post {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="postId")
+	@Column(name = "postId")
 	private int postId;
-//	@ManyToOne
-//	@JoinColumn(name="userId")
-//	private Member member;
-	
+	// @ManyToOne
+	// @JoinColumn(name="userId")
+	// private Member member;
+
 	private int userId;
-	
-	@Column(name="title")
+
+	@Column(name = "title")
 	private String title;
-	@Column(name="content")
+	@Column(name = "content")
 	private String content;
-	@Column(name="people")
+	@Column(name = "people")
 	private int people;
-	@Column(name="price")
+	@Column(name = "price")
 	private int price;
-	@Column(name="county")
+	@Column(name = "county")
 	private String county;
-	@Column(name="startDate")
+	@Column(name = "startDate")
 	private Date startDate;
-	@Column(name="endDate")
+	@Column(name = "endDate")
 	private Date endDate;
-	@Column(name="score")
+	@Column(name = "score")
 	private int score;
-	@Column(name="releaseDate")
+	@Column(name = "releaseDate")
 	private Timestamp releaseDate;
-	@Column(name="userLike")
+	@Column(name = "userLike")
 	private int userLike;
-	@Column(name="userUnlike")
+	@Column(name = "userUnlike")
 	private int userUnlike;
-	@Column(name="postReport")
+	@Column(name = "postReport")
 	private int postReport;
-	@Column(name="postHide")
+	@Column(name = "postHide")
 	private int postHide;
-	
+
 	public Post() {
 	}
 
@@ -66,13 +62,13 @@ public class Post {
 		this.postId = postId;
 	}
 
-//	public Member getMember() {
-//		return member;
-//	}
-//
-//	public void setMember(Member member) {
-//		this.member = member;
-//	}
+	// public Member getMember() {
+	// return member;
+	// }
+	//
+	// public void setMember(Member member) {
+	// this.member = member;
+	// }
 
 	public String getTitle() {
 		return title;
@@ -187,5 +183,4 @@ public class Post {
 		this.userId = userId;
 	}
 
-	
 }

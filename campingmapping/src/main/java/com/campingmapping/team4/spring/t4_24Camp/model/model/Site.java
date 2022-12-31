@@ -2,45 +2,43 @@ package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
 import java.sql.Blob;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "site")
 public class Site {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "siteID")
 	private Integer siteID;
-	
+
 	@Column(name = "siteName")
 	private String siteName;
-	
+
 	@Column(name = "sitePictures")
 	private Blob sitePictures;
-	
+
 	@Column(name = "totalSites")
 	private Integer totalSites;
-	
+
 	@Column(name = "siteMoney")
 	private Integer siteMoney;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "fk_campID")
 	private Camp camp;
-	
-	
+
 	public Site() {
 	}
 
-	
 	public Integer getSiteID() {
 		return siteID;
 	}
@@ -88,6 +86,5 @@ public class Site {
 	public void setCamp(Camp camp) {
 		this.camp = camp;
 	}
-
 
 }

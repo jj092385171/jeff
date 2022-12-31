@@ -3,33 +3,31 @@ package com.campingmapping.team4.spring.t4_24Camp.model.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tag")
 public class Tag {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tagID")
 	private Integer tagID;
-	
+
 	@Column(name = "tagName")
 	private String tagName;
-	
+
 	@ManyToMany(mappedBy = "tags")
 	private Set<Camp> camps = new HashSet<>();
-	
 
 	public Tag() {
 	}
-
 
 	public Integer getTagID() {
 		return tagID;
@@ -47,8 +45,6 @@ public class Tag {
 		this.tagName = tagName;
 	}
 
-	
-
 	public Set<Camp> getCamps() {
 		return camps;
 	}
@@ -56,6 +52,5 @@ public class Tag {
 	public void setCamps(Set<Camp> camps) {
 		this.camps = camps;
 	}
-
 
 }

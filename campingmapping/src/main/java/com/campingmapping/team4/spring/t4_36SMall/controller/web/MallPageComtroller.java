@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MallPageComtroller {
 
 	@GetMapping({ "", "/" })
-	public String getMemberList() {
+	public String mallIndex() {
 		return "mall/index";
 	}
 
