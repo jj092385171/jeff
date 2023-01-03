@@ -14,7 +14,7 @@ import util.HibernateUtils;
 public class CategoryServiceImpl implements CategoryService {
 
 	
-	private final CategoryDao categoryDao = new CategoryDaoImpl(HibernateUtils.getSessionFactory().getCurrentSession());
+	private final CategoryDao categoryDao = new CategoryDaoImpl(HibernateUtils.getSessionFactory().openSession());
 
 	@Override
 	public void create(Category category) throws SQLException {

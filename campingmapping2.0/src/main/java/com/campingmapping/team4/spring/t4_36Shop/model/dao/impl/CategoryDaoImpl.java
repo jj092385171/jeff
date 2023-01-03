@@ -18,8 +18,8 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	// 新增一筆記錄---
 	public Category insert(Category category) {
-
-		session.save(category);
+		session.saveOrUpdate(category);
+		session.close();
 		return category;
 	}
 
@@ -29,6 +29,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
 		if (category != null) {
 			session.delete(category);
+			session.close();
 			return true;
 		}
 
@@ -42,6 +43,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		if (updateByPdid != null) {
 			session.saveOrUpdate(category);
 		}
+		session.close();
 	}
 
 	// 使用Pdid搜尋
@@ -51,7 +53,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		if (category != null) {
 			return category;
 		}
-
+		session.close();
 		return null;
 	}
 
@@ -74,7 +76,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	public List<Category> selectAll() {
 		Query<Category> query = session.createQuery("from Category", Category.class);
 		List<Category> resultList = query.getResultList();
-
+		session.close();
 		return resultList;
 	}
 

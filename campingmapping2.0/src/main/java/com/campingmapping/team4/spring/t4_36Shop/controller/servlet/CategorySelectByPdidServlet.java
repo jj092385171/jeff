@@ -31,7 +31,6 @@ public class CategorySelectByPdidServlet extends HttpServlet {
 		try {
 			select = cgS.select(parameter);
 			req.setAttribute("Category", select);
-			System.out.println(select.toString());
 			RequestDispatcher rd = req.getRequestDispatcher("http://localhost:8080/campingmapping2.0/t4_36shop/admin/Pd_update.jsp");
 			rd.forward(req, resp);
 			return;
