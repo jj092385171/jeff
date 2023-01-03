@@ -7,4 +7,6 @@ public interface MemberService {
 	public Iterable<Member> showMember();
 
 	public int delete(String account);
+
+	public Member findMemberById(Integer id);
 }

@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t4_01Member.model.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t4_01Member.model.dao.repository.MemberRepository;
@@ -26,8 +27,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public int delete(String account) {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	@Transactional
+	public Member findMemberById(Integer id) {
+		return memberRepository.findById(id).get();
+
+		
+
 	}
 
 }
