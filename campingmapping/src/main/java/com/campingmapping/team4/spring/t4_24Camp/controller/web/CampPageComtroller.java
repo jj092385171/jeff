@@ -10,7 +10,7 @@ public class CampPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String campIndex() {
-		return "camp/index";
+		return "camp/guest/index";
 	}
 
 }

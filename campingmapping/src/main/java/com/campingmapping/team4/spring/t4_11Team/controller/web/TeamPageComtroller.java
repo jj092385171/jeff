@@ -10,7 +10,7 @@ public class TeamPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String teamIndex() {
-		return "team/index";
+		return "team/guest/index";
 	}
 
 }

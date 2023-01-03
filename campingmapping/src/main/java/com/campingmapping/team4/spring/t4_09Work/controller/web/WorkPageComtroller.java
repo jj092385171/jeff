@@ -10,7 +10,7 @@ public class WorkPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String workIndex() {
-		return "work/index";
+		return "work/guest/index";
 	}
 
 }

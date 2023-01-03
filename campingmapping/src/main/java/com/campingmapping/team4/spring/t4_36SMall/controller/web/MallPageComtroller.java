@@ -10,7 +10,7 @@ public class MallPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String mallIndex() {
-		return "mall/index";
+		return "mall/guest/index";
 	}
 
 }

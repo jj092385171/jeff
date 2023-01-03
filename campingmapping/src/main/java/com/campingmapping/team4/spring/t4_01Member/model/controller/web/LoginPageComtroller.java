@@ -8,17 +8,17 @@ public class LoginPageComtroller {
 
 	@GetMapping({ "/login", "/login/" })
 	public String login() {
-		return "camper/login";
+		return "camper/global/login";
 	}
 
 	@GetMapping({ "/register", "/register/" })
 	public String register() {
-		return "camper/register";
+		return "camper/global/register";
 	}
 
 	@GetMapping({ "/forgotpassword", "/forgotpassword/" })
 	public String forgotPassword() {
-		return "camper/forgotpassword";
+		return "camper/global/forgotpassword";
 	}
 
 }

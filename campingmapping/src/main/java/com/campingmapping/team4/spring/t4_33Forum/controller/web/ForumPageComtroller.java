@@ -10,7 +10,7 @@ public class ForumPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String forumIndex() {
-		return "forum/index";
+		return "forum/guest/index";
 	}
 
 }

@@ -10,7 +10,7 @@ public class CamperPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String camperIndex() {
-		return "camper/index";
+		return "camper/guest/index";
 	}
 
 }
