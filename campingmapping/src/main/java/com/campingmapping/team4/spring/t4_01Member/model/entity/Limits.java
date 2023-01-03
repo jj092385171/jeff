@@ -34,10 +34,10 @@ public class Limits {
     // 賣家
     @Column(name = "sell")
     private String sell;
-    // publisher
+    // post
     // 發文
-    @Column(name = "publisher")
-    private String publisher;
+    @Column(name = "post")
+    private String post;
     // message
     // 留言
     @Column(name = "message")
@@ -50,28 +50,28 @@ public class Limits {
     // 應徵者
     @Column(name = "applier")
     private String applier;
-    // mainhoster
+    // teamleader
     // 揪團主
-    @Column(name = "mainhoster")
-    private String mainhoster;
-    // attender
+    @Column(name = "teamleader")
+    private String teamleader;
+    // teammember
     // 參加者
-    @Column(name = "attender")
-    private String attender;
+    @Column(name = "teammember")
+    private String teammember;
     // campingowner
     // 營主
     @Column(name = "campingowner")
     private String campingowner;
-    // customer
+    // camporder
     // 營地預定
-    @Column(name = "customer")
-    private String customer;
+    @Column(name = "camporder")
+    private String camporder;
     // admin
     @Column(name = "admin")
     private String admin;
-    // member
-    @Column(name = "members")
-    private String members;
+    // camper
+    @Column(name = "camper")
+    private String camper;
     // show
     @Column(name = "show")
     private String show;
