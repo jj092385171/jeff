@@ -23,12 +23,12 @@ import com.campingmapping.team4.spring.t4_33Forum.model.service.PostService;
 
 import util.HibernateUtils;
 
-
-@WebServlet("/T4_33/newPostServlet")
-public class newPostServlet extends HttpServlet {
+@WebServlet("/T4_33/updatePostServlet")
+public class updatePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			SessionFactory factory = HibernateUtils.getSessionFactory();
@@ -38,59 +38,72 @@ public class newPostServlet extends HttpServlet {
 			HttpSession httpSession = request.getSession();
 			
 			Post post = new Post();
-			//取得輸入的title
-			String title = request.getParameter("title"); 
+			String postId = request.getParameter("postId"); //取得傳送來的postId
+			post.setPostId(Integer.parseInt(postId)); 
+			String title = request.getParameter("title"); //取得更新的title
 			post.setTitle(title);
-			//取得輸入的content
-			String content = request.getParameter("content"); 
+			String content = request.getParameter("content"); //取得更新的content
 			post.setContent(content);
-			//取得輸入的people
-			String stringPeople = request.getParameter("people"); 
+//			String stringPicture = request.getParameter("picture"); //取得更新的picture
+//			System.out.println(stringPicture);
+//			InputStream isPicture = null;
+//			if(stringPicture != "") {
+//				isPicture = new ByteArrayInputStream(stringPicture.getBytes()); //String要轉成inputStream
+//			}
+//			bean.setPicture(isPicture);
+			
+//			String picture = request.getParameter("picture"); //取得更新的picture
+//			if(picture != "") {
+////				String path=request.getSession().getServletContext().getRealPath("/")+"/imgs";
+////				OutputStream out = new FileOutputStream(new File(path, picture));
+//				picture = "../imgs/" + picture; //
+//			}
+//			post.setPicture(picture);
+//			System.out.println(picture);
+			
+			String stringPeople = request.getParameter("people"); //取得更新的people
 			int people = 0;
 			if(stringPeople != "") {
 				people = Integer.parseInt(stringPeople);
 			}
 			post.setPeople(people);
-			//取得輸入的price
-			String stringPrice = request.getParameter("price"); 
+			String stringPrice = request.getParameter("price"); //取得更新的price
 			int price = 0;
 			if(stringPrice != "") {
 				price = Integer.parseInt(stringPrice);
 			}
 			post.setPrice(price);
-			//取得輸入的county
-			String county = request.getParameter("county"); 
+			String county = request.getParameter("county"); //取得更新的county
 			post.setCounty(county);
-			//取得輸入的startDate
-			String stringStartDate = request.getParameter("startDate"); 
+			String stringStartDate = request.getParameter("startDate"); //取得更新的startDate
 			Date startDate = null;
 			if(stringStartDate != "") {
 				startDate = date.parse(stringStartDate); //--> String轉成utilDate
 			}
 			post.setStartDate(startDate);
-			//取得輸入的endDate
-			String stringEndDate = request.getParameter("endDate"); 
+			String stringEndDate = request.getParameter("endDate"); //取得更新的endDate
 			Date endDate = null;
 			if(stringEndDate != "") {
 				endDate = date.parse(stringEndDate); //--> String轉成utilDate
 			}
 			post.setEndDate(endDate);
-			//取得輸入的score
-			String stringScore = request.getParameter("score"); 
+			String stringScore = request.getParameter("score"); //取得更新的score
 			int score = 0;
 			if(stringScore != "") {
 				score = Integer.parseInt(stringScore);
 			}
 			post.setScore(score);
 			
-			PostService postService = new PostService(session); //送到資料庫建立post
-			postService.insertPost(post);
-			
+			PostService postService = new PostService(session); //送到資料庫更新post
+			postService.updatePost(post); 
 			
 			List<Post> list = postService.selectAllPost();
+			for(Post p : list) {
+				System.out.println(p.getStartDate());
+			}
 			httpSession.setAttribute("postList", list);
 			
-//			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPost.jsp");
+//			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPostServlet");
 //			rd.forward(request, response);
 			String contextPath = request.getContextPath();
 			
