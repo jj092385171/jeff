@@ -81,8 +81,8 @@ public class PostDao {
 	
 	// 查詢被檢舉貼文
 	public List<Post> selectReportPost(Post post) throws SQLException {
-		String hql = "from Post where postReport = ?1 order by releaseDate desc";
-		List<Post> resultList = this.session.createQuery(hql, Post.class).setParameter(1, post.getPostReport()).getResultList();
+		String hql = "from Post where postReport = ?1 and postHide !=?2 order by releaseDate desc";
+		List<Post> resultList = this.session.createQuery(hql, Post.class).setParameter(1, post.getPostReport()).setParameter(2, post.getPostHide()).getResultList();
 		return resultList;
 	}
 	

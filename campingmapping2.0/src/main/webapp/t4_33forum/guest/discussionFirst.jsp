@@ -35,20 +35,24 @@
         <input type="submit" value="新增貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showForumManagerServlet' />" value="管理者首頁">
         <input type="submit" formaction="<c:url value='/testIndex.jsp' />" value="回首頁">
+    </form>    
         <table>
         	<tbody>
         	<c:forEach var="post" items="${postList}">
         		<tr>
         		<td>
+        			<form method="POST">
+        			<input type="hidden" name="postId" value="${post.postId}">
         			<h3>${post.title}</h3>
         			${post.content}<br><br>
         			最後更新日期:${post.releaseDate}<br>
-        			<input type="submit" formaction="<c:url value='/T4_33/showPostServlet?postId=${post.postId}' />" value="查看貼文">
+        			<input type="submit" formaction="<c:url value='/T4_33/showPostServlet' />" value="查看貼文">
+        			</form>
         		</td>
         		</tr>
         	</c:forEach>
         	</tbody>
         </table>
-    </form>
+
 </body>
 </html>

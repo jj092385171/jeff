@@ -2,6 +2,7 @@ package com.campingmapping.team4.spring.t4_33Forum.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -42,7 +43,7 @@ public class showForumManagerServlet extends HttpServlet {
 			response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_33forum/admin/ForumManagerFirst.jsp"));
 			return;
 			
-		} catch (IOException | SQLException e) {
+		} catch (IOException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}
 	}

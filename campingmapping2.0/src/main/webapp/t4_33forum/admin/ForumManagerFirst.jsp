@@ -36,6 +36,7 @@
         <input type="submit" formaction="<c:url value='/T4_33/showHidePostServlet' />" value="查詢隱藏貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showReportPostServlet' />" value="查詢被檢舉的貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showDiscussionServlet' />" value="回討論區首頁">
+    </form>    
         <table>
         	<thead>
         		<tr>
@@ -75,13 +76,16 @@
         		<td>${post.postReport}</td>
         		<td>${post.postHide}</td>
         		<td>
-        			<input type="submit" formaction="<c:url value='/T4_33/showUpdatePostServlet?postId=${post.postId}' />" value="修改貼文">
-        			<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet?postId=${post.postId}' />" value="隱藏貼文">
+        			<form method="POST">
+        			<input type="hidden" name="postId" value="${post.postId}">
+        			<input type="submit" formaction="<c:url value='/T4_33/showUpdatePostServlet' />" value="修改貼文">
+        			<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet' />" value="隱藏貼文" onclick="return confirm('是否確定隱藏?');">
+        			</form>
         		</td>
         		</tr>
         	</c:forEach>
         	</tbody>
         </table>
-    </form>
+    
 </body>
 </html>

@@ -62,7 +62,7 @@
 		</div>
 		<div>
 			<input type="hidden" name="postId" value="${postId}">
-			<input type="submit" value="修改完成">
+			<input type="submit" value="修改完成" onclick="return confirm('是否確定修改?');">
 		</div>
 	</form>
 	<script>

@@ -74,7 +74,7 @@
 		</div>
 		<div>
 			<input type="submit" formaction="<c:url value='/T4_33/showUpdatePostServlet' />" value="修改貼文">
-			<input type="submit" formaction="<c:url value='/T4_33/reportPostServlet' />" value="檢舉貼文">
+			<input type="submit" formaction="<c:url value='/T4_33/reportPostServlet' />" value="檢舉貼文" onclick="return confirm('是否確定檢舉?');">
 <%-- 			<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet' />" value="隱藏貼文"> --%>
 <%-- 			<input type="submit" formaction="<c:url value='/T4_33/deletePostServlet' />" value="刪除貼文"> --%>
 			<input type="submit" formaction="<c:url value='/T4_33/showDiscussionServlet' />" value="回討論區">

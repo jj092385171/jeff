@@ -36,7 +36,7 @@
 	<h3 class="titleh3">隱藏貼文</h3>
 	<form action="<c:url value='/T4_33/showForumManagerServlet' />" method="POST" id="postForm">
         <input type="submit" value="回管理者首頁">
-        
+    </form>    
         <table>
         	<thead>
         		<tr>
@@ -76,12 +76,15 @@
         			<td>${postHideList.postReport}</td>
         			<td>${postHideList.postHide}</td>
         			<td>
-        				<input type="submit" formaction="<c:url value='/T4_33/cancelHidePostServlet?postId=${postHideList.postId}' />" value="取消隱藏貼文">
+        				<form method="POST">
+        				<input type="hidden" name="postId" value="${postHideList.postId}">
+        				<input type="submit" formaction="<c:url value='/T4_33/cancelHidePostServlet' />" id="cancelHide" value="取消隱藏貼文" onclick="return confirm('是否確定取消隱藏?');">
+        				</form>
         			</td>
         		</tr>
         	</c:forEach>
         	</tbody>
         </table>
-    </form>
+   
 </body>
 </html>

@@ -2,6 +2,9 @@ package com.campingmapping.team4.spring.t4_33Forum.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,6 +26,8 @@ import util.HibernateUtils;
 public class showDiscussionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			SessionFactory factory = HibernateUtils.getSessionFactory();
@@ -42,7 +47,7 @@ public class showDiscussionServlet extends HttpServlet {
 			response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_33forum/guest/discussionFirst.jsp"));
 			return;
 			
-		} catch (IOException | SQLException e) {
+		} catch (IOException | SQLException | ParseException  e) {
 			e.printStackTrace();
 		}
 	}
