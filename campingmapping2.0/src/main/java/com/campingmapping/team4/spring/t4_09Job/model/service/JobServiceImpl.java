@@ -35,7 +35,7 @@ public class JobServiceImpl implements JobService {
 			jb = jobDAO.selectAll();
 			session.getTransaction().commit();
 			return jb;
-		} catch (Exception e) {
+		} catch (Exception  e) {
 			session.getTransaction().rollback();
 			e.printStackTrace();
 			return null;
