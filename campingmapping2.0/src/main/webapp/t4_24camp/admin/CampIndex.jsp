@@ -7,11 +7,12 @@
 		<head>
 			<meta charset="utf-8" />
 			<title>EEIT56_露營</title>
+			<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		</head>
 
 		<body>
 			<div>
-				<a href="<c:url value='/IndexShowAllPageServlet' />"><strong>營地_營區位管理</strong></a>
+				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>
@@ -27,46 +28,53 @@
 						<th>營地圖片</th>
 						<th>營地簡介</th>
 						<th>營地標籤</th>
-					</tr>
-					<tr>
-						<th>&emsp;&emsp;營位區編號</th>
-						<th>&emsp;營位區名</th>
-						<th>&emsp;營區位圖片</th>
-						<th>&emsp;總營位</th>
-						<th>&emsp;營位金額</th>
+						<th>更新</th>
+						<th>刪除</th>
+						<th>新增營區位</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var='all' items='${showALL}'>
+					<c:forEach var='camp' items='${allCamps}'>
 						<tr>
-							<td>${ all.campID }</td>
-							<td>${ all.campName }</td>
-							<td>${ all.city.cityID }</td>
-							<td>${ all.city.cityName }</td>
-							<td>${ all.location }</td>
+							<td>${ camp.campID }</td>
+							<td><a href="<c:url value='/SitesOfCampServlet.do?campID=${ camp.campID }' />">${
+									camp.campName }</a></td>
+							<td>${ camp.city.cityID }</td>
+							<td>${ camp.city.cityName }</td>
+							<td>${ camp.location }</td>
 							<!-- <td>
 								<img width="80" height="100"
-									src="<c:url value='/T4_24/GetCampImage?id=${all.campID}'/>" />
+								src="<c:url value='/T4_24/GetCampImage?id=${camp.campID}'/>" />
 							</td> -->
-							<td>${ all.description }</td>
+							<td>${ camp.description }</td>
 							<td>
-								<c:forEach var='tag' items='${all.tags}'>
+								<c:forEach var='tag' items='${camp.tags}'>
 									${tag.tagName} &nbsp; / &nbsp;
 								</c:forEach>
 							</td>
+							<td>
+								<form action="<c:url value='/UpadteCampByIDPageServlet.do'/>" method="POST">
+									<button onclick="return check()" type="submit" name="campID"
+										value="${camp.campID }">更新</button>
+								</form>
+							</td>
+							<td>
+								<!-- <form action="<c:url value='/DeleteCampByIDServlet.do'/>" method="POST">
+									<button onclick="return check()" type="submit" name="campID"
+										value="${camp.campID }">刪除</button>
+								</form> -->
+								<form>
+									<button class="delete" value="${camp.campID}" name="campID"
+										type="button">刪除</button>
+								</form>
+							</td>
+							<td>
+								<form action="<c:url value='/InsertSiteGetCampIDServlet?campID=${camp.campID }'/>"
+									method="POST">
+									<button>新增營區位</button>
+								</form>
+							</td>
 						</tr>
-						<c:forEach var='site' items='${all.sites}'>
-							<tr>
-								<td>&emsp;&emsp;${ site.siteID }</td>
-								<td>&emsp;${ site.siteName }</td>
-								<!-- <td>&emsp; 
- 									<img width="80" height="100"
- 										src="<c:url value='/T4_24/GetSiteImage?id=${site.siteID}'/>" />
-								</td>  -->
-								<td>&emsp;${ site.totalSites }</td>
-								<td>&emsp;${ site.siteMoney }</td>
-							</tr>
-						</c:forEach>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -76,15 +84,63 @@
 			<div>
 				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營位區</a>
+				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/t4_24camp/admin/UpdatePage.jsp' />">&emsp;修改&emsp;營地_營區位</a>
-				<br>
-				<a href="<c:url value='/t4_24camp/admin/deletePage.jsp' />">&emsp;刪除&emsp;營地_營區位</a>
-				<br>
-				<a href="<c:url value='IndexShowAllPageServlet' />">回首頁</a>
+				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
+
+			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+			<script>
+				$(function () {
+					$('.delete').click(function () {
+						let id = $(this).attr("value");
+						Swal.fire({
+							title: 'Are you sure?',
+							text: "You won't be able to revert this!",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes, delete it!'
+						}).then((result) => {
+							console.log(result)
+							if (result.isConfirmed) {
+								$.ajax({
+									url: '/campingmapping2.0/DeleteCampByIDServlet.do',
+									method: "post",
+									dataType: "text",
+									data: { "campID": id },
+								})
+									.done(function () {
+										console.log("del")
+										// $(location).attr("href", "/campingmapping2.0/t4_24camp/admin/QueryPageForm.jsp")
+									})//done
+									.fail(function (error) {
+										console.log(error)
+									})//fail end
+							}//if
+						})//then
+
+					})//click end
+				});
+				//function end
+
+
+				function check() {
+					var conf = confirm("確定執行?");
+					if (conf == true) {
+						alert("執行!!");
+						return true;
+					}
+					else {
+						alert("取消執行!");
+						// return false here
+						return false;
+					}
+				}
+			</script>
 		</body>
 
 		</html>

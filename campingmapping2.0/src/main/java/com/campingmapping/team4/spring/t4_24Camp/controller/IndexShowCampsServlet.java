@@ -24,12 +24,12 @@ import util.*;
 
 
 
-@WebServlet("/IndexShowAllPageServlet")
-public class IndexShowAllPageServlet extends HttpServlet {
+@WebServlet("/IndexShowCampsServlet")
+public class IndexShowCampsServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	//showAll
+	//showAllCamp
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession httpsession = request.getSession();
@@ -41,11 +41,11 @@ public class IndexShowAllPageServlet extends HttpServlet {
 		TagDao tagDao = new TagDao(session);
 		CityDao cityDao = new CityDao(session);
 		
-		List<Camp> showAll = campDao.showAll();
+		List<Camp> allCamps = campDao.showAll();
 		List<Tag> tagList = tagDao.showAll();
 		List<City> cityList = cityDao.showAll();
 		
-		httpsession.setAttribute("showALL", showAll);
+		httpsession.setAttribute("allCamps", allCamps);
 		httpsession.setAttribute("tagList", tagList);
 		httpsession.setAttribute("cityList", cityList);
 		

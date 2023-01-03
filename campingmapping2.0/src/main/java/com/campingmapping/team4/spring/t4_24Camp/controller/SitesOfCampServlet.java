@@ -1,7 +1,7 @@
 package com.campingmapping.team4.spring.t4_24Camp.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,39 +15,37 @@ import org.hibernate.SessionFactory;
 
 import com.campingmapping.team4.spring.t4_24Camp.model.dao.CampDao;
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
 
 import util.HibernateUtils;
 
 
-@WebServlet("/UpadteCampByIDPageServlet.do")
-public class UpadteCampByIDPageServlet extends HttpServlet {
-
+@WebServlet("/SitesOfCampServlet.do")
+public class SitesOfCampServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-
-	// 更新頁面, camp, 顯示所有citys, tags
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
-
+    
+	//ShowSitesOfCamp
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
-
-		// 存錯誤的map
-		HashMap<String, String> errorMsg = new HashMap<>();
-		request.setAttribute("ErrorMsg", errorMsg);
-
+		
 		String campID = request.getParameter("campID");
 		
 		CampDao campDao = new CampDao(session);
 		Camp camp = campDao.findCampByID(Integer.valueOf(campID));
-
-		request.setAttribute("camp", camp);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/t4_24camp/admin/UpdateCampByIDForm.jsp");
+		Set<Site> sites = camp.getSites();
+		
+		
+		request.setAttribute("sites", sites);
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("t4_24camp/admin/SitesOfCamp.jsp");
 		rd.forward(request, response);
 		return;
-
+		
+		
 	}
 
 }
