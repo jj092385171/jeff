@@ -14,26 +14,25 @@ import util.HibernateUtils;
 public class PostCommentDao {
 
 	private SessionFactory factory;
+	private Session session;
 	
 	public PostCommentDao() {
 		//取得工廠
 		this.factory = HibernateUtils.getSessionFactory();
+		// 取得連線
+		this.session = factory.getCurrentSession();
 	}
 	
 	// 依貼文查所有留言
-	public List<PostComment> selectPostComment(PostComment postComment) throws SQLException {
-		// 取得連線
-		Session session = factory.getCurrentSession();
+	public List<PostComment> selectPostComment(Post post) throws SQLException {
 		String hql = "from PostComment where postId = ?1 and postCommentHide != 1";
-		List<PostComment> resultList = session.createQuery(hql, PostComment.class).setParameter(1, postComment.getPost().getPostId()).getResultList();
+		List<PostComment> resultList = this.session.createQuery(hql, PostComment.class).setParameter(1, post.getPostId()).getResultList();
 		return resultList;
 	}
 	
 	// 新增留言
 	public void insertPostComment(PostComment postComment) throws SQLException {
-		// 取得連線
-		Session session = factory.getCurrentSession();
-		session.save(postComment);
+		this.session.save(postComment);
 	}
 	
 	// 修改留言
@@ -68,8 +67,7 @@ public class PostCommentDao {
 	
 	// 取消檢舉留言
 	public Boolean cancelReportPostComment(PostComment postComment) throws SQLException {
-		Session session = factory.getCurrentSession();
-		PostComment result = session.get(PostComment.class, postComment.getPostCommentId());
+		PostComment result = this.session.get(PostComment.class, postComment.getPostCommentId());
 		if(result != null) {
 			result.setPostCommentReport(postComment.getPostCommentReport());
 			return true;
@@ -79,8 +77,7 @@ public class PostCommentDao {
 	
 	// 變更是否隱藏留言
 	public void changeHidePostComment(PostComment postComment) throws SQLException {
-		Session session = factory.getCurrentSession();
-		PostComment result = session.get(PostComment.class, postComment.getPostCommentId());
+		PostComment result = this.session.get(PostComment.class, postComment.getPostCommentId());
 		if(result != null) {
 			result.setPostCommentHide(postComment.getPostCommentHide());
 		}

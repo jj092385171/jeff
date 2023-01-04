@@ -31,33 +31,61 @@
 
 <body>
 	<h2>討論區管理者首頁</h2>
-	<form action="<c:url value='/T4_33/newPost.jsp' />" method="POST" id="postForm">
+	<form action="<c:url value='/t4_33forum/guest/newPost.jsp' />" method="POST" id="postForm">
         <input type="submit" value="新增貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showHidePostServlet' />" value="查詢隱藏貼文">
         <input type="submit" formaction="<c:url value='/T4_33/showReportPostServlet' />" value="查詢被檢舉的貼文">
-        <input type="submit" formaction="<c:url value='/T4_33/showdiscussionServlet' />" value="回討論區首頁">
+        <input type="submit" formaction="<c:url value='/T4_33/showDiscussionServlet' />" value="回討論區首頁">
+    </form>    
         <table>
         	<thead>
         		<tr>
-        			<th>編號</th>
+        			<th>貼文編號</th>
+        			<th>會員編號</th>
         			<th>標題</th>
         			<th>內容</th>
+        			<th>露營人數</th>
+        			<th>露營費用</th>
+        			<th>露營城市</th>
+        			<th>開始露營日期</th>
+        			<th>結束露營日期</th>
+        			<th>評分</th>
         			<th>最後更新日期</th>
-        			<th></th>
+        			<th>喜歡本貼文人數</th>
+        			<th>不喜歡本貼文人數</th>
+        			<th>是否被檢舉</th>
+        			<th>是否被隱藏</th>
         		</tr>
         	</thead>
         	<tbody>
         	<c:forEach var="post" items="${postList}">
         		<tr>
         		<td>${post.postId}</td>
+        		<td>${post.userId}</td>
         		<td>${post.title}</td>
         		<td>${post.content}</td>
+        		<td>${post.people}</td>
+        		<td>${post.price}</td>
+        		<td>${post.county}</td>
+        		<td>${post.startDate}</td>
+        		<td>${post.endDate}</td>
+        		<td>${post.score}</td>
         		<td>${post.releaseDate}</td>
-        		<td><input type="submit" formaction="<c:url value='/T4_33/showPostServlet?postId=${post.postId}' />" value="查看貼文"></td>
+        		<td>${post.userLike}</td>
+        		<td>${post.userUnlike}</td>
+        		<td>${post.postReport}</td>
+        		<td>${post.postHide}</td>
+        		<td>
+        			<form method="POST">
+        			<input type="hidden" name="postId" value="${post.postId}">
+        			<input type="submit" formaction="<c:url value='/T4_33/showUpdatePostServlet' />" value="修改貼文">
+        			<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet' />" value="隱藏貼文" onclick="return confirm('是否確定隱藏?');">
+        			</form>
+        		</td>
         		</tr>
         	</c:forEach>
         	</tbody>
         </table>
-    </form>
+    
 </body>
 </html>

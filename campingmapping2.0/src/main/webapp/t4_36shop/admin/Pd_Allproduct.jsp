@@ -46,7 +46,7 @@
 					<!-- 					<h1 class="h3 mb-4 text-gray-800">商城維護</h1> -->
 					<div>
 						<form
-							action="<c:url value='http://localhost:8080/Hibernate_web/Pd_insert.jsp'/>"
+							action="<c:url value='/t4_36shop/admin/Pd_insert.jsp'/>"
 							method="POST">
 							<input type="submit" value="新增產品"
 								style="width: 105px; height: 50px;">

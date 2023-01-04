@@ -51,7 +51,7 @@ public class Camp {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp", cascade = CascadeType.ALL)
 	private Set<Site> sites = new HashSet<Site>();
-	
+
 
 	public Camp() {
 	}
