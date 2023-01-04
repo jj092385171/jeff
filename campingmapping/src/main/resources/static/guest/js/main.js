@@ -1,16 +1,16 @@
 (function ($) {
     "use strict";
-    
+
     // Initiate the wowjs animation library
     new WOW().init();
-    
+
     // Initiate menu
     $('#header').after('<div class="mobile-menu d-xl-none">');
     $('.top-menu').clone().appendTo('.mobile-menu');
     $('.mobile-menu-btn').click(function () {
         $('.mobile-menu').stop().slideToggle();
     });
-    
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -20,10 +20,10 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
-    
+
     //Portfolio modal slider
     $('.port-slider').delay(10000);
     $('.port-slider').slick({
@@ -44,7 +44,7 @@
         centerMode: true,
         focusOnSelect: true
     });
-    
+
     $('#popover-content-download').hide();
     $("[data-toggle=popover]").each(function (e) {
         $(this).popover({
@@ -56,7 +56,7 @@
         });
 
     });
-    
+
     // Date and time picker
     $('#date-1, #date-2, #date-3, #date-4, #date-5, #date-6').datetimepicker({
         format: 'L'
@@ -66,3 +66,6 @@
     });
 })(jQuery);
 
+window.onload = function () {
+    document.body.style.display = 'block';
+}

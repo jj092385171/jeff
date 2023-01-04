@@ -45,6 +45,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+
 }
 
 html {
@@ -73,7 +74,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #858796;
+  color: #242424;
   text-align: left;
   background-color: #fff;
 }
@@ -173,13 +174,13 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color: #0040ff;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #224abe;
+  color: #668cff;
   text-decoration: underline;
 }
 
@@ -2693,23 +2694,23 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  color: #00CED1;
+  background-color: #222222;
+  border-color: #222222;
 }
 
 .btn-primary:hover {
-  color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  color: #222222;
+  background-color: #00CED1;
+  border-color: #00CED1;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
-  color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
-  box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+  /* color: #fff;
+  background-color: #018284;
+  border-color: #018284;
+  box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5); */
 }
 
 .btn-primary.disabled,
@@ -2722,9 +2723,9 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
 .show>.btn-primary.dropdown-toggle {
-  color: #fff;
-  background-color: #2653d4;
-  border-color: #244ec9;
+  color: #252525;
+  background-color: #018284;
+  border-color: #018284;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
@@ -7110,7 +7111,8 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #fff !important;
+  background-color: #d4d4d4 !important;
+
 }
 
 .bg-transparent {
@@ -10719,6 +10721,8 @@ button.bg-dark:focus {
   text-transform: lowercase !important;
 }
 
+
+
 .text-uppercase,
 .dropdown .dropdown-menu .dropdown-header,
 .sidebar .sidebar-heading {
@@ -10991,7 +10995,7 @@ a:focus {
 }
 
 #wrapper #content-wrapper {
-  background-color: #f8f9fc;
+  background-color: #f0f0f0;
   width: 100%;
   overflow-x: hidden;
 }
@@ -11101,7 +11105,7 @@ a:focus {
 
 .bg-gradient-primary {
   background-color: black;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+  background-image: linear-gradient(180deg, #212529 10%, #666 100%);
   background-size: cover;
 }
 
@@ -11193,6 +11197,10 @@ a:focus {
 
 .text-lg {
   font-size: 1.2rem;
+}
+
+.text-primary {
+  color: #616161 !important;
 }
 
 .text-gray-100 {
@@ -11431,8 +11439,8 @@ a:focus {
 }
 
 .topbar .dropdown-list .dropdown-header {
-  background-color: #4e73df;
-  border: 1px solid #4e73df;
+  background-color: #666;
+  border: 1px solid #666;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #fff;
@@ -11583,7 +11591,7 @@ a:focus {
   text-transform: uppercase;
   font-weight: 800;
   font-size: 0.65rem;
-  color: #b7b9cc;
+  color: #222222;
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item,
@@ -11591,7 +11599,7 @@ a:focus {
   padding: 0.5rem 1rem;
   margin: 0 0.5rem;
   display: block;
-  color: #3a3b45;
+  color: #333333;
   text-decoration: none;
   border-radius: 0.35rem;
   white-space: nowrap;
@@ -11600,11 +11608,13 @@ a:focus {
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
   background-color: #eaecf4;
+  color: #4A4A4A;
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
   background-color: #dddfeb;
+  color: #212121;
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
@@ -11910,7 +11920,7 @@ a:focus {
 }
 
 .sidebar-dark .sidebar-brand {
-  color: #fff;
+  color: #00CED1;
 }
 
 .sidebar-dark hr.sidebar-divider {
@@ -11946,7 +11956,7 @@ a:focus {
 }
 
 .sidebar-dark .nav-item.active .nav-link {
-  color: #fff;
+  color: #00CED1;
 }
 
 .sidebar-dark .nav-item.active .nav-link i {
@@ -12594,6 +12604,11 @@ form.user .btn-user {
   overflow: hidden;
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+
+footer.bg-foot {
+  background: #d4d4d4;
 }
 
 footer.sticky-footer {
