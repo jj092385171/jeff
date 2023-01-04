@@ -17,9 +17,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 
 @Entity
 @Table(name = "camp")
+@Component
 public class Camp {
 	
 	@Id
