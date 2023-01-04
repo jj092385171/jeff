@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 //相當於beans.config.xml的Java程式組態
 @Configuration
-@ComponentScan(basePackages = {"tw.jack"})
+@ComponentScan(basePackages = {"com.campingmapping.team4.spring"})
 @EnableWebMvc
 @EnableTransactionManagement
 public class RootAppConfig {
@@ -38,7 +38,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() throws IllegalArgumentException, NamingException {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan("tw.jack");
+		factoryBean.setPackagesToScan("com.campingmapping.team4.spring");
 		factoryBean.setHibernateProperties(addProperties());
 		return factoryBean;
 		
