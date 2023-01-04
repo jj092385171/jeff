@@ -24,17 +24,20 @@ import util.HibernateUtils;
 public class view extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		doPost(request, response);
-//	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
+		
+		System.out.println("回到view找資料");
+
 		
 		TeamService teamService = new TeamService(session);
 		List<Initiating> view = teamService.selectAllInitiating();

@@ -40,7 +40,7 @@ public class alter extends HttpServlet {
 		String alter = request.getParameter("alter");
 		if (alter != null) {
 			request.setAttribute("initiatingnum", alter);
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_11/Alter.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/view");
 			rd.forward(request, response);
 		}else {
 			Map<String, String[]> params = request.getParameterMap();

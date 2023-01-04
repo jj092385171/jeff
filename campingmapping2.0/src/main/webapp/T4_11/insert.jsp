@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<!DOCTYPE html>
-		<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 		<html>
 
 		<head>
@@ -39,7 +34,6 @@
 
 								<div class="col-6 col-12-medium">
 
-									<!-- Form -->
 									<form action="<c:url value='/controller'/>" method="POST">
 										發文會員:<input type="text" id="postmember" name="postmember" onkeyup="value=value.replace(/[^\d]/g,'') " 
 										required placeholder="請輸入會員編號,僅限數字"><br>

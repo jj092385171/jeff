@@ -156,13 +156,10 @@ public class InitiatingDaoImpl implements InitiatingDao{
 	public List<Initiating> selectAllCamparea() {
 			List<String> list = session.createQuery("select distinct camparea from Initiating").getResultList();
 			ArrayList<Initiating> resultlis = new ArrayList<Initiating>();
-			Initiating in = new Initiating();
 			for (String string : list) {
-				int i = 0;
-				in.setCurrentnum(i);
+				Initiating in = new Initiating();
 				in.setCamparea(string);
 				resultlis.add(in);
-				i++;
 			}
 			return resultlis;
 	}
@@ -172,8 +169,8 @@ public class InitiatingDaoImpl implements InitiatingDao{
 	public List<Initiating> selectAllMember() {
 		List<Integer> list = session.createQuery("select distinct postmember from Initiating").getResultList();
 		ArrayList<Initiating> resultlist = new ArrayList<Initiating>();
-		Initiating in = new Initiating();
 		for (Integer integer : list) {
+			Initiating in = new Initiating();
 			in.setPostmember(integer);
 			resultlist.add(in);
 		}
