@@ -6,11 +6,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Tag;
 
 
-
+@Repository
+@Transactional
 public class TagDao {
 	
 	@Autowired

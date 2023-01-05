@@ -107,6 +107,7 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.14.1</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

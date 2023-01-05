@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
         <!DOCTYPE HTML>
 
         <html>
@@ -12,14 +13,14 @@
 
         <body>
             <div>
-				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
+				<a href="/campingmapping3.0/indexShowAllCamp.controller"><strong>營地_營區位管理</strong></a>
 			</div>
 
             <hr>
 
             <!-- Form -->
             <h3>新增營地資料:</h3>
-            <form method="post" action="<c:url value='/T4_24/InsertCampServlet' />" enctype="multipart/form-data">
+            <form:form method="post" action="" enctype="multipart/form-data" modelAttribute="campBean">
                 <div>
                     <input type="text" name="campName" value="${param.campName}" placeholder="營地名" />
                     <div style="color:#FF0000; font-size:60%; display: inline">
@@ -61,16 +62,16 @@
                     <input type="submit" value="Add" />
                     <input type="reset" value="Reset" />
                 </div>
-            </form>
+            </form:form>
 
             <hr>
 
             <div>
-				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
+				<a href="/campingmapping3.0/queryPage.controller">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
+				<a href="/campingmapping3.0/insertPage.controller">&emsp;新增&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
+				<a href="/campingmapping3.0/indexShowAllCamp.controller">回首頁</a>
 			</div>
 
         </body>
