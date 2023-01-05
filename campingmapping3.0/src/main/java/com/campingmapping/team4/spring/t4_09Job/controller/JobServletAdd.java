@@ -9,23 +9,20 @@ import java.util.HashMap;
 
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
 import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
 
-
-@MultipartConfig()
-@WebServlet("/JobServletAdd")
-public class JobServletAdd extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+@Controller
+public class JobServletAdd  {
+	@Autowired
+	private JobServiceImpl jobServiceImpl ;
+	@PostMapping("/JobServletAdd")
+	@ResponseBody
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -46,8 +43,6 @@ public class JobServletAdd extends HttpServlet {
 			Integer rackID = Integer.parseInt(request.getParameter("rackID"));
 			jobBean.setRackID(rackID);
 
-//			System.out.println(jobBean.getuID());
-
 			try {
 				JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
 				if (findBeanByRackID.getRackID() == rackID) {
@@ -56,20 +51,11 @@ public class JobServletAdd extends HttpServlet {
 				}
 			} catch (Exception e) {
 			}
-			
+
 		} catch (Exception e) {
 			errorMessage.put("rackID", "輸入格式錯誤");
 			request.setAttribute("ErrorMsg", errorMessage);
 		}
-
-//		// 驗證刊登編號是否重複
-//		Integer rackID = Integer.parseInt(request.getParameter("rackID"));
-//		JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
-//		if (findBeanByRackID.getRackID() != 0) {
-//			errorMessage.put("rackID", "編號重複,新增失敗");
-//		}
-//		request.setAttribute("ErrorMsg", errorMessage);
-//		jobBean.setRackID(rackID);
 
 		String job = request.getParameter("job");
 		jobBean.setJob(job);
@@ -113,10 +99,10 @@ public class JobServletAdd extends HttpServlet {
 		// 處理照片格式
 		InputStream in = request.getPart("img").getInputStream();
 		long size = request.getPart("img").getSize();
-			try {
-				Blob image = jobServiceImpl.fileToBlob(in, size);
-				jobBean.setImg(image);
-			} catch (Exception e) {
+		try {
+			Blob image = jobServiceImpl.fileToBlob(in, size);
+			jobBean.setImg(image);
+		} catch (Exception e) {
 		}
 
 		if (!errorMessage.isEmpty()) {

@@ -5,22 +5,24 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name="job")
-
+@Component
 public class JobBean {
 
-	
-	@Column(name = "uID")
-	private int uID;//會員
 	@Id 
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rackID")
 	private int rackID;//刊登編號
+	@Column(name = "uID")
+	private int uID;//會員
 	@Column(name = "job")
 	private String job;//職缺
 	@Column(name = "salary")

@@ -8,20 +8,21 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t4_09Job.model.dao.JobDAO;
 import com.campingmapping.team4.spring.t4_09Job.model.dao.JobDAOimpl;
 import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
 
-import util.HibernateUtils;
 
-
+@Service
 public class JobServiceImpl implements JobService {
 	private JobDAO jobDAO = new JobDAOimpl();
+	@Autowired
 	private SessionFactory factory;
 
 	public JobServiceImpl() {
-		this.factory =  HibernateUtils.getSessionFactory();
 	}
 
 	// 秀全部
@@ -176,18 +177,5 @@ public class JobServiceImpl implements JobService {
 			return null;
 		}
 	}
-	// 判斷時間
-//		@Override
-//		public boolean selectTime(Date rackUp, Date rackDown) {
-//			try {
-//				DbUtils.begin();
-	//
-//				DbUtils.commit();
-	//
-//			} catch (Exception e) {
-//				DbUtils.rollbacl();
-//				e.printStackTrace();
-//			}
-//			return false;
-//		}
+
 }

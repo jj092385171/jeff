@@ -1,33 +1,28 @@
 package com.campingmapping.team4.spring.t4_09Job.model.dao;
+
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
 
-import util.HibernateUtils;
 
+@Repository
+@Transactional
 public class JobDAOimpl implements JobDAO {
-
+	@Autowired
 	private SessionFactory factory;
-
-	public JobDAOimpl() {
-		this.factory = HibernateUtils.getSessionFactory();
-	}
 
 	// 新增資料
 	@Override
 	public void addJob(JobBean jobBean) {
 		Session session = factory.getCurrentSession();
-
-		System.out.println(jobBean);
-
 		session.save(jobBean);
-
-		
-
 	}
 
 	// 透過rackID找圖片
@@ -35,8 +30,7 @@ public class JobDAOimpl implements JobDAO {
 	public JobBean findImgByRackID(int rackID) {
 		Session session = factory.getCurrentSession();
 		JobBean result = session.createQuery("from JobBean where rackID = :rid ", JobBean.class)
-				.setParameter("rid", rackID)
-				.getSingleResult();
+				.setParameter("rid", rackID).getSingleResult();
 		JobBean jobBean = new JobBean();
 		jobBean.setImg(result.getImg());
 		return jobBean;
@@ -57,8 +51,8 @@ public class JobDAOimpl implements JobDAO {
 	public void updateJob(JobBean jobBean) {
 		Session session = factory.getCurrentSession();
 		JobBean jbean = session.get(JobBean.class, jobBean.getRackID());
-		if (jbean!=null) {
-			jbean = jobBean ;
+		if (jbean != null) {
+			jbean = jobBean;
 		}
 //		String hql = "update JobBean set uID=?1,job=?2,salary=?3,quantity=?4"
 //				+ ",place=?5,time=?6,date=?7,img=?8,remark=?9,rackUp=?10,rackDown=?11"
@@ -76,7 +70,7 @@ public class JobDAOimpl implements JobDAO {
 //		.setParameter("",);
 //		.setParameter("",);
 //		.setParameter("",);
-		
+
 	}
 
 	// 透過刊登編號找一筆資料
@@ -103,8 +97,7 @@ public class JobDAOimpl implements JobDAO {
 		Session session = factory.getCurrentSession();
 
 		List<JobBean> result = session.createQuery("from JobBean where job like :j", JobBean.class)
-		.setParameter("j", "%"+job+"%")
-		.getResultList();
+				.setParameter("j", "%" + job + "%").getResultList();
 		System.out.println(result);
 
 		return result;
@@ -112,13 +105,12 @@ public class JobDAOimpl implements JobDAO {
 
 	// 透過會員id找資料
 	@Override
-	public List<JobBean> findBeanByuID(int uID)  {
+	public List<JobBean> findBeanByuID(int uID) {
 		Session session = factory.getCurrentSession();
 
-		List<JobBean> result = session.createQuery("from JobBean where uID = :u",JobBean.class)
+		List<JobBean> result = session.createQuery("from JobBean where uID = :u", JobBean.class)
 
-		.setParameter("u", uID)
-		.getResultList();
+				.setParameter("u", uID).getResultList();
 		return result;
 	}
 
