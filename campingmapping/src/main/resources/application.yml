@@ -14,11 +14,10 @@ spring:
     url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True
     username: sa
   jpa:
-    hibernate:
-      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServer2016Dialect
+        '[allow_update_outside_transaction]': true
     show-sql: true
   servlet:
     multipart:
