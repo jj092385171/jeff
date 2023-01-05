@@ -33,12 +33,6 @@
 			</p>
 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.id}</div>
 
-			<!-- 			<hr> -->
-			<!-- 			<p> -->
-			<!-- 				刊登編號 <input class="cl" type="text" name="rackID" -->
-			<%-- 					value='${param.rackID}' required> --%>
-			<!-- 			</p> -->
-			<%-- 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.rackID}</div> --%>
 
 			<hr>
 			<p>
