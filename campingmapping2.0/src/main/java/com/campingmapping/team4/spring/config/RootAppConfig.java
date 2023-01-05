@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 //相當於beans.config.xml的Java程式組態
 @Configuration
-@ComponentScan(basePackages = {"tw.jack"})
+@ComponentScan(basePackages = {"com.campingmapping.team4.spring"})
 @EnableWebMvc
 @EnableTransactionManagement
 public class RootAppConfig {

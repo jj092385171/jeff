@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 //相當於mvc-servlet.xml的Java程式組態
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "tw.jack")
+@ComponentScan(basePackages = "com.campingmapping.team4.spring")
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
