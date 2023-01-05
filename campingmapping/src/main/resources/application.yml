@@ -1,9 +1,9 @@
 server:
-  error:
-    include-stacktrace: always
-    path: /error
-    whitelabel:
-      enabled: false
+  # error:
+  #   include-stacktrace: always
+  #   path: /error
+  #   whitelabel:
+  #     enabled: false
   port: 8000
   servlet:
     context-path: /morari

@@ -1,7 +1,5 @@
 package com.campingmapping.team4.spring.t4_01Member.model.entity;
 
-import org.springframework.stereotype.Component;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "profiles")
-@Component
+@AllArgsConstructor
 public class Profiles {
 
 	@Id
@@ -32,12 +30,5 @@ public class Profiles {
 
 	@Column(name = "PHONE")
 	private String phone;
-
-	public Profiles(Integer id, String name, String address, String phone) {
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.phone = phone;
-	}
 
 }

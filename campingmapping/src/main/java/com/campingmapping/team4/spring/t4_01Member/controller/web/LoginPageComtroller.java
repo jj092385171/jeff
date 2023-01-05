@@ -1,24 +1,24 @@
-package com.campingmapping.team4.spring.t4_01Member.controller.web;
+// package com.campingmapping.team4.spring.t4_01Member.controller.web;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.stereotype.Controller;
+// import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
-public class LoginPageComtroller {
+// @Controller
+// public class LoginPageComtroller {
 
-	@GetMapping({ "/login", "/login/" })
-	public String login() {
-		return "camper/global/login";
-	}
+// @GetMapping({ "/login", "/login/" })
+// public String login() {
+// return "camper/global/login";
+// }
 
-	@GetMapping({ "/register", "/register/" })
-	public String register() {
-		return "camper/global/register";
-	}
+// @GetMapping({ "/register", "/register/" })
+// public String register() {
+// return "camper/global/register";
+// }
 
-	@GetMapping({ "/forgotpassword", "/forgotpassword/" })
-	public String forgotPassword() {
-		return "camper/global/forgotpassword";
-	}
+// @GetMapping({ "/forgotpassword", "/forgotpassword/" })
+// public String forgotPassword() {
+// return "camper/global/forgotpassword";
+// }
 
-}
+// }

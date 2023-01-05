@@ -20,6 +20,12 @@
     "axe/aria": "off",
     "axe/parsing": "off",
     "disown-opener": "off",
-    "meta-charset-utf-8": "off"
+    "meta-charset-utf-8": "off",
+    "axe/language": [
+      "default",
+      {
+        "html-has-lang": "off"
+      }
+    ]
   }
 }
