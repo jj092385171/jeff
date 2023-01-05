@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
-import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 @MultipartConfig()
 @WebServlet("/JobServletUpdate")
@@ -30,10 +30,9 @@ public class JobServletUpdate extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		Map<String, String> errorMessage = new HashMap<>();
-		JobServiceImpl jobServiceImpl = new JobServiceImpl();
-		JobBean jobBean = new JobBean();
+		JobWorkService jobServiceImpl = new JobWorkService();
+		JobWorkBean jobBean = new JobWorkBean();
 
 		String str = request.getParameter("rackID");
 		Integer rackID = Integer.parseInt(str.trim());
@@ -49,7 +48,7 @@ public class JobServletUpdate extends HttpServlet {
 		long size = request.getPart("img").getSize();
 		try {
 			Blob image = jobServiceImpl.fileToBlob(in, size);
-			JobServiceImpl jsi = new JobServiceImpl();
+			JobWorkService jsi = new JobWorkService();
 
 			jobBean = jsi.findBeanByRackID(rackID);
 			if (size != 0) {

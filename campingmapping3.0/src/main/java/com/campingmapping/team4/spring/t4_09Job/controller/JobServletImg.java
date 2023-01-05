@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
-import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 
 @MultipartConfig()
@@ -35,8 +35,8 @@ public class JobServletImg extends HttpServlet {
 		try {
 			String rackID = request.getParameter("id");
 			int parseID = Integer.parseInt(rackID);
-			JobServiceImpl jsdi = new JobServiceImpl();
-			JobBean jobBean = jsdi.findImgByRackID(parseID);
+			JobWorkService jsdi = new JobWorkService();
+			JobWorkBean jobBean = jsdi.findImgByRackID(parseID);
 			blob = jobBean.getImg();
 			is = blob.getBinaryStream();
 			os = response.getOutputStream();

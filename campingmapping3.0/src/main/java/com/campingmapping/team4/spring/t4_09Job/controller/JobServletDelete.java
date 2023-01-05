@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 
 @MultipartConfig()
@@ -21,7 +21,7 @@ public class JobServletDelete extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String rackID = request.getParameter("de");
 		int parseID = Integer.parseInt(rackID);
-		JobServiceImpl jsdi = new JobServiceImpl();
+		JobWorkService jsdi = new JobWorkService();
 		jsdi.deleteJob(parseID);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/deleteSucces.jsp");

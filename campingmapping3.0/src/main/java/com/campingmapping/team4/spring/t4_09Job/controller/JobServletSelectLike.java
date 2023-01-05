@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
-import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 @MultipartConfig()
 @WebServlet("/JobServletSelectLike")
@@ -31,10 +31,10 @@ public class JobServletSelectLike extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Map<String, String> errorMessage = new HashMap<>();
-		JobServiceImpl jsi = new JobServiceImpl();
+		JobWorkService jsi = new JobWorkService();
 		try {
 			String st = request.getParameter("job");
-			List<JobBean> jobBean = jsi.findJobByJobLike(st);
+			List<JobWorkBean> jobBean = jsi.findJobByJobLike(st);
 			if (jobBean.size()==0) {
 				errorMessage.put("job", "查無資料");
 			}
@@ -48,7 +48,7 @@ public class JobServletSelectLike extends HttpServlet {
 			return;
 		}
 		String st = request.getParameter("job");
-		List<JobBean> jobBean = jsi.findJobByJobLike(st);
+		List<JobWorkBean> jobBean = jsi.findJobByJobLike(st);
 		request.setAttribute("jobBean", jobBean);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/showSelect.jsp");

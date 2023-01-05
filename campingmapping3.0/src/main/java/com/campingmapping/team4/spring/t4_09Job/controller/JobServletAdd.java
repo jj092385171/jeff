@@ -14,21 +14,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
-import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 @Controller
 public class JobServletAdd  {
 	@Autowired
-	private JobServiceImpl jobServiceImpl ;
+	private JobWorkService jobServiceImpl ;
 	@PostMapping("/JobServletAdd")
 	@ResponseBody
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Map<String, String> errorMessage = new HashMap<>();
-		JobServiceImpl jobServiceImpl = new JobServiceImpl();
-		JobBean jobBean = new JobBean();
+		JobWorkService jobServiceImpl = new JobWorkService();
+		JobWorkBean jobBean = new JobWorkBean();
 
 		// 驗證會員id輸入格式
 		try {
@@ -44,7 +44,7 @@ public class JobServletAdd  {
 			jobBean.setRackID(rackID);
 
 			try {
-				JobBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
+				JobWorkBean findBeanByRackID = jobServiceImpl.findBeanByRackID(rackID);
 				if (findBeanByRackID.getRackID() == rackID) {
 					errorMessage.put("rackID", "編號重複,新增失敗");
 					request.setAttribute("ErrorMsg", errorMessage);

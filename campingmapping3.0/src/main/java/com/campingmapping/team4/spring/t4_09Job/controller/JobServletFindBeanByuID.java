@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
-import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 
 @MultipartConfig()
@@ -31,11 +31,11 @@ public class JobServletFindBeanByuID extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		Map<String, String> errorMessage = new HashMap<>();
-		JobServiceImpl jsi = new JobServiceImpl();
+		JobWorkService jsi = new JobWorkService();
 		try {
 			String str = request.getParameter("uID");
 			int uID = Integer.parseInt(str);
-			List<JobBean> jobBean = jsi.findBeanByuID(uID);
+			List<JobWorkBean> jobBean = jsi.findBeanByuID(uID);
 
 			try {						
 						if (jobBean.size() == 0) {
@@ -59,7 +59,7 @@ public class JobServletFindBeanByuID extends HttpServlet {
 		}
 		String str = request.getParameter("uID");
 		int uID = Integer.parseInt(str);
-		List<JobBean> jobBean = jsi.findBeanByuID(uID);
+		List<JobWorkBean> jobBean = jsi.findBeanByuID(uID);
 		request.setAttribute("jobBean", jobBean);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/showSelect.jsp");

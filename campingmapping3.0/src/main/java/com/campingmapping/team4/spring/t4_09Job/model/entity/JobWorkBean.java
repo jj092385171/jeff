@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="job")
 @Component
-public class JobBean {
+public class JobWorkBean {
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -146,7 +146,7 @@ public class JobBean {
 		builder.append("]");
 		return builder.toString();
 	}
-	public JobBean(int uID, int rackID, String job, String salary, int quantity, String place, String date, String time,
+	public JobWorkBean(int uID, int rackID, String job, String salary, int quantity, String place, String date, String time,
 			Blob img, String remark, Date rackUp, Date rackDown) {
 		super();
 		this.uID = uID;
@@ -162,7 +162,7 @@ public class JobBean {
 		this.rackUp = rackUp;
 		this.rackDown = rackDown;
 	}
-	public JobBean() {
+	public JobWorkBean() {
 	}
 	
 	

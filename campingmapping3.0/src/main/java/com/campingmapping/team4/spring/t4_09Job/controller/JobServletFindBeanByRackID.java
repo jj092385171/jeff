@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campingmapping.team4.spring.t4_09Job.model.entity.JobBean;
-import com.campingmapping.team4.spring.t4_09Job.model.service.JobServiceImpl;
+import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
+import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 @MultipartConfig()
 @WebServlet("/JobServletFindBeanByRackID")
@@ -28,8 +28,8 @@ public class JobServletFindBeanByRackID extends HttpServlet {
 	
 //		String rackID = request.getParameter("up");
 		int rint = Integer.parseInt(request.getParameter("up"));
-		JobServiceImpl jsi = new JobServiceImpl();
-		JobBean JobBean = jsi.findBeanByRackID(rint);
+		JobWorkService jsi = new JobWorkService();
+		JobWorkBean JobBean = jsi.findBeanByRackID(rint);
 //		System.out.println(JobBean);
 		request.setAttribute("JobBean", JobBean);
 
