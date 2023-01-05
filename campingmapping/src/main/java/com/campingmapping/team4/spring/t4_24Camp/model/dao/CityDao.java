@@ -1,42 +1,40 @@
-package com.campingmapping.team4.spring.t4_24Camp.model.dao;
+// package com.campingmapping.team4.spring.t4_24Camp.model.dao;
 
-import java.util.List;
-import java.util.Set;
+// import java.util.List;
+// import java.util.Set;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
+// import org.hibernate.Session;
+// import org.hibernate.query.Query;
 
-import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
-import com.campingmapping.team4.spring.t4_24Camp.model.model.City;
+// import com.campingmapping.team4.spring.t4_24Camp.model.entity.Camp;
+// import com.campingmapping.team4.spring.t4_24Camp.model.entity.City;
 
+// public class CityDao {
 
+// private Session session;
 
-public class CityDao {
+// public CityDao(Session session) {
+// this.session = session;
+// }
 
-	private Session session;
+// // 搜尋全部城市
+// public List<City> showAll() {
+// Query<City> query = session.createQuery("from City", City.class);
+// List<City> resultList = query.getResultList();
 
-	public CityDao(Session session) {
-		this.session = session;
-	}
+// return resultList;
+// }
 
-	//搜尋全部城市
-	public List<City> showAll() {
-		Query<City> query = session.createQuery("from City", City.class);
-		List<City> resultList = query.getResultList();
-		
-		return resultList;
-	}
-	
-	//透過cityID搜尋camps
-	public Set<Camp> findCampsByCityID(int cityID) {
-		City city = session.get(City.class, cityID);
-		
-		if(city != null) {
-			Set<Camp> camps = city.getCamps();
-			return camps;
-		}
-		
-		return null;
-	}
+// // 透過cityID搜尋camps
+// public Set<Camp> findCampsByCityID(int cityID) {
+// City city = session.get(City.class, cityID);
 
-}
+// if (city != null) {
+// Set<Camp> camps = city.getCamps();
+// return camps;
+// }
+
+// return null;
+// }
+
+// }

@@ -14,24 +14,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "postComment")
-public class PostComment {
+@Table(name = "VoteOption")
+public class VoteOption {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "postCommentId")
-	private Integer postCommentId;
+	@Column(name = "optionId")
+	private Integer optionId;
+	@Column(name = "optionName")
+	private String optionName;
 	@ManyToOne
-	@JoinColumn(name = "postId")
-	private Post post;
-	// @ManyToOne
-	// @JoinColumn(name="userId")
-	// private Member member;
-	@Column(name = "postComment")
-	private String postComment;
-	@Column(name = "postCommentReport")
-	private Integer postCommentReport;
-	@Column(name = "postCommentHide")
-	private Integer postCommentHide;
+	@JoinColumn(name = "voteId")
+	private Integer voteId;
 
 }
