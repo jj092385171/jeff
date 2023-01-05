@@ -10,9 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 //商品列表
 @Entity
 @Table(name = "category")
+@Component
 public class Category {
 
 	@Id

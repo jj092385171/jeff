@@ -2,12 +2,17 @@ package com.campingmapping.team4.spring.t4_36Shop.model.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.campingmapping.team4.spring.t4_36Shop.model.dao.CategoryDao;
 import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+@Repository
+@Transactional
 public class CategoryDaoImpl implements CategoryDao {
 
 	private Session session;
@@ -37,13 +42,16 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	// 修改一筆產品資料
-	public void update(Category category) {
+	public Category update(Category category) throws Exception {
 		Category updateByPdid = session.get(Category.class, category.getPdid());
 
 		if (updateByPdid != null) {
 			session.saveOrUpdate(category);
+			session.close();
+			return updateByPdid;
 		}
 		session.close();
+		throw new Exception();
 	}
 
 	// 使用Pdid搜尋
@@ -57,24 +65,10 @@ public class CategoryDaoImpl implements CategoryDao {
 		return null;
 	}
 
-	// 透過Pdid找圖片
-//	@Override
-//	public Category findImgByPdiD(int id) throws SQLException {
-//		String sql = "select Pdpicture from category where Pdid = ? ";
-//		Connection connection = DbUtils.getConnection();
-//		PreparedStatement pre = connection.prepareStatement(sql);
-//		pre.setInt(1, id);
-//		ResultSet rs = pre.executeQuery();
-//		rs.next();
-//		Category cg = new Category();
-//		cg.setPdpicture(rs.getBlob("Pdpicture"));
-//
-//		return cg;
-//
-//	}
 	// 搜尋全部
 	public List<Category> selectAll() {
-		Query<Category> query = session.createQuery("from Category", Category.class);
+		Query<Category> query = session.createQuery("from Category",
+				Category.class);
 		List<Category> resultList = query.getResultList();
 		session.close();
 		return resultList;
