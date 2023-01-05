@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.t4_09Work.model.repository;
+package com.campingmapping.team4.spring.t4_09Work.model.Dao.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
