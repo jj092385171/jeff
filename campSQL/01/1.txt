@@ -1,6 +1,6 @@
 USE [campDB]
 GO
-/****** Object:  Table [dbo].[coupon]    Script Date: 2022/12/22 上午 11:37:11 ******/
+/****** Object:  Table [dbo].[coupon]    Script Date: 2023/1/3 上午 12:25:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -24,7 +24,7 @@ CREATE TABLE [dbo].[coupon](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[couponwallet]    Script Date: 2022/12/22 上午 11:37:11 ******/
+/****** Object:  Table [dbo].[couponwallet]    Script Date: 2023/1/3 上午 12:25:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,20 +35,21 @@ CREATE TABLE [dbo].[couponwallet](
 	[couponid] [int] NOT NULL,
 	[state] [int] NOT NULL,
 	[show] [char](1) NOT NULL,
+	[coupon_couponid] [int] NULL,
+	[member_uid] [int] NULL,
  CONSTRAINT [PK_couponwallet] PRIMARY KEY CLUSTERED 
 (
 	[cwid] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[license]    Script Date: 2022/12/22 上午 11:37:11 ******/
+/****** Object:  Table [dbo].[license]    Script Date: 2023/1/3 上午 12:25:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[license](
-	[uid] [int] NOT NULL,
-	[account] [nvarchar](50) NULL,
+	[account] [nvarchar](50) NOT NULL,
 	[facebookid] [nvarchar](50) NULL,
 	[googleid] [nvarchar](50) NULL,
 	[lineid] [nvarchar](50) NULL,
@@ -56,17 +57,16 @@ CREATE TABLE [dbo].[license](
 	[show] [char](1) NOT NULL,
  CONSTRAINT [PK_license] PRIMARY KEY CLUSTERED 
 (
-	[uid] ASC
+	[account] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[limits]    Script Date: 2022/12/22 上午 11:37:11 ******/
+/****** Object:  Table [dbo].[limits]    Script Date: 2023/1/3 上午 12:25:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[limits](
-	[uid] [int] NOT NULL,
 	[account] [nvarchar](50) NOT NULL,
 	[nomore] [char](1) NOT NULL,
 	[buy] [char](1) NOT NULL,
@@ -84,18 +84,17 @@ CREATE TABLE [dbo].[limits](
 	[show] [char](1) NOT NULL,
  CONSTRAINT [PK_limits] PRIMARY KEY CLUSTERED 
 (
-	[uid] ASC
+	[account] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[loginhistory]    Script Date: 2022/12/22 上午 11:37:11 ******/
+/****** Object:  Table [dbo].[loginhistory]    Script Date: 2023/1/3 上午 12:25:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[loginhistory](
 	[lhid] [int] IDENTITY(1,1) NOT NULL,
-	[uid] [int] NOT NULL,
 	[account] [nvarchar](50) NOT NULL,
 	[ip] [nvarchar](50) NOT NULL,
 	[logindate] [datetime2](7) NOT NULL,
@@ -106,7 +105,7 @@ CREATE TABLE [dbo].[loginhistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[member]    Script Date: 2022/12/22 上午 11:37:11 ******/
+/****** Object:  Table [dbo].[member]    Script Date: 2023/1/3 上午 12:25:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,14 +135,15 @@ CREATE TABLE [dbo].[member](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[passworldhistory]    Script Date: 2022/12/22 上午 11:37:11 ******/
+/****** Object:  Table [dbo].[passwordhistory]    Script Date: 2023/1/3 上午 12:25:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[passworldhistory](
+CREATE TABLE [dbo].[passwordhistory](
 	[phid] [int] IDENTITY(1,1) NOT NULL,
-	[oldpassworld] [nvarchar](max) NOT NULL,
+	[account] [nvarchar](50) NOT NULL,
+	[oldpassword] [nvarchar](max) NOT NULL,
 	[setpswdate] [datetime2](7) NOT NULL,
  CONSTRAINT [PK_passworldhistory] PRIMARY KEY CLUSTERED 
 (
@@ -151,95 +151,95 @@ CREATE TABLE [dbo].[passworldhistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (1, N'YagamiTaichi', NULL, NULL, NULL, N'1', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'a', NULL, NULL, NULL, N'715e4a633a340a9c4c1f8c53399d05c0f3a434b6', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (2, N'IshidaYamato', NULL, NULL, NULL, N'2', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'asdf ASDF1', NULL, NULL, NULL, N'619f10ac053c0809f63c3bb241dede0b2de82db0', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (3, N'JohnDepp', NULL, NULL, NULL, N'3', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'asdf ASDF11', NULL, NULL, NULL, N'cbdd1e2260972e349f66ed89cb089f4eb052fa38', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (4, N'LeonardoPikachu', NULL, NULL, NULL, N'4', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'ChienMingWang', NULL, NULL, NULL, N'12', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (5, N'Squidward', NULL, NULL, NULL, N'5', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'ChristopherHemsworth', NULL, NULL, NULL, N'8', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (6, N'PatrickStar', NULL, NULL, NULL, N'6', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'DwightHoward', NULL, NULL, NULL, N'10', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (7, N'RyanReynolds', NULL, NULL, NULL, N'7', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'IshidaYamato', NULL, NULL, NULL, N'2', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (8, N'ChristopherHemsworth', NULL, NULL, NULL, N'8', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'JohnDepp', NULL, NULL, NULL, N'3', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (9, N'ShihShihDer', NULL, NULL, NULL, N'9', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'LeonardoPikachu', NULL, NULL, NULL, N'4', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (10, N'DwightHoward', NULL, NULL, NULL, N'10', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'PatrickStar', NULL, NULL, NULL, N'6', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (11, N'WuBai', NULL, NULL, NULL, N'11', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'qwer ASDF1', NULL, NULL, NULL, N'3d3f489c81c85e0ee1b2e64d327f6843c5831acd', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (12, N'ChienMingWang', NULL, NULL, NULL, N'12', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'qwerQWER 1', NULL, NULL, NULL, N'95106d2f8e433f18bda32c0db8482eba5e32ed8e', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (19, N'asdf ASDF1', NULL, NULL, NULL, N'619f10ac053c0809f63c3bb241dede0b2de82db0', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'QWERqwer11', NULL, NULL, NULL, N'142057f9721df90d4e21a3db46b1e1e355ae14e3', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (20, N'qwerQWER 1', NULL, NULL, NULL, N'95106d2f8e433f18bda32c0db8482eba5e32ed8e', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'RyanReynolds', NULL, NULL, NULL, N'7', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (21, N'qwer ASDF1', NULL, NULL, NULL, N'3d3f489c81c85e0ee1b2e64d327f6843c5831acd', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'ShihShihDer', NULL, NULL, NULL, N'9', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (22, N'asdf ASDF11', NULL, NULL, NULL, N'cbdd1e2260972e349f66ed89cb089f4eb052fa38', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'Squidward', NULL, NULL, NULL, N'5', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (23, N'QWERqwer11', NULL, NULL, NULL, N'142057f9721df90d4e21a3db46b1e1e355ae14e3', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'WuBai', NULL, NULL, NULL, N'11', N'y')
 GO
-INSERT [dbo].[license] ([uid], [account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (24, N'a', NULL, NULL, NULL, N'715e4a633a340a9c4c1f8c53399d05c0f3a434b6', N'y')
+INSERT [dbo].[license] ([account], [facebookid], [googleid], [lineid], [password], [show]) VALUES (N'YagamiTaichi', NULL, NULL, NULL, N'1', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (1, N'YagamiTaichi', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'a', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (2, N'IshidaYamato', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'asdf ASDF1', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (3, N'JohnDepp', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'asdf ASDF11', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (4, N'LeonardoPikachu', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'ChienMingWang', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (5, N'Squidward', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'ChristopherHemsworth', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (6, N'PatrickStar', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'DwightHoward', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (7, N'RyanReynolds', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'IshidaYamato', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (8, N'ChristopherHemsworth', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'JohnDepp', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (9, N'ShihShihDer', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'LeonardoPikachu', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (10, N'DwightHoward', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'PatrickStar', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (11, N'WuBai', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'qwer ASDF1', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (12, N'ChienMingWang', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'qwerQWER 1', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (19, N'asdf ASDF1', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'QWERqwer11', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (20, N'qwerQWER 1', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'RyanReynolds', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (21, N'qwer ASDF1', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'ShihShihDer', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (22, N'asdf ASDF11', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'Squidward', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (23, N'QWERqwer11', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'WuBai', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
-INSERT [dbo].[limits] ([uid], [account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (24, N'a', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
+INSERT [dbo].[limits] ([account], [nomore], [buy], [sell], [publisher], [message], [enterprise], [applier], [mainhoster], [attender], [campingowner], [customer], [admin], [members], [show]) VALUES (N'YagamiTaichi', N'y', N'y', N'n', N'y', N'y', N'n', N'y', N'y', N'y', N'n', N'y', N'n', N'y', N'y')
 GO
 SET IDENTITY_INSERT [dbo].[loginhistory] ON 
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (1, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-11T13:39:24.8966667' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (1, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-11T13:39:24.8966667' AS DateTime2), N'y')
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (2, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-11T13:40:45.6300000' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (2, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-11T13:40:45.6300000' AS DateTime2), N'y')
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (3, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-16T00:51:20.8766667' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (3, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-16T00:51:20.8766667' AS DateTime2), N'y')
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (4, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-16T00:51:32.4733333' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (4, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-16T00:51:32.4733333' AS DateTime2), N'y')
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (5, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:58:06.9633333' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (5, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:58:06.9633333' AS DateTime2), N'y')
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (6, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:58:23.7933333' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (6, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:58:23.7933333' AS DateTime2), N'y')
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (7, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:58:31.5066667' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (7, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:58:31.5066667' AS DateTime2), N'y')
 GO
-INSERT [dbo].[loginhistory] ([lhid], [uid], [account], [ip], [logindate], [show]) VALUES (8, 23, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:59:21.9400000' AS DateTime2), N'y')
+INSERT [dbo].[loginhistory] ([lhid], [account], [ip], [logindate], [show]) VALUES (8, N'QWERqwer11', N'0:0:0:0:0:0:0:1', CAST(N'2022-12-17T21:59:21.9400000' AS DateTime2), N'y')
 GO
 SET IDENTITY_INSERT [dbo].[loginhistory] OFF
 GO
@@ -285,7 +285,7 @@ SET IDENTITY_INSERT [dbo].[member] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__member__449601202C141600]    Script Date: 2022/12/22 上午 11:37:12 ******/
+/****** Object:  Index [UQ__member__449601202C141600]    Script Date: 2023/1/3 上午 12:25:17 ******/
 ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ__member__449601202C141600] UNIQUE NONCLUSTERED 
 (
 	[account] ASC
@@ -293,13 +293,13 @@ ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ__member__449601202C141600] UNIQUE
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ_account]    Script Date: 2022/12/22 上午 11:37:12 ******/
+/****** Object:  Index [UQ_account]    Script Date: 2023/1/3 上午 12:25:17 ******/
 ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ_account] UNIQUE NONCLUSTERED 
 (
 	[account] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [UQ_UID]    Script Date: 2022/12/22 上午 11:37:12 ******/
+/****** Object:  Index [UQ_UID]    Script Date: 2023/1/3 上午 12:25:17 ******/
 ALTER TABLE [dbo].[member] ADD  CONSTRAINT [UQ_UID] UNIQUE NONCLUSTERED 
 (
 	[uid] ASC
@@ -359,7 +359,7 @@ ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_show]  DEFAULT ('y') FOR [
 GO
 ALTER TABLE [dbo].[member] ADD  CONSTRAINT [DF_member_about]  DEFAULT ('暫時沒有留下什麼') FOR [about]
 GO
-ALTER TABLE [dbo].[passworldhistory] ADD  CONSTRAINT [DF_passworldhistory_setpswdate]  DEFAULT (getdate()) FOR [setpswdate]
+ALTER TABLE [dbo].[passwordhistory] ADD  CONSTRAINT [DF_passworldhistory_setpswdate]  DEFAULT (getdate()) FOR [setpswdate]
 GO
 ALTER TABLE [dbo].[couponwallet]  WITH CHECK ADD  CONSTRAINT [fk_coupon_couponWallet_couponid] FOREIGN KEY([couponid])
 REFERENCES [dbo].[coupon] ([couponid])
@@ -371,36 +371,35 @@ REFERENCES [dbo].[member] ([uid])
 GO
 ALTER TABLE [dbo].[couponwallet] CHECK CONSTRAINT [fk_member_couponWallet_uid]
 GO
+ALTER TABLE [dbo].[couponwallet]  WITH CHECK ADD  CONSTRAINT [FK1k33g4hfgvql0601fvyiyw46h] FOREIGN KEY([member_uid])
+REFERENCES [dbo].[member] ([uid])
+GO
+ALTER TABLE [dbo].[couponwallet] CHECK CONSTRAINT [FK1k33g4hfgvql0601fvyiyw46h]
+GO
+ALTER TABLE [dbo].[couponwallet]  WITH CHECK ADD  CONSTRAINT [FKio9moy80dagm5pj7ff883c4hg] FOREIGN KEY([coupon_couponid])
+REFERENCES [dbo].[coupon] ([couponid])
+GO
+ALTER TABLE [dbo].[couponwallet] CHECK CONSTRAINT [FKio9moy80dagm5pj7ff883c4hg]
+GO
 ALTER TABLE [dbo].[license]  WITH CHECK ADD  CONSTRAINT [fk_member_license_account] FOREIGN KEY([account])
 REFERENCES [dbo].[member] ([account])
 GO
 ALTER TABLE [dbo].[license] CHECK CONSTRAINT [fk_member_license_account]
-GO
-ALTER TABLE [dbo].[license]  WITH NOCHECK ADD  CONSTRAINT [fk_member_license_uid] FOREIGN KEY([uid])
-REFERENCES [dbo].[member] ([uid])
-NOT FOR REPLICATION 
-GO
-ALTER TABLE [dbo].[license] CHECK CONSTRAINT [fk_member_license_uid]
 GO
 ALTER TABLE [dbo].[limits]  WITH CHECK ADD  CONSTRAINT [fk_member_limits_account] FOREIGN KEY([account])
 REFERENCES [dbo].[member] ([account])
 GO
 ALTER TABLE [dbo].[limits] CHECK CONSTRAINT [fk_member_limits_account]
 GO
-ALTER TABLE [dbo].[limits]  WITH CHECK ADD  CONSTRAINT [fk_member_limits_uid] FOREIGN KEY([uid])
-REFERENCES [dbo].[member] ([uid])
-GO
-ALTER TABLE [dbo].[limits] CHECK CONSTRAINT [fk_member_limits_uid]
-GO
 ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [fk_member_loginhistory_account] FOREIGN KEY([account])
 REFERENCES [dbo].[member] ([account])
 GO
 ALTER TABLE [dbo].[loginhistory] CHECK CONSTRAINT [fk_member_loginhistory_account]
 GO
-ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [fk_member_loginhistory_uid] FOREIGN KEY([uid])
-REFERENCES [dbo].[member] ([uid])
+ALTER TABLE [dbo].[passwordhistory]  WITH CHECK ADD  CONSTRAINT [FK_passworldhistory_member] FOREIGN KEY([account])
+REFERENCES [dbo].[member] ([account])
 GO
-ALTER TABLE [dbo].[loginhistory] CHECK CONSTRAINT [fk_member_loginhistory_uid]
+ALTER TABLE [dbo].[passwordhistory] CHECK CONSTRAINT [FK_passworldhistory_member]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'帳號' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'member', @level2type=N'COLUMN',@level2name=N'account'
 GO

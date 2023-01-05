@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.OrderBy;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 import lombok.Data;
@@ -99,25 +101,26 @@ public class Member {
 	@Column(name = "about")
 	private String about;
 
-//	@OneToOne(mappedBy = "member")
-//	private Limits limits;
-//	@OneToOne
-//	@PrimaryKeyJoinColumn
-//	private License license;
-	
-	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-	// @JoinTable(name = "Member_LoginHistory",
-	// joinColumns = {@JoinColumn(name = "memberid", referencedColumnName =
-	// "uid")},
-	// inverseJoinColumns = {@JoinColumn(name = "loginhistoryId",
-	// referencedColumnName = "uid")})
-	
-//	@OneToMany(mappedBy = "member")
-//	 @OrderBy("logindate desc")
-//	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-//	@OrderBy("cwid desc")
-//	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
+	@JsonIgnore
+	@JsonIgnoreProperties("member")
+	@OneToOne(mappedBy = "member")
+	private License license;
+
+	@JsonIgnore
+	@JsonIgnoreProperties("member")
+	@OneToOne(mappedBy = "member")
+	private Limits limits;
+
+	@JsonIgnore
+	@JsonIgnoreProperties("member")
+	@OneToMany(mappedBy = "member")
+	@OrderBy("logindate desc")
+	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
+
+	@JsonIgnore
+	@JsonIgnoreProperties("member")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+	@OrderBy("cwid desc")
+	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
 
 }

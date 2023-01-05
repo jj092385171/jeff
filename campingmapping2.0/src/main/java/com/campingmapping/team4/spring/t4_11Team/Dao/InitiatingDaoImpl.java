@@ -9,10 +9,12 @@ import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t4_11Team.model.Initiating;
-import com.campingmapping.team4.spring.t4_33Forum.controller.newPostServlet;
 
+@Repository @Transactional
 public class InitiatingDaoImpl implements InitiatingDao{
 	
 	private Session session;
@@ -174,7 +176,6 @@ public class InitiatingDaoImpl implements InitiatingDao{
 			in.setPostmember(integer);
 			resultlist.add(in);
 		}
-		
 		return resultlist;
 	}
 

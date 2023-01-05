@@ -52,13 +52,13 @@ public class Pd_insertServlet extends HttpServlet {
 			Blob Pdpicture = ImageUtil.fileToBlob(is, sizeInBytes);
 
 			CategoryService categoryService = new CategoryServiceImpl();
-			Category bean = new Category(null,userID, Pdname, Pdtitle, Pdcontent, Pdtype, Pdpicture, Pdprice, Pdinventory,
+			Category bean = new Category(null,userID, Pdname, Pdtitle, Pdcontent, Pdtype, null, Pdprice, Pdinventory,
 					Pddate, Pdlastupdate);
 
 			categoryService.create(bean);
 
 			String contextPath = request.getContextPath();
-			response.sendRedirect(contextPath + "/T4_36/html5up-editorial/Pd_ok.jsp");
+			response.sendRedirect(contextPath + "/t4_36shop/admin/Pd_ok.jsp");
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

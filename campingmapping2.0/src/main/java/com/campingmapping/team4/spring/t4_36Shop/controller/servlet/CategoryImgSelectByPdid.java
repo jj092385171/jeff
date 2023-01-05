@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 import com.campingmapping.team4.spring.t4_36Shop.model.service.impl.CategoryServiceImpl;
 
 
@@ -35,8 +34,8 @@ public class CategoryImgSelectByPdid extends HttpServlet {
 			String pdid = request.getParameter("pdid");
 			int Pdid = Integer.parseInt(pdid);
 			CategoryServiceImpl jsdi = new CategoryServiceImpl();
-			Category category = jsdi.findImgByPdiD(Pdid);
-			blob = category.getPdpicture();
+//			Category category = jsdi.findImgByPdiD(Pdid);
+//			blob = category.getPdpicture();
 			is = blob.getBinaryStream();
 			os = response.getOutputStream();
 			int len = 0;
@@ -47,7 +46,7 @@ public class CategoryImgSelectByPdid extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("失敗");
+			System.out.println("憭望��");
 		}finally {
 			if (is != null) is.close();
             if (os != null) os.close();

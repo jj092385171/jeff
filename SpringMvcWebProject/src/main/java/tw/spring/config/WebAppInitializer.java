@@ -3,6 +3,7 @@ package tw.spring.config;
 import javax.servlet.Filter;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 // 相當於web.xml的Java程式組態
@@ -29,7 +30,8 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	@Override
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter cef1 = new CharacterEncodingFilter("UTF-8", true);
-		return new Filter[] {cef1};
+		HiddenHttpMethodFilter hhmf = new HiddenHttpMethodFilter();
+		return new Filter[] {cef1,hhmf};
 	}
 	
 }

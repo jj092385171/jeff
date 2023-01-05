@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,9 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import com.campingmapping.team4.spring.t4_33Forum.model.entity.Post;
 import com.campingmapping.team4.spring.t4_33Forum.model.service.PostService;
+
+import util.HibernateUtils;
 
 
 @WebServlet("/T4_33/newPostServlet")
@@ -23,14 +30,14 @@ public class newPostServlet extends HttpServlet {
        
 	SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
-	}
-	
-	private void processRequest(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			request.setCharacterEncoding("UTF-8");
-			Post post = new Post();
+			SessionFactory factory = HibernateUtils.getSessionFactory();
+			Session session = factory.getCurrentSession();
 			
+			request.setCharacterEncoding("UTF-8");
+			HttpSession httpSession = request.getSession();
+			
+			Post post = new Post();
 			//取得輸入的title
 			String title = request.getParameter("title"); 
 			post.setTitle(title);
@@ -76,19 +83,27 @@ public class newPostServlet extends HttpServlet {
 			}
 			post.setScore(score);
 			
-			PostService service = new PostService(); //送到資料庫建立post
-			Post newPost = service.insertPostService(post); //回傳建立的post
+			PostService postService = new PostService(session); //送到資料庫建立post
+			postService.insertPost(post);
 			
-			request.setAttribute("newPost", newPost); //傳newPost到showPost
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPost.jsp");
-			rd.forward(request, response);
+			List<Post> list = postService.selectAllPost();
+			httpSession.setAttribute("postList", list);
+			
+//			RequestDispatcher rd = request.getRequestDispatcher("/T4_33/showPost.jsp");
+//			rd.forward(request, response);
+			String contextPath = request.getContextPath();
+			
+			int userId = 9;
+			if(userId == 9) {
+				response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_33forum/admin/ForumManagerFirst.jsp"));
+				return;
+			}
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/t4_33forum/guest/discussionFirst.jsp"));
 			return;
 			
-		} catch (IOException | ParseException | SQLException | ServletException e) {
+		} catch (IOException | ParseException | SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
-
 }

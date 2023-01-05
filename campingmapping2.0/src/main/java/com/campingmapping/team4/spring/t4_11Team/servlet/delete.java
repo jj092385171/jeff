@@ -39,7 +39,7 @@ public class delete extends HttpServlet {
 		String num = request.getParameter("delete");
 		teamService.deleteInitiating(Integer.valueOf(num));
 		System.out.println("刪除成功");
-
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/view");
 		rd.forward(request, response);
 	}

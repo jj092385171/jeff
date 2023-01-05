@@ -12,8 +12,8 @@
 
         <body>
             <div>
-                <a href="<c:url value='/IndexShowAllPageServlet' />"><strong>營地_營區位管理</strong></a>
-            </div>
+				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
+			</div>
 
             <hr>
 
@@ -65,31 +65,13 @@
 
             <hr>
 
-            <h3>請輸入營地 ID:</h3>
-            <form method="post" action=" <c:url value='/T4_24/InsertSiteByCampIDPageServlet' />">
-                <div>
-                    <input type="text" name="campIDSite" value="${param.campIDSite}" placeholder="營地編號" />
-                    <div style="color:#FF0000; font-size:60%; display: inline">
-                        ${ErrorMsg.campIDSite}</div>
-                </div>
-                <!-- Break -->
-                <div>
-                    <input type="submit" value="Add" />
-                    <input type="reset" value="Reset" />
-                </div>
-            </form>
-
             <div>
-                <a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
-                <br>
-                <a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營位區</a>
-                <br>
-                <a href="<c:url value='/t4_24camp/admin/UpdatePage.jsp' />">&emsp;修改&emsp;營地_營區位</a>
-                <br>
-                <a href="<c:url value='/t4_24camp/admin/deletePage.jsp' />">&emsp;刪除&emsp;營地_營區位</a>
-                <br>
-                <a href="<c:url value='IndexShowAllPageServlet' />">回首頁</a>
-            </div>
+				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
+				<br>
+				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
+				<br>
+				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
+			</div>
 
         </body>
 

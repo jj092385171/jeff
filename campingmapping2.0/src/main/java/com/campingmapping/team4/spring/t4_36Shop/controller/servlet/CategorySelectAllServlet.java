@@ -16,7 +16,7 @@ import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 import com.campingmapping.team4.spring.t4_36Shop.model.service.CategoryService;
 import com.campingmapping.team4.spring.t4_36Shop.model.service.impl.CategoryServiceImpl;
 
-@WebServlet("/SelectAllServlet")
+@WebServlet("/SelectAllServlet.do")
 public class CategorySelectAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class CategorySelectAllServlet extends HttpServlet {
 		}
 		req.setAttribute("AllList", list);
 		
-		RequestDispatcher rd = req.getRequestDispatcher("http://localhost:8080/campingmapping2.0/t4_36shop/admin/Pd_Allproduct.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/t4_36shop/admin/Pd_Allproduct.jsp");
 		rd.forward(req, resp);
 	}
 
