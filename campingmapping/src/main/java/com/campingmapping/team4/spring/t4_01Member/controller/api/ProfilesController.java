@@ -13,8 +13,13 @@ public class ProfilesController {
 	public String processAction(@RequestParam("userName") String userName,
 			@RequestParam("userAddress") String userAddress,
 			@RequestParam("userPhone") String userPhone) {
-		System.out.println("in");
 		return "message:" + userName + "-" + userAddress + "-" + userPhone;
+	}
+
+	@PostMapping("/profiles2.controller")
+	@ResponseBody
+	public String processAction2(@RequestParam("userName") String userName) {
+		return "message:" + userName;
 	}
 
 }

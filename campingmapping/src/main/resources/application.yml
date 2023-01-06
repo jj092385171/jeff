@@ -11,7 +11,7 @@ spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     password: "0000"
-    url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True
+    url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
     username: sa
   jpa:
     properties:

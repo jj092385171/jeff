@@ -21,17 +21,28 @@
          var tagsLen = tags.length;
          console.log('tagsLen:' + tagsLen);
 
+         var textResult = '';
          for (var i = 0; i < tagsLen; i++) {
             var xSel = tags[i];
             console.log("i=" + i);
             console.log(xSel);
+            for (var j = 0; j < 2; j++) {
+               var r1 = xSel.childNodes[j].nextElementSibling;
+               var text1 = r1.textContent;
+               textResult += text1 + ' ';
+            }
+            textResult += '<br/>';
          }
+         console.log('textResult:' + textResult);
+
+         document.getElementById('result1').innerHTML = textResult;
       };
    </script>
 </head>
 
 <body>
    ajax04
+   <div id="result1"></div>
 </body>
 
 </html>
