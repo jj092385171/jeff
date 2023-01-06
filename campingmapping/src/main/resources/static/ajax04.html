@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>ajax04</title>
+   <script type="text/javascript">
+      var xh = new XMLHttpRequest();
+      xh.open('get', 'xml/game.xml', true);
+      xh.send();
+
+      xh.onload = function () {
+         console.log('status:' + xh.status);
+         console.log(xh.responseXML);
+         console.log('result:' + xh.responseXML);
+
+         var result = xh.responseXML.documentElement;
+         console.log(result);
+
+         var tags = result.getElementsByTagName('role');
+         var tagsLen = tags.length;
+         console.log('tagsLen:' + tagsLen);
+
+         for (var i = 0; i < tagsLen; i++) {
+            var xSel = tags[i];
+            console.log("i=" + i);
+            console.log(xSel);
+         }
+      };
+   </script>
+</head>
+
+<body>
+   ajax04
+</body>
+
+</html>
