@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 import com.campingmapping.team4.spring.t4_36Shop.model.service.CategoryService;
 
 @Controller
-@RequestMapping("/category")
 public class CategoryCrudController {
 
 	@Autowired
@@ -41,7 +39,7 @@ public class CategoryCrudController {
 
 	@GetMapping("/selectAll")
 	@ResponseBody
-	public List<Category> selectAll(@PathVariable("pdid") int pdid)
+	public List<Category> selectAll()
 			throws SQLException {
 		List<Category> category = categoryService.selectAll();
 		return category;
@@ -55,7 +53,7 @@ public class CategoryCrudController {
 		return categoryService.update(category);
 	}
 
-	@DeleteMapping("/profiles/{pdid}")
+	@DeleteMapping("/delete/{pdid}")
 	@ResponseBody
 	public String delete(@PathVariable("pdid") int pdid) throws SQLException {
 		categoryService.delete(pdid);

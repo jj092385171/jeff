@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pdid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer pdid;
 	// 產品編號(pk)
 	@Column(name = "userID")
@@ -147,7 +147,6 @@ public class Category {
 
 	public Category(Integer pdid, String userID, String pdname, String pdtitle, String pdcontent, String pdtype,
 			Blob pdpicture, int pdprice, int pdinventory, Date pddate, Date pdlastupdate) {
-		super();
 		this.pdid = pdid;
 		this.userID = userID;
 		this.pdname = pdname;

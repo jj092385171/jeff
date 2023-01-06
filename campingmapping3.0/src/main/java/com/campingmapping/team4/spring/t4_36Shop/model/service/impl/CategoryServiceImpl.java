@@ -5,12 +5,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t4_36Shop.model.dao.CategoryDao;
-import com.campingmapping.team4.spring.t4_36Shop.model.dao.impl.CategoryDaoImpl;
 import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 import com.campingmapping.team4.spring.t4_36Shop.model.service.CategoryService;
 
@@ -19,11 +17,9 @@ import com.campingmapping.team4.spring.t4_36Shop.model.service.CategoryService;
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
-	private SessionFactory factory;
-
-	private CategoryDao categoryDao = new CategoryDaoImpl(
-			factory.openSession());
-
+	private CategoryDao categoryDao;
+	
+	
 	@Override
 	public Category create(Category category) throws SQLException {
 		return categoryDao.insert(category);
