@@ -21,7 +21,7 @@ public class TagDao {
 	
 	
 	//ID搜尋標籤
-	public Tag findByID(int... tadID){
+	public Tag findByID(int tadID){
 		Session session = factory.openSession();
 		
 		Tag tag = session.get(Tag.class, tadID);

@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,12 +24,12 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "camp")
 @Component
-public class Camp {
+public class Camp implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "campID")
-	private Integer campID;
+	private int campID;
 	
 	@Column(name = "campName")
 	private String campName;
@@ -49,7 +50,7 @@ public class Camp {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "tagOfCamp",
 	joinColumns = {@JoinColumn(name = "fk_campID", referencedColumnName = "campID")},
-	inverseJoinColumns = {@JoinColumn(name = "fk_tagID", referencedColumnName = "tagID")})
+	inverseJoinColumns = { @JoinColumn(name = "fk_tagID", referencedColumnName = "tagID")})
 	private Set<Tag> tags = new HashSet<>();
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp", cascade = CascadeType.ALL)
@@ -60,11 +61,11 @@ public class Camp {
 	}
 
 	
-	public Integer getCampID() {
+	public int getCampID() {
 		return campID;
 	}
 
-	public void setCampID(Integer campID) {
+	public void setCampID(int campID) {
 		this.campID = campID;
 	}
 

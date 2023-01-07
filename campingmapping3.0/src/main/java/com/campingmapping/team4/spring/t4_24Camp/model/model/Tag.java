@@ -1,10 +1,13 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,12 +19,12 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "tag")
 @Component
-public class Tag {
+public class Tag implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tagID")
-	private Integer tagID;
+	private int tagID;
 	
 	@Column(name = "tagName")
 	private String tagName;
@@ -34,11 +37,11 @@ public class Tag {
 	}
 
 
-	public Integer getTagID() {
+	public int getTagID() {
 		return tagID;
 	}
 
-	public void setTagID(Integer tagID) {
+	public void setTagID(int tagID) {
 		this.tagID = tagID;
 	}
 
@@ -49,8 +52,6 @@ public class Tag {
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
 	}
-
-	
 
 	public Set<Camp> getCamps() {
 		return camps;

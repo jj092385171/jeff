@@ -26,7 +26,7 @@ public class CampDao {
 
 	
 	//新增營地
-	public Integer AddCamp(Camp camp) {
+	public Integer addCamp(Camp camp) {
 		Session session = factory.openSession();
 		
 		Serializable campID = null;
@@ -35,7 +35,7 @@ public class CampDao {
 		}
 		
 		session.close();
-		return (Integer) campID;
+		return (Integer)campID;
 	}
 	
 	//搜尋全部

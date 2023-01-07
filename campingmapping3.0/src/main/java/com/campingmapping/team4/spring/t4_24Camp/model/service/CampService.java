@@ -20,8 +20,8 @@ public class CampService {
 	
 
 	//新增營地
-	public Integer AddCamp(Camp camp) {
-		return campDao.AddCamp(camp);
+	public Integer addCamp(Camp camp) {
+		return campDao.addCamp(camp);
 	}	
 		
 	//搜尋全部

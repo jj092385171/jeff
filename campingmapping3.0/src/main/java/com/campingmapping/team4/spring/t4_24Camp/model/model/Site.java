@@ -1,5 +1,7 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,12 +16,12 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "site")
 @Component
-public class Site {
+public class Site implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "siteID")
-	private Integer siteID;
+	private int siteID;
 	
 	@Column(name = "siteName")
 	private String siteName;
@@ -28,10 +30,10 @@ public class Site {
 	private String sitePicturesPath;
 	
 	@Column(name = "totalSites")
-	private Integer totalSites;
+	private int totalSites;
 	
 	@Column(name = "siteMoney")
-	private Integer siteMoney;
+	private int siteMoney;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_campID")
@@ -42,11 +44,11 @@ public class Site {
 	}
 
 	
-	public Integer getSiteID() {
+	public int getSiteID() {
 		return siteID;
 	}
 
-	public void setSiteID(Integer siteID) {
+	public void setSiteID(int siteID) {
 		this.siteID = siteID;
 	}
 
@@ -66,19 +68,19 @@ public class Site {
 		this.sitePicturesPath = sitePicturesPath;
 	}
 
-	public Integer getTotalSites() {
+	public int getTotalSites() {
 		return totalSites;
 	}
 
-	public void setTotalSites(Integer totalSites) {
+	public void setTotalSites(int totalSites) {
 		this.totalSites = totalSites;
 	}
 
-	public Integer getSiteMoney() {
+	public int getSiteMoney() {
 		return siteMoney;
 	}
 
-	public void setSiteMoney(Integer siteMoney) {
+	public void setSiteMoney(int siteMoney) {
 		this.siteMoney = siteMoney;
 	}
 

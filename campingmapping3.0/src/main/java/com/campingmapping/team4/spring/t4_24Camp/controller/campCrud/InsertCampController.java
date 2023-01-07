@@ -69,12 +69,6 @@ public class InsertCampController {
 		if (tagIDs == null || tagIDs.length == 0) {
 			errors.put("tagIDs", "必須選擇標籤");
 		}
-		Set<Tag> tagSet = new HashSet<Tag>();
-		for (int tagID : tagIDs) {
-			Tag tag = tagService.findByID(tagID);
-			System.out.println(tag.getTagName());
-			tagSet.add(tag);
-		}
 		//錯誤導回
 		if(errors != null && !errors.isEmpty()) {
 			return "redirect:/t4_24camp/admin/QueryPageForm";
@@ -82,14 +76,20 @@ public class InsertCampController {
 		
 		Camp cb = new Camp();
 		
+		Set<Tag> tags = cb.getTags();
+		for (int tagID : tagIDs) {
+			Tag tag = tagService.findByID(tagID);
+			tags.add(tag);
+		}
+		
 		cb.setCampName(campName);
 		cb.setCity(city);
 		cb.setLocation(location);
 		cb.setCampPicturesPath(fileName);
 		cb.setDescription(description);
-		cb.setTags(tagSet);
+		cb.setTags(tags);
 		
-		Integer campID = campService.AddCamp(cb);
+		Integer campID = campService.addCamp(cb);
 		Camp resultCamp = campService.findCampByID(campID);
 		
 		m.addAttribute("campID", resultCamp.getCampID());
