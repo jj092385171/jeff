@@ -33,9 +33,7 @@
 			<p>
 				會員id <input type="text" name="uid" value='${param.uid}' required>
 			</p>
-			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.id}</div>
-
-
+			<div style="color: #FF0000; font-size: 60%; display: inline">${errors.id}</div>
 			<hr>
 			<p>
 				職缺 <input type="hidden" id="ii" value="${param.ii}"> <select
@@ -61,7 +59,7 @@
 				人數 <input type="text" name="quantity" value='${param.quantity}'
 					required>
 			</p>
-			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${errors.quantity}</div>
 			<hr>
 
 			<p>
@@ -112,9 +110,6 @@
 			<button>回首頁</button>
 		</div>
 	</form>
-
-
-
 
 </body>
 </html>

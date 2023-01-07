@@ -21,9 +21,7 @@
 
 <body>
 	<h2 class="c1">刪除成功</h2>
-	<!-- 	<div class="b"> -->
-	<!-- 		<a href="insert.controller">回上一頁</a> -->
-	<!-- 	</div> -->
+	
 	<form action="<c:url value='insert.controller' />" method="POST"
 		enctype="multipart/form-data">
 		<div class="b">

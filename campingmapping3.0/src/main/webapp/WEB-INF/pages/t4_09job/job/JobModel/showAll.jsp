@@ -45,7 +45,6 @@
 
 			<thead>
 				<tr>
-
 					<th>刊登編號</th>
 					<th>uID</th>
 					<th>職缺</th>

@@ -39,7 +39,7 @@ public class JobWorkController1 {
 			@RequestParam("place") String place, @RequestParam("time") String time, @RequestParam("date") String date,
 			@RequestParam("rackUp") String rackUp, @RequestParam("rackDown") String rackDown,
 			@RequestParam("img") MultipartFile img, @RequestParam("remark") String remark, Model m) throws IOException {
-
+		
 		Map<String, String> errorMessage = new HashMap<>();
 		m.addAttribute("errors", errorMessage);
 		JobWorkBean j = new JobWorkBean();
@@ -49,6 +49,7 @@ public class JobWorkController1 {
 			j.setuID(uID);
 		} catch (Exception e) {
 			errorMessage.put("id", "輸入格式錯誤");
+			return "t4_09job/job/JobModel/insert";
 		}
 		j.setJob(job);
 		j.setSalary(salary);
@@ -58,6 +59,7 @@ public class JobWorkController1 {
 			j.setQuantity(q);
 		} catch (Exception e) {
 			errorMessage.put("quantity", "輸入格式錯誤");
+			return "t4_09job/job/JobModel/insert";
 		}
 		j.setPlace(place);
 		j.setTime(time);
@@ -84,8 +86,7 @@ public class JobWorkController1 {
 			j.setImg(image);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}	
 		j.setRemark(remark);
 		jobWorkService.addJob(j);
 		return "t4_09job/job/JobModel/addSuccess";

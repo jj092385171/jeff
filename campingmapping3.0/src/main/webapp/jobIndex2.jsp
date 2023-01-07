@@ -49,13 +49,28 @@
 					<header class="major">
 						<h2>Menu</h2>
 					</header>
-					<ul>
-						<li><a href="jobCRUD.controller">職缺刊登</a></li>										
-						<li><a href=" ">人才查詢</a></li>
-						<li><a href=" ">刊登方案</a></li>
-						<li><a href="#">證照中心</a></li>
-						<li><a href="#">履歷</a></li>
-					</ul>
+					<form action="<c:url value='jobCRUD.controller'/>" method="post"
+						enctype="multipart/form-data">
+						<button>職缺刊登</button>
+					</form>
+					<form action="<c:url value=''/>" method="post"
+						enctype="multipart/form-data">
+						<button>人才查詢</button>
+					</form>
+					<form action="<c:url value=''/>" method="post"
+						enctype="multipart/form-data">
+						<button>刊登方案</button>
+					</form>
+					<form action="<c:url value=''/>" method="post"
+						enctype="multipart/form-data">
+						<button>職缺刊登</button>
+					</form>
+					<form action="<c:url value=''/>" method="post"
+						enctype="multipart/form-data">
+						<button>履歷</button>
+					</form>
+					
+
 				</nav>
 
 				<!-- Section -->
