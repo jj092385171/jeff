@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 
@@ -40,6 +41,7 @@
 <body>
 	<div class="c1">
 		<table class="t1">
+
 			<thead>
 				<tr>
 
@@ -58,36 +60,34 @@
 				</tr>
 			</thead>
 			<tbody class="t2">
-				<c:forEach var="JobBean" items="${showAllJob}">
+				<c:forEach var="JobWorkBean" items="${showAllJob}">
 					<tr>
-
-
-						<td>${JobBean.rackID}</td>
-						<td>${JobBean.uID}</td>
-						<td>${JobBean.job}</td>
-						<td>${JobBean.salary}</td>
-						<td>${JobBean.quantity}</td>
-						<td>${JobBean.place}</td>
-						<td>${JobBean.date}</td>
-						<td>${JobBean.time}</td>
+						<td>${JobWorkBean.rackID}</td>
+						<td>${JobWorkBean.uID}</td>
+						<td>${JobWorkBean.job}</td>
+						<td>${JobWorkBean.salary}</td>
+						<td>${JobWorkBean.quantity}</td>
+						<td>${JobWorkBean.place}</td>
+						<td>${JobWorkBean.date}</td>
+						<td>${JobWorkBean.time}</td>
 						<td><img width="80" height="100"
-							src="<c:url value='/JobServletImg?id=${JobBean.rackID}'/>" /></td>
-						<td>${JobBean.remark}</td>
-						<td>${JobBean.rackUp}</td>
-						<td>${JobBean.rackDown}</td>
+							src="<c:url value='/JobServletImg?id=${JobWorkBean.rackID}'/>" /></td>
+						<td>${JobWorkBean.remark}</td>
+						<td>${JobWorkBean.rackUp}</td>
+						<td>${JobWorkBean.rackDown}</td>
 
 
 						<td>
-<%-- 							<form action="<c:url value='/JobServletDelete'/>" method="POST" --%>
-<!-- 								enctype="multipart/form-data"> -->
-<%-- 								<input type="hidden" name="de" value="${JobBean.rackID}"> --%>
-<!-- 								<button>刪除</button> -->
-								<button class="delete" name="de" value='${JobBean.rackID}' type="button">刪除</button>
+							<%-- 							<form action="<c:url value='/JobServletDelete'/>" method="POST" --%>
+							<!-- 								enctype="multipart/form-data"> --> <%-- 								<input type="hidden" name="de" value="${JobBean.rackID}"> --%>
+							<!-- 								<button>刪除</button> --> <!-- </form> -->
+							<button class="delete" name="de" value='${JobWorkBean.rackID}'
+								type="button">刪除</button>
 
-<!-- 							</form> -->
+
 							<form action="<c:url value='/JobServletFindBeanByRackID'/>"
 								method="POST" enctype="multipart/form-data">
-								<input type="hidden" name="up" value="${JobBean.rackID}">
+								<input type="hidden" name="up" value="${JobWorkBean.rackID}">
 								<button>修改</button>
 							</form>
 
@@ -95,6 +95,7 @@
 					</tr>
 				</c:forEach>
 			</tbody>
+
 		</table>
 	</div>
 	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"

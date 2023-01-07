@@ -25,7 +25,9 @@ public class JobWorkService {
 
 	// 秀全部
 	public List<JobWorkBean> showAllJob() {
-		return jobDao.selectAll();		 
+		List<JobWorkBean> selectAll = jobDao.selectAll();
+		System.out.println(selectAll);
+		return selectAll;	
 	}
 
 	// 新增職缺

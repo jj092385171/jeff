@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,13 +20,17 @@ import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
 import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
 
 @Controller
-public class JobWorkController {
+public class JobWorkController1 {
 
 	@Autowired
 	private JobWorkService jobWorkService;
 
-	@PostMapping(path = "/JobServletAdd")
-	public String insert(@RequestParam("uid") String uid, @RequestParam("job") String job,
+	@GetMapping(path = "/insert.controller")
+	public String processMainAction() {
+		return "t4_09job/job/JobModel/insert";
+	}
+	@PostMapping(path = "/jobServletAdd.controller")
+	public String controllerInsert(@RequestParam("uid") String uid, @RequestParam("job") String job,
 			@RequestParam("salary") String salary, @RequestParam("quantity") String quantity,
 			@RequestParam("place") String place, @RequestParam("time") String time, @RequestParam("date") String date,
 			@RequestParam("rackUp") String rackUp, @RequestParam("rackDown") String rackDown,
@@ -79,6 +84,6 @@ public class JobWorkController {
 		
 		j.setRemark(remark);
 		jobWorkService.addJob(j);
-		return "";
+		return "t4_09job/job/JobModel/addSuccess";
 	}
 }

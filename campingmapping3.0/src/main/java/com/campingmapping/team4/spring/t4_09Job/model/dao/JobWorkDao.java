@@ -21,15 +21,17 @@ public class JobWorkDao {
 	public void addJob(JobWorkBean jobBean) {
 		Session session = factory.openSession();
 		session.save(jobBean);
+		session.close();
 	}
 
 	// 透過rackID找圖片
 	public JobWorkBean findImgByRackID(int rackID) {
 		Session session = factory.openSession();
-		JobWorkBean result = session.createQuery("from JobBean where rackID = :rid ", JobWorkBean.class)
+		JobWorkBean result = session.createQuery("from JobWorkBean where rackID = :rid ", JobWorkBean.class)
 				.setParameter("rid", rackID).getSingleResult();
 		JobWorkBean jobBean = new JobWorkBean();
 		jobBean.setImg(result.getImg());
+		session.close();
 		return jobBean;
 	}
 
@@ -40,6 +42,7 @@ public class JobWorkDao {
 		if (jbean != null) {
 			session.delete(jbean);
 		}
+		session.close();
 	}
 
 	// 透過刊登id更改職缺等
@@ -57,32 +60,33 @@ public class JobWorkDao {
 		jbean.setImg(jobBean.getImg());
 		jbean.setDate(jobBean.getDate());
 		jbean.setTime(jobBean.getTime());
-
+		session.close();
 	}
 
 	// 透過刊登編號找一筆資料
 	public JobWorkBean findBeanByRackID(int rackID) {
 		Session session = factory.openSession();
 		JobWorkBean jbean = session.get(JobWorkBean.class, rackID);
-
+		session.close();
 		return jbean;
 	}
 
 	// 搜尋全部
 	public List<JobWorkBean> selectAll() {
 		Session session = factory.openSession();
-		Query<JobWorkBean> query = session.createQuery("from JobBean", JobWorkBean.class);
+		Query<JobWorkBean> query = session.createQuery("from JobWorkBean", JobWorkBean.class);
 		List<JobWorkBean> result = query.getResultList();
+		session.close();
 		return result;
 	}
 
 	// 透過job搜尋全部職缺
 	public List<JobWorkBean> findJobByJobLike(String job) {
 		Session session = factory.openSession();
-		List<JobWorkBean> result = session.createQuery("from JobBean where job like :j", JobWorkBean.class)
+		List<JobWorkBean> result = session.createQuery("from JobWorkBean where job like :j", JobWorkBean.class)
 				.setParameter("j", "%" + job + "%").getResultList();
 		System.out.println(result);
-
+		session.close();
 		return result;
 	}
 
@@ -90,8 +94,9 @@ public class JobWorkDao {
 	public List<JobWorkBean> findBeanByuID(int uID) {
 		Session session = factory.openSession();
 
-		List<JobWorkBean> result = session.createQuery("from JobBean where uID = :u", JobWorkBean.class)
+		List<JobWorkBean> result = session.createQuery("from JobWorkBean where uID = :u", JobWorkBean.class)
 				.setParameter("u", uID).getResultList();
+		session.close();
 		return result;
 	}
 

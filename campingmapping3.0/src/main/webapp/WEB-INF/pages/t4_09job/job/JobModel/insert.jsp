@@ -24,7 +24,7 @@
 </style>
 </head>
 <body>
-	<form action="<c:url value='/JobServletAdd'/>" method="POST"
+	<form action="jobServletAdd.controller" method="POST"
 		enctype="multipart/form-data">
 		<div class="c1">
 
