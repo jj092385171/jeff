@@ -21,6 +21,15 @@ public class CityDao {
 	@Autowired
 	private SessionFactory factory;
 	
+	
+	//透過ID搜尋City
+	public City findCityByID(int cityID) {
+		Session session = factory.openSession();
+		City city = session.get(City.class, cityID);
+		
+		session.close();
+		return city;
+	}
 
 	//搜尋全部城市
 	public List<City> showAll() {
@@ -28,6 +37,7 @@ public class CityDao {
 		Query<City> query = session.createQuery("from City", City.class);
 		List<City> resultList = query.getResultList();
 		
+		session.close();
 		return resultList;
 	}
 	
@@ -40,7 +50,7 @@ public class CityDao {
 			Set<Camp> camps = city.getCamps();
 			return camps;
 		}
-		
+		session.close();
 		return null;
 	}
 

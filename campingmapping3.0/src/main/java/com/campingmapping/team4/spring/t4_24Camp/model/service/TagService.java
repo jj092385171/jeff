@@ -17,6 +17,11 @@ public class TagService {
 	private TagDao tagDao;
 	
 	
+	//ID搜尋標籤
+	public Tag findByID(int tadID){
+		return tagDao.findByID(tadID);
+	}
+	
 	//搜尋全部標籤
 	public List<Tag> showAll(){
 		return tagDao.showAll();

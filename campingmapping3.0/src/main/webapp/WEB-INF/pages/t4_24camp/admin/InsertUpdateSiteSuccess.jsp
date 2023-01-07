@@ -12,7 +12,7 @@
 
 		<body>
 			<div>
-				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
+				<a href="/campingmapping3.0/indexShowAllCamp.controller"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>

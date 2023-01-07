@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.service;
 
-import java.sql.Blob;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +20,7 @@ public class CampService {
 	
 
 	//新增營地
-	public Camp AddCamp(Camp camp) {
+	public Integer AddCamp(Camp camp) {
 		return campDao.AddCamp(camp);
 	}	
 		
@@ -36,8 +35,8 @@ public class CampService {
 	}
 	
 	//更新營地
-	public Camp updateByCampID(int campID , String campName, int cityID, String location, Blob campPictures, String description, Set<Tag> tags) {
-		return campDao.updateByCampID(campID, campName, cityID, location, campPictures, description, tags);
+	public Camp updateByCampID(int campID , String campName, int cityID, String location, String campPicturesPath, String description, Set<Tag> tags) {
+		return campDao.updateByCampID(campID, campName, cityID, location, campPicturesPath, description, tags);
 	}
 	
 	//刪除營地

@@ -42,10 +42,9 @@
 							<td>${ camp.city.cityID }</td>
 							<td>${ camp.city.cityName }</td>
 							<td>${ camp.location }</td>
-							<!-- <td>
-								<img width="80" height="100"
-								src="<c:url value='/T4_24/GetCampImage?id=${camp.campID}'/>" />
-							</td> -->
+							<td>
+								<img width="80" height="100" src="/campingmapping3.0/getCampPicture/${camp.campID}" />
+							</td>
 							<td>${ camp.description }</td>
 							<td>
 								<c:forEach var='tag' items='${camp.tags}'>
@@ -59,14 +58,14 @@
 								</form>
 							</td>
 							<td>
-								<!-- <form action="<c:url value='/DeleteCampByIDServlet.do'/>" method="POST">
+								<form action="/deleteCampByID.controller" method="POST">
 									<button onclick="return check()" type="submit" name="campID"
 										value="${camp.campID }">刪除</button>
-								</form> -->
-								<form>
+								</form>
+								<!-- <form>
 									<button class="delete" value="${camp.campID}" name="campID"
 										type="button">刪除</button>
-								</form>
+								</form> -->
 							</td>
 							<td>
 								<form action="<c:url value='/InsertSiteGetCampIDServlet?campID=${camp.campID }'/>"
@@ -94,7 +93,7 @@
 
 			<script>
 				$(function () {
-					$('.delete').click(function () {
+					$('').click(function () {
 						let id = $(this).attr("value");
 						Swal.fire({
 							title: 'Are you sure?',

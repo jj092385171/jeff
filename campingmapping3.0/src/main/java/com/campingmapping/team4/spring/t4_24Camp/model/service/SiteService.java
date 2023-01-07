@@ -18,13 +18,28 @@ public class SiteService {
 	
 	
 	//新增
-	public Site AddCamp(Site site) {
+	public Integer AddCamp(Site site) {
 		return siteDao.AddCamp(site);
 	}
 	
 	//透過campID查site
 	public Set<Site> findSitesByCampID(int campID) {
 		return siteDao.findSitesByCampID(campID);
+	}
+	
+	//透過siteID查詢site
+	public Site findSiteByID(int siteID) {
+		return siteDao.findSiteByID(siteID);
+	}
+	
+	//更新營區位
+	public Site updateBySiteID(int siteID, String siteName, String sitePicturesPath, int totalSites, int siteMoney) {
+		return siteDao.updateBySiteID(siteID, siteName, sitePicturesPath, totalSites, siteMoney);
+	}
+	
+	//刪除營區地
+	public boolean deletdBySiteID(int siteID){
+		return siteDao.deletdBySiteID(siteID);
 	}
 	
 }

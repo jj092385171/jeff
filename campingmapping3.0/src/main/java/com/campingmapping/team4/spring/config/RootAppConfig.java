@@ -26,7 +26,7 @@ public class RootAppConfig {
 	@Bean
 	public DataSource dataSource() throws IllegalArgumentException, NamingException {
 		JndiObjectFactoryBean jndiBean = new JndiObjectFactoryBean();
-		jndiBean.setJndiName("java:comp/env/connectSqlServerJdbc/SystemService");
+		jndiBean.setJndiName("java:comp/env/campingmapping3.0");
 		jndiBean.afterPropertiesSet();
 		DataSource ds = (DataSource) jndiBean.getObject();
 		return ds;
@@ -48,6 +48,7 @@ public class RootAppConfig {
 		props.put("hibernate.dialect", org.hibernate.dialect.SQLServerDialect.class);
 		props.put("hibernate.show_sql", Boolean.TRUE);
 		props.put("hibernate.format_sql", Boolean.TRUE);
+		props.put("hibernate.allow_update_outside_transaction", "true");
 //		props.put("hibernate.current_session_context_class", "thread");
 		return props;
 		

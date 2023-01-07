@@ -19,6 +19,11 @@ public class CityService {
 	private CityDao cityDao;
 
 	
+	//透過ID搜尋City
+	public City findCityByID(int cityID) {
+		return cityDao.findCityByID(cityID);
+	}
+	
 	//搜尋全部城市
 	public List<City> showAll() {
 		return cityDao.showAll();

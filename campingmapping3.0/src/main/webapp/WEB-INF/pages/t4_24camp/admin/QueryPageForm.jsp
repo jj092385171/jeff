@@ -16,7 +16,7 @@
 
 			<hr>
 
-			<form name="QueryCampByCityNameForm" action="<c:url value='/T4_24/QueryCampsByCityIDsServlet' />"
+			<form name="QueryCampByCityNameForm" action="queryCampsByCityIDs.controller"
 				method="POST">
 				<table>
 					<thead>
@@ -33,7 +33,7 @@
 								<c:forEach var='city' items='${cityList}'>
 									<input type="checkbox" name="cityID" value="${city.cityID}" />${city.cityName}
 								</c:forEach>
-								<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.cityIDs}</div>
+								<div style="color:#FF0000; font-size:60%; display: inline">${errors.cityIDs}</div>
 							</td>
 						<tr>
 							<td><input type="submit" value="送出"></td>
@@ -44,7 +44,7 @@
 
 			<hr>
 
-			<form name="QueryCampByCampIDForm" action="<c:url value='/T4_24/QueryCampByCampIDServlet' />" method="POST">
+			<form name="QueryCampByCampIDForm" action="queryCampsByCampIDs.controller" method="POST">
 				<table>
 					<thead>
 						<tr>
@@ -57,7 +57,7 @@
 						<tr>
 							<td>營地ID:</td>
 							<td><input name="campID" value="" type="text">
-								<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.campID}</div>
+								<div style="color:#FF0000; font-size:60%; display: inline">${errors.campID}</div>
 							</td>
 						<tr>
 							<td><input type="submit" value="送出"></td>

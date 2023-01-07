@@ -40,14 +40,14 @@ public class Camp {
 	@Column(name = "location")
 	private String location;
 	
-	@Column(name = "campPictures")
-	private java.sql.Blob campPictures;
+	@Column(name = "campPicturesPath")
+	private String campPicturesPath;
 	
 	@Column(name = "description")
 	private String description;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "TagOfCamp",
+	@JoinTable(name = "tagOfCamp",
 	joinColumns = {@JoinColumn(name = "fk_campID", referencedColumnName = "campID")},
 	inverseJoinColumns = {@JoinColumn(name = "fk_tagID", referencedColumnName = "tagID")})
 	private Set<Tag> tags = new HashSet<>();
@@ -94,18 +94,18 @@ public class Camp {
 		this.location = location;
 	}
 
-	public java.sql.Blob getCampPictures() {
-		return campPictures;
+	public String getCampPicturesPath() {
+		return campPicturesPath;
 	}
 
-	public void setCampPictures(java.sql.Blob campPictures) {
-		this.campPictures = campPictures;
+
+	public void setCampPicturesPath(String campPicturesPath) {
+		this.campPicturesPath = campPicturesPath;
 	}
 
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;

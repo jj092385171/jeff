@@ -1,6 +1,6 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.dao;
 
-import java.sql.Blob;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -26,10 +26,16 @@ public class CampDao {
 
 	
 	//新增營地
-	public Camp AddCamp(Camp camp) {
+	public Integer AddCamp(Camp camp) {
 		Session session = factory.openSession();
-		session.save(camp);
-		return camp;
+		
+		Serializable campID = null;
+		if(camp != null) {
+			campID = session.save(camp);
+		}
+		
+		session.close();
+		return (Integer) campID;
 	}
 	
 	//搜尋全部
@@ -38,6 +44,7 @@ public class CampDao {
 		Query<Camp> query = session.createQuery("from Camp", Camp.class);
 		List<Camp> resultList = query.getResultList();
 		
+		session.close();
 		return resultList;
 	}	
 	
@@ -46,15 +53,12 @@ public class CampDao {
 		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 		
-		if(camp != null) {
-			return camp;
-		}
-		
-		return null;
+		session.close();
+		return camp;
 	}
 	
 	//更新營地
-	public Camp updateByCampID(int campID , String campName, int cityID, String location, Blob campPictures, String description, Set<Tag> tags) {
+	public Camp updateByCampID(int campID , String campName, int cityID, String location, String campPicturesPath, String description, Set<Tag> tags) {
 		Session session = factory.openSession();
 		Camp campBean = session.get(Camp.class, campID);
 		
@@ -62,14 +66,15 @@ public class CampDao {
 			campBean.setCampName(campName);
 			campBean.setCity(session.get(City.class, cityID));
 			campBean.setLocation(location);
-			campBean.setCampPictures(campPictures);
+			campBean.setCampPicturesPath(campPicturesPath);
 			campBean.setDescription(description);
 			campBean.setTags(tags);
 			
-			return campBean;
+			session.flush();
 		}
 		
-		return null;
+		session.close();
+		return campBean;
 	}
 	
 	//刪除營地
@@ -81,9 +86,13 @@ public class CampDao {
 			deletdTagsByID(campID);
 			deleteSitesbyCampID(campID);
 			session.delete(camp);
+			session.flush();
+			
+			session.close();
 			return true;
 		}
 		
+		session.close();
 		return false;
 	}
 
@@ -98,10 +107,12 @@ public class CampDao {
 			while (it.hasNext()) {
 				Tag tag = (Tag) it.next();
 				it.remove();
-//					session.delete(tag);
+				
+//				session.delete(tag);
+//				session.flush();
 			}
 		}
-		
+		session.close();
 		return false;
 	}
 	
@@ -116,10 +127,12 @@ public class CampDao {
 			while (it.hasNext()) {
 				Site site = (Site) it.next();
 				it.remove();
+				
 				session.delete(site);
+				session.flush();
 			}
 		}
-		
+		session.close();
 		return false;
 	}
 	
