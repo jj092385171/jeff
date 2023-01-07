@@ -94,6 +94,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
+		<!-- azure blob 圖片API -->
+		<!-- <dependency>
+			<groupId>com.azure.spring</groupId>
+		<artifactId>spring-cloud-azure-starter-storage-blob</artifactId>
+			<version>4.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.azure</groupId>
+		<artifactId>azure-storage-blob</artifactId>
+			<version>12.20.1</version>
+		</dependency> -->
+		<!-- azure blob 圖片API end -->
+
 
 	</dependencies>
 	<build>
