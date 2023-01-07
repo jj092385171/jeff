@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -78,9 +79,6 @@
 
 
 						<td>
-							<%-- 							<form action="<c:url value='/JobServletDelete'/>" method="POST" --%>
-							<!-- 								enctype="multipart/form-data"> --> <%-- 								<input type="hidden" name="de" value="${JobBean.rackID}"> --%>
-							<!-- 								<button>刪除</button> --> <!-- </form> -->
 							<button class="delete" name="de" value='${JobWorkBean.rackID}'
 								type="button">刪除</button>
 
@@ -98,8 +96,9 @@
 
 		</table>
 	</div>
-	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"
-		method="POST" enctype="multipart/form-data">
+
+	<form action="<c:url value='jobCRUD.controller' />" method="POST"
+		enctype="multipart/form-data">
 		<div class="b">
 			<button>回首頁</button>
 		</div>
@@ -124,7 +123,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                      url:'/campingmapping2.0/JobServletDelete',
+                      url:'/campingmapping3.0/delete.controller',
                       method:"post",
                       dataType:"text",
                       data: {"de":id},

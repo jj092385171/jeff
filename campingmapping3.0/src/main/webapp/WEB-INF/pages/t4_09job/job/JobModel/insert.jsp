@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,17 +106,14 @@
 		</div>
 	</form>
 
-	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"
+	<form action="<c:url value='jobCRUD.controller' />"
 		method="POST" enctype="multipart/form-data">
-
 		<div class="b">
 			<button>回首頁</button>
 		</div>
 	</form>
 
-	<script src="https://code.jquery.com/jquery-3.6.1.js">
-		
-	</script>
+
 
 
 </body>

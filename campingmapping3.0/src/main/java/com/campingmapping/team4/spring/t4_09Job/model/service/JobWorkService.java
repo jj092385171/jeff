@@ -26,7 +26,7 @@ public class JobWorkService {
 	// 秀全部
 	public List<JobWorkBean> showAllJob() {
 		List<JobWorkBean> selectAll = jobDao.selectAll();
-		System.out.println(selectAll);
+//		System.out.println(selectAll);
 		return selectAll;	
 	}
 
