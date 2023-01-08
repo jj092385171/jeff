@@ -1,20 +1,25 @@
 package com.campingmapping.team4.spring.t4_09Job.controller;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t4_09Job.model.entity.JobWorkBean;
 import com.campingmapping.team4.spring.t4_09Job.model.service.JobWorkService;
@@ -30,32 +35,17 @@ public class JobWorkController2 {
 		m.addAttribute("showAllJob", showAllJob);
 		return "t4_09job/job/JobModel/showAll";
 	}
-//	@GetMapping(path = "/img.controller")
-//	public String processAction2(@RequestParam("de") String rackID) {
-//		OutputStream os = null;
-//		InputStream is = null;
-//		Blob blob = null;
-//		try {		
-//			int parseID = Integer.parseInt(rackID);
-//		
-//			JobWorkBean result = jobWorkService.findImgByRackID(parseID);
-//			blob = result.getImg();
-//			is = blob.getBinaryStream();
-//			os = response.getOutputStream();
-//			int len = 0;
-//			byte[] bytes = new byte[8000];
-//			while ((len = is.read(bytes)) != -1) {
-//			os.write(bytes, 0, len);
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("失敗");
-//		}finally {
-//			if (is != null) is.close();
-//            if (os != null) os.close();
-//		}
-//	}
+
+	@GetMapping(path = "/img.controller/{id}")
+	@ResponseBody
+	public byte[] processAction2(@PathVariable("id") String rackID, HttpServletRequest request,
+			HttpServletResponse response) throws SQLException, IOException {
+		int parseID = Integer.parseInt(rackID);
+		JobWorkBean result = jobWorkService.findImgByRackID(parseID);
+		Blob img = result.getImg();
+		InputStream binaryStream = img.getBinaryStream();
+		return IOUtils.toByteArray(binaryStream);
+	}
 
 	@PostMapping(path = "/delete.controller")
 	public String processAction3(@RequestParam("de") String rackID) {

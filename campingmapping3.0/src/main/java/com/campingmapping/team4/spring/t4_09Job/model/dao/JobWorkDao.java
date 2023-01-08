@@ -1,6 +1,13 @@
 package com.campingmapping.team4.spring.t4_09Job.model.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -34,7 +41,12 @@ public class JobWorkDao {
 		session.close();
 		return jobBean;
 	}
-
+	// 圖片轉blob
+	public Blob fileToBlob(InputStream is, long size) throws IOException, SerialException, SQLException {
+		byte[] b = new byte[(int) size];
+		is.read(b);
+		return new SerialBlob(b);
+	}
 	// 透過rackID刪除資料
 	public void deleteJob(int rackID) {
 		Session session = factory.openSession();
@@ -97,11 +109,11 @@ public class JobWorkDao {
 	// 透過會員id找資料
 	public List<JobWorkBean> findBeanByuID(int uID) {
 		Session session = factory.openSession();
-
 		List<JobWorkBean> result = session.createQuery("from JobWorkBean where uID = :u", JobWorkBean.class)
 				.setParameter("u", uID).getResultList();
 		session.close();
 		return result;
 	}
+
 
 }

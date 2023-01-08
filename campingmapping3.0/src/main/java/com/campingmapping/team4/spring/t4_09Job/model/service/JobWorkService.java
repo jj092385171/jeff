@@ -6,7 +6,6 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +49,9 @@ public class JobWorkService {
 		jobDao.updateJob(jobBean);
 	}
 
-	// 上傳圖片
+	// 載入圖片
 	public Blob fileToBlob(InputStream is, long size) throws SerialException, SQLException, IOException {
-		byte[] b = new byte[(int) size];
-		is.read(b);
-		return new SerialBlob(b);
+		return jobDao.fileToBlob(is, size);
 	}
 
 	// 透過rackID抓一筆資料

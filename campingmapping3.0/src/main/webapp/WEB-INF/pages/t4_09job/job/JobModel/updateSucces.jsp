@@ -80,7 +80,7 @@
 					<td>${JobBean.date}</td>
 					<td>${JobBean.time}</td>
 					<td><img width="80" height="100"
-						src="<c:url value='img.controller?id=${JobBean.rackID}'/>" /></td>
+						src="<c:url value='img.controller/${JobBean.rackID}'/>" /></td>
 					<td>${JobBean.remark}</td>
 					<td>${JobBean.rackUp}</td>
 					<td>${JobBean.rackDown}</td>
