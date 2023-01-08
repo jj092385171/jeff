@@ -6,13 +6,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.campingmapping.team4.spring.t4_01Member.model.dao.repository.LicenseRepository;
+import com.campingmapping.team4.spring.t4_01Member.model.dao.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,11 +19,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final LicenseRepository repository;
+    private final MemberRepository repository;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> repository.findByAccount(username)
+        return account -> repository.findByAccount(account)
                 .orElseThrow(() -> new UsernameNotFoundException("Account not found"));
     }
 

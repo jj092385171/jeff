@@ -1,15 +1,23 @@
 package com.campingmapping.team4.spring.t4_01Member.model.entity;
 
 import java.sql.Blob;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +39,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "member")
 // @Component(value = "member")
-public class Member {
+public class Member implements UserDetails {
 	// uid
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -118,12 +126,51 @@ public class Member {
 	@JsonIgnoreProperties("member")
 	@OneToMany(mappedBy = "member")
 	@OrderBy("logindate desc")
+	@Builder.Default
 	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
 
 	@JsonIgnore
 	@JsonIgnoreProperties("member")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
 	@OrderBy("cwid desc")
+	@Builder.Default
 	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority(role.name()));
+	}
+
+	@Override
+	public String getUsername() {
+		return getAccount();
+	}
+
+	@Override
+	public String getPassword() {
+		return license.getPassword();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 }

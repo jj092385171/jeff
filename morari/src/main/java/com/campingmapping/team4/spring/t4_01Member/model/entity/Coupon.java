@@ -88,6 +88,7 @@ public class Coupon {
     @JsonIgnoreProperties("coupon")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "coupon")
     @OrderBy("cwid desc")
+    @Builder.Default
     private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
 
 }
