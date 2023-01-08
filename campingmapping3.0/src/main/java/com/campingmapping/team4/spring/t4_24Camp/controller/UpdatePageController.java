@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
+import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
 import com.campingmapping.team4.spring.t4_24Camp.model.service.CampService;
+import com.campingmapping.team4.spring.t4_24Camp.model.service.SiteService;
 
 @Controller
-public class UpdateCampPageController {
+public class UpdatePageController {
 
 	@Autowired
 	private CampService campService;
+	
+	@Autowired
+	private SiteService siteService;
 	
 
 	@PostMapping("upadteCampPage.controller")
@@ -26,4 +31,14 @@ public class UpdateCampPageController {
 		return "/t4_24camp/admin/UpdateCampByIDForm";
 	}
 
+	@PostMapping("sitesOfCamp.controller/upadteSitePage.controller")
+	public String upadteSitePage(@RequestParam("siteID") int siteID,Model m) {
+		
+		Site site = siteService.findSiteByID(siteID);
+		
+		m.addAttribute("site", site);
+		
+		return "/t4_24camp/admin/UpdateSiteByIDForm";
+	}
+	
 }

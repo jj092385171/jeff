@@ -74,7 +74,7 @@ public class InsertCampController {
 		
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
-			return "redirect:/t4_24camp/admin/QueryPageForm";
+			return "redirect:/t4_24camp/admin/InsertCampForm";
 		}
 
 		Integer campID = campService.addCamp(campName, Integer.valueOf(cityID), location, fileName, description, tagIDs);

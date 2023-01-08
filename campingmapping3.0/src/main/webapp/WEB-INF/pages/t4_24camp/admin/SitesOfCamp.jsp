@@ -24,6 +24,8 @@
 						<th>營區位圖片</th>
 						<th>總營位</th>
 						<th>營位金額</th>
+						<th>更新</th>
+						<th>刪除</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,14 +33,13 @@
 						<tr>
 							<td>${ site.siteID }</td>
 							<td>${ site.siteName }</td>
-							<!-- <td> 
-								<img width="80" height="100"
-									src="<c:url value='/T4_24/GetSiteImage?id=${site.siteID}'/>" />
-							</td>  -->
+							<td>
+								<img width="80" height="100" src="/campingmapping3.0/getSitePicture/${site.siteID}" />
+							</td>
 							<td>${ site.totalSites }</td>
 							<td>${ site.siteMoney }</td>
 							<td>
-								<form action="<c:url value='/PageUpadteSiteByIDServlet'/>" method="POST">
+								<form action="upadteSitePage.controller" method="POST">
 									<button onclick="return check()" type="submit" name="siteID"
 										value="${site.siteID }">更新</button>
 								</form>

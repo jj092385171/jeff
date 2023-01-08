@@ -68,9 +68,8 @@
 								</form> -->
 							</td>
 							<td>
-								<form action="<c:url value='/InsertSiteGetCampIDServlet?campID=${camp.campID }'/>"
-									method="POST">
-									<button>新增營區位</button>
+								<form action="insertSitePage.controller" method="POST">
+									<button type="submit" name="campID" value="${camp.campID }">新增營區位</button>
 								</form>
 							</td>
 						</tr>

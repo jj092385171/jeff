@@ -17,9 +17,9 @@ public class SiteService {
 	private SiteDao siteDao;
 	
 	
-	//新增
-	public Integer AddCamp(Site site) {
-		return siteDao.AddCamp(site);
+	//新增營地位
+	public Integer AddCamp(String siteName, String sitePicturesPath, int totalSites, int siteMoney, int campID) {
+		return siteDao.AddCamp(siteName, sitePicturesPath, totalSites, siteMoney, campID);
 	}
 	
 	//透過campID查site

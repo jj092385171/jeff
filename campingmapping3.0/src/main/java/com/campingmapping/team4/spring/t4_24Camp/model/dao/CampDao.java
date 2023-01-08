@@ -44,8 +44,7 @@ public class CampDao {
 		camp.setDescription(description);
 		camp.setTags(tags);
 
-		Serializable campID = null;
-		campID = session.save(camp);
+		Serializable campID = session.save(camp);
 		session.flush();
 
 		session.close();
@@ -123,6 +122,7 @@ public class CampDao {
 			session.delete(camp);
 			session.flush();
 			
+			session.close();
 			return true;
 		}
 		

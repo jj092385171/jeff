@@ -17,7 +17,7 @@
 
 			<hr>
 
-			<form name="InsertSiteByIDForm" action="<c:url value='/InsertSiteByIDServlet.do' />" method="POST"
+			<form name="InsertSiteForm" action="insertSite.controller" method="POST"
 				enctype="multipart/form-data">
 				<table>
 					<thead>
@@ -38,7 +38,7 @@
 						<tr>
 							<td>選擇營區位圖片:</td>
 							<td>
-								<input name="sitePictures" type="file">
+								<input name="sitePicturesPath" type="file">
 								<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.sitePictures}
 								</div>
 							</td>

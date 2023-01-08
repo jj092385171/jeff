@@ -21,14 +21,20 @@ public class SiteDao {
 	private SessionFactory factory;
 
 	
-	//新增
-	public Integer AddCamp(Site site) {
+	//新增營區位
+	public Integer AddCamp(String siteName, String sitePicturesPath, int totalSites, int siteMoney, int campID) {
 		Session session = factory.openSession();
 		
-		Serializable siteID = null;
-		if(site != null) {
-			siteID = session.save(site);
-		}
+		Site site = new Site();
+		site.setSiteName(siteName);
+		site.setSitePicturesPath(sitePicturesPath);
+		site.setTotalSites(totalSites);
+		site.setSiteMoney(siteMoney);
+		site.setCamp(session.get(Camp.class, campID));
+		
+		Serializable siteID = session.save(site);
+		session.flush();
+		
 		session.close();
 		return (Integer)siteID;
 	}
