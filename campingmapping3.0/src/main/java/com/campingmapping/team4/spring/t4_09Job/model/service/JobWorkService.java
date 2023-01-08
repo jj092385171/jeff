@@ -41,6 +41,7 @@ public class JobWorkService {
 
 	// 刪除職缺
 	public void deleteJob(int rackID) {
+		System.out.println("11111111111");
 		jobDao.deleteJob(rackID);
 	}
 

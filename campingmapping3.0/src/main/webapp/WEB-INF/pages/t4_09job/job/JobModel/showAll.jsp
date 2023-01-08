@@ -78,8 +78,7 @@
 
 
 						<td>
-							<button class="delete" name="de" value='${JobBean.rackID}'
-								type="button">刪除</button>
+							<button class="delete" name="de" value='${JobBean.rackID}'>刪除</button>
 
 
 							<form action="<c:url value='selectRackId.controller'/>"

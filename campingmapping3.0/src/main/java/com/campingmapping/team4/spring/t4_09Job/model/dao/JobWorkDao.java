@@ -51,7 +51,7 @@ public class JobWorkDao {
 	public void deleteJob(int rackID) {
 		Session session = factory.openSession();
 		JobWorkBean jbean = session.get(JobWorkBean.class, rackID);
-		System.out.println(jbean);
+		System.out.println("delete:"+jbean);
 		if (jbean != null) {
 			session.delete(jbean);
 			// 一定要加這行
