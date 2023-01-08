@@ -28,14 +28,6 @@
 
 <body>
 	<div class="c1">
-		<%-- <form action="<c:url value='/JobServletFindBeanByuID'/>" method="POST" --%>
-		<!-- 			enctype="multipart/form-data"> -->
-		<!-- 			搜尋:<input type="text" name="sel" required> <input -->
-		<!-- 				type="submit" value="查詢"> -->
-		<%-- <div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.sel}
-			</div> --%>
-		<!-- 		</form> -->
-
 
 		<form action="<c:url value='/selectLike.controller'/>" method="POST"
 			enctype="multipart/form-data">
@@ -67,8 +59,8 @@
 	</div>
 	<hr>
 
-	<form action="<c:url value='jobCRUD.controller' />"
-		method="POST" enctype="multipart/form-data">
+	<form action="<c:url value='jobCRUD.controller' />" method="POST"
+		enctype="multipart/form-data">
 		<div class="b">
 			<button>回首頁</button>
 		</div>

@@ -62,8 +62,8 @@
 			<tbody class="t2">
 				<c:forEach var="JobBean" items="${jobBean}">
 					<tr>
-						<td>${JobBean.uID}</td>
 						<td>${JobBean.rackID}</td>
+						<td>${JobBean.uID}</td>
 						<td>${JobBean.job}</td>
 						<td>${JobBean.salary}</td>
 						<td>${JobBean.quantity}</td>
@@ -71,7 +71,7 @@
 						<td>${JobBean.date}</td>
 						<td>${JobBean.time}</td>
 						<td><img width="80" height="100"
-							src="<c:url value='/JobServletImg?id=${JobBean.rackID}'/>" /></td>
+							src="<c:url value='img.controller?id=${JobBean.rackID}'/>" /></td>
 						<td>${JobBean.remark}</td>
 						<td>${JobBean.rackUp}</td>
 						<td>${JobBean.rackDown}</td>
@@ -79,9 +79,9 @@
 							<button class="delete" name="de" value='${JobBean.rackID}'
 								type="button">刪除</button>
 
-							<form
-								action="<c:url value='/JobServletFindBeanByRackID?up=${JobBean.rackID}'/>"
+							<form action="<c:url value='selectRackId.controller'/>"
 								method="POST" enctype="multipart/form-data">
+								<input type="hidden" name="up" value="${JobBean.rackID}">
 								<button>修改</button>
 							</form>
 						</td>

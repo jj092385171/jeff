@@ -30,7 +30,7 @@ public class JobWorkController2 {
 		m.addAttribute("showAllJob", showAllJob);
 		return "t4_09job/job/JobModel/showAll";
 	}
-//	@GetMapping(path = "/showAll.controller")
+//	@GetMapping(path = "/img.controller")
 //	public String processAction2(@RequestParam("de") String rackID) {
 //		OutputStream os = null;
 //		InputStream is = null;

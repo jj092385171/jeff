@@ -89,6 +89,7 @@ public class JobWorkController1 {
 		}	
 		j.setRemark(remark);
 		jobWorkService.addJob(j);
+		m.addAttribute("JobBean",j);
 		return "t4_09job/job/JobModel/addSuccess";
 	}
 }

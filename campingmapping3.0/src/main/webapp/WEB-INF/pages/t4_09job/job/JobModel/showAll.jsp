@@ -60,31 +60,31 @@
 				</tr>
 			</thead>
 			<tbody class="t2">
-				<c:forEach var="JobWorkBean" items="${showAllJob}">
+				<c:forEach var="JobBean" items="${showAllJob}">
 					<tr>
-						<td>${JobWorkBean.rackID}</td>
-						<td>${JobWorkBean.uID}</td>
-						<td>${JobWorkBean.job}</td>
-						<td>${JobWorkBean.salary}</td>
-						<td>${JobWorkBean.quantity}</td>
-						<td>${JobWorkBean.place}</td>
-						<td>${JobWorkBean.date}</td>
-						<td>${JobWorkBean.time}</td>
+						<td>${JobBean.rackID}</td>
+						<td>${JobBean.uID}</td>
+						<td>${JobBean.job}</td>
+						<td>${JobBean.salary}</td>
+						<td>${JobBean.quantity}</td>
+						<td>${JobBean.place}</td>
+						<td>${JobBean.date}</td>
+						<td>${JobBean.time}</td>
 						<td><img width="80" height="100"
-							src="<c:url value='/JobServletImg?id=${JobWorkBean.rackID}'/>" /></td>
-						<td>${JobWorkBean.remark}</td>
-						<td>${JobWorkBean.rackUp}</td>
-						<td>${JobWorkBean.rackDown}</td>
+							src="<c:url value='img.controller?id=${JobBean.rackID}'/>" /></td>
+						<td>${JobBean.remark}</td>
+						<td>${JobBean.rackUp}</td>
+						<td>${JobBean.rackDown}</td>
 
 
 						<td>
-							<button class="delete" name="de" value='${JobWorkBean.rackID}'
+							<button class="delete" name="de" value='${JobBean.rackID}'
 								type="button">刪除</button>
 
 
-							<form action="<c:url value='/JobServletFindBeanByRackID'/>"
+							<form action="<c:url value='selectRackId.controller'/>"
 								method="POST" enctype="multipart/form-data">
-								<input type="hidden" name="up" value="${JobWorkBean.rackID}">
+								<input type="hidden" name="up" value="${JobBean.rackID}">
 								<button>修改</button>
 							</form>
 

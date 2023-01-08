@@ -42,7 +42,7 @@ public class JobWorkDao {
 		System.out.println(jbean);
 		if (jbean != null) {
 			session.delete(jbean);
-			//一定要加這行
+			// 一定要加這行
 			session.flush();
 			session.close();
 		}
@@ -64,6 +64,7 @@ public class JobWorkDao {
 		jbean.setImg(jobBean.getImg());
 		jbean.setDate(jobBean.getDate());
 		jbean.setTime(jobBean.getTime());
+		session.flush();
 		session.close();
 	}
 
@@ -89,7 +90,6 @@ public class JobWorkDao {
 		Session session = factory.openSession();
 		List<JobWorkBean> result = session.createQuery("from JobWorkBean where job like :j", JobWorkBean.class)
 				.setParameter("j", "%" + job + "%").getResultList();
-		System.out.println(result);
 		session.close();
 		return result;
 	}

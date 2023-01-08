@@ -28,22 +28,21 @@
 </head>
 
 <body>
-	<form action="<c:url value='/JobServletUpdate'/>" method="POST"
+	<form action="<c:url value='update.controller'/>" method="POST"
 		enctype="multipart/form-data">
 		<div class="c1">
-
-
-			<p>
-				會員id <input type="text" name="uid"
-					value="${JobBean.uID}${param.uid}" required>
-			</p>
-			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.id}</div>
-			<hr>
 
 			<p>
 				刊登編號 <input type="text" name="rackID"
 					value="${JobBean.rackID}${param.rackID} " readonly>
 			</p>
+			<hr>
+			
+			<p>
+				會員id <input type="text" name="uid"
+					value="${JobBean.uID}${param.uid}" required>
+			</p>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${errors.id}</div>
 			<hr>
 
 			<p>
@@ -72,7 +71,7 @@
 				人數 <input type="text" name="quantity"
 					value="${JobBean.quantity}${param.quantity}" required>
 			</p>
-			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${errors.quantity}</div>
 			<hr>
 
 
@@ -109,7 +108,7 @@
 			<p>
 				照片更新 <input type="file" name="img"><img width="80"
 					height="100"
-					src="<c:url value='/JobServletImg?id=${JobBean.rackID}${param.img}'/>" />
+					src="<c:url value='img.controller?id=${JobBean.rackID}${param.img}'/>" />
 			</p>
 			<hr>
 			<p>
@@ -121,8 +120,8 @@
 				value="取消">
 		</div>
 	</form>
-	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"
-		method="POST" enctype="multipart/form-data">
+	<form action="<c:url value='jobCRUD.controller' />" method="POST"
+		enctype="multipart/form-data">
 		<div class="b">
 			<button>回首頁</button>
 		</div>
