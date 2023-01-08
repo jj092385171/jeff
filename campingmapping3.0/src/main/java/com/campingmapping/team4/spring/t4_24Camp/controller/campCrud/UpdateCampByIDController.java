@@ -20,7 +20,7 @@ import com.campingmapping.team4.spring.t4_24Camp.model.service.CampService;
 import com.campingmapping.team4.spring.t4_24Camp.model.service.TagService;
 
 @Controller
-public class InsertCampController {
+public class UpdateCampByIDController {
 
 	@Autowired
 	private CampService campService;
@@ -28,11 +28,12 @@ public class InsertCampController {
 	@Autowired
 	private TagService tagService;
 
-	@PostMapping("insertCamp.controller")
-	public String insertCamp(@RequestParam("campName") String campName, @RequestParam("campPicturesPath") MultipartFile mf,
-			@RequestParam("cityID") String cityID, @RequestParam("location") String location,
-			@RequestParam("tagID") int[] tagIDs, @RequestParam("description") String description, Model m)
-			throws IllegalStateException, IOException {
+	
+	@PostMapping("updateCampByID.controller")
+	public String updateCampByID(@RequestParam("campID") int campID, @RequestParam("campName") String campName,
+			@RequestParam("campPicturesPath") MultipartFile mf, @RequestParam("cityID") String cityID,
+			@RequestParam("location") String location, @RequestParam("tagID") int[] tagIDs,
+			@RequestParam("description") String description, Model m) throws IllegalStateException, IOException {
 
 		// 存錯誤的map
 		Map<String, String> errors = new HashMap<>();
@@ -74,15 +75,15 @@ public class InsertCampController {
 		
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
-			return "redirect:/t4_24camp/admin/QueryPageForm";
+			return "redirect:/t4_24camp/admin/UpdateCampByIDForm";
 		}
-
-		Integer campID = campService.addCamp(campName, Integer.valueOf(cityID), location, fileName, description, tagIDs);
-		Camp camp = campService.findCampByID(campID);
+		
+		
+		Camp camp = campService.updateByCampID(campID, campName, Integer.valueOf(cityID), location, fileName, description, tags);
 
 		m.addAttribute("camp", camp);
-		m.addAttribute("what", "新增");
-
+		m.addAttribute("what", "更新");
+		
 		return "/t4_24camp/admin/InsertUpdateCampSuccess";
 	}
 

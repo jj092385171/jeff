@@ -27,9 +27,9 @@
                             ${errors.campName}</div>
                     </div>
                     <div>
-                        <input name="campPictures" type="file">
+                        <input name="campPicturesPath" type="file">
                         <div style="color:#FF0000; font-size:60%; display: inline">
-                            ${errors.campPictures}</div>
+                            ${errors.campPicturesPath}</div>
                     </div>
                     <!-- Break -->
                     <c:forEach var='city' items='${cityList}'>

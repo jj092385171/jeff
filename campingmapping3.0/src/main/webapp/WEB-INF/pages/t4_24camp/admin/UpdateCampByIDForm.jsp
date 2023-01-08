@@ -18,11 +18,11 @@
 			<hr>
 
 			<h2>修改營地</h2>
-			<form name="UpdateCampByIDForm" action="<c:url value='/T4_24/UpdateCampByIDServlet' />" method="POST"
+			<form name="UpdateCampByIDForm" action="updateCampByID.controller" method="POST"
 				enctype="multipart/form-data">
-				營地編號: <input type="text" name='campID' readonly="readonly" value='${ camp.campID }${param.campID}'><br>
+				營地編號: <input type="text" name='campID' readonly="readonly" value='${ camp.campID }'><br>
 				營地: <input type="text" name='campName' value='${ camp.campName }${param.campName}'>
-				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.campName}</div>
+				<div style="color:#FF0000; font-size:60%; display: inline">${errors.campName}</div>
 				<br>
 				縣市編號: <input type="text" name='city.cityID' readonly="readonly"
 					value='${ camp.city.cityID }${param.cityID}'><br>
@@ -35,13 +35,13 @@
 				縣市:<c:forEach var='city' items='${cityList}'>
 					<input type="radio" name="cityID" value="${city.cityID}" />${city.cityName}
 				</c:forEach>
-				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.cityID}</div>
+				<div style="color:#FF0000; font-size:60%; display: inline">${errors.cityID}</div>
 				<br>
 				地址: <input type="text" name='location' value='${ camp.location }${param.location}'>
-				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.location}</div>
+				<div style="color:#FF0000; font-size:60%; display: inline">${errors.location}</div>
 				<br>
-				圖片: <input type="file" name="campPictures" id='campPictures'>
-				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.campPictures}</div>
+				圖片: <input type="file" name="campPicturesPath" id='campPicturesPath'>
+				<div style="color:#FF0000; font-size:60%; display: inline">${errors.campPicturesPath}</div>
 				<br>
 				簡介: <input type="text" name='description' value='${ camp.description }${param.description}'><br>
 
@@ -54,7 +54,7 @@
 				標籤: <c:forEach var='tag' items='${tagList}'>
 					<input type="checkbox" name="tagID" value="${tag.tagID}" />${tag.tagName}
 				</c:forEach>
-				<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.tagIDs}</div>
+				<div style="color:#FF0000; font-size:60%; display: inline">${errors.tagIDs}</div>
 
 
 

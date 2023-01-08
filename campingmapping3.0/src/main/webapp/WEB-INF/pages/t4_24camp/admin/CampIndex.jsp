@@ -52,13 +52,13 @@
 								</c:forEach>
 							</td>
 							<td>
-								<form action="<c:url value='/UpadteCampByIDPageServlet.do'/>" method="POST">
+								<form action="upadteCampPage.controller" method="POST">
 									<button onclick="return check()" type="submit" name="campID"
 										value="${camp.campID }">更新</button>
 								</form>
 							</td>
 							<td>
-								<form action="/deleteCampByID.controller" method="POST">
+								<form action="deleteCampByID.controller" method="POST">
 									<button onclick="return check()" type="submit" name="campID"
 										value="${camp.campID }">刪除</button>
 								</form>

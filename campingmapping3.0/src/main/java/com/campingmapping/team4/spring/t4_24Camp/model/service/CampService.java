@@ -20,8 +20,8 @@ public class CampService {
 	
 
 	//新增營地
-	public Integer addCamp(Camp camp) {
-		return campDao.addCamp(camp);
+	public int addCamp(String campName, int cityID, String location, String campPicturesPath, String description, int[] tagIDs) {
+		return campDao.addCamp(campName, cityID, location, campPicturesPath, description, tagIDs);
 	}	
 		
 	//搜尋全部

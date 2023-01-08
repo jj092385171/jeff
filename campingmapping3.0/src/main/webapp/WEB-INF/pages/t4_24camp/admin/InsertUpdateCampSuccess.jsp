@@ -33,17 +33,17 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>${ campID }</td>
-							<td>${ campName }</td>
-							<td>${ city.cityID }</td>
-							<td>${ city.cityName }</td>
-							<td>${ location }</td>
+							<td>${ camp.campID }</td>
+							<td>${ camp.campName }</td>
+							<td>${ camp.city.cityID }</td>
+							<td>${ camp.city.cityName }</td>
+							<td>${ camp.location }</td>
 							<td>
-								<img width="80" height="100" src="/campingmapping3.0/getCampPicture/${campID}" />
+								<img width="80" height="100" src="/campingmapping3.0/getCampPicture/${camp.campID}" />
 							</td>
 							<td>${ camp.description }</td>
 							<td>
-								<c:forEach var='tag' items='${tags}'>
+								<c:forEach var='tag' items='${camp.tags}'>
 									${tag.tagName} &nbsp; / &nbsp;
 								</c:forEach>
 							</td>
