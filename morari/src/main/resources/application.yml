@@ -12,14 +12,15 @@ server:
 spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    password: "0000"
+    password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
     url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
-    username: sa
+    username: Team4Admin
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServer2016Dialect
         '[allow_update_outside_transaction]': true
+        '[hbm2ddl.auto]': create-drop
     show-sql: true
   servlet:
     multipart:

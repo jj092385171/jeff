@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.t4_01Member.model.entity;
+package com.alibou.security.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
 
-    private String email;
-    private String account;
-    private String password;
+  private String firstname;
+  private String lastname;
+  private String email;
+  private String password;
 }
