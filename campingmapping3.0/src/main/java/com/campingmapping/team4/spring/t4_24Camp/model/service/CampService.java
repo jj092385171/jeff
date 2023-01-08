@@ -44,14 +44,5 @@ public class CampService {
 		return campDao.deletdByCampID(campID);
 	}
 	
-	//刪除TagOfCamp
-	public boolean deletdTagsByID(int campID){
-		return campDao.deletdTagsByID(campID);
-	}
-	
-	//刪除SitebyCampID
-	public boolean deleteSitesbyCampID(int campID){
-		return campDao.deleteSitesbyCampID(campID);
-	}
 	
 }
