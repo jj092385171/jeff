@@ -4,6 +4,8 @@ import java.sql.Blob;
 import java.util.Set;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
@@ -12,22 +14,20 @@ import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
 
 public class SiteDao {
 	
-private Session session;
-	
-	public SiteDao(Session session){
-		this.session = session;
-	}
+	@Autowired
+	private SessionFactory factory;
 
 	
 	//新增
 	public Site AddCamp(Site site) {
-	
-			session.save(site);
-			return site;
+		Session session = factory.openSession();
+		session.save(site);
+		return site;
 	}
 	
 	//透過campID查site
 	public Set<Site> findSitesByCampID(int campID) {
+		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null ) {
@@ -42,6 +42,7 @@ private Session session;
 	
 	//透過siteID查詢site
 	public Site findSiteByID(int siteID) {
+		Session session = factory.openSession();
 		Site site = session.get(Site.class, siteID);
 		
 		if(site != null) {
@@ -53,6 +54,7 @@ private Session session;
 	
 	//更新營區位
 	public Site updateBySiteID(int siteID, String siteName, Blob sitePictures, int totalSites, int siteMoney) {
+		Session session = factory.openSession();
 		Site site = session.get(Site.class, siteID);
 		
 		if(site != null) {
@@ -69,6 +71,7 @@ private Session session;
 	
 	//刪除營區地
 	public boolean deletdBySiteID(int siteID){
+		Session session = factory.openSession();
 		Site site = session.get(Site.class, siteID);
 			
 		if(site != null) {

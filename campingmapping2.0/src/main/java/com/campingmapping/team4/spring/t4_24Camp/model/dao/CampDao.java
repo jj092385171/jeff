@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
 import com.campingmapping.team4.spring.t4_24Camp.model.model.City;
@@ -16,22 +18,20 @@ import com.campingmapping.team4.spring.t4_24Camp.model.model.Tag;
 
 public class CampDao {
 	
-	private Session session;
-	
-	public CampDao(Session session){
-		this.session = session;
-	}
+	@Autowired
+	private SessionFactory factory;
 
 	
 	//新增營地
 	public Camp AddCamp(Camp camp) {
-	
-			session.save(camp);
-			return camp;
+		Session session = factory.openSession();
+		session.save(camp);
+		return camp;
 	}
 	
 	//搜尋全部
 	public List<Camp> showAll(){
+		Session session = factory.openSession();
 		Query<Camp> query = session.createQuery("from Camp", Camp.class);
 		List<Camp> resultList = query.getResultList();
 		
@@ -40,6 +40,7 @@ public class CampDao {
 	
 	//透過campID查詢camp
 	public Camp findCampByID(int campID) {
+		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null) {
@@ -51,6 +52,7 @@ public class CampDao {
 	
 	//更新營地
 	public Camp updateByCampID(int campID , String campName, int cityID, String location, Blob campPictures, String description, Set<Tag> tags) {
+		Session session = factory.openSession();
 		Camp campBean = session.get(Camp.class, campID);
 		
 		if(campBean != null) {
@@ -69,6 +71,7 @@ public class CampDao {
 	
 	//刪除營地
 	public boolean deletdByCampID(int campID){
+		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 
 		if(camp != null) {
@@ -83,6 +86,7 @@ public class CampDao {
 
 	//刪除TagOfCamp
 	public boolean deletdTagsByID(int campID){
+		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null) {
@@ -100,6 +104,7 @@ public class CampDao {
 	
 	//刪除SitebyCampID
 	public boolean deleteSitesbyCampID(int campID){
+		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 		
 		if(camp != null) {

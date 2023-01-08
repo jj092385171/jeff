@@ -7,7 +7,6 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +48,8 @@ public class RootAppConfig {
 		props.put("hibernate.dialect", org.hibernate.dialect.SQLServerDialect.class);
 		props.put("hibernate.show_sql", Boolean.TRUE);
 		props.put("hibernate.format_sql", Boolean.TRUE);
-//		props.put("hibernate.current_session_context_class", "thread");
+		props.put("hibernate.allow_update_outside_transaction", "true");
+		//		props.put("hibernate.current_session_context_class", "thread");
 		return props;
 		
 	}
