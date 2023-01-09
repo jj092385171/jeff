@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,8 +24,13 @@ public class JobWorkController1 {
 
 	@Autowired
 	private JobWorkService jobWorkService;
-	@PostMapping(path = "/jobCRUD.controller")
+	
+	@GetMapping(path = "/jobIndex.controller")
 	public String processMainAction() {
+		return "t4_09job/job/jobIndex";
+	}
+	@PostMapping(path = "/jobCRUD.controller")
+	public String processMainAction1() {
 		return "t4_09job/job/JobModel/jobCRUD";
 	}
 	@PostMapping(path = "/insert.controller")
