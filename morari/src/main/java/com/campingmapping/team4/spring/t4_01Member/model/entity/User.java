@@ -1,4 +1,4 @@
-package com.alibou.security.user;
+package com.campingmapping.team4.spring.t4_01Member.model.entity;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -15,7 +16,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -27,14 +27,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "_user")
+@Table(name = "user")
 public class User implements UserDetails {
 
   @Id
-  @GeneratedValue
-  private Integer id;
-  private String firstname;
-  private String lastname;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer uid;
+  private String account;
   private String email;
   private String password;
 

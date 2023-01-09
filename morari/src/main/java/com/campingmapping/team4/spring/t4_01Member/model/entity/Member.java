@@ -38,8 +38,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "member")
-// @Component(value = "member")
-public class Member implements UserDetails {
+public class Member {
 	// uid
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
