@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category update(Category category) throws SQLException, Exception {
-		return categoryDao.update(category);
+		return categoryDao.updateByPdid(category);
 	}
 
 	@Override

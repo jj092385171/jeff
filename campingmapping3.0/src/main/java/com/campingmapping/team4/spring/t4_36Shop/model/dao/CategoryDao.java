@@ -13,7 +13,7 @@ public interface CategoryDao {
 	// 依Pd_id來刪除單筆記錄
 	Boolean deleteByPd_id(int id) throws SQLException;
 
-	Category update(Category category) throws SQLException, Exception;
+	Category updateByPdid(Category category) throws SQLException, Exception;
 
 	Category selectByPdid(int Pdid) throws SQLException;
 
