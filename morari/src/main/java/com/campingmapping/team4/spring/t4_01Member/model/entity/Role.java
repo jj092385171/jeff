@@ -1,8 +1,9 @@
-package com.campingmapping.team4.spring.t4_01Member.model.entity;
+package com.alibou.security.user;
 
 public enum Role {
 
-    USER,
-    ADMIN
-
+  USER,
+  ADMIN,
+  CAMP,
+  POST
 }
