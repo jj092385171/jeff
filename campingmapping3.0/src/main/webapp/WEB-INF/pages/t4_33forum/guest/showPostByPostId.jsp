@@ -23,8 +23,14 @@
 </style>
 </head>
 <body onload="show()">
-<form method="post">
+<form>
 	<h3>貼文</h3>
+	<input type="hidden" name="postId" value="${resultPost.postId}">
+	<input type="submit" formaction="showAllPost" value="回討論區">
+	<input type="hidden" name="postId" value="${resultPost.userId}">
+	<input type="submit" formaction="showPostByUserId" value="回個人貼文">
+</form>
+<form method="post">
 	<input type="hidden" name="postId" value="${resultPost.postId}">
 	<div>
 		<label>標題:</label>
@@ -80,7 +86,6 @@
 		<input type="submit" formaction="" value="不喜歡">
 	</div>
 	<input type="submit" formaction="reportPost" value="檢舉貼文" onclick="return confirm('是否確定檢舉貼文?');">
-	<input type="button" value="回上一頁" onclick="history.back()">
 </form>
 
 	

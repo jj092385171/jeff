@@ -77,7 +77,7 @@
         		<td>
         			<form method="get">
         				<input type="hidden" name="postId" value="${post.postId}">
-        				<input type="submit" formaction="showUpdatePostByPostId" value="修改貼文">
+        				<input type="submit" formaction="showUpdatePostByPostIdAdmin" value="修改貼文">
         			</form>
         			<form method="post">
         				<input type="hidden" name="postId" value="${post.postId}">

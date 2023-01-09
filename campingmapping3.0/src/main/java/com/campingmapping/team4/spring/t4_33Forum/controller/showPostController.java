@@ -51,6 +51,14 @@ public class showPostController {
 		return "/t4_33forum/guest/updatePost";
 	}
 	
+	// 之後應該要用user判斷
+	@GetMapping("/showUpdatePostByPostIdAdmin")
+	public String showUpdatePostByPostIdAdmin(@RequestParam("postId") int postId, Model m) {
+		Post findPostByPostId = postService.findPostByPostId(postId);
+		m.addAttribute("resultPost", findPostByPostId);
+		return "/t4_33forum/admin/updatePostAdmin";
+	}
+	
 	@GetMapping("/showPostByUserId")
 	public String showPostByUserId(/*@RequestParam("userId") int userId,*/ Model m) {
 		int userId = 9;

@@ -30,7 +30,7 @@
 </head>
 
 <body>
-	<h3>個人貼文</h3>
+	<h2>個人貼文</h2>
 	<form>
         <input type="submit" formaction="newPost" value="新增貼文">
         <input type="submit" formaction="showAllPost" value="回討論區首頁">
