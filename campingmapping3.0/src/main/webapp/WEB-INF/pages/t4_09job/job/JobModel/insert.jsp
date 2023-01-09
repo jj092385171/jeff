@@ -90,7 +90,7 @@
 			<hr>
 
 			<p>
-				照片上傳 <input type="file" name="img" value='${param.img}'>
+				照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img" value='${param.img}'>
 			</p>
 			<hr>
 

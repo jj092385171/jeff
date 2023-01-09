@@ -28,7 +28,7 @@
 </head>
 
 <body>
-	<form action="<c:url value='update.controller'/>" method="POST"
+	<form id="form" action="<c:url value='update.controller'/>" method="POST"
 		enctype="multipart/form-data">
 		<div class="c1">
 
@@ -106,7 +106,7 @@
 			<hr>
 
 			<p>
-				照片更新 <input type="file" name="img"><img width="80"
+				照片更新 <input  accept=".jpg,.pnp,.jfif" type="file" name="img"><img width="80"
 					height="100"
 					src="<c:url value='img.controller/${JobBean.rackID}${param.img}'/>" />
 			</p>
