@@ -45,7 +45,7 @@
 								</form>
 							</td>
 							<td>
-								<form action="<c:url value='/DeleteCampByIDServlet.do'/>" method="POST">
+								<form action="deleteSiteByID.controller" method="POST">
 									<button id="a" onclick="return check()" type="submit" name="siteID"
 										value="${site.siteID }">刪除</button>
 								</form>

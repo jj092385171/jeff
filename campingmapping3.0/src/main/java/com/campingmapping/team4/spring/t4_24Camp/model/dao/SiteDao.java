@@ -82,6 +82,7 @@ public class SiteDao {
 		Site site = session.get(Site.class, siteID);
 			
 		if(site != null) {
+			site.setCamp(null);
 			session.delete(site);
 			
 			session.flush();

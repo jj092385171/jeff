@@ -16,12 +16,12 @@ public class DeleteCampByIDController {
 	
 	
 	@PostMapping("deleteCampByID.controller")
-	public String deleteCampByID(@RequestParam("campID") int campID, Model m) {
+	public String deleteCampByID(@RequestParam("campID") int campID,Model m) {
 		
 		campService.deletdByCampID(campID);
-		m.addAttribute("ID","campID: " + campID + " 刪除成功");
+		m.addAttribute("ID","siteID: " + Integer.toString(campID) + " 刪除成功");
 		
-		return "/t4_24camp/admin/CampIndex";
+		return "/t4_24camp/admin/DeleteByIDSuccess";
 	}
 	
 	
