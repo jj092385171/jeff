@@ -23,8 +23,13 @@
 </style>
 </head>
 <body onload="show()">
-<form method="post">
+<form action="showAllPost">
 	<h3>貼文</h3>
+	<input type="hidden" name="postId" value="${resultPost.postId}">
+	<input type="submit" value="回討論區">
+<!-- 	<input type="submit" formaction="showUpdatePostByPostId" value="修改貼文"> -->
+</form>
+<form method="post">
 	<input type="hidden" name="postId" value="${resultPost.postId}">
 	<div>
 		<label>標題:</label>
@@ -81,11 +86,7 @@
 	</div>
 	<input type="submit" formaction="reportPost" value="檢舉貼文" onclick="return confirm('是否確定檢舉貼文?');">
 </form>
-<form action="showAllPost">
-	<input type="hidden" name="postId" value="${resultPost.postId}">
-	<input type="submit" value="回討論區">
-	<input type="submit" formaction="showUpdatePostByPostId" value="修改貼文">
-</form>
+
 	
 <hr>
 <form action="insertPostComment" method="post">

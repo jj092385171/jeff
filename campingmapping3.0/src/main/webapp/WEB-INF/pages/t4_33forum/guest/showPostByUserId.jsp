@@ -46,6 +46,7 @@
         			${post.content}<br><br>
         			最後更新日期:${post.releaseDate}<br>
         			<input type="submit" formaction="showPostByPostId" value="查看貼文">
+        			<input type="submit" formaction="showUpdatePostByPostId" value="修改貼文">
         			</form>
         		</td>
         	</tr>
