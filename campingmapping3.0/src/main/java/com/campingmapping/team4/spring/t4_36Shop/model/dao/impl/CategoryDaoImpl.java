@@ -45,18 +45,16 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	// 修改一筆產品資料
-	public Category updateByPdid(Category category) throws Exception {
+	public Category updateByPdid(Category category){
 		Session session = factory.openSession();
-		Category updateByPdid = session.get(Category.class, category.getPdid());
-
-		if (updateByPdid != null) {
-			session.saveOrUpdate(category);
+		if(category != null) {
+			session.update(category);
 			session.flush();
 			session.close();
-			return updateByPdid;
 		}
+		
 		session.close();
-		throw new Exception();
+		return category;
 	}
 
 	// 使用Pdid搜尋
