@@ -18,7 +18,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public Iterable<Member> showMember() {
-
 		return memberRepository.findAll();
 
 	}

@@ -34,7 +34,6 @@ public class User implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer uid;
   private String account;
-  private String email;
   private String password;
 
   @ElementCollection(fetch = FetchType.EAGER)

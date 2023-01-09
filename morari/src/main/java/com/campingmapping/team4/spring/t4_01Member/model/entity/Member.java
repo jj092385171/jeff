@@ -134,6 +134,7 @@ public class Member {
 	@OrderBy("cwid desc")
 	@Builder.Default
 	private Set<CouponWallet> couponWallet = new LinkedHashSet<CouponWallet>();
+
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
