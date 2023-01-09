@@ -75,9 +75,12 @@
         		<td>${post.postReport}</td>
         		<td>${post.postHide}</td>
         		<td>
-        			<form method="POST">
+        			<form method="get">
         				<input type="hidden" name="postId" value="${post.postId}">
-        				<input type="submit" formaction="updatePost" value="修改貼文">
+        				<input type="submit" formaction="showUpdatePostByPostId" value="修改貼文">
+        			</form>
+        			<form method="post">
+        				<input type="hidden" name="postId" value="${post.postId}">
         				<input type="submit" formaction="hidePost" value="隱藏貼文" onclick="return confirm('是否確定隱藏貼文?');">
         			</form>
         		</td>

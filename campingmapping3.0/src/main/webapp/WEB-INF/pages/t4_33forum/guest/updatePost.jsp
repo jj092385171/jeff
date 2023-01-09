@@ -51,11 +51,13 @@
 		</div>
 		<div>
 			<label>開始露營日期</label>
-			<input type="date" name="startDate" id="startDate" value="${resultPost.startDate}">
+			<input type="hidden" id="startDateId" value="${resultPost.startDate}">			
+			<input type="date" name="startDate" id="startDate">
 		</div>
 		<div>
 			<label>結束露營日期</label>
-			<input type="date" name="endDate" id="endDate" value="${resultPost.endDate}">
+			<input type="hidden" id="endDateId" value="${resultPost.endDate}">
+			<input type="date" name="endDate" id="endDate">
 		</div>
 		<div>
 			<label>評分</label>
@@ -67,11 +69,14 @@
 			<input type="button" value="回上一頁" onclick="history.back()">
 		</div>
 	</form>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 	<script>
 		function show(){
 			showPeople();
 			showPrice();
 			showCounty();
+			showStartDate();
+			showEndDate();
 			showScore();
 		}
 				
@@ -119,6 +124,16 @@
 				}  
 				document.getElementById("county").appendChild(option);
 			}
+		}
+		
+		function showStartDate() {
+			let date = moment(Date.parse(document.getElementById("startDateId").value)).format('YYYY-MM-DD');
+			document.getElementById("startDate").value = date;
+		}
+		
+		function showEndDate() {
+			let date = moment(Date.parse(document.getElementById("endDateId").value)).format('YYYY-MM-DD');
+			document.getElementById("endDate").value = date;
 		}
 		
 		function showScore(){

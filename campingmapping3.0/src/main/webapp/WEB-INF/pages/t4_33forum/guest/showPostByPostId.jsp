@@ -51,12 +51,13 @@
 	</div>
 	<div>
 		<label>開始露營日期:</label>
-		<input type="hidden" id="startDateGet" value="${resultPost.startDate}">
-		<input type="text" name="startDate" id="startDate"  size="30" disabled>
+		<input type="hidden" id="startDateId" value="${resultPost.startDate}">
+		<input type="text" name="startDate" id="startDate" size="30" disabled>
 	</div>
 	<div>
 		<label>結束露營日期:</label>
-		<input type="text" name="endDate" value="${resultPost.endDate}" size="30" disabled>
+		<input type="hidden" id="endDateId" value="${resultPost.endDate}">
+		<input type="text" name="endDate" id="endDate" size="30" disabled>
 	</div>
 	<div>
 		<label>評分:</label>
@@ -65,7 +66,8 @@
 	</div>
 	<div>
 		<label>最後更新日期:</label>
-		<input type="text" name="releaseDate" value="${resultPost.releaseDate}" size="30" disabled>
+		<input type="hidden" id="releaseDateId" value="${resultPost.releaseDate}">
+		<input type="text" name="releaseDate" id="releaseDate" size="30" disabled>
 	</div>
 	<div>
 		<label>喜歡本貼文人數:</label>
@@ -92,35 +94,28 @@
 	<label>新增留言:</label>
     <input type="text" name="comment" maxlength="100" size="100" required="required">
     <input type="submit" value="送出留言"><br>
+</form>
 	<table>
 		<c:forEach var="postComment" items="${resultpostComment}">
         	<tr>
         		<td>
         			留言者ID：${postComment.userId}<br>
         			留言內容：${postComment.postComment}
-        			<input type="submit" formaction="" value="隱藏留言">
+<!--         			<input type="submit" formaction="" value="隱藏留言"> -->
         		</td>
         	</tr>
         </c:forEach>		
 	</table>
-</form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script type="text/javascript">
 	function show(){
 		showPeople();
 		showPrice();
 		showCounty();
+		showStartDate();
+		showEndDate();
 		showScore();
-		startDate();
-		
-	}
-	function dateFormat(data) {
-		return moment(Date.parse(document.getElementById("startDateGet").value)).format('YYYY/MM/DD')
-	}
-	function startDate() {
-		
-		let date = moment(Date.parse(document.getElementById("startDateGet").value)).format('YYYY/MM/DD HH:mm')
-		document.getElementById("startDate").value = date;
+		showReleaseDate();
 	}
 	
 	function showPeople(){
@@ -151,11 +146,30 @@
 		}
 	}
 	
+	function showStartDate() {
+		if(document.getElementById("startDateId").value != ""){
+			let date = moment(Date.parse(document.getElementById("startDateId").value)).format('YYYY-MM-DD');
+			document.getElementById("startDate").value = date;
+		}
+	}
+	
+	function showEndDate() {
+		if(document.getElementById("endDateId").value != ""){
+			let date = moment(Date.parse(document.getElementById("endDateId").value)).format('YYYY-MM-DD');
+			document.getElementById("endDate").value = date;
+		}
+	}
+	
 	function showScore(){
 		var scoreId = document.getElementById("scoreId").value;
 		if(scoreId > 0){
 			document.getElementById("score").value = scoreId;
 		}
+	}
+	
+	function showReleaseDate() {
+		let date = moment(Date.parse(document.getElementById("releaseDateId").value)).format('YYYY-MM-DD HH:mm:ss');
+		document.getElementById("releaseDate").value = date;
 	}
 </script>
 
