@@ -4,16 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.campingmapping.team4.spring.t4_11Team.controller.TService;
 import com.campingmapping.team4.spring.t4_11Team.model.Initiating;
@@ -58,17 +56,16 @@ public class ViewController {
 		return "Delete OK";
 	}
 	
-	@RequestMapping("/content")
-	public String content(@RequestParam ("content") String content, RedirectAttributes attr) {
-	  System.out.println(content);
-	  attr.addAttribute("content", content);
-	  return "redirect:update";
+	@GetMapping("/update.controller")
+	public String display() {
+		return "update";
 	}
 	
-	@GetMapping("/update")
-	public String display(@RequestParam String content, Model model) {
-	  model.addAttribute("content", content);
-	  return "update";
+	@PutMapping("/updateMaterial.controller")
+	@ResponseBody
+	public String update(@RequestBody Initiating initiating) {
+		teamService.updateInitiating(initiating);
+		return "update OK";
 	}
-
+	
 }

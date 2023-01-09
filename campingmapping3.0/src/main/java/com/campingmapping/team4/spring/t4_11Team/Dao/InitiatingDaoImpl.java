@@ -151,6 +151,7 @@ public class InitiatingDaoImpl implements InitiatingDao{
 		if(initiating != null) {
 			session.update(initiating);
 			session.flush();
+			session.close();
 		}
 		session.close();
 		return initiating;

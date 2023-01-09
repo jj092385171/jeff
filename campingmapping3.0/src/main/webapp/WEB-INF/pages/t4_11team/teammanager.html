@@ -38,8 +38,12 @@
 						" method=" + '"delete"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" + 
 						"<button type=" + '"button"' + "name=" + '"delete"' + ">" + "刪除" + "</button>" + "</form>"+
-						"<form " + "><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" + 
-						"<button type=" + '"button"' + "name=" + '"update"' + ">" + "修改" + "</button>" + "</form>"
+						"<form " + "action=" + "/campingmapping3.0/update.controller" + 
+						" method=" + '"get"' +
+						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" +
+						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + data[i].postmember + '"' +">"+
+						"<input type="+ '"hidden"' + "name=" + '"pday"' + "value=" + '"' + pDay + '"' +">"+
+						"<button type=" + '"submit"' + "name=" + '"update"' + ">" + "修改" + "</button>" + "</form>"
 						+ "</td>" + "<td>" + data[i].initiatingnum + 
 						"</td>" + "<td>" + data[i].postmember + "</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
 						eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
