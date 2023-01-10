@@ -58,6 +58,8 @@ public class ViewController {
 	@PostMapping("/insertMaterial.controller")
 	@ResponseBody
 	public String insert(@RequestBody Initiating i) {
+		System.out.println("1"+i.getCurrentnum());
+		System.out.println("2"+i.getAcceptablenum());
 		teamService.insertInitiating(i);
 		return "Insert OK";
 	}
@@ -78,7 +80,6 @@ public class ViewController {
 	@PutMapping("/updateMaterial.controller")
 	@ResponseBody
 	public String update(@RequestBody Initiating initiating) {
-		System.out.println(initiating.getPair());
 		Initiating in = teamService.findById(initiating.getInitiatingnum());
 		initiating.setPostdate(in.getPostdate());
 		teamService.updateInitiating(initiating);
