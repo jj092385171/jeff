@@ -9,26 +9,28 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t4_33Forum.controller.newPostServlet;
 import com.campingmapping.team4.spring.t4_33Forum.model.dao.PostDao;
 import com.campingmapping.team4.spring.t4_33Forum.model.entity.Post;
-
+@Service
+@Transactional
 public class PostService {
-
+	@Autowired
 	private PostDao postDao;
-	
-	public PostService(Session session) {
-		this.postDao = new PostDao(session);
-	}
 	
 	SimpleDateFormat dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+//	public PostService(Session session) {
+//		this.postDao = new PostDao(session);
+//	}
+	
 	// 查所有貼文
 	public List<Post> selectAllPost() throws SQLException, ParseException{
-		Post post = new Post();
-		post.setPostHide(1);
-		return postDao.selectAllPost(post);
+		return postDao.selectAllPost();
 	}
 	// 查單一貼文
 	public Post selectSinglePost(Post post) throws SQLException{
@@ -39,24 +41,11 @@ public class PostService {
 	
 	// 新增貼文
 	public void insertPost(Post post) throws SQLException, ParseException{
-		// 設定userId
-		post.setUserId(9);
-		// 設定現在時間
-		Date utilReleaseDate = dateTime.parse(dateTime.format(new Date()));
-		post.setReleaseDate(new Timestamp(utilReleaseDate.getTime()));
-		post.setUserLike(0);
-		post.setUserUnlike(0);
-		post.setPostReport(0);
-		post.setPostHide(0);
 		postDao.insertPost(post);
 	}
 	
 	// 修改貼文
 	public void updatePost(Post post) throws SQLException, ParseException{
-		// 設定現在時間
-		Date utilReleaseDate = dateTime.parse(dateTime.format(new Date()));
-		post.setReleaseDate(new Timestamp(utilReleaseDate.getTime()));
-		post.setPostReport(0);
 		postDao.updatePost(post);
 	}
 	
@@ -66,47 +55,34 @@ public class PostService {
 	
 	// 檢舉貼文
 	public void reportPost(Post post) throws SQLException{
-		post.setPostReport(1);
 		postDao.reportPost(post);
 	}
 	
 	// 查詢被檢舉貼文
 	public List<Post> selectReportPost() throws SQLException{
-		Post post = new Post();
-		post.setPostReport(1);
-		post.setPostHide(1);
-		return postDao.selectReportPost(post);
+		return postDao.selectReportPost();
 	}
 	
 	// 取消檢舉貼文
 	public void cancelReportPost(Post post) throws SQLException{
-		post.setPostReport(2);
 		postDao.cancelReportPost(post);
 	}
 	
 	// 隱藏貼文
 	public void hidePost(Post post) throws SQLException, ParseException{
-		// 設定現在時間
-		Date utilReleaseDate = dateTime.parse(dateTime.format(new Date()));
-		post.setReleaseDate(new Timestamp(utilReleaseDate.getTime()));
 		post.setPostHide(1);
+		postDao.changeHidePost(post);
+	}
+	
+	// 取消隱藏貼文
+	public void cancelHidePost(Post post) throws SQLException, ParseException{
+		post.setPostReport(2);
+		post.setPostHide(0);
 		postDao.changeHidePost(post);
 	}
 	
 	// 查詢隱藏貼文
 	public List<Post> selectHidePost() throws SQLException{
-		Post post = new Post();
-		post.setPostHide(1);
-		return postDao.selectHidePost(post);
-	}
-	
-	// 取消隱藏貼文
-	public void cancelHidePost(Post post) throws SQLException, ParseException{
-		// 設定現在時間
-		Date utilReleaseDate = dateTime.parse(dateTime.format(new Date()));
-		post.setReleaseDate(new Timestamp(utilReleaseDate.getTime()));
-		post.setPostReport(2);
-		post.setPostHide(0);
-		postDao.changeHidePost(post);
+		return postDao.selectHidePost();
 	}
 }

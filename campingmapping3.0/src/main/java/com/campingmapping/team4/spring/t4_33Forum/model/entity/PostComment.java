@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import com.campingmapping.team4.spring.t4_01Member.model.entity.Member;
+//import com.campingmapping.team4.spring.t4_01Member.model.entity.Member;
 
 @Entity
 @Table(name="postComment")
@@ -28,6 +28,10 @@ public class PostComment {
 //	@ManyToOne
 //	@JoinColumn(name="userId")
 //	private Member member;
+	
+	@Column(name = "userId")
+	private int userId;
+	
 	@Column(name="postComment")
 	private String postComment;
 	@Column(name="postCommentReport")
@@ -86,5 +90,13 @@ public class PostComment {
 		this.postCommentHide = postCommentHide;
 	}
 
-	
+	// test
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 }

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import com.campingmapping.team4.spring.t4_01Member.model.entity.Member;
+//import com.campingmapping.team4.spring.t4_01Member.model.entity.Member;
 
 @Entity
 @Table(name="post")
@@ -27,7 +27,7 @@ public class Post {
 //	@ManyToOne
 //	@JoinColumn(name="userId")
 //	private Member member;
-	
+	@Column(name = "userId")
 	private int userId;
 	
 	@Column(name="title")
