@@ -22,7 +22,7 @@ public class InsertSiteController {
 	private SiteService siteService;
 	
 
-	@PostMapping("insertSite.controller")
+	@PostMapping("/insertSite.controller")
 	public String insertSite(@RequestParam("siteName") String siteName,
 			@RequestParam("sitePicturesPath") MultipartFile mf, @RequestParam("totalSites") String totalSites,
 			@RequestParam("siteMoney") String siteMoney,@RequestParam("campID") int campID, Model m) throws IllegalStateException, IOException {

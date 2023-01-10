@@ -21,8 +21,8 @@ public class UpdatePageController {
 	private SiteService siteService;
 	
 
-	@PostMapping("upadteCampPage.controller")
-	public String upadteCampPage(@RequestParam("campID") int campID,Model m) {
+	@PostMapping("/upadteCampPage1.controller")
+	public String upadteCampPage1(@RequestParam("campID") int campID,Model m) {
 
 		Camp camp = campService.findCampByID(campID);
 		
@@ -31,7 +31,7 @@ public class UpdatePageController {
 		return "/t4_24camp/admin/UpdateCampByIDForm";
 	}
 
-	@PostMapping("sitesOfCamp.controller/upadteSitePage.controller")
+	@PostMapping("/upadteSitePage.controller")
 	public String upadteSitePage(@RequestParam("siteID") int siteID,Model m) {
 		
 		Site site = siteService.findSiteByID(siteID);

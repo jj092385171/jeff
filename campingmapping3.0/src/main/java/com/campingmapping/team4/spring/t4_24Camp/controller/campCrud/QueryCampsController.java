@@ -49,7 +49,7 @@ public class QueryCampsController {
 		return "/t4_24camp/admin/QueryByCityIDsResult";
 	}
 	
-	@PostMapping("/queryCampsByCampIDs.controller")
+	@PostMapping("/queryCampsByCampID.controller")
 	public String queryByID(@RequestParam("campID") String campID, Model m) {
 		
 		HashMap<String, String> errors = new HashMap<String, String>();

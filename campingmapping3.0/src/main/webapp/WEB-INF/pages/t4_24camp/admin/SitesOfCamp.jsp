@@ -34,12 +34,12 @@
 							<td>${ site.siteID }</td>
 							<td>${ site.siteName }</td>
 							<td>
-								<img width="80" height="100" src="/campingmapping3.0/getSitePicture/${site.siteID}" />
+								<img width="80" height="100" src="/campingmapping3.0/getSitePicture1/${site.siteID}" />
 							</td>
 							<td>${ site.totalSites }</td>
 							<td>${ site.siteMoney }</td>
 							<td>
-								<form action="upadteSitePage.controller" method="POST">
+								<form action="../upadteSitePage.controller" method="POST">
 									<button onclick="return check()" type="submit" name="siteID"
 										value="${site.siteID }">更新</button>
 								</form>

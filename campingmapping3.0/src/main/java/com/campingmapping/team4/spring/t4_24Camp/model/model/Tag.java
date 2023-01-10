@@ -24,7 +24,7 @@ public class Tag implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tagID")
-	private int tagID;
+	private Integer tagID;
 	
 	@Column(name = "tagName")
 	private String tagName;
@@ -37,11 +37,11 @@ public class Tag implements Serializable{
 	}
 
 
-	public int getTagID() {
+	public Integer getTagID() {
 		return tagID;
 	}
 
-	public void setTagID(int tagID) {
+	public void setTagID(Integer tagID) {
 		this.tagID = tagID;
 	}
 

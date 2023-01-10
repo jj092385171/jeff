@@ -22,7 +22,7 @@ public class UpdateSiteByIDController {
 	private SiteService siteService;
 		
 		
-	@PostMapping("sitesOfCamp.controller/sitesOfCamp.controller/updateSiteByID.controller")
+	@PostMapping("/sitesOfCamp.controller/updateSiteByID.controller")
 	public String updateSiteByID(@RequestParam("siteID") int siteID, @RequestParam("siteName") String siteName, @RequestParam("sitePicturesPath") MultipartFile mf,@RequestParam("totalSites") String totalSites, @RequestParam("siteMoney") String siteMoney, Model m) throws IllegalStateException, IOException {
 		
 		// 存錯誤的map

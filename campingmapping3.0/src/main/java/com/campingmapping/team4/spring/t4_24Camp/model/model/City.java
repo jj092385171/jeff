@@ -29,7 +29,7 @@ public class City implements Serializable{
 	@Column(name = "cityName")
 	private String cityName;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city")
 	private Set<Camp>camps = new HashSet<Camp>();
 
 	public City() {

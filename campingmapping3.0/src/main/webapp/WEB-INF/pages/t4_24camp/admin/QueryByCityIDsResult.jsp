@@ -45,10 +45,8 @@
 							<td>${ cb.city.cityName }</td>
 							<td>${ cb.location }</td>
 							<td>
-								<!-- <td>
-								<img width="80" height="100"
-									src="<c:url value='/T4_24/GetCampImage?id=${cb.campID}'/>" />
-							</td> -->
+								<img width="80" height="100" src="/campingmapping3.0/getCampPicture/${cb.campID}" />
+							</td>
 							<td>${ cb.description }</td>
 							<td>
 								<c:forEach var='tag' items='${cb.tags}'>
@@ -60,10 +58,9 @@
 							<tr>
 								<td>&emsp;&emsp;${ site.siteID }</td>
 								<td>&emsp;${ site.siteName }</td>
-								<!-- <td>&emsp;
-									<img width="80" height="100"
-										src="<c:url value='/T4_24/GetSiteImage?id=${site.siteID}'/>" />
-								</td> -->
+								<td>
+									<img width="80" height="100" src="/campingmapping3.0/getSitePicture1/${site.siteID}" />
+								</td>
 								<td>&emsp;${ site.totalSites }</td>
 								<td>&emsp;${ site.siteMoney }</td>
 							</tr>

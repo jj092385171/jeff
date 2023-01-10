@@ -33,7 +33,7 @@
 						value="${city.cityID}${param.cityID}" />${city.cityName}
 				</c:forEach><br>
 				縣市:<c:forEach var='city' items='${cityList}'>
-					<input type="radio" name="cityID" value="${city.cityID}" />${city.cityName}
+					<input type="radio" name="cityID" value="${city.cityID}${param.cityID}" />${city.cityName}
 				</c:forEach>
 				<div style="color:#FF0000; font-size:60%; display: inline">${errors.cityID}</div>
 				<br>
@@ -52,7 +52,7 @@
 				</c:forEach><br>
 
 				標籤: <c:forEach var='tag' items='${tagList}'>
-					<input type="checkbox" name="tagID" value="${tag.tagID}" />${tag.tagName}
+					<input type="checkbox" name="tagID" value="${tag.tagID}${param.tagID}" />${tag.tagName}
 				</c:forEach>
 				<div style="color:#FF0000; font-size:60%; display: inline">${errors.tagIDs}</div>
 

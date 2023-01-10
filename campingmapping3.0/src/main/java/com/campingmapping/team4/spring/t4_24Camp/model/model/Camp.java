@@ -35,7 +35,7 @@ public class Camp implements Serializable{
 	private String campName;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_cityID")
+	@JoinColumn(name = "fkCityID")
 	private City city;
 	
 	@Column(name = "location")
@@ -47,13 +47,13 @@ public class Camp implements Serializable{
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tagOfCamp",
-	joinColumns = {@JoinColumn(name = "fk_campID", referencedColumnName = "campID")},
-	inverseJoinColumns = { @JoinColumn(name = "fk_tagID", referencedColumnName = "tagID")})
+	joinColumns = {@JoinColumn(name = "fkCampID", referencedColumnName = "campID")},
+	inverseJoinColumns = { @JoinColumn(name = "fkTagID", referencedColumnName = "tagID")})
 	private Set<Tag> tags = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
 	private Set<Site> sites = new HashSet<Site>();
 
 

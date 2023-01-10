@@ -52,7 +52,7 @@
 								</c:forEach>
 							</td>
 							<td>
-								<form action="upadteCampPage.controller" method="POST">
+								<form action="upadteCampPage1.controller" method="POST">
 									<button onclick="return check()" type="submit" name="campID"
 										value="${camp.campID }">更新</button>
 								</form>

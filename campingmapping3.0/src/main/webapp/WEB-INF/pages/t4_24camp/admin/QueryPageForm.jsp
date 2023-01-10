@@ -44,7 +44,7 @@
 
 			<hr>
 
-			<form name="QueryCampByCampIDForm" action="queryCampsByCampIDs.controller" method="POST">
+			<form name="QueryCampByCampIDForm" action="queryCampsByCampID.controller" method="POST">
 				<table>
 					<thead>
 						<tr>

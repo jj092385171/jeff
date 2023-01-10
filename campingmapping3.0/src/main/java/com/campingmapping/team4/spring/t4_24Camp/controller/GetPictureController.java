@@ -27,9 +27,9 @@ public class GetPictureController {
 	@Autowired
 	private SiteService siteService;
 
-	@GetMapping(path = "/getCampPicture/{campID}", produces = "text/plain;charset=UTF-8")
+	@GetMapping(path = "/getCampPicture1/{campID}", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
-	public byte[] getCampPicture(HttpServletRequest request, HttpServletResponse response, @PathVariable("campID") int campID) throws IOException {
+	public byte[] getCampPicture1(HttpServletRequest request, HttpServletResponse response, @PathVariable("campID") int campID) throws IOException {
 		Camp camp = campService.findCampByID(campID);
 		String fileName = camp.getCampPicturesPath();
 		
@@ -37,9 +37,9 @@ public class GetPictureController {
 		return IOUtils.toByteArray(in);
 	}
 	
-	@GetMapping(path = "/getSitePicture/{siteID}", produces = "text/plain;charset=UTF-8")
+	@GetMapping(path = "/getSitePicture1/{siteID}", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
-	public byte[] getSitePicture(HttpServletRequest request, HttpServletResponse response, @PathVariable("siteID") int siteID) throws IOException {
+	public byte[] getSitePicture1(HttpServletRequest request, HttpServletResponse response, @PathVariable("siteID") int siteID) throws IOException {
 		Site site = siteService.findSiteByID(siteID);
 		String fileName = site.getSitePicturesPath();
 		

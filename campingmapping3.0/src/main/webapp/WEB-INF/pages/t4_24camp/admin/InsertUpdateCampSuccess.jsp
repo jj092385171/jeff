@@ -39,7 +39,7 @@
 							<td>${ camp.city.cityName }</td>
 							<td>${ camp.location }</td>
 							<td>
-								<img width="80" height="100" src="/campingmapping3.0/getCampPicture/${camp.campID}" />
+								<img width="80" height="100" src="/campingmapping3.0/getCampPicture1/${camp.campID}" />
 							</td>
 							<td>${ camp.description }</td>
 							<td>

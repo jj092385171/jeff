@@ -72,8 +72,15 @@ public class CampDao {
 
 	// 更新營地
 	public Camp updateByCampID(int campID, String campName, int cityID, String location, String campPicturesPath,
-			String description, Set<Tag> tags) {
+			String description, int[] tagIDs) {
 		Session session = factory.openSession();
+		
+		Set<Tag> tags = new HashSet<Tag>();
+		for (int tagID : tagIDs) {
+			Tag tag = session.get(Tag.class, tagID);
+			tags.add(tag);
+		}
+		
 		Camp campBean = session.get(Camp.class, campID);
 
 		if (campBean != null) {
@@ -96,6 +103,8 @@ public class CampDao {
 		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 		
+		camp.setCity(null);
+		
 		if(camp != null) {
 			//刪除TagOfCamp
 			Set<Tag> tags = camp.getTags();
@@ -110,12 +119,10 @@ public class CampDao {
 			//刪除SiteOfCamp
 			Set<Site> sites = camp.getSites();
 			if(sites.size() != 0) {
-				Iterator<Site> it2 = sites.iterator();
-				while (it2.hasNext()) {
-					Site site = it2.next();
+				for (Site site : sites) {
 					site.setCamp(null);
-					it2.remove();
 					session.delete(site);
+					session.flush();
 				}
 			}
 			
@@ -126,47 +133,9 @@ public class CampDao {
 			return true;
 		}
 		
+		session.close();
 		return false;
 	}
-
-//	//刪除TagOfCamp
-//	public boolean deletdTagsByID(int campID){
-//		Session session = factory.openSession();
-//		Camp camp = session.get(Camp.class, campID);
-//		
-//		if(camp != null) {
-//			Set<Tag> tags = camp.getTags();
-//			Iterator<Tag> it = tags.iterator();
-//			while (it.hasNext()) {
-//				Tag tag = (Tag) it.next();
-//				it.remove();
-//				
-////				session.delete(tag);
-////				session.flush();
-//			}
-//		}
-//		session.close();
-//		return false;
-//	}
-
-//	// 刪除SitebyCampID
-//	public boolean deleteSitesbyCampID(int campID) {
-//		Session session = factory.openSession();
-//		Camp camp = session.get(Camp.class, campID);
-//
-//		if (camp != null) {
-//			Set<Site> sites = camp.getSites();
-//			Iterator<Site> it = sites.iterator();
-//			while (it.hasNext()) {
-//				Site site = (Site) it.next();
-//				it.remove();
-//
-//				session.delete(site);
-//				session.flush();
-//			}
-//		}
-//		session.close();
-//		return false;
-//	}
+	
 
 }

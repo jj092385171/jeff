@@ -14,7 +14,7 @@ public class DeleteSiteByIDController {
 	@Autowired
 	private SiteService siteService;
 
-	@PostMapping("sitesOfCamp.controller/deleteSiteByID.controller")
+	@PostMapping("/sitesOfCamp.controller/deleteSiteByID.controller")
 	public String deleteSiteByID(@RequestParam("siteID") int siteID, Model m) {
 		
 		siteService.deletdBySiteID(siteID);

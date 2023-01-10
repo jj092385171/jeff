@@ -36,7 +36,7 @@ public class Site implements Serializable{
 	private int siteMoney;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_campID")
+	@JoinColumn(name = "fkCampID")
 	private Camp camp;
 	
 	
