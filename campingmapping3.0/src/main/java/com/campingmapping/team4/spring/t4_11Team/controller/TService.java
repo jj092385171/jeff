@@ -24,4 +24,6 @@ public interface TService {
 	public String hqlCommand(String startdate, String enddate, String initiatingnum, String postmember,String camparea);
 
 	public List<Initiating> selectInitiating(String sql);
+	
+	public Initiating findById(int initiatingnum);
 }

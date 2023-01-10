@@ -20,6 +20,8 @@
 				response.json().then(function (data) {
 					var resultText = '';
 					var tableData = "";
+					var optionData= "";
+					optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
 					for (var i = 0; i < data.length; i++) {
 						var pDay = new Date(data[i].postdate);
 						var sDay = new Date(data[i].startdate);
@@ -28,11 +30,13 @@
 						if (data[i].pair != 0) {
 							pair = "不可配對"
 						}
+						
 						resultText += data[i].initiatingnum + " " + data[i].postmember
 							+ " " + data[i].postdate + " " + data[i].startdate + " "
 							+ data[i].enddate + " " + data[i].currentnum + " "
 							+ data[i].acceptablenum + " " + data[i].camparea + " "
 							+ data[i].pair + "<br/>";
+							
 						tableData += "<tr>" + "<td><form " + 
 						"action=" + "/campingmapping3.0/delete.controller/" + "{" + data[i].initiatingnum + "}" + 
 						" method=" + '"delete"' +
@@ -42,17 +46,53 @@
 						" method=" + '"get"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" +
 						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + data[i].postmember + '"' +">"+
-						"<input type="+ '"hidden"' + "name=" + '"pday"' + "value=" + '"' + pDay + '"' +">"+
 						"<button type=" + '"submit"' + "name=" + '"update"' + ">" + "修改" + "</button>" + "</form>"
 						+ "</td>" + "<td>" + data[i].initiatingnum + 
 						"</td>" + "<td>" + data[i].postmember + "</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
 						eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
 						"<td>" + data[i].camparea + "</td>" + "<td>" + pair + "</td>" + "</tr>"
+						
+						optionData += "<option value=" + data[i].initiatingnum + '"' + ">" + data[i].initiatingnum + "</option>"
 					}
 					document.getElementById('result').innerHTML = tableData;
+					document.getElementById('initiatingnum').innerHTML = optionData;
 				});
 			});
-			
+		
+		fetch('showallcamparea.controller', { method: 'GET' }).then(
+				function (response) {
+					if (response.status != 200) {
+						console.log(response.satus);
+						return;
+					}
+
+					response.json().then(function (data) {
+						var optionData = '';
+						optionData += "<option value=" + "0" + '"' + ">" + "請選擇露營地點" + "</option>"
+						for (var i = 0; i < data.length; i++){
+							optionData += "<option value=" + data[i].camparea + '"' + ">" + data[i].camparea + "</option>"
+						}
+						document.getElementById('camparea').innerHTML = optionData;
+					});
+				});
+		
+		fetch('showallpostmember.controller', { method: 'GET' }).then(
+				function (response) {
+					if (response.status != 200) {
+						console.log(response.satus);
+						return;
+					}
+
+					response.json().then(function (data) {
+						var optionData = '';
+						optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
+						for (var i = 0; i < data.length; i++){
+							optionData += "<option value=" + data[i].postmember + '"' + ">" + data[i].postmember + "</option>"
+						}
+						document.getElementById('postmember').innerHTML = optionData;
+					});
+				});
+		
 		var xh = new XMLHttpRequest();
 		xh.open('get', 'view.controller', true);
 		xh.send();
@@ -81,7 +121,6 @@
 		        	console.log(name);
 		            var formData = new FormData(button.form);
 		            var value = formData.get('dnum');
-					console.log(value);
 		            
 		            // 發出 DELETE 請求
 		            var xhr = new XMLHttpRequest();
@@ -105,6 +144,15 @@
 		            	};
 		            	xhr.send("content="+value);
 		            }
+		            else if(name == "select"){
+		            	xhr.open('get', '/campingmapping3.0/searchBySelect.controller',true);
+		            	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		            	xhr.onload = function() {
+		            	  console.log(xhr.responseText);
+		            	  console.log(xhr.status);
+		            	};
+		            	xhr.send(formData);
+		            }
 		            
 		        });
 		    });
@@ -114,8 +162,22 @@
 </head>
 
 <body>
-	<h3>1</h3>
+	<h3>揪團管理</h3>
 	<table id="result"></table>
+	<form action="/searchBySelect.controller" method="get">
+									<ul class="actions">
+										<li><button type="button" name="select">查詢</button></li>
+										<li>起始日期: <input type="date" id="startdate" name="startdate"></li>
+										<li>結束日期: <input type="date" id="enddate" name="enddate"></li>
+										<li><select id="initiatingnum" name="initiatingnum">
+										</select></li>
+										<li><select id="postmember" name="postmember">
+										</select></li>
+										<li><select id="camparea" name="camparea">
+										</select></li>
+									</ul>
+	</form>
+	<table id="select"></table>
 	<button type="button" onclick="window.location.href='insert.controller'">新增</button>
 </body>
 

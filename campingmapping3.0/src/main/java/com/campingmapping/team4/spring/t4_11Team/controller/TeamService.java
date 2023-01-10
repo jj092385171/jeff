@@ -64,4 +64,9 @@ public class TeamService implements TService{
 		return iDao.selectInitiating(sql);
 	}
 
+	@Override
+	public Initiating findById(int initiatingnum) {
+		return iDao.findById(initiatingnum);
+	}
+
 }

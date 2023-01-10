@@ -196,4 +196,13 @@ public class InitiatingDaoImpl implements InitiatingDao{
 		return resultlist;
 	}
 
+	@Override
+	public Initiating findById(int initiatingnum) {
+		Session session = factory.openSession();
+		Initiating resultBean = session.get(Initiating.class, initiatingnum);
+		
+		session.close();
+		return resultBean;
+	}
+
 }
