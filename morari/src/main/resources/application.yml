@@ -1,0 +1,43 @@
+server:
+  # error:
+  #   include-stacktrace: always
+  #   path: /error
+  #   whitelabel:
+  #     enabled: false
+  port: 8000
+  servlet:
+    context-path: /morari
+    encoding:
+      charset: UTF-8
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
+    url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
+    username: Team4Admin
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2016Dialect
+        '[allow_update_outside_transaction]': true
+        '[hbm2ddl.auto]': create-drop
+    show-sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 128KB
+      max-request-size: 128KB
+  thymeleaf:
+    prefix: classpath:/templates/
+  web:
+    resources:
+      cache:
+        period: 0
+      static-locations: classpath:/static/
+  # cloud:
+  #   azure:
+  #     storage:
+  #       blob:
+  #         account-name: eteam4eit56blobdb
+  #         account-key: DefaultEndpointsProtocol=https;AccountName=eteam4eit56blobdb;AccountKey=gcDS9D5Ckpz6kfr/xgUjG2Nyg6JYNn65t74VEzWjRW7bjAca+W6epPfD7/JCZ41mOR+muUWygyKw+AStTWI9QQ==;EndpointSuffix=core.windows.net
+  #         endpoint: https://eteam4eit56blobdb.blob.core.windows.net/
