@@ -121,6 +121,7 @@
 		        	console.log(name);
 		            var formData = new FormData(button.form);
 		            var value = formData.get('dnum');
+					console.log(value);
 		            
 		            // 發出 DELETE 請求
 		            var xhr = new XMLHttpRequest();
@@ -143,15 +144,8 @@
 		            	  console.log(xhr.status);
 		            	};
 		            	xhr.send("content="+value);
-		            }
-		            else if(name == "select"){
-		            	xhr.open('get', '/campingmapping3.0/searchBySelect.controller',true);
-		            	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		            	xhr.onload = function() {
-		            	  console.log(xhr.responseText);
-		            	  console.log(xhr.status);
-		            	};
-		            	xhr.send(formData);
+		            }else if(name == "selcet"){
+		            	
 		            }
 		            
 		        });
@@ -164,7 +158,7 @@
 <body>
 	<h3>揪團管理</h3>
 	<table id="result"></table>
-	<form action="/searchBySelect.controller" method="get">
+	<form action="" method="POST">
 									<ul class="actions">
 										<li><button type="button" name="select">查詢</button></li>
 										<li>起始日期: <input type="date" id="startdate" name="startdate"></li>
