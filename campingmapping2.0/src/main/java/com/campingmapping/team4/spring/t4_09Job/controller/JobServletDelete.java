@@ -24,9 +24,9 @@ public class JobServletDelete extends HttpServlet {
 		JobServiceImpl jsdi = new JobServiceImpl();
 		jsdi.deleteJob(parseID);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/deleteSucces.jsp");
+//		RequestDispatcher rd = request.getRequestDispatcher("/t4_09job/job/JobModel/deleteSucces.jsp");
 
-		rd.forward(request, response);
+//		rd.forward(request, response);
 		return;
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
