@@ -18,8 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryDao categoryDao;
-	
-	
+
 	@Override
 	public Category create(Category category) throws SQLException {
 		return categoryDao.insert(category);
