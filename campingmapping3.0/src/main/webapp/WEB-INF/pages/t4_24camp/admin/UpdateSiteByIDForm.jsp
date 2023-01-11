@@ -23,16 +23,16 @@
 					method="POST" enctype="multipart/form-data">
 					營區位編號: <input type="text" name='siteID' readonly="readonly"
 						value='${ site.siteID }'><br>
-					營區位名: <input type="text" name='siteName' value='${ site.siteName }${param.siteName}'>
+					營區位名: <input type="text" name='siteName' value='${ site.siteName }'>
 					<div style="color:#FF0000; font-size:60%; display: inline">${errors.siteName}</div>
 					<br>
 					圖片: <input type="file" name="sitePicturesPath">
-						<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.sitePicturesPath}</div>
+						<div style="color:#FF0000; font-size:60%; display: inline">${errors.sitePicturesPath}</div>
 						<br> 
-					總營位: <input type="text" name='totalSites' value='${ site.totalSites }${param.totalSites}'>
+					總營位: <input type="text" name='totalSites' value='${ site.totalSites }'>
 					<div style="color:#FF0000; font-size:60%; display: inline">${errors.totalSites}</div>
 					<br>
-					營位金額: <input type="text" name='siteMoney' value='${ site.siteMoney }${param.siteMoney}'>
+					營位金額: <input type="text" name='siteMoney' value='${ site.siteMoney }'>
 					<div style="color:#FF0000; font-size:60%; display: inline">${errors.siteMoney}</div>
 					<br>
 					營地編號: <input type="text" name='campID' readonly="readonly"

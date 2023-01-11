@@ -21,7 +21,7 @@ public class Site implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "siteID")
-	private int siteID;
+	private Integer siteID;
 	
 	@Column(name = "siteName")
 	private String siteName;
@@ -30,10 +30,10 @@ public class Site implements Serializable{
 	private String sitePicturesPath;
 	
 	@Column(name = "totalSites")
-	private int totalSites;
+	private Integer totalSites;
 	
 	@Column(name = "siteMoney")
-	private int siteMoney;
+	private Integer siteMoney;
 	
 	@ManyToOne
 	@JoinColumn(name = "fkCampID")
@@ -44,11 +44,11 @@ public class Site implements Serializable{
 	}
 
 	
-	public int getSiteID() {
+	public Integer getSiteID() {
 		return siteID;
 	}
 
-	public void setSiteID(int siteID) {
+	public void setSiteID(Integer siteID) {
 		this.siteID = siteID;
 	}
 
@@ -68,19 +68,19 @@ public class Site implements Serializable{
 		this.sitePicturesPath = sitePicturesPath;
 	}
 
-	public int getTotalSites() {
+	public Integer getTotalSites() {
 		return totalSites;
 	}
 
-	public void setTotalSites(int totalSites) {
+	public void setTotalSites(Integer totalSites) {
 		this.totalSites = totalSites;
 	}
 
-	public int getSiteMoney() {
+	public Integer getSiteMoney() {
 		return siteMoney;
 	}
 
-	public void setSiteMoney(int siteMoney) {
+	public void setSiteMoney(Integer siteMoney) {
 		this.siteMoney = siteMoney;
 	}
 

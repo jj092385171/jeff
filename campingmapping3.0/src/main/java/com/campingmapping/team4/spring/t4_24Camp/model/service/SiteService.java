@@ -18,7 +18,7 @@ public class SiteService {
 	
 	
 	//新增營地位
-	public Integer AddCamp(String siteName, String sitePicturesPath, int totalSites, int siteMoney, int campID) {
+	public Integer AddCamp(String siteName, String sitePicturesPath, Integer totalSites, Integer siteMoney, int campID) {
 		return siteDao.AddCamp(siteName, sitePicturesPath, totalSites, siteMoney, campID);
 	}
 	
@@ -33,7 +33,7 @@ public class SiteService {
 	}
 	
 	//更新營區位
-	public Site updateBySiteID(int siteID, String siteName, String sitePicturesPath, int totalSites, int siteMoney) {
+	public Site updateBySiteID(int siteID, String siteName, String sitePicturesPath, Integer totalSites, Integer siteMoney) {
 		return siteDao.updateBySiteID(siteID, siteName, sitePicturesPath, totalSites, siteMoney);
 	}
 	

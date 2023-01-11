@@ -24,7 +24,7 @@ public class City implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cityID")
-	private int cityID;
+	private Integer cityID;
 	
 	@Column(name = "cityName")
 	private String cityName;
@@ -35,11 +35,11 @@ public class City implements Serializable{
 	public City() {
 	}
 
-	public int getCityID() {
+	public Integer getCityID() {
 		return cityID;
 	}
 
-	public void setCityID(int cityID) {
+	public void setCityID(Integer cityID) {
 		this.cityID = cityID;
 	}
 

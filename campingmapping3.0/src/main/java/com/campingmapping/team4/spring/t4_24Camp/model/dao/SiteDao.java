@@ -22,7 +22,7 @@ public class SiteDao {
 
 	
 	//新增營區位
-	public Integer AddCamp(String siteName, String sitePicturesPath, int totalSites, int siteMoney, int campID) {
+	public Integer AddCamp(String siteName, String sitePicturesPath, Integer totalSites, Integer siteMoney, int campID) {
 		Session session = factory.openSession();
 		
 		Site site = new Site();
@@ -60,7 +60,7 @@ public class SiteDao {
 	}
 	
 	//更新營區位
-	public Site updateBySiteID(int siteID, String siteName, String sitePicturesPath, int totalSites, int siteMoney) {
+	public Site updateBySiteID(int siteID, String siteName, String sitePicturesPath, Integer totalSites, Integer siteMoney) {
 		Session session = factory.openSession();
 		Site site = session.get(Site.class, siteID);
 		

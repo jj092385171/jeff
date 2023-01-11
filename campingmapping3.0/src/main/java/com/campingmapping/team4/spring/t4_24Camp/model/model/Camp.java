@@ -29,7 +29,7 @@ public class Camp implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "campID")
-	private int campID;
+	private Integer campID;
 	
 	@Column(name = "campName")
 	private String campName;
@@ -61,11 +61,11 @@ public class Camp implements Serializable{
 	}
 
 	
-	public int getCampID() {
+	public Integer getCampID() {
 		return campID;
 	}
 
-	public void setCampID(int campID) {
+	public void setCampID(Integer campID) {
 		this.campID = campID;
 	}
 

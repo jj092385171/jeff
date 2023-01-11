@@ -26,7 +26,7 @@ public class CampDao {
 	private SessionFactory factory;
 
 	// 新增營地
-	public int addCamp(String campName, int cityID, String location, String campPicturesPath, String description,
+	public int addCamp(String campName, Integer cityID, String location, String campPicturesPath, String description,
 			int[] tagIDs) {
 		Session session = factory.openSession();
 
@@ -71,7 +71,7 @@ public class CampDao {
 	}
 
 	// 更新營地
-	public Camp updateByCampID(int campID, String campName, int cityID, String location, String campPicturesPath,
+	public Camp updateByCampID(Integer campID, String campName, Integer cityID, String location, String campPicturesPath,
 			String description, int[] tagIDs) {
 		Session session = factory.openSession();
 		

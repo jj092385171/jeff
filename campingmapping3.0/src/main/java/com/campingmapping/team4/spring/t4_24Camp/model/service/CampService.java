@@ -18,7 +18,7 @@ public class CampService {
 	
 
 	//新增營地
-	public int addCamp(String campName, int cityID, String location, String campPicturesPath, String description, int[] tagIDs) {
+	public int addCamp(String campName, Integer cityID, String location, String campPicturesPath, String description, int[] tagIDs) {
 		return campDao.addCamp(campName, cityID, location, campPicturesPath, description, tagIDs);
 	}	
 		
@@ -33,7 +33,7 @@ public class CampService {
 	}
 	
 	//更新營地
-	public Camp updateByCampID(int campID , String campName, int cityID, String location, String campPicturesPath, String description, int[] tagIDs) {
+	public Camp updateByCampID(int campID , String campName, Integer cityID, String location, String campPicturesPath, String description, int[] tagIDs) {
 		return campDao.updateByCampID(campID, campName, cityID, location, campPicturesPath, description, tagIDs);
 	}
 	

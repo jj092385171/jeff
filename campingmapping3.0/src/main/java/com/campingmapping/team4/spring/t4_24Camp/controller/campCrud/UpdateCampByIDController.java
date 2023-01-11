@@ -26,20 +26,19 @@ public class UpdateCampByIDController {
 
 	@Autowired
 	private CampService campService;
-	
+
 	@Autowired
 	private CityService cityService;
-	
+
 	@Autowired
 	private TagService tagService;
-	
 
-	
 	@PostMapping("/updateCampByID.controller")
-	public String updateCampByID(@RequestParam("campID")@Nullable int campID, @RequestParam("campName")@Nullable String campName,
-			@RequestParam("campPicturesPath") MultipartFile mf, @RequestParam("cityID")@Nullable String cityID,
-			@RequestParam("location")@Nullable String location, @RequestParam("tagID")@Nullable int[] tagIDs,
-			@RequestParam("description")@Nullable String description, Model m) throws IllegalStateException, IOException {
+	public String updateCampByID(@RequestParam("campID") @Nullable Integer campID,
+			@RequestParam("campName") @Nullable String campName, @RequestParam("campPicturesPath") MultipartFile mf,
+			@RequestParam("cityID") @Nullable String cityID, @RequestParam("location") @Nullable String location,
+			@RequestParam("description") @Nullable String description, @RequestParam("tagID") @Nullable int[] tagIDs,
+			Model m) throws IllegalStateException, IOException {
 
 		// 存錯誤的map
 		Map<String, String> errors = new HashMap<>();
@@ -74,35 +73,37 @@ public class UpdateCampByIDController {
 		if (tagIDs == null || tagIDs.length == 0) {
 			errors.put("tagIDs", "必須選擇標籤");
 		}
-		
-		
-		
+
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
 			Camp tmpcamp = new Camp();
 			tmpcamp.setCampID(campID);
 			tmpcamp.setCampName(campName);
-			tmpcamp.setCity(cityService.findCityByID(Integer.valueOf(cityID)));
+			if(cityID != null) {
+				tmpcamp.setCity(cityService.findCityByID(Integer.valueOf(cityID)));
+			}
 			tmpcamp.setLocation(location);
 			tmpcamp.setCampPicturesPath(fileName);
-			
-			Set<Tag> tags = new HashSet<Tag>();
-			for (int tagID : tagIDs) {
-				Tag tmpTag = tagService.findByID(tagID);
-				tags.add(tmpTag);
+			if (tagIDs != null) {
+				Set<Tag> tags = new HashSet<Tag>();
+				for (int tagID : tagIDs) {
+					Tag tmpTag = tagService.findByID(tagID);
+					tags.add(tmpTag);
+				}
+				tmpcamp.setTags(tags);				
 			}
-			tmpcamp.setTags(tags);
-			
+
 			m.addAttribute("camp", tmpcamp);
-			
-			return "redirect:/t4_24camp/admin/UpdateCampByIDForm";
+
+			return "/t4_24camp/admin/UpdateCampByIDForm";
 		}
-		
-		Camp camp = campService.updateByCampID(campID, campName, Integer.valueOf(cityID), location, fileName, description, tagIDs);
+
+		Camp camp = campService.updateByCampID(campID, campName, Integer.valueOf(cityID), location, fileName,
+				description, tagIDs);
 
 		m.addAttribute("camp", camp);
 		m.addAttribute("what", "更新");
-		
+
 		return "/t4_24camp/admin/InsertUpdateCampSuccess";
 	}
 
