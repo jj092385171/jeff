@@ -9,12 +9,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 //商品列表
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "category")
 public class Category {
@@ -43,10 +45,10 @@ public class Category {
 	private Blob pdpicture;
 	// 照片 vinbinary
 	@Column(name = "pdprice")
-	private int pdprice;
+	private Integer pdprice;
 	// 價位
 	@Column(name = "pdinventory")
-	private int pdinventory;
+	private Integer pdinventory;
 	// 庫存數量
 	@Column(name = "pddate")
 	private Date pddate;

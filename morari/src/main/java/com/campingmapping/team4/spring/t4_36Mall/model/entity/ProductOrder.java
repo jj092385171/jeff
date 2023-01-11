@@ -4,14 +4,25 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table
 public class ProductOrder {
 
-	private int orderID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer orderID;
 	// 訂單編號(pk)
 	private String Od_status;
 	// 訂單狀態

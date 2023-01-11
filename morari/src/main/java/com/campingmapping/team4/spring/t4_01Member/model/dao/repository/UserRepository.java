@@ -7,6 +7,6 @@ import com.campingmapping.team4.spring.t4_01Member.model.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-  Optional<User> findByEmail(String email);
+  Optional<User> findByAccount(String account);
 
 }
