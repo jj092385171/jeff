@@ -3,7 +3,8 @@ package com.campingmapping.team4.spring.t433forum.model.entity;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import com.campingmapping.team4.spring.t401member.model.entity.User;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,11 +14,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "post")
 public class Post {
@@ -29,7 +34,8 @@ public class Post {
 
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	private User user;
+	@JsonIgnoreProperties("post")
+	private UserProfiles userprofiles;
 
 	@Column(name = "title")
 	private String title;

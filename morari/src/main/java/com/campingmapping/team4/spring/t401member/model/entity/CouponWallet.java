@@ -1,5 +1,7 @@
 package com.campingmapping.team4.spring.t401member.model.entity;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -23,6 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "couponwallet")
+@Component
 public class CouponWallet {
 
     // cwid
@@ -33,12 +36,16 @@ public class CouponWallet {
     private Integer cwid;
     // uid
     // 擁有者ID
-    @Column(name = "uid")
-    private Integer uid;
+    @JsonIgnoreProperties("couponwallet")
+    @ManyToOne
+    @JoinColumn(name = "uid")
+    private UserProfiles userprofiles;
     // couponid
     // 票券ID
-    @Column(name = "couponid")
-    private Integer couponid;
+    @JsonIgnoreProperties("couponwallet")
+    @ManyToOne
+    @JoinColumn(name = "couponid")
+    private Coupon coupon;
     // state
     // 狀態(1.未使用 2.已使用 3.已過期 4.暫停)
     @Column(name = "state")
@@ -46,15 +53,5 @@ public class CouponWallet {
     // show
     @Column(name = "show")
     private String show;
-
-    @JsonIgnoreProperties("couponwallet")
-    @ManyToOne
-    @JoinColumn(name = "coupon_couponid")
-    private Coupon coupon;
-
-    @JsonIgnoreProperties("couponwallet")
-    @ManyToOne
-    @JoinColumn(name = "member_uid")
-    private Member member;
 
 }

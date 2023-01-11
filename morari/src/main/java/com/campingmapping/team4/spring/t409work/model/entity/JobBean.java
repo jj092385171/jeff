@@ -3,8 +3,7 @@ package com.campingmapping.team4.spring.t409work.model.entity;
 import java.sql.Blob;
 import java.util.Date;
 
-import com.campingmapping.team4.spring.t401member.model.entity.Member;
-import com.campingmapping.team4.spring.t401member.model.entity.User;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,9 +26,11 @@ public class JobBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rackID")
 	private Integer rackID;// 刊登編號
+
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	private User user;// 會員
+	private UserProfiles userprofiles;// 會員
+
 	@Column(name = "job")
 	private String job;// 職缺
 	@Column(name = "salary")

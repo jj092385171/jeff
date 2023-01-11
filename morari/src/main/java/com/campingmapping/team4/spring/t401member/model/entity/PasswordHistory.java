@@ -2,6 +2,8 @@ package com.campingmapping.team4.spring.t401member.model.entity;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "passwordhistory")
+@Component
 public class PasswordHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,6 +2,8 @@ package com.campingmapping.team4.spring.t401member.model.entity;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -25,6 +27,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "loginhistory")
+@Component
 public class LoginHistory {
 
     // lhid
@@ -36,7 +39,7 @@ public class LoginHistory {
     @JsonIgnoreProperties("loginhistory")
     @ManyToOne
     @JoinColumn(name = "uid")
-    private Member member;
+    private UserProfiles userprofiles;
     // ip
     // IP位置
     @Column(name = "ip")

@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -29,7 +32,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "coupon")
-
+@Component
 public class Coupon {
     // couponid
     // ID
@@ -85,6 +88,7 @@ public class Coupon {
     @Column(name = "couponphoto")
     private Blob couponphoto;
 
+    @JsonIgnore
     @JsonIgnoreProperties("coupon")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "coupon")
     @OrderBy("cwid desc")

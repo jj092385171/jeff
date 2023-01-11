@@ -19,10 +19,10 @@
 	</properties>
 	<dependencies>
 		<!-- Jdbc -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jdbc</artifactId>
-		</dependency>
+		<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency> -->
 		<!-- jpa -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -83,6 +83,13 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- MYSQL 資料庫-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<!-- lombok 語法簡化 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

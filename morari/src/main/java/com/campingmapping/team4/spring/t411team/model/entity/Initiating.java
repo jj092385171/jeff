@@ -2,7 +2,7 @@ package com.campingmapping.team4.spring.t411team.model.entity;
 
 import java.util.Date;
 
-import com.campingmapping.team4.spring.t401member.model.entity.Member;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,10 +28,7 @@ public class Initiating {
 
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	private Member member;
-
-	// @Column(name = "postmember")
-	// private Integer postmember;
+	private UserProfiles userprofiles;
 
 	@Column(name = "postdate")
 	private Date postdate;

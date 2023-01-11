@@ -3,7 +3,8 @@ package com.campingmapping.team4.spring.t436mall.model.entity;
 import java.sql.Blob;
 import java.util.Date;
 
-import com.campingmapping.team4.spring.t401member.model.entity.User;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,7 +36,8 @@ public class Category {
 	// 會員 ID(fk)
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	private User user;
+	@JsonIgnoreProperties("category")
+	private UserProfiles userprofiles;
 	// 產品名稱
 	@Column(name = "pdtitle")
 	private String pdtitle;
