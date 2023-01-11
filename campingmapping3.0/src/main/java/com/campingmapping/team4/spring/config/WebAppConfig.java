@@ -32,7 +32,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver irvr = new InternalResourceViewResolver();
-		irvr.setPrefix("/WEB-INF/pages/t4_11team/");
+		irvr.setPrefix("/WEB-INF/pages/");
 		irvr.setSuffix(".html");
 		return irvr;
 	}
