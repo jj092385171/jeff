@@ -26,8 +26,9 @@ public class Initiating {
 	@Column(name = "initiatingnum")
 	private Integer initiatingnum;
 
-	@Column(name = "uid")
-	private Integer uid;
+	@ManyToOne
+	@JoinColumn(name = "uid")
+	private UserProfiles userprofiles;
 
 	@Column(name = "postdate")
 	private Date postdate;

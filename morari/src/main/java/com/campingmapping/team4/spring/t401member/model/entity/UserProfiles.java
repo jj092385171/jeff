@@ -90,10 +90,4 @@ public class UserProfiles implements UserDetails {
     return true;
   }
 
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
-
 }

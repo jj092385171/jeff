@@ -34,8 +34,10 @@ public class Category {
 	@Column(name = "userID")
 	private String userID;
 	// 會員 ID(fk)
-	@Column(name = "uid")
-	private Integer uid;
+	@ManyToOne
+	@JoinColumn(name = "uid")
+	@JsonIgnoreProperties("category")
+	private UserProfiles userprofiles;
 	// 產品名稱
 	@Column(name = "pdtitle")
 	private String pdtitle;

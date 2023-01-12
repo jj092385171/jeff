@@ -26,8 +26,11 @@ public class JobBean {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "rackID")
 	private Integer rackID;// 刊登編號
-	@Column(name = "uid")
-	private Integer uid;// 會員
+
+	@ManyToOne
+	@JoinColumn(name = "uid")
+	private UserProfiles userprofiles;// 會員
+
 	@Column(name = "job")
 	private String job;// 職缺
 	@Column(name = "salary")
