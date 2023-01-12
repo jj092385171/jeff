@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
-import java.sql.Blob;
 import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
@@ -31,13 +30,13 @@ public class Category {
 	@Column(name = "pdid")
 	private Integer pdid;
 	// 產品編號(pk)
-	@Column(name = "userID")
-	private String userID;
-	// 會員 ID(fk)
 	@ManyToOne
 	@JoinColumn(name = "uid")
 	@JsonIgnoreProperties("category")
 	private UserProfiles userprofiles;
+	// 會員 ID(fk)
+	@Column(name = "pdname")
+	private String pdname;
 	// 產品名稱
 	@Column(name = "pdtitle")
 	private String pdtitle;
@@ -49,7 +48,7 @@ public class Category {
 	private String pdtype;
 	// 產品類型
 	@Column(name = "pdpicture")
-	private Blob pdpicture;
+	private String pdpicture;
 	// 照片 vinbinary
 	@Column(name = "pdprice")
 	private Integer pdprice;

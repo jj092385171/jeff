@@ -30,6 +30,7 @@ import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -114,5 +115,10 @@ public class UserProfiles implements UserDetails {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   @Builder.Default
   private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  @Builder.Default
+  private Set<ProductOrder> productOrder = new LinkedHashSet<ProductOrder>();
 
 }

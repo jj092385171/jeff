@@ -3,10 +3,11 @@ package com.campingmapping.team4.spring.t436mall.model.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t436mall.model.dao.repository.CategoryRepository;
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
-
+@Service
 public class CategoryServiceImpl {
 
 	@Autowired
@@ -23,9 +24,9 @@ public class CategoryServiceImpl {
 	}
 
 	// 依Pdid來修改單筆產品
-//	public void updateByPdid(Category category) {
-//		cDao.save(category);
-//	}
+	// public void updateByPdid(Category category) {
+	// cDao.save(category);
+	// }
 
 	// 依Pdid來搜尋單筆產品
 	public Category selectByPdid(int Pdid) {
@@ -42,7 +43,8 @@ public class CategoryServiceImpl {
 
 		for (Category buy : category) {
 			Category inventory = cDao.findById(buy.getPdid()).get();
-			inventory.setPdinventory(inventory.getPdinventory() - buy.getPdinventory());
+			inventory.setPdinventory(
+					inventory.getPdinventory() - buy.getPdinventory());
 			cDao.save(inventory);
 		}
 	}
