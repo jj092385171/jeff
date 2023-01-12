@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t436mall.model.dao.repository.CategoryRepository;
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 import com.campingmapping.team4.spring.t436mall.model.service.CategoryService;
@@ -20,17 +18,12 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	public CategoryRepository cDao;
 	
-	@Autowired
-	public UserRepository uDao;
-
 	// 新增一筆產品
 	@Override
-	public Category createorupdata(Category category) {
+	public Category create(Category category) {
 		Date now = new Date();
 		category.setPdlastupdate(now);
 		category.setPddate(now);
-		UserProfiles userid = category.getUserprofiles();
-		category.setUserprofiles(userid);
 		return cDao.save(category);
 	}
 
@@ -56,17 +49,17 @@ public class CategoryServiceImpl implements CategoryService {
 
 	// 搜尋所有產品
 	@Override
-	public List<Category> selectAllPd() {
+	public List<Category> selectAll() {
 		return cDao.findAll();
 	}
 
-	// 根據購買修改庫存
+	// 根據購買減少庫存
+	@Override
 	public void updateBuy(List<Category> category) {
 
 		for (Category buy : category) {
-			Category inventory = cDao.findById(buy.getPdid()).get();
-			inventory.setPdinventory(
-					inventory.getPdinventory() - buy.getPdinventory());
+			Category inventory = cDao.findById(buy.getId()).get();
+			inventory.setPdinventory(inventory.getPdinventory() - buy.getPdinventory());
 			cDao.save(inventory);
 		}
 	}

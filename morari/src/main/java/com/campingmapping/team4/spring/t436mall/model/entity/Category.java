@@ -2,16 +2,12 @@ package com.campingmapping.team4.spring.t436mall.model.entity;
 
 import java.util.Date;
 
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,14 +23,12 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pdid")
-	private Integer pdid;
+	@Column(name = "id")
+	private Integer id;
 	// 產品編號(pk)
-	@ManyToOne
-	@JoinColumn(name = "uid")
-	@JsonIgnoreProperties("category")
-	private UserProfiles userprofiles;
-	// 會員 ID(fk)
+	@Column(name = "userid")
+	private Integer userid;
+	// 會員 ID
 	@Column(name = "pdname")
 	private String pdname;
 	// 產品名稱

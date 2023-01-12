@@ -6,7 +6,7 @@ import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 
 public interface CategoryService {
 
-	public Category createorupdata(Category category);
+	public Category create(Category category);
 
 	public void deleteByPdid(int id);
 
@@ -14,7 +14,7 @@ public interface CategoryService {
 
 	public Category selectByPdid(int Pdid);
 
-	public List<Category> selectAllPd();
+	public List<Category> selectAll();
 
 	public void updateBuy(List<Category> category);
 }

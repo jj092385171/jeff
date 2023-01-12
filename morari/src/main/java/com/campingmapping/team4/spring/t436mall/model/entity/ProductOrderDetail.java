@@ -12,25 +12,28 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "productorder")
+@Table(name = "productorderdetail")
 public class ProductOrderDetail {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+	// 訂單詳情編號 不顯示(pk)
 	@Column(name = "orderid")
-	private int orderid;
-	// 訂單編號(pk)
+	private String orderid;
+	// 訂單編號
 	@Column(name = "pdid")
-	private int pdid;
-	// 產品編號(fk)
+	private Integer pdid;
+	// 產品編號
 	@Column(name = "pdprice")
-	private int pdprice;
+	private Integer pdprice;
 	// 商品價格(fk)
 	@Column(name = "pdqty")
-	private int pdqty;
+	private Integer pdqty;
 	// 數量
 	@Column(name = "money")
-	private int money;
+	private Integer money;
 	// 總計
 
 }

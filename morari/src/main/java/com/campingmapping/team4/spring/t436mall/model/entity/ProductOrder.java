@@ -2,16 +2,10 @@ package com.campingmapping.team4.spring.t436mall.model.entity;
 
 import java.util.Date;
 
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,26 +17,20 @@ import lombok.NoArgsConstructor;
 public class ProductOrder {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "oid")
-	private int oid;
-	// 序號(pk)
-	@Column(name = "orderid")
-	private int orderid;
-	// 訂單編號(pk)
-	@ManyToOne
-	@JoinColumn(name = "uid")
-	@JsonIgnoreProperties("productorder")
-	private UserProfiles userprofiles;
-	// 會員 ID(fk)
+	@Column(name = "id")
+	private Integer id;
+	// 訂單編號(自動產生亂碼)(pk)
+	@Column(name = "userid")
+	private Integer userid;
+	// 會員 ID
 	@Column(name = "privateodstatus")
 	private String privateodstatus;
 	// 訂單狀態
 	@Column(name = "datetime")
 	private Date datetime;
-	// 訂單日期
+	// 下訂單日期
 	@Column(name = "money")
-	private int money;
+	private Integer money;
 	// 總計
 	@Column(name = "odshippingaddress")
 	private String odshippingaddress;

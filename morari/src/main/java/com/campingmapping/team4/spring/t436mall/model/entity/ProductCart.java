@@ -17,20 +17,17 @@ public class ProductCart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cartid")
-	private int cartid;
+	@Column(name = "id")
+	private Integer id;
 	// 購物車編號(pk)
 	@Column(name = "userid")
-	private int userid;
-	// 會員 ID(fk)
+	private Integer userid;
+	// 會員 ID
 	@Column(name = "pdid")
 	private Integer pdid;
 	// 產品編號(fk)
 	@Column(name = "ctqty")
-	private int ctqty;
+	private Integer ctqty;
 	// 數量
-	@Column(name = "money")
-	private int money;
-	// 總計金額
 
 }
