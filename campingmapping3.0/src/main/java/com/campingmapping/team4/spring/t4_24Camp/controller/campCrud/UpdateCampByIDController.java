@@ -32,10 +32,11 @@ public class UpdateCampByIDController {
 
 	@Autowired
 	private TagService tagService;
+	
 
 	@PostMapping("/updateCampByID.controller")
 	public String updateCampByID(@RequestParam("campID") @Nullable Integer campID,
-			@RequestParam("campName") @Nullable String campName, @RequestParam("campPicturesPath") MultipartFile mf,
+			@RequestParam("campName") @Nullable String campName, @RequestParam("campPicturesPath")@Nullable MultipartFile mf,
 			@RequestParam("cityID") @Nullable String cityID, @RequestParam("location") @Nullable String location,
 			@RequestParam("description") @Nullable String description, @RequestParam("tagID") @Nullable int[] tagIDs,
 			Model m) throws IllegalStateException, IOException {
@@ -74,6 +75,7 @@ public class UpdateCampByIDController {
 			errors.put("tagIDs", "必須選擇標籤");
 		}
 
+		
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
 			Camp tmpcamp = new Camp();

@@ -1,10 +1,8 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "city")
 @Component
-public class City implements Serializable{
+public class City {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

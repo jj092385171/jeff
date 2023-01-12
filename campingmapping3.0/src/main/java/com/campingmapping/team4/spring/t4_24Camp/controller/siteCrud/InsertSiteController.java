@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
+import com.campingmapping.team4.spring.t4_24Camp.model.service.CampService;
 import com.campingmapping.team4.spring.t4_24Camp.model.service.SiteService;
 
 @Controller
@@ -21,11 +23,14 @@ public class InsertSiteController {
 	@Autowired
 	private SiteService siteService;
 	
+	@Autowired
+	private CampService campService;
+	
 
 	@PostMapping("/insertSite.controller")
-	public String insertSite(@RequestParam("siteName") String siteName,
-			@RequestParam("sitePicturesPath") MultipartFile mf, @RequestParam("totalSites") String totalSites,
-			@RequestParam("siteMoney") String siteMoney,@RequestParam("campID") int campID, Model m) throws IllegalStateException, IOException {
+	public String insertSite(@RequestParam("siteName")@Nullable String siteName,
+			@RequestParam("sitePicturesPath")@Nullable MultipartFile mf, @RequestParam("totalSites")@Nullable String totalSites,
+			@RequestParam("siteMoney")@Nullable String siteMoney,@RequestParam("campID") int campID, Model m) throws IllegalStateException, IOException {
 
 		// 存錯誤的map
 		Map<String, String> errors = new HashMap<>();
@@ -55,9 +60,26 @@ public class InsertSiteController {
 			errors.put("siteMoney", "必須輸入營位金額");
 		}
 
+		
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
-			return "redirect:/t4_24camp/admin/InsertSiteForm";
+			Site tmpsite = new Site();
+			tmpsite.setSiteName(siteName);
+			tmpsite.setSitePicturesPath(fileName);
+			tmpsite.setTotalSites(null);
+			if (!totalSites.equals("")) {
+				tmpsite.setTotalSites(Integer.valueOf(totalSites));
+			}
+			tmpsite.setSiteMoney(null);
+			if (!totalSites.equals("")) {
+				tmpsite.setSiteMoney(Integer.valueOf(siteMoney));
+			}
+			tmpsite.setCamp(campService.findCampByID(campID));
+			
+			m.addAttribute("campID", campID);
+			m.addAttribute("errors", errors);
+			
+			return "/t4_24camp/admin/InsertSiteForm";
 		}
 
 		Integer siteID = siteService.AddCamp(siteName, fileName, Integer.valueOf(totalSites), Integer.valueOf(siteMoney), campID);

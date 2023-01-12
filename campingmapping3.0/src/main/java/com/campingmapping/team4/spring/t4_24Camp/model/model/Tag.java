@@ -1,13 +1,10 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "tag")
 @Component
-public class Tag implements Serializable{
+public class Tag {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

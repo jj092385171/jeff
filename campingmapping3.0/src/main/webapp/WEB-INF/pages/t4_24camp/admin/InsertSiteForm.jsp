@@ -31,30 +31,30 @@
 						<tr>
 							<td>營區位名:</td>
 							<td>
-								<input name="siteName" value="${param.siteName}" type="text">
-								<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.siteName}</div>
+								<input name="siteName" value="${site.siteName}" type="text">
+								<div style="color:#FF0000; font-size:60%; display: inline">${errors.siteName}</div>
 							</td>
 						</tr>
 						<tr>
 							<td>選擇營區位圖片:</td>
 							<td>
 								<input name="sitePicturesPath" type="file">
-								<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.sitePictures}
+								<div style="color:#FF0000; font-size:60%; display: inline">${errors.sitePictures}
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>總營位:</td>
 							<td>
-								<input name="totalSites" value="${param.totalSites}" type="text">
-								<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.totalSites}</div>
+								<input name="totalSites" value="${site.totalSites}" type="text">
+								<div style="color:#FF0000; font-size:60%; display: inline">${errors.totalSites}</div>
 							</td>
 						</tr>
 						<tr>
 							<td>營位金額:</td>
 							<td>
-								<input name="siteMoney" value="${param.siteMoney}" type="text">
-								<div style="color:#FF0000; font-size:60%; display: inline">${ErrorMsg.siteMoney}</div>
+								<input name="siteMoney" value="${site.siteMoney}" type="text">
+								<div style="color:#FF0000; font-size:60%; display: inline">${errors.siteMoney}</div>
 							</td>
 						</tr>
 						<tr>

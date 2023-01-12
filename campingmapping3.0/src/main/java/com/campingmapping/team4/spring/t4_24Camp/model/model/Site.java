@@ -1,7 +1,5 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "site")
 @Component
-public class Site implements Serializable{
+public class Site {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

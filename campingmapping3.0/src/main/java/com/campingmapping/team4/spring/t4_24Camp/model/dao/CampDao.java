@@ -24,6 +24,10 @@ public class CampDao {
 
 	@Autowired
 	private SessionFactory factory;
+	@Autowired
+	private CityDao cityDao;
+	@Autowired
+	private TagDao tagDao;
 
 	// 新增營地
 	public int addCamp(String campName, Integer cityID, String location, String campPicturesPath, String description,
@@ -35,10 +39,10 @@ public class CampDao {
 			Tag tag = session.get(Tag.class, tagID);
 			tags.add(tag);
 		}
-
+		City city00 = cityDao.findCityByID(cityID);
 		Camp camp = new Camp();
 		camp.setCampName(campName);
-		camp.setCity(session.get(City.class, cityID));
+		camp.setCity(city00);
 		camp.setLocation(location);
 		camp.setCampPicturesPath(campPicturesPath);
 		camp.setDescription(description);

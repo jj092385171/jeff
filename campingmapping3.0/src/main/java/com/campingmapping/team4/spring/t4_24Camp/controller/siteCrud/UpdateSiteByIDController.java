@@ -75,7 +75,8 @@ public class UpdateSiteByIDController {
 			}
 			tmpsite.setCamp(campService.findCampByID(campID));
 			
-			m.addAttribute("site", tmpsite);
+			m.addAttribute("errors", errors);
+			
 			return "/t4_24camp/admin/UpdateSiteByIDForm";
 		}
 		
