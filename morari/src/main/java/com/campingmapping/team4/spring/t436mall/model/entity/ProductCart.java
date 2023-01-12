@@ -21,7 +21,7 @@ public class ProductCart {
 	private int cartid;
 	// 購物車編號(pk)
 	@Column(name = "userid")
-	private String userid;
+	private int userid;
 	// 會員 ID(fk)
 	@Column(name = "pdid")
 	private Integer pdid;
@@ -31,6 +31,6 @@ public class ProductCart {
 	// 數量
 	@Column(name = "money")
 	private int money;
-	//總計金額
+	// 總計金額
 
 }

@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.CategoryServiceImpl;
 
 @RestController
+@RequestMapping("/category")
 public class CategoryController {
 
 	@Autowired
 	private CategoryServiceImpl categoryServiceImpl;
 
-	// 新增一筆產品或修改單筆產品
-	@PostMapping("/createorupdata")
+	// 新增一筆產品
+	@PostMapping("/create")
 	public Category createorupdata(@RequestBody Category category) {
 		return categoryServiceImpl.createorupdata(category);
 	}
@@ -42,6 +44,12 @@ public class CategoryController {
 	@DeleteMapping("/persons/{Pdid}")
 	public void deleteByPdid(@PathVariable int Pdid) {
 		categoryServiceImpl.deleteByPdid(Pdid);
+	}
+	
+	// 依Pdid來修改單筆產品
+	@PutMapping("/updateByPdid")
+	public Category updateByPdid(@PathVariable  Category category) {
+		return categoryServiceImpl.updateByPdid(category);
 	}
 	
 	// 根據購買修改庫存

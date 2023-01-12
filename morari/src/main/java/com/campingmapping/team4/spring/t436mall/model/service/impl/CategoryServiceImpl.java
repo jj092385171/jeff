@@ -1,39 +1,61 @@
 package com.campingmapping.team4.spring.t436mall.model.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t436mall.model.dao.repository.CategoryRepository;
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
+import com.campingmapping.team4.spring.t436mall.model.service.CategoryService;
+
 @Service
-public class CategoryServiceImpl {
+@Transactional
+public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	public CategoryRepository cDao;
+	
+	@Autowired
+	public UserRepository uDao;
 
-	// 新增一筆產品或修改單筆產品
+	// 新增一筆產品
+	@Override
 	public Category createorupdata(Category category) {
+		Date now = new Date();
+		category.setPdlastupdate(now);
+		category.setPddate(now);
+		UserProfiles userid = category.getUserprofiles();
+		category.setUserprofiles(userid);
 		return cDao.save(category);
 	}
 
 	// 依Pdid來刪除單筆產品
+	@Override
 	public void deleteByPdid(int id) {
 		cDao.deleteById(id);
 	}
 
 	// 依Pdid來修改單筆產品
-	// public void updateByPdid(Category category) {
-	// cDao.save(category);
-	// }
+	@Override
+	public Category updateByPdid(Category category) {
+		Date now = new Date();
+		category.setPdlastupdate(now);
+		return cDao.save(category);
+	}
 
 	// 依Pdid來搜尋單筆產品
+	@Override
 	public Category selectByPdid(int Pdid) {
 		return cDao.findById(Pdid).orElse(null);
 	}
 
 	// 搜尋所有產品
+	@Override
 	public List<Category> selectAllPd() {
 		return cDao.findAll();
 	}

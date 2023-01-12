@@ -32,7 +32,7 @@ public class ProductOrder {
 	// 訂單編號(pk)
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	@JsonIgnoreProperties("category")
+	@JsonIgnoreProperties("productorder")
 	private UserProfiles userprofiles;
 	// 會員 ID(fk)
 	@Column(name = "privateodstatus")
