@@ -27,17 +27,15 @@ import lombok.NoArgsConstructor;
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "pdid")
 	private Integer pdid;
 	// 產品編號(pk)
 	@Column(name = "userID")
 	private String userID;
 	// 會員 ID(fk)
-	@ManyToOne
-	@JoinColumn(name = "uid")
-	@JsonIgnoreProperties("category")
-	private UserProfiles userprofiles;
+	@Column(name = "uid")
+	private Integer uid;
 	// 產品名稱
 	@Column(name = "pdtitle")
 	private String pdtitle;

@@ -12,30 +12,30 @@ server:
 spring:
   datasource:
 # -------------MSSQL------------- 
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
+    # driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    # url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
 
-    password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
-    username: Team4Admin
+    # password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
+    # username: Team4Admin    
 # -------------MYSQL------------- 
-    # driver-class-name: com.mysql.cj.jdbc.Driver
-    # url: jdbc:mysql://localhost:3306/campDB?serverTimezone=UTC&useSSL=false
-    # password: "MbQeThWmZq4t6w9z$C&F)J@NcRfUjXn2r5u8x!A%D*G-KaPdSgVkYp3s6v9y$B?E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjXn2r"
-    # username: root
-
-
-
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/campDB?serverTimezone=UTC&useSSL=false
+    password: "MbQeThWmZq4t6w9z$C&F)J@NcRfUjXn2r5u8x!A%D*G-KaPdSgVkYp3s6v9y$B?E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjXn2r"
+    username: Team4Admin
   jpa:
     properties:
       hibernate:
-# -------------MYSQL-------------
-        # dialect: org.hibernate.dialect.MySQL8Dialect
-        # '[allow_update_outside_transaction]': true
-        # '[hbm2ddl.auto]': create-drop
 # -------------MSSQL------------- 
-        dialect: org.hibernate.dialect.SQLServer2016Dialect
+    #     dialect: org.hibernate.dialect.SQLServer2016Dialect
+    #     '[allow_update_outside_transaction]': true
+    #     '[hbm2ddl.auto]': update
+    #     '[format_sql]': true
+    # show-sql: true
+# -------------MYSQL-------------
+        dialect: org.hibernate.dialect.MySQL8Dialect
         '[allow_update_outside_transaction]': true
         '[hbm2ddl.auto]': update
+        '[format_sql]': true
     show-sql: true
   servlet:
     multipart:

@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserProfiles implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer uid;
   private String account;
   private String password;
@@ -89,26 +89,6 @@ public class UserProfiles implements UserDetails {
     return true;
   }
 
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Post> post = new LinkedHashSet<Post>();
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<JobBean> job = new LinkedHashSet<JobBean>();
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Initiating> initiatings = new LinkedHashSet<Initiating>();
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Category> categories = new LinkedHashSet<Category>();
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")

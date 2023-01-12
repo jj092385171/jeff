@@ -37,7 +37,7 @@ public class Coupon {
     // couponid
     // ID
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "couponid")
     private Integer couponid;
     // couponcode
@@ -78,11 +78,11 @@ public class Coupon {
     private Date creatdate;
     // show
     // 是否顯示
-    @Column(name = "show")
-    private String show;
+    @Column(name = "showcoupon")
+    private String showcoupon;
     // state
-    @Column(name = "state")
-    private String state;
+    @Column(name = "couponstate")
+    private String couponstate;
     // couponphoto
     // 票券圖案
     @Column(name = "couponphoto")

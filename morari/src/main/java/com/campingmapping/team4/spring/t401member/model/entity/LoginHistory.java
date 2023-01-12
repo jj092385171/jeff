@@ -32,9 +32,9 @@ public class LoginHistory {
 
     // lhid
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lhid")
-    private Integer lhid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "loginhistoryid")
+    private Integer loginhistoryid;
     // uid
     @JsonIgnoreProperties("loginhistory")
     @ManyToOne
@@ -42,14 +42,14 @@ public class LoginHistory {
     private UserProfiles userprofiles;
     // ip
     // IP位置
-    @Column(name = "ip")
-    private String ip;
+    @Column(name = "loginhistoryip")
+    private String loginhistoryip;
     // logindate
     // 登入時間
     @Column(name = "logindate")
     private Date logindate;
     // show
-    @Column(name = "show")
-    private String show;
+    @Column(name = "showloginhistory")
+    private String showloginhistory;
 
 }

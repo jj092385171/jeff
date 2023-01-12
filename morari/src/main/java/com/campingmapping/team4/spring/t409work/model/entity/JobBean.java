@@ -23,14 +23,11 @@ import lombok.NoArgsConstructor;
 public class JobBean {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "rackID")
 	private Integer rackID;// 刊登編號
-
-	@ManyToOne
-	@JoinColumn(name = "uid")
-	private UserProfiles userprofiles;// 會員
-
+	@Column(name = "uid")
+	private Integer uid;// 會員
 	@Column(name = "job")
 	private String job;// 職缺
 	@Column(name = "salary")

@@ -31,7 +31,7 @@ public class CouponWallet {
     // cwid
     // 票券夾ID
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cwid")
     private Integer cwid;
     // uid
@@ -48,10 +48,10 @@ public class CouponWallet {
     private Coupon coupon;
     // state
     // 狀態(1.未使用 2.已使用 3.已過期 4.暫停)
-    @Column(name = "state")
-    private Integer state;
+    @Column(name = "couponwalletstate")
+    private Integer couponwalletstate;
     // show
-    @Column(name = "show")
-    private String show;
+    @Column(name = "showcouponwallet")
+    private String showcouponwallet;
 
 }

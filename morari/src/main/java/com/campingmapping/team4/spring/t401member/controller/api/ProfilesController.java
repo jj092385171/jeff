@@ -30,10 +30,8 @@ public class ProfilesController {
 	public String add(@RequestParam("account") String account,
 			@RequestParam("password") String password) {
 		UserProfiles user = UserProfiles.builder().account(account).password(password).build();
-		Post post = Post.builder().title("123").userprofiles(user).build();
 
 		userRepository.save(user);
-		postRepository.save(post);
 
 		return "message:" + account + "-" + password;
 	}
