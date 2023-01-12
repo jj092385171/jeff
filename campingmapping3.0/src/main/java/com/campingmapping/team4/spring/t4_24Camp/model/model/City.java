@@ -3,7 +3,6 @@ package com.campingmapping.team4.spring.t4_24Camp.model.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +27,7 @@ public class City {
 	@Column(name = "cityName")
 	private String cityName;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city")
 	private Set<Camp>camps = new HashSet<Camp>();
 
 	public City() {

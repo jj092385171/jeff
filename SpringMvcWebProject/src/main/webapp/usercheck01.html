@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UserCheck</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+   $(function(){
+	   $('#send').click(function(){
+		   var username = $('#userAccount').val();
+		   console.log('username:' + username);
+		   
+		   if($.trim(username)==''){
+			   alert('Name is empty');
+			   return;
+		   }
+		   
+		   var params = {"username":'' + username};
+		   
+		   $.ajax({
+			   type:'post',
+			   url:'userscheck.controller',
+			   contentType: 'application/json',
+			   data: JSON.stringify(params),
+			   success: function(data){
+				   console.log('data:' + data);
+				   if(data=='Y'){
+					   $('#result').html("帳號已使用");
+				   }
+				   
+				   if(data=='N'){
+					   $('#result').html("帳號未使用");
+				   }
+			   }
+		   });
+	   });
+   });
+</script>
+</head>
+<body>
+<table>
+   <tr>
+      <td>Account:<input type="text" id="userAccount" name="userAccount"/></td>
+      <td id="result"></td>
+   </tr>
+</table>
+<button id="send">Send</button>
+</body>
+</html>

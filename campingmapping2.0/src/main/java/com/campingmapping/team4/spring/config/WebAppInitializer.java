@@ -1,6 +1,6 @@
 package com.campingmapping.team4.spring.config;
 
-import javax.servlet.Filter;
+//import javax.servlet.Filter;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -26,11 +26,11 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 //		return null;
 	}
 
-	@Override
-	protected Filter[] getServletFilters() {
-		CharacterEncodingFilter cef1 = new CharacterEncodingFilter("UTF-8", true);
-		return new Filter[] {cef1};
-	}
+//	@Override
+//	protected Filter[] getServletFilters() {
+//		CharacterEncodingFilter cef1 = new CharacterEncodingFilter("UTF-8", true);
+//		return new Filter[] {cef1};
+//	}
 
 	
 	

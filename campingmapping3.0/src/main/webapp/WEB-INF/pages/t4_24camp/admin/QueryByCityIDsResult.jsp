@@ -9,8 +9,8 @@
 		</head>
 
 		<body>
-			<<div>
-				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
+			<div>
+				<a href="/campingmapping3.0/indexShowAllCamp.controller"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>
@@ -45,10 +45,8 @@
 							<td>${ cb.city.cityName }</td>
 							<td>${ cb.location }</td>
 							<td>
-								<!-- <td>
-								<img width="80" height="100"
-									src="<c:url value='/T4_24/GetCampImage?id=${cb.campID}'/>" />
-							</td> -->
+								<img width="80" height="100" src="/campingmapping3.0/getCampPicture/${cb.campID}" />
+							</td>
 							<td>${ cb.description }</td>
 							<td>
 								<c:forEach var='tag' items='${cb.tags}'>
@@ -60,10 +58,9 @@
 							<tr>
 								<td>&emsp;&emsp;${ site.siteID }</td>
 								<td>&emsp;${ site.siteName }</td>
-								<!-- <td>&emsp;
-									<img width="80" height="100"
-										src="<c:url value='/T4_24/GetSiteImage?id=${site.siteID}'/>" />
-								</td> -->
+								<td>
+									<img width="80" height="100" src="/campingmapping3.0/getSitePicture1/${site.siteID}" />
+								</td>
 								<td>&emsp;${ site.totalSites }</td>
 								<td>&emsp;${ site.siteMoney }</td>
 							</tr>
@@ -73,11 +70,11 @@
 			</table>
 
 			<div>
-				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
+				<a href="/campingmapping3.0/queryPage.controller">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
+				<a href="/campingmapping3.0/insertPage.controller">&emsp;新增&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
+				<a href="/campingmapping3.0/indexShowAllCamp.controller">回首頁</a>
 			</div>
 
 		</body>

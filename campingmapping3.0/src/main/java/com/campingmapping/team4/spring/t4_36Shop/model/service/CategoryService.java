@@ -7,15 +7,13 @@ import com.campingmapping.team4.spring.t4_36Shop.model.entity.Category;
 
 public interface CategoryService {
 
-	void create(Category category) throws SQLException;
+	Category create(Category category) throws SQLException;
 
-	void delete(int id) throws SQLException;
+	Boolean delete(int id) throws SQLException;
 
-	void update(Category category) throws SQLException;
+	Category update(Category category) throws SQLException, Exception;
 
 	Category select(int id) throws SQLException;
-
-//    Category findImgByPdiD(int id);
 
 	List<Category> selectAll() throws SQLException;
 }

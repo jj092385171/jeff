@@ -21,14 +21,14 @@
 	<header>
 		<h3>修改貼文</h3>
 	</header>
-	<form action="<c:url value='/T4_33/updatePostServlet' />" method="POST">
+	<form action="updatePost" method="POST">
 		<div>
 			<label>*標題</label>
-			<input type="text" name="title" maxlength="30" size="80" required="required" value="${title}">
+			<input type="text" name="title" maxlength="30" size="80" required="required" value="${resultPost.title}">
 		</div>
 		<div>
 			<label>*內容</label>
-			<textarea name="content" id="" cols="66" rows="10" required="required">${content}</textarea>
+			<textarea name="content" id="" cols="66" rows="10" required="required">${resultPost.content}</textarea>
 		</div>
 <!-- 		<div> -->
 <!-- 			<label>修改照片</label> -->
@@ -41,34 +41,42 @@
 		</div>
 		<div>
 			<label>露營費用</label>
-			<input type="number" name="price" value="${price}" min="1" >
+			<input type="hidden" id="priceId" value="${resultPost.price}">
+			<input type="number" name="price" id="price" min="1">
 		</div>
 		<div>
 			<label>露營城市</label>
-			<input type="hidden" name="" id="countyId" value="${county}">
+			<input type="hidden" name="" id="countyId" value="${resultPost.county}">
 			<select name="county" id="county"></select>
 		</div>
 		<div>
 			<label>開始露營日期</label>
-			<input type="date" name="startDate" id="startDate" value="${startDate}">
+			<input type="hidden" id="startDateId" value="${resultPost.startDate}">			
+			<input type="date" name="startDate" id="startDate">
 		</div>
 		<div>
 			<label>結束露營日期</label>
-			<input type="date" name="endDate" id="endDate" value="${endDate}">
+			<input type="hidden" id="endDateId" value="${resultPost.endDate}">
+			<input type="date" name="endDate" id="endDate">
 		</div>
 		<div>
 			<label>評分</label>
 			<select name="score" id="score"></select>
 		</div>
 		<div>
-			<input type="hidden" name="postId" value="${postId}">
+			<input type="hidden" name="postId" value="${resultPost.postId}">
 			<input type="submit" value="修改完成" onclick="return confirm('是否確定修改?');">
+			<input type="button" value="回上一頁" onclick="history.back()">
 		</div>
 	</form>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 	<script>
 		function show(){
 			showPeople();
+			showPrice();
 			showCounty();
+			showStartDate();
+			showEndDate();
 			showScore();
 		}
 				
@@ -82,10 +90,17 @@
 				option = document.createElement("option");
 				option.value = i;
 				option.innerHTML = i;
-				if(i == ${people}){
+				if(i == ${resultPost.people}){
 					option.selected = "selected";
 				}
 				document.getElementById("people").appendChild(option);
+			}
+		}
+		
+		function showPrice(){
+			var priceId = document.getElementById("priceId").value;
+			if(priceId > 0){
+				document.getElementById("price").value = priceId;
 			}
 		}
 			
@@ -111,6 +126,16 @@
 			}
 		}
 		
+		function showStartDate() {
+			let date = moment(Date.parse(document.getElementById("startDateId").value)).format('YYYY-MM-DD');
+			document.getElementById("startDate").value = date;
+		}
+		
+		function showEndDate() {
+			let date = moment(Date.parse(document.getElementById("endDateId").value)).format('YYYY-MM-DD');
+			document.getElementById("endDate").value = date;
+		}
+		
 		function showScore(){
 			var scoreMax = 5;
 			var option = document.createElement("option");
@@ -122,7 +147,7 @@
 				option = document.createElement("option");
 				option.value = i;
 				option.innerHTML = i;
-				if(i == ${score}){
+				if(i == ${resultPost.score}){
 					option.selected = "selected";
 				}
 				document.getElementById("score").appendChild(option);

@@ -11,7 +11,7 @@
 
 		<body>
 			<div>
-				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
+				<a href="/campingmapping3.0/indexShowAllCamp.controller"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>
@@ -24,6 +24,8 @@
 						<th>營區位圖片</th>
 						<th>總營位</th>
 						<th>營位金額</th>
+						<th>更新</th>
+						<th>刪除</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,20 +33,19 @@
 						<tr>
 							<td>${ site.siteID }</td>
 							<td>${ site.siteName }</td>
-							<!-- <td> 
-								<img width="80" height="100"
-									src="<c:url value='/T4_24/GetSiteImage?id=${site.siteID}'/>" />
-							</td>  -->
+							<td>
+								<img width="80" height="100" src="/campingmapping3.0/getSitePicture1/${site.siteID}" />
+							</td>
 							<td>${ site.totalSites }</td>
 							<td>${ site.siteMoney }</td>
 							<td>
-								<form action="<c:url value='/PageUpadteSiteByIDServlet'/>" method="POST">
+								<form action="../upadteSitePage.controller" method="POST">
 									<button onclick="return check()" type="submit" name="siteID"
 										value="${site.siteID }">更新</button>
 								</form>
 							</td>
 							<td>
-								<form action="<c:url value='/DeleteCampByIDServlet.do'/>" method="POST">
+								<form action="deleteSiteByID.controller" method="POST">
 									<button id="a" onclick="return check()" type="submit" name="siteID"
 										value="${site.siteID }">刪除</button>
 								</form>
@@ -57,11 +58,11 @@
 			<hr>
 
 			<div>
-				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
+				<a href="/campingmapping3.0/queryPage.controller">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
+				<a href="/campingmapping3.0/insertPage.controller">&emsp;新增&emsp;營地_營區位</a>
 				<br>
-				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
+				<a href="/campingmapping3.0/indexShowAllCamp.controller">回首頁</a>
 			</div>
 
 

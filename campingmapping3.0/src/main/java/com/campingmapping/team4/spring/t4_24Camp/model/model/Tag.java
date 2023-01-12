@@ -50,8 +50,6 @@ public class Tag {
 		this.tagName = tagName;
 	}
 
-	
-
 	public Set<Camp> getCamps() {
 		return camps;
 	}

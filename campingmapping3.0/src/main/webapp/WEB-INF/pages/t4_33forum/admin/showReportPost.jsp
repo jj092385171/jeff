@@ -34,7 +34,7 @@
 
 <body>
 	<h3 class="titleh3">被檢舉的貼文</h3>
-	<form action="<c:url value='/T4_33/showForumManagerServlet' />" method="POST" id="postForm">
+	<form action="showAllPostAdmin">
         <input type="submit" value="回管理者首頁">
     </form>    
         <table>
@@ -78,8 +78,8 @@
         			<td>
         				<form method="POST">
         				<input type="hidden" name="postId" value="${postReportList.postId}">
-        				<input type="submit" formaction="<c:url value='/T4_33/hidePostServlet' />" value="隱藏貼文">
-        				<input type="submit" formaction="<c:url value='/T4_33/cancelReportPostServlet' />" value="取消檢舉貼文">
+        				<input type="submit" formaction="hidePost" value="隱藏貼文" onclick="return confirm('是否確定隱藏貼文?');">
+        				<input type="submit" formaction="cancelReportPost" value="取消檢舉貼文" onclick="return confirm('是否確定取消檢舉貼文?');">
         				</form>
         			</td>
         		</tr>
