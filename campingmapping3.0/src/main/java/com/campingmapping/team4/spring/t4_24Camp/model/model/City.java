@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,27 +19,27 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "city")
 @Component
-public class City {
+public class City implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cityID")
-	private Integer cityID;
+	private int cityID;
 	
 	@Column(name = "cityName")
 	private String cityName;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city")
 	private Set<Camp>camps = new HashSet<Camp>();
 
 	public City() {
 	}
 
-	public Integer getCityID() {
+	public int getCityID() {
 		return cityID;
 	}
 
-	public void setCityID(Integer cityID) {
+	public void setCityID(int cityID) {
 		this.cityID = cityID;
 	}
 

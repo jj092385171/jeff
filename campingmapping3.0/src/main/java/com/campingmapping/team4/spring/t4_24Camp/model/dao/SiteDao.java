@@ -1,28 +1,42 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.dao;
 
-import java.sql.Blob;
+import java.io.Serializable;
 import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Camp;
 import com.campingmapping.team4.spring.t4_24Camp.model.model.Site;
 
 
-
+@Repository
+@Transactional
 public class SiteDao {
 	
 	@Autowired
 	private SessionFactory factory;
 
 	
-	//新增
-	public Site AddCamp(Site site) {
+	//新增營區位
+	public Integer AddCamp(String siteName, String sitePicturesPath, int totalSites, int siteMoney, int campID) {
 		Session session = factory.openSession();
-		session.save(site);
-		return site;
+		
+		Site site = new Site();
+		site.setSiteName(siteName);
+		site.setSitePicturesPath(sitePicturesPath);
+		site.setTotalSites(totalSites);
+		site.setSiteMoney(siteMoney);
+		site.setCamp(session.get(Camp.class, campID));
+		
+		Serializable siteID = session.save(site);
+		session.flush();
+		
+		session.close();
+		return (Integer)siteID;
 	}
 	
 	//透過campID查site
@@ -30,14 +44,10 @@ public class SiteDao {
 		Session session = factory.openSession();
 		Camp camp = session.get(Camp.class, campID);
 		
-		if(camp != null ) {
-			Set<Site> sites = camp.getSites();
-				if(sites != null) {
-					return sites;
-				}
-		}
+		Set<Site> sites = camp.getSites();
 		
-		return null;
+		session.close();
+		return sites;
 	}
 	
 	//透過siteID查詢site
@@ -45,28 +55,25 @@ public class SiteDao {
 		Session session = factory.openSession();
 		Site site = session.get(Site.class, siteID);
 		
-		if(site != null) {
-			return site;
-		}
-		
-		return null;
+		session.close();
+		return site;
 	}
 	
 	//更新營區位
-	public Site updateBySiteID(int siteID, String siteName, Blob sitePictures, int totalSites, int siteMoney) {
+	public Site updateBySiteID(int siteID, String siteName, String sitePicturesPath, int totalSites, int siteMoney) {
 		Session session = factory.openSession();
 		Site site = session.get(Site.class, siteID);
 		
 		if(site != null) {
 			site.setSiteName(siteName);
-			site.setSitePictures(sitePictures);
+			site.setSitePicturesPath(sitePicturesPath);
 			site.setTotalSites(totalSites);
 			site.setSiteMoney(siteMoney);
 			
-			return site;
+			session.flush();
 	    }
-		
-		return  null;
+		session.close();
+		return site;
     }
 	
 	//刪除營區地
@@ -75,10 +82,14 @@ public class SiteDao {
 		Site site = session.get(Site.class, siteID);
 			
 		if(site != null) {
+			site.setCamp(null);
 			session.delete(site);
+			
+			session.flush();
+			session.close();
 			return true;
 		}
-		
+		session.close();
 		return false;
 	}
 

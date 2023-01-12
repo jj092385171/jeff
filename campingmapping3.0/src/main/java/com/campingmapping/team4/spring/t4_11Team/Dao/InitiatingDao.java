@@ -25,5 +25,5 @@ public interface InitiatingDao {
 	
 	public List<Initiating> selectAllMember();
 	
-
+	public Initiating findById(int initiatingnum); 
 }

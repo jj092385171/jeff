@@ -32,8 +32,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver irvr = new InternalResourceViewResolver();
-		irvr.setPrefix("/WEB-INF/pages/");
-		irvr.setSuffix(".jsp");
+		irvr.setPrefix("/WEB-INF/pages/t4_11team/");
+		irvr.setSuffix(".html");
 		return irvr;
 	}
 
@@ -45,8 +45,9 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "membersmain.controller");
-		registry.addViewController("/funny.action").setViewName("form");
+		registry.addViewController("/").setViewName("t4_24camp/admin/CampIndex");
+//		registry.addRedirectViewController("/", "membersmain.controller");
+//		registry.addViewController("/funny.action").setViewName("form");
 	}
 	
 	@Bean

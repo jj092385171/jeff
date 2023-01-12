@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,36 +24,36 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "camp")
 @Component
-public class Camp {
+public class Camp implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "campID")
-	private Integer campID;
+	private int campID;
 	
 	@Column(name = "campName")
 	private String campName;
 	
 	@ManyToOne
-	@JoinColumn(name = "fk_cityID")
+	@JoinColumn(name = "fkCityID")
 	private City city;
 	
 	@Column(name = "location")
 	private String location;
 	
-	@Column(name = "campPictures")
-	private java.sql.Blob campPictures;
+	@Column(name = "campPicturesPath")
+	private String campPicturesPath;
 	
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "TagOfCamp",
-	joinColumns = {@JoinColumn(name = "fk_campID", referencedColumnName = "campID")},
-	inverseJoinColumns = {@JoinColumn(name = "fk_tagID", referencedColumnName = "tagID")})
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tagOfCamp",
+	joinColumns = {@JoinColumn(name = "fkCampID", referencedColumnName = "campID")},
+	inverseJoinColumns = { @JoinColumn(name = "fkTagID", referencedColumnName = "tagID")})
 	private Set<Tag> tags = new HashSet<>();
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
 	private Set<Site> sites = new HashSet<Site>();
 
 
@@ -60,11 +61,11 @@ public class Camp {
 	}
 
 	
-	public Integer getCampID() {
+	public int getCampID() {
 		return campID;
 	}
 
-	public void setCampID(Integer campID) {
+	public void setCampID(int campID) {
 		this.campID = campID;
 	}
 
@@ -94,18 +95,18 @@ public class Camp {
 		this.location = location;
 	}
 
-	public java.sql.Blob getCampPictures() {
-		return campPictures;
+	public String getCampPicturesPath() {
+		return campPicturesPath;
 	}
 
-	public void setCampPictures(java.sql.Blob campPictures) {
-		this.campPictures = campPictures;
+
+	public void setCampPicturesPath(String campPicturesPath) {
+		this.campPicturesPath = campPicturesPath;
 	}
 
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
