@@ -45,6 +45,7 @@ public class UserProfiles implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer uid;
+
   private String account;
   private String password;
 
