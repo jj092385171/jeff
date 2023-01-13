@@ -35,7 +35,8 @@ public class JobWorkController2 {
 		m.addAttribute("showAllJob", showAllJob);
 		return "t4_09job/job/JobModel/showAll";
 	}
-
+	
+	//秀圖片
 	@GetMapping(path = "/img.controller/{id}")
 	@ResponseBody
 	public byte[] processAction2(@PathVariable("id") String rackID, HttpServletRequest request,
