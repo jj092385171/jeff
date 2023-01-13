@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.entity.City;
@@ -31,7 +30,7 @@ public class IndexShowCampsController {
 	@Autowired
 	private TagService tagService;
 
-	@GetMapping("indexShowAllCamp.controller")
+	@GetMapping("/indexShowAllCamp.controller")
 	@ResponseBody
 	public Map<String, Object> processAction(Model m) {
 		List<Camp> allCamps = campService.findAll();
