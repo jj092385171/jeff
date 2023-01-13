@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery05</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON('jsoncreator3.controller', function (data) {
+                var resultText = '';
+
+                for (var i = 0; i < data.length; i++) {
+                    resultText += data[i].houseid + " " + data[i].housename + "<br/>";
+                }
+
+                $('#result').html(resultText);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="result"></div>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.post('jsoncreator5.controller', function (data) {
+                console.log(data);
+                console.log(data.houseid + " " + data.housename);
+                $('#result').html(data.houseid + " " + data.housename);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="result"></div>
+</body>
+
+</html>

@@ -3,19 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>promise02</title>
+    <title>asyncNawait01</title>
     <script type="text/javascript">
         window.onload = function () {
-            var promise = new Promise(function (resolve, reject) {
-                setTimeout(function () {
-                    resolve('nice to meet you');
-                }, 3000);
-            });
+            async function play() {
+                return "play for fun";
+            }
 
-            promise.then(function (msg) {
+            play().then(function (msg) {
                 document.getElementById('result').innerHTML = msg;
             });
-        };
+        }
     </script>
 </head>
 
