@@ -2,14 +2,19 @@ package com.campingmapping.team4.spring.t436mall.model.entity;
 
 import java.util.Date;
 
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "category")
 public class Category {
 
@@ -26,8 +32,12 @@ public class Category {
 	@Column(name = "id")
 	private Integer id;
 	// 產品編號(pk)
-	@Column(name = "userid")
-	private Integer userid;
+//	@Column(name = "userid")
+//	private Integer userid;
+	@ManyToOne
+	@JoinColumn(name = "userid")
+	@JsonIgnore
+	private UserProfiles userprofiles;// 會員
 	// 會員 ID
 	@Column(name = "pdname")
 	private String pdname;

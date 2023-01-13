@@ -15,38 +15,38 @@ import com.campingmapping.team4.spring.t436mall.model.service.ProductCartService
 public class ProductCartServiceImpl implements ProductCartService {
 
 	@Autowired
-	public ProductCartRepository pDao;
+	public ProductCartRepository pcDao;
 
 	// 依userid新增一筆購物車資料
 	@Override
 	public ProductCart create(ProductCart productcart) {
-		return pDao.save(productcart);
+		return pcDao.save(productcart);
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@Override
 	public ProductCart updataById(ProductCart productcart) {
-		return pDao.save(productcart);
+		return pcDao.save(productcart);
 	}
 	// 清空購物車
 	@Override
 	public void deleteByUserId(int id) {
-		pDao.deleteById(id);
+		pcDao.deleteById(id);
 	}
 	// 結帳->新增訂單
 	@Override
 	public void checkout(int id) {
 		// 須先加上建立訂單
-		pDao.deleteById(id);
+		pcDao.deleteById(id);
 	}
 	// 依userID查詢購物車資料
 	@Override
 	public List<ProductCart> selectAllByUserId(Integer userid) {
-		return pDao.findByUserID(userid);
+		return pcDao.findByUserid(userid);
 	}
 	// 查詢購物車所有資料(後台)
 	@Override
 	public List<ProductCart> selectAll() {
-		return pDao.findAll();
+		return pcDao.findAll();
 	}
 
 }

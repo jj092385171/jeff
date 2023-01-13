@@ -6,7 +6,7 @@ import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 
 public interface CategoryService {
 
-	public Category create(Category category);
+	public Category create(Category category ,Integer uid);
 
 	public void deleteByPdid(int id);
 

@@ -16,46 +16,46 @@ import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.CategoryServiceImpl;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/Category")
 public class CategoryController {
 
 	@Autowired
-	private CategoryServiceImpl categoryServiceImpl;
+	private CategoryServiceImpl cServiceImpl;
 
 	// 新增一筆產品
-	@PostMapping("/create")
-	public Category create(@RequestBody Category category) {
-		return categoryServiceImpl.create(category);
+	@PostMapping("/create/{uid}")
+	public Category create(@RequestBody Category category ,@PathVariable int uid) {	
+		return cServiceImpl.create(category ,uid);
 	}
 	
 	// 搜尋所有產品
 	@GetMapping("/selectAllPd")
 	public List<Category> selectAllPd() {
-		return categoryServiceImpl.selectAll();
+		return cServiceImpl.selectAll();
 	}
 	
 	// 依Pdid來搜尋單筆產品
 	@GetMapping("/getPersonById/{Pdid}")
 	public Category getPersonById(@PathVariable int Pdid) {
-		return categoryServiceImpl.selectByPdid(Pdid);
+		return cServiceImpl.selectByPdid(Pdid);
 	}
 
 	// 依Pdid來刪除單筆產品
 	@DeleteMapping("/persons/{Pdid}")
 	public void deleteByPdid(@PathVariable int Pdid) {
-		categoryServiceImpl.deleteByPdid(Pdid);
+		cServiceImpl.deleteByPdid(Pdid);
 	}
 	
 	// 依Pdid來修改單筆產品
 	@PutMapping("/updateByPdid")
 	public Category updateByPdid(@RequestBody  Category category) {
-		return categoryServiceImpl.updateByPdid(category);
+		return cServiceImpl.updateByPdid(category);
 	}
 	
 	// 根據購買減少庫存
 	@PutMapping("/updateBuy/")
 	public void updateBuy(@RequestBody List<Category> category) {
-		categoryServiceImpl.updateBuy(category);
+		cServiceImpl.updateBuy(category);
 	}
 
 }
