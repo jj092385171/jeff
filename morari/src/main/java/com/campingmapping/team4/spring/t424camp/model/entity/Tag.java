@@ -1,7 +1,12 @@
 package com.campingmapping.team4.spring.t424camp.model.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,16 +18,18 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tag")
-public class Tag {
+@Component
+public class Tag implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "tagID")
+	@Column(name = "TAGID")
 	private Integer tagID;
 
-	@Column(name = "tagName")
+	@Column(name = "TAGNAME")
 	private String tagName;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "tags")
 	private Set<Camp> camps = new HashSet<>();
 

@@ -1,10 +1,15 @@
 package com.campingmapping.team4.spring.t424camp.model.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,43 +21,68 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import jakarta.persistence.Entity;
-
 @Entity
 @Table(name = "camp")
-public class Camp {
+@Component
+public class Camp implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "campID")
+	@Column(name = "CAMPID")
 	private Integer campID;
 
-	@Column(name = "campName")
+	@Column(name = "CAMPNAME")
 	private String campName;
 
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "fk_cityID")
+	@JoinColumn(name = "FKCITYID")
 	private City city;
 
-	@Column(name = "location")
+	@Column(name = "LOCATION")
 	private String location;
 
-	@Column(name = "campPictures")
-	private java.sql.Blob campPictures;
+	@Column(name = "CAMPPICTURESPATH")
+	private String campPicturesPath;
 
-	@Column(name = "description")
+	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "TagOfCamp", joinColumns = {
-			@JoinColumn(name = "fk_campID", referencedColumnName = "campID") }, inverseJoinColumns = {
-					@JoinColumn(name = "fk_tagID", referencedColumnName = "tagID") })
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tagofcamp", joinColumns = {
+			@JoinColumn(name = "FKCAMPID", referencedColumnName = "CAMPID") }, inverseJoinColumns = {
+					@JoinColumn(name = "FKTAGID", referencedColumnName = "TAGID") })
 	private Set<Tag> tags = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp", cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
 	private Set<Site> sites = new HashSet<Site>();
 
 	public Camp() {
+	}
+
+	public Camp(Integer campID, String campName, City city, String location, String campPicturesPath,
+			String description, Set<Tag> tags) {
+		super();
+		this.campID = campID;
+		this.campName = campName;
+		this.city = city;
+		this.location = location;
+		this.campPicturesPath = campPicturesPath;
+		this.description = description;
+		this.tags = tags;
+	}
+
+	public Camp(String campName, City city, String location, String campPicturesPath, String description,
+			Set<Tag> tags) {
+		super();
+		this.campName = campName;
+		this.city = city;
+		this.location = location;
+		this.campPicturesPath = campPicturesPath;
+		this.description = description;
+		this.tags = tags;
 	}
 
 	public Integer getCampID() {
@@ -87,12 +117,12 @@ public class Camp {
 		this.location = location;
 	}
 
-	public java.sql.Blob getCampPictures() {
-		return campPictures;
+	public String getCampPicturesPath() {
+		return campPicturesPath;
 	}
 
-	public void setCampPictures(java.sql.Blob campPictures) {
-		this.campPictures = campPictures;
+	public void setCampPicturesPath(String campPicturesPath) {
+		this.campPicturesPath = campPicturesPath;
 	}
 
 	public String getDescription() {

@@ -9,6 +9,8 @@ server:
     context-path: /morari
     encoding:
       charset: UTF-8
+      
+  
 spring:
   datasource:
 # -------------MSSQL------------- 
@@ -43,13 +45,13 @@ spring:
 #      enabled: true
 #      max-file-size: 128KB
 #      max-request-size: 128KB
-  thymeleaf:
-    prefix: classpath:/templates/
-  web:
-    resources:
-      cache:
-        period: 0
-      static-locations: classpath:/static/
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#  web:
+#    resources:
+#      cache:
+#        period: 0
+#      static-locations: classpath:/static/
   # cloud:
   #   azure:
   #     storage:
@@ -57,3 +59,5 @@ spring:
   #         account-name: eteam4eit56blobdb
   #         account-key: DefaultEndpointsProtocol=https;AccountName=eteam4eit56blobdb;AccountKey=gcDS9D5Ckpz6kfr/xgUjG2Nyg6JYNn65t74VEzWjRW7bjAca+W6epPfD7/JCZ41mOR+muUWygyKw+AStTWI9QQ==;EndpointSuffix=core.windows.net
   #         endpoint: https://eteam4eit56blobdb.blob.core.windows.net/
+  main:
+    allow-circular-references: true
