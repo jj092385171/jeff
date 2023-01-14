@@ -2,33 +2,33 @@
 <html lang="zh-TW">
 
 <head>
-  <script src="guest/js/head.js"></script>
-  <!-- sharepage 公用頁面 -->
-  <script src="guest/js/share.js"></script>
+	<script src="../guest/js/head.js"></script>
+	<!-- sharepage 公用頁面 -->
+	<script src="../guest/js/share.js"></script>
 
 </head>
 
 <body style="display: none" onload="show()">
-  <!-- Header Section Start -->
-  <div class="header"></div>
+	<!-- Header Section Start -->
+	<div class="header"></div>
 
-  <!-- Header Section End -->
-
-
-
-
-
-  <!-- 分離範例 -->
-<!--   <div class="test"></div> -->
-  <a href="/morari/forum/showInsert.controller">新增貼文</a>
-  <script src="forum/js/test.js"></script>
-  <script src="forum/js/newpost.js"></script>
+	<!-- Header Section End -->
 
 
 
 
-  <!-- 我自己的東西 -->
-  <h3>新增貼文</h3>
+
+	<!-- 分離範例 -->
+	<!--   <div class="test"></div> -->
+	<a href="/morari/forum/showInsert.controller">新增貼文</a>
+	<!-- <script src="forum/js/test.js"></script> -->
+	<!-- <script src="forum/js/newpost.js"></script> -->
+
+
+
+
+	<!-- 我自己的東西 -->
+	<h3>新增貼文</h3>
 	<form action="insertPost" method="POST">
 		<div>
 			<label for="">*標題</label>
@@ -81,53 +81,83 @@
 
 
 
-  <!-- Footer Section Start -->
-  <div class="footer"></div>
-  <!-- Footer Section End -->
+	<!-- Footer Section Start -->
+	<div class="footer"></div>
+	<!-- Footer Section End -->
 
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-  
-  
-  
-  
-  
-  
-  <!-- 我自己的東西 -->
-  <script>
-		$(document).ready(function(){
-			
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Vendor JavaScript File -->
+	<script src="../guest/vendor/jquery/jquery.min.js"></script>
+	<script src="../guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+	<script src="../guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+	<script src="../guest/vendor/easing/easing.min.js" defer></script>
+	<script src="../guest/vendor/stickyjs/sticky.js" defer></script>
+	<script src="../guest/vendor/superfish/hoverIntent.js" defer></script>
+	<script src="../guest/vendor/superfish/superfish.min.js" defer></script>
+	<script src="../guest/vendor/wow/wow.min.js" defer></script>
+	<script src="../guest/vendor/slick/slick.min.js" defer></script>
+	<script src="../guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+	<script src="../guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+	<script src="../guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+	<!-- Booking Javascript File -->
+	<script src="../guest/js/jqBootstrapValidation.min.js" defer></script>
+	<script src="../guest/js/booking.js" defer></script>
+
+	<!-- Main Javascript File -->
+	<script src="../guest/js/main.js" defer></script>
+
+	<!-- 我自己的東西 -->
+	<script>
+		$(document).ready(function () {
+
 		});
-	
-		function show(){
+
+		function show() {
 			showPeople();
 			showCounty();
 			showScore();
 		}
-		
+
 		function showPeople() {
 			var peopleMax = 10;
 			for (let i = 1; i <= peopleMax; i++) {
-			var option = document.createElement("option");
-			option.value = i;
-			option.innerHTML = i;
-			document.getElementById("people").appendChild(option);
+				var option = document.createElement("option");
+				option.value = i;
+				option.innerHTML = i;
+				document.getElementById("people").appendChild(option);
 			}
 		}
-				
-		function showCounty(){
-			var countyInner = ["台北市", "新北市", "基隆市", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣", 
+
+		function showCounty() {
+			var countyInner = ["台北市", "新北市", "基隆市", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣",
 				"雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"];
 			var countyValue = ["TPE", "TPH", "KLU", "TYC", "HSH", "HSC", "MAL", "TXG", "CWH", "NTO", "YLH", "CHY", "CYI",
 				"TNN", "KHH", "IUH", "ILN", "HWA", "TTT", "PEH", "KMN", "LNN"];
-			for(let i = 0; i < countyInner.length; i++){
+			for (let i = 0; i < countyInner.length; i++) {
 				var option = document.createElement("option");
 				option.value = countyValue[i];
 				option.innerHTML = countyInner[i];
 				document.getElementById("county").appendChild(option);
 			}
 		}
-				
-		function showScore(){
+
+		function showScore() {
 			var scoreMax = 5;
 			for (let i = 1; i <= scoreMax; i++) {
 				var option = document.createElement("option");
@@ -136,35 +166,7 @@
 				document.getElementById("score").appendChild(option);
 			}
 		}
-  </script>
-  
-  
-  
-  
-  
-  
-
-
-  <!-- Vendor JavaScript File -->
-  <script src="guest/vendor/jquery/jquery.min.js" defer></script>
-  <script src="guest/vendor/jquery/jquery-migrate.min.js" defer></script>
-  <script src="guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
-  <script src="guest/vendor/easing/easing.min.js" defer></script>
-  <script src="guest/vendor/stickyjs/sticky.js" defer></script>
-  <script src="guest/vendor/superfish/hoverIntent.js" defer></script>
-  <script src="guest/vendor/superfish/superfish.min.js" defer></script>
-  <script src="guest/vendor/wow/wow.min.js" defer></script>
-  <script src="guest/vendor/slick/slick.min.js" defer></script>
-  <script src="guest/vendor/tempusdominus/js/moment.min.js" defer></script>
-  <script src="guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
-  <script src="guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
-
-  <!-- Booking Javascript File -->
-  <script src="guest/js/booking.js" defer></script>
-  <script src="guest/js/jqBootstrapValidation.min.js" defer></script>
-
-  <!-- Main Javascript File -->
-  <script src="guest/js/main.js" defer></script>
+	</script>
 
 
 </body>
