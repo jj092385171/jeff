@@ -60,6 +60,7 @@ public class WorkPageController {
 	}
 
 	// 處理照片格式(進資料庫)
+	@PostMapping("/fileToBlob.controller")
 	public void processImgAction(@RequestParam("img") MultipartFile img) throws IOException {
 		JobBean jBean = new JobBean();
 		InputStream in = img.getInputStream();
@@ -72,32 +73,32 @@ public class WorkPageController {
 		}
 	}
 
-	// 還未寫完
+	//新增
 	@GetMapping("/jobInsert.controller")
 	@ResponseBody
 	public void processInsertAction2(@RequestBody JobBean jobBean) {
-		JobBean jBean = new JobBean();
+//		JobBean jBean = new JobBean();
 		UserProfiles u = new UserProfiles();
 		u.setUid(1);
-		jBean.setUserprofiles(u);	
-		jBean.setDate(jobBean.getDate());
-		jBean.setRackUp(jobBean.getRackUp());
-		jBean.setRackDown(jobBean.getRackDown());
-		jBean.setJob(jobBean.getJob());
-		jBean.setPlace(jobBean.getPlace());
-		jBean.setQuantity(jobBean.getQuantity());
-	//	jBean.setImg(jobBean.getImg());
-		jBean.setRemark(jobBean.getRemark());
-		jBean.setSalary(jobBean.getSalary());
-		jBean.setTime(jobBean.getTime());
-		jBean.setSalary(jobBean.getSalary());
-		
-		jService.insert(jBean);
-
+		jobBean.setUserprofiles(u);	
+//		jBean.setDate(jobBean.getDate());
+//		jBean.setRackUp(jobBean.getRackUp());
+//		jBean.setRackDown(jobBean.getRackDown());
+//		jBean.setJob(jobBean.getJob());
+//		jBean.setPlace(jobBean.getPlace());
+//		jBean.setQuantity(jobBean.getQuantity());
+//		jBean.setImg(jobBean.getImg());
+//		jBean.setRemark(jobBean.getRemark());
+//		jBean.setSalary(jobBean.getSalary());
+//		jBean.setTime(jobBean.getTime());
+//		jBean.setSalary(jobBean.getSalary());
+//		
+		jService.insert(jobBean);
 	}
 
 	// 找全部
 	@GetMapping("/jobShowAll.controller")
+	@ResponseBody
 	public List<JobBean> processShowJobAllAction() {
 		List<JobBean> result = jService.findAll();
 		return result;
@@ -115,11 +116,10 @@ public class WorkPageController {
 	}
 
 	// 刪除
-	@GetMapping("/jobDelete.controller")
-	public String processDeleteAction(@RequestParam("de") String rackID) {
-		int parseID = Integer.parseInt(rackID);
-		jService.deleteById(parseID);
-		return "ok";
+	@PostMapping("/jobDelete.controller")
+	public boolean processDeleteAction(@RequestParam("de") Integer rackID) {
+		jService.deleteById(rackID);
+		return true;
 	}
 
 	// 模糊搜尋
@@ -146,17 +146,21 @@ public class WorkPageController {
 
 	// 透過rackid找資料後給前端修改
 	@PostMapping("/selectRackId.controller")
+	@ResponseBody
 	public JobBean processAction4(@RequestParam("up") Integer rackID) {
 		JobBean result = jService.findById(rackID);
 		return result;
 	}
 
 	// 修改
-	// 還未寫完,圖片在這裡轉成byte
-	@GetMapping("/jobUpdate.controller")
+	// 還未寫完
+	@PostMapping("/jobUpdate.controller")
 	@ResponseBody
 	public JobBean processUpdateAction(@RequestBody JobBean jBean) {
-		jService.insert(jBean);
+		UserProfiles u = new UserProfiles();
+		u.setUid(1);
+		jBean.setUserprofiles(u);	
+		jService.updateJob(jBean);
 		return jBean;
 	}
 }

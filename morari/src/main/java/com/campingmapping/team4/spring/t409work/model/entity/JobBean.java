@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +29,7 @@ public class JobBean {
 	private Integer rackID;// 刊登編號
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
 
@@ -47,9 +49,9 @@ public class JobBean {
 	private Blob img;// 圖片
 	@Column(name = "remark")
 	private String remark;// 備註
-	@Column(name = "rackUp")
+	@Column(name = "rackup")
 	private Date rackUp;// 上架日期
-	@Column(name = "rackDown")
+	@Column(name = "rackdown")
 	private Date rackDown;// 下架日期
 
 }
