@@ -21,12 +21,15 @@ public class PostComment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "postCommentId")
 	private Integer postCommentId;
+	
 	@ManyToOne
 	@JoinColumn(name = "postId")
 	private Post post;
+	
 	// @ManyToOne
 	// @JoinColumn(name="userId")
 	// private Member member;
+	
 	@Column(name = "postComment")
 	private String postComment;
 	@Column(name = "postCommentReport")

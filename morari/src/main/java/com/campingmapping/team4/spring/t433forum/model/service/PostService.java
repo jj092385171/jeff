@@ -1,6 +1,12 @@
 package com.campingmapping.team4.spring.t433forum.model.service;
 // package com.campingmapping.team4.spring.t4_33Forum.model.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import com.campingmapping.team4.spring.t433forum.model.dao.repository.PostRepository;
+import com.campingmapping.team4.spring.t433forum.model.entity.Post;
+
 // import java.sql.SQLException;
 // import java.sql.Timestamp;
 // import java.text.ParseException;
@@ -11,7 +17,30 @@ package com.campingmapping.team4.spring.t433forum.model.service;
 // import com.campingmapping.team4.spring.t4_33Forum.model.dao.PostDao;
 // import com.campingmapping.team4.spring.t4_33Forum.model.entity.Post;
 
-// public class PostService {
+public class PostService {
+	
+	private PostRepository postRepository;
+	
+	// 查單一貼文
+	public Post getPostById(Integer id) {
+		Optional<Post> findById = postRepository.findById(id);
+		return findById.get();
+	}
+	
+	// 查所有貼文
+	public List<Post> getAllPost(){
+		return postRepository.findAll();
+	}
+	
+	// 新增
+	public Post insert(Post post) {
+		return postRepository.save(post);
+	}
+	
+	// 修改
+	public Post update(Post post) {
+		return postRepository.save(post);
+	}
 
 // private PostDao postDao;
 
@@ -88,4 +117,4 @@ package com.campingmapping.team4.spring.t433forum.model.service;
 // post.setPostHide(0);
 // postDao.changeHidePost(post);
 // }
-// }
+}
