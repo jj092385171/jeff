@@ -1,14 +1,20 @@
 package com.campingmapping.team4.spring.t409work.model.service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobRepository;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 
@@ -46,10 +52,7 @@ public class JobService {
 		jobDao.save(jobBean);
 	}
 
-	// 載入圖片
-//	public Blob fileToBlob(InputStream is, long size) throws SerialException, SQLException, IOException {
-//		return jobDao.fileToBlob(is, size);
-//	}
+
 
 	// 透過rackID抓一筆資料
 	public JobBean findById(Integer rackID) {
@@ -67,7 +70,22 @@ public class JobService {
 	}
 
 	// 透過會員id找資料
-	public List<JobBean> findByUid(UserProfiles userprofiles ) {
-		return jobDao.findByUid(userprofiles);
+	public List<JobBean> findByUid(Integer uid ) {
+		return jobDao.findByUid(uid);
 	}
+	// 圖片轉blob
+	public Blob fileToBlob(InputStream is, long size) throws IOException, SerialException, SQLException {
+		byte[] b = new byte[(int) size];
+		is.read(b);
+		return new SerialBlob(b);
+	}
+	public Blob fileToBlob(MultipartFile photo) throws IOException, SQLException {
+        InputStream is = photo.getInputStream();
+        long size = photo.getSize();
+        byte[] b = new byte[(int) size];
+        SerialBlob sb = null;
+        is.read(b);
+        sb = new SerialBlob(b);
+        return sb;
+    }
 }
