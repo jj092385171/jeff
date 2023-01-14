@@ -7,7 +7,7 @@ import com.campingmapping.team4.spring.t436mall.model.entity.ProductCart;
 public interface ProductCartService {
 
 	// 依userid新增一筆購物車資料
-	public ProductCart create(ProductCart productcart);
+	public ProductCart create(ProductCart productcart,Integer pdid);
 	// 依cartid來增加or減少購物車產品數量
 	public ProductCart updataById(ProductCart productcart);
 	// 清空購物車

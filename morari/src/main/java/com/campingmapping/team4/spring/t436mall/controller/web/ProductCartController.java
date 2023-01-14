@@ -24,8 +24,8 @@ public class ProductCartController {
 
 	// 依userid新增一筆購物車資料
 	@PostMapping("/create")
-	public ProductCart create(@RequestBody ProductCart productcart) {
-		return PCServiceImpl.create(productcart);
+	public ProductCart create(@RequestBody ProductCart productcart,@PathVariable int pdid) {
+		return PCServiceImpl.create(productcart,pdid);
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@PutMapping("/updataById")

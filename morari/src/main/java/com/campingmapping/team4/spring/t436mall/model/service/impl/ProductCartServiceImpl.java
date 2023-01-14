@@ -19,7 +19,7 @@ public class ProductCartServiceImpl implements ProductCartService {
 
 	// 依userid新增一筆購物車資料
 	@Override
-	public ProductCart create(ProductCart productcart) {
+	public ProductCart create(ProductCart productcart,Integer pdid) {
 		return pcDao.save(productcart);
 	}
 	// 依cartid來增加or減少購物車產品數量
@@ -41,7 +41,7 @@ public class ProductCartServiceImpl implements ProductCartService {
 	// 依userID查詢購物車資料
 	@Override
 	public List<ProductCart> selectAllByUserId(Integer userid) {
-		return pcDao.findByUserid(userid);
+		return pcDao.findByUserprofiles(userid);
 	}
 	// 查詢購物車所有資料(後台)
 	@Override

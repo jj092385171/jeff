@@ -15,7 +15,7 @@ public interface ProductCartRepository extends JpaRepository<ProductCart, Intege
 	// 清空購物車
 	// 結帳->新增訂單
 	// 依userID查詢購物車資料
-	public List<ProductCart> findByUserid(Integer userid);
+	public List<ProductCart> findByUserprofiles(Integer userid);
 	// 查詢購物車所有資料(後台)
 
 }
