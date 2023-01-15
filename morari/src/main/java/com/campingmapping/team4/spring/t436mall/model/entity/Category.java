@@ -80,4 +80,9 @@ public class Category {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	@Builder.Default
 	private Set<ProductCart> productcart = new LinkedHashSet<ProductCart>();
+	@JsonIgnore
+	@JsonIgnoreProperties("category")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	@Builder.Default
+	private Set<ProductOrderDetail> productorderdetail = new LinkedHashSet<ProductOrderDetail>();
 }

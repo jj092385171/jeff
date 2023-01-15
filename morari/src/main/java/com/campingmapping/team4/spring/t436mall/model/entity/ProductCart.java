@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,12 +32,12 @@ public class ProductCart {
 	@JsonIgnore
 	private UserProfiles userprofiles;
 	// 會員 ID
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "pdid")
 	@JsonIgnore
 	// @Column(name = "pdid")
-	private Category category;
 	// private Integer pdid;
+	private Category category;
 	// 產品編號(fk)
 	@Column(name = "ctqty")
 	private Integer ctqty;
