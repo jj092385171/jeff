@@ -29,7 +29,7 @@ spring:
     properties:
       hibernate:
 # -------------MSSQL------------- 
-         dialect: org.hibernate.dialect.SQLServer2016Dialect
+         dialect: org.hibernate.dialect.SQLServerDialect
          '[allow_update_outside_transaction]': true
          '[hbm2ddl.auto]': update
          '[format_sql]': true

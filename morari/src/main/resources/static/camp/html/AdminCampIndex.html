@@ -5,18 +5,52 @@
 	<meta charset="UTF-8">
 	<title>AdminCampIndex</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<style>
+		th {
+			border: 1px solid black;
+		}
+	</style>
 	<script type="text/javascript">
 		$(function () {
-			$('#send').click(function () {
-				console.log('123')
-				// $.ajax({
-				// 	type: 'get',
-				// 	url: 'indexShowAllCamp.controller',
-				// 	success: function (data) {
-				// 		$('#result').html(data);
-				// 	}
+			// $('#send').click(function () {
+			// 	$.ajax({
+			// 		type: 'GET',
+			// 		url: '/morari/admin/camp/indexShowAllCamp.controller',
+			// 		success: function (data) {
+			// 			console.log(data["allCamps"]);
+			// 			var allCamps = data["allCamps"];
+			// 			$.each(allCamps, function (i) {
+			// 				console.log(i);
+			// 				console.log(allCamps[i]);
+			// 			});
+			// 		}
 
+			// 	});
+			// });
+			$.getJSON('/morari/admin/camp/indexShowAllCamp.controller', function (data) {
+
+				// console.log(data["allCamps"]);
+				var allCamps = data["allCamps"];
+				var resultText1 = '';
+				var resultText2 = '';
+				// $.each(allCamps, function (key) {
+				// 	// console.log(allCamps[key]);
+				// 	$.each(allCamps[key], function (i) {
+				// 		console.log('<th>' + i + '<th>');
+				// 		resultText1 += '<th>' + i + '<th/>'
+				// 	});
 				// });
+				$.each(allCamps, function (key) {
+					// console.log(allCamps[key]);
+					resultText2 += '<tr>'
+					$.each(allCamps[key], function (i) {
+						console.log(allCamps[key][i]);
+						resultText2 += '<td>' + allCamps[key][i] + '<td/>'
+					});
+					resultText2 += '<tr/>'
+				});
+				// $('#thead').html(resultText1);
+				$('#table').html(resultText2);
 			});
 		});
 
@@ -24,9 +58,7 @@
 </head>
 
 <body>
-	<div id="result">
-	</div>
-	<button id="send">Send</button>
+	<table id="table"></table>
 </body>
 
 </html>
