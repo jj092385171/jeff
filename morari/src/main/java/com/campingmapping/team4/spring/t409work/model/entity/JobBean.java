@@ -24,9 +24,9 @@ import lombok.NoArgsConstructor;
 public class JobBean {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "rackID")
-	private Integer rackID;// 刊登編號
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "rackid")
+	private Integer rackid;// 刊登編號
 
 	@ManyToOne
 	@JsonIgnore
@@ -50,6 +50,6 @@ public class JobBean {
 	@Column(name = "remark")
 	private String remark;// 備註
 	@Column(name = "rackup")
-	private Date rackUp;// 上架日期
+	private Date rackup;// 上架日期
 
 }

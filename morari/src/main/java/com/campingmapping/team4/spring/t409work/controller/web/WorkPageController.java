@@ -6,6 +6,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,9 @@ public class WorkPageController {
 	}
 
 	// 啟動insert
-	@PostMapping("/insert.controller")
+	@GetMapping("/insert.controller")
 	public String processMainAction2() {
-		return "t4_09job/job/JobModel/insert";
+		return "work/insert";
 	}
 
 	// 啟動select
@@ -76,8 +77,9 @@ public class WorkPageController {
 	//新增 ok
 	@GetMapping("/jobInsert.controller/{u}")
 	@ResponseBody
-	public void processInsertAction2(@RequestBody JobBean jobBean,@PathVariable Integer u) {
-		jService.insert(jobBean,u);
+	public JobBean processInsertAction2(@RequestBody JobBean jobBean,@PathVariable Integer u) {
+		return jService.insert(jobBean,u);
+
 	}
 
 
