@@ -1,5 +1,7 @@
 package com.campingmapping.team4.spring.t4_11Team.servlet;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +60,6 @@ public class ViewController {
 	@PostMapping("/insertMaterial.controller")
 	@ResponseBody
 	public String insert(@RequestBody Initiating i) {
-		System.out.println("1"+i.getCurrentnum());
-		System.out.println("2"+i.getAcceptablenum());
 		teamService.insertInitiating(i);
 		return "Insert OK";
 	}
@@ -84,6 +84,16 @@ public class ViewController {
 		initiating.setPostdate(in.getPostdate());
 		teamService.updateInitiating(initiating);
 		return "update OK";
+	}
+	
+	@PostMapping("/select.controller")
+	@ResponseBody
+	public List<Initiating> select(@RequestBody Initiating i){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		String std = dateFormat.format(i.getStartdate());
+		String ed = dateFormat.format(i.getEnddate());
+		System.out.println(std+ "--" + ed);
+		return null;
 	}
 	
 }

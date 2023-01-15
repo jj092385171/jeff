@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class JobBean {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "rackID")
 	private Integer rackID;// 刊登編號
 

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Vote {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "voteId")
 	private int voteId;
 	@Column(name = "voteName")

@@ -120,8 +120,6 @@
 		        	var name = button.name;
 		        	console.log(name);
 		            var formData = new FormData(button.form);
-		            var value = formData.get('dnum');
-					console.log(value);
 		            
 		            // 發出 DELETE 請求
 		            var xhr = new XMLHttpRequest();
@@ -136,14 +134,35 @@
 		            	  }
 		            	};
 		            xhr.send();
-		            }else if(name == "update"){
-		            	xhr.open('POST', '/campingmapping3.0/content',true);
-		            	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		            	xhr.onload = function() {
-		            	  console.log(xhr.responseText);
-		            	  console.log(xhr.status);
-		            	};
-		            	xhr.send("content="+value);
+		            }
+		     		else if(name == "select"){
+		     			formData.forEach(function(value, key) {
+		     			    if (key === "initiatingnum" || key === "postmember") {
+		     			        formData.set(key, parseInt(value));
+		     			    }
+		     			});
+		     			console.log(formData)
+		     			var startdate = formData.get('startdate');
+		     			console.log(startdate);
+		     			var enddate = formData.get('enddate');
+		     			console.log(enddate);
+		     			
+		     			const data = Object.fromEntries(formData);
+						const json = JSON.stringify(data);
+		     			
+		     			fetch('/campingmapping3.0/select.controller', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: json
+						})
+							.then(function (response) {
+								console.log(response);
+								if (response.status == 200) {
+									location.href = '/campingmapping3.0/team.controller';
+								}
+							});
 		            }
 		            
 		        });
@@ -156,7 +175,7 @@
 <body>
 	<h3>揪團管理</h3>
 	<table id="result"></table>
-	<form action="" method="POST">
+	<form id="select" action="" method="POST">
 									<ul class="actions">
 										<li><button type="button" name="select">查詢</button></li>
 										<li>起始日期: <input type="date" id="startdate" name="startdate"></li>
@@ -169,7 +188,6 @@
 										</select></li>
 									</ul>
 	</form>
-	<table id="select"></table>
 	<button type="button" onclick="window.location.href='insert.controller'">新增</button>
 </body>
 

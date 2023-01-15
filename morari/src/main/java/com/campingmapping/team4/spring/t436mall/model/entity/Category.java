@@ -36,9 +36,9 @@ import lombok.NoArgsConstructor;
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "pdid")
+	private Integer pdid;
 	// 產品編號(pk)
 	// @Column(name = "userid")
 	// private Integer userid;

@@ -24,9 +24,9 @@ import lombok.NoArgsConstructor;
 @Component
 public class PasswordHistory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "phid")
-    private Integer phid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "passwordhistoryid")
+    private Integer passwordhistoryid;
 
     @Column(name = "account")
     private String account;
@@ -34,7 +34,7 @@ public class PasswordHistory {
     @Column(name = "oldpassword")
     private String oldpassword;
 
-    @Column(name = "setpswdate")
-    private Date setpswdate;
+    @Column(name = "setpassworddate")
+    private Date setpassworddate;
 
 }

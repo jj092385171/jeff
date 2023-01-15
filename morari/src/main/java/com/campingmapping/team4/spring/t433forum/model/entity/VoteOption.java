@@ -19,7 +19,7 @@ package com.campingmapping.team4.spring.t433forum.model.entity;
 // public class VoteOption {
 
 // @Id
-// @GeneratedValue(strategy = GenerationType.IDENTITY)
+// @GeneratedValue(strategy = GenerationType.AUTO)
 // @Column(name = "optionId")
 // private Integer optionId;
 // @Column(name = "optionName")
