@@ -114,15 +114,15 @@ public class UserProfiles implements UserDetails {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
 	@Builder.Default
 	private Set<LoginHistory> loginhistories = new LinkedHashSet<LoginHistory>();
-	@JsonIgnore
-	@JsonIgnoreProperties("userprofiles")
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-	@Builder.Default
-	private Set<Category> category = new LinkedHashSet<Category>();
-	@JsonIgnore
-	@JsonIgnoreProperties("userprofiles")
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-	@Builder.Default
-	private Set<ProductCart> productcart = new LinkedHashSet<ProductCart>();
+//	@JsonIgnore
+//	@JsonIgnoreProperties("userprofiles")
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+//	@Builder.Default
+//	private Set<Category> category = new LinkedHashSet<Category>();
+//	@JsonIgnore
+//	@JsonIgnoreProperties("userprofiles")
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+//	@Builder.Default
+//	private Set<ProductCart> productcart = new LinkedHashSet<ProductCart>();
 
 }

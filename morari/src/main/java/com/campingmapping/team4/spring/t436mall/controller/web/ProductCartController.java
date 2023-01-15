@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCart;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVo;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.ProductCartServiceImpl;
 
 @RestController
@@ -24,32 +25,33 @@ public class ProductCartController {
 
 	// 依userid新增一筆購物車資料
 	@PostMapping("/create")
-	public ProductCart create(@RequestBody ProductCart productcart,@PathVariable int pdid) {
-		return PCServiceImpl.create(productcart,pdid);
+	public ProductCart create(@RequestBody ProductCart productcart) {
+		return PCServiceImpl.create(productcart);
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@PutMapping("/updataById")
 	public ProductCart updataById(@RequestBody ProductCart productcart) {
 		return PCServiceImpl.updataById(productcart);
 	}
-	// 清空購物車
-	@DeleteMapping("/deleteByUserId")
-	public void deleteByUserId(@PathVariable int id) {
-		PCServiceImpl.deleteByUserId(id);
+	// 依id刪除購物車
+	@DeleteMapping("/deleteById/{id}")
+	public void deleteById(@PathVariable Integer id) {
+		PCServiceImpl.deleteById(id);
 	}
-	// 結帳->新增訂單
-	@DeleteMapping("/checkout")
-	public void checkout(@PathVariable int id) {
-		PCServiceImpl.checkout(id);
+	
+	// 依userid清空購物車、或結帳
+	@DeleteMapping("/deleteAllByUserId/{userid}")
+	public void deleteAllByUserId(@PathVariable Integer userid) {
+		PCServiceImpl.deleteAllByUserId(userid);
 	}
 	// 依userID查詢購物車資料
-	@GetMapping("/selectAllByUserId")
-	public List<ProductCart> selectAllByUserId(@PathVariable Integer userid) {
+	@GetMapping("/selectAllByUserId/{userid}")
+	public List<ProductCartVo> selectAllByUserId(@PathVariable Integer userid) {
 		return PCServiceImpl.selectAllByUserId(userid);
 	}
 	// 查詢購物車所有資料(後台)
-	@GetMapping("/selectAll")
-	public List<ProductCart> selectAll() {
-		return PCServiceImpl.selectAll();
+	@GetMapping("/selectAllVo")
+	public List<ProductCartVo> selectAllVo() {
+		return PCServiceImpl.selectAllVo();
 	}
 }

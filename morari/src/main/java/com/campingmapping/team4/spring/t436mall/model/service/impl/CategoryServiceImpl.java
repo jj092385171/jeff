@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 import com.campingmapping.team4.spring.t436mall.model.dao.repository.CategoryRepository;
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 import com.campingmapping.team4.spring.t436mall.model.service.CategoryService;
@@ -18,20 +17,15 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	public CategoryRepository cDao;
-	
-	@Autowired
-	public UserRepository userDao;
-	
+
 	// 新增一筆產品
 	@Override
-	public Category create(Category category ,Integer uid) {
+	public Category create(Category category) {
 		Date now = new Date();
 		category.setPdlastupdate(now);
 		category.setPddate(now);
-		category.setUserprofiles(userDao.findById(uid).get());
-		
 		cDao.save(category);
-		
+
 		return category;
 	}
 
@@ -66,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public void updateBuy(List<Category> category) {
 
 		for (Category buy : category) {
-			Category inventory = cDao.findById(buy.getId()).get();
+			Category inventory = cDao.findById(buy.getPdid()).get();
 			inventory.setPdinventory(inventory.getPdinventory() - buy.getPdinventory());
 			cDao.save(inventory);
 		}

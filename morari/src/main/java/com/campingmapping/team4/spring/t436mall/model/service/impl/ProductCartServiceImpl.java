@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t436mall.model.dao.repository.ProductCartRepository;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCart;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVo;
 import com.campingmapping.team4.spring.t436mall.model.service.ProductCartService;
 
 @Service
@@ -16,37 +17,38 @@ public class ProductCartServiceImpl implements ProductCartService {
 
 	@Autowired
 	public ProductCartRepository pcDao;
-
+	
 	// 依userid新增一筆購物車資料
 	@Override
-	public ProductCart create(ProductCart productcart,Integer pdid) {
+	public ProductCart create(ProductCart productcart) {
 		return pcDao.save(productcart);
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@Override
 	public ProductCart updataById(ProductCart productcart) {
+//		productcart.setUserprofiles(userDao.findById(productcart.getUserprofiles()).get());
 		return pcDao.save(productcart);
+		
 	}
-	// 清空購物車
+	// 依id刪除購物車
 	@Override
-	public void deleteByUserId(int id) {
+	public void deleteById(Integer id) {
 		pcDao.deleteById(id);
 	}
-	// 結帳->新增訂單
+	// 依userid清空購物車、或結帳
 	@Override
-	public void checkout(int id) {
-		// 須先加上建立訂單
-		pcDao.deleteById(id);
+	public void deleteAllByUserId(Integer userid) {
+		pcDao.deleteAllByUserid(userid);
 	}
 	// 依userID查詢購物車資料
 	@Override
-	public List<ProductCart> selectAllByUserId(Integer userid) {
-		return pcDao.findByUserprofiles(userid);
+	public List<ProductCartVo> selectAllByUserId(Integer userid) {
+		return pcDao.findByUserid(userid);
 	}
 	// 查詢購物車所有資料(後台)
 	@Override
-	public List<ProductCart> selectAll() {
-		return pcDao.findAll();
+	public List<ProductCartVo> selectAllVo() {
+		return pcDao.findAllVo();
 	}
 
 }

@@ -23,17 +23,17 @@ public class CategoryController {
 	private CategoryServiceImpl cServiceImpl;
 
 	// 新增一筆產品
-	@PostMapping("/create/{uid}")
-	public Category create(@RequestBody Category category ,@PathVariable int uid) {	
-		return cServiceImpl.create(category ,uid);
+	@PostMapping("/create")
+	public Category create(@RequestBody Category category) {
+		return cServiceImpl.create(category);
 	}
-	
+
 	// 搜尋所有產品
 	@GetMapping("/selectAllPd")
 	public List<Category> selectAllPd() {
 		return cServiceImpl.selectAll();
 	}
-	
+
 	// 依Pdid來搜尋單筆產品
 	@GetMapping("/getPersonById/{Pdid}")
 	public Category getPersonById(@PathVariable int Pdid) {
@@ -41,19 +41,19 @@ public class CategoryController {
 	}
 
 	// 依Pdid來刪除單筆產品
-	@DeleteMapping("/persons/{Pdid}")
+	@DeleteMapping("/deleteByPdid/{Pdid}")
 	public void deleteByPdid(@PathVariable int Pdid) {
 		cServiceImpl.deleteByPdid(Pdid);
 	}
-	
+
 	// 依Pdid來修改單筆產品
 	@PutMapping("/updateByPdid")
-	public Category updateByPdid(@RequestBody  Category category) {
+	public Category updateByPdid(@RequestBody Category category) {
 		return cServiceImpl.updateByPdid(category);
 	}
-	
+
 	// 根據購買減少庫存
-	@PutMapping("/updateBuy/")
+	@PutMapping("/updateBuy")
 	public void updateBuy(@RequestBody List<Category> category) {
 		cServiceImpl.updateBuy(category);
 	}
