@@ -51,7 +51,5 @@ public class JobBean {
 	private String remark;// 備註
 	@Column(name = "rackup")
 	private Date rackUp;// 上架日期
-	@Column(name = "rackdown")
-	private Date rackDown;// 下架日期
 
 }

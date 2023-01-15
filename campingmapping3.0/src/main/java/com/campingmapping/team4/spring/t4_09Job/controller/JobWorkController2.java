@@ -52,7 +52,7 @@ public class JobWorkController2 {
 	public String processAction3(@RequestParam("de") String rackID) {
 		int parseID = Integer.parseInt(rackID);
 		jobWorkService.deleteJob(parseID);
-		return "t4_09job/job/JobModel/deleteSucces";
+	//	return "t4_09job/job/JobModel/deleteSucces";
 	}
 
 	@PostMapping(path = "/select.controller")

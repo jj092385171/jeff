@@ -73,30 +73,23 @@ public class WorkPageController {
 		}
 	}
 
-	//新增
-	@GetMapping("/jobInsert.controller")
+	//新增 ok
+	@GetMapping("/jobInsert.controller/{u}")
 	@ResponseBody
-	public void processInsertAction2(@RequestBody JobBean jobBean) {
-//		JobBean jBean = new JobBean();
-		UserProfiles u = new UserProfiles();
-		u.setUid(1);
-		jobBean.setUserprofiles(u);	
-//		jBean.setDate(jobBean.getDate());
-//		jBean.setRackUp(jobBean.getRackUp());
-//		jBean.setRackDown(jobBean.getRackDown());
-//		jBean.setJob(jobBean.getJob());
-//		jBean.setPlace(jobBean.getPlace());
-//		jBean.setQuantity(jobBean.getQuantity());
-//		jBean.setImg(jobBean.getImg());
-//		jBean.setRemark(jobBean.getRemark());
-//		jBean.setSalary(jobBean.getSalary());
-//		jBean.setTime(jobBean.getTime());
-//		jBean.setSalary(jobBean.getSalary());
-//		
-		jService.insert(jobBean);
+	public void processInsertAction2(@RequestBody JobBean jobBean,@PathVariable Integer u) {
+		jService.insert(jobBean,u);
 	}
 
-	// 找全部
+
+	// 修改ok
+	@GetMapping("/jobUpdate.controller/{u}")
+	@ResponseBody
+	public JobBean processUpdateAction(@RequestBody JobBean jBean,@PathVariable Integer u) {
+		
+		jService.updateJob(jBean, u);
+		return jBean;
+	}
+	// 找全部 ok
 	@GetMapping("/jobShowAll.controller")
 	@ResponseBody
 	public List<JobBean> processShowJobAllAction() {
@@ -152,15 +145,4 @@ public class WorkPageController {
 		return result;
 	}
 
-	// 修改
-	// 還未寫完
-	@PostMapping("/jobUpdate.controller")
-	@ResponseBody
-	public JobBean processUpdateAction(@RequestBody JobBean jBean) {
-		UserProfiles u = new UserProfiles();
-		u.setUid(1);
-		jBean.setUserprofiles(u);	
-		jService.updateJob(jBean);
-		return jBean;
-	}
 }

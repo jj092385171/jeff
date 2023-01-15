@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserProfiles implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer uid;
   private String account;
   private String password;

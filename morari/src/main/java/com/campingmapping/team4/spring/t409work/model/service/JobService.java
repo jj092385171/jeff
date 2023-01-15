@@ -4,17 +4,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
+import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobRepository;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 
@@ -26,6 +30,9 @@ public class JobService {
 	@Autowired
 	private JobRepository jobDao;
 
+	@Autowired
+	private UserRepository uDao;
+	
 	// 秀全部
 	public List<JobBean> findAll() {
 		List<JobBean> selectAll = jobDao.findAll();
@@ -33,10 +40,19 @@ public class JobService {
 	}
 
 	// 新增職缺
-	public void insert(JobBean jBean) {
+	public void insert(JobBean jBean,Integer u) {
+		jBean.setUserprofiles(uDao.findById(u).get());
+		Date now = new Date();
+		jBean.setRackUp(now);
 		jobDao.save(jBean);
 	}
-
+	
+	// 改職缺內容
+		public void updateJob(JobBean jobBean,Integer u) {
+			jobBean.setUserprofiles(uDao.findById(u).get());
+			jobDao.save(jobBean);
+		}
+		
 	// 透過rackID秀圖片
 //	public JobBean findImgByRackID(int rackID) {
 //		return jobDao.findImgByRackID(rackID);	 
@@ -47,10 +63,7 @@ public class JobService {
 		jobDao.deleteById(rackID);
 	}
 
-	// 改職缺內容
-	public void updateJob(JobBean jobBean) {
-		jobDao.save(jobBean);
-	}
+	
 
 
 
