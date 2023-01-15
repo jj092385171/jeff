@@ -1,31 +1,31 @@
-var token
-document.addEventListener("DOMContentLoaded", function () {
-    let submitBtn = document.getElementById("resumbit");
-    submitBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-        var form = document.getElementById("register");
-        var formData = new FormData(form);
-        var jsonData = {};
-        for (var [key, value] of formData.entries()) {
-            jsonData[key] = value;
-        }
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", form.action, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let response = JSON.parse(xhr.response);
-                token = response.token;
-                window.globalToken = token;
+// var token
+// document.addEventListener("DOMContentLoaded", function () {
+//     let submitBtn = document.getElementById("resumbit");
+//     submitBtn.addEventListener("click", function (event) {
+//         event.preventDefault();
+//         var form = document.getElementById("register");
+//         var formData = new FormData(form);
+//         var jsonData = {};
+//         for (var [key, value] of formData.entries()) {
+//             jsonData[key] = value;
+//         }
+//         var xhr = new XMLHttpRequest();
+//         xhr.open("POST", form.action, true);
+//         xhr.setRequestHeader('Content-Type', 'application/json');
+//         xhr.onreadystatechange = function () {
+//             if (xhr.readyState === 4 && xhr.status === 200) {
+//                 let response = JSON.parse(xhr.response);
+//                 token = response.token;
+//                 window.globalToken = token;
 
-                console.log("var " + token);
-                console.log("window " + window.globalToken);
+//                 console.log("var " + token);
+//                 console.log("window " + window.globalToken);
 
-            }
-        };
-        xhr.send(JSON.stringify(jsonData));
-    });
-});
+//             }
+//         };
+//         xhr.send(JSON.stringify(jsonData));
+//     });
+// });
 
 // fetch('/api/v1/auth/register', {
 //     method: 'POST',
@@ -80,21 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
 //         $(".error").html('');
 //     }
 // });
-var originalFetch = window.fetch;
-window.fetch = function (url, options) {
-    options = options || {};
-    options.headers = options.headers || {};
-    options.headers['Authorization'] = 'Bearer ' + window.globalToken;
+// var originalFetch = window.fetch;
+// window.fetch = function (url, options) {
+//     options = options || {};
+//     options.headers = options.headers || {};
+//     options.headers['Authorization'] = 'Bearer ' + window.globalToken;
 
-    console.log("---------------");
-    console.log("window " + window.globalToken);
-    console.log("---------------");
-    console.log("var " + token);
-    // console.log(window.token);
+//     console.log("---------------");
+//     console.log("window " + window.globalToken);
+//     console.log("---------------");
+//     console.log("var " + token);
+//     // console.log(window.token);
 
-    return originalFetch(url, options);
-}
+//     return originalFetch(url, options);
+// }
 
 
-console.log("jsvar " + token);
-console.log("jswindow " + window.globalToken);
+// console.log("jsvar " + token);
+// console.log("jswindow " + window.globalToken);
