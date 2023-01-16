@@ -21,27 +21,38 @@ public class SecurityConfiguration {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
+        // 關閉CSRF
+        .csrf().disable()
+        // 啟用jwt監聽
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-        .csrf()
-        .disable()
-        .authorizeHttpRequests()
-        .requestMatchers(
-            "/api/v1/auth/**",
-            "/favicon.ico",
-            "/index.html",
-            "/oauth2/authorization/**",
-            "/webjars/**",
-            "/error",
-            "/user",
-            "/11.html",
-            "/all.js")
-        .permitAll()
-        .anyRequest()
-        .authenticated()
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        // 設定是否需要驗證的路徑
+        .authorizeHttpRequests(authorize -> authorize
+            .requestMatchers(
+                "/api/v1/auth/**",
+                "/favicon.ico",
+                "/index.html",
+                "/oauth2/authorization/**",
+                "/webjars/**",
+                "/error",
+                "/user",
+                "/11.html",
+                "/all.js")
+            .permitAll()
+            // .requestMatchers(HttpMethod.POST,"/users/")
+            .anyRequest().authenticated())
+        // 登入頁面
+        .formLogin(formLogin -> formLogin
+            .loginPage("/login.html")
+            .defaultSuccessUrl("/")
+            .permitAll())
+        // 登出頁面
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/")
+            .permitAll())
+        .sessionManagement(session -> session
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
     ;
 

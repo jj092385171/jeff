@@ -2,7 +2,6 @@ package com.alibou.security.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.util.WebUtils;
 
 @Component
 @RequiredArgsConstructor
@@ -29,35 +27,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletRequest request,
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain) throws ServletException, IOException {
-
+    final String authHeader = request.getHeader("Authorization");
     final String jwt;
     final String userEmail;
-
-    Cookie[] cookies = request.getCookies();
-    String cookiejwt = null;
-
-    Cookie cookie2 = WebUtils.getCookie(request, "jwt");
-
-    System.out.println("檢查");
-    System.out.println(cookies == null);
-    System.out.println(cookie2 == null);
-
-    if (cookies != null) {
-      for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("jwt")) {
-          cookiejwt = cookie.getValue();
-
-          System.out.println(cookiejwt);
-
-          break;
-        }
-      }
-    }
-    if (cookiejwt == null || cookies == null) {
+    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
       filterChain.doFilter(request, response);
       return;
     }
-    jwt = cookiejwt;
+    jwt = authHeader.substring(7);
     userEmail = jwtService.extractUsername(jwt);
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);

@@ -9,6 +9,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.SQLServer2016Dialect
         '[allow_update_outside_transaction]': true
-        '[hbm2ddl.auto]': update
+        '[hbm2ddl.auto]': create-drop
         '[format_sql]': true
     show-sql: true
