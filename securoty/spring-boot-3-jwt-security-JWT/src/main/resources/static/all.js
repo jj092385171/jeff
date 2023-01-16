@@ -1,11 +1,3 @@
-const jwt = token
-const http = (url, options = {}) => {
-    options.headers = options.headers || {}
-    options.headers.Authorization = `Bearer ${jwt}`
-    return fetch(url, options)
-}
-
-
 // var token
 // document.addEventListener("DOMContentLoaded", function () {
 //     let submitBtn = document.getElementById("resumbit");
