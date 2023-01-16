@@ -6,7 +6,15 @@
 	<title>AdminCampIndex</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<style>
-		th {
+		table {
+			border: 1px solid red;
+		}
+
+		tr {
+			border: 1px solid blue;
+		}
+
+		td {
 			border: 1px solid black;
 		}
 	</style>
@@ -31,8 +39,7 @@
 
 				// console.log(data["allCamps"]);
 				var allCamps = data["allCamps"];
-				var resultText1 = '';
-				var resultText2 = '';
+				var resultText = '';
 				// $.each(allCamps, function (key) {
 				// 	// console.log(allCamps[key]);
 				// 	$.each(allCamps[key], function (i) {
@@ -41,16 +48,17 @@
 				// 	});
 				// });
 				$.each(allCamps, function (key) {
-					// console.log(allCamps[key]);
-					resultText2 += '<tr>'
+					console.log(allCamps[key]);
+					resultText += '<tr>'
 					$.each(allCamps[key], function (i) {
 						console.log(allCamps[key][i]);
-						resultText2 += '<td>' + allCamps[key][i] + '<td/>'
+						resultText += '<td>' + allCamps[key][i] + '<td/>'
+						console.log(resultText)
 					});
-					resultText2 += '<tr/>'
+					resultText += '<tr/>'
 				});
 				// $('#thead').html(resultText1);
-				$('#table').html(resultText2);
+				$('#table').html(resultText);
 			});
 		});
 
