@@ -29,7 +29,7 @@
 <!-- 		上架日期 <input type="date" name="rackUp" value='${param.rackUp}'required> -->
 		
 		備註<textarea name="remark" cols="20" rows="5"></textarea>	
-		<input id="send" type="submit" value="送出"> 
+		<input id="send" type="button" value="送出"> 
 		<input type="reset" value="取消">	
 	</form>
 	
@@ -46,9 +46,9 @@
 			console.log(formData);
 			
 			$.ajax({
-			    type: "GET",
-			    url: "/morari/jobInsert.controller/{u}",
-			    ContentType: 'application/json',
+			    type: "post",
+			    url: "jobInsert.controller",
+			    contentType: 'application/json',
 			    data: JSON.stringify(formData),
 			    success: function(response) {
 			    	console.log(response);

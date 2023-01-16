@@ -75,10 +75,10 @@ public class WorkPageController {
 	}
 
 	//新增 ok
-	@GetMapping("/jobInsert.controller/{u}")
+	@PostMapping("/jobInsert.controller")
 	@ResponseBody
-	public JobBean processInsertAction2(@RequestBody JobBean jobBean,@PathVariable Integer u) {
-		return jService.insert(jobBean,u);
+	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
+		return jService.insert(jobBean,1);
 
 	}
 
@@ -86,8 +86,7 @@ public class WorkPageController {
 	// 修改ok
 	@GetMapping("/jobUpdate.controller/{u}")
 	@ResponseBody
-	public JobBean processUpdateAction(@RequestBody JobBean jBean,@PathVariable Integer u) {
-		
+	public JobBean processUpdateAction(@RequestBody JobBean jBean,@PathVariable Integer u) {	
 		jService.updateJob(jBean, u);
 		return jBean;
 	}
