@@ -1,4 +1,4 @@
-fetch("admin/share/head.html")
+fetch("/morari/admin/share/head.html")
     .then(response => response.text())
     .then(html => {
         // 將載入的 HTML 放入 .header 元素中
