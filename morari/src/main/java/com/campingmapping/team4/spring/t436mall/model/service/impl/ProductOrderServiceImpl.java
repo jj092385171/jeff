@@ -13,6 +13,7 @@ import com.campingmapping.team4.spring.t436mall.model.dao.repository.ProductOrde
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVoRequest;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrder;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderDetail;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderVo;
 import com.campingmapping.team4.spring.t436mall.model.service.ProductOrderService;
 
 @Service
@@ -60,7 +61,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 	}
 	// 依orderID來搜尋單筆訂單
 	@Override
-	public ProductOrder selectById(String id) {
+	public List<ProductOrderVo> selectById(String id) {
 		return pDao.findById(id);
 	}
 	// 依userID來搜尋所有訂單

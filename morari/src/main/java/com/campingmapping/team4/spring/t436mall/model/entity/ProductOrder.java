@@ -2,6 +2,8 @@ package com.campingmapping.team4.spring.t436mall.model.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -25,9 +27,11 @@ public class ProductOrder {
 	@Column(name = "odstatus")
 	private String odstatus;
 	// 訂單狀態
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@Column(name = "datetime")
 	private Date datetime;
 	// 下訂單日期
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@Column(name = "odshippingdatetime")
 	private Date odshippingdatetime;
 	// 出貨日期

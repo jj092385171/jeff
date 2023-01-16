@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrder;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderVo;
+
 import java.lang.String;
 
 public interface ProductOrderRepository extends	JpaRepository<ProductOrder, Integer> {
@@ -15,7 +17,11 @@ public interface ProductOrderRepository extends	JpaRepository<ProductOrder, Inte
 	// 根據購物車新增一筆訂單
 	// 依userID來修改單筆產品(只有後臺能使用)
 	// 依orderID來搜尋單筆訂單
-	public ProductOrder findById(String id);
+	@Query(value = "SELECT p.id, p.userid, d.pdid, d.pdqty, c.pdpicture, c.pdprice, c.pdname"
+			+ " FROM productorder p"
+			+ " LEFT JOIN productorderdetail d ON  p.id = d.pdorderid"
+			+" LEFT JOIN category c ON d.pdid = c.pdid WHERE p.id= ?1", nativeQuery = true)
+	public List<ProductOrderVo> findById(String id);
 	// 依userID來搜尋所有訂單
 	public List<ProductOrder> findByUserid(Integer userid);
 	// 搜尋所有訂單(只有後臺能使用)

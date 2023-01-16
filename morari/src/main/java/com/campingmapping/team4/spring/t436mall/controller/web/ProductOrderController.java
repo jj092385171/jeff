@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVoRequest;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrder;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderVo;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.ProductOrderServiceImpl;
 
 @RestController
@@ -35,7 +36,7 @@ public class ProductOrderController {
 	}
 	// 依orderID來搜尋單筆訂單
 	@GetMapping("/selectById/{id}")
-	public ProductOrder selectById(@PathVariable String id) {
+	public List<ProductOrderVo> selectById(@PathVariable String id) {
 		return pOServiceImpl.selectById(id);
 	}
 	// 依userID來搜尋所有訂單

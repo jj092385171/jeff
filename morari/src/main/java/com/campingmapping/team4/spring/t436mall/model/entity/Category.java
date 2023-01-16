@@ -2,6 +2,8 @@ package com.campingmapping.team4.spring.t436mall.model.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,9 +49,11 @@ public class Category {
 	@Column(name = "pdinventory")
 	private Integer pdinventory;
 	// 庫存數量
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@Column(name = "pddate")
 	private Date pddate;
 	// 商品建立日期
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@Column(name = "pdlastupdate")
 	private Date pdlastupdate;
 	// 商品更新日期
