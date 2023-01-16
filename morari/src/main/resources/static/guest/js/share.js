@@ -1,4 +1,4 @@
-fetch("guest/share/header.html")
+fetch("/morari/guest/share/header.html")
   .then(response => response.text())
   .then(html => {
     // 將載入的 HTML 放入 .header 元素中
@@ -45,7 +45,7 @@ fetch("guest/share/header.html")
   });
 
 // 載入 footer.html
-fetch("guest/share/footer.html")
+fetch("/morari/guest/share/footer.html")
   .then(response => response.text())
   .then(html => {
     // 將載入的 HTML 放入 .footer 元素中
