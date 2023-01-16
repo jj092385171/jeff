@@ -7,8 +7,8 @@
 <body>
 	<h3>新增</h3>
 
-	<form id="insert">
-		會員id <input type="text" name="u" value='1' required>
+	<form id="insert" enctype="multipart/form-data">
+		會員id <input id="u" type="text" name="u" value='1' required>
 		職缺 <input type="hidden" id="ii"> 
 		<select name="job">
 			<option value="廚師">廚師</option>
@@ -25,10 +25,9 @@
 		人數 <input type="text" name="quantity" required>
 		地點 <input type="text" name="place"  required>
 		可上班日期 <input type="text" name="date" required>
-		可上班時段 <input type="text" name="time" required>
-<!-- 		上架日期 <input type="date" name="rackUp" value='${param.rackUp}'required> -->
+		可上班時段 <input type="text" name="time" required>		
+		備註<textarea name="remark" cols="20" rows="5"></textarea>		
 		
-		備註<textarea name="remark" cols="20" rows="5"></textarea>	
 		<input id="send" type="button" value="送出"> 
 		<input type="reset" value="取消">	
 	</form>
@@ -41,15 +40,22 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#send").click(function(){
-			var form = document.getElementById('insert');
-			var formData = new FormData(form);
-			console.log(formData);
-			
+
+			function getFormData($form){
+			    var unindexed_array = $form.serializeArray();
+			    var indexed_array = {};
+
+			    $.map(unindexed_array, function(n, i){
+			        indexed_array[n['name']] = n['value'];
+			    });
+
+			    return indexed_array;
+			}
 			$.ajax({
-			    type: "post",
-			    url: "jobInsert.controller",
+			    type: 'POST',
+			    url: 'jobInsert.controller',
 			    contentType: 'application/json',
-			    data: JSON.stringify(formData),
+			    data: JSON.stringify(getFormData($("#insert"))),
 			    success: function(response) {
 			    	console.log(response);
 			    	$("#insert").html(response.data);
@@ -57,7 +63,6 @@
 			});
 		});
 	});
-
 	</script>
 </body>
 </html>

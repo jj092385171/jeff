@@ -43,6 +43,7 @@ public class JobService {
 		jBean.setUserprofiles(uDao.findById(u).get());
 		Date currentDate = new Date();
 		jBean.setRackup(currentDate);
+		System.out.println(jBean);
 		return jobDao.save(jBean);
 	}
 	
