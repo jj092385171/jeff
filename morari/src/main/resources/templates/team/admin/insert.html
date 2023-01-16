@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新增</title>
+<script type="text/javascript">
+window.onload = function(){
+	const form = document.getElementById('insert');
+	
+	form.addEventListener('submit', function(event) {
+	  event.preventDefault();
+	  
+	  const formData = Array.from(this.elements).reduce(function(data, element) {
+	    data[element.name] = element.value;
+	    return data;
+	  }, {});
+	  
+	  var value = formData.get('userprofiles');
+	  url.searchParams.append('uid', value);
+	  
+	  const json = JSON.stringify(formData);
+	  
+	  fetch('/morari/team/insertMaterial.controller', {
+		  method: 'POST',
+		  headers: {
+		    'Content-Type': 'application/json'
+		  },
+		  body: json
+		})
+		  .then(function(response) {
+		    if(response.status == 200){
+		    	location.href="/morari/team/teammanager.controller";
+		    }
+		  });
+	});
+}
+</script>
+</head>
+<body>
+	<h3>新增</h3>
+	<form id="insert">
+		發文會員:<input type="text" id="userprofiles" name="userprofiles"
+			onkeyup="value=value.replace(/[^\d]/g,'') " required
+			placeholder="請輸入會員編號,僅限數字"><br> 起始日期:<input type="date"
+			id="startdate" name="startdate" required><br> 結束日期:<input
+			type="date" id="enddate" name="enddate" required><br>
+		現有人數:<input type="text" id="currentnum" name="currentnum" onkeyup="value=value.replace(/[^\d]/g,'') " required
+			placeholder="請輸入現有人數,僅限數字"><br>
+		接受人數:<input type="text" id="acceptablenum" name="acceptablenum" onkeyup="value=value.replace(/[^\d]/g,'') "
+			required placeholder="請輸入接受人數,僅限數字"><br>
+		露營地點:<input type="text" id="camparea" name="camparea" required placeholder="請輸入露營地點"><br>
+		<input type="hidden" id="pair" name="pair" value="0" required><br>
+		<button type="submit" id="send" value="Send">Send</button>
+	</form>
+	
+</body>
+</html>

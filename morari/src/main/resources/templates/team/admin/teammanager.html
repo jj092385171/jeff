@@ -16,12 +16,15 @@
 					console.log(response.satus);
 					return;
 				}
+				
+				console.log(response);
+
 
 				response.json().then(function (data) {
 					var resultText = '';
 					var tableData = "";
 					var optionData= "";
-					optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
+					optionData += "<option value=" + "0" + '"' + ">" + "請選擇表單號碼" + "</option>"
 					for (var i = 0; i < data.length; i++) {
 						var pDay = new Date(data[i].postdate);
 						var sDay = new Date(data[i].startdate);
@@ -31,24 +34,24 @@
 							pair = "不可配對"
 						}
 						
-						resultText += data[i].initiatingnum + " " + data[i].postmember
+						resultText += data[i].initiatingnum + " " + data[i].userprofiles
 							+ " " + data[i].postdate + " " + data[i].startdate + " "
 							+ data[i].enddate + " " + data[i].currentnum + " "
 							+ data[i].acceptablenum + " " + data[i].camparea + " "
 							+ data[i].pair + "<br/>";
 							
 						tableData += "<tr>" + "<td><form " + 
-						"action=" + "/campingmapping3.0/delete.controller/" + "{" + data[i].initiatingnum + "}" + 
+						"action=" + "/delete.controller/" + "{" + data[i].initiatingnum + "}" + 
 						" method=" + '"delete"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" + 
 						"<button type=" + '"button"' + "name=" + '"delete"' + ">" + "刪除" + "</button>" + "</form>"+
-						"<form " + "action=" + "/campingmapping3.0/update.controller" + 
+						"<form " + "action=" + "/update.controller" + 
 						" method=" + '"get"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" +
-						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + data[i].postmember + '"' +">"+
+						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + data[i].userprofiles + '"' +">"+
 						"<button type=" + '"submit"' + "name=" + '"update"' + ">" + "修改" + "</button>" + "</form>"
 						+ "</td>" + "<td>" + data[i].initiatingnum + 
-						"</td>" + "<td>" + data[i].postmember + "</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
+						"</td>" + "<td>" + data[i].userprofiles + "</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
 						eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
 						"<td>" + data[i].camparea + "</td>" + "<td>" + pair + "</td>" + "</tr>"
 						
@@ -56,42 +59,34 @@
 					}
 					document.getElementById('result').innerHTML = tableData;
 					document.getElementById('initiatingnum').innerHTML = optionData;
+					
+					//露營地點不重複
+					optionData = '';
+					var campareaData = data.filter(function(item, index, self) {
+					    return index === self.findIndex(function(t) {
+					        return t.camparea === item.camparea;
+					    });
+					});
+					optionData += "<option value=" + "0" + '"' + ">" + "請選擇露營地點" + "</option>"
+					for (var i = 0; i < campareaData.length; i++){
+						optionData += "<option value=" + campareaData[i].camparea + '"' + ">" + campareaData[i].camparea + "</option>"
+					}
+					document.getElementById('camparea').innerHTML = optionData;
+					
+					//發文會員不重複
+					optionData = '';
+					var uidData = data.filter(function(item, index, self) {
+					    return index === self.findIndex(function(t) {
+					        return t.userprofiles === item.userprofiles;
+					    });
+					});
+					optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
+					for (var i = 0; i < uidData.length; i++){
+						optionData += "<option value=" + uidData[i].userprofiles + '"' + ">" + uidData[i].userprofiles + "</option>"
+					}
+					document.getElementById('userprofiles').innerHTML = optionData;
 				});
 			});
-		
-		fetch('showallcamparea.controller', { method: 'GET' }).then(
-				function (response) {
-					if (response.status != 200) {
-						console.log(response.satus);
-						return;
-					}
-
-					response.json().then(function (data) {
-						var optionData = '';
-						optionData += "<option value=" + "0" + '"' + ">" + "請選擇露營地點" + "</option>"
-						for (var i = 0; i < data.length; i++){
-							optionData += "<option value=" + data[i].camparea + '"' + ">" + data[i].camparea + "</option>"
-						}
-						document.getElementById('camparea').innerHTML = optionData;
-					});
-				});
-		
-		fetch('showallpostmember.controller', { method: 'GET' }).then(
-				function (response) {
-					if (response.status != 200) {
-						console.log(response.satus);
-						return;
-					}
-
-					response.json().then(function (data) {
-						var optionData = '';
-						optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
-						for (var i = 0; i < data.length; i++){
-							optionData += "<option value=" + data[i].postmember + '"' + ">" + data[i].postmember + "</option>"
-						}
-						document.getElementById('postmember').innerHTML = optionData;
-					});
-				});
 		
 		var xh = new XMLHttpRequest();
 		xh.open('get', 'view.controller', true);
@@ -105,7 +100,7 @@
 
 			var resultText = '';
 			for (var i = 0; i < data.length; i++) {
-				resultText += data[i].initiatingnum + " " + data[i].postmember
+				resultText += data[i].initiatingnum + " " + data[i].userprofiles
 					+ " " + data[i].postdate + " " + data[i].startdate + " "
 					+ data[i].enddate + " " + data[i].currentnum + " "
 					+ data[i].acceptablenum + " " + data[i].camparea + " "
@@ -120,14 +115,16 @@
 		        	var name = button.name;
 		        	console.log(name);
 		            var formData = new FormData(button.form);
+		            var value = formData.get('dnum'); 
 		            
 		            // 發出 DELETE 請求
 		            var xhr = new XMLHttpRequest();
 		            if(name == "delete"){
-		           		xhr.open('DELETE', '/morari/delete.controller/{' + value + "}");
+		           		xhr.open('DELETE', 'delete.controller/{' + value + "}");
 		            	xhr.onload = function() {
 		            	  if (xhr.status === 200) {
 		            	    console.log(xhr.responseText);
+		            	    location.href="/morari/team/teammanager.controller";
 		            	  }
 		            	  else {
 		            	    console.error(xhr.responseText);
@@ -150,7 +147,7 @@
 		     			const data = Object.fromEntries(formData);
 						const json = JSON.stringify(data);
 		     			
-		     			fetch('/campingmapping3.0/select.controller', {
+		     			fetch('/morari/select.controller', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json'
@@ -160,7 +157,7 @@
 							.then(function (response) {
 								console.log(response);
 								if (response.status == 200) {
-									location.href = '/morari/team.controller';
+									location.href = 'team.controller';
 								}
 							});
 		            }
@@ -182,7 +179,7 @@
 										<li>結束日期: <input type="date" id="enddate" name="enddate"></li>
 										<li><select id="initiatingnum" name="initiatingnum">
 										</select></li>
-										<li><select id="postmember" name="postmember">
+										<li><select id="userprofiles" name="userprofiles">
 										</select></li>
 										<li><select id="camparea" name="camparea">
 										</select></li>

@@ -42,80 +42,82 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Component
 public class UserProfiles implements UserDetails {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer uid;
-  private String account;
-  private String password;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer uid;
+	private String account;
+	private String password;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Enumerated(EnumType.STRING)
-  private Collection<Role> roles;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Enumerated(EnumType.STRING)
+	private Collection<Role> roles;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return roles.stream()
-        .map(role -> new SimpleGrantedAuthority(role.name()))
-        .collect(Collectors.toList());
-  }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
+	}
 
-  @Override
-  public String getPassword() {
-    return password;
-  }
+	@Override
+	public String getPassword() {
+		return password;
+	}
 
-  @Override
-  public String getUsername() {
-    return account;
-  }
+	@Override
+	public String getUsername() {
+		return account;
+	}
 
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Post> post = new LinkedHashSet<Post>();
+	@JsonIgnore
+	@JsonIgnoreProperties("userprofiles")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+	@Builder.Default
+	private Set<Post> post = new LinkedHashSet<Post>();
 
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<JobBean> job = new LinkedHashSet<JobBean>();
+	@JsonIgnore
+	@JsonIgnoreProperties("userprofiles")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+	@Builder.Default
+	private Set<JobBean> job = new LinkedHashSet<JobBean>();
 
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Initiating> initiatings = new LinkedHashSet<Initiating>();
+	@JsonIgnore
+	@JsonIgnoreProperties("userprofiles")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+	@Builder.Default
+	private Set<Initiating> initiatings = new LinkedHashSet<Initiating>();
 
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Category> categories = new LinkedHashSet<Category>();
+	@JsonIgnore
+	@JsonIgnoreProperties("userprofiles")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+	@Builder.Default
+	private Set<Category> categories = new LinkedHashSet<Category>();
 
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
+	@JsonIgnore
+	@JsonIgnoreProperties("userprofiles")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+	@Builder.Default
+	private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
 }
