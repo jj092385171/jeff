@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.CategoryServiceImpl;
@@ -21,7 +22,7 @@ public class MallPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String mallIndex() {
-		return "mall/guest/index";
+		return "mall/admin/index";
 	}
 
 	@Autowired
@@ -29,31 +30,37 @@ public class MallPageComtroller {
 	
 	@GetMapping("/productqueryallmain.controller")
 	public String processQueryAllAction() {
-		return "mall/guest/mallallproduct";
+		return "mall/admin/index";
 	}
 
 	// 新增一筆產品
 	@PostMapping("/create")
-	public Category create(@RequestBody Category category) {
-		return cServiceImpl.create(category);
+	public String create(@RequestBody Category category) {
+		cServiceImpl.create(category);
+		return "";
 	}
 
 	// 搜尋所有產品
 	@GetMapping("/selectAllPd")
+	@ResponseBody
 	public List<Category> selectAllPd() {
 		return cServiceImpl.selectAll();
 	}
 
 	// 依Pdid來搜尋單筆產品
 	@GetMapping("/getPersonById/{Pdid}")
+	@ResponseBody
 	public Category getPersonById(@PathVariable int Pdid) {
 		return cServiceImpl.selectByPdid(Pdid);
 	}
 
 	// 依Pdid來刪除單筆產品
 	@DeleteMapping("/deleteByPdid/{Pdid}")
-	public void deleteByPdid(@PathVariable int Pdid) {
+	@ResponseBody
+	public String deleteByPdid(@PathVariable int Pdid) {
+		
 		cServiceImpl.deleteByPdid(Pdid);
+		return "delete ok!";
 	}
 
 	// 依Pdid來修改單筆產品
@@ -62,9 +69,4 @@ public class MallPageComtroller {
 		return cServiceImpl.updateByPdid(category);
 	}
 
-	// 根據購買減少庫存
-	@PutMapping("/updateBuy")
-	public void updateBuy(@RequestBody List<Category> category) {
-		cServiceImpl.updateBuy(category);
-	}
 }

@@ -40,17 +40,22 @@
 							+ data[i].acceptablenum + " " + data[i].camparea + " "
 							+ data[i].pair + "<br/>";
 							
-						tableData += "<tr>" + "<td><form " + 
+						tableData += "<tr>" + 
+						
+						"<td><form " + 
 						"action=" + "/delete.controller/" + "{" + data[i].initiatingnum + "}" + 
 						" method=" + '"delete"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" + 
 						"<button type=" + '"button"' + "name=" + '"delete"' + ">" + "刪除" + "</button>" + "</form>"+
+						
 						"<form " + "action=" + "/update.controller" + 
 						" method=" + '"get"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" +
 						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + data[i].userprofiles + '"' +">"+
 						"<button type=" + '"submit"' + "name=" + '"update"' + ">" + "修改" + "</button>" + "</form>"
-						+ "</td>" + "<td>" + data[i].initiatingnum + 
+						+ "</td>" 
+						
+						+ "<td>" + data[i].initiatingnum + 
 						"</td>" + "<td>" + data[i].userprofiles + "</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
 						eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
 						"<td>" + data[i].camparea + "</td>" + "<td>" + pair + "</td>" + "</tr>"
