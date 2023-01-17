@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>新增</title>
+</head>
+
+<body>
+	<h3>新增</h3>
+
+	<form id="insert" enctype="multipart/form-data">
+		會員編號 <input type="text" name="uid" value='1' required>
+
+		職缺 <input type="text" name="job" required>
+		薪資 <input type="text" name="salary" required>
+		人數 <input type="text" name="quantity" required>
+		地點 <input type="text" name="place" required>
+		可上班日期 <input type="text" name="date" required>
+		可上班時段 <input type="text" name="time" required>
+		備註<textarea name="remark" cols="20" rows="5"></textarea>
+
+		<input id="send" type="button" value="送出">
+		<input type="reset" value="取消">
+	</form>
+
+	<form id=img>
+		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img">
+	</form>
+	
+	<h3 id="su"></h3>
+	<table id="showInsert"></table>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#send").click(function () {
+				function getFormData($form) {
+					var unindexed_array = $form.serializeArray();
+					var indexed_array = {};
+
+					$.map(unindexed_array, function (n, i) {
+						indexed_array[n['name']] = n['value'];
+					});
+					
+					return indexed_array;
+				}
+				$.ajax({
+					type: 'POST',
+					url: 'jobInsert.controller',
+					contentType: 'application/json',
+					data: JSON.stringify(getFormData($("#insert"))),
+					success: function (response) {
+						$('#showInsert').empty("");
+					
+						if (response == null) {
+							$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
+						} else {
+							var h3 = $('#su');
+							h3.prepend('新增成功');
+							var table = $('#showInsert');
+							table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
+
+						
+							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
+								console.log("response:"+response);
+								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
+									"<td>" + response.quantity + "</td>" + "<td>" + response.place + "</td>" + "<td>" + response.date + "</td>" + "<td>" + response.time + "</td>" + "<td>" + response.remark + "</td>" + "<td>" + response.img + "</td>" +
+									"</tr>";
+								table.append(tr);
+							//});
+						}
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

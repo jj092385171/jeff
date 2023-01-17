@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 
@@ -51,7 +47,7 @@ public class WorkPageController {
 	// 啟動insert
 	@GetMapping("/insert.controller")
 	public String processMainAction2() {
-		return "work/insert";
+		return "work/admin/insert";
 	}
 
 	// 啟動select
@@ -79,7 +75,6 @@ public class WorkPageController {
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
 		return jService.insert(jobBean,1);
-
 	}
 
 

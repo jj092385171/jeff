@@ -29,7 +29,7 @@ public class JobBean {
 	private Integer rackid;// 刊登編號
 
 	@ManyToOne
-	@JsonIgnore
+//	@JsonIgnore
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
 
