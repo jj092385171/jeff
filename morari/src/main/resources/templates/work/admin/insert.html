@@ -47,7 +47,7 @@
 				}
 				$.ajax({
 					type: 'POST',
-					url: 'jobInsert.controller',
+					url: '/morari/work/jobInsert.controller',
 					contentType: 'application/json',
 					data: JSON.stringify(getFormData($("#insert"))),
 					success: function (response) {
@@ -64,7 +64,7 @@
 						
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
-								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
+								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
 									"<td>" + response.quantity + "</td>" + "<td>" + response.place + "</td>" + "<td>" + response.date + "</td>" + "<td>" + response.time + "</td>" + "<td>" + response.remark + "</td>" + "<td>" + response.img + "</td>" +
 									"</tr>";
 								table.append(tr);
