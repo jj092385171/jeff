@@ -20,6 +20,11 @@ import com.campingmapping.team4.spring.t436mall.model.service.impl.ProductCartSe
 @RequestMapping("/ProductCart")
 public class ProductCartController {
 
+	@GetMapping({ "", "/" })
+	public String mallIndex() {
+		return "mall/guest/index";
+	}
+	
 	@Autowired
 	private ProductCartServiceImpl PCServiceImpl;
 

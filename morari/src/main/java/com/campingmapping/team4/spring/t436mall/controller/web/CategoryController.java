@@ -19,8 +19,18 @@ import com.campingmapping.team4.spring.t436mall.model.service.impl.CategoryServi
 @RequestMapping("/Category")
 public class CategoryController {
 
+	@GetMapping({ "", "/" })
+	public String mallIndex() {
+		return "mall/guest/index";
+	}
+	
 	@Autowired
 	private CategoryServiceImpl cServiceImpl;
+	
+	@GetMapping("/productqueryallmain.controller")
+	public String processQueryAllAction() {
+		return "mall/guest/mallallproduct";
+	}
 
 	// 新增一筆產品
 	@PostMapping("/create")
