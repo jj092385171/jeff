@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF8">
+	<title>TeamManager</title>
+	<style>
+		td {
+			border: 2px black solid;
+		}
+	</style>
+	<script type="text/javascript">
+		fetch('view.controller', { method: 'GET' }).then(
+			function (response) {
+				if (response.status != 200) {
+					console.log(response.satus);
+					return;
+				}
+				
+				console.log(response);
+
+
+				response.json().then(function (data) {
+					var resultText = '';
+					var tableData = "";
+					var optionData= "";
+					optionData += "<option value=" + "0" + '"' + ">" + "請選擇表單號碼" + "</option>"
+					for (var i = 0; i < data.length; i++) {
+						var pDay = new Date(data[i].postdate);
+						var sDay = new Date(data[i].startdate);
+						var eDay = new Date(data[i].enddate);
+						var pair = "可配對";
+						if (data[i].pair != 0) {
+							pair = "不可配對"
+						}
+						
+						resultText += data[i].initiatingnum + " " + data[i].userprofiles
+							+ " " + data[i].postdate + " " + data[i].startdate + " "
+							+ data[i].enddate + " " + data[i].currentnum + " "
+							+ data[i].acceptablenum + " " + data[i].camparea + " "
+							+ data[i].pair + "<br/>";
+							
+						tableData += "<tr>" + "<td><form " + 
+						"action=" + "/delete.controller/" + "{" + data[i].initiatingnum + "}" + 
+						" method=" + '"delete"' +
+						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" + 
+						"<button type=" + '"button"' + "name=" + '"delete"' + ">" + "刪除" + "</button>" + "</form>"+
+						"<form " + "action=" + "/update.controller" + 
+						" method=" + '"get"' +
+						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" +
+						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + data[i].userprofiles + '"' +">"+
+						"<button type=" + '"submit"' + "name=" + '"update"' + ">" + "修改" + "</button>" + "</form>"
+						+ "</td>" + "<td>" + data[i].initiatingnum + 
+						"</td>" + "<td>" + data[i].userprofiles + "</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
+						eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
+						"<td>" + data[i].camparea + "</td>" + "<td>" + pair + "</td>" + "</tr>"
+						
+						optionData += "<option value=" + data[i].initiatingnum + '"' + ">" + data[i].initiatingnum + "</option>"
+					}
+					document.getElementById('result').innerHTML = tableData;
+					document.getElementById('initiatingnum').innerHTML = optionData;
+					
+					//露營地點不重複
+					optionData = '';
+					var campareaData = data.filter(function(item, index, self) {
+					    return index === self.findIndex(function(t) {
+					        return t.camparea === item.camparea;
+					    });
+					});
+					optionData += "<option value=" + "0" + '"' + ">" + "請選擇露營地點" + "</option>"
+					for (var i = 0; i < campareaData.length; i++){
+						optionData += "<option value=" + campareaData[i].camparea + '"' + ">" + campareaData[i].camparea + "</option>"
+					}
+					document.getElementById('camparea').innerHTML = optionData;
+					
+					//發文會員不重複
+					optionData = '';
+					var uidData = data.filter(function(item, index, self) {
+					    return index === self.findIndex(function(t) {
+					        return t.userprofiles === item.userprofiles;
+					    });
+					});
+					optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
+					for (var i = 0; i < uidData.length; i++){
+						optionData += "<option value=" + uidData[i].userprofiles + '"' + ">" + uidData[i].userprofiles + "</option>"
+					}
+					document.getElementById('userprofiles').innerHTML = optionData;
+				});
+			});
+		
+		var xh = new XMLHttpRequest();
+		xh.open('get', 'view.controller', true);
+		xh.send();
+	
+		xh.onload = function () {
+			console.log('status:' + xh.status);
+			console.log(xh.responseText);
+
+			var data = JSON.parse(xh.responseText);
+
+			var resultText = '';
+			for (var i = 0; i < data.length; i++) {
+				resultText += data[i].initiatingnum + " " + data[i].userprofiles
+					+ " " + data[i].postdate + " " + data[i].startdate + " "
+					+ data[i].enddate + " " + data[i].currentnum + " "
+					+ data[i].acceptablenum + " " + data[i].camparea + " "
+					+ data[i].pair + "<br/>";
+			}
+			console.log(resultText);
+			
+			document.querySelectorAll("button").forEach(function(button) {
+		        button.addEventListener("click", function(event) {
+		        	
+		        	// 取得表單輸入
+		        	var name = button.name;
+		        	console.log(name);
+		            var formData = new FormData(button.form);
+		            var value = formData.get('dnum'); 
+		            
+		            // 發出 DELETE 請求
+		            var xhr = new XMLHttpRequest();
+		            if(name == "delete"){
+		           		xhr.open('DELETE', 'delete.controller/{' + value + "}");
+		            	xhr.onload = function() {
+		            	  if (xhr.status === 200) {
+		            	    console.log(xhr.responseText);
+		            	    location.href="/morari/team/teammanager.controller";
+		            	  }
+		            	  else {
+		            	    console.error(xhr.responseText);
+		            	  }
+		            	};
+		            xhr.send();
+		            }
+		     		else if(name == "select"){
+		     			formData.forEach(function(value, key) {
+		     			    if (key === "initiatingnum" || key === "postmember") {
+		     			        formData.set(key, parseInt(value));
+		     			    }
+		     			});
+		     			console.log(formData)
+		     			var startdate = formData.get('startdate');
+		     			console.log(startdate);
+		     			var enddate = formData.get('enddate');
+		     			console.log(enddate);
+		     			
+		     			const data = Object.fromEntries(formData);
+						const json = JSON.stringify(data);
+		     			
+		     			fetch('/morari/select.controller', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: json
+						})
+							.then(function (response) {
+								console.log(response);
+								if (response.status == 200) {
+									location.href = 'team.controller';
+								}
+							});
+		            }
+		            
+		        });
+		    });
+		}
+		
+	</script>
+</head>
+
+<body>
+	<h3>揪團管理</h3>
+	<table id="result"></table>
+	<form id="select" action="" method="POST">
+									<ul class="actions">
+										<li><button type="button" name="select">查詢</button></li>
+										<li>起始日期: <input type="date" id="startdate" name="startdate"></li>
+										<li>結束日期: <input type="date" id="enddate" name="enddate"></li>
+										<li><select id="initiatingnum" name="initiatingnum">
+										</select></li>
+										<li><select id="userprofiles" name="userprofiles">
+										</select></li>
+										<li><select id="camparea" name="camparea">
+										</select></li>
+									</ul>
+	</form>
+	<button type="button" onclick="window.location.href='insert.controller'">新增</button>
+</body>
+
+</html>
