@@ -1,4 +1,3 @@
-<!-- <body onload="show()"> -->
 <h3>新增貼文</h3>
 <form action="insertPost" method="POST">
 	<div>
@@ -45,49 +44,3 @@
 		<input type="button" value="回上一頁" onclick="history.back()">
 	</div>
 </form>
-<script src="/morari/guest/vendor/jquery/jquery.min.js" defer></script>
-<script>
-	$(document).ready(function () {
-
-	});
-
-	function show() {
-		showPeople();
-		showCounty();
-		showScore();
-	}
-
-	function showPeople() {
-		var peopleMax = 10;
-		for (let i = 1; i <= peopleMax; i++) {
-			var option = document.createElement("option");
-			option.value = i;
-			option.innerHTML = i;
-			document.getElementById("people").appendChild(option);
-		}
-	}
-
-	function showCounty() {
-		var countyInner = ["台北市", "新北市", "基隆市", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣",
-			"雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"];
-		var countyValue = ["TPE", "TPH", "KLU", "TYC", "HSH", "HSC", "MAL", "TXG", "CWH", "NTO", "YLH", "CHY", "CYI",
-			"TNN", "KHH", "IUH", "ILN", "HWA", "TTT", "PEH", "KMN", "LNN"];
-		for (let i = 0; i < countyInner.length; i++) {
-			var option = document.createElement("option");
-			option.value = countyValue[i];
-			option.innerHTML = countyInner[i];
-			document.getElementById("county").appendChild(option);
-		}
-	}
-
-	function showScore() {
-		var scoreMax = 5;
-		for (let i = 1; i <= scoreMax; i++) {
-			var option = document.createElement("option");
-			option.value = i;
-			option.innerHTML = i;
-			document.getElementById("score").appendChild(option);
-		}
-	}
-</script>
-<!-- </body> -->
