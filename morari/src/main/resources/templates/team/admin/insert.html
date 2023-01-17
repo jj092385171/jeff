@@ -11,16 +11,17 @@ window.onload = function(){
 	  event.preventDefault();
 	  
 	  const formData = Array.from(this.elements).reduce(function(data, element) {
-	    data[element.name] = element.value;
-	    return data;
-	  }, {});
+		    data[element.name] = element.value;
+		    return data;
+		}, {});
 	  
-	  var value = formData.get('userprofiles');
-	  url.searchParams.append('uid', value);
+	  const value = formData['userprofiles'];
+	  const data = {uid : value};
+	  delete formData['userprofiles'];
 	  
 	  const json = JSON.stringify(formData);
 	  
-	  fetch('/morari/team/insertMaterial.controller', {
+	  fetch('/morari/team/insertMaterial.controller/{'+ data.uid + '}', {
 		  method: 'POST',
 		  headers: {
 		    'Content-Type': 'application/json'
