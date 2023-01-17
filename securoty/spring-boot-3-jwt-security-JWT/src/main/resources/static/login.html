@@ -9,11 +9,46 @@
 </head>
 
 <body>
-    <form action="/api/v1/auth/authenticate" method="post">
+    <form action="/api/v1/auth/authenticate" method="post" id="usein">
         <input type="text" name="email">email<br>
         <input type="text" name="password">password<br>
-        <input type="submit">
+        <input type="button" id="in" value="GO">
     </form>
+
+
+
+
+    <script>
+        var token
+        document.addEventListener("DOMContentLoaded", function () {
+            let submitBtn = document.getElementById("in");
+            submitBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                var form = document.getElementById("usein");
+                var formData = new FormData(form);
+                var jsonData = {};
+                for (var [key, value] of formData.entries()) {
+                    jsonData[key] = value;
+                }
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", form.action, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        let response = JSON.parse(xhr.response);
+                        token = response.token;
+                        window.globalToken = token;
+
+                        console.log("var " + token);
+                        console.log("window " + window.globalToken);
+
+                    }
+                };
+                xhr.send(JSON.stringify(jsonData));
+            });
+        });
+    </script>
 </body>
 
 </html>

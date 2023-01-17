@@ -15,7 +15,7 @@
 
 <body>
     <h1>Demo</h1>
-    <a href="/api/v1/demo-controller">jump</a>
+    <a href="/api/v1/demo-controller" onclick="sendRequest()">jump</a>
     <a href="/11.html">jump1</a>
     <div class="container"></div>
     <div class="container unauthenticated">
@@ -83,6 +83,16 @@
 
         document.cookie = "jwt"
 
+
+        function sendRequest() {
+            fetch("/api/v1/demo-controller", {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Cookie": "jwt=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjczOTIzNTg1LCJleHAiOjE2NzM5MjUwMjV9.EY4r1Z06BcfkT15Lz7_FTGNIst7uYPZgN75pItvhGbLdrsP7lwC0EJpGMd9_bB0wdSzjT9t8IlTTm-iKKf5H7g"
+                }
+            });
+        }
     </script>
 </body>
 

@@ -27,6 +27,9 @@ public class AuthenticationController {
 
     AuthenticationResponse authenticationResponse = service.register(request);
     Cookie jwtCookie = new Cookie("jwt", authenticationResponse.getToken());
+
+    System.out.println(jwtCookie.getValue());
+
     jwtCookie.setHttpOnly(true);
     response.addCookie(jwtCookie);
     return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -41,6 +44,9 @@ public class AuthenticationController {
 
     AuthenticationResponse authenticationResponse = service.authenticate(request);
     Cookie jwtCookie = new Cookie("jwt", authenticationResponse.getToken());
+
+    System.out.println(jwtCookie.getValue());
+
     jwtCookie.setHttpOnly(true);
     response.addCookie(jwtCookie);
     return new ResponseEntity<>(HttpStatus.CREATED);
