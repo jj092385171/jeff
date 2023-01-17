@@ -41,7 +41,7 @@ public class WorkPageController {
 	// 啟動CRUD
 	@GetMapping("/jobCRUD.controller")
 	public String processMainAction1() {
-		return "t4_09job/job/JobModel/jobCRUD";
+		return "work/admin/jobCRUD";
 	}
 
 	// 啟動insert
@@ -86,7 +86,7 @@ public class WorkPageController {
 		return jBean;
 	}
 	// 找全部 ok
-	@GetMapping("/jobShowAll.controller")
+	@PostMapping("/jobShowAll.controller")
 	@ResponseBody
 	public List<JobBean> processShowJobAllAction() {
 		List<JobBean> result = jService.findAll();
