@@ -16,8 +16,9 @@ public class InsertController {
 	private PostService postService;
 	
 	@PostMapping("/insertpost.controller")
-	public Post insertPost(@RequestBody Post post) {
-		return postService.insert(post);
+	public String insertPost(@RequestBody Post post) {
+		postService.insert(post);
+		return "{\"url\" :\"http://localhost:8080/morari/admin/forum/forumadminindex\"}" ;
 	}
 	
 }

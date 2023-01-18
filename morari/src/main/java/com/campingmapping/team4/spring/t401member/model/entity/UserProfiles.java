@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -35,6 +36,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
 @Data
+@ToString(exclude = {"job","initiatings","categories","loginHistories"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -92,8 +94,7 @@ public class UserProfiles implements UserDetails {
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Post> post = new LinkedHashSet<Post>();
+  private Collection<Post> post;
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")

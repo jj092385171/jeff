@@ -6,21 +6,40 @@ fetch("/morari/forum/html/newpost.html")
         document.querySelector(".newpost").innerHTML = html;
     });
 
-// 送資料判斷
-	
-    
-// 顯示畫面
 	$(document).ready(function () {
+		// 顯示畫面
 		showPeople();
  		showCounty();
  		showScore();
+ 		
+ 		// 新增貼文
+ 		$("#sub").click(function(){		
+			console.log("test");
+			var params = {
+				"title":$("#title").val(),
+				"content":$("#content").val(),
+				"people":$("#people").val(),
+				"price":$("#price").val(),
+				"county":$("#county").val(),
+				"startDate":$("#startDate").val(),
+				"endDate":$("#endDate").val(),
+				"score":$("#score").val()
+				}
+				
+			$.ajax({
+				type:"post",
+				url:"/morari/insertpost.controller",
+				dataType:"JSON",
+				contentType:"application/json",
+				data:JSON.stringify(params),
+				success: function(data){
+					alert("新增成功")
+					window.location = data.url;
+				}
+			});	
+		});
 	});
 
-	function show() {
-		showPeople();
-		showCounty();
-		showScore();
-	}
 
 	function showPeople() {
 		var peopleMax = 10;

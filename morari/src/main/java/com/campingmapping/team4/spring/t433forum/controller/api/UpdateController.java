@@ -16,7 +16,7 @@ public class UpdateController {
 	
 	// 修改
 	@PutMapping("/updatepost.controller")
-	public Post updatePost(@RequestBody Post post) {
+	public String updatePost(@RequestBody Post post) {
 		Integer postid = post.getPostid();
 		Post postById = postService.getPostById(postid);
 		post.setUserprofiles(postById.getUserprofiles());
@@ -24,7 +24,9 @@ public class UpdateController {
 		post.setUserunlike(postById.getUserunlike());
 		post.setPostreport(postById.getPostreport());
 		post.setPosthide(postById.getPosthide());
-		return postService.update(post);
+		postService.update(post);
+		String json = "{\"url\" :\"http://localhost:8080/morari/admin/forum/forumadminindex\"}";
+		return json;
 	}
 	
 	// 喜歡

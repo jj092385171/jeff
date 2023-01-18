@@ -61,6 +61,7 @@ $(document).ready(function(){
 			if(data.startdate != "" && data.startdate != null){
 				var date = moment(Date.parse(data.startdate)).format('YYYY-MM-DD');
 				$("#startDate").val(date);
+				console.log($("#startDate").val());
 			}
 			
 			if(data.enddate != "" && data.enddate != null){
@@ -82,7 +83,10 @@ $(document).ready(function(){
 				}
 				$("#score").append(option);
 			}
-		}
+			
+//			var hid = "<a href='/morari/forum/showpost.controller/" + postid + "' id='sub'>修改完成</a>"
+//			$("#hid").append(hid);
+		}	
 	});
 	
 	// 修改完成
@@ -99,14 +103,17 @@ $(document).ready(function(){
 				"endDate":$("#endDate").val(),
 				"score":$("#score").val()
 			}
+			
+			
 			$.ajax({
 				type:"put",
 				url:"/morari/updatepost.controller",
 				dataType:"JSON",
 				contentType:"application/json",
 				data:JSON.stringify(params),
-				success: function(){
+				success: function(data){
 					alert("更新成功")
+					window.location = data.url;
 				}
 			});
 		}
