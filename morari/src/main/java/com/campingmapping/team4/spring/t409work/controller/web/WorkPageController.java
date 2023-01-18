@@ -34,8 +34,8 @@ public class WorkPageController {
 		return "work/guest/index";
 	}
 	// 啟動我的首頁
-	@GetMapping("/ttt")
-	public String ttt() {
+	@GetMapping("/crud.controller")
+	public String processMainAction1() {
 		return "work/admin/crud";
 	}
 
@@ -54,7 +54,7 @@ public class WorkPageController {
 	// 啟動select
 	@PostMapping("/select.controller")
 	public String processMainAction3() {
-		return "work/admin/select";
+		return "work/admin/select2";
 	}
 
 	// 啟動update

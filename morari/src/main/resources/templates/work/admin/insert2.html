@@ -74,7 +74,7 @@
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
     <script src="/morari/work/js/insert.js" defer></script>
     <script type="text/javascript">
-		$(document).ready(function () {
+// 		$(document).ready(function () {
 			$("#send").click(function () {
 				function getFormData($form) {
 					var unindexed_array = $form.serializeArray();
@@ -88,7 +88,7 @@
 				}
 				$.ajax({
 					type: 'POST',
-					url: '/morari/work/jobInsert.controller',
+					url: '/morari/admin/work/jobInsert.controller',
 					contentType: 'application/json',
 					data: JSON.stringify(getFormData($("#insert"))),
 					success: function (response) {
@@ -101,8 +101,7 @@
 							h3.prepend('新增成功');
 							var table = $('#showInsert');
 							table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
-
-						
+			
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
 								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
@@ -114,7 +113,7 @@
 					}
 				});
 			});
-		});
+// 		});
 	</script>
 
 </body>
