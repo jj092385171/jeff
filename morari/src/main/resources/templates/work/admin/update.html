@@ -28,7 +28,7 @@
 		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img">
 	</form>
 	
-	<form action="/morari/work/jobCRUD.controller" method="GET">
+	<form action="/morari/admin/work/crud.controller" method="GET">
 		<input type="submit" value="回首頁">
 	</form>
 	<hr>
@@ -45,7 +45,7 @@
 			
 			$.ajax({
 				type: 'POST',
-				url: '/morari/work/selectRackId.controller/'+id,
+				url: '/morari/admin/work/selectRackId.controller/'+id,
 				dataType: 'json',			
 				success: function (data) {
 // 					$('#1').val(data.uid);
@@ -72,7 +72,7 @@
 				}
 				$.ajax({
 					type: 'POST',
-					url: '/morari/work/jobUpdate.controller',
+					url: '/morari/admin/work/jobUpdate.controller',
 					contentType: 'application/json',
 					data: JSON.stringify(getFormData($("#update"))),
 					success: function (response) {

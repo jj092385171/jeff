@@ -17,7 +17,7 @@
 	</div>
 	<br>
 
-	<form action="jobCRUD.controller" method="GET"
+	<form action="crud.controller" method="GET"
 		enctype="multipart/form-data">
 		<input type="submit" value="回首頁">
 	</form>
@@ -32,13 +32,16 @@
 	function selectUid(uid) {
 		$.ajax({
 			type:'POST',
-			url: '/morari/work/selectUid.controller/'+uid,
+			url: '/morari/admin/work/selectUid.controller/'+uid,
 			dataType:'json',
 			success: function (data) {
 				$('#showInsert').empty("");
 
-				if (data == null) {
-					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
+				if (data.length === 0) {
+					var h3 = $('#su');
+					h3.prepend('查詢結果');
+					var table = $('#showInsert');
+					table.append("<tr><td colspan='2'>暫無資料</td></tr>");
 				} else {
 					var h3 = $('#su');
 					h3.prepend('查詢結果');
@@ -70,12 +73,12 @@
 	function selectJob(job) {
 			$.ajax({
 				type:'POST',
-				url: '/morari/work/selectLike.controller/'+job,
+				url: '/morari/admin/work/selectLike.controller/'+job,
 				dataType:'json',
 				success: function (data) {
 					$('#showInsert').empty("");
 
-					if (data == null) {
+					if (data.length === 0) {
 						$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 					} else {
 						var h3 = $('#su');
@@ -97,7 +100,7 @@
 							"<td>" + n.time + "</td>" + 
 							"<td>" + n.remark + "</td>" + 
 							"<td>" + n.img + "</td>" + 
-							"<td><button id='update' onclick='jobUpdate("+ n.rackid +")'>修改</button>" + "</td>" +"</tr>"+
+							"<td><form action='update.controller/"+ n.rackid +"' method='POST'><input type='submit' value='修改'></form></td>"+ 
 							"<td><button id='delete' onclick='jobDelete("+ n.rackid +")'>刪除</button>" + "</td>" +"</tr>";
 							table.append(tr);
 						});
@@ -110,7 +113,7 @@
 			if(confirm("確定刪除該筆資料(刊登編號:"+ rackid + ")?")){
 				$.ajax({
 					type: 'delete',
-					url: '/morari/work/jobDelete.controller/'+rackid,
+					url: '/morari/admin/work/jobDelete.controller/'+rackid,
 					dataType: 'TEXT',
 					success: function(data){
 						alert(data);

@@ -48,13 +48,13 @@ public class WorkPageController {
 	// 啟動insert
 	@PostMapping("/insert.controller")
 	public String processMainAction2() {
-		return "work/admin/insert2";
+		return "work/admin/insert";
 	}
 
 	// 啟動select
 	@PostMapping("/select.controller")
 	public String processMainAction3() {
-		return "work/admin/select2";
+		return "work/admin/select";
 	}
 
 	// 啟動update
@@ -131,10 +131,12 @@ public class WorkPageController {
 	@ResponseBody
 	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
 		List<JobBean> result = jService.findByJobisLike(job);
+		System.out.println(result);
 		if (result.size() == 0) {
 			return null;
-		}
+		}else {
 		return result;
+		}
 	}
 
 	// 透過uid搜尋

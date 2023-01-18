@@ -29,7 +29,7 @@
 		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img">
 	</form>
 	
-	<form action="jobCRUD.controller" method="GET"
+	<form action="crud.controller" method="GET"
 		enctype="multipart/form-data">
 		<input type="submit" value="回首頁">
 	</form>
@@ -54,7 +54,7 @@
 				}
 				$.ajax({
 					type: 'POST',
-					url: '/morari/work/jobInsert.controller',
+					url: '/morari/admin/work/jobInsert.controller',
 					contentType: 'application/json',
 					data: JSON.stringify(getFormData($("#insert"))),
 					success: function (response) {
