@@ -3,23 +3,22 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>新增</title>
+	<title>修改</title>
 </head>
 
 <body>
-	<h3>新增</h3>
-
-	<form id="insert" enctype="multipart/form-data">
+	<h3>修改</h3>
+	<form id="update" enctype="multipart/form-data">
 	
-		會員編號 <input type="text" name="uid" value='1' required><br>
+		會員編號 <input id="1" type="text" name="uid" value='1' required><br>
 
-		職缺 <input type="text" name="job" required><br>
-		薪資 <input type="text" name="salary" required><br>
-		人數 <input type="text" name="quantity" required><br>
-		地點 <input type="text" name="place" required><br>
-		可上班日期 <input type="text" name="date" required><br>
-		可上班時段 <input type="text" name="time" required><br>
-		備註<textarea name="remark" cols="20" rows="5"></textarea><br>
+		職缺 <input id="2" type="text" name="job" required><br>
+		薪資 <input id="3" type="text" name="salary" required><br>
+		人數 <input id="4" type="text" name="quantity" required><br>
+		地點 <input id="5" type="text" name="place" required><br>
+		可上班日期 <input id="6" type="text" name="date" required><br>
+		可上班時段 <input id="7" type="text" name="time" required><br>
+		備註<textarea id="8" name="remark" cols="20" rows="5"></textarea><br>
 
 		<input id="send" type="button" value="送出"><br>
 		<input type="reset" value="取消"><br>
@@ -29,8 +28,7 @@
 		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img">
 	</form>
 	
-	<form action="jobCRUD.controller" method="GET"
-		enctype="multipart/form-data">
+	<form action="/morari/work/jobCRUD.controller" method="GET">
 		<input type="submit" value="回首頁">
 	</form>
 	<hr>
@@ -41,6 +39,26 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
+			var url = window.location.href;
+			var id = url.split("/").pop();
+			console.log(id);
+			
+			$.ajax({
+				type: 'POST',
+				url: '/morari/work/selectRackId.controller/'+id,
+				dataType: 'json',			
+				success: function (data) {
+// 					$('#1').val(data.uid);
+					$('#2').val(data.job);
+					$('#3').val(data.salary);
+					$('#4').val(data.quantity);
+					$('#5').val(data.place);
+					$('#6').val(data.date);
+					$('#7').val(data.time);
+					$('#8').val(data.remark);
+					
+				}
+			});
 			$("#send").click(function () {
 				function getFormData($form) {
 					var unindexed_array = $form.serializeArray();
@@ -49,14 +67,14 @@
 					$.map(unindexed_array, function (n, i) {
 						indexed_array[n['name']] = n['value'];
 					});
-					
+					console.log(indexed_array);
 					return indexed_array;
 				}
 				$.ajax({
 					type: 'POST',
-					url: '/morari/work/jobInsert.controller',
+					url: '/morari/work/jobUpdate.controller',
 					contentType: 'application/json',
-					data: JSON.stringify(getFormData($("#insert"))),
+					data: JSON.stringify(getFormData($("#update"))),
 					success: function (response) {
 						$('#showInsert').empty("");
 					
@@ -64,14 +82,14 @@
 							$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 						} else {
 							var h3 = $('#su');
-							h3.prepend('新增成功');
+							h3.prepend('修改成功');
 							var table = $('#showInsert');
 							table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
 
 						
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
-								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
+								var tr = "<tr align='center'>" + "<td>" + response.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
 									"<td>" + response.quantity + "</td>" + "<td>" + response.place + "</td>" + "<td>" + response.date + "</td>" + "<td>" + response.time + "</td>" + "<td>" + response.remark + "</td>" + "<td>" + response.img + "</td>" +
 									"</tr>";
 								table.append(tr);
@@ -81,6 +99,7 @@
 				});
 			});
 		});
+
 	</script>
 </body>
 

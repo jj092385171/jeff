@@ -5,9 +5,12 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
@@ -18,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobRepository;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 
@@ -48,9 +52,9 @@ public class JobService {
 	}
 	
 	// 改職缺內容
-		public void updateJob(JobBean jobBean,Integer u) {
-			jobBean.setUserprofiles(uDao.findById(u).get());
-			jobDao.save(jobBean);
+		public JobBean updateJob(JobBean jobBean) {
+//			jobBean.setUserprofiles(uDao.findById(u).get());
+			return jobDao.save(jobBean);
 		}
 		
 	// 透過rackID秀圖片
@@ -83,9 +87,14 @@ public class JobService {
 	}
 
 	// 透過會員id找資料
-	public List<JobBean> findByUid(Integer uid ) {
-		return jobDao.findByUid(uid);
+	public List<JobBean> findUid(Integer uid ) {
+		
+		UserProfiles findById = uDao.findById(uid).get();
+		Collection<JobBean> job = findById.getJob();
+		ArrayList<JobBean> arrayList = new ArrayList<JobBean>(job);
+		return arrayList;
 	}
+	
 	// 圖片轉blob
 	public Blob fileToBlob(InputStream is, long size) throws IOException, SerialException, SQLException {
 		byte[] b = new byte[(int) size];

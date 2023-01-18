@@ -6,34 +6,120 @@
 </head>
 <body>
 	<div>
-		<form id="selectJob">
-
-			<h3>查詢</h3>
-			職缺:<select name="job">
-				<option value="廚師">廚師</option>
-				<option value="廚助">廚助</option>
-				<option value="房務員">房務員</option>
-				<option value="會計">會計</option>
-				<option value="櫃台">櫃台</option>
-				<option value="假日工讀生">假日工讀生</option>
-				<option value="行政管理人員">行政管理人員</option>
-				<option value="夜班保全">夜班保全</option>
-				<option value="其他">其他</option>
-			</select> <input type="submit" value="查詢">
-		</form>
+	<h3>查詢</h3>	
+			職缺<input id="sej" type="text" name="job" required>
+			<button id="selectJob"  onclick='selectJob(document.getElementById("sej").value)'>查詢</button>	
 		<hr>
-
-		<form id="selectUid">
-			會員ID:<input type="text" name="uID" required> 
-			<input type="submit" value="查詢">
-		</form>
+			會員ID:<input id="seu" type="text" name="uid" required> 
+			<button id="selectUid"  onclick='selectUid(document.getElementById("seu").value)'>查詢</button>	
+	
 
 	</div>
-	<hr>
+	<br>
 
-	<form action="jobCRUD.controller" method="POST"
+	<form action="jobCRUD.controller" method="GET"
 		enctype="multipart/form-data">
 		<input type="submit" value="回首頁">
 	</form>
+	<hr>
+	
+	<h3 id="su"></h3>
+	<table id="showInsert"></table>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+	function selectUid(uid) {
+		$.ajax({
+			type:'POST',
+			url: '/morari/work/selectUid.controller/'+uid,
+			dataType:'json',
+			success: function (data) {
+				$('#showInsert').empty("");
+
+				if (data == null) {
+					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
+				} else {
+					var h3 = $('#su');
+					h3.prepend('查詢結果');
+					var table = $('#showInsert');
+					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
+
+					$.each(data, function (i, n) {
+						console.log("data:" + data);
+						var tr = "<tr align='center'>" + 
+						"<td>" + n.userprofiles.uid + "</td>" + 
+						"<td>" + n.rackid + "</td>" +
+						"<td>" + n.rackup + "</td>" + 
+						"<td>" + n.job + "</td>" + 
+						"<td>" + n.salary + "</td>" + 
+						"<td>" + n.quantity + "</td>" + 
+						"<td>" + n.place + "</td>" + 
+						"<td>" + n.date + "</td>" + 
+						"<td>" + n.time + "</td>" + 
+						"<td>" + n.remark + "</td>" + 
+						"<td>" + n.img + "</td>" + 
+						"<td><form action='update.controller/"+ n.rackid +"' method='POST'><input type='submit' value='修改'></form></td>"+ 					
+						"<td><button id='delete' onclick='jobDelete("+ n.rackid +")'>刪除</button></td>" +"</tr>";
+						table.append(tr);
+					});
+				}
+			}
+		});
+	};
+	function selectJob(job) {
+			$.ajax({
+				type:'POST',
+				url: '/morari/work/selectLike.controller/'+job,
+				dataType:'json',
+				success: function (data) {
+					$('#showInsert').empty("");
+
+					if (data == null) {
+						$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
+					} else {
+						var h3 = $('#su');
+						h3.prepend('查詢結果');
+						var table = $('#showInsert');
+						table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
+
+						$.each(data, function (i, n) {
+							console.log("data:" + data);
+							var tr = "<tr align='center'>" + 
+							"<td>" + n.userprofiles.uid + "</td>" + 
+							"<td>" + n.rackid + "</td>" +
+							"<td>" + n.rackup + "</td>" + 
+							"<td>" + n.job + "</td>" + 
+							"<td>" + n.salary + "</td>" + 
+							"<td>" + n.quantity + "</td>" + 
+							"<td>" + n.place + "</td>" + 
+							"<td>" + n.date + "</td>" + 
+							"<td>" + n.time + "</td>" + 
+							"<td>" + n.remark + "</td>" + 
+							"<td>" + n.img + "</td>" + 
+							"<td><button id='update' onclick='jobUpdate("+ n.rackid +")'>修改</button>" + "</td>" +"</tr>"+
+							"<td><button id='delete' onclick='jobDelete("+ n.rackid +")'>刪除</button>" + "</td>" +"</tr>";
+							table.append(tr);
+						});
+					}
+				}
+			});
+		};
+	
+	function jobDelete(rackid){
+			if(confirm("確定刪除該筆資料(刊登編號:"+ rackid + ")?")){
+				$.ajax({
+					type: 'delete',
+					url: '/morari/work/jobDelete.controller/'+rackid,
+					dataType: 'TEXT',
+					success: function(data){
+						alert(data);
+						location.reload();
+					}
+				});
+			}else{				
+			}
+		};
+		</script>
 </body>
 </html>

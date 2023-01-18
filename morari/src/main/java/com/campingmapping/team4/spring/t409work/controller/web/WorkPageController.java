@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 
 @Controller
-@RequestMapping("/work")
+@RequestMapping("/admin/work")
 public class WorkPageController {
 
 	@Autowired
@@ -32,29 +33,34 @@ public class WorkPageController {
 	public String workIndex() {
 		return "work/guest/index";
 	}
-
 	// 啟動我的首頁
-	@GetMapping("/jobIndex.controller")
-	public String processMainAction() {
-		return "t4_09job/job/jobIndex";
+	@GetMapping("/ttt")
+	public String ttt() {
+		return "work/admin/crud";
 	}
 
 	// 啟動CRUD
-	@GetMapping("/jobCRUD.controller")
-	public String processMainAction1() {
-		return "work/admin/jobCRUD";
-	}
+//	@GetMapping("/jobCRUD.controller")
+//	public String processMainAction1() {
+//		return "work/admin/jobCRUD";
+//	}
 
 	// 啟動insert
-	@GetMapping("/insert.controller")
+	@PostMapping("/insert.controller")
 	public String processMainAction2() {
-		return "work/admin/insert";
+		return "work/admin/insert2";
 	}
 
 	// 啟動select
 	@PostMapping("/select.controller")
 	public String processMainAction3() {
-		return "t4_09job/job/JobModel/select";
+		return "work/admin/select";
+	}
+
+	// 啟動update
+	@PostMapping("/update.controller/{u}")
+	public String processMainAction4() {
+		return "work/admin/update";
 	}
 
 	// 處理照片格式(進資料庫)
@@ -71,21 +77,28 @@ public class WorkPageController {
 		}
 	}
 
-	//新增 ok
+	// 新增
 	@PostMapping("/jobInsert.controller")
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
-		return jService.insert(jobBean,1);
+		return jService.insert(jobBean, 2);
 	}
 
-
-	// 修改ok
-	@GetMapping("/jobUpdate.controller/{u}")
+	// 修改
+	@PostMapping("/jobUpdate.controller")
 	@ResponseBody
-	public JobBean processUpdateAction(@RequestBody JobBean jBean,@PathVariable Integer u) {	
-		jService.updateJob(jBean, u);
-		return jBean;
+	public JobBean processUpdateAction(@RequestBody JobBean jBean) {	
+		return jService.updateJob(jBean);
 	}
+
+	// 透過rackid找資料後給前端修改
+	@PostMapping("/selectRackId.controller/{rackID}")
+	@ResponseBody
+	public JobBean processAction4(@PathVariable Integer rackID) {
+		JobBean result = jService.findById(rackID);
+		return result;
+	}
+
 	// 找全部 ok
 	@PostMapping("/jobShowAll.controller")
 	@ResponseBody
@@ -106,40 +119,34 @@ public class WorkPageController {
 	}
 
 	// 刪除
-	@DeleteMapping("/jobDelete.controller/{de}")
-	public String processDeleteAction(@PathVariable("de") Integer rackID) {
+	@DeleteMapping("/jobDelete.controller/{rackID}")
+	@ResponseBody
+	public String processDeleteAction(@PathVariable Integer rackID) {
 		jService.deleteById(rackID);
 		return "ok";
 	}
 
 	// 模糊搜尋
-	@PostMapping("/selectLike.controller")
+	@PostMapping("/selectLike.controller/{job}")
 	@ResponseBody
-	public List<JobBean> processSelectlikeAction(@RequestParam("job") String job) {
+	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
 		List<JobBean> result = jService.findByJobisLike(job);
-		if (result.size() == 0) {// 在前面判斷 再給查無此資料字串到html
-			return null;
-		}
-		return result;
-	}
-
-	// 透過uid搜尋
-	@PostMapping("/selectUid.controller")
-	@ResponseBody
-	public List<JobBean> processSelectUidAction(@RequestParam("uID") Integer uid) {
-		List<JobBean> result = jService.findByUid(uid);
 		if (result.size() == 0) {
 			return null;
 		}
 		return result;
 	}
 
-	// 透過rackid找資料後給前端修改
-	@PostMapping("/selectRackId.controller")
+	// 透過uid搜尋
+	@PostMapping("/selectUid.controller/{uid}")
 	@ResponseBody
-	public JobBean processAction4(@RequestParam("up") Integer rackID) {
-		JobBean result = jService.findById(rackID);
+	public List<JobBean> processSelectUidAction(@PathVariable Integer uid) {
+		List<JobBean> result = jService.findUid(uid);
+		if (result.size() == 0) {
+			return null;
+		}
 		return result;
 	}
 
+	
 }

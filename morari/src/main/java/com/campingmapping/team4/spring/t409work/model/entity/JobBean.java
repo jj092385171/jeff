@@ -4,7 +4,6 @@ import java.sql.Blob;
 import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,6 +31,10 @@ public class JobBean {
 //	@JsonIgnore
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
+	
+//	@Column(name="uid")
+//	@Transient
+//	private Integer uid;
 
 	@Column(name = "job")
 	private String job;// 職缺
