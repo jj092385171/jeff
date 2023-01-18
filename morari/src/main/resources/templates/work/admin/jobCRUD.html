@@ -44,16 +44,40 @@
 
 						$.each(response, function (i, n) {
 							console.log("response:" + response);
-							var tr = "<tr align='center'>" + "<td>" + n.userprofiles.uid + "</td>" + "<td>" + n.rackid + "</td>" 
-							+ "<td>" + n.rackup + "</td>" + "<td>" + n.job + "</td>" + "<td>" + n.salary + "</td>" + 
-							"<td>" + n.quantity + "</td>" + "<td>" + n.place + "</td>" + "<td>" + n.date + "</td>" + 
-							"<td>" + n.time + "</td>" + "<td>" + n.remark + "</td>" + "<td>" + n.img + "</td>" 
-							+ "<td>"+"<button id='delete' onclick=delete("+"n.rackid"+")>"+"刪除"+"</button>" + "</td>" +"</tr>";
+							var tr = "<tr align='center'>" + 
+							"<td>" + n.userprofiles.uid + "</td>" + 
+							"<td>" + n.rackid + "</td>" +
+							"<td>" + n.rackup + "</td>" + 
+							"<td>" + n.job + "</td>" + 
+							"<td>" + n.salary + "</td>" + 
+							"<td>" + n.quantity + "</td>" + 
+							"<td>" + n.place + "</td>" + 
+							"<td>" + n.date + "</td>" + 
+							"<td>" + n.time + "</td>" + 
+							"<td>" + n.remark + "</td>" + 
+							"<td>" + n.img + "</td>" + 
+							"<td><button id='delete' onclick='function jobDelete("+ n.rackid +")'>刪除</button>" + "</td>" +"</tr>";
 							table.append(tr);
 						});
 					}
 				}
 			});
+			
+			function jobDelete(rackid){
+				if(confirm("確定刪除該筆資料(刊登編號:"+ rackid + ")?")){
+					$.ajax({
+						type: 'delete',
+						url: '/morari/work/jobDelete.controller/'+rackid,
+						contentType: 'text',
+						success: function(data){
+							alert(data);
+							location.reload();
+						}
+					});
+				}else{				
+				}
+			};
+	
 		});
 
 	</script>
