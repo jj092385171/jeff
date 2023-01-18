@@ -32,12 +32,24 @@ public class MallPageComtroller {
 	public String processQueryAllAction() {
 		return "mall/admin/index";
 	}
+	
+	@GetMapping("/productcreate.controller")
+	public String processcreateAction() {
+		return "mall/admin/newproduct";
+	}
+	
+	@GetMapping("/updateproduct.controller/{id}")
+	public String processupdateAction() {
+		return "mall/admin/updateproduct";
+	}
 
 	// 新增一筆產品
-	@PostMapping("/create")
-	public String create(@RequestBody Category category) {
+	@PostMapping("/create.controller")
+	@ResponseBody
+	public String create(@RequestBody Category category ) {
+		System.out.println(category.getPdid()); 
 		cServiceImpl.create(category);
-		return "";
+		return "insert ok!!";
 	}
 
 	// 搜尋所有產品
@@ -48,9 +60,9 @@ public class MallPageComtroller {
 	}
 
 	// 依Pdid來搜尋單筆產品
-	@GetMapping("/getPersonById/{Pdid}")
+	@GetMapping("/selectByPdid/{Pdid}")
 	@ResponseBody
-	public Category getPersonById(@PathVariable int Pdid) {
+	public Category selectByPdid(@PathVariable int Pdid) {
 		return cServiceImpl.selectByPdid(Pdid);
 	}
 
@@ -60,13 +72,15 @@ public class MallPageComtroller {
 	public String deleteByPdid(@PathVariable int Pdid) {
 		
 		cServiceImpl.deleteByPdid(Pdid);
-		return "delete ok!";
+		return "刪除成功!";
 	}
 
 	// 依Pdid來修改單筆產品
 	@PutMapping("/updateByPdid")
-	public Category updateByPdid(@RequestBody Category category) {
-		return cServiceImpl.updateByPdid(category);
+	@ResponseBody
+	public String updateByPdid(@RequestBody Category category) {
+		cServiceImpl.updateByPdid(category);
+		return "修改成功!";
 	}
 
 }

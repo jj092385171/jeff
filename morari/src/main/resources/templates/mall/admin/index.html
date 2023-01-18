@@ -11,7 +11,7 @@
 	</style>
 	<script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
-		fetch('selectAllPd', { method: 'GET' }).then(
+		fetch('/morari/mall/selectAllPd', { method: 'GET' }).then(
 			function (response) {
 				if (response.status != 200) {
 					console.log(response.satus);
@@ -21,7 +21,7 @@
 				response.json().then(function (n) {
 					var tableData = 
 						"<th>產品編號</th>"+"<th>產品名稱</th>"+
-						"<th>會員id</th>"+"<th>產品類型</th>"+
+						"<th>會員id</th>"+"<th>品牌名稱</th>"+
 						"<th>產品規格</th>"+	"<th>類型</th>"+
 						"<th>照片</th>"+"<th>產品價格</th>"+
 						"<th>產品庫存</th>"+"<th>上架時間</th>"+
@@ -51,13 +51,17 @@
 		function confirmDelete(pdid) {
 			if (confirm("確定刪除此項產品資料(編號:" + pdid + ")?")) {
 				$.ajax({
-					   url:'deleteByPdid/'+pdid,
+					   url:'/morari/mall/deleteByPdid/'+pdid,
 					   type:'delete',
-					   dataType:'TEXT',
+					   dataType:'text',
 					   success: function(data){
 					   alert(data);
 					   location.reload();
-					   }
+					   },
+						error: function(){
+						// 刪除失敗時的處理
+						alert('刪除失敗');
+					}
 				
 				  });
 			} else {
@@ -65,9 +69,16 @@
 		}
 		function updateProduct(pdid) {
 			if (confirm("確定修改此項產品資料(編號:" + pdid + ")?")) {
-				document.forms[0].action="http://localhost:8080/campingmapping/CategorySelectByPdidServlet.do?pdid="+id;
-				document.forms[0].method="POST";
-				document.forms[0].submit();
+				$.ajax({
+					   success: function(data){
+					   window.location.href = "/morari/mall/updateproduct.controller/"+pdid;
+					   },
+						error: function(){
+						// 刪除失敗時的處理
+						alert('刪除失敗');
+					}
+				
+				  });
 				
 			} else {
 			}
@@ -79,6 +90,9 @@
 
 <body>
 	<h3>商城管理</h3>
+	<form action="/morari/mall/productcreate.controller"method="GET">
+	<input type="submit" value="新增產品">
+	</form>
 	<table id="result"></table>
 </body>
 
