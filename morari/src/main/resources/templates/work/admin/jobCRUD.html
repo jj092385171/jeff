@@ -39,12 +39,16 @@
 						var h3 = $('#su');
 						//h3.prepend('新增成功');
 						var table = $('#showInsert');
-						table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
+						table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
 
 
 						$.each(response, function (i, n) {
 							console.log("response:" + response);
-							var tr = "<tr align='center'>" + "<td>" + n.userprofiles.uid + "</td>" + "<td>" + n.rackid + "</td>" + "<td>" + n.rackup + "</td>" + "<td>" + n.job + "</td>" + "<td>" + n.salary + "</td>" + "<td>" + n.quantity + "</td>" + "<td>" + n.place + "</td>" + "<td>" + n.date + "</td>" + "<td>" + n.time + "</td>" + "<td>" + n.remark + "</td>" + "<td>" + n.img + "</td>" + "</tr>";
+							var tr = "<tr align='center'>" + "<td>" + n.userprofiles.uid + "</td>" + "<td>" + n.rackid + "</td>" 
+							+ "<td>" + n.rackup + "</td>" + "<td>" + n.job + "</td>" + "<td>" + n.salary + "</td>" + 
+							"<td>" + n.quantity + "</td>" + "<td>" + n.place + "</td>" + "<td>" + n.date + "</td>" + 
+							"<td>" + n.time + "</td>" + "<td>" + n.remark + "</td>" + "<td>" + n.img + "</td>" 
+							+ "<td>"+"<button id='delete' onclick=delete("+"n.rackid"+")>"+"刪除"+"</button>" + "</td>" +"</tr>";
 							table.append(tr);
 						});
 					}
