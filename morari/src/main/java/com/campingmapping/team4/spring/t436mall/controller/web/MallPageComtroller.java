@@ -30,7 +30,7 @@ public class MallPageComtroller {
 	
 	@GetMapping("/productqueryallmain.controller")
 	public String processQueryAllAction() {
-		return "mall/admin/index";
+		return "mall/admin/productindex";
 	}
 	
 	@GetMapping("/productcreate.controller")
