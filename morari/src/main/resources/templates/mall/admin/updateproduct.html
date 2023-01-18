@@ -32,7 +32,8 @@ td {
 	</select>產品類型<br> 
 	<input type="text"  name="pdpicture" id="pdpicture"/>照片<br>
 	<input type="text"  name="pdprice" id="pdprice">價位<br> 
-	<input type="text"  name="pdinventory" id="pdinventory">庫存數量<br> <br>
+	<input type="text"  name="pdinventory" id="pdinventory">庫存數量<br>
+	<input type="text"  name="pddate" id="pddate" readonly="readonly">上架時間<br> <br>
 	<input type="button" value="提交" onclick="submitForm()">
 </form>
 
@@ -56,6 +57,7 @@ $.ajax({
 		$('#pdpicture').val(data.pdpicture);
 		$('#pdprice').val(data.pdprice);
 		$('#pdinventory').val(data.pdinventory);
+		$('#pddate').val(data.pddate);
 		
 	}
 });
