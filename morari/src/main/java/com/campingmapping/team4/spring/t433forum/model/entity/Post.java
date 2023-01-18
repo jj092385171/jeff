@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -37,10 +38,10 @@ public class Post {
 	@JsonIgnoreProperties("post")
 	private UserProfiles userprofiles;
 
-	@Column(name = "title")
+	@Column(name = "title", nullable = false)
 	private String title;
 	
-	@Column(name = "content")
+	@Column(name = "content", nullable = false)
 	private String content;
 	
 	@Column(name = "people")

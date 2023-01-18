@@ -1,16 +1,16 @@
 // 載入 你的.html
-fetch("/morari/forum/html/newpost.html")
-    .then(response => response.text())
-    .then(html => {
-        // 將載入的 HTML 放入 .footer 元素中
-        document.querySelector(".newpost").innerHTML = html;
-    });
+//fetch("/morari/forum/html/newpost.html")
+//    .then(response => response.text())
+//    .then(html => {
+//        // 將載入的 HTML 放入 .footer 元素中
+//        document.querySelector(".newpost").innerHTML = html;
+//    });
 
 // 送資料判斷
 	
     
 // 顯示畫面
-	$(function(){
+$(function(){
 	$.ajax({
 		url:"/morari/showall.controller",
 		dataType:"JSON",
@@ -24,9 +24,8 @@ fetch("/morari/forum/html/newpost.html")
 				var tr = "<tr align='center'>" + 
 				"<td>" + n.postid + "</td><td>" + n.userid + "</td><td>" + n.title + "</td><td>" + n.content +"</td><td>" + n.people + "</td><td>" + 
 				n.price + "</td><td>" + n.county + "</td><td>" + n.startdate + "</td><td>" + n.enddate + "</td><td>" + n.score + "</td><td>" + 
-				n.releasedate + "</td><td>" + n.userlike + "</td><td>" + n.userunlike + "</td><td>" + n.postreport + "</td><td>" + n.posthide + "</td><td>" + <a href='/morari/updatepost.controller'>修改貼文</a> + "</td></tr>";
+				n.releasedate + "</td><td>" + n.userlike + "</td><td>" + n.userunlike + "</td><td>" + n.postreport + "</td><td>" + n.posthide + "</td><td><a href='/morari/forum/showupdate.controller/" + n.postid + "'>修改貼文</a></td></tr>";
 				table.append(tr);
-				console.log(n.postid);
 			});
 		}
 	});

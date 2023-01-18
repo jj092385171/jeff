@@ -1,0 +1,39 @@
+<h3>修改貼文</h3>
+<form>
+	<div>
+		<label>*標題</label>
+		<input type="text" name="title" id="title" maxlength="30" size="80" required="required">
+	</div>
+	<div>
+		<label>*內容</label>
+		<textarea name="content" id="content" cols="66" rows="10" required="required"></textarea>
+	</div>
+	<div>
+		<label>露營人數</label>
+		<select name="people" id="people"></select>
+	</div>
+	<div>
+		<label>露營費用</label>
+		<input type="number" name="price" id="price" min="1">
+	</div>
+	<div>
+		<label>露營城市</label>
+		<select name="county" id="county"></select>
+	</div>
+	<div>
+		<label>開始露營日期</label>
+		<input type="date" name="startDate" id="startDate">
+	</div>
+	<div>
+		<label>結束露營日期</label>
+		<input type="date" name="endDate" id="endDate">
+	</div>
+	<div>
+		<label>評分</label>
+		<select name="score" id="score"></select>
+	</div>
+	<div>
+		<input type="button" value="修改完成" id="sub">
+		<input type="button" value="回上一頁" onclick="history.back()">
+	</div>
+</form>
