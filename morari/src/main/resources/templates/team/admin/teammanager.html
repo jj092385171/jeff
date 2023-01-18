@@ -26,15 +26,17 @@
 					var optionData= "";
 					optionData += "<option value=" + "0" + '"' + ">" + "請選擇表單號碼" + "</option>"
 					for (var i = 0; i < data.length; i++) {
-						var pDay = new Date(data[i].postdate);
-						var sDay = new Date(data[i].startdate);
-						var eDay = new Date(data[i].enddate);
+						var pDay = new Date(data[i].postdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});
+						var sDay = new Date(data[i].startdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
+						var eDay = new Date(data[i].enddate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
+						
 						var pair = "可配對";
 						if (data[i].pair != 0) {
 							pair = "不可配對"
 						}
 						
-						resultText += data[i].initiatingnum + " " + data[i].userprofiles
+						resultText += data[i].initiatingnum + " " 
+						+ data[i].userprofiles.uid
 							+ " " + data[i].postdate + " " + data[i].startdate + " "
 							+ data[i].enddate + " " + data[i].currentnum + " "
 							+ data[i].acceptablenum + " " + data[i].camparea + " "
@@ -45,13 +47,19 @@
 						" method=" + '"delete"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" + 
 						"<button type=" + '"button"' + "name=" + '"delete"' + ">" + "刪除" + "</button>" + "</form>"+
-						"<form " + "action=" + "/update.controller" + 
+						
+						"<form " + "action=" + "/morari/team/update.controller" + 
 						" method=" + '"get"' +
 						"><input type="+ '"hidden"' + "name=" + '"dnum"' + "value=" + '"' + data[i].initiatingnum + '"' +">" +
-						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + data[i].userprofiles + '"' +">"+
+						"<input type="+ '"hidden"' + "name=" + '"pman"' + "value=" + '"' + 
+						data[i].userprofiles.uid + 
+						'"' +">"+
 						"<button type=" + '"submit"' + "name=" + '"update"' + ">" + "修改" + "</button>" + "</form>"
+						
 						+ "</td>" + "<td>" + data[i].initiatingnum + 
-						"</td>" + "<td>" + data[i].userprofiles + "</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
+						"</td>" + "<td>" + 
+						data[i].userprofiles.uid + 
+						"</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
 						eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
 						"<td>" + data[i].camparea + "</td>" + "<td>" + pair + "</td>" + "</tr>"
 						
@@ -69,7 +77,7 @@
 					});
 					optionData += "<option value=" + "0" + '"' + ">" + "請選擇露營地點" + "</option>"
 					for (var i = 0; i < campareaData.length; i++){
-						optionData += "<option value=" + campareaData[i].camparea + '"' + ">" + campareaData[i].camparea + "</option>"
+						optionData += "<option value=" + campareaData[i].camparea + ">" + campareaData[i].camparea + "</option>"
 					}
 					document.getElementById('camparea').innerHTML = optionData;
 					
@@ -82,7 +90,7 @@
 					});
 					optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
 					for (var i = 0; i < uidData.length; i++){
-						optionData += "<option value=" + uidData[i].userprofiles + '"' + ">" + uidData[i].userprofiles + "</option>"
+						optionData += "<option value=" + '"' + uidData[i].userprofiles.uid + '"' + ">" + uidData[i].userprofiles.uid + "</option>"
 					}
 					document.getElementById('userprofiles').innerHTML = optionData;
 				});
@@ -133,11 +141,12 @@
 		            xhr.send();
 		            }
 		     		else if(name == "select"){
-		     			formData.forEach(function(value, key) {
-		     			    if (key === "initiatingnum" || key === "postmember") {
-		     			        formData.set(key, parseInt(value));
-		     			    }
-		     			});
+		     			
+		     			var inum = formData.get('initiatingnum');
+		     			formData.delete("initiatingnum");
+		     			formData.append("initiatingnum", parseInt(inum));
+		     			formData.delete("userprofiles");
+		     			
 		     			console.log(formData)
 		     			var startdate = formData.get('startdate');
 		     			console.log(startdate);
@@ -147,7 +156,7 @@
 		     			const data = Object.fromEntries(formData);
 						const json = JSON.stringify(data);
 		     			
-		     			fetch('/morari/select.controller', {
+		     			fetch('select.controller', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json'
@@ -157,7 +166,28 @@
 							.then(function (response) {
 								console.log(response);
 								if (response.status == 200) {
-									location.href = 'team.controller';
+									response.json().then(function (data){
+										var resultText = "";
+										var selectData = "";
+										for (var i = 0; i < data.length; i++) {
+											var pDay = new Date(data[i].postdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});
+											var sDay = new Date(data[i].startdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
+											var eDay = new Date(data[i].enddate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
+											
+											var pair = "可配對";
+											if (data[i].pair != 0) {
+												pair = "不可配對"
+											}
+											
+											resultText += data[i].initiatingnum + " " 
+											+ data[i].userprofiles.uid
+												+ " " + pDay + " " + sDay + " "
+												+ eDay + " " + data[i].currentnum + " "
+												+ data[i].acceptablenum + " " + data[i].camparea + " "
+												+ pair + "<br/>";
+										}
+										console.log(resultText);
+									});
 								}
 							});
 		            }
@@ -172,7 +202,7 @@
 <body>
 	<h3>揪團管理</h3>
 	<table id="result"></table>
-	<form id="select" action="" method="POST">
+	<form id="select">
 									<ul class="actions">
 										<li><button type="button" name="select">查詢</button></li>
 										<li>起始日期: <input type="date" id="startdate" name="startdate"></li>

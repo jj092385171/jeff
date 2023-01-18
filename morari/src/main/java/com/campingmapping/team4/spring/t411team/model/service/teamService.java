@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t411team.model.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,18 @@ public class teamService {
 	
 	public List<Initiating> findAll(){
 		return iRepo.findAll();
+	}
+	
+	public List<Initiating> selectDynamic(String uid, Date startdate, Date enddate, String camparea){
+		List<Initiating> result = new ArrayList<Initiating>(); 
+		List<Initiating> dateList = iRepo.findByStartdateGreaterThanEqualAndEnddateLessThanEqual(startdate, enddate);
+		List<Initiating> campareaList = iRepo.findByCamparea(camparea);
+//		List<Initiating> uidList = iRepo.findByUid(uid);
+		if(dateList!=null) {
+			result.addAll(campareaList);
+//			result.containsAll(uidList);
+		}
+		return result;
 	}
 	
 }

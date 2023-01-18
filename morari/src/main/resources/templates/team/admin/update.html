@@ -13,7 +13,8 @@
 
 				const formData = new FormData(form);
 				const pair = formData.get('pair');
-
+				formData.delete("userprofiles");
+				
 				// 如果 radio 按鈕未選中，則將其值設置為 undefined
 				if (!pair) {
 					formData.set('pair', undefined);
@@ -43,8 +44,8 @@
 <body>
 	<h3>修改</h3>
 	<form id="update">
-		<input type="hidden" id="initiatingnum" name="initiatingnum"><br><input type="hidden" id="uid"
-			name="uid">
+		<input type="hidden" id="initiatingnum" name="initiatingnum"><br>
+		<input type="hidden" id="userprofiles" name="userprofiles">
 		起始日期:<input type="date" id="startdate" name="startdate" required><br>
 		結束日期:<input type="date" id="enddate" name="enddate" required><br>
 		現有人數:<input type="text" id="currentnum" name="currentnum" onkeyup="value=value.replace(/[^\d]/g,'') " required
@@ -64,7 +65,7 @@
 		console.log(value2);
 		const inputElement1 = document.getElementById('initiatingnum');
 		inputElement1.value = value1;
-		const inputElement2 = document.getElementById('postmember');
+		const inputElement2 = document.getElementById('userprofiles');
 		inputElement2.value = value2;
 	</script>
 </body>

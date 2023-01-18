@@ -2,6 +2,7 @@ package com.campingmapping.team4.spring.t411team.controller.web;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,6 @@ public class TeamPageComtroller {
 	@ResponseBody
 	public String insert(@RequestBody Initiating i , @PathVariable String uid) {
 		String id = uid.substring(1, uid.length()-1);
-		System.out.println(id);
 		teamService.insert(i, Integer.valueOf(id));
 		return "Insert OK";
 	}
@@ -72,21 +72,24 @@ public class TeamPageComtroller {
 	
 	@PutMapping("/updateMaterial.controller")
 	@ResponseBody
-	public String update(@RequestBody Initiating initiating) {
-		Initiating in = teamService.findById(initiating.getInitiatingnum());
-		initiating.setPostdate(in.getPostdate());
-		teamService.update(initiating);
+	public String update(@RequestBody Initiating i) {
+		Initiating in = teamService.findById(i.getInitiatingnum());
+		i.setPostdate(in.getPostdate());
+		i.setUserprofiles(in.getUserprofiles());
+		teamService.update(i);
 		return "update OK";
 	}
 	
 	@PostMapping("/select.controller")
 	@ResponseBody
 	public List<Initiating> select(@RequestBody Initiating i){
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		String std = dateFormat.format(i.getStartdate());
-		String ed = dateFormat.format(i.getEnddate());
-		System.out.println(std+ "--" + ed);
-		return null;
+		DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		String uid = "";
+//		Date std = sdf.parse("1900-01-01");
+//		Date ed = sdf.parse("2099-12-31");
+		
+		List<Initiating> result = teamService.selectDynamic(uid, i.getStartdate(), i.getEnddate(), i.getCamparea());
+		return result;
 	}
 
 }
