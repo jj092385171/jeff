@@ -21,6 +21,8 @@ import jakarta.persistence.Table;
 @Component
 public class Tag implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TAGID")
@@ -33,9 +35,11 @@ public class Tag implements Serializable {
 	@ManyToMany(mappedBy = "tags")
 	private Set<Camp> camps = new HashSet<>();
 
+	
 	public Tag() {
 	}
 
+	
 	public Integer getTagID() {
 		return tagID;
 	}

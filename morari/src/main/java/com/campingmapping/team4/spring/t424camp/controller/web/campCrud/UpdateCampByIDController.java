@@ -10,20 +10,24 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.service.CampService;
 
 @Controller
+@RequestMapping("/admin/camp")
 public class UpdateCampByIDController {
 
 	@Autowired
 	private CampService campService;
 
 	@PostMapping("/updateCampByID.controller")
-	public String updateCampByID(@RequestParam("campID") @Nullable Integer campID,
+	@ResponseBody
+	public Camp updateCampByID(@RequestParam("campID") @Nullable Integer campID,
 			@RequestParam("campName") @Nullable String campName,
 			@RequestParam("campPicturesPath") @Nullable MultipartFile mf,
 			@RequestParam("cityID") @Nullable String cityID, @RequestParam("location") @Nullable String location,
@@ -64,20 +68,20 @@ public class UpdateCampByIDController {
 			errors.put("tagIDs", "必須選擇標籤");
 		}
 
-		// 錯誤導回
-		if (errors != null && !errors.isEmpty()) {
-			m.addAttribute("errors", errors);
-
-			return "t4_24camp/admin/UpdateCampByIDForm";
-		}
+//		// 錯誤導回
+//		if (errors != null && !errors.isEmpty()) {
+//			m.addAttribute("errors", errors);
+//
+//			return "t4_24camp/admin/UpdateCampByIDForm";
+//		}
 
 		Camp camp = campService.update(campID, campName, Integer.valueOf(cityID), location, fileName, description,
 				tagIDs);
 
-		m.addAttribute("camp", camp);
-		m.addAttribute("what", "更新");
+//		m.addAttribute("camp", camp);
+//		m.addAttribute("what", "更新");
 
-		return "t4_24camp/admin/InsertUpdateCampSuccess";
+		return camp;
 	}
 
 }

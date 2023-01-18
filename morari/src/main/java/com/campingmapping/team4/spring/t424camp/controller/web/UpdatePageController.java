@@ -3,8 +3,11 @@ package com.campingmapping.team4.spring.t424camp.controller.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.entity.Site;
@@ -12,6 +15,7 @@ import com.campingmapping.team4.spring.t424camp.model.service.CampService;
 import com.campingmapping.team4.spring.t424camp.model.service.SiteService;
 
 @Controller
+@RequestMapping("/admin/camp")
 public class UpdatePageController {
 
 	@Autowired
@@ -19,25 +23,33 @@ public class UpdatePageController {
 
 	@Autowired
 	private SiteService siteService;
+	
+	
+	@GetMapping("/UpdateCampByIDForm")
+	public String toUpadteCampPage() {
+		return "camp/admin/UpdateCampByIDForm" ;
+	}
 
-	@PostMapping("/upadteCampPage1.controller")
-	public String upadteCampPage1(@RequestParam("campID") int campID, Model m) {
+	@PostMapping("/upadteCampPage.controller")
+	@ResponseBody
+	public Camp upadteCampPage(@RequestBody int campID, Model m) {
 
 		Camp camp = campService.findById(campID);
 
-		m.addAttribute("camp", camp);
+//		m.addAttribute("camp", camp);
 
-		return "t4_24camp/admin/UpdateCampByIDForm";
+		return camp;
 	}
 
 	@PostMapping("/upadteSitePage.controller")
-	public String upadteSitePage(@RequestParam("siteID") int siteID, Model m) {
+	@ResponseBody
+	public Site upadteSitePage(@RequestBody int siteID, Model m) {
 
 		Site site = siteService.findBySiteId(siteID);
 
-		m.addAttribute("site", site);
+//		m.addAttribute("site", site);
 
-		return "t4_24camp/admin/UpdateSiteByIDForm";
+		return site;
 	}
 
 }

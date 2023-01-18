@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                var campID = JSON.parse(sessionStorage.getItem("campID"));
+                $.getJSON('/morari/admin/camp/sitesOfCamp.controller/' + campID, function (data) {
+                    // console.log(data);
+                    var table = $('#table');
+                    var tr = '';
+                    table.append("<thead><th>營位區編號</th><th>營位區名</th><th>營區位圖片</th><th>總營位</th><th>營位金額</th><th>更新</th><th>刪除</th></thead>");
+                    $.each(data, function (i, n) {
+
+                        tr = "<tbody>"
+                            + "<tr>"
+                            + "<td>" + n.siteID + "</td>"
+                            + "<td>" + n.siteName + "</td>"
+                            + "<td>" + '<img width="80" height="100" src="/morari/images/' + n.sitePicturesPath + '">' + "</td>"
+                            + "<td>" + n.totalSites + "</td>"
+                            + "<td>" + n.siteMoney + "</td>"
+                            + "<td>"
+                            + '<form action= "/morari/admin/camp/upadteSitePage.controller" method="POST" >'
+                            + '<button onclick="return check()" type="submit" name="siteID" value="' + n.siteID + '">更新</button>'
+                            + "</form>"
+                            + "</td>"
+                            + "<td>"
+                            + '<form action = "/morari/admin/camp/deleteSiteByID.controller" method = "POST" >'
+                            + '<button onclick="return check()" type="submit" name="siteID" value="' + n.siteID + '">刪除</button>'
+                            + "</form >"
+                            + "</td>"
+                            + "</tr>"
+                            + "</tbody>"
+                        table.append(tr);
+                    });
+                })
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <table id="table"></table>
+</body>
+
+</html>

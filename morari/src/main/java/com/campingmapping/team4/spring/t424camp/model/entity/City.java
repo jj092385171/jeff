@@ -22,6 +22,8 @@ import jakarta.persistence.Table;
 @Component
 public class City implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CITYID")
@@ -34,9 +36,11 @@ public class City implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city")
 	private Set<Camp> camps = new HashSet<Camp>();
 
+	
 	public City() {
 	}
 
+	
 	public Integer getCityID() {
 		return cityID;
 	}

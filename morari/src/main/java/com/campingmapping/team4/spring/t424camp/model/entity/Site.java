@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +17,8 @@ import jakarta.persistence.Table;
 @Table(name = "site")
 @Component
 public class Site implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,11 +37,12 @@ public class Site implements Serializable {
 	@Column(name = "SITEMONEY")
 	private Integer siteMoney;
 
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKCAMPID")
 	private Camp camp;
 
+	
 	public Site() {
 	}
 
@@ -65,6 +66,7 @@ public class Site implements Serializable {
 		this.camp = camp;
 	}
 
+	
 	public Integer getSiteID() {
 		return siteID;
 	}
