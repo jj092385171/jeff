@@ -35,6 +35,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
 @Data
+@ToString(exclude = { "job", "initiatings", "categories", "loginHistories" })
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

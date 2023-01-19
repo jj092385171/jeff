@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // System.out.println(cookie.);
         System.out.println(cookie.toString());
 
-        if (cookie.getName().equals("jwt")) {
+        if (cookie.getName().equals("sigin")) {
           cookiejwt = cookie.getValue();
 
           System.out.println("JWT= " + cookiejwt);
@@ -73,7 +73,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
     }
-    response.addCookie(new Cookie("jwt", cookiejwt));
+    Cookie jwtcookie = new Cookie("sigin", cookiejwt);
+    jwtcookie.setHttpOnly(true);
+    jwtcookie.setPath("/");
+    response.addCookie(jwtcookie);
     filterChain.doFilter(request, response);
   }
 }

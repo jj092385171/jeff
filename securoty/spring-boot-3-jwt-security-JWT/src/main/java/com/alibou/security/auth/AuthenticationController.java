@@ -26,8 +26,8 @@ public class AuthenticationController {
     System.out.println("註冊");
 
     AuthenticationResponse authenticationResponse = service.register(request);
-    Cookie jwtCookie = new Cookie("jwt", authenticationResponse.getToken());
-
+    Cookie jwtCookie = new Cookie("sigin", authenticationResponse.getToken());
+    jwtCookie.setPath("/");
     System.out.println(jwtCookie.getValue());
 
     jwtCookie.setHttpOnly(true);
@@ -43,7 +43,8 @@ public class AuthenticationController {
     System.out.println("登入");
 
     AuthenticationResponse authenticationResponse = service.authenticate(request);
-    Cookie jwtCookie = new Cookie("jwt", authenticationResponse.getToken());
+    Cookie jwtCookie = new Cookie("sigin", authenticationResponse.getToken());
+    jwtCookie.setPath("/");
 
     System.out.println(jwtCookie.getValue());
 
