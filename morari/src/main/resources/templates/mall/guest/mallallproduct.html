@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <script src="/morari/guest/js/head.js"></script>
+  <!-- sharepage 公用頁面 -->
+  <script src="/morari/guest/js/share.js"></script>
+
+</head>
+
+<body style="display: none" onload="show()">
+  <!-- Header Section Start -->
+  <div class="header"></div>
+
+  <!-- Header Section End -->
+
+
+
+
+
+  <!-- 分離範例 -->
+<<<<<<< HEAD:morari/src/main/resources/templates/forum/guest/newpost.html
+  <!--   <div class="test"></div> -->
+  <!--   <script src="/morari/forum/js/test.js"></script> -->
+  
+  
+=======
+  <div class="test"></div>
+  <script src="/morari/mall/js/test.js"></script>
+	<script type="text/javascript">
+	
+		   function load(){
+		   $.ajax({
+			   type:'post',
+			   url:'/Category/selectAllPd' ,
+			   dataType:'JSON',
+			   contentType:'application/json',
+			   success: function(data){
+				   console.log(data);
+				   $('#showproduct').empty("");
+				   
+				   if(data==null){
+					   $('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
+				   }else{
+					   var table = $('#showproduct');
+					   table.append("<tr id='ptitle'><th>ID</th><th>Product Name</th><th>Product Price</th><th>Note</th></tr>");
+					   
+					   $.each(data, function(i,n){
+						   var tr = "<tr align='center'>" + "<td><a href='/order/purchaseOrderProduct.controller?pid=" + n.id + "'>" + n.id +
+						            "</a></td>" +
+						            "<td>" + n.pdid + "</td>" + "<td>" + n.userid + "</td>" +
+						            "<td>" + n.pdname + "</td>" +"<td>" + n.pdtitle + "</td>"  +
+						            "<td>" + n.pdcontent + "</td>" +"<td>" + n.pdtype + "</td>"  +
+						            "<td>" + n.pdpicture + "</td>" + "<td>" + n.pdprice + "</td>" +
+						            "<td>" + n.pdinventory + "</td>" +"<td>" + n.pddate + "</td>" +
+						            "<td>" + n.pdlastupdate + "</td>" +
+						            "</tr>";
+						   table.append(tr);
+					   });				   
+				   }
+			   }
+		   });
+	   }
+
+	</script>
+
+>>>>>>> origin/36:morari/src/main/resources/templates/mall/guest/mallallproduct.html
+
+  <!-- 我自己的東西 -->
+  <div class="newpost"></div>
+  
+
+
+
+
+  <!-- Footer Section Start -->
+  <div class="footer"></div>
+  <!-- Footer Section End -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+  <!-- Vendor JavaScript File -->
+<<<<<<< HEAD:morari/src/main/resources/templates/forum/guest/newpost.html
+  <script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+=======
+  <script src="/morari/guest/vendor/jquery/jquery.min.js" ></script>
+>>>>>>> origin/36:morari/src/main/resources/templates/mall/guest/mallallproduct.html
+  <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+  <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
+  <script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
+  <script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
+  <script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+  <!-- Booking Javascript File -->
+  <script src="/morari/guest/js/booking.js" defer></script>
+  <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
+
+  <!-- Main Javascript File -->
+  <script src="/morari/guest/js/main.js" defer></script>
+
+
+  <!-- 我自己的東西 -->
+  <script src="/morari/forum/js/newpost.js"></script>
+
+</body>
+
+</html>
