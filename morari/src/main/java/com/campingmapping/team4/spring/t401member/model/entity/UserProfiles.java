@@ -18,8 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +28,7 @@ import org.springframework.stereotype.Component;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
+import com.campingmapping.team4.spring.t433forum.model.entity.PostComment;
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -95,6 +94,11 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Post> post;
+
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  private Collection<PostComment> postcomments;
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")

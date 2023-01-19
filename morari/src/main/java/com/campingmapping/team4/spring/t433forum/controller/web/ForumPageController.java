@@ -2,13 +2,12 @@ package com.campingmapping.team4.spring.t433forum.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/forum")
 public class ForumPageController {
-	
+
 	@GetMapping({ "", "/" })
 	public String forumIndex() {
 		return "forum/guest/index";
@@ -19,13 +18,13 @@ public class ForumPageController {
 	public String processShowInsert() {
 		return "forum/guest/newpost";
 	}
-	
+
 	// 顯示貼文內容
 	@GetMapping("/showpost.controller/*")
-	public String processShowPost( ) {
+	public String processShowPost() {
 		return "forum/guest/showpost";
 	}
-	
+
 	// 顯示修改貼文
 	@GetMapping("/showupdate.controller/*")
 	public String processShowUpdate() {

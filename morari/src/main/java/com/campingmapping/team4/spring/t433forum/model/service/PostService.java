@@ -1,19 +1,6 @@
 package com.campingmapping.team4.spring.t433forum.model.service;
 // package com.campingmapping.team4.spring.t4_33Forum.model.service;
 
-<<<<<<< HEAD
-// import java.sql.SQLException;
-// import java.sql.Timestamp;
-// import java.text.ParseException;
-// import java.text.SimpleDateFormat;
-// import java.util.Date;
-// import java.util.List;
-
-// import com.campingmapping.team4.spring.t4_33Forum.model.dao.PostDao;
-// import com.campingmapping.team4.spring.t4_33Forum.model.entity.Post;
-
-// public class PostService {
-=======
 import java.util.Date;
 import java.util.List;
 
@@ -33,93 +20,92 @@ public class PostService {
 	private PostRepository postRepository;
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	// 查單一貼文
 	public Post getPostById(Integer id) {
-//		Optional<Post> findById = postRepository.findById(id);
+		// Optional<Post> findById = postRepository.findById(id);
 		return postRepository.findById(id).get();
 	}
-	
+
 	// 查所有貼文
-	public List<Post> getAllPost(){
+	public List<Post> getAllPost() {
 		return postRepository.findAll();
 	}
-	
+
 	// 查會員貼文
-	public List<Post> getUserNonHidePost(Integer userId){
-		UserProfiles uProfiles = userRepository.findById(userId).get();
+	public List<Post> getUserNonHidePost(Integer userId) {
+		UserProfiles uProfiles = userRepository.findById(1).get();
 		return postRepository.findByuserprofiles(uProfiles);
 	}
-	
+
 	// 查非隱藏貼文
-	public List<Post> getNonHidePost(){
+	public List<Post> getNonHidePost() {
 		return postRepository.findByposthide(0);
 	}
-	
+
 	// 查隱藏貼文
-	public List<Post> getHidePost(){
+	public List<Post> getHidePost() {
 		return postRepository.findByposthide(1);
 	}
-	
+
 	// 查檢舉貼文
-	public List<Post> getReportPost(){
+	public List<Post> getReportPost() {
 		return postRepository.findBypostreport(1);
 	}
-	
+
 	// 新增
 	public Post insert(Post post) {
-		Integer uid = 300;
+		Integer uid = 1;
 		UserProfiles userProfiles = userRepository.findById(uid).get();
 		post.setUserprofiles(userProfiles);
-		
+
 		post.setUserprofiles(userProfiles);
 		post.setReleasedate(new Date());
 		post.setUserlike(0);
 		post.setUserunlike(0);
 		post.setPostreport(0);
 		post.setPosthide(0);
-		
+
 		return postRepository.save(post);
 	}
-	
+
 	// 修改
 	public Post update(Post post) {
 		post.setReleasedate(new Date());
 		post.setPostreport(0);
-		
+
 		return postRepository.save(post);
 	}
-	
+
 	// 喜歡
-	
+
 	// 不喜歡
-	
+
 	// 檢舉
 	public Post report(Post post) {
 		post.setPostreport(1);
 		return postRepository.save(post);
 	}
-	
+
 	// 取消檢舉
 	public Post cancelReport(Post post) {
 		post.setPostreport(0);
 		return postRepository.save(post);
 	}
-	
+
 	// 隱藏
 	public Post hide(Post post) {
 		post.setPosthide(1);
 		return postRepository.save(post);
 	}
-	
+
 	// 取消隱藏
 	public Post cancelHide(Post post) {
 		post.setPosthide(0);
 		return postRepository.save(post);
 	}
-	
->>>>>>> origin/33
 
+}
 // private PostDao postDao;
 
 // public PostService() {

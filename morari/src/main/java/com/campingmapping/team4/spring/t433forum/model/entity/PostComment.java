@@ -25,40 +25,27 @@ import lombok.NoArgsConstructor;
 public class PostComment {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
-	@Column(name = "postCommentId")
-	private Integer postCommentId;
-=======
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "postcommentId")
 	private Integer postcommentId;
-	
->>>>>>> origin/33
+
 	@ManyToOne
 	@JoinColumn(name = "postid")
+	@JsonIgnoreProperties("postcomment")
 	private Post post;
 	// @ManyToOne
 	// @JoinColumn(name="userId")
 	// private Member member;
-<<<<<<< HEAD
-	@Column(name = "postComment")
-	private String postComment;
-	@Column(name = "postCommentReport")
-	private Integer postCommentReport;
-	@Column(name = "postCommentHide")
-	private Integer postCommentHide;
-=======
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	@JsonIgnoreProperties("post")
+	@JsonIgnoreProperties("postcomment")
 	private UserProfiles userprofiles;
-	
+
 	@Column(name = "postcomment")
 	private String postcomment;
 	@Column(name = "postcommentreport")
 	private Integer postcommentreport;
 	@Column(name = "postcommenthide")
 	private Integer postcommenthide;
->>>>>>> origin/33
 
 }
