@@ -163,9 +163,7 @@
 										+ '<button id="delete" type="button" name="campID" value="' + n.campID + '">刪除</button>'
 										+ "</td>"
 										+ "<td>"
-										+ '<form action="insertSitePage.controller" method="POST">'
-										+ '<button type="submit" name="campID" value="' + n.campID + '">新增營區位</button>'
-										+ "</form>"
+										+ '<button id="insertsite" type="button" name="campID" value="' + n.campID + '">新增營區位</button>'
 										+ "</td>"
 										+ "</tr>"
 										+ "</tbody>"
@@ -213,9 +211,7 @@
 									+ '<button id="delete" type="button" name="campID" value="' + QueryByIDResult.campID + '">刪除</button>'
 									+ "</td>"
 									+ "<td>"
-									+ '<form action="insertSitePage.controller" method="POST">'
-									+ '<button type="submit" name="campID" value="' + QueryByIDResult.campID + '">新增營區位</button>'
-									+ "</form>"
+									+ '<button id="insertsite" type="button" name="campID" value="' + QueryByIDResult.campID + '">新增營區位</button>'
 									+ "</td>"
 									+ "</tr>"
 									+ "</tbody>"
@@ -237,7 +233,7 @@
 							tagNames += element.tagName + '/'
 						});
 
-						camptr = "<tbody value='6699'>"
+						camptr = "<tbody>"
 							+ "<tr>"
 							+ "<td>" + n.campID + "</td>"
 							+ '<td class="td2"><a href="#">' + n.campName + '</a></td>'
@@ -253,9 +249,7 @@
 							+ '<button id="delete" type="button" name="campID" value="' + n.campID + '">刪除</button>'
 							+ "</td>"
 							+ "<td>"
-							+ '<form action="insertSitePage.controller" method="POST">'
-							+ '<button type="submit" name="campID" value="' + n.campID + '">新增營區位</button>'
-							+ "</form>"
+							+ '<button id="insertsite" type="button" name="campID" value="' + n.campID + '">新增營區位</button>'
 							+ "</td>"
 							+ "</tr>"
 							+ "</tbody>"
@@ -304,6 +298,13 @@
 						return false;
 					}
 				});
+
+				$('#camptable').on('click', '#insertsite', function () {
+					var campID = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().text();
+					sessionStorage.setItem("campID", JSON.stringify(campID));
+					window.location.href = '/morari/admin/camp/insertSitePage.controller';
+				});
+
 
 			});
 		});

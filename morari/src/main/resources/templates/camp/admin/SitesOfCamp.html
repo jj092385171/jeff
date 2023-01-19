@@ -24,20 +24,53 @@
                             + "<td>" + n.totalSites + "</td>"
                             + "<td>" + n.siteMoney + "</td>"
                             + "<td>"
-                            + '<form action= "/morari/admin/camp/upadteSitePage.controller" method="POST" >'
-                            + '<button onclick="return check()" type="submit" name="siteID" value="' + n.siteID + '">更新</button>'
-                            + "</form>"
+                            + '<button id="update" type="button" name="siteID" value="' + n.siteID + '">更新</button>'
                             + "</td>"
                             + "<td>"
-                            + '<form action = "/morari/admin/camp/deleteSiteByID.controller" method = "POST" >'
-                            + '<button onclick="return check()" type="submit" name="siteID" value="' + n.siteID + '">刪除</button>'
-                            + "</form >"
+                            + '<button id="delete" type="button" name="siteID" value="' + n.siteID + '">刪除</button>'
                             + "</td>"
                             + "</tr>"
                             + "</tbody>"
                         sitetable.append(sitetr);
                     });
                 })
+
+                $('#sitetable').on('click', '#update', function () {
+                    if (confirm("確定更新?")) {
+                        alert("更新!!");
+                        var campID = $(this).parent().prev().prev().prev().prev().prev().text();
+                        console.log(campID)
+                        // sessionStorage.setItem("campID", JSON.stringify(campID));
+                        // window.location.href = '/morari/admin/camp/';
+                    }
+                    else {
+                        alert("取消更新!");
+                        return false;
+                    }
+                });
+
+                $('#sitetable').on('click', '#delete', function () {
+                    if (confirm("確定刪除?")) {
+                        alert("刪除!!");
+                        var campID = $(this).parent().prev().prev().prev().prev().prev().prev().text();
+                        var cj = JSON.stringify(campID);
+                        var deletebody = $(this).parent().parent().parent();
+                        $.ajax({
+                            url: '/morari/admin/camp/deleteSiteByID.controller',
+                            type: 'post',
+                            data: cj,
+                            contentType: 'application/json',
+                            success: function (deleteResult) {
+                                alert('營區位:' + campID + ' 成功刪除');
+                                deletebody.empty();
+                            }
+                        });
+                    }
+                    else {
+                        alert("取消刪除!");
+                        return false;
+                    }
+                });
 
             });
         });

@@ -4,24 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.campingmapping.team4.spring.t424camp.model.service.SiteService;
 
 @Controller
+@RequestMapping("/admin/camp")
 public class DeleteSiteByIDController {
 
 	@Autowired
 	private SiteService siteService;
 
-	@PostMapping("/sitesOfCamp.controller/deleteSiteByID.controller")
-	public String deleteSiteByID(@RequestParam("siteID") int siteID, Model m) {
-
+	@PostMapping("/deleteSiteByID.controller")
+	public boolean deleteSiteByID(@RequestBody int siteID, Model m) {
 		siteService.deleteById(siteID);
 
-		m.addAttribute("ID", "siteID: " + Integer.toString(siteID) + " 刪除成功");
+//		m.addAttribute("ID", "siteID: " + Integer.toString(siteID) + " 刪除成功");
 
-		return "t4_24camp/admin/DeleteByIDSuccess";
+		return true;
 	}
 
 }
