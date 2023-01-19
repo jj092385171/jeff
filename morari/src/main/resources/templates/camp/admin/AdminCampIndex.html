@@ -30,10 +30,33 @@
 				<!-- Begin Page Content(開始主要內容區塊) -->
 				<div class="container-fluid">
 
-					<table id="table"></table>
+					<form id="cityform" method="post">
+						<table id="citytable"></table>
+					</form>
+					<form id="idform" action="queryCampsByCampID.controller" method="post">
+						<table id="idtable">
+							<thead>
+								<th>
+									<h2>ID查詢營地資料</h2>
+								</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input name="campID" value="" type="text">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+
+					<hr>
+
+					<table id="camptable"></table>
+
+					<hr>
+
 					<div>
-						<a href="/morari/admin/camp/queryPage.controller">&emsp;查詢&emsp;營地_營區位</a>
-						<br>
 						<a href="/morari/admin/camp/insertPage.controller">&emsp;新增&emsp;營地_營區位</a>
 						<br>
 						<a href="/morari/admin/camp/indexShowAllCamp.controller">回首頁</a>
@@ -86,17 +109,84 @@
 			$(document).ready(function () {
 				$.getJSON('/morari/admin/camp/indexShowAllCamp.controller', function (data) {
 
+					var cityList = data["cityList"];
+					var citytable = $('#citytable');
+					var citys = '';
+					var citytr = '';
+					citytable.append("<thead><th><h2>縣市查詢營地資料</h2></th></thead>")
+					$.each(cityList, function (i, n) {
+						citys += '<input type="checkbox" name="cityID" value="' + n.cityID + '" />' + n.cityName
+					});
+					citytr += '<tbody><tr><td>縣市:</td><td>' + citys + '</td></tr><tr><td colspan="2"><input type="submit" value="送出"></td></tr></tbody>'
+					citytable.append(citytr);
+
+					$('#cityform').on('submit', function (e) {
+						e.preventDefault();
+						var checkboxValues = [];
+						$("input[name='cityID']:checked").each(function () {
+							checkboxValues.push($(this).val());
+						});
+						var jsonData = JSON.stringify(checkboxValues);
+						$.ajax({
+							url: '/morari/admin/camp/queryCampsByCityIDs.controller',
+							type: 'post',
+							data: jsonData,
+							dataType: 'json',
+							contentType: 'application/json',
+							success: function (QueryByCityIDsResult) {
+								// sessionStorage.setItem("QueryByCityIDsResult", J
+								$("#camptable").empty();
+								var querytable = $('#camptable');
+								var querytr = '';
+								querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+								$.each(QueryByCityIDsResult, function (i, n) {
+									var tagNames = '';
+									n.tags.forEach(element => {
+										tagNames += element.tagName + '/'
+									});
+
+									querytr = "<tbody>"
+										+ "<tr>"
+										+ "<td>" + n.campID + "</td>"
+										+ "<td class='td2'><a href='#'>" + n.campName + "</a></td>"
+										+ "<td>" + n.city.cityName + "</td>"
+										+ "<td>" + '<img width="80" height="100" src="/morari/images/' + n.campPicturesPath + '">' + "</td>"
+										+ "<td>" + n.description + "</td>"
+										+ "<td>" + n.location + "</td>"
+										+ "<td>" + tagNames + "</td>"
+										+ "<td>"
+										+ '<button id="update" type="button" name="campID" value="' + n.campID + '">更新</button>'
+										+ "</td>"
+										+ "<td>"
+										+ '<button id="delete" type="button" name="campID" value="' + n.campID + '">刪除</button>'
+										+ "</td>"
+										+ "<td>"
+										+ '<form action="insertSitePage.controller" method="POST">'
+										+ '<button type="submit" name="campID" value="' + n.campID + '">新增營區位</button>'
+										+ "</form>"
+										+ "</td>"
+										+ "</tr>"
+										+ "</tbody>"
+									querytable.append(querytr);
+								});
+
+							}
+						});
+					});
+
+
+
 					var allCamps = data["allCamps"];
-					var table = $('#table');
-					var tr = '';
-					table.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+					var camptable = $('#camptable');
+					var camptr = '';
+					camptable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
 					$.each(allCamps, function (i, n) {
 						var tagNames = '';
 						n.tags.forEach(element => {
 							tagNames += element.tagName + '/'
 						});
 
-						tr = "<tbody>"
+						camptr = "<tbody value='6699'>"
 							+ "<tr>"
 							+ "<td>" + n.campID + "</td>"
 							+ '<td class="td2"><a href="#">' + n.campName + '</a></td>'
@@ -118,17 +208,17 @@
 							+ "</td>"
 							+ "</tr>"
 							+ "</tbody>"
-						table.append(tr);
+						camptable.append(camptr);
 					});
 				});
 
-				$('#table').on('click', '.td2', function () {
+				$('#camptable').on('click', '.td2', function () {
 					var campID = $(this).prev().text();
 					sessionStorage.setItem("campID", JSON.stringify(campID));
 					window.location.href = '/morari/admin/camp/SitesOfCamp';
 				});
 
-				$('#table').on('click', '#update', function () {
+				$('#camptable').on('click', '#update', function () {
 					if (confirm("確定更新?")) {
 						alert("更新!!");
 						var campID = $(this).parent().prev().prev().prev().prev().prev().prev().prev().text();
@@ -141,18 +231,20 @@
 					}
 				});
 
-				$('#table').on('click', '#delete', function () {
+				$('#camptable').on('click', '#delete', function () {
 					if (confirm("確定刪除?")) {
 						alert("刪除!!");
 						var campID = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().text();
 						var cj = JSON.stringify(campID);
+						var deletebody = $(this).parent().parent().parent();
 						$.ajax({
 							url: '/morari/admin/camp/deleteCampByID.controller',
 							type: 'post',
 							data: cj,
 							contentType: 'application/json',
 							success: function (deleteResult) {
-								console.log(deleteResult)
+								alert('營地:' + campID + ' 成功刪除');
+								deletebody.empty();
 							}
 						});
 					}

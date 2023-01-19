@@ -11,12 +11,12 @@
                 var campID = JSON.parse(sessionStorage.getItem("campID"));
                 $.getJSON('/morari/admin/camp/sitesOfCamp.controller/' + campID, function (data) {
                     // console.log(data);
-                    var table = $('#table');
-                    var tr = '';
-                    table.append("<thead><th>營位區編號</th><th>營位區名</th><th>營區位圖片</th><th>總營位</th><th>營位金額</th><th>更新</th><th>刪除</th></thead>");
+                    var sitetable = $('#sitetable');
+                    var sitetr = '';
+                    sitetable.append("<thead><th>營位區編號</th><th>營位區名</th><th>營區位圖片</th><th>總營位</th><th>營位金額</th><th>更新</th><th>刪除</th></thead>");
                     $.each(data, function (i, n) {
 
-                        tr = "<tbody>"
+                        sitetr = "<tbody>"
                             + "<tr>"
                             + "<td>" + n.siteID + "</td>"
                             + "<td>" + n.siteName + "</td>"
@@ -35,7 +35,7 @@
                             + "</td>"
                             + "</tr>"
                             + "</tbody>"
-                        table.append(tr);
+                        sitetable.append(sitetr);
                     });
                 })
 
@@ -46,7 +46,7 @@
 
 <body>
 
-    <table id="table"></table>
+    <table id="sitetable"></table>
 </body>
 
 </html>
