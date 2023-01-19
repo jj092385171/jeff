@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class ProductCart {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
 	// 購物車編號 不顯示(pk)

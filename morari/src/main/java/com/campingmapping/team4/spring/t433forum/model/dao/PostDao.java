@@ -13,7 +13,7 @@ package com.campingmapping.team4.spring.t433forum.model.dao;
 
 // import util.HibernateUtils;
 
-// public class PostDao {
+public class PostDao {
 
 // private SessionFactory factory;
 
@@ -110,4 +110,4 @@ package com.campingmapping.team4.spring.t433forum.model.dao;
 // result.setPostHide(post.getPostHide());
 // }
 // }
-// }
+}

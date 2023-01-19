@@ -29,13 +29,12 @@ import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
 import com.campingmapping.team4.spring.t433forum.model.entity.PostComment;
-import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
 @Data
-@ToString(exclude = { "post", "job", "initiatings", "categories", "loginHistories" })
+@ToString(exclude = { "post", "job", "initiatings", "loginHistories" })
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

@@ -31,14 +31,14 @@ public class PostComment {
 
 	@ManyToOne
 	@JoinColumn(name = "postid")
-	@JsonIgnoreProperties("postcomment")
 	private Post post;
+
 	// @ManyToOne
 	// @JoinColumn(name="userId")
 	// private Member member;
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	@JsonIgnoreProperties("postcomment")
+	@JsonIgnoreProperties("post")
 	private UserProfiles userprofiles;
 
 	@Column(name = "postcomment")

@@ -22,22 +22,22 @@ public class MallPageComtroller {
 
 	@GetMapping({ "", "/" })
 	public String mallIndex() {
-		return "mall/guest/index";
+		return "mall/admin/index";
 	}
 
 	@Autowired
 	private CategoryServiceImpl cServiceImpl;
-
+	
 	@GetMapping("/productqueryallmain.controller")
 	public String processQueryAllAction() {
 		return "mall/admin/productindex";
 	}
-
+	
 	@GetMapping("/productcreate.controller")
 	public String processcreateAction() {
 		return "mall/admin/newproduct";
 	}
-
+	
 	@GetMapping("/updateproduct.controller/{id}")
 	public String processupdateAction() {
 		return "mall/admin/updateproduct";
@@ -46,8 +46,8 @@ public class MallPageComtroller {
 	// 新增一筆產品
 	@PostMapping("/create.controller")
 	@ResponseBody
-	public String create(@RequestBody Category category) {
-		System.out.println(category.getPdid());
+	public String create(@RequestBody Category category ) {
+		System.out.println(category.getPdid()); 
 		cServiceImpl.create(category);
 		return "insert ok!!";
 	}
@@ -70,7 +70,7 @@ public class MallPageComtroller {
 	@DeleteMapping("/deleteByPdid/{Pdid}")
 	@ResponseBody
 	public String deleteByPdid(@PathVariable int Pdid) {
-
+		
 		cServiceImpl.deleteByPdid(Pdid);
 		return "刪除成功!";
 	}

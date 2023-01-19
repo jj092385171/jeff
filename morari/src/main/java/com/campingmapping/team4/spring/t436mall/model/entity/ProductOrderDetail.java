@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class ProductOrderDetail {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
 	// 訂單詳情序號 不顯示(pk)

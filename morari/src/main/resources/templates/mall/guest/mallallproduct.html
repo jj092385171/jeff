@@ -8,7 +8,7 @@
 
 </head>
 
-<body style="display: none" onload="show()">
+<body style="display: none">
   <!-- Header Section Start -->
   <div class="header"></div>
 
@@ -21,46 +21,43 @@
   <!-- 分離範例 -->
   <div class="test"></div>
   <script src="/morari/mall/js/test.js"></script>
-  <script type="text/javascript">
+	<script type="text/javascript">
+	
+		   function load(){
+		   $.ajax({
+			   type:'post',
+			   url:'/Category/selectAllPd' ,
+			   dataType:'JSON',
+			   contentType:'application/json',
+			   success: function(data){
+				   console.log(data);
+				   $('#showproduct').empty("");
+				   
+				   if(data==null){
+					   $('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
+				   }else{
+					   var table = $('#showproduct');
+					   table.append("<tr id='ptitle'><th>ID</th><th>Product Name</th><th>Product Price</th><th>Note</th></tr>");
+					   
+					   $.each(data, function(i,n){
+						   var tr = "<tr align='center'>" + "<td><a href='/order/purchaseOrderProduct.controller?pid=" + n.id + "'>" + n.id +
+						            "</a></td>" +
+						            "<td>" + n.pdid + "</td>" + "<td>" + n.userid + "</td>" +
+						            "<td>" + n.pdname + "</td>" +"<td>" + n.pdtitle + "</td>"  +
+						            "<td>" + n.pdcontent + "</td>" +"<td>" + n.pdtype + "</td>"  +
+						            "<td>" + n.pdpicture + "</td>" + "<td>" + n.pdprice + "</td>" +
+						            "<td>" + n.pdinventory + "</td>" +"<td>" + n.pddate + "</td>" +
+						            "<td>" + n.pdlastupdate + "</td>" +
+						            "</tr>";
+						   table.append(tr);
+					   });				   
+				   }
+			   }
+		   });
+	   }
 
-    function load() {
-      $.ajax({
-        type: 'post',
-        url: '/Category/selectAllPd',
-        dataType: 'JSON',
-        contentType: 'application/json',
-        success: function (data) {
-          console.log(data);
-          $('#showproduct').empty("");
+	</script>
 
-          if (data == null) {
-            $('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
-          } else {
-            var table = $('#showproduct');
-            table.append("<tr id='ptitle'><th>ID</th><th>Product Name</th><th>Product Price</th><th>Note</th></tr>");
-
-            $.each(data, function (i, n) {
-              var tr = "<tr align='center'>" + "<td><a href='/order/purchaseOrderProduct.controller?pid=" + n.id + "'>" + n.id +
-                "</a></td>" +
-                "<td>" + n.pdid + "</td>" + "<td>" + n.userid + "</td>" +
-                "<td>" + n.pdname + "</td>" + "<td>" + n.pdtitle + "</td>" +
-                "<td>" + n.pdcontent + "</td>" + "<td>" + n.pdtype + "</td>" +
-                "<td>" + n.pdpicture + "</td>" + "<td>" + n.pdprice + "</td>" +
-                "<td>" + n.pdinventory + "</td>" + "<td>" + n.pddate + "</td>" +
-                "<td>" + n.pdlastupdate + "</td>" +
-                "</tr>";
-              table.append(tr);
-            });
-          }
-        }
-      });
-    }
-
-  </script>
-
-
-  <!-- 我自己的東西 -->
-  <div class="newpost"></div>
 
 
 
@@ -74,7 +71,7 @@
 
 
   <!-- Vendor JavaScript File -->
-  <script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+  <script src="/morari/guest/vendor/jquery/jquery.min.js" ></script>
   <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
   <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
   <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
@@ -94,9 +91,6 @@
   <!-- Main Javascript File -->
   <script src="/morari/guest/js/main.js" defer></script>
 
-
-  <!-- 我自己的東西 -->
-  <script src="/morari/forum/js/newpost.js"></script>
 
 </body>
 
