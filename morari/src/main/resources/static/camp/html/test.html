@@ -1,251 +1,44 @@
-<!-- Room Section Start -->
-<div id="rooms">
-    <div class="container">
-        <div class="section-header">
-            <h2>Apartments & Suites</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in mi libero. Quisque convallis, enim
-                at venenatis tincidunt.
-            </p>
-        </div>
-        <div class="row">
-            <div class="col-md-12 room">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="room-img">
-                            <img src="/morari/guest/img/room/room-1.jpg">
-                        </div>
+ <h3>新增營地資料:</h3>
+                <form method="post" action="insertCamp.controller" enctype="multipart/form-data">
+                    <div>
+                        <input type="text" name="campName" value="${param.campName}" placeholder="營地名" />
+                        <div style="color:#FF0000; font-size:60%; display: inline">
+                            ${errors.campName}</div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="room-des">
-                            <h3>Standard Single</h3>
-                            <h1>$150<span>/ Night</span></h1>
-                            <ul class="room-size">
-                                <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
-                                <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
-                            </ul>
-                            <ul class="room-icon">
-                                <li class="icon-1"></li>
-                                <li class="icon-2"></li>
-                                <li class="icon-3"></li>
-                                <li class="icon-4"></li>
-                                <li class="icon-5"></li>
-                                <li class="icon-6"></li>
-                                <li class="icon-7"></li>
-                                <li class="icon-8"></li>
-                                <li class="icon-9"></li>
-                                <li class="icon-10"></li>
-                            </ul>
-                            <div class="room-link">
-                                <a href="#" data-toggle="modal" data-target="#modal-id">Read More</a>
-                                <a href="#">Book Now</a>
-                            </div>
-                        </div>
+                    <div>
+                        <input name="campPicturesPath" type="file">
+                        <div style="color:#FF0000; font-size:60%; display: inline">
+                            ${errors.campPicturesPath}</div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 room">
-                <div class="row">
-                    <div class="col-md-6 d-block d-md-none">
-                        <div class="room-img">
-                            <img src="/morari/guest/img/room/room-2.jpg">
+                    <!-- Break -->
+                    <c:forEach var='city' items='${cityList}'>
+                        <div>
+                            ${city.cityName}<input type="radio" name="cityID" value="${city.cityID}">
                         </div>
+                    </c:forEach>
+                    <div style="color:#FF0000; font-size:60%; display: inline">
+                        ${errors.cityID}</div>
+                    <!-- Break -->
+                    <div>
+                        <input type="text" name="location" value="${param.location}" placeholder="地址" />
+                        <div style="color:#FF0000; font-size:60%; display: inline">
+                            ${errors.location}</div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="room-des">
-                            <h3>Standard Double</h3>
-                            <h1>$220<span>/ Night</span></h1>
-                            <ul class="room-size">
-                                <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
-                                <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
-                            </ul>
-                            <ul class="room-icon">
-                                <li class="icon-1"></li>
-                                <li class="icon-2"></li>
-                                <li class="icon-3"></li>
-                                <li class="icon-4"></li>
-                                <li class="icon-5"></li>
-                                <li class="icon-6"></li>
-                                <li class="icon-7"></li>
-                                <li class="icon-8"></li>
-                                <li class="icon-9"></li>
-                                <li class="icon-10"></li>
-                            </ul>
-                            <div class="room-link">
-                                <a href="#" data-toggle="modal" data-target="#modal-id">Read More</a>
-                                <a href="#">Book Now</a>
-                            </div>
-                        </div>
+                    <!-- Break -->
+                    <div>
+                        <c:forEach var='tag' items='${tagList}'>
+                            ${tag.tagName}<input type="checkbox" name="tagID" value="${tag.tagID}">
+                        </c:forEach>
                     </div>
-                    <div class="col-md-6 d-none d-md-block">
-                        <div class="room-img">
-                            <img src="/morari/guest/img/room/room-2.jpg">
-                        </div>
+                    <div style="color:#FF0000; font-size:60%; display: inline">
+                        ${errors.tagIDs}</div>
+                    <!-- Break -->
+                    <div>
+                        <textarea name="description" placeholder="描述" rows="6"></textarea>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 room">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="room-img">
-                            <img src="/morari/guest/img/room/room-3.jpg">
-                        </div>
+                    <!-- Break -->
+                    <div>
+                        <input type="submit" value="Add" />
+                        <input type="reset" value="Reset" />
                     </div>
-                    <div class="col-md-6">
-                        <div class="room-des">
-                            <h3>Premium Single</h3>
-                            <h1>$180<span>/ Night</span></h1>
-                            <ul class="room-size">
-                                <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
-                                <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
-                            </ul>
-                            <ul class="room-icon">
-                                <li class="icon-1"></li>
-                                <li class="icon-2"></li>
-                                <li class="icon-3"></li>
-                                <li class="icon-4"></li>
-                                <li class="icon-5"></li>
-                                <li class="icon-6"></li>
-                                <li class="icon-7"></li>
-                                <li class="icon-8"></li>
-                                <li class="icon-9"></li>
-                                <li class="icon-10"></li>
-                            </ul>
-                            <div class="room-link">
-                                <a href="#" data-toggle="modal" data-target="#modal-id">Read More</a>
-                                <a href="#">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 room">
-                <div class="row">
-                    <div class="col-md-6 d-block d-md-none">
-                        <div class="room-img">
-                            <img src="/morari/guest/img/room/room-4.jpg">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="room-des">
-                            <h3>Premium Double</h3>
-                            <h1>$300<span>/ Night</span></h1>
-                            <ul class="room-size">
-                                <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
-                                <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
-                            </ul>
-                            <ul class="room-icon">
-                                <li class="icon-1"></li>
-                                <li class="icon-2"></li>
-                                <li class="icon-3"></li>
-                                <li class="icon-4"></li>
-                                <li class="icon-5"></li>
-                                <li class="icon-6"></li>
-                                <li class="icon-7"></li>
-                                <li class="icon-8"></li>
-                                <li class="icon-9"></li>
-                                <li class="icon-10"></li>
-                            </ul>
-                            <div class="room-link">
-                                <a href="#" data-toggle="modal" data-target="#modal-id">Read More</a>
-                                <a href="#">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 d-none d-md-block">
-                        <div class="room-img">
-                            <img src="/morari/guest/img/room/room-4.jpg">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 room">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="room-img">
-                            <img src="/morari/guest/img/room/room-5.jpg">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="room-des">
-                            <h3>Economy Single</h3>
-                            <h1>$120<span>/ Night</span></h1>
-                            <ul class="room-size">
-                                <li><i class="fa fa-arrow-right"></i>Size: 260 sq ft </li>
-                                <li><i class="fa fa-arrow-right"></i>Beds: 2 Single(s) </li>
-                            </ul>
-                            <ul class="room-icon">
-                                <li class="icon-1"></li>
-                                <li class="icon-2"></li>
-                                <li class="icon-3"></li>
-                                <li class="icon-4"></li>
-                                <li class="icon-5"></li>
-                                <li class="icon-6"></li>
-                                <li class="icon-7"></li>
-                                <li class="icon-8"></li>
-                                <li class="icon-9"></li>
-                                <li class="icon-10"></li>
-                            </ul>
-                            <div class="room-link">
-                                <a href="#" data-toggle="modal" data-target="#modal-id">Read More</a>
-                                <a href="#">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Room Section End -->
-
-<!-- Modal for Room Section Start -->
-<div id="modal-id" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="port-slider">
-                            <div><img src="/morari/guest/img/room-slider/room-1.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-2.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-3.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-4.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-5.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-6.jpg"></div>
-                        </div>
-                        <div class="port-slider-nav">
-                            <div><img src="/morari/guest/img/room-slider/room-1.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-2.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-3.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-4.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-5.jpg"></div>
-                            <div><img src="/morari/guest/img/room-slider/room-6.jpg"></div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <h2>Lorem ipsum dolor</h2>
-                        <p>
-                            Lorem ipsum dolor viverra purus imperdiet rhoncus imperdiet. Suspendisse vulputate
-                            condimentum ligula sollicitudin hendrerit. Phasellus luctus, elit et ultrices interdum,
-                            neque mi pellentesque massorci. Nam in cursus ex, nec mattis lectus. Curabitur quis
-                            elementum nunc. Mauris iaculis, justo eu aliquam sagittis, arcu eros cursus libero, sit amet
-                            eleifend dolor odio at lacus.
-                        </p>
-                        <div class="modal-link">
-                            <a href="#">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal for Room Section End -->
+                </form>

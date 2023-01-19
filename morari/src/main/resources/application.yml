@@ -56,4 +56,5 @@ spring:
   #       blob:
   #         account-name: eteam4eit56blobdb
   #         account-key: DefaultEndpointsProtocol=https;AccountName=eteam4eit56blobdb;AccountKey=gcDS9D5Ckpz6kfr/xgUjG2Nyg6JYNn65t74VEzWjRW7bjAca+W6epPfD7/JCZ41mOR+muUWygyKw+AStTWI9QQ==;EndpointSuffix=core.windows.net
-  #         endpoint: https://eteam4eit56blobdb.blob.core.windows.net/
+  #         endpoint: https://eteam4eit56blobdb.blob.core.windows.net/  main:
+    allow-circular-references: true

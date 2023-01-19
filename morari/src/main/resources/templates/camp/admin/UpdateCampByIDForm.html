@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                $.getJSON('/morari/admin/camp/indexShowAllCamp.controller', function (data) {
+                    var cityList = data["cityList"];
+                    var tagList = data["tagList"];
+
+
+                    var radio = '';
+                    $.each(cityList, function (i, n) {
+                        radio += '<input type="radio" name="cityID" value="' + n.cityID + '" />' + n.cityName
+                    });
+
+                    var tags = '';
+                    $.each(tagList, function (i, n) {
+                        tags += '<input type="checkbox" name="tagID" value="' + n.tagID + '" />' + n.tagName
+                    });
+
+                    var campID = JSON.parse(sessionStorage.getItem("campID"));
+                    var jc = JSON.stringify(campID);
+                    $.ajax({
+                        url: '/morari/admin/camp/upadteCampPage.controller',
+                        type: 'post',
+                        data: jc,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (camp) {
+                            var form = $('#form');
+                            var div = '';
+
+                            div = '營地編號: <input type="text" name="campID" readonly="readonly" value="' + camp.campID + '"><br>'
+                                + '營地名: <input type="text" name="campName" value="' + camp.campName + '"><br>'
+                                + '縣市編號: <input type="text" name="city.cityID" readonly="readonly" value="' + camp.city.cityID + '"><br>'
+                                + '縣市名: <input type="text" name="city.cityName" readonly="readonly"value="' + camp.city.cityName + '"><br>'
+                                + '縣市選項:' + radio + "<br>"
+                                + '地址: <input type="text" name="location" value="' + camp.location + '"><br>'
+                                + '簡介: <input type="text" name="description" value="' + camp.description + '"><br>'
+                                + '圖片: <img width="80" height="100" src="/morari/images/' + camp.campPicturesPath + '"><br>'
+                                + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><br>'
+                                + '標籤選項:' + tags + "<br>"
+                                + '<input id="send" type="button" value="更新">'
+                            form.append(div);
+                        }
+                    });
+
+                    $('body').on('click', '#send', function () {
+                        var formData = new FormData(form);
+                        $.ajax({
+                            url: '/morari/admin/camp/updateCampByID.controller',
+                            type: 'post',
+                            data: formData,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (after) {
+                                $("#form").empty();
+                                var form = $('#form');
+                                var div = '';
+
+                                div = '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.campID + '"><br>'
+                                    + '營地: <input type="text" name="campName" value="' + after.campName + '"><br>'
+                                    + '縣市編號: <input type="text" name="city.cityID" readonly="readonly" value="' + after.city.cityID + '"><br>'
+                                    + '縣市名: <input type="text" name="city.cityName" readonly="readonly"value="' + after.city.cityName + '"><br>'
+                                    + '縣市選項:' + radio + "<br>"
+                                    + '地址: <input type="text" name="location" value="' + after.location + '"><br>'
+                                    + '簡介: <input type="text" name="description" value="' + after.description + '"><br>'
+                                    + '圖片: <img width="80" height="100" src="/morari/images/' + after.campPicturesPath + '"><br>'
+                                    + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><br>'
+                                    + '標籤選項:' + tags + "<br>"
+                                    + '<input id="send" type="button" value="更新">'
+                                form.append(div);
+                            }
+                        });
+                    });
+
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form id="form" method="post" enctype="multipart/form-data"></form>
+</body>
+
+</html>

@@ -9,10 +9,12 @@ import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t4_11Team.model.Initiating;
-import com.campingmapping.team4.spring.t4_33Forum.controller.newPostServlet;
 
+@Repository @Transactional
 public class InitiatingDaoImpl implements InitiatingDao{
 	
 	private Session session;
@@ -156,13 +158,10 @@ public class InitiatingDaoImpl implements InitiatingDao{
 	public List<Initiating> selectAllCamparea() {
 			List<String> list = session.createQuery("select distinct camparea from Initiating").getResultList();
 			ArrayList<Initiating> resultlis = new ArrayList<Initiating>();
-			Initiating in = new Initiating();
 			for (String string : list) {
-				int i = 0;
-				in.setCurrentnum(i);
+				Initiating in = new Initiating();
 				in.setCamparea(string);
 				resultlis.add(in);
-				i++;
 			}
 			return resultlis;
 	}
@@ -172,12 +171,11 @@ public class InitiatingDaoImpl implements InitiatingDao{
 	public List<Initiating> selectAllMember() {
 		List<Integer> list = session.createQuery("select distinct postmember from Initiating").getResultList();
 		ArrayList<Initiating> resultlist = new ArrayList<Initiating>();
-		Initiating in = new Initiating();
 		for (Integer integer : list) {
+			Initiating in = new Initiating();
 			in.setPostmember(integer);
 			resultlist.add(in);
 		}
-		
 		return resultlist;
 	}
 

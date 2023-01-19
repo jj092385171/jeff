@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                var campID = JSON.parse(sessionStorage.getItem("campID"));
+                $.getJSON('/morari/admin/camp/sitesOfCamp.controller/' + campID, function (data) {
+                    // console.log(data);
+                    var sitetable = $('#sitetable');
+                    var sitetr = '';
+                    sitetable.append("<thead><th>營位區編號</th><th>營位區名</th><th>營區位圖片</th><th>總營位</th><th>營位金額</th><th>更新</th><th>刪除</th></thead>");
+                    $.each(data, function (i, n) {
+
+                        sitetr = "<tbody>"
+                            + "<tr>"
+                            + "<td>" + n.siteID + "</td>"
+                            + "<td>" + n.siteName + "</td>"
+                            + "<td>" + '<img width="80" height="100" src="/morari/images/' + n.sitePicturesPath + '">' + "</td>"
+                            + "<td>" + n.totalSites + "</td>"
+                            + "<td>" + n.siteMoney + "</td>"
+                            + "<td>"
+                            + '<button id="update" type="button" name="siteID" value="' + n.siteID + '">更新</button>'
+                            + "</td>"
+                            + "<td>"
+                            + '<button id="delete" type="button" name="siteID" value="' + n.siteID + '">刪除</button>'
+                            + "</td>"
+                            + "</tr>"
+                            + "</tbody>"
+                        sitetable.append(sitetr);
+                    });
+                })
+
+                $('#sitetable').on('click', '#update', function () {
+                    if (confirm("確定更新?")) {
+                        alert("更新!!");
+                        var campID = $(this).parent().prev().prev().prev().prev().prev().text();
+                        console.log(campID)
+                        // sessionStorage.setItem("campID", JSON.stringify(campID));
+                        // window.location.href = '/morari/admin/camp/';
+                    }
+                    else {
+                        alert("取消更新!");
+                        return false;
+                    }
+                });
+
+                $('#sitetable').on('click', '#delete', function () {
+                    if (confirm("確定刪除?")) {
+                        alert("刪除!!");
+                        var campID = $(this).parent().prev().prev().prev().prev().prev().prev().text();
+                        var cj = JSON.stringify(campID);
+                        var deletebody = $(this).parent().parent().parent();
+                        $.ajax({
+                            url: '/morari/admin/camp/deleteSiteByID.controller',
+                            type: 'post',
+                            data: cj,
+                            contentType: 'application/json',
+                            success: function (deleteResult) {
+                                alert('營區位:' + campID + ' 成功刪除');
+                                deletebody.empty();
+                            }
+                        });
+                    }
+                    else {
+                        alert("取消刪除!");
+                        return false;
+                    }
+                });
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <table id="sitetable"></table>
+</body>
+
+</html>

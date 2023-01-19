@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+	<script src="/morari/admin/js/head.js"></script>
+
+	<!-- sharepage -->
+	<script src="/morari/admin/js/share.js"></script>
+
+</head>
+
+<body id="page-top" style="display: none">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- sidebar -->
+		<div class="sidebarshare"></div>
+		<!-- sidebar end -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- topbar -->
+				<div class="topbarshare"></div>
+				<!-- topbar end -->
+
+				<!-- Begin Page Content(開始主要內容區塊) -->
+				<div class="container-fluid">
+
+					<form id="cityform" method="post">
+						<table id="citytable"></table>
+					</form>
+					<form id="idform" method="post">
+						<table id="idtable">
+							<thead>
+								<th>
+									<h2>ID查詢營地資料</h2>
+								</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input id="inputid" name="campID" value="" type="text">
+									</td>
+									<td>
+										<input type="submit" value="查詢">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+
+					<hr>
+
+					<table id="camptable"></table>
+
+					<hr>
+
+					<div>
+						<a href="/morari/admin/camp/insertPage.controller">&emsp;新增&emsp;營地_營區位</a>
+						<br>
+						<a href="/morari/admin/camp/indexShowAllCamp.controller">回首頁</a>
+					</div>
+
+				</div>
+				<!-- /.container-fluid(結束主要內容區塊) -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+			<div class="footershare"></div>
+			<!-- End of Footer -->
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top">
+		<i class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal-->
+	<div class="loginoutshare"></div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
+	<script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="/morari/admin/vendor/jquery-easing/jquery.easing.min.js" defer></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/morari/admin/js/sb-admin-2.min.js" defer></script>
+
+	<!-- Page level plugins -->
+	<script src="/morari/admin/vendor/chart.js/Chart.min.js" defer></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
+	<script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$(document).ready(function () {
+				$.getJSON('/morari/admin/camp/indexShowAllCamp.controller', function (data) {
+
+					var cityList = data["cityList"];
+					var citytable = $('#citytable');
+					var citys = '';
+					var citytr = '';
+					citytable.append("<thead><th><h2>縣市查詢營地資料</h2></th></thead>")
+					$.each(cityList, function (i, n) {
+						citys += '<input type="checkbox" name="cityID" value="' + n.cityID + '" />' + n.cityName
+					});
+					citytr += '<tbody><tr><td>縣市:</td><td>' + citys + '</td><td><input type="submit" value="查詢"></td></tr></tbody>'
+					citytable.append(citytr);
+
+					$('#cityform').on('submit', function (e) {
+						e.preventDefault();
+						var checkboxValues = [];
+						$("input[name='cityID']:checked").each(function () {
+							checkboxValues.push($(this).val());
+						});
+						var jsonData = JSON.stringify(checkboxValues);
+						$.ajax({
+							url: '/morari/admin/camp/queryCampsByCityIDs.controller',
+							type: 'post',
+							data: jsonData,
+							dataType: 'json',
+							contentType: 'application/json',
+							success: function (QueryByCityIDsResult) {
+								$("#camptable").empty();
+								var querytable = $('#camptable');
+								var querytr = '';
+								querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+								$.each(QueryByCityIDsResult, function (i, n) {
+									var tagNames = '';
+									n.tags.forEach(element => {
+										tagNames += element.tagName + '/'
+									});
+
+									querytr = "<tbody>"
+										+ "<tr>"
+										+ "<td>" + n.campID + "</td>"
+										+ "<td class='td2'><a href='#'>" + n.campName + "</a></td>"
+										+ "<td>" + n.city.cityName + "</td>"
+										+ "<td>" + '<img width="80" height="100" src="/morari/images/' + n.campPicturesPath + '">' + "</td>"
+										+ "<td>" + n.description + "</td>"
+										+ "<td>" + n.location + "</td>"
+										+ "<td>" + tagNames + "</td>"
+										+ "<td>"
+										+ '<button id="update" type="button" name="campID" value="' + n.campID + '">更新</button>'
+										+ "</td>"
+										+ "<td>"
+										+ '<button id="delete" type="button" name="campID" value="' + n.campID + '">刪除</button>'
+										+ "</td>"
+										+ "<td>"
+										+ '<button id="insertsite" type="button" name="campID" value="' + n.campID + '">新增營區位</button>'
+										+ "</td>"
+										+ "</tr>"
+										+ "</tbody>"
+									querytable.append(querytr);
+								});
+
+							}
+						});
+					});
+
+
+					$('#idform').on('submit', function (e) {
+						e.preventDefault();
+						var inputid = $('#inputid').val();
+						var jinput = JSON.stringify(inputid);
+						$.ajax({
+							url: '/morari/admin/camp/queryCampByID.controller',
+							type: 'post',
+							data: inputid,
+							dataType: 'json',
+							contentType: 'application/json',
+							success: function (QueryByIDResult) {
+								$("#camptable").empty();
+								var querytable = $('#camptable');
+								var querytr = '';
+								querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+								var tagNames = '';
+								QueryByIDResult.tags.forEach(element => {
+									tagNames += element.tagName + '/'
+								});
+
+								querytr = "<tbody>"
+									+ "<tr>"
+									+ "<td>" + QueryByIDResult.campID + "</td>"
+									+ "<td class='td2'><a href='#'>" + QueryByIDResult.campName + "</a></td>"
+									+ "<td>" + QueryByIDResult.city.cityName + "</td>"
+									+ "<td>" + '<img width="80" height="100" src="/morari/images/' + QueryByIDResult.campPicturesPath + '">' + "</td>"
+									+ "<td>" + QueryByIDResult.description + "</td>"
+									+ "<td>" + QueryByIDResult.location + "</td>"
+									+ "<td>" + tagNames + "</td>"
+									+ "<td>"
+									+ '<button id="update" type="button" name="campID" value="' + QueryByIDResult.campID + '">更新</button>'
+									+ "</td>"
+									+ "<td>"
+									+ '<button id="delete" type="button" name="campID" value="' + QueryByIDResult.campID + '">刪除</button>'
+									+ "</td>"
+									+ "<td>"
+									+ '<button id="insertsite" type="button" name="campID" value="' + QueryByIDResult.campID + '">新增營區位</button>'
+									+ "</td>"
+									+ "</tr>"
+									+ "</tbody>"
+								querytable.append(querytr);
+
+							}
+						});
+					});
+
+
+
+					var allCamps = data["allCamps"];
+					var camptable = $('#camptable');
+					var camptr = '';
+					camptable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+					$.each(allCamps, function (i, n) {
+						var tagNames = '';
+						n.tags.forEach(element => {
+							tagNames += element.tagName + '/'
+						});
+
+						camptr = "<tbody>"
+							+ "<tr>"
+							+ "<td>" + n.campID + "</td>"
+							+ '<td class="td2"><a href="#">' + n.campName + '</a></td>'
+							+ "<td>" + n.city.cityName + "</td>"
+							+ "<td>" + '<img width="80" height="100" src="/morari/images/' + n.campPicturesPath + '">' + "</td>"
+							+ "<td>" + n.description + "</td>"
+							+ "<td>" + n.location + "</td>"
+							+ "<td>" + tagNames + "</td>"
+							+ "<td>"
+							+ '<button id="update" type="button" name="campID" value="' + n.campID + '">更新</button>'
+							+ "</td>"
+							+ "<td>"
+							+ '<button id="delete" type="button" name="campID" value="' + n.campID + '">刪除</button>'
+							+ "</td>"
+							+ "<td>"
+							+ '<button id="insertsite" type="button" name="campID" value="' + n.campID + '">新增營區位</button>'
+							+ "</td>"
+							+ "</tr>"
+							+ "</tbody>"
+						camptable.append(camptr);
+					});
+				});
+
+				$('#camptable').on('click', '.td2', function () {
+					var campID = $(this).prev().text();
+					sessionStorage.setItem("campID", JSON.stringify(campID));
+					window.location.href = '/morari/admin/camp/SitesOfCamp';
+				});
+
+				$('#camptable').on('click', '#update', function () {
+					if (confirm("確定更新?")) {
+						alert("更新!!");
+						var campID = $(this).parent().prev().prev().prev().prev().prev().prev().prev().text();
+						sessionStorage.setItem("campID", JSON.stringify(campID));
+						window.location.href = '/morari/admin/camp/UpdateCampByIDForm';
+					}
+					else {
+						alert("取消更新!");
+						return false;
+					}
+				});
+
+				$('#camptable').on('click', '#delete', function () {
+					if (confirm("確定刪除?")) {
+						alert("刪除!!");
+						var campID = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().text();
+						var cj = JSON.stringify(campID);
+						var deletebody = $(this).parent().parent().parent();
+						$.ajax({
+							url: '/morari/admin/camp/deleteCampByID.controller',
+							type: 'post',
+							data: cj,
+							contentType: 'application/json',
+							success: function (deleteResult) {
+								alert('營地:' + campID + ' 成功刪除');
+								deletebody.empty();
+							}
+						});
+					}
+					else {
+						alert("取消刪除!");
+						return false;
+					}
+				});
+
+				$('#camptable').on('click', '#insertsite', function () {
+					var campID = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().text();
+					sessionStorage.setItem("campID", JSON.stringify(campID));
+					window.location.href = '/morari/admin/camp/insertSitePage.controller';
+				});
+
+
+			});
+		});
+
+	</script>
+
+</body>
+
+</html>

@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t4_33Forum.model.entity;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,10 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import com.campingmapping.team4.spring.t4_01Member.model.entity.Member;
 
 @Entity
 @Table(name="post")
+@Component
 public class Post {
 
 	@Id
@@ -45,7 +47,7 @@ public class Post {
 	@Column(name="score")
 	private int score;
 	@Column(name="releaseDate")
-	private Timestamp releaseDate;
+	private Date releaseDate;
 	@Column(name="userLike")
 	private int userLike;
 	@Column(name="userUnlike")
@@ -138,11 +140,11 @@ public class Post {
 		this.score = score;
 	}
 
-	public Timestamp getReleaseDate() {
+	public Date getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Timestamp releaseDate) {
+	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
