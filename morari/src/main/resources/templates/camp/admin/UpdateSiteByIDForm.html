@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                var siteID = JSON.parse(sessionStorage.getItem("siteID"));
+                var jc = JSON.stringify(siteID);
+                $.ajax({
+                    url: '/morari/admin/camp/upadteSitePage.controller',
+                    type: 'post',
+                    data: jc,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (site) {
+                        var form = $('#form');
+                        var div = '';
+
+                        div = '營區位編號: <input type="text" name="siteID" readonly="readonly" value="' + site.siteID + '"><br>'
+                            + '營區位名: <input type="text" name="siteName" value="' + site.siteName + '"><br>'
+                            + '圖片: <img width="80" height="100" src="/morari/images/' + site.sitePicturesPath + '"><br>'
+                            + '上傳圖片: <input type="file" name="sitePicturesPath" id="sitePicturesPath"><br>'
+                            + '總營位: <input type="text" name="totalSites" value="' + site.totalSites + '"><br>'
+                            + '營位金額: <input type="text" name="siteMoney" value="' + site.siteMoney + '"><br>'
+                            + '營地編號: <input type="text" name="campID" readonly="readonly" value="' + site.camp.campID + '"><br>'
+                            + '<input id="send" type="button" value="更新">'
+                        form.append(div);
+                    }
+                });
+
+                $('body').on('click', '#send', function () {
+                    var formData = new FormData(form);
+                    $.ajax({
+                        url: '/morari/admin/camp/updateSiteByID.controller',
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (after) {
+                            $("#form").empty();
+                            var form = $('#form');
+                            var div = '';
+
+                            div = '營區位編號: <input type="text" name="siteName" readonly="readonly" value="' + after.siteID + '"><br>'
+                                + '營區位名: <input type="text" name="siteName" value="' + after.siteName + '"><br>'
+                                + '圖片: <img width="80" height="100" src="/morari/images/' + after.sitePicturesPath + '"><br>'
+                                + '總營位: <input type="text" name="totalSites" value="' + after.totalSites + '"><br>'
+                                + '營位金額: <input type="text" name="siteMoney" value="' + after.siteMoney + '"><br>'
+                                + '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.camp.campID + '"><br>'
+                                + '<input id="send" type="button" value="新增">'
+                            form.append(div);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form id="form" method="post" enctype="multipart/form-data"></form>
+</body>
+
+</html>

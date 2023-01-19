@@ -38,10 +38,9 @@
                 $('#sitetable').on('click', '#update', function () {
                     if (confirm("確定更新?")) {
                         alert("更新!!");
-                        var campID = $(this).parent().prev().prev().prev().prev().prev().text();
-                        console.log(campID)
-                        // sessionStorage.setItem("campID", JSON.stringify(campID));
-                        // window.location.href = '/morari/admin/camp/';
+                        var siteID = $(this).parent().prev().prev().prev().prev().prev().text();
+                        sessionStorage.setItem("siteID", JSON.stringify(siteID));
+                        window.location.href = '/morari/admin/camp/UpdateSiteByIDForm';
                     }
                     else {
                         alert("取消更新!");
@@ -52,8 +51,8 @@
                 $('#sitetable').on('click', '#delete', function () {
                     if (confirm("確定刪除?")) {
                         alert("刪除!!");
-                        var campID = $(this).parent().prev().prev().prev().prev().prev().prev().text();
-                        var cj = JSON.stringify(campID);
+                        var siteID = $(this).parent().prev().prev().prev().prev().prev().prev().text();
+                        var cj = JSON.stringify(siteID);
                         var deletebody = $(this).parent().parent().parent();
                         $.ajax({
                             url: '/morari/admin/camp/deleteSiteByID.controller',

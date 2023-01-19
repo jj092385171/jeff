@@ -126,14 +126,12 @@
 		</dependency> -->
 		<!-- azure blob 圖片API end -->
 		
-
-
-
 		
-		<dependency>
+		
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>commons-io</groupId>
