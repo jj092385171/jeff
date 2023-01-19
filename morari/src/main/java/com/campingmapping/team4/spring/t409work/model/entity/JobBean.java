@@ -23,13 +23,18 @@ import lombok.NoArgsConstructor;
 public class JobBean {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "rackID")
-	private Integer rackID;// 刊登編號
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "rackid")
+	private Integer rackid;// 刊登編號
 
 	@ManyToOne
+//	@JsonIgnore
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
+	
+//	@Column(name="uid")
+//	@Transient
+//	private Integer uid;
 
 	@Column(name = "job")
 	private String job;// 職缺
@@ -47,9 +52,7 @@ public class JobBean {
 	private Blob img;// 圖片
 	@Column(name = "remark")
 	private String remark;// 備註
-	@Column(name = "rackUp")
-	private Date rackUp;// 上架日期
-	@Column(name = "rackDown")
-	private Date rackDown;// 下架日期
+	@Column(name = "rackup")
+	private Date rackup;// 上架日期
 
 }
