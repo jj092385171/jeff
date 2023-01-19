@@ -33,7 +33,7 @@
 					<form id="cityform" method="post">
 						<table id="citytable"></table>
 					</form>
-					<form id="idform" action="queryCampsByCampID.controller" method="post">
+					<form id="idform" method="post">
 						<table id="idtable">
 							<thead>
 								<th>
@@ -43,7 +43,10 @@
 							<tbody>
 								<tr>
 									<td>
-										<input name="campID" value="" type="text">
+										<input id="inputid" name="campID" value="" type="text">
+									</td>
+									<td>
+										<input type="submit" value="查詢">
 									</td>
 								</tr>
 							</tbody>
@@ -117,7 +120,7 @@
 					$.each(cityList, function (i, n) {
 						citys += '<input type="checkbox" name="cityID" value="' + n.cityID + '" />' + n.cityName
 					});
-					citytr += '<tbody><tr><td>縣市:</td><td>' + citys + '</td></tr><tr><td colspan="2"><input type="submit" value="送出"></td></tr></tbody>'
+					citytr += '<tbody><tr><td>縣市:</td><td>' + citys + '</td><td><input type="submit" value="查詢"></td></tr></tbody>'
 					citytable.append(citytr);
 
 					$('#cityform').on('submit', function (e) {
@@ -134,7 +137,6 @@
 							dataType: 'json',
 							contentType: 'application/json',
 							success: function (QueryByCityIDsResult) {
-								// sessionStorage.setItem("QueryByCityIDsResult", J
 								$("#camptable").empty();
 								var querytable = $('#camptable');
 								var querytr = '';
@@ -169,6 +171,55 @@
 										+ "</tbody>"
 									querytable.append(querytr);
 								});
+
+							}
+						});
+					});
+
+
+					$('#idform').on('submit', function (e) {
+						e.preventDefault();
+						var inputid = $('#inputid').val();
+						var jinput = JSON.stringify(inputid);
+						$.ajax({
+							url: '/morari/admin/camp/queryCampByID.controller',
+							type: 'post',
+							data: inputid,
+							dataType: 'json',
+							contentType: 'application/json',
+							success: function (QueryByIDResult) {
+								$("#camptable").empty();
+								var querytable = $('#camptable');
+								var querytr = '';
+								querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+								var tagNames = '';
+								QueryByIDResult.tags.forEach(element => {
+									tagNames += element.tagName + '/'
+								});
+
+								querytr = "<tbody>"
+									+ "<tr>"
+									+ "<td>" + QueryByIDResult.campID + "</td>"
+									+ "<td class='td2'><a href='#'>" + QueryByIDResult.campName + "</a></td>"
+									+ "<td>" + QueryByIDResult.city.cityName + "</td>"
+									+ "<td>" + '<img width="80" height="100" src="/morari/images/' + QueryByIDResult.campPicturesPath + '">' + "</td>"
+									+ "<td>" + QueryByIDResult.description + "</td>"
+									+ "<td>" + QueryByIDResult.location + "</td>"
+									+ "<td>" + tagNames + "</td>"
+									+ "<td>"
+									+ '<button id="update" type="button" name="campID" value="' + QueryByIDResult.campID + '">更新</button>'
+									+ "</td>"
+									+ "<td>"
+									+ '<button id="delete" type="button" name="campID" value="' + QueryByIDResult.campID + '">刪除</button>'
+									+ "</td>"
+									+ "<td>"
+									+ '<form action="insertSitePage.controller" method="POST">'
+									+ '<button type="submit" name="campID" value="' + QueryByIDResult.campID + '">新增營區位</button>'
+									+ "</form>"
+									+ "</td>"
+									+ "</tr>"
+									+ "</tbody>"
+								querytable.append(querytr);
 
 							}
 						});
