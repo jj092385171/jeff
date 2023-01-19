@@ -24,7 +24,7 @@ public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "TAGID")
 	private Integer tagID;
 
@@ -35,11 +35,9 @@ public class Tag implements Serializable {
 	@ManyToMany(mappedBy = "tags")
 	private Set<Camp> camps = new HashSet<>();
 
-	
 	public Tag() {
 	}
 
-	
 	public Integer getTagID() {
 		return tagID;
 	}

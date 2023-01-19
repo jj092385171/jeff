@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +32,7 @@ public class WorkPageController {
 	public String workIndex() {
 		return "work/guest/index";
 	}
+
 	// 啟動我的首頁
 	@GetMapping("/crud.controller")
 	public String processMainAction1() {
@@ -40,10 +40,10 @@ public class WorkPageController {
 	}
 
 	// 啟動CRUD
-//	@GetMapping("/jobCRUD.controller")
-//	public String processMainAction1() {
-//		return "work/admin/jobCRUD";
-//	}
+	// @GetMapping("/jobCRUD.controller")
+	// public String processMainAction1() {
+	// return "work/admin/jobCRUD";
+	// }
 
 	// 啟動insert
 	@PostMapping("/insert.controller")
@@ -87,7 +87,7 @@ public class WorkPageController {
 	// 修改
 	@PostMapping("/jobUpdate.controller")
 	@ResponseBody
-	public JobBean processUpdateAction(@RequestBody JobBean jBean) {	
+	public JobBean processUpdateAction(@RequestBody JobBean jBean) {
 		return jService.updateJob(jBean);
 	}
 
@@ -134,8 +134,8 @@ public class WorkPageController {
 		System.out.println(result);
 		if (result.size() == 0) {
 			return null;
-		}else {
-		return result;
+		} else {
+			return result;
 		}
 	}
 
@@ -150,5 +150,4 @@ public class WorkPageController {
 		return result;
 	}
 
-	
 }
