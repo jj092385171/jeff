@@ -113,10 +113,5 @@ public class UserProfiles implements UserDetails {
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  private Collection<Category> categories;
-
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<LoginHistory> loginHistories;
 }

@@ -19,65 +19,65 @@
 				}
 				console.log(response);
 				response.json().then(function (n) {
-					var tableData = 
-						"<th>產品編號</th>"+"<th>產品名稱</th>"+
-						"<th>會員id</th>"+"<th>品牌名稱</th>"+
-						"<th>產品規格</th>"+	"<th>類型</th>";
+					var tableData =
+						"<th>產品編號</th>" + "<th>產品名稱</th>" +
+						"<th>會員id</th>" + "<th>品牌名稱</th>" +
+						"<th>產品規格</th>" + "<th>類型</th>";
 					for (var i = 0; i < n.length; i++) {
-						tableData += 
+						tableData +=
 							"<tr>" +
-				            "<td>" + n[i].userid + "</td>" + "<td>" + n[i].pdid + "</td>" +
-				            "<td>" + n[i].ctqty + "</td>" +"<td>" + n[i].pdname + "</td>"  +
-				            "<td>" + n[i].pdprice + "</td>" +"<td>" + n[i].pdpicture + "</td>"  +
-				            
-				            "<td><button id='update' type='button' value='n[i].pdid' onclick='updateProduct(" + n[i].pdid + ")'>修改</button></td>" +
-				            "<td><button id='delete' type='button' value='n[i].pdid' onclick='confirmDelete(" + n[i].pdid + ")'>刪除</button></td>" +
-							
-				            "</tr>"
-						
+							"<td>" + n[i].userid + "</td>" + "<td>" + n[i].pdid + "</td>" +
+							"<td>" + n[i].ctqty + "</td>" + "<td>" + n[i].pdname + "</td>" +
+							"<td>" + n[i].pdprice + "</td>" + "<td>" + n[i].pdpicture + "</td>" +
+
+							"<td><button id='update' type='button' value='n[i].pdid' onclick='updateProduct(" + n[i].pdid + ")'>修改</button></td>" +
+							"<td><button id='delete' type='button' value='n[i].pdid' onclick='confirmDelete(" + n[i].pdid + ")'>刪除</button></td>" +
+
+							"</tr>"
+
 					}
 					document.getElementById('result').innerHTML = tableData;
 				});
-				
+
 			});
-		
+
 		function confirmDelete(pdid) {
 			if (confirm("確定刪除此項產品資料(編號:" + pdid + ")?")) {
 				$.ajax({
-					   url:'/morari/mall/deleteByPdid/'+pdid,
-					   type:'delete',
-					   dataType:'text',
-					   success: function(data){
-					   alert(data);
-					   location.reload();
-					   },
-						error: function(){
+					url: '/morari/mall/deleteByPdid/' + pdid,
+					type: 'delete',
+					dataType: 'text',
+					success: function (data) {
+						alert(data);
+						location.reload();
+					},
+					error: function () {
 						// 刪除失敗時的處理
 						alert('刪除失敗');
 					}
-				
-				  });
+
+				});
 			} else {
 			}
 		}
 		function updateProduct(pdid) {
 			if (confirm("確定修改此項產品資料(編號:" + pdid + ")?")) {
 				$.ajax({
-					   success: function(data){
-					   window.location.href = "/morari/mall/updateproduct.controller/"+pdid;
-					   },
-						error: function(){
+					success: function (data) {
+						window.location.href = "/morari/mall/updateproduct.controller/" + pdid;
+					},
+					error: function () {
 						// 刪除失敗時的處理
 						alert('刪除失敗');
 					}
-				
-				  });
-				
+
+				});
+
 			} else {
 			}
 		}
-		
-		
+
+
 	</script>
 </head>
 
