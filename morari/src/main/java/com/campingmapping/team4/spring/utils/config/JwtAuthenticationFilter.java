@@ -19,6 +19,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
+import io.jsonwebtoken.ExpiredJwtException;
+
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -35,11 +37,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final String jwt;
     final String userEmail;
     final String JWTCookieName = "sigin";
-    // 存取下個要去路徑的請求加進COOKIE
-    String targetUrl = request.getRequestURL().toString();
-    Cookie targetUrlCookie = new Cookie("targetUrl", targetUrl);
-    targetUrlCookie.setPath("/");
-    response.addCookie(targetUrlCookie);
 
     Cookie[] cookies = request.getCookies();
     String cookiejwt = null;
@@ -55,24 +52,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       return;
     }
     jwt = cookiejwt;
-    userEmail = jwtService.extractUsername(jwt);
-    if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-      if (jwtService.isTokenValid(jwt, userDetails)) {
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-            userDetails,
-            null,
-            userDetails.getAuthorities());
-        authToken.setDetails(
-            new WebAuthenticationDetailsSource().buildDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authToken);
+
+    try {
+      userEmail = jwtService.extractUsername(jwt);
+
+      if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+        if (jwtService.isTokenValid(jwt, userDetails)) {
+          UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+              userDetails,
+              null,
+              userDetails.getAuthorities());
+          authToken.setDetails(
+              new WebAuthenticationDetailsSource().buildDetails(request));
+          SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
       }
+      Cookie jwtcookie = new Cookie(JWTCookieName, cookiejwt);
+      jwtcookie.setHttpOnly(true);
+      jwtcookie.setPath("/");
+      response.addCookie(jwtcookie);
+      filterChain.doFilter(request, response);
+    } catch (ExpiredJwtException e) {
+      // 刪除 JWT cookie
+      e.printStackTrace();
+      Cookie jwtCookie = new Cookie(JWTCookieName, null);
+      jwtCookie.setMaxAge(1000 * 60 * 24);
+      jwtCookie.setHttpOnly(true);
+      jwtCookie.setPath("/");
+      response.addCookie(jwtCookie);
+      response.sendRedirect("/morari/home");
     }
-    Cookie jwtcookie = new Cookie(JWTCookieName, cookiejwt);
-    jwtcookie.setHttpOnly(true);
-    jwtcookie.setPath("/");
-    response.addCookie(jwtcookie);
-    filterChain.doFilter(request, response);
   }
 
 }

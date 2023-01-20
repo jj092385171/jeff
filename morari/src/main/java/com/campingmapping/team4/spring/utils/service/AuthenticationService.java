@@ -26,7 +26,7 @@ public class AuthenticationService {
 
         public AuthenticationResponse register(RegisterRequest request) {
                 UserProfiles userProfiles = UserProfiles.builder()
-                                .account(request.getAccount())
+                                .email(request.getEmail())
                                 .password(passwordEncoder.encode(request.getPassword()))
                                 .roles(Arrays.asList(Role.USER))
                                 .build();
@@ -40,11 +40,11 @@ public class AuthenticationService {
         public AuthenticationResponse authenticate(AuthenticationRequest request) {
                 authenticationManager.authenticate(
                                 new UsernamePasswordAuthenticationToken(
-                                                request.getAccount(),
+                                                request.getEmail(),
                                                 request.getPassword()));
-                var userProfiles = repository.findByAccount(request.getAccount())
+                var userProfiles = repository.findByEmail(request.getEmail())
                                 .orElseThrow();
-                var jwtToken = jwtService.generateToken(userProfiles);
+                String jwtToken = jwtService.generateToken(userProfiles, request.getRememberMe());
                 return AuthenticationResponse.builder()
                                 .token(jwtToken)
                                 .build();

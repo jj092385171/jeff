@@ -30,13 +30,12 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="email" class="form-control form-control-user" id="useremail"
+                                                name="email" aria-describedby="emailHelp" placeholder="Enter Email...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="userpassword" name="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -45,7 +44,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="/morari/index" class="btn btn-primary btn-user btn-block">
+                                        <a class="btn btn-primary btn-user btn-block" onclick="submitForm()">
                                             Login
                                         </a>
                                         <hr>
@@ -84,6 +83,31 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/morari/admin/js/sb-admin-2.min.js"></script>
+
+    <script>
+        function submitForm() {
+            const data = {
+                email: document.getElementById("useremail").value,
+                password: document.getElementById("userpassword").value,
+                rememberMe: document.getElementById("customCheck").checked
+            }
+
+            fetch("/morari/api/auth/authenticate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(response => {
+                    // Handle response from server
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
 
 </body>
 

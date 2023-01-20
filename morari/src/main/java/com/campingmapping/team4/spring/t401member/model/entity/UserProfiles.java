@@ -45,7 +45,7 @@ public class UserProfiles implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer uid;
-  private String account;
+  private String email;
   @JsonIgnore
   private String password;
 
@@ -67,7 +67,7 @@ public class UserProfiles implements UserDetails {
 
   @Override
   public String getUsername() {
-    return account;
+    return email;
   }
 
   @Override

@@ -31,13 +31,19 @@ public class JwtService {
 
   // 接收entity準備製作JWT
   public String generateToken(UserDetails userDetails) {
-    return generateToken(new HashMap<>(), userDetails);
+    return generateToken(new HashMap<>(), userDetails, false);
+  }
+
+  // memberMe
+  public String generateToken(UserDetails userDetails, Boolean rememberMe) {
+    return generateToken(new HashMap<>(), userDetails, rememberMe);
   }
 
   // 製作JWT
   public String generateToken(
       Map<String, Object> extraClaims,
-      UserDetails userDetails) {
+      UserDetails userDetails,
+      Boolean rememberMe) {
     // 放自定義物件
 
     UserProfiles userProfile = (UserProfiles) userDetails;
@@ -48,7 +54,7 @@ public class JwtService {
         .setClaims(extraClaims)
         .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+        .setExpiration(new Date(System.currentTimeMillis() + (rememberMe ? 1000 * 60 * 60 * 24 * 7 : 1000 * 60 * 24)))
         .signWith(getSignInKey(), SignatureAlgorithm.HS512)
         .compact();
   }
