@@ -5,7 +5,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +66,24 @@ public class JwtService {
   public boolean isTokenValid(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
     return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+  }
+
+  // 尋找當前使用者的UID
+  public Integer getUId(HttpServletRequest request) {
+    Cookie[] cookies = request.getCookies();
+    if (cookies == null || cookies.length == 0) {
+      return null;
+    }
+    String jwt = Arrays.stream(cookies)
+        .filter(c -> c.getName().equals("sigin"))
+        .map(Cookie::getValue)
+        .findFirst()
+        .orElse(null);
+    if (jwt == null || jwt.isEmpty()) {
+      return null;
+    }
+    Claims claims = extractAllClaims(jwt);
+    return (Integer) claims.get("uid");
   }
 
   private boolean isTokenExpired(String token) {
