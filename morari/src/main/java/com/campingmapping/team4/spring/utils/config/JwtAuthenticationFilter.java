@@ -68,10 +68,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
           SecurityContextHolder.getContext().setAuthentication(authToken);
         }
       }
-      Cookie jwtcookie = new Cookie(JWTCookieName, cookiejwt);
-      jwtcookie.setHttpOnly(true);
-      jwtcookie.setPath("/");
-      response.addCookie(jwtcookie);
+      Cookie jwtCookie = new Cookie(JWTCookieName, cookiejwt);
+      jwtCookie.setHttpOnly(true);
+      jwtCookie.setSecure(true);
+      jwtCookie.setPath("/");
+      response.addCookie(jwtCookie);
       filterChain.doFilter(request, response);
     } catch (ExpiredJwtException e) {
       // 刪除 JWT cookie
@@ -79,6 +80,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       Cookie jwtCookie = new Cookie(JWTCookieName, null);
       jwtCookie.setMaxAge(1000 * 60 * 24);
       jwtCookie.setHttpOnly(true);
+      jwtCookie.setSecure(true);
       jwtCookie.setPath("/");
       response.addCookie(jwtCookie);
       response.sendRedirect("/morari/home");

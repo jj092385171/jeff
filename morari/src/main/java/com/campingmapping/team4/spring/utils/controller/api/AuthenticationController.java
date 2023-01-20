@@ -31,6 +31,7 @@ public class AuthenticationController {
     Cookie jwtCookie = new Cookie("sigin", authenticationResponse.getToken());
     jwtCookie.setPath("/");
     jwtCookie.setHttpOnly(true);
+    jwtCookie.setSecure(true);
     response.addCookie(jwtCookie);
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
@@ -42,6 +43,7 @@ public class AuthenticationController {
     Cookie jwtCookie = new Cookie("sigin", authenticationResponse.getToken());
     jwtCookie.setPath("/");
     jwtCookie.setHttpOnly(true);
+    jwtCookie.setSecure(true);
     response.addCookie(jwtCookie);
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
