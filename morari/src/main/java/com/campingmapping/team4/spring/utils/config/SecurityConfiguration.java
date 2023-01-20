@@ -27,20 +27,9 @@ public class SecurityConfiguration {
                                 // 關閉CSRF
                                 .csrf().disable()
                                 // 設定是否需要驗證的路徑(更改成使用註釋)
-                                .authorizeHttpRequests(authorize -> authorize
-                                                // .requestMatchers(
-                                                // "/api/v1/auth/**",
-                                                // "/favicon.ico",
-                                                // "/index.html",
-                                                // "/oauth2/authorization/**",
-                                                // "/webjars/**",
-                                                // "/error",
-                                                // "/user",
-                                                // "/11.html",
-                                                // "/all.js")
-                                                // .permitAll()
-                                                // .requestMatchers(HttpMethod.POST,"/users/")
-                                                .anyRequest().permitAll())
+                                .authorizeHttpRequests()
+                                .anyRequest().permitAll()
+                                .and()
                                 // 啟用jwt監聽
                                 .authenticationProvider(authenticationProvider)
                                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

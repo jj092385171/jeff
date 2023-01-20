@@ -4,7 +4,7 @@ server:
   #   path: /error
   #   whitelabel:
   #     enabled: false
-  port: 8080
+  port: 8443
   servlet:
     context-path: /morari
     encoding:
@@ -20,7 +20,8 @@ server:
     key-store-password: "3s6v9y$B&E)H@McQfThWmZq4t7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)H@McQfTjWnZr4u7x!z%C*F"
     # 憑證格式：JKS 或 PKCS12
     key-store-type: PKCS12
-
+  http2:
+    enabled: true
 
 
 

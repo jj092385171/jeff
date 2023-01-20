@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +19,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+// import com.campingmapping.team4.spring.utils.config.AOPConfig.AuthAspect;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -27,6 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
+  // private final AuthAspect authAspect;
 
   @Override
   protected void doFilterInternal(
@@ -37,6 +41,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final String jwt;
     final String userEmail;
     final String JWTCookieName = "sigin";
+
+    // 取得所有需要驗證的路徑
+    // Set<String> authPaths = authAspect.getAuthPaths();
+
+    // 判斷當前請求路徑是否需要驗證
+    boolean needAuth = false;
+    // for (String path : authPaths) {
+    // if (request.getRequestURI().startsWith(path)) {
+    // needAuth = true;
+    // System.out.println("需要");
+
+    // }
+    // }
+
+    if (request.getRequestURI().equals("/morari/admin")) {
+      needAuth = true;
+    }
+    if (!needAuth) {
+      filterChain.doFilter(request, response);
+      return;
+    }
+
+    System.out.println("auth");
 
     Cookie[] cookies = request.getCookies();
     String cookiejwt = null;
