@@ -46,6 +46,7 @@ public class UserProfiles implements UserDetails {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer uid;
   private String account;
+  @JsonIgnore
   private String password;
 
   @ElementCollection(fetch = FetchType.EAGER)
