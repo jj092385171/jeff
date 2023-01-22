@@ -1090,6 +1090,7 @@ input::-ms-input-placeholder {
 
 #booking .form-control:focus,
 #booking .custom-select:focus {
+
     border-color: #f7ac93;
     box-shadow: none;
     outline: 0 none;
