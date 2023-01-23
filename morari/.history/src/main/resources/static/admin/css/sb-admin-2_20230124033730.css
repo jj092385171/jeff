@@ -1,3 +1,46 @@
+/* github */
+.btn-github {
+  color: #fff;
+  background-color: #858796;
+  border-color: #fff;
+}
+
+.btn-github:hover {
+  color: #fff;
+  background-color: #717380;
+  border-color: #e6e6e6;
+}
+
+.btn-github:focus,
+.btn-github.focus {
+  color: #fff;
+  background-color: #30497c;
+  border-color: #e6e6e6;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
+.btn-github.disabled,
+.btn-github:disabled {
+  color: #fff;
+  background-color: #3b5998;
+  border-color: #fff;
+}
+
+.btn-github:not(:disabled):not(.disabled):active,
+.btn-github:not(:disabled):not(.disabled).active,
+.show>.btn-github.dropdown-toggle {
+  color: #fff;
+  background-color: #2d4373;
+  border-color: #dfdfdf;
+}
+
+.btn-github:not(:disabled):not(.disabled):active:focus,
+.btn-github:not(:disabled):not(.disabled).active:focus,
+.show>.btn-github.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
+/* github */
 
 /*!
  * Start Bootstrap - SB Admin 2 v4.1.3 (https://startbootstrap.com/theme/sb-admin-2)
@@ -12244,49 +12287,6 @@ form.user .btn-user {
   box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
 }
 
-/* github */
-.btn-github {
-  color: #fff;
-  background-color: #858796;
-  border-color: #fff;
-}
-
-.btn-github:hover {
-  color: #fff;
-  background-color: #7a7c8a;
-  border-color: #e6e6e6;
-}
-
-.btn-github:focus,
-.btn-github.focus {
-  color: #fff;
-  background-color: #696b77;
-  border-color: #e6e6e6;
-  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
-}
-
-.btn-github.disabled,
-.btn-github:disabled {
-  color: #fff;
-  background-color: #858796;
-  border-color: #fff;
-}
-
-.btn-github:not(:disabled):not(.disabled):active,
-.btn-github:not(:disabled):not(.disabled).active,
-.show>.btn-github.dropdown-toggle {
-  color: #fff;
-  background-color: #858796;
-  border-color: #dfdfdf;
-}
-
-.btn-github:not(:disabled):not(.disabled):active:focus,
-.btn-github:not(:disabled):not(.disabled).active:focus,
-.show>.btn-github.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
-}
-
-/* github */
 
 
 .error {

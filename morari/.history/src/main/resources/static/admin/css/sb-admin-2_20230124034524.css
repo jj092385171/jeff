@@ -12268,7 +12268,7 @@ form.user .btn-user {
 .btn-github.disabled,
 .btn-github:disabled {
   color: #fff;
-  background-color: #858796;
+  background-color: #3b5998;
   border-color: #fff;
 }
 
@@ -12276,7 +12276,7 @@ form.user .btn-user {
 .btn-github:not(:disabled):not(.disabled).active,
 .show>.btn-github.dropdown-toggle {
   color: #fff;
-  background-color: #858796;
+  background-color: #2d4373;
   border-color: #dfdfdf;
 }
 

@@ -76,3 +76,17 @@ spring:
   #         endpoint: https://eteam4eit56blobdb.blob.core.windows.net/  
   main:
     allow-circular-references: true
+# oauth2
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: 79b6681332474f5ad91f
+            clientSecret: e67cb760488cc52e98ca8a547922d1d740222db6
+          google:
+            client-id: 611952345376-olh286m5v2e498h8orje59blgkvss6vo.apps.googleusercontent.com
+            client-secret: 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
+          facebook:
+            clientId: 575077734065145
+            clientSecret: 7c35c07c36ee83c1d99c62391736310c
