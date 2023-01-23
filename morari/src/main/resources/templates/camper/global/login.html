@@ -41,7 +41,7 @@
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                    Me</label><p id="errormsg"></p>
                                             </div>
                                         </div>
                                         <a class="btn btn-primary btn-user btn-block" onclick="submitForm()">
@@ -99,9 +99,16 @@
                 },
                 body: JSON.stringify(data)
             })
-                .then(res => res.json())
-                .then(response => {
-                    // Handle response from server
+                .then(                  
+                    response => {
+                 if (response.status === 201) {
+        // success
+        console.log("login success")
+        window.location.href = '/morari/home';
+    }else{
+        document.getElementById("errormsg").innerHTML="login failed";
+        console.log("login failed")
+    }
                 })
                 .catch(error => {
                     console.error("Error:", error);

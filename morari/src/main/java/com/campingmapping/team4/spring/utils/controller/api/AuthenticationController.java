@@ -27,6 +27,7 @@ public class AuthenticationController {
   @PostMapping("/register")
   public ResponseEntity<Void> register(
       @RequestBody RegisterRequest request, HttpServletResponse response) {
+
     AuthenticationResponse authenticationResponse = service.register(request);
     Cookie jwtCookie = new Cookie("sigin", authenticationResponse.getToken());
     jwtCookie.setPath("/");

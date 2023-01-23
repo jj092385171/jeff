@@ -31,7 +31,7 @@ public class CouponWallet {
     // cwid
     // 票券夾ID
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cwid")
     private Integer cwid;
     // uid

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class PostComment {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "postcommentId")
 	private Integer postcommentId;
 

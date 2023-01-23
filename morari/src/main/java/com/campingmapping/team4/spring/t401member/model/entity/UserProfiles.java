@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t401member.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -43,8 +44,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserProfiles implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer uid;
+  @Column(nullable = false,unique = true,length = 50)
   private String email;
   @JsonIgnore
   private String password;
