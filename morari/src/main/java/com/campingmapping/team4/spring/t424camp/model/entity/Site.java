@@ -1,16 +1,20 @@
 package com.campingmapping.team4.spring.t424camp.model.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +24,7 @@ public class Site implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "SITEID")
@@ -41,6 +46,9 @@ public class Site implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "FKCAMPID")
 	private Camp camp;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "")
+	private Set<CampOrderitem> orderitems = new HashSet<CampOrderitem>();
 
 	
 	public Site() {

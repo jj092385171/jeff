@@ -26,8 +26,8 @@
                     var form = $('#form');
                     var div = '';
 
-                    div = '營地名: <input type="text" name="campName" placeholder="營地名" value=""><br>'
-                        + '縣市選項:' + radio + "<br>"
+                    div = '營地名: <input type="text" name="campName" placeholder="營地名" value=""><span id="errorCampName" style="color: red;"></span><br>'
+                        + '縣市選項:' + radio + '<br>'
                         + '地址: <input type="text" name="location" placeholder="地址" value=""><br>'
                         + '簡介: <input type="text" name="description" placeholder="描述"><br>'
                         + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><br>'
@@ -40,31 +40,40 @@
                 $('body').on('click', '#send', function () {
                     var formData = new FormData(form);
                     $.ajax({
-                        url: '/morari/admin/camp/updateCampByID.controller',
+                        url: '/morari/admin/camp/insertCamp.controller',
                         type: 'post',
                         data: formData,
                         contentType: false,
                         cache: false,
                         processData: false,
                         success: function (after) {
-                            $("#form").empty();
-                            var form = $('#form');
-                            var div = '';
 
-                            var tagNames = '';
-                            after.tags.forEach(element => {
-                                tagNames += element.tagName + '/'
-                            });
+                            if (after.error == 'true') {
+                                console.log(after.campName);
+                                $("#errorCampName").append(after.campName);
+                            }
+                            else {
+                                $("#form").empty();
+                                var form = $('#form');
+                                var div = '';
 
-                            div = '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.campID + '"><br>'
-                                + '營地: <input type="text" name="campName" value="' + after.campName + '"><br>'
-                                + '縣市編號: <input type="text" name="city.cityID" readonly="readonly" value="' + after.city.cityID + '"><br>'
-                                + '縣市名: <input type="text" name="city.cityName" readonly="readonly"value="' + after.city.cityName + '"><br>'
-                                + '地址: <input type="text" name="location" value="' + after.location + '"><br>'
-                                + '簡介: <input type="text" name="description" value="' + after.description + '"><br>'
-                                + '圖片: <img width="80" height="100" src="/morari/images/' + after.campPicturesPath + '"><br>'
-                                + '標籤:' + tagNames + '<br>'
-                            form.append(div);
+                                var tagNames = '';
+                                after.tags.forEach(element => {
+                                    tagNames += element.tagName + '/'
+                                });
+
+
+                                div = '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.campID + '"><br>'
+                                    + '營地: <input type="text" name="campName" value="' + after.campName + '"><br>'
+                                    + '縣市編號: <input type="text" name="city.cityID" readonly="readonly" value="' + after.city.cityID + '"><br>'
+                                    + '縣市名: <input type="text" name="city.cityName" readonly="readonly"value="' + after.city.cityName + '"><br>'
+                                    + '地址: <input type="text" name="location" value="' + after.location + '"><br>'
+                                    + '簡介: <input type="text" name="description" value="' + after.description + '"><br>'
+                                    + '圖片: <img width="80" height="100" src="/morari/images/' + after.campPicturesPath + '"><br>'
+                                    + '標籤:' + tagNames + '<br>'
+                                form.append(div);
+                            }
+
                         }
                     });
                 });

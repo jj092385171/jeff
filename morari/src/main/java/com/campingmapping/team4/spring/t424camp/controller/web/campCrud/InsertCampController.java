@@ -27,11 +27,11 @@ public class InsertCampController {
 
 	@PostMapping("/insertCamp.controller")
 	@ResponseBody
-	public Camp insertCamp(@RequestParam("campName") @Nullable String campName,
+	public Object insertCamp(@RequestParam("campName") @Nullable String campName,
 			@RequestParam("campPicturesPath") @Nullable MultipartFile mf,
 			@RequestParam("cityID") @Nullable String cityID, @RequestParam("location") @Nullable String location,
 			@RequestParam("tagID") @Nullable int[] tagIDs, @RequestParam("description") @Nullable String description,
-			Model m) throws IllegalStateException, IOException {
+			Model m) {
 
 		// 存錯誤的map
 		Map<String, String> errors = new HashMap<>();
@@ -42,13 +42,20 @@ public class InsertCampController {
 		}
 
 		// 圖
-		if (mf.isEmpty()) {
+		String fileName = null;
+		try {
+			if (mf == null || mf.isEmpty()) {
+				errors.put("campPicturesPath", "必須選擇圖片");
+			} else {
+				String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
+				fileName = mf.getOriginalFilename();
+				File saveFilePath = new File(saveFileDir, fileName);
+				mf.transferTo(saveFilePath);
+			}
+		} catch (IOException e) {
 			errors.put("campPicturesPath", "必須選擇圖片");
 		}
-		String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
-		String fileName = mf.getOriginalFilename();
-		File saveFilePath = new File(saveFileDir, fileName);
-		mf.transferTo(saveFilePath);
+		
 //		saveFilePath.delete();
 
 		// 縣市
@@ -65,13 +72,14 @@ public class InsertCampController {
 		if (tagIDs == null || tagIDs.length == 0) {
 			errors.put("tagIDs", "必須選擇標籤");
 		}
+		
 
-//		// 錯誤導回
-//		if (errors != null && !errors.isEmpty()) {
+		// 錯誤導回
+		if (errors != null && !errors.isEmpty()) {
 //			m.addAttribute("errors", errors);
-//
-//			return "t4_24camp/admin/InsertCampForm";
-//		}
+			errors.put("error", "true");
+			return errors;
+		}
 
 		Camp camp = campService.insert(campName, Integer.valueOf(cityID), location, fileName, description, tagIDs);
 
