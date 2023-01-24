@@ -42,7 +42,7 @@ public class Site implements Serializable {
 	@Column(name = "SITEMONEY")
 	private Integer siteMoney;
 
-//	@JsonIgnore
+	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKCAMPID")
 	private Camp camp;
@@ -50,7 +50,6 @@ public class Site implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "")
 	private Set<CampOrderitem> orderitems = new HashSet<CampOrderitem>();
 
-	
 	public Site() {
 	}
 
@@ -74,7 +73,6 @@ public class Site implements Serializable {
 		this.camp = camp;
 	}
 
-	
 	public Integer getSiteID() {
 		return siteID;
 	}

@@ -7,21 +7,21 @@
 }
 
 body {
-    color: #666;
+    color: #2D3739;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    background: #ffffff;
+    background: #f2f2f2;
 }
 
 a {
-    color: #222222;
+    color: #394648;
     transition: 0.5s;
 }
 
 a:hover,
 a:active,
 a:focus {
-    color: #00CED1;
+    color: #ffdbb3;
     outline: none;
     text-decoration: none;
 }
@@ -64,8 +64,8 @@ h6 {
 .back-to-top {
     position: fixed;
     display: none;
-    background: #222222;
-    color: #00CED1;
+    background: #aeaeae;
+    color: #ffdbb3;
     width: 44px;
     height: 44px;
     text-align: center;
@@ -79,8 +79,8 @@ h6 {
 }
 
 .back-to-top:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #aeaeae;
+    background: #ffdbb3;
 }
 
 .back-to-top i {
@@ -92,7 +92,7 @@ h6 {
 /* ================================================= */
 
 #header {
-    background: #222222;
+    background: #2b3436;
     position: relative;
     height: 60px;
 }
@@ -127,12 +127,14 @@ h6 {
 
 .main-menu ul li:hover a,
 .main-menu ul li.active a {
-    color: #ffffff;
+    color: #ffddb7;
+    background-color: #4e6364;
+    border-radius: 10px;
 }
 
 .main-menu ul li a {
     font-family: 'Roboto Slab', serif;
-    color: #00CED1;
+    color: #CBAC88;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 400;
@@ -142,8 +144,9 @@ h6 {
     display: block;
     transition: color .25s ease, background-color .25s ease;
 }
+
 .mobile-menu-btn {
-    color: #00CED1;
+    color: #CBAC88;
     text-align: center;
     font-size: 30px;
     line-height: 57px;
@@ -157,7 +160,7 @@ h6 {
 
 .mobile-menu {
     display: none;
-    background: #2a2a2a;
+    background: #2b3436;
     border-top: #343434;
 }
 
@@ -201,6 +204,7 @@ h6 {
     padding-right: 10px;
     font-size: 20px;
 }
+
 @media (max-width: 575.98px) {
     #header .logo {
         padding-left: 5px;
@@ -222,6 +226,7 @@ h6 {
         padding: 0 30px;
     }
 }
+
 @media (max-width: 1199.98px) {
     .main-menu {
         display: none;
@@ -243,7 +248,7 @@ h6 {
 #search {
     position: relative;
     padding: 30px 0 20px 0;
-    background: #f2f2f2;
+    background: #ffdbb3;
 }
 
 #search.search-slider {
@@ -263,15 +268,15 @@ h6 {
     #search.search-slider {
         display: none;
     }
-    
+
     #search.search-home {
         display: block;
     }
-    
+
     #search {
         padding: 30px 0 35px 0;
     }
-    
+
     #search .control-group-kid {
         margin-top: 15px;
     }
@@ -306,20 +311,20 @@ h6 {
 #search input:focus,
 #search select:focus,
 #search button:focus {
-    border-color: #00CED1;
+    border-color: #CBAC88;
 }
 
 #search .btn {
     margin-top: 31px;
-    color: #00CED1;
+    color: #000000;
     background: #222222;
     border-color: #222222;
 }
 
 #search .btn:hover {
     color: #222222;
-    background: #00CED1;
-    border-color: #00CED1;
+    background: #CBAC88;
+    border-color: #CBAC88;
 }
 
 #search.search-slider .btn {
@@ -328,8 +333,8 @@ h6 {
 }
 
 #search.search-slider .btn:hover {
-    background: #00CED1;
-    border-color: #00CED1;
+    background: #CBAC88;
+    border-color: #CBAC88;
 }
 
 #search.search-slider input,
@@ -358,7 +363,7 @@ h6 {
 #welcome {
     position: relative;
     padding: 45px 0 60px 0;
-    background: #ffffff;
+    background: #f2f2f2;
     text-align: center;
 }
 
@@ -389,12 +394,12 @@ h6 {
         font-size: 40px;
         font-weight: 700;
     }
-    
+
     #welcome h4 {
         font-size: 30px;
         font-weight: 400;
     }
-    
+
     #welcome p {
         font-size: 18px;
         line-height: 28px;
@@ -407,12 +412,12 @@ h6 {
         font-weight: 700;
         letter-spacing: 0;
     }
-    
+
     #welcome h4 {
         font-size: 20px;
         font-weight: 400;
     }
-    
+
     #welcome p {
         font-size: 16px;
         line-height: 26px;
@@ -422,14 +427,15 @@ h6 {
 #welcome a {
     display: inline-block;
     padding: 7px 30px;
-    color: #00CED1;
-    background: #222222;
+    color: #000000;
+    background: #CBAC88;
     border-radius: 30px;
 }
 
 #welcome a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
+
 }
 
 /* ================================================= */
@@ -674,21 +680,21 @@ h6 {
 
 #about .content-col a {
     display: inline-block;
-    background: #222222;
     font-weight: 400;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     padding: 8px 30px;
     border-radius: 30px;
 }
 
 #about .content-col a:hover {
-    background: #00CED1;
-    color: #222222;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
-#about .content-col a:focus {
+/* #about .content-col a:focus {
     color: #fff;
-}
+} */
 
 /* ================================================= */
 /* ------------------ Rooms Style ------------------ */
@@ -798,7 +804,7 @@ h6 {
         margin-right: 10px;
         margin-bottom: 10px;
     }
-    
+
 }
 
 #rooms .room-icon li.icon-1 {
@@ -890,9 +896,9 @@ h6 {
 #rooms .room-link a {
     display: inline-block;
     padding: 7px 30px;
-    color: #00CED1;
     border-radius: 30px;
-    background: #222222;
+    color: #000000;
+    background: #CBAC88;
 }
 
 #rooms .room-link a:first-child {
@@ -900,8 +906,8 @@ h6 {
 }
 
 #rooms .room-link a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #rooms hr {
@@ -914,7 +920,7 @@ h6 {
     padding: 0px 8px 5px 8px;
     font-size: 25px;
     border-radius: 20px;
-    background: #00CED1;
+    background: #CBAC88;
     color: #fff;
 }
 
@@ -941,15 +947,15 @@ h6 {
     display: inline-block;
     margin: 0 auto;
     padding: 8px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     cursor: pointer;
     border: none;
 }
 
 .modal .modal-body a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 .modal .port-slider-nav .slick-track {
@@ -995,26 +1001,26 @@ h6 {
 #subscribe .subscribe-form input[type="email"]:focus {
     box-shadow: none;
     outline: 0 none;
-    border-color: #00CED1;
+    border-color: #CBAC88;
+    ;
 }
 
 @media only screen and (max-width: 479px) {
     #subscribe .subscribe-form input[type="email"] {
-        text-align: center; 
-    } 
+        text-align: center;
+    }
 }
 
 input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
-input::-ms-input-placeholder { 
-    color: white; 
+input::-ms-input-placeholder {
+    color: white;
 }
 
 #subscribe .subscribe-form button {
     font-size: 22px;
-    color: #00CED1;
     height: 50px;
     position: absolute;
     right: 0;
@@ -1022,18 +1028,19 @@ input::-ms-input-placeholder {
     line-height: 1px;
     padding: 6px 30px;
     margin-right: -1px;
-    background: #222222;
     border: none;
     border-radius: 30px;
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
     transition: all .3s;
+    color: #434343;
+    background: #CBAC88;
 }
 
 #subscribe .subscribe-form button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #subscribe .subscribe-form button:focus {
@@ -1047,7 +1054,7 @@ input::-ms-input-placeholder {
         position: static;
         margin-top: 15px;
         width: 100%;
-    } 
+    }
 }
 
 /* ================================================= */
@@ -1071,7 +1078,7 @@ input::-ms-input-placeholder {
 #booking .form-control,
 #booking .custom-select {
     height: 35px;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(123, 123, 123);
     border-radius: 30px;
     line-height: 24px;
     padding: 5px 20px;
@@ -1083,7 +1090,8 @@ input::-ms-input-placeholder {
 
 #booking .form-control:focus,
 #booking .custom-select:focus {
-    border-color: #00CED1;
+
+    border-color: #f7ac93;
     box-shadow: none;
     outline: 0 none;
 }
@@ -1091,20 +1099,20 @@ input::-ms-input-placeholder {
 #booking .button button {
     display: inline-block;
     font-size: 16px;
-    color: #00CED1;
     line-height: 24px;
     padding: 10px 30px 8px 30px;
     border-radius: 30px;
-    background: #222222;
     border: none;
     font-weight: 400;
     cursor: pointer;
     transition: all .3s;
+    color: #000000;
+    background: #CBAC88;
 }
 
 #booking .button button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #booking .help-block ul {
@@ -1128,8 +1136,8 @@ input::-ms-input-placeholder {
     font-family: 'Roboto Slab', serif;
     display: inline-block;
     padding: 15px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #4b4b4b;
+    background: #CBAC88;
     font-size: 28px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -1137,8 +1145,8 @@ input::-ms-input-placeholder {
 }
 
 #call-us a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 /* ================================================= */
@@ -1163,12 +1171,13 @@ input::-ms-input-placeholder {
     padding: 30px 15px;
     margin-bottom: 15px;
     text-align: center;
-    background: #222222;
+    background: #2b3436;
+    ;
     border-radius: 30px;
 }
 
 #contact .contact-info .info-item i {
-    color: #00CED1;
+    color: #CBAC88;
     font-size: 30px;
     margin-bottom: 15px;
 }
@@ -1192,7 +1201,7 @@ input::-ms-input-placeholder {
 }
 
 #contact .contact-info .info-item a:hover {
-    color: #00CED1;
+    color: #CBAC88;
 }
 
 #contact .contact-form {
@@ -1222,7 +1231,8 @@ input::-ms-input-placeholder {
     border-radius: 30px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
     textarea:focus,
     input:focus {
         font-size: 16px;
@@ -1233,14 +1243,14 @@ input::-ms-input-placeholder {
 #contact .contact-form input[type="text"]:focus,
 #contact .contact-form input[type="email"]:focus,
 #contact .contact-form textarea:focus {
-    border-color: #00CED1;
+    border-color: #f7ac93;
 }
 
 #contact .contact-form button {
     display: inline-block;
     padding: 8px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     font-size: 18px;
     font-weight: 400;
     border: none;
@@ -1250,8 +1260,8 @@ input::-ms-input-placeholder {
 }
 
 #contact .contact-form button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #contact .help-block ul {
@@ -1277,7 +1287,7 @@ input::-ms-input-placeholder {
     #login .container .col-md-6:first-child {
         margin-bottom: 30px;
     }
-} 
+}
 
 #login .login-form {
     position: relative;
@@ -1303,7 +1313,7 @@ input::-ms-input-placeholder {
     border-radius: 30px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
     input:focus {
         font-size: 16px;
         background: #fff;
@@ -1313,14 +1323,14 @@ input::-ms-input-placeholder {
 #login .login-form input[type="text"]:focus,
 #login .login-form input[type="email"]:focus,
 #login .login-form input[type="password"]:focus {
-    border-color: #00CED1;
+    border-color: #f7ac93;
 }
 
 #login .login-form button {
     display: inline-block;
     padding: 8px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     font-size: 18px;
     font-weight: 400;
     border: none;
@@ -1330,8 +1340,8 @@ input::-ms-input-placeholder {
 }
 
 #login .login-form button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 /* ================================================= */
@@ -1342,7 +1352,8 @@ input::-ms-input-placeholder {
     position: relative;
     padding: 30px 0 25px 0;
     text-align: center;
-    background: #222222;
+    background: #2b3436;
+    color: #8a755c;
 }
 
 #footer .social {
@@ -1351,11 +1362,11 @@ input::-ms-input-placeholder {
 }
 
 #footer a {
-    color: #00CED1;
+    color: #CBAC88;
 }
 
 #footer a:hover {
-    color: #ffffff;
+    color: #ffddb7;
 }
 
 #footer .social a {
@@ -1363,15 +1374,15 @@ input::-ms-input-placeholder {
     width: 40px;
     height: 40px;
     padding: 5px 10px;
-    background: #00CED1;
-    color: #222222;
+    color: #000000;
+    background: #CBAC88;
     font-size: 20px;
     border-radius: 30px;
 }
 
 #footer .social a:hover {
-    background: #ffffff;
-    color: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #footer ul {
@@ -1388,7 +1399,7 @@ input::-ms-input-placeholder {
     list-style-type: none;
     padding: 0 10px 0 3px;
     line-height: 15px;
-    border-right: 1px solid #ffffff;
+    border-right: 0px solid #ffffff;
 }
 
 #footer ul li:last-child {

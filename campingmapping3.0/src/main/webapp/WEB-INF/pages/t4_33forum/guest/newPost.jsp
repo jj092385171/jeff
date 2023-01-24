@@ -22,7 +22,7 @@
 				<h3>新增貼文</h3>
 			</header>
 			<article>
-				<form action="insertPost" method="POST">
+				<form action="<c:url value='/T4_33/newPostServlet' />" method="POST">
 					<div class="disBlock">
 						<label for="">*標題</label>
 						<input type="text" name="title" maxlength="30" size="80" required="required">
@@ -64,7 +64,7 @@
 					<div class="disBlock">
 						<input type="submit" value="送出">
 						<input type="reset" name="" id="" value="清除">
-						<input type="button" value="回上一頁" onclick="history.back()">
+						<input type="button" value="回討論區" onclick="history.back()">
 					</div>
 				</form>
 			</article>

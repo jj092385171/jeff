@@ -1,0 +1,46 @@
+<h3>新增貼文</h3>
+<form>
+	<div>
+		<label for="">*標題</label>
+		<input type="text" name="title" id="title" maxlength="30" size="80" required="required">
+	</div>
+	<div>
+		<label for="">*內容</label>
+		<textarea name="content" id="content" cols="66" rows="10" required="required"></textarea>
+	</div>
+	<div>
+		<label for="">露營人數</label>
+		<select name="people" id="people">
+			<option value="">請選擇</option>
+		</select>
+	</div>
+	<div>
+		<label for="">露營費用</label>
+		<input type="number" name="price" id="price" min="1">
+	</div>
+	<div>
+		<label for="">露營城市</label>
+		<select name="county" id="county">
+			<option value="">請選擇</option>
+		</select>
+	</div>
+	<div>
+		<label for="">開始露營日期</label>
+		<input type="date" name="startDate" id="startDate">
+	</div>
+	<div>
+		<label for="">結束露營日期</label>
+		<input type="date" name="endDate" id="endDate">
+	</div>
+	<div>
+		<label for="">評分</label>
+		<select name="score" id="score">
+			<option value="">請選擇</option>
+		</select>
+	</div>
+	<div>
+		<input type="button" value="送出" id="sub">
+		<input type="reset" value="清除">
+		<input type="button" value="回上一頁" onclick="history.back()">
+	</div>
+</form>

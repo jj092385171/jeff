@@ -11,7 +11,7 @@
 
 		<body>
 			<div>
-				<a href="/campingmapping3.0/indexShowAllCamp.controller"><strong>營地_營區位管理</strong></a>
+				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>
@@ -38,9 +38,9 @@
 							<td>${ camp.city.cityID }</td>
 							<td>${ camp.city.cityName }</td>
 							<td>${ camp.location }</td>
-							<td>
-								<img width="80" height="100" src="/campingmapping3.0/getCampPicture1/${camp.campID}" />
-							</td>
+							<!-- <td>
+								<img width="80" height="100" src="<c:url value='/T4_24/GetCampImage?id=${camp.campID}'/>" />
+							</td> -->
 							<td>${ camp.description }</td>
 							<td>
 								<c:forEach var='tag' items='${camp.tags}'>
@@ -53,11 +53,11 @@
 			</div>
 
 			<div>
-				<a href="/campingmapping3.0/queryPage.controller">&emsp;查詢&emsp;營地_營區位</a>
+				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
-				<a href="/campingmapping3.0/insertPage.controller">&emsp;新增&emsp;營地_營區位</a>
+				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
 				<br>
-				<a href="/campingmapping3.0/indexShowAllCamp.controller">回首頁</a>
+				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
 		</body>

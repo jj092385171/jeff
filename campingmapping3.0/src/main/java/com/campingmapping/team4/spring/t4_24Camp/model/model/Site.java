@@ -1,5 +1,7 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,8 +26,8 @@ public class Site {
 	@Column(name = "siteName")
 	private String siteName;
 	
-	@Column(name = "sitePicturesPath")
-	private String sitePicturesPath;
+	@Column(name = "sitePictures")
+	private Blob sitePictures;
 	
 	@Column(name = "totalSites")
 	private Integer totalSites;
@@ -34,7 +36,7 @@ public class Site {
 	private Integer siteMoney;
 	
 	@ManyToOne
-	@JoinColumn(name = "fkCampID")
+	@JoinColumn(name = "fk_campID")
 	private Camp camp;
 	
 	
@@ -58,12 +60,12 @@ public class Site {
 		this.siteName = siteName;
 	}
 
-	public String getSitePicturesPath() {
-		return sitePicturesPath;
+	public Blob getSitePictures() {
+		return sitePictures;
 	}
 
-	public void setSitePicturesPath(String sitePicturesPath) {
-		this.sitePicturesPath = sitePicturesPath;
+	public void setSitePictures(Blob sitePictures) {
+		this.sitePictures = sitePictures;
 	}
 
 	public Integer getTotalSites() {

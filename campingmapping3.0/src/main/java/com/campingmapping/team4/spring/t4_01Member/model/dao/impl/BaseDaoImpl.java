@@ -16,7 +16,7 @@ import org.hibernate.query.Query;
 
 import com.campingmapping.team4.spring.t4_01Member.model.dao.BaseDao;
 
-//import util.HibernateUtils;
+import util.HibernateUtils;
 @SuppressWarnings("unchecked")
 public class BaseDaoImpl<T> implements BaseDao<T> {
 
@@ -25,7 +25,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	public BaseDaoImpl() {
 		// 獲得連線
-//		this.factory = HibernateUtils.getSessionFactory();
+		this.factory = HibernateUtils.getSessionFactory();
 		// 獲得父類類型
 		ParameterizedType genericSuperclass = (ParameterizedType) this
 				.getClass().getGenericSuperclass();

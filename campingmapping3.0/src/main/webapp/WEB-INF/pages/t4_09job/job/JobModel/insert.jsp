@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -26,14 +25,22 @@
 </style>
 </head>
 <body>
-	<form action="jobServletAdd.controller" method="POST"
+	<form action="<c:url value='/JobServletAdd'/>" method="POST"
 		enctype="multipart/form-data">
 		<div class="c1">
 
 			<p>
 				會員id <input type="text" name="uid" value='${param.uid}' required>
 			</p>
-			<div style="color: #FF0000; font-size: 60%; display: inline">${errors.id}</div>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.id}</div>
+
+			<!-- 			<hr> -->
+			<!-- 			<p> -->
+			<!-- 				刊登編號 <input class="cl" type="text" name="rackID" -->
+			<%-- 					value='${param.rackID}' required> --%>
+			<!-- 			</p> -->
+			<%-- 			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.rackID}</div> --%>
+
 			<hr>
 			<p>
 				職缺 <input type="hidden" id="ii" value="${param.ii}"> <select
@@ -59,7 +66,7 @@
 				人數 <input type="text" name="quantity" value='${param.quantity}'
 					required>
 			</p>
-			<div style="color: #FF0000; font-size: 60%; display: inline">${errors.quantity}</div>
+			<div style="color: #FF0000; font-size: 60%; display: inline">${ErrorMsg.quantity}</div>
 			<hr>
 
 			<p>
@@ -90,7 +97,7 @@
 			<hr>
 
 			<p>
-				照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img" value='${param.img}'>
+				照片上傳 <input type="file" name="img" value='${param.img}'>
 			</p>
 			<hr>
 
@@ -104,12 +111,18 @@
 		</div>
 	</form>
 
-	<form action="<c:url value='jobCRUD.controller' />"
+	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"
 		method="POST" enctype="multipart/form-data">
+
 		<div class="b">
 			<button>回首頁</button>
 		</div>
 	</form>
+
+	<script src="https://code.jquery.com/jquery-3.6.1.js">
+		
+	</script>
+
 
 </body>
 </html>

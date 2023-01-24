@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    password: "0000"
+    url: jdbc:sqlserver://localhost:1433;databaseName=test;TrustServerCertificate=True;encrypt=true;
+    username: sa
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2016Dialect
+        '[allow_update_outside_transaction]': true
+        '[hbm2ddl.auto]': create-drop
+        '[format_sql]': true
+    show-sql: true

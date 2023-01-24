@@ -22,48 +22,44 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableTransactionManagement
 public class RootAppConfig {
-
+	
 	@Bean
-	public DataSource dataSource()
-			throws IllegalArgumentException, NamingException {
+	public DataSource dataSource() throws IllegalArgumentException, NamingException {
 		JndiObjectFactoryBean jndiBean = new JndiObjectFactoryBean();
-		jndiBean.setJndiName("java:comp/env/campingmapping3.0");
+		jndiBean.setJndiName("java:comp/env/connectSqlServerJdbc/SystemService");
 		jndiBean.afterPropertiesSet();
 		DataSource ds = (DataSource) jndiBean.getObject();
 		return ds;
-
+		
 	}
-
+	
 	@Bean
-	public LocalSessionFactoryBean sessionFactory()
-			throws IllegalArgumentException, NamingException {
+	public LocalSessionFactoryBean sessionFactory() throws IllegalArgumentException, NamingException {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
 		factoryBean.setPackagesToScan("com.campingmapping.team4.spring");
 		factoryBean.setHibernateProperties(addProperties());
 		return factoryBean;
-
+		
 	}
-
+	
 	private Properties addProperties() {
 		Properties props = new Properties();
 		props.put("hibernate.dialect", org.hibernate.dialect.SQLServerDialect.class);
 		props.put("hibernate.show_sql", Boolean.TRUE);
 		props.put("hibernate.format_sql", Boolean.TRUE);
-		props.put("hibernate.allow_update_outside_transaction", Boolean.TRUE);
 //		props.put("hibernate.current_session_context_class", "thread");
 		return props;
 		
 	}
-
-	@Bean
-	@Autowired
-	public HibernateTransactionManager transactionManager(
-			SessionFactory factory) {
+	
+	@Bean @Autowired
+	public HibernateTransactionManager transactionManager(SessionFactory factory) {
 		HibernateTransactionManager txMgr = new HibernateTransactionManager();
 		txMgr.setSessionFactory(factory);
 		return txMgr;
-
+		
 	}
-
+	
+	
 }

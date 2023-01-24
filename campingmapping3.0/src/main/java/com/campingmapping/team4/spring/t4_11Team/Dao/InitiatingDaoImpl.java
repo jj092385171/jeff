@@ -7,28 +7,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t4_11Team.model.Initiating;
+import com.campingmapping.team4.spring.t4_33Forum.controller.newPostServlet;
 
-@Repository
-@Transactional
 public class InitiatingDaoImpl implements InitiatingDao{
 	
-	@Autowired
-	private SessionFactory factory;
+	private Session session;
+	
+	public InitiatingDaoImpl(Session session) {
+		this.session = session;
+	}
 
 	@Override
 	public String hqlCommand(String startdate, String enddate, String initiatingnum, String postmember,String camparea) {
-		
-		Session session = factory.openSession();
-		
 		String hql = "";
 		String numCommand = "";
 		String memberCommand = "";
@@ -56,22 +50,19 @@ public class InitiatingDaoImpl implements InitiatingDao{
 		hql = hql + "FROM Initiating WHERE " + numCommand + memberCommand + areaCommand + stdCommand + edCommand;
 		
 		String sqlCommand = hql.substring(0,hql.length()-4);
-		session.close();
+		System.out.println(sqlCommand);
 		return sqlCommand;
 	}
 	
 	@Override
 	public List<Initiating> selectInitiating(String sql) {
-		Session session = factory.openSession();
 		Query<Initiating> query = session.createQuery(sql,Initiating.class);
 		List<Initiating> result = query.getResultList();
-		session.close();
 		return result;
 	}
 
 	@Override
 	public Initiating setInitiating(Map<String, String[]> map) {
-		Session session = factory.openSession();
 		Initiating initiating = new Initiating();
 		for (Map.Entry<String, String[]> entry : map.entrySet()) {
 			String key = entry.getKey();
@@ -114,95 +105,80 @@ public class InitiatingDaoImpl implements InitiatingDao{
 				break;
 			}
 		}
-		session.close();
 		return initiating;
 	}
 
 	@Override
 	public Initiating insertInitiating(Initiating initiating) {
-		Session session = factory.openSession();
-		if(initiating != null) {
+		Initiating in = session.get(Initiating.class, initiating.getInitiatingnum());
+		if(in == null) {
 			Date now = new Date();
 			initiating.setPostdate(now);
 			session.save(initiating);
+			return initiating;
 		}
-		session.close();
-		return initiating;
+		return null;
 	}
 
 	@Override
 	public boolean deleteInitiating(int initiatingnum) {
-		Session session = factory.openSession();
-		Initiating in = new Initiating();
-		in = (Initiating)session.get(Initiating.class,initiatingnum);
+		Initiating in = session.get(Initiating.class,initiatingnum);
 		if(in != null) {
 			session.delete(in);
-			session.flush();
-			session.close();
 			return true;
 		}
-		session.close();
 		return false;
 	}
 
 	@Override
 	public Initiating updateInitiating(Initiating initiating) {
-		Session session = factory.openSession();
-		if(initiating != null) {
-			session.update(initiating);
-			session.flush();
-			session.close();
+		Initiating in = session.get(Initiating.class, initiating.getInitiatingnum());
+		if(in != null) {
+			in.setStartdate(initiating.getStartdate());
+			in.setEnddate(initiating.getEnddate());
+			in.setCurrentnum(initiating.getCurrentnum());
+			in.setAcceptablenum(initiating.getAcceptablenum());
+			in.setCamparea(initiating.getCamparea());
+			in.setPair(initiating.getPair());
 		}
-		session.close();
-		return initiating;
+		return in;
 	}
 
 	@Override
 	public List<Initiating> selectAllInitiating() {
-		Session session = factory.openSession();
 		Query<Initiating> query = session.createQuery("from Initiating",Initiating.class);
 		List<Initiating> result = query.getResultList();
-		session.close();
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Initiating> selectAllCamparea() {
-		Session session = factory.openSession();
 			List<String> list = session.createQuery("select distinct camparea from Initiating").getResultList();
 			ArrayList<Initiating> resultlis = new ArrayList<Initiating>();
+			Initiating in = new Initiating();
 			for (String string : list) {
-				Initiating in = new Initiating();
+				int i = 0;
+				in.setCurrentnum(i);
 				in.setCamparea(string);
 				resultlis.add(in);
+				i++;
 			}
-			session.close();
 			return resultlis;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Initiating> selectAllMember() {
-		Session session = factory.openSession();
 		List<Integer> list = session.createQuery("select distinct postmember from Initiating").getResultList();
 		ArrayList<Initiating> resultlist = new ArrayList<Initiating>();
+		Initiating in = new Initiating();
 		for (Integer integer : list) {
-			Initiating in = new Initiating();
 			in.setPostmember(integer);
 			resultlist.add(in);
 		}
-		session.close();
-		return resultlist;
-	}
-
-	@Override
-	public Initiating findById(int initiatingnum) {
-		Session session = factory.openSession();
-		Initiating resultBean = session.get(Initiating.class, initiatingnum);
 		
-		session.close();
-		return resultBean;
+		return resultlist;
 	}
 
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -42,9 +41,9 @@
 <body>
 	<div class="c1">
 		<table class="t1">
-
 			<thead>
 				<tr>
+
 					<th>刊登編號</th>
 					<th>uID</th>
 					<th>職缺</th>
@@ -62,6 +61,8 @@
 			<tbody class="t2">
 				<c:forEach var="JobBean" items="${showAllJob}">
 					<tr>
+
+
 						<td>${JobBean.rackID}</td>
 						<td>${JobBean.uID}</td>
 						<td>${JobBean.job}</td>
@@ -71,17 +72,21 @@
 						<td>${JobBean.date}</td>
 						<td>${JobBean.time}</td>
 						<td><img width="80" height="100"
-							src="<c:url value='img.controller/${JobBean.rackID}'/>" /></td>
+							src="<c:url value='/JobServletImg?id=${JobBean.rackID}'/>" /></td>
 						<td>${JobBean.remark}</td>
 						<td>${JobBean.rackUp}</td>
 						<td>${JobBean.rackDown}</td>
 
 
 						<td>
-							<button class="delete" name="de" value='${JobBean.rackID}'>刪除</button>
+<%-- 							<form action="<c:url value='/JobServletDelete'/>" method="POST" --%>
+<!-- 								enctype="multipart/form-data"> -->
+<%-- 								<input type="hidden" name="de" value="${JobBean.rackID}"> --%>
+<!-- 								<button>刪除</button> -->
+								<button class="delete" name="de" value='${JobBean.rackID}' type="button">刪除</button>
 
-
-							<form action="<c:url value='selectRackId.controller'/>"
+<!-- 							</form> -->
+							<form action="<c:url value='/JobServletFindBeanByRackID'/>"
 								method="POST" enctype="multipart/form-data">
 								<input type="hidden" name="up" value="${JobBean.rackID}">
 								<button>修改</button>
@@ -91,12 +96,10 @@
 					</tr>
 				</c:forEach>
 			</tbody>
-
 		</table>
 	</div>
-
-	<form action="<c:url value='jobCRUD.controller' />" method="POST"
-		enctype="multipart/form-data">
+	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"
+		method="POST" enctype="multipart/form-data">
 		<div class="b">
 			<button>回首頁</button>
 		</div>
@@ -121,7 +124,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                      url:'/campingmapping3.0/delete.controller',
+                      url:'/campingmapping2.0/JobServletDelete',
                       method:"post",
                       dataType:"text",
                       data: {"de":id},

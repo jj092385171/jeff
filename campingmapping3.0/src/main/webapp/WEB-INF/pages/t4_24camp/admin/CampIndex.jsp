@@ -12,7 +12,7 @@
 
 		<body>
 			<div>
-				<a href="/campingmapping3.0/indexShowAllCamp.controller"><strong>營地_營區位管理</strong></a>
+				<a href="<c:url value='/IndexShowCampsServlet' />"><strong>營地_營區位管理</strong></a>
 			</div>
 
 			<hr>
@@ -37,14 +37,15 @@
 					<c:forEach var='camp' items='${allCamps}'>
 						<tr>
 							<td>${ camp.campID }</td>
-							<td><a href="/campingmapping3.0/sitesOfCamp.controller/${ camp.campID }">${
+							<td><a href="<c:url value='/SitesOfCampServlet.do?campID=${ camp.campID }' />">${
 									camp.campName }</a></td>
 							<td>${ camp.city.cityID }</td>
 							<td>${ camp.city.cityName }</td>
 							<td>${ camp.location }</td>
-							<td>
-								<img width="80" height="100" src="/campingmapping3.0/getCampPicture/${camp.campID}" />
-							</td>
+							<!-- <td>
+								<img width="80" height="100"
+								src="<c:url value='/T4_24/GetCampImage?id=${camp.campID}'/>" />
+							</td> -->
 							<td>${ camp.description }</td>
 							<td>
 								<c:forEach var='tag' items='${camp.tags}'>
@@ -52,24 +53,25 @@
 								</c:forEach>
 							</td>
 							<td>
-								<form action="upadteCampPage1.controller" method="POST">
+								<form action="<c:url value='/UpadteCampByIDPageServlet.do'/>" method="POST">
 									<button onclick="return check()" type="submit" name="campID"
 										value="${camp.campID }">更新</button>
 								</form>
 							</td>
 							<td>
-								<form action="deleteCampByID.controller" method="POST">
+								<!-- <form action="<c:url value='/DeleteCampByIDServlet.do'/>" method="POST">
 									<button onclick="return check()" type="submit" name="campID"
 										value="${camp.campID }">刪除</button>
-								</form>
-								<!-- <form>
+								</form> -->
+								<form>
 									<button class="delete" value="${camp.campID}" name="campID"
 										type="button">刪除</button>
-								</form> -->
+								</form>
 							</td>
 							<td>
-								<form action="insertSitePage.controller" method="POST">
-									<button type="submit" name="campID" value="${camp.campID }">新增營區位</button>
+								<form action="<c:url value='/InsertSiteGetCampIDServlet?campID=${camp.campID }'/>"
+									method="POST">
+									<button>新增營區位</button>
 								</form>
 							</td>
 						</tr>
@@ -80,11 +82,11 @@
 			<hr>
 
 			<div>
-				<a href="/campingmapping3.0/queryPage.controller">&emsp;查詢&emsp;營地_營區位</a>
+				<a href="<c:url value='/t4_24camp/admin/QueryPageForm.jsp' />">&emsp;查詢&emsp;營地_營區位</a>
 				<br>
-				<a href="/campingmapping3.0/insertPage.controller">&emsp;新增&emsp;營地_營區位</a>
+				<a href="<c:url value='/t4_24camp/admin/InsertCampForm.jsp' />">&emsp;新增&emsp;營地_營區位</a>
 				<br>
-				<a href="/campingmapping3.0/indexShowAllCamp.controller">回首頁</a>
+				<a href="<c:url value='/IndexShowCampsServlet' />">回首頁</a>
 			</div>
 
 
@@ -92,7 +94,7 @@
 
 			<script>
 				$(function () {
-					$('').click(function () {
+					$('.delete').click(function () {
 						let id = $(this).attr("value");
 						Swal.fire({
 							title: 'Are you sure?',

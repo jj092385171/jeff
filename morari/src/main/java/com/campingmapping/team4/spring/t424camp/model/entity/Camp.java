@@ -37,7 +37,7 @@ public class Camp implements Serializable {
 	@Column(name = "CAMPNAME")
 	private String campName;
 
-//	@JsonIgnore
+	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKCITYID")
 	private City city;
@@ -51,7 +51,7 @@ public class Camp implements Serializable {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-//	@JsonIgnore
+	// @JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tagofcamp", joinColumns = {
 			@JoinColumn(name = "FKCAMPID", referencedColumnName = "CAMPID") }, inverseJoinColumns = {
