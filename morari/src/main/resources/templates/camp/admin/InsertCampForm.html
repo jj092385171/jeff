@@ -8,6 +8,7 @@
     <script type="text/javascript">
         $(function () {
             $(document).ready(function () {
+                var form = $('#form');
                 $.getJSON('/morari/admin/camp/indexShowAllCamp.controller', function (data) {
                     var cityList = data["cityList"];
                     var tagList = data["tagList"];
@@ -23,7 +24,7 @@
                         tags += '<input type="checkbox" name="tagID" value="' + n.tagID + '" />' + n.tagName
                     });
 
-                    var form = $('#form');
+
                     var div = '';
 
                     div = '營地名: <input type="text" name="campName" placeholder="營地名" value=""><span id="errorCampName" style="color: red;"></span><br>'
@@ -38,7 +39,9 @@
                 });
 
                 $('body').on('click', '#send', function () {
-                    var formData = new FormData(form);
+                    // console.log(form);
+                    // console.log(form.get(0));
+                    var formData = new FormData(form.get(0));
                     $.ajax({
                         url: '/morari/admin/camp/insertCamp.controller',
                         type: 'post',

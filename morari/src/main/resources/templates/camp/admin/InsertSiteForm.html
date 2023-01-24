@@ -22,6 +22,8 @@
                 form.append(div);
 
                 $('body').on('click', '#send', function () {
+                    // console.log(form);
+                    // console.log(form.get(0));
                     var formData = new FormData(form.get(0));
                     $.ajax({
                         url: '/morari/admin/camp/insertSite.controller',

@@ -7,12 +7,17 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -29,8 +34,10 @@ public class CampOrder implements Serializable {
 	@Column(name = "ORDERID")
 	private Integer orderID;
 	
-	@Column(name = "USERID")
-	private Integer userID;
+	// @JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "FKUSERID")
+	private UserProfiles userprofiles;
 	
 	@Column(name = "ORDERTIME")
 	private Date orderTime;
@@ -47,9 +54,12 @@ public class CampOrder implements Serializable {
 	@Column(name = "TOTALPRICE")
 	private Integer totalPrice;
 	
-	@Column(name = "FKCAMPID")
-	private Integer campID;
+	// @JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "FKCAMPID")
+	private Camp camp;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "campOrder")
 	private Set<CampOrderitem> orderitems = new HashSet<CampOrderitem>();
 
@@ -58,17 +68,17 @@ public class CampOrder implements Serializable {
 		super();
 	}
 
-	public CampOrder(Integer orderID, Integer userID, Date orderTime, Date goingTime, Date leavingTime, String status,
-			Integer totalPrice, Integer campID) {
+	public CampOrder(Integer orderID, UserProfiles userprofiles, Date orderTime, Date goingTime, Date leavingTime,
+			String status, Integer totalPrice, Camp camp) {
 		super();
 		this.orderID = orderID;
-		this.userID = userID;
+		this.userprofiles = userprofiles;
 		this.orderTime = orderTime;
 		this.goingTime = goingTime;
 		this.leavingTime = leavingTime;
 		this.status = status;
 		this.totalPrice = totalPrice;
-		this.campID = campID;
+		this.camp = camp;
 	}
 
 	
@@ -80,12 +90,12 @@ public class CampOrder implements Serializable {
 		this.orderID = orderID;
 	}
 
-	public Integer getUserID() {
-		return userID;
+	public UserProfiles getUserprofiles() {
+		return userprofiles;
 	}
 
-	public void setUserID(Integer userID) {
-		this.userID = userID;
+	public void setUserprofiles(UserProfiles userprofiles) {
+		this.userprofiles = userprofiles;
 	}
 
 	public Date getOrderTime() {
@@ -128,13 +138,25 @@ public class CampOrder implements Serializable {
 		this.totalPrice = totalPrice;
 	}
 
-	public Integer getCampID() {
-		return campID;
+	public Camp getCamp() {
+		return camp;
 	}
 
-	public void setCampID(Integer campID) {
-		this.campID = campID;
+	public void setCamp(Camp camp) {
+		this.camp = camp;
 	}
 
+	public Set<CampOrderitem> getOrderitems() {
+		return orderitems;
+	}
 
+	public void setOrderitems(Set<CampOrderitem> orderitems) {
+		this.orderitems = orderitems;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 }

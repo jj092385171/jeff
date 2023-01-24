@@ -27,19 +27,15 @@ public class CampOrderitem implements Serializable {
 	@Column(name = "ORDERITEMID")
 	private Integer orderitemID;
 	
+	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKORDERID")
 	private CampOrder campOrder;
 	
+	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKSITEID")
 	private Site site;
-	
-	@Column(name = "FKUSERID")
-	private Integer userID;
-	
-	@Column(name = "ORDERTIME")
-	private Date orderTime;
 	
 	@Column(name = "GOINGTIME")
 	private Date goingTime;
@@ -58,7 +54,78 @@ public class CampOrderitem implements Serializable {
 		super();
 	}
 
+	public CampOrderitem(Integer orderitemID, CampOrder campOrder, Site site, Date goingTime, Date leavingTime,
+			Integer numbers, Integer unitPrice) {
+		super();
+		this.orderitemID = orderitemID;
+		this.campOrder = campOrder;
+		this.site = site;
+		this.goingTime = goingTime;
+		this.leavingTime = leavingTime;
+		this.numbers = numbers;
+		this.unitPrice = unitPrice;
+	}
+
 	
+	public Integer getOrderitemID() {
+		return orderitemID;
+	}
+
+	public void setOrderitemID(Integer orderitemID) {
+		this.orderitemID = orderitemID;
+	}
+
+	public CampOrder getCampOrder() {
+		return campOrder;
+	}
+
+	public void setCampOrder(CampOrder campOrder) {
+		this.campOrder = campOrder;
+	}
+
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
+	}
+
+	public Date getGoingTime() {
+		return goingTime;
+	}
+
+	public void setGoingTime(Date goingTime) {
+		this.goingTime = goingTime;
+	}
+
+	public Date getLeavingTime() {
+		return leavingTime;
+	}
+
+	public void setLeavingTime(Date leavingTime) {
+		this.leavingTime = leavingTime;
+	}
+
+	public Integer getNumbers() {
+		return numbers;
+	}
+
+	public void setNumbers(Integer numbers) {
+		this.numbers = numbers;
+	}
+
+	public Integer getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(Integer unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	
 }

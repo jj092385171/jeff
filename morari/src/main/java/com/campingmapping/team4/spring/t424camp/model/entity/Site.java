@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,9 +49,11 @@ public class Site implements Serializable {
 	@JoinColumn(name = "FKCAMPID")
 	private Camp camp;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
 	private Set<CampOrderitem> orderitems = new HashSet<CampOrderitem>();
 
+	
 	public Site() {
 	}
 
@@ -73,6 +77,7 @@ public class Site implements Serializable {
 		this.camp = camp;
 	}
 
+	
 	public Integer getSiteID() {
 		return siteID;
 	}
