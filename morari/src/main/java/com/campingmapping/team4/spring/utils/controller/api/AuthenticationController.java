@@ -57,11 +57,16 @@ public class AuthenticationController {
     return service.loginstate(request);
   }
   @PostMapping("/logout")
-public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+public void logout(HttpServletResponse response) throws IOException  {
     // 處理登出邏輯，例如清除session、Cookie等
+    Cookie jwtCookie = new Cookie("sigin", null);
+    jwtCookie.setPath("/");
+    jwtCookie.setHttpOnly(true);
+    jwtCookie.setSecure(true);
+    response.addCookie(jwtCookie);
     
     // 重定向到登入頁面
-    response.sendRedirect("/morari/home");
+    response.sendRedirect("/morari/login");
 }
 
 }
