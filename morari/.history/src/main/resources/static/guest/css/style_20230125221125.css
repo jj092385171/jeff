@@ -1540,12 +1540,4 @@ a.dropdown-item:disabled {
     font-size: 16px;
     margin: 4px;
     padding: 6px 12px;
-    color: #000;
-    background-color: #CBAC88;
-}
-#logoutbtn:hover,
-#logoutbtn:active,
-#logoutbtn:focus{
-    color: #858796;
-    background-color: #ffddb7;
 }

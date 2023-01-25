@@ -29,12 +29,10 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body" id="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer" id="modal-footer">
-                <button class="btn btn-secondary" id="logoutx" type="button" data-dismiss="modal">Cancel</button>
-                <form action="/morari/api/auth/logout" method="post" style="margin: 0;padding: 0;line-height: 0;">
-                    <button class="btn " id="logoutbtn" type="submit">Logout</button>
-                </form>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
             </div>
         </div>
     </div>

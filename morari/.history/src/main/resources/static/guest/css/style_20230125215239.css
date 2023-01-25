@@ -1515,7 +1515,7 @@ a.dropdown-item:disabled {
     display: block;
     background-color: #00000000;
 }
-#modal-body {
+#modal-body{
     font-family:  "Nunito";
     color: #2D3739;
     font-size: 16px;
@@ -1523,29 +1523,4 @@ a.dropdown-item:disabled {
     line-height: 1.5;
     color: #2D3739;
     text-align: left;
-}
-#modal-footer {
-    padding: 12px;
-    font-family:  "Nunito";
-    font-size: 16px;
-}
-#logoutx {
-    font-family:  "Nunito";
-    font-size: 16px;
-    margin: 4px;
-    padding: 6px 12px;
-}
-#logoutbtn {
-    font-family:  "Nunito";
-    font-size: 16px;
-    margin: 4px;
-    padding: 6px 12px;
-    color: #000;
-    background-color: #CBAC88;
-}
-#logoutbtn:hover,
-#logoutbtn:active,
-#logoutbtn:focus{
-    color: #858796;
-    background-color: #ffddb7;
 }

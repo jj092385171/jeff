@@ -1543,9 +1543,8 @@ a.dropdown-item:disabled {
     color: #000;
     background-color: #CBAC88;
 }
-#logoutbtn:hover,
-#logoutbtn:active,
-#logoutbtn:focus{
+#logoutbtn:hover
+{
     color: #858796;
     background-color: #ffddb7;
 }

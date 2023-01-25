@@ -1423,17 +1423,28 @@ input::-ms-input-placeholder {
     border-radius: 100%;
 }
 
-
+.dropdown-content a {
+    font-size: 13.6px;
+}
 
 .dropdown-content {
+    /* border-radius: 10px;  
+    position: absolute;
+    background-color: #4e6364;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1000; */
+
     right: 10px;
     left: auto;
     position: absolute;
     top: 100%;
     z-index: 1000;
+    display: none;
     float: left;
-    padding: 8px 0;
+    padding: 4px 24px;
     margin: 0.125rem 0 0;
+
     color: #858796;
     text-align: left;
     list-style: none;
@@ -1442,110 +1453,171 @@ input::-ms-input-placeholder {
     border-radius: 0.35rem;
 
 
-
-
 }
 
-a.dropdown-item {
-    padding: 4px 24px;
-    font-size: 13.6px;
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 0.85rem;
+    color: #858796;
+    text-align: left;
+    list-style: none;
+    background-color: #2b3436;
+    background-clip: padding-box;
+    border-radius: 0.35rem;
+}
+
+.dropdown-menu-left {
+    right: auto;
+    left: 0;
+}
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
+
+@media (min-width: 576px) {
+    .dropdown-menu-sm-left {
+        right: auto;
+        left: 0;
+    }
+
+    .dropdown-menu-sm-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .dropdown-menu-md-left {
+        right: auto;
+        left: 0;
+    }
+
+    .dropdown-menu-md-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .dropdown-menu-lg-left {
+        right: auto;
+        left: 0;
+    }
+
+    .dropdown-menu-lg-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .dropdown-menu-xl-left {
+        right: auto;
+        left: 0;
+    }
+
+    .dropdown-menu-xl-right {
+        right: 0;
+        left: auto;
+    }
+}
+
+.dropdown-menu[x-placement^="top"],
+.dropdown-menu[x-placement^="right"],
+.dropdown-menu[x-placement^="bottom"],
+.dropdown-menu[x-placement^="left"] {
+    right: auto;
+    bottom: auto;
+}
+
+.dropdown-menu .dropdown-header {
+    text-transform: uppercase !important;
+}
+
+.dropdown-menu {
+    font-size: 0.85rem;
+}
+
+.dropdown-menu .dropdown-header {
+    font-weight: 800;
+    font-size: 0.65rem;
+    color: #b7b9cc;
+}
+
+.dropdown-menu {
+    width: calc(100% - 1.5rem);
+    right: 0.75rem;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
     font-weight: 400;
-    line-height: 20.4px;
+    color: #cbac88;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: #2b3436;
+    border: 0;
+    width: 160px;
+    height: 28.4px;
 }
 
-a.dropdown-item:hover,
-a.dropdown-item:focus {
+.dropdown-item:hover,
+.dropdown-item:focus {
     background-color: #4E6364;
     color: #CBAC88;
     text-decoration: none;
 }
 
-a.dropdown-item.active,
-a.dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
     background-color: #4E6364;
     color: #CBAC88;
     text-decoration: none;
 }
 
-a.dropdown-item.disabled,
-a.dropdown-item:disabled {
+.dropdown-item.disabled,
+.dropdown-item:disabled {
     color: #b7b9cc;
     pointer-events: none;
     background-color: transparent;
 }
 
-.modal-header,
-.modal-body {
-    padding: 16px;
-    font-family:  "Nunito";
-}
-
-.modal-title {
-    
-    line-height: 1.5;
-    
-    font-size: 20px;
-    font-weight: 400;
-    
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    pointer-events: auto;
-    background-color: #fff;
-    background-clip: padding-box;
-    font-family:  "Nunito";
-    outline: 0;
-    text-align: left;
-    width: auto;
-    margin: 0;
-    color: #2D3739;
-    text-align: left;
-    
-}
-
-#logoutclose {
-    line-height: 24px;
-    padding: 16px;
-    margin: -16px ;
-    margin-left: 289.975px;
-    font-size: 24px;
-    font-family:  "Nunito";
-    color: #000;
-    float: right;
+.dropdown-item-text {
     display: block;
-    background-color: #00000000;
+    padding: 0.25rem 1.5rem;
+    color: #3a3b45;
 }
-#modal-body {
-    font-family:  "Nunito";
-    color: #2D3739;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #2D3739;
-    text-align: left;
+
+.dropdown-item a {
+    color: #CBAC88;
+    text-decoration: none;
+    background-color: transparent;
 }
-#modal-footer {
-    padding: 12px;
-    font-family:  "Nunito";
-    font-size: 16px;
+
+.dropdown-item a:hover {
+    color: #ffddb7;
+    text-decoration: underline;
 }
-#logoutx {
-    font-family:  "Nunito";
-    font-size: 16px;
-    margin: 4px;
-    padding: 6px 12px;
+
+.dropdown-item a:not([href]):not([class]) {
+    color: inherit;
+    text-decoration: none;
 }
-#logoutbtn {
-    font-family:  "Nunito";
-    font-size: 16px;
-    margin: 4px;
-    padding: 6px 12px;
-    color: #000;
-    background-color: #CBAC88;
-}
-#logoutbtn:hover,
-#logoutbtn:active,
-#logoutbtn:focus{
-    color: #858796;
-    background-color: #ffddb7;
+
+.dropdown-item a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none;
 }

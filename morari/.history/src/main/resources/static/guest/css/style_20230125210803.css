@@ -1474,78 +1474,47 @@ a.dropdown-item:disabled {
     background-color: transparent;
 }
 
-.modal-header,
-.modal-body {
-    padding: 16px;
-    font-family:  "Nunito";
+.modal-dialog-scrollable .modal-header,
+.modal-dialog-scrollable .modal-footer {
+    flex-shrink: 0;
 }
 
-.modal-title {
-    
-    line-height: 1.5;
-    
-    font-size: 20px;
-    font-weight: 400;
-    
+.modal-dialog-scrollable .modal-body {
+    overflow-y: auto;
+}
+
+.modal-header {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    pointer-events: auto;
-    background-color: #fff;
-    background-clip: padding-box;
-    font-family:  "Nunito";
-    outline: 0;
-    text-align: left;
-    width: auto;
-    margin: 0;
-    color: #2D3739;
-    text-align: left;
-    
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #e3e6f0;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
 }
 
-#logoutclose {
-    line-height: 24px;
-    padding: 16px;
-    margin: -16px ;
-    margin-left: 289.975px;
-    font-size: 24px;
-    font-family:  "Nunito";
-    color: #000;
-    float: right;
-    display: block;
-    background-color: #00000000;
+.modal-header .close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
 }
-#modal-body {
-    font-family:  "Nunito";
-    color: #2D3739;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #2D3739;
-    text-align: left;
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
 }
-#modal-footer {
-    padding: 12px;
-    font-family:  "Nunito";
-    font-size: 16px;
+
+.modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    border-top: 1px solid #e3e6f0;
+    border-bottom-right-radius: calc(0.3rem - 1px);
+    border-bottom-left-radius: calc(0.3rem - 1px);
 }
-#logoutx {
-    font-family:  "Nunito";
-    font-size: 16px;
-    margin: 4px;
-    padding: 6px 12px;
-}
-#logoutbtn {
-    font-family:  "Nunito";
-    font-size: 16px;
-    margin: 4px;
-    padding: 6px 12px;
-    color: #000;
-    background-color: #CBAC88;
-}
-#logoutbtn:hover,
-#logoutbtn:active,
-#logoutbtn:focus{
-    color: #858796;
-    background-color: #ffddb7;
+
+.modal-footer>* {
+    margin: 0.25rem;
 }
