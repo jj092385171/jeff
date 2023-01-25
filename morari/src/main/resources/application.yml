@@ -9,19 +9,19 @@ server:
     context-path: /morari
     encoding:
       charset: UTF-8
-  #ssl:
+  ssl:
     # 憑證別名
-    #key-alias: baeldung
+    key-alias: baeldung
     # 僅提供 https 服務(不使用 http)
-    #enabled: true
+    enabled: true
     # 憑證路徑
-    #key-store: classpath:keystore/baeldung.p12
+    key-store: classpath:keystore/baeldung.p12
     # 憑證密碼
-    #key-store-password: "3s6v9y$B&E)H@McQfThWmZq4t7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)H@McQfTjWnZr4u7x!z%C*F"
+    key-store-password: "3s6v9y$B&E)H@McQfThWmZq4t7w!z%C*F-JaNdRgUkXn2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)H@McQfTjWnZr4u7x!z%C*F"
     # 憑證格式：JKS 或 PKCS12
-   # key-store-type: PKCS12
- # http2:
-    #enabled: true
+    key-store-type: PKCS12
+  http2:
+    enabled: true
 
 
 

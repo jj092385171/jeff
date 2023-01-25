@@ -19,5 +19,10 @@ public class InsertPageController {
 
 		return "camp/admin/InsertSiteForm";
 	}
+	
+	@GetMapping("/insertorder")
+	public String insert() {
+		return "camp/admin/insertOrder";
+	}
 
 }

@@ -64,7 +64,7 @@ public class Camp implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
-	private Set<CampOrder> campOrders = new HashSet<CampOrder>();
+	private Set<Order> campOrders = new HashSet<Order>();
 
 	
 	public Camp() {

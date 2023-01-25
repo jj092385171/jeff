@@ -24,7 +24,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "camporder")
 @Component
-public class CampOrder implements Serializable {
+public class Order implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -61,17 +61,16 @@ public class CampOrder implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "campOrder")
-	private Set<CampOrderitem> orderitems = new HashSet<CampOrderitem>();
+	private Set<Orderitem> orderitems = new HashSet<Orderitem>();
 
 	
-	public CampOrder() {
+	public Order() {
 		super();
 	}
-
-	public CampOrder(Integer orderID, UserProfiles userprofiles, Date orderTime, Date goingTime, Date leavingTime,
-			String status, Integer totalPrice, Camp camp) {
+	
+	public Order(UserProfiles userprofiles, Date orderTime, Date goingTime, Date leavingTime, String status,
+			Integer totalPrice, Camp camp, Set<Orderitem> orderitems) {
 		super();
-		this.orderID = orderID;
 		this.userprofiles = userprofiles;
 		this.orderTime = orderTime;
 		this.goingTime = goingTime;
@@ -79,6 +78,20 @@ public class CampOrder implements Serializable {
 		this.status = status;
 		this.totalPrice = totalPrice;
 		this.camp = camp;
+		this.orderitems = orderitems;
+	}
+
+	public Order(Integer orderID, UserProfiles userprofiles, Date orderTime, Date goingTime, Date leavingTime,
+			String status, Integer totalPrice, Camp camp, Set<Orderitem> orderitems) {
+		super();
+		this.orderID = orderID;
+		this.userprofiles = userprofiles;
+		this.orderTime = orderTime;
+		this.goingTime = goingTime;
+		this.leavingTime = leavingTime;
+		this.status = status;
+		this.camp = camp;
+		this.orderitems = orderitems;
 	}
 
 	
@@ -146,11 +159,11 @@ public class CampOrder implements Serializable {
 		this.camp = camp;
 	}
 
-	public Set<CampOrderitem> getOrderitems() {
+	public Set<Orderitem> getOrderitems() {
 		return orderitems;
 	}
 
-	public void setOrderitems(Set<CampOrderitem> orderitems) {
+	public void setOrderitems(Set<Orderitem> orderitems) {
 		this.orderitems = orderitems;
 	}
 

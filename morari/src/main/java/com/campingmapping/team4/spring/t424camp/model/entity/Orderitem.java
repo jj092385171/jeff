@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "camporderitem")
 @Component
-public class CampOrderitem implements Serializable {
+public class Orderitem implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -30,7 +30,7 @@ public class CampOrderitem implements Serializable {
 	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKORDERID")
-	private CampOrder campOrder;
+	private Order campOrder;
 	
 	// @JsonIgnore
 	@ManyToOne
@@ -50,15 +50,25 @@ public class CampOrderitem implements Serializable {
 	private Integer unitPrice;
 
 	
-	public CampOrderitem() {
+	public Orderitem() {
 		super();
 	}
+	
 
-	public CampOrderitem(Integer orderitemID, CampOrder campOrder, Site site, Date goingTime, Date leavingTime,
+	public Orderitem(Site site, Date goingTime, Date leavingTime, Integer numbers, Integer unitPrice) {
+		super();
+		this.site = site;
+		this.goingTime = goingTime;
+		this.leavingTime = leavingTime;
+		this.numbers = numbers;
+		this.unitPrice = unitPrice;
+	}
+
+
+	public Orderitem(Integer orderitemID, Site site, Date goingTime, Date leavingTime,
 			Integer numbers, Integer unitPrice) {
 		super();
 		this.orderitemID = orderitemID;
-		this.campOrder = campOrder;
 		this.site = site;
 		this.goingTime = goingTime;
 		this.leavingTime = leavingTime;
@@ -75,11 +85,11 @@ public class CampOrderitem implements Serializable {
 		this.orderitemID = orderitemID;
 	}
 
-	public CampOrder getCampOrder() {
+	public Order getCampOrder() {
 		return campOrder;
 	}
 
-	public void setCampOrder(CampOrder campOrder) {
+	public void setCampOrder(Order campOrder) {
 		this.campOrder = campOrder;
 	}
 

@@ -51,7 +51,7 @@ public class Site implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
-	private Set<CampOrderitem> orderitems = new HashSet<CampOrderitem>();
+	private Set<Orderitem> orderitems = new HashSet<Orderitem>();
 
 	
 	public Site() {
@@ -124,6 +124,18 @@ public class Site implements Serializable {
 
 	public void setCamp(Camp camp) {
 		this.camp = camp;
+	}
+
+	public Set<Orderitem> getOrderitems() {
+		return orderitems;
+	}
+
+	public void setOrderitems(Set<Orderitem> orderitems) {
+		this.orderitems = orderitems;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
