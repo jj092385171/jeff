@@ -41,21 +41,25 @@
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label><p id="errormsg"></p>
+                                                    Me</label>
+                                                <p id="errormsg" style="color: red;"></p>
                                             </div>
                                         </div>
                                         <a class="btn btn-primary btn-user btn-block" onclick="submitForm()">
                                             Login
                                         </a>
                                         <hr>
-                                        <a href="/oauth2/authorization/google" class="btn btn-google btn-user btn-oauth" id="btn-oauth">
-                                            <i class="fab fa-google fa-fw"></i> 
+                                        <a href="/oauth2/authorization/google" class="btn btn-google btn-user btn-oauth"
+                                            id="btn-oauth">
+                                            <i class="fab fa-google fa-fw"></i>
                                         </a>
-                                        <a href="/oauth2/authorization/facebook" class="btn btn-facebook btn-user btn-oauth" id="btn-oauth">
+                                        <a href="/oauth2/authorization/facebook"
+                                            class="btn btn-facebook btn-user btn-oauth" id="btn-oauth">
                                             <i class="fab fa-facebook-f fa-fw"></i>
                                         </a>
-                                        <a href="/oauth2/authorization/github" class="btn btn-github btn-user btn-oauth" id="btn-oauth">
-                                            <i class="fab fa-github fa-fw"></i> 
+                                        <a href="/oauth2/authorization/github" class="btn btn-github btn-user btn-oauth"
+                                            id="btn-oauth">
+                                            <i class="fab fa-github fa-fw"></i>
                                         </a>
                                     </form>
                                     <hr>
@@ -102,17 +106,21 @@
                 },
                 body: JSON.stringify(data)
             })
-                .then(                  
+                .then(
                     response => {
-                 if (response.status === 201) {
-        // success
-        console.log("login success")
-        window.location.href = '/morari/home';
-    }else{
-        document.getElementById("errormsg").innerHTML="login failed";
-        console.log("login failed")
-    }
-                })
+                        
+                        if (response.status === 201) {
+                            // success
+                            console.log("login success")
+                            window.location.href = '/morari/home';
+                        } else if(response.status === 401){
+                            document.getElementById("errormsg").innerHTML = "Invalid Email or Password";
+                            console.log("Invalid Email or Password")
+                        }else {
+                            document.getElementById("errormsg").innerHTML = "login failed";
+                            console.log("login failed")
+                        }
+                    })
                 .catch(error => {
                     console.error("Error:", error);
                 });

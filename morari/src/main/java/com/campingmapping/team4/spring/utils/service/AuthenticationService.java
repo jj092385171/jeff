@@ -6,11 +6,9 @@ import java.util.Arrays;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
@@ -19,6 +17,7 @@ import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRespon
 import com.campingmapping.team4.spring.t401member.model.dto.RegisterRequest;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.campingmapping.team4.spring.utils.config.MyConstants;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
@@ -64,13 +63,12 @@ public class AuthenticationService {
                 String cookiejwt = null;
 
                 Boolean islogin = false;
-                final String JWTCookieName = "sigin";
                 final String jwt;
                 final String userEmail;
 
                 if (cookies != null) {
                         cookiejwt = Arrays.stream(cookies)
-                                        .filter(c -> c.getName().equals(JWTCookieName))
+                                        .filter(c -> c.getName().equals(MyConstants.JWT_COOKIE_NAME))
                                         .map(Cookie::getValue)
                                         .findFirst()
                                         .orElse(null);

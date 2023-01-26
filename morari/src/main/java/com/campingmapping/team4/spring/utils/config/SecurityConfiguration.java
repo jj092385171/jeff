@@ -2,6 +2,7 @@ package com.campingmapping.team4.spring.utils.config;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -20,6 +22,8 @@ public class SecurityConfiguration {
 
         private final JwtAuthenticationFilter jwtAuthFilter;
         private final AuthenticationProvider authenticationProvider;
+        @Autowired
+        private LogoutSuccessHandler logoutSuccessHandler;
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -28,6 +32,7 @@ public class SecurityConfiguration {
                                 .csrf().disable()
                                 // 設定是否需要驗證的路徑(更改成使用註釋)
                                 .authorizeHttpRequests()
+                                .requestMatchers("/admin").hasAnyAuthority("ADMIN")
                                 .anyRequest().permitAll()
                                 .and()
                                 // 啟用jwt監聽
@@ -40,13 +45,17 @@ public class SecurityConfiguration {
                                 // 登出頁面
                                 .logout(logout -> logout
                                                 .logoutUrl("/logout")
-                                                .logoutSuccessUrl("/morari")
+                                                .logoutSuccessUrl("/")
+                                                .logoutSuccessHandler(logoutSuccessHandler)
                                                 .permitAll())
                                 // 若無權限指定路徑
+                                .oauth2Login(oauthLogin -> oauthLogin.loginPage("/login").successHandler(new CustomAuthenticationSuccessHandler()))
                                 .exceptionHandling(exceptionHandling -> exceptionHandling
-                                                .accessDeniedPage("/morari"))
+                                                .accessDeniedPage("/home"))
                                 .sessionManagement(session -> session
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
                 return http.build();
         }
+
+       
 }

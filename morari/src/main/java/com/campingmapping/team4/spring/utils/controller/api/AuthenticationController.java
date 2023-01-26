@@ -2,10 +2,9 @@ package com.campingmapping.team4.spring.utils.controller.api;
 
 import lombok.RequiredArgsConstructor;
 
-import java.io.IOException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRequest;
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationResponse;
 import com.campingmapping.team4.spring.t401member.model.dto.RegisterRequest;
+import com.campingmapping.team4.spring.utils.config.MyConstants;
 import com.campingmapping.team4.spring.utils.service.AuthenticationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +31,7 @@ public class AuthenticationController {
       @RequestBody RegisterRequest request, HttpServletResponse response) {
 
     AuthenticationResponse authenticationResponse = service.register(request);
-    Cookie jwtCookie = new Cookie("sigin", authenticationResponse.getToken());
+    Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, authenticationResponse.getToken());
     jwtCookie.setPath("/");
     jwtCookie.setHttpOnly(true);
     jwtCookie.setSecure(true);
@@ -42,13 +42,20 @@ public class AuthenticationController {
   @PostMapping("/authenticate")
   public ResponseEntity<Void> authenticate(
       @RequestBody AuthenticationRequest request, HttpServletResponse response) {
-    AuthenticationResponse authenticationResponse = service.authenticate(request);
-    Cookie jwtCookie = new Cookie("sigin", authenticationResponse.getToken());
-    jwtCookie.setPath("/");
-    jwtCookie.setHttpOnly(true);
-    jwtCookie.setSecure(true);
-    response.addCookie(jwtCookie);
-    return ResponseEntity.status(HttpStatus.CREATED).build();
+    try {
+      AuthenticationResponse authenticationResponse = service.authenticate(request);
+      Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, authenticationResponse.getToken());
+      jwtCookie.setPath("/");
+      jwtCookie.setHttpOnly(true);
+      jwtCookie.setSecure(true);
+      response.addCookie(jwtCookie);
+
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    } catch (BadCredentialsException e) {
+      // 驗證失敗
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
   }
 
   @PostMapping("/state")
@@ -56,17 +63,18 @@ public class AuthenticationController {
       HttpServletRequest request) {
     return service.loginstate(request);
   }
-  @PostMapping("/logout")
-public void logout(HttpServletResponse response) throws IOException  {
-    // 處理登出邏輯，例如清除session、Cookie等
-    Cookie jwtCookie = new Cookie("sigin", null);
-    jwtCookie.setPath("/");
-    jwtCookie.setHttpOnly(true);
-    jwtCookie.setSecure(true);
-    response.addCookie(jwtCookie);
-    
-    // 重定向到登入頁面
-    response.sendRedirect("/morari/login");
-}
+
+  // @PostMapping("/logout")
+  // public void logout(HttpServletResponse response) throws IOException {
+  // // 處理登出邏輯，例如清除session、Cookie等
+  // Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, null);
+  // jwtCookie.setPath("/");
+  // jwtCookie.setHttpOnly(true);
+  // jwtCookie.setSecure(true);
+  // response.addCookie(jwtCookie);
+
+  // // 重定向到登入頁面
+  // response.sendRedirect("/morari");
+  // }
 
 }

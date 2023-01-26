@@ -26,6 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
+
   // private final AuthAspect authAspect;
 
   @Override
@@ -36,11 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     final String jwt;
     final String userEmail;
-    final String JWTCookieName = "sigin";
 
-   
     boolean needAuth = false;
-
 
     if (request.getRequestURI().equals("/morari/admin")) {
       needAuth = true;
@@ -56,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     String cookiejwt = null;
     if (cookies != null) {
       cookiejwt = Arrays.stream(cookies)
-          .filter(c -> c.getName().equals(JWTCookieName))
+          .filter(c -> c.getName().equals(MyConstants.JWT_COOKIE_NAME))
           .map(Cookie::getValue)
           .findFirst()
           .orElse(null);
@@ -82,7 +80,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
           SecurityContextHolder.getContext().setAuthentication(authToken);
         }
       }
-      Cookie jwtCookie = new Cookie(JWTCookieName, cookiejwt);
+      Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, cookiejwt);
       jwtCookie.setHttpOnly(true);
       jwtCookie.setSecure(true);
       jwtCookie.setPath("/");
@@ -91,7 +89,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     } catch (ExpiredJwtException e) {
       // 刪除 JWT cookie
       e.printStackTrace();
-      Cookie jwtCookie = new Cookie(JWTCookieName, null);
+      Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, null);
       jwtCookie.setMaxAge(1000 * 60 * 24);
       jwtCookie.setHttpOnly(true);
       jwtCookie.setSecure(true);

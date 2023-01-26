@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.campingmapping.team4.spring.utils.config.MyConstants;
 
 @Service
 public class JwtService {
@@ -59,6 +60,7 @@ public class JwtService {
         .setSubject(userDetails.getUsername())
         .setIssuedAt(new Date(System.currentTimeMillis()))
         .setExpiration(new Date(System.currentTimeMillis() + (rememberMe ? 1000 * 60 * 60 * 24 * 7 : 1000 * 60 * 24)))
+        
         .signWith(getSignInKey(), SignatureAlgorithm.HS512)
         .compact();
   }
@@ -75,7 +77,7 @@ public class JwtService {
       return null;
     }
     String jwt = Arrays.stream(cookies)
-        .filter(c -> c.getName().equals("sigin"))
+        .filter(c -> c.getName().equals(MyConstants.JWT_COOKIE_NAME))
         .map(Cookie::getValue)
         .findFirst()
         .orElse(null);
