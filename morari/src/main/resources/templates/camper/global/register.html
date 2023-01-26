@@ -42,11 +42,14 @@
                                     Register Account
                                 </a>
                                 <hr>
-                                <a href="/morari/index" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                <a href="/morari/index" class="btn btn-google btn-user btn-oauth" id="btn-oauth">
+                                    <i class="fab fa-google fa-fw"></i> 
                                 </a>
-                                <a href="/morari/index" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                <a href="/morari/index" class="btn btn-facebook btn-user btn-oauth" id="btn-oauth">
+                                    <i class="fab fa-facebook-f fa-fw"></i> 
+                                </a>
+                                <a href="/oauth2/authorization/github" class="btn btn-github btn-user btn-oauth" id="btn-oauth">
+                                    <i class="fab fa-github fa-fw"></i> 
                                 </a>
                             </form>
                             <hr>
@@ -107,7 +110,6 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
-    </script>
     </script>
 
 </body>

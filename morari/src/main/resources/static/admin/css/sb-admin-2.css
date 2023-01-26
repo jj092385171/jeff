@@ -3350,6 +3350,12 @@ fieldset:disabled a.btn {
   display: block;
   width: 100%;
 }
+#btn-oauth {
+  /* display: block; */
+  float: inline-start; 
+  border-radius: 100%;
+}
+
 
 .btn-block+.btn-block {
   margin-top: 0.5rem;
@@ -12133,19 +12139,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background: url("/morari/img/login.webp");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+  background: url("/morari/img/register.webp");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+  background: url("/morari/img/password.jpg");
   background-position: center;
   background-size: cover;
 }

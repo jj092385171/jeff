@@ -86,7 +86,7 @@ window.onload = function () {
                     });
             } else {
                 // 未登入
-                document.getElementById("loginstate").innerHTML = '<a class="fa fa-user" href="/morari/login">登入</a>';
+                document.getElementById("loginstate").innerHTML = '<a class="fa fa-user" href="/morari/login"> login</a>';
             }
         })
         .catch(error => {
