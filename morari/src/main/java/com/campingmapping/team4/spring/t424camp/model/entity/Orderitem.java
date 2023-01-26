@@ -3,7 +3,11 @@ package com.campingmapping.team4.spring.t424camp.model.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,19 +31,23 @@ public class Orderitem implements Serializable {
 	@Column(name = "ORDERITEMID")
 	private Integer orderitemID;
 	
-	// @JsonIgnore
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKORDERID")
 	private Order campOrder;
 	
-	// @JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKSITEID")
 	private Site site;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "GOINGTIME")
 	private Date goingTime;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "LEAVINGTIME")
 	private Date leavingTime;
 	

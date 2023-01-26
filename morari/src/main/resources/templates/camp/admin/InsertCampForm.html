@@ -27,13 +27,13 @@
 
                     var div = '';
 
-                    div = '營地名: <input type="text" name="campName" placeholder="營地名" value=""><span id="errorCampName" style="color: red;"></span><br>'
-                        + '縣市選項:' + radio + '<br>'
-                        + '地址: <input type="text" name="location" placeholder="地址" value=""><br>'
+                    div = '營地名: <input type="text" name="campName" placeholder="營地名" ><span id="errorCampName" style="color: red;"></span><br>'
+                        + '縣市選項:' + radio + '<span id="errorcityID" style="color: red;"></span><br>'
+                        + '地址: <input type="text" name="location" placeholder="地址" ><span id="errorlocation" style="color: red;"></span><br>'
                         + '簡介: <input type="text" name="description" placeholder="描述"><br>'
-                        + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><br>'
-                        + '標籤選項:' + tags + "<br>"
-                        + '<input id="send" type="button" value="新增">'
+                        + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><span id="errorcampPicturesPath" style="color: red;"></span><br>'
+                        + '標籤選項:' + tags + '<span id="errortagIDs" style="color: red;"></span><br>'
+                        + '<input id="send" type="button" value="新增"><span id="errornone" style="color: red;"></span>'
                     form.append(div);
                 });
 
@@ -51,8 +51,16 @@
                         success: function (after) {
 
                             if (after.error == 'true') {
-                                console.log(after.campName);
                                 $("#errorCampName").append(after.campName);
+                                $("#errorcampPicturesPath").append(after.campPicturesPath);
+                                $("#errorcityID").append(after.cityID);
+                                $("#errorlocation").append(after.location);
+                                $("#errortagIDs").append(after.tagIDs);
+                                return;
+                            }
+                            else if (after.error == 'none') {
+                                $("#errornone").append(after.noData);
+                                return;
                             }
                             else {
                                 $("#form").empty();

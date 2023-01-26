@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/camp")
 public class QueryOrder {
-	
-	@GetMapping("/OrderOfSite")
+
+	@GetMapping("/queryOrder")
 	public String queryByCityIDsResult() {
-		return "camp/admin/OrderOfSite" ;
+		return "camp/admin/AdminOrderIndex" ;
 	}
 
 }

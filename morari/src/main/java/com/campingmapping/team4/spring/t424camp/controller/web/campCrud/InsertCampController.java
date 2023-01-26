@@ -56,7 +56,6 @@ public class InsertCampController {
 			errors.put("campPicturesPath", "必須選擇圖片");
 		}
 		
-//		saveFilePath.delete();
 
 		// 縣市
 		if (cityID == null || cityID.length() == 0) {
@@ -76,15 +75,18 @@ public class InsertCampController {
 
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
-//			m.addAttribute("errors", errors);
 			errors.put("error", "true");
 			return errors;
 		}
 
 		Camp camp = campService.insert(campName, Integer.valueOf(cityID), location, fileName, description, tagIDs);
 
-//		m.addAttribute("camp", camp);
-//		m.addAttribute("what", "新增");
+		// 空值
+		if (camp == null) {
+			errors.put("error", "none");
+			errors.put("noData", "查無資料");
+			return errors;
+		}
 
 		return camp;
 	}

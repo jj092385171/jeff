@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,47 +28,59 @@ public class QueryCampsController {
 	
 	@PostMapping("/queryCampsByCityIDs.controller")
 	@ResponseBody
-	public List<Camp> queryByCityIDs(@RequestBody int[] cityIDs, Model m) {
+	public Object queryByCityIDs(@RequestBody@Nullable int[] cityIDs, Model m) {
 
 		HashMap<String, String> errors = new HashMap<String, String>();
-		m.addAttribute("errors", errors);
 
 		// 縣市
 		if (cityIDs == null || cityIDs.length == 0) {
 			errors.put("cityIDs", "必須勾選縣市");
 		}
 
-//		// 錯誤導回
-//		if (errors != null && !errors.isEmpty()) {
-//			return "t4_24camp/admin/QueryPageForm";
-//		}
-
+		// 錯誤導回
+		if (errors != null && !errors.isEmpty()) {
+			errors.put("error", "true");
+			return errors;
+		}
+		
 		List<Camp> camps = cityService.findCampsByCityIds(cityIDs);
+		
+		// 空值
+		if (camps == null) {
+			errors.put("error", "none");
+			errors.put("noData", "查無資料");
+			return errors;
+		}
 
-//		m.addAttribute("camps", camps);
 
 		return camps;
 	}
 	
 	@PostMapping("/queryCampByID.controller")
 	@ResponseBody
-	public Camp queryByID(@RequestBody Integer campID, Model m) {
+	public Object queryByID(@RequestBody@Nullable Integer campID, Model m) {
 
 		HashMap<String, String> errors = new HashMap<String, String>();
-		m.addAttribute("errors", errors);
 
 		// 縣市
 		if (campID == null) {
-			errors.put("cityID", "必須輸入ID");
+			errors.put("campID", "必須輸入ID");
 		}
 
-//		// 錯誤導回
-//		if (errors != null && !errors.isEmpty()) {
-//			return "redirect:/t4_24camp/admin/QueryPageForm";
-//		}
+		// 錯誤導回
+		if (errors != null && !errors.isEmpty()) {
+			errors.put("error", "true");
+			return errors;
+		}
 
 		Camp camp = campService.findById(campID);
-//		m.addAttribute("camp", camp);
+		
+		// 空值
+		if (camp == null) {
+			errors.put("error", "none");
+			errors.put("noData", "查無資料");
+			return errors;
+		}
 
 		return camp;
 	}

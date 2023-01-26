@@ -5,9 +5,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,8 +41,16 @@ public class OrderService {
 	
 	@Autowired
 	private SiteRepository siteRepository;
+	
+	
+	//查詢訂單
+	public List<Order> findAll() {
+		return orderRepository.findAll();
+	}
 
-	public Order insert(Integer uid, Integer[] siteIds, Integer[] nums, Date goingdate, Date leavingdate, Integer campID) {
+	
+	//新增訂單
+	public Order insert(Integer uid, Integer[] siteIds, Integer[] nums, Date goingtime, Date leavingtime, Integer campID) {
 		
 		UserProfiles user = userRepository.findById(uid).get();
 		
@@ -55,17 +64,17 @@ public class OrderService {
 			if(nums[i] > 0) {
 				int siteId = siteIds[i];
 				Site site = siteRepository.findById(siteId).get();
-				if(!checkRest(site, campID, goingdate, leavingdate)) {
+				if(!checkRest(site, nums[i], goingtime, leavingtime)) {
 					return null;
 				}
 				Integer price = site.getSiteMoney();
 				totalPrice += price * nums[i];
 				
-				orderitems.add(new Orderitem(site, goingdate, leavingdate, nums[i], price)) ;
+				orderitems.add(new Orderitem(site, goingtime, leavingtime, nums[i], price)) ;
 			}
 		}
 		
-		Order order = new Order(user, now, goingdate, leavingdate, "訂單成立", totalPrice, camp, orderitems);
+		Order order = new Order(user, now, goingtime, leavingtime, "訂單成立", totalPrice, camp, orderitems);
 		
 		order =  orderRepository.save(order);
 		
@@ -77,19 +86,29 @@ public class OrderService {
 		return order;
 	}
 	
-	private boolean checkRest(Site site, Integer num, Date goingdate, Date leavingdate) {
-		int daysBetween = (int) TimeUnit.DAYS.convert(leavingdate.getTime() - goingdate.getTime(), TimeUnit.MILLISECONDS);		
-		for(int i=0; i<daysBetween; i++) {
-			List<Orderitem> items = orderitemRepository.findBySiteidAndLessThanGoingDate(site.getSiteID(), goingdate);
+	
+	//檢查當下是否有剩餘營位
+	private boolean checkRest(Site site, Integer num, Date goingtime, Date leavingtime) {
+//		int daysBetween = (int) TimeUnit.DAYS.convert(leavingtime.getTime() - goingtime.getTime(), TimeUnit.MILLISECONDS);		
+		while(goingtime.before(leavingtime)) {
+			List<Orderitem> items = orderitemRepository.findBySiteidAndLessThanGoingDate(site.getSiteID(), goingtime);
 			long totalNums = items.stream().mapToInt(Orderitem::getNumbers).sum();
 			if ((site.getTotalSites() - totalNums) < num) {
 				return false;
 			}
 			Calendar cal = Calendar.getInstance();
-			cal.setTime(goingdate);
+			cal.setTime(goingtime);
 			cal.add(Calendar.DATE, 1);
-			goingdate = cal.getTime();
+			goingtime = cal.getTime();
 		}
+		
 		return true;
 	}
+
+
+	public Page<Order> getByPage(Pageable pageable) {
+		return orderRepository.findAll(pageable);
+	}
+	
+	
 }

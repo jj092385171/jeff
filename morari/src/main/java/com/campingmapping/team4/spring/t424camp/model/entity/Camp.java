@@ -51,6 +51,7 @@ public class Camp implements Serializable {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+
 	// @JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tagofcamp", joinColumns = {
@@ -158,4 +159,18 @@ public class Camp implements Serializable {
 		this.sites = sites;
 	}
 
+	public Set<Order> getCampOrders() {
+		return campOrders;
+	}
+
+	public void setCampOrders(Set<Order> campOrders) {
+		this.campOrders = campOrders;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
+	
 }

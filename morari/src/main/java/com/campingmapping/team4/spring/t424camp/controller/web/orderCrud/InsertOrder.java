@@ -38,8 +38,8 @@ public class InsertOrder {
 	@ResponseBody
 	public Object insertOrder(@RequestParam("siteIds")@Nullable Integer[] siteIds,
 			@RequestParam("nums")@Nullable Integer[] nums,
-			@RequestParam("goingdate")@Nullable String goingdateString, 
-			@RequestParam("leavingdate")@Nullable String leavingdateString,
+			@RequestParam("goingdate")@Nullable String goingtimeString, 
+			@RequestParam("leavingdate")@Nullable String leavingtimeString,
 			@RequestParam("campID")@Nullable Integer campID
 			) {
 		
@@ -56,27 +56,30 @@ public class InsertOrder {
 			errors.put("nums", "請選擇數量");
 		}
 		
-		//出入日期
+		//出入營日期
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date goingdate = null;
-		Date leavingdate = null;
+		Date goingtime = null;
+		Date leavingtime = null;
 		try {
-			goingdate = sdf.parse(goingdateString);
-			leavingdate = sdf.parse(leavingdateString);
-			if(goingdate.after(leavingdate)) {
-				errors.put("dateString", "起始時間不得大於結束時間");
+			goingtime = sdf.parse(goingtimeString);
+			leavingtime = sdf.parse(leavingtimeString);
+			if(goingtime.after(leavingtime)) {
+				errors.put("timeString", "入營時間不得晚於離營時間");
+			}
+			if(goingtime.equals(leavingtime)) {
+				errors.put("timeString", "入營時間與離營時間不得同一天");
 			}
 		} catch (ParseException e) {
-			errors.put("dateString", "錯誤日期格式");
+			errors.put("timeString", "錯誤日期格式");
 			e.printStackTrace();
 		}
 		
 		//使用者
 		Integer uid = jwtService.getUId(httpServletRequest);
 		
-		Order order = orderService.insert(uid, siteIds, nums, goingdate, leavingdate, campID);
+		Order order = orderService.insert(uid, siteIds, nums, goingtime, leavingtime, campID);
 		if(order == null) {
-			System.out.println("fuck");
+			System.out.println("broken");
 			errors.put("order", "訂單新增失敗");
 		}
 		

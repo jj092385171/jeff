@@ -46,7 +46,8 @@
 										<input id="inputid" name="campID" value="" type="text">
 									</td>
 									<td>
-										<input type="submit" value="查詢">
+										<input type="submit" value="查詢"><span id="errorcampID"
+											style="color: red;"></span>
 									</td>
 								</tr>
 							</tbody>
@@ -120,7 +121,7 @@
 					$.each(cityList, function (i, n) {
 						citys += '<input type="checkbox" name="cityID" value="' + n.cityID + '" />' + n.cityName
 					});
-					citytr += '<tbody><tr><td>縣市:</td><td>' + citys + '</td><td><input type="submit" value="查詢"></td></tr></tbody>'
+					citytr += '<tbody><tr><td>縣市:</td><td>' + citys + '</td><td><input type="submit" value="查詢"><span id="errorcityIDs" style="color: red;"></span></td></tr></tbody>'
 					citytable.append(citytr);
 
 					$('#cityform').on('submit', function (e) {
@@ -137,6 +138,17 @@
 							dataType: 'json',
 							contentType: 'application/json',
 							success: function (QueryByCityIDsResult) {
+
+								if (QueryByCityIDsResult.error == 'true') {
+									$("#errorcityIDs").append(QueryByCityIDsResult.cityIDs);
+									return;
+								}
+								if (QueryByCityIDsResult.error == 'none') {
+									$("#errorcityIDs").append(QueryByCityIDsResult.noData);
+									return;
+								}
+
+								$("#errorcityIDs").empty();
 								$("#camptable").empty();
 								var querytable = $('#camptable');
 								var querytr = '';
@@ -186,6 +198,16 @@
 							dataType: 'json',
 							contentType: 'application/json',
 							success: function (QueryByIDResult) {
+								if (QueryByIDResult.error == 'true') {
+									$("#errorcampID").append(QueryByIDResult.campID);
+									return;
+								}
+								if (QueryByIDResult.error == 'none') {
+									$("#errorcampID").append(QueryByIDResult.noData);
+									return;
+								}
+
+								$("#errorcampID").empty();
 								$("#camptable").empty();
 								var querytable = $('#camptable');
 								var querytr = '';

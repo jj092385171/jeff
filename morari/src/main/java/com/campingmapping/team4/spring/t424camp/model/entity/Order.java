@@ -5,10 +5,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,17 +35,23 @@ public class Order implements Serializable {
 	@Column(name = "ORDERID")
 	private Integer orderID;
 	
-	// @JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKUSERID")
 	private UserProfiles userprofiles;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "ORDERTIME")
 	private Date orderTime;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "GOINGTIME")
 	private Date goingTime;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "LEAVINGTIME")
 	private Date leavingTime;
 	
@@ -54,12 +61,12 @@ public class Order implements Serializable {
 	@Column(name = "TOTALPRICE")
 	private Integer totalPrice;
 	
-	// @JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "FKCAMPID")
 	private Camp camp;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "campOrder")
 	private Set<Orderitem> orderitems = new HashSet<Orderitem>();
 
