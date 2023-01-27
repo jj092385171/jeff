@@ -28,6 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
+import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
@@ -36,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
 @Data
-@ToString(exclude = {"job","initiatings","categories","loginHistories"})
+@ToString(exclude = {"job","resume","initiatings","categories","loginHistories"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -101,6 +102,11 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<JobBean> job;
+  
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  private Collection<ResumeBean> resume;
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")

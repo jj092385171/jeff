@@ -13,7 +13,7 @@ public interface JobRepository extends JpaRepository<JobBean, Integer> {
 	public List<JobBean> findByJobisLike(String job);
 	
 	
-	@Query(value = "select * from JobBean where uid = ?1" ,nativeQuery = true)
-	public List<JobBean> findByUid(Integer uid);
-	
+//	@Query(value = "select * from JobBean where uid = ?1" ,nativeQuery = true)
+//	public List<JobBean> findByUid(Integer uid);
+//	
 }

@@ -1,17 +1,21 @@
 package com.campingmapping.team4.spring.t409work.model.entity;
 
 import java.sql.Blob;
+import java.util.Collection;
 import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,9 +30,12 @@ public class JobBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rackid")
 	private Integer rackid;// 刊登編號
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="job")//設一個外來建的集合
+	@JsonIgnore
+	private Collection<ResumeBean> resumes;
 
 	@ManyToOne
-//	@JsonIgnore
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
 	

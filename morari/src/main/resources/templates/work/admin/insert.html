@@ -59,7 +59,9 @@
 					data: JSON.stringify(getFormData($("#insert"))),
 					success: function (response) {
 						$('#showInsert').empty("");
-					
+						$('#su').empty("");
+						$('#insert').empty("");
+						$('#img').empty("");
 						if (response == null) {
 							$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 						} else {

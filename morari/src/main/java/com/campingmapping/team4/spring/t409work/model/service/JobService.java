@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
@@ -66,10 +64,6 @@ public class JobService {
 	public void deleteById(int rackID) {
 		jobDao.deleteById(rackID);
 	}
-
-	
-
-
 
 	// 透過rackID抓一筆資料
 	public JobBean findById(Integer rackID) {
