@@ -22,71 +22,88 @@ import com.campingmapping.team4.spring.utils.config.MyConstants;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-        private final UserRepository repository;
-        private final PasswordEncoder passwordEncoder;
-        private final JwtService jwtService;
-        private final AuthenticationManager authenticationManager;
-        private final UserDetailsService userDetailsService;
+	private final UserRepository repository;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
+	private final AuthenticationManager authenticationManager;
+	private final UserDetailsService userDetailsService;
 
-        public AuthenticationResponse register(RegisterRequest request) {
-                UserProfiles userProfiles = UserProfiles.builder()
-                                .email(request.getEmail())
-                                .password(passwordEncoder.encode(request.getPassword()))
-                                .roles(Arrays.asList(Role.USER))
-                                .build();
-                repository.save(userProfiles);
-                String jwtToken = jwtService.generateToken(userProfiles);
-                return AuthenticationResponse.builder()
-                                .token(jwtToken)
-                                .build();
-        }
+	// 註冊
+	public Boolean register(RegisterRequest request) {
+		try {
+			UserProfiles userProfiles = UserProfiles.builder()
+					.email(request.getEmail())
+					.password(passwordEncoder.encode(request.getPassword()))
+					.roles(Arrays.asList(Role.USER))
+					.build();
+			repository.save(userProfiles);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
-        public AuthenticationResponse authenticate(AuthenticationRequest request) {
-                authenticationManager.authenticate(
-                                new UsernamePasswordAuthenticationToken(
-                                                request.getEmail(),
-                                                request.getPassword()));
-                var userProfiles = repository.findByEmail(request.getEmail())
-                                .orElseThrow();
-                String jwtToken = jwtService.generateToken(userProfiles, request.getRememberMe());
-                return AuthenticationResponse.builder()
-                                .token(jwtToken)
-                                .build();
-        }
+	// 登入
+	public Boolean authenticate(AuthenticationRequest request, HttpServletResponse response) {
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(
+							request.getEmail(),
+							request.getPassword()));
+			UserProfiles userProfiles = repository.findByEmail(request.getEmail()).orElseThrow();
+			AuthenticationResponse authenticationResponse = jwtService.generateToken(userProfiles,
+					request.getRememberMe());
+			jwtService.refreshTokenToCookie(response, authenticationResponse);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
-        public Boolean loginstate(HttpServletRequest request) {
-                Cookie[] cookies = request.getCookies();
-                String cookiejwt = null;
+	// 登入狀態
+	public Boolean loginstate(HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		String cookiejwt = null;
 
-                Boolean islogin = false;
-                final String jwt;
-                final String userEmail;
+		Boolean islogin = false;
+		final String jwt;
+		final String userEmail;
 
-                if (cookies != null) {
-                        cookiejwt = Arrays.stream(cookies)
-                                        .filter(c -> c.getName().equals(MyConstants.JWT_COOKIE_NAME))
-                                        .map(Cookie::getValue)
-                                        .findFirst()
-                                        .orElse(null);
-                }
-                if (cookiejwt == null || cookiejwt.isEmpty()) {
-                        return false;
-                }
-                jwt = cookiejwt;
-                try {
-                        userEmail = jwtService.extractUsername(jwt);
-                        if (userEmail != null) {
-                                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-                                islogin = jwtService.isTokenValid(jwt, userDetails);
-                        }
-                } catch (ExpiredJwtException e) {
-                        islogin = false;
-                }
-                return islogin;
-        }
+		if (cookies != null) {
+			cookiejwt = Arrays.stream(cookies)
+					.filter(c -> c.getName().equals(MyConstants.JWT_COOKIE_NAME))
+					.map(Cookie::getValue)
+					.findFirst()
+					.orElse(null);
+		}
+		if (cookiejwt == null || cookiejwt.isEmpty()) {
+			return false;
+		}
+		jwt = cookiejwt;
+		try {
+			userEmail = jwtService.extractUsername(jwt);
+			if (userEmail != null) {
+				UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+				islogin = jwtService.isTokenValid(jwt, userDetails);
+			}
+		} catch (ExpiredJwtException e) {
+			islogin = false;
+		}
+		return islogin;
+	}
+
+	private Cookie setCookie(String key, String value) {
+		Cookie cookie = new Cookie(key, value);
+		cookie.setPath("/");
+		cookie.setHttpOnly(true);
+		cookie.setSecure(true);
+		return cookie;
+	}
 
 }

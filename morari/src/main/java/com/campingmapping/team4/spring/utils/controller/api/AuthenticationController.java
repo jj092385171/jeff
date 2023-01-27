@@ -2,6 +2,8 @@ package com.campingmapping.team4.spring.utils.controller.api;
 
 import lombok.RequiredArgsConstructor;
 
+import java.io.IOException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -28,30 +30,23 @@ public class AuthenticationController {
 
   @PostMapping("/register")
   public ResponseEntity<Void> register(
-      @RequestBody RegisterRequest request, HttpServletResponse response) {
+      @RequestBody RegisterRequest request, HttpServletResponse response) throws IOException {
 
-    AuthenticationResponse authenticationResponse = service.register(request);
-    Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, authenticationResponse.getToken());
-    jwtCookie.setPath("/");
-    jwtCookie.setHttpOnly(true);
-    jwtCookie.setSecure(true);
-    response.addCookie(jwtCookie);
-    return ResponseEntity.status(HttpStatus.CREATED).build();
+    if (service.register(request)) {
+      return ResponseEntity.status(HttpStatus.CREATED).build();
+    } else {
+      // 回傳409表示衝突
+      return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+
   }
 
   @PostMapping("/authenticate")
   public ResponseEntity<Void> authenticate(
       @RequestBody AuthenticationRequest request, HttpServletResponse response) {
-    try {
-      AuthenticationResponse authenticationResponse = service.authenticate(request);
-      Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, authenticationResponse.getToken());
-      jwtCookie.setPath("/");
-      jwtCookie.setHttpOnly(true);
-      jwtCookie.setSecure(true);
-      response.addCookie(jwtCookie);
-
+    if (service.authenticate(request, response)) {
       return ResponseEntity.status(HttpStatus.CREATED).build();
-    } catch (BadCredentialsException e) {
+    } else {
       // 驗證失敗
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

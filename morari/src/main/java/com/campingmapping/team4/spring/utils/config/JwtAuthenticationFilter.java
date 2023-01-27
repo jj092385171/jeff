@@ -38,6 +38,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final String jwt;
     final String userEmail;
 
+System.out.println(SecurityContextHolder.getContext().getAuthentication()==null);
+if(SecurityContextHolder.getContext().getAuthentication()!=null){
+  System.out.println(SecurityContextHolder.getContext().getAuthentication());
+}
+
     boolean needAuth = false;
 
     if (request.getRequestURI().equals("/morari/admin")) {
@@ -47,8 +52,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       filterChain.doFilter(request, response);
       return;
     }
-
-    System.out.println("auth");
 
     Cookie[] cookies = request.getCookies();
     String cookiejwt = null;

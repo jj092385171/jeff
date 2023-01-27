@@ -72,7 +72,7 @@ public class ApplicationConfig {
         jwtCookie.setSecure(true);
         response.addCookie(jwtCookie);
 
-        // 重定向到登入頁面
+        // 重定向頁面
         response.sendRedirect("/morari");
       }
     };
