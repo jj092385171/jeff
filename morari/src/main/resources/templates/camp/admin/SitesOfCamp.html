@@ -10,7 +10,6 @@
             $(document).ready(function () {
                 var campID = JSON.parse(sessionStorage.getItem("campID"));
                 $.getJSON('/morari/admin/camp/sitesOfCamp.controller/' + campID, function (data) {
-                    // console.log(data);
                     var sitetable = $('#sitetable');
                     var sitetr = '';
                     sitetable.append("<thead><th>營位區編號</th><th>營位區名</th><th>營區位圖片</th><th>總營位</th><th>營位金額</th><th>更新</th><th>刪除</th></thead>");

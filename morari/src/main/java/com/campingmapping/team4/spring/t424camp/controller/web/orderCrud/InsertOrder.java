@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t424camp.model.entity.Order;
+import com.campingmapping.team4.spring.t424camp.model.entity.Orderitem;
 import com.campingmapping.team4.spring.t424camp.model.service.OrderService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin/camp")
@@ -33,6 +39,7 @@ public class InsertOrder {
 	
 	@Autowired
 	private HttpServletRequest httpServletRequest;
+	
 	
 	@PostMapping("/insertOrder.controller")
 	@ResponseBody
@@ -79,11 +86,38 @@ public class InsertOrder {
 		
 		Order order = orderService.insert(uid, siteIds, nums, goingtime, leavingtime, campID);
 		if(order == null) {
-			System.out.println("broken");
 			errors.put("order", "訂單新增失敗");
 		}
 		
-		return order;
+		HttpSession session = httpServletRequest.getSession();
+		session.setAttribute("successOrder", order);
+		
+		
+		Date now = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String nowString = dateFormat.format(now);
+		
+		Set<Orderitem> orderitems = order.getOrderitems();
+		String items = "";
+		for (Orderitem orderitem : orderitems) {
+			items += orderitem.getSite().getSiteName() + "#";
+		}
+		
+		
+		AllInOne all = new AllInOne("");
+		AioCheckOutALL obj = new AioCheckOutALL();
+		obj.setMerchantTradeNo("Product0000" + order.getOrderID());
+		obj.setMerchantTradeDate(nowString);
+		obj.setTotalAmount(order.getTotalPrice().toString());
+		obj.setTradeDesc("test Description");
+		obj.setItemName(items);
+		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setClientBackURL("https://localhost:8080/morari/admin/camp/querySuccessOrderPage");
+		obj.setNeedExtraPaidInfo("N");
+		String form = all.aioCheckOut(obj, null);
+		return form;
+		
+//		return order;
 	}
 
 }

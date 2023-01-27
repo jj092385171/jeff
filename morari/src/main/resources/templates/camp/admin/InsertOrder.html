@@ -10,7 +10,6 @@
             $(document).ready(function () {
                 var campID = JSON.parse(sessionStorage.getItem("campID"));
                 $.getJSON('/morari/admin/camp/sitesOfCamp.controller/' + campID, function (data) {
-                    // console.log(data);
                     var div = $('#div');
                     var tmp = '';
                     div.append('<div><span>營位區編號</span><span>營位區名</span><span>營區位圖片</span><span>總營位</span><span>營位金額</span></div>');
@@ -27,7 +26,7 @@
                     });
                     div.append('<span>入營時間:<input type="date" name="goingdate"></span>');
                     div.append('<span>離營時間:<input type="date" name="leavingdate"></span><br>');
-                    div.append('<button id="addOrder">新增訂單</button>');
+                    div.append('<button id="addOrder">結帳</button>');
                 })
 
 
@@ -59,50 +58,49 @@
                         cache: false,
                         processData: false,
                         success: function (after) {
-                            console.log(after);
                             $("#div").empty();
-                            var ordertable = $('#ordertable');
-                            var ordertr = '';
+                            $("#div").append(after);
+                            // var ordertable = $('#ordertable');
+                            // var ordertr = '';
 
-                            alert("新增訂單成功");
+                            // alert("新增訂單成功");
 
-                            ordertable.append('<thead><th>訂單編號</th><th>營地名稱</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th></thead>');
+                            // ordertable.append('<thead><th>訂單編號</th><th>營地名稱</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th></thead>');
+                            // ordertr = '<tbody>'
+                            //     + '<tr>'
+                            //     + '<td>' + after.orderID + '</td>'
+                            //     + '<td>' + after.camp.campName + '</td>'
+                            //     + '<td>' + after.camp.city.cityName + '</td>'
+                            //     + '<td>' + '<img width="80" height="100" src="/morari/images/' + after.camp.campPicturesPath + '">' + '</td>'
+                            //     + '<td>' + after.camp.location + '</td>'
+                            //     + '<td>' + after.userprofiles.username + '</td>'
+                            //     + '<td>' + after.userprofiles.email + '</td>'
+                            //     + '<td>' + after.orderTime + '</td>'
+                            //     + '<td>' + after.goingTime + '</td>'
+                            //     + '<td>' + after.leavingTime + '</td>'
+                            //     + '<td>' + after.totalPrice + '</td>'
+                            //     + '</tr>'
+                            //     + '</tbody>'
+                            // ordertable.append(ordertr);
+                            // $('#hr').append('<hr>');
 
-                            ordertr = '<tbody>'
-                                + '<tr>'
-                                + '<td>' + after.orderID + '</td>'
-                                + '<td>' + after.camp.campName + '</td>'
-                                + '<td>' + after.camp.city.cityName + '</td>'
-                                + '<td>' + '<img width="80" height="100" src="/morari/images/' + after.camp.campPicturesPath + '">' + '</td>'
-                                + '<td>' + after.camp.location + '</td>'
-                                + '<td>' + after.userprofiles.username + '</td>'
-                                + '<td>' + after.userprofiles.email + '</td>'
-                                + '<td>' + after.orderTime + '</td>'
-                                + '<td>' + after.goingTime + '</td>'
-                                + '<td>' + after.leavingTime + '</td>'
-                                + '<td>' + after.totalPrice + '</td>'
-                                + '</tr>'
-                                + '</tbody>'
-                            ordertable.append(ordertr);
-                            $('#hr').append('<hr>');
+                            // var orderitemtable = $('#orderitemtable');
+                            // var orderitemtr = '';
 
-                            var orderitemtable = $('#orderitemtable');
-                            var orderitemtr = '';
+                            // ordertable.append('<thead><th>營位名稱</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>');
 
-                            ordertable.append('<thead><th>營位名稱</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>');
+                            // $.each(after.orderitems, function (i, orderitem) {
+                            //     orderitemtr = '<tbody>'
+                            //         + '<tr>'
+                            //         + '<td>' + orderitem.site.siteName + '</td>'
+                            //         + '<td>' + '<img width="80" height="100" src="/morari/images/' + orderitem.site.sitePicturesPath + '">' + '</td>'
+                            //         + '<td>' + orderitem.unitPrice + '</td>'
+                            //         + '<td>' + orderitem.numbers + '</td>'
+                            //         + '</tr>'
+                            //         + '</tbody>'
+                            //     orderitemtable.append(orderitemtr);
 
-                            $.each(after.orderitems, function (i, orderitem) {
-                                orderitemtr = '<tbody>'
-                                    + '<tr>'
-                                    + '<td>' + orderitem.site.siteName + '</td>'
-                                    + '<td>' + '<img width="80" height="100" src="/morari/images/' + orderitem.site.sitePicturesPath + '">' + '</td>'
-                                    + '<td>' + orderitem.unitPrice + '</td>'
-                                    + '<td>' + orderitem.numbers + '</td>'
-                                    + '</tr>'
-                                    + '</tbody>'
-                                orderitemtable.append(orderitemtr);
-
-                            });
+                            // });
 
                         }
                     });
@@ -117,9 +115,6 @@
 
 <body>
     <div id="div"></div>
-    <table id="ordertable"></table>
-    <div id="hr"></div>
-    <table id="orderitemtable"></table>
 </body>
 
 </html>

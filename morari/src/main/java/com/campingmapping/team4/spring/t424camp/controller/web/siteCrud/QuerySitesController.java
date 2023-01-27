@@ -29,10 +29,8 @@ public class QuerySitesController {
 	@GetMapping("/sitesOfCamp.controller/{campID}")
 	@ResponseBody
 	public Set<Site> queryByCamp(@PathVariable("campID") int campID, Model m) {
-		Set<Site> sites = siteService.findSiteByCampId(campID);
-//		m.addAttribute("sites", sites);
 
-		return sites;
+		return siteService.findSiteByCampId(campID);
 	}
 
 }

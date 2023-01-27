@@ -43,11 +43,30 @@ public class OrderService {
 	private SiteRepository siteRepository;
 	
 	
-	//查詢訂單
-	public List<Order> findAll() {
-		return orderRepository.findAll();
+	//更新訂單(狀態)
+	public Order update(Order order) {
+		return orderRepository.save(order);
 	}
-
+	
+	//ID查詢訂單
+	public Order findByOrderId(int orderId) {
+		return orderRepository.findById(orderId).get();
+	}
+	
+	//查詢全部訂單, 分頁
+	public Page<Order> getByPage(Pageable pageable) {
+		Page<Order> findAll = orderRepository.findAll(pageable);
+		Date now = new Date();
+		
+		for (Order order : findAll) {
+			Date leavingTime = order.getLeavingTime();
+			if(leavingTime.before(now)) {
+				order.setStatus("訂單已完成");
+				orderRepository.save(order);
+			}
+		}
+		return findAll;
+	}
 	
 	//新增訂單
 	public Order insert(Integer uid, Integer[] siteIds, Integer[] nums, Date goingtime, Date leavingtime, Integer campID) {
@@ -103,11 +122,6 @@ public class OrderService {
 		}
 		
 		return true;
-	}
-
-
-	public Page<Order> getByPage(Pageable pageable) {
-		return orderRepository.findAll(pageable);
 	}
 	
 	

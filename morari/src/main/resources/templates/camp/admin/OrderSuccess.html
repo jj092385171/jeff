@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                $.getJSON('/morari/admin/camp/querySuccessOrder', function (data) {
+                    console.log(data);
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <table id="ordertable"></table>
+    <div id="hr"></div>
+    <table id="orderitemtable"></table>
+</body>
+
+</html>
