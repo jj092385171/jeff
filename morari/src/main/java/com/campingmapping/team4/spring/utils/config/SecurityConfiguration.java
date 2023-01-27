@@ -48,14 +48,15 @@ public class SecurityConfiguration {
                                                 .logoutSuccessUrl("/")
                                                 .logoutSuccessHandler(logoutSuccessHandler)
                                                 .permitAll())
+                                .oauth2Login(oauthLogin -> oauthLogin.loginPage("/login")
+                                                .successHandler(new CustomAuthenticationSuccessHandler()))
                                 // 若無權限指定路徑
-                                .oauth2Login(oauthLogin -> oauthLogin.loginPage("/login").successHandler(new CustomAuthenticationSuccessHandler()))
-                                .exceptionHandling(exceptionHandling -> exceptionHandling
-                                                .accessDeniedPage("/home"))
+                                .exceptionHandling(exceptionHandling -> System.out.println("88")
+                                // exceptionHandling.accessDeniedPage("/home")
+                                )
                                 .sessionManagement(session -> session
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
                 return http.build();
         }
 
-       
 }

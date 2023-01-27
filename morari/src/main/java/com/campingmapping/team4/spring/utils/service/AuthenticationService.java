@@ -70,40 +70,22 @@ public class AuthenticationService {
 	public Boolean loginstate(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		String cookiejwt = null;
-
 		Boolean islogin = false;
-		final String jwt;
-		final String userEmail;
-
 		if (cookies != null) {
-			cookiejwt = Arrays.stream(cookies)
-					.filter(c -> c.getName().equals(MyConstants.JWT_COOKIE_NAME))
-					.map(Cookie::getValue)
-					.findFirst()
-					.orElse(null);
+			cookiejwt = jwtService.getToken(cookies, MyConstants.JWT_COOKIE_NAME);
 		}
 		if (cookiejwt == null || cookiejwt.isEmpty()) {
 			return false;
 		}
-		jwt = cookiejwt;
 		try {
-			userEmail = jwtService.extractUsername(jwt);
+			String userEmail = jwtService.extractUsername(cookiejwt);
 			if (userEmail != null) {
 				UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-				islogin = jwtService.isTokenValid(jwt, userDetails);
+				islogin = jwtService.isTokenValid(cookiejwt, userDetails);
 			}
 		} catch (ExpiredJwtException e) {
 			islogin = false;
 		}
 		return islogin;
 	}
-
-	private Cookie setCookie(String key, String value) {
-		Cookie cookie = new Cookie(key, value);
-		cookie.setPath("/");
-		cookie.setHttpOnly(true);
-		cookie.setSecure(true);
-		return cookie;
-	}
-
 }
