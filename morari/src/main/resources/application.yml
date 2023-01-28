@@ -52,6 +52,7 @@ spring:
 # -------------MYSQL-------------
         dialect: org.hibernate.dialect.MySQL8Dialect
         '[allow_update_outside_transaction]': true
+        # '[hbm2ddl.auto]': create
         '[hbm2ddl.auto]': update
         '[format_sql]': true
     show-sql: true

@@ -2,7 +2,6 @@ package com.campingmapping.team4.spring.utils.service;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +16,7 @@ import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRespon
 import com.campingmapping.team4.spring.t401member.model.dto.RegisterRequest;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+// import com.campingmapping.team4.spring.t401member.model.entity.UserRoles;
 import com.campingmapping.team4.spring.utils.config.MyConstants;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -37,13 +37,13 @@ public class AuthenticationService {
 	// 註冊
 	public Boolean register(RegisterRequest request) {
 		try {
-			Role user = roleRepository.findByName("USER").get();
+			Role roleUser = roleRepository.findByName("USER").get();
 			UserProfiles userProfiles = UserProfiles.builder()
 					.email(request.getEmail())
 					.password(passwordEncoder.encode(request.getPassword()))
-					.roles(Arrays.asList(user))
 					.build();
-					userRepository.save(userProfiles);
+			userProfiles.getRoles().add(roleUser);
+			userRepository.save(userProfiles);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

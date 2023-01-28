@@ -1,6 +1,10 @@
 package com.campingmapping.team4.spring.utils.config;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,55 +12,66 @@ import org.springframework.stereotype.Component;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.RoleRepository;
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+// import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRoleRepository;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-
 import jakarta.transaction.Transactional;
 
 @Component
+// 啟動時自動執行
 public class SetupDataLoader implements
         ApplicationListener<ContextRefreshedEvent> {
-
     boolean alreadySetup = false;
-
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private RoleRepository roleRepository;
+    // @Autowired
+    // private UserRoleRepository userRoleRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
+        // 查看有無權限並創建
         if (alreadySetup)
             return;
-        createRoleIfNotFound("SUPERADMIN");
-        createRoleIfNotFound("ADMIN");
-        createRoleIfNotFound("CAMP");
-        createRoleIfNotFound("SHOP");
-        createRoleIfNotFound("FORUM");
-        createRoleIfNotFound("MALL");
-        createRoleIfNotFound("TEAM");
+        List<String> roles = Arrays.asList(
+                "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM");
+        roles.forEach(r -> createRoleIfNotFound(r));
 
-        Role adminRole = roleRepository.findByName("ADMIN").get();
-        UserProfiles userProfiles = UserProfiles.builder()
-                .email("admin@admin.com")
-                .password(passwordEncoder.encode("0000"))
-                .roles(Arrays.asList(adminRole))
-                .build();
-        userRepository.save(userProfiles);
+        // 檢查有無存在生成超級管理員
+        Role adminRole = roleRepository.findByName("SUPERADMIN").get();
 
+        Optional<UserProfiles> userOptional = userRepository.findByEmail(MyConstants.SUPER_ADMIN_NAME);
+        UserProfiles userProfiles;
+        try{
+        if (userOptional.isPresent()) {
+            userProfiles = userOptional.get();
+            userProfiles.setEmail(MyConstants.SUPER_ADMIN_NAME);
+            userProfiles.setPassword(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD));
+            userProfiles.getRoles().clear();
+            userProfiles.getRoles().add(adminRole);
+            userRepository.save(userProfiles);
+        } else {
+            // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
+
+            userProfiles = UserProfiles.builder()
+                    .email(MyConstants.SUPER_ADMIN_NAME)
+                    .password(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD))
+                    .build();
+            userProfiles.getRoles().add(adminRole);
+            userRepository.save(userProfiles);
+        }}catch(Exception e){
+            e.printStackTrace();
+        }
         alreadySetup = true;
     }
 
     @Transactional
-    Role createRoleIfNotFound(String name) {
-
-        Role role = roleRepository.findByName(name).get();
-        if (role == null) {
-            role = Role.builder().name(name).build();
-            roleRepository.save(role);
-        }
-        return role;
+    public Role createRoleIfNotFound(String name) {
+        return roleRepository.findByName(name)
+                .orElseGet(() -> roleRepository.save(Role.builder().name(name).build()));
     }
-
 }

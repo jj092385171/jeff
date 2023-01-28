@@ -74,7 +74,7 @@ window.onload = function () {
         // 發送請求時附帶Cookie
         credentials: "include"
     })
-        .then(response => response.json())
+        // .then(response => response.json())
         .then(loginstate => {
             if (loginstate) {
                 // 登入
@@ -112,9 +112,6 @@ window.onload = function () {
 function toggleDropdown() {
     let dropdownContent = document.getElementById("dropdown-content");
     if (dropdownContent.style.display === "none") {
-
-        console.log("b")
-
         dropdownContent.style.display = "block";
 
         console.log(dropdownContent.style.display)

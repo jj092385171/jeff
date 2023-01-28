@@ -15,11 +15,14 @@ import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -35,8 +38,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
-@Data
-@ToString(exclude = { "post", "job", "initiatings", "loginHistories" })
+@Getter@Setter
+@ToString(exclude = { "post", "job", "initiatings", "loginhistories" ,"roles"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -55,17 +58,24 @@ public class UserProfiles implements UserDetails {
   private String password;
 
   @Embedded
-  UserName userName;
+  UserName username;
 
   @Embedded
-  UserPrivacy userPrivacy;
+  UserPrivacy userprivacy;
 
   @Embedded
-  UserDetail userdDetail;
+  UserDetail userddetail;
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-  private Collection<Role> roles;
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @ManyToMany
+  @Builder.Default
+  @JoinTable(
+  name = "user_role",
+  joinColumns = { @JoinColumn(name = "uid") },
+  inverseJoinColumns = { @JoinColumn(name = "rid") }
+  )
+  private Set<Role> roles = new HashSet<>();  
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -127,5 +137,6 @@ public class UserProfiles implements UserDetails {
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  private Collection<LoginHistory> loginHistories;
+  private Collection<LoginHistory> loginhistories;
+  
 }

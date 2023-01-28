@@ -146,7 +146,6 @@ public class JwtService {
     Boolean remember = (Boolean) extractAllClaims(refreshToken).get("remember");
     String email = extractUsername(accessToken);
     UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-    System.out.println(userDetailsService == null);
     if (isTokenExpired(accessToken)) {
       if (isTokenExpired(refreshToken)) {
         // 如果access token和refresh token都過期，刪除token

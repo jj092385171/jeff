@@ -2,6 +2,7 @@ package com.campingmapping.team4.spring.utils.config;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,8 +20,11 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration {
 
+    @Autowired
     private final JwtAuthenticationFilter jwtAuthFilter;
+    @Autowired
     private final AuthenticationProvider authenticationProvider;
+    @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
 
     @Bean
@@ -47,6 +51,7 @@ public class SecurityConfiguration {
                         .logoutSuccessHandler(logoutSuccessHandler)
                         .permitAll())
                 .oauth2Login(oauthLogin -> oauthLogin.loginPage("/login")
+                // .permitAll())
                         .successHandler(new CustomAuthenticationSuccessHandler()))
                 // 若無權限指定路徑
                 // .exceptionHandling(exceptionHandling -> System.out.println("88")

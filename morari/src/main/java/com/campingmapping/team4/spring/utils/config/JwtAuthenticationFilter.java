@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,7 +16,9 @@ import com.campingmapping.team4.spring.utils.service.JwtService;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+  @Autowired
   private final JwtService jwtService;
+  @Autowired
   private final UserDetailsService userDetailsService;
   @Override
   protected void doFilterInternal(

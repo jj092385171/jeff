@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,7 +29,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
-
+  @Autowired
   private final UserRepository repository;
 
   // 登入核對帳號
