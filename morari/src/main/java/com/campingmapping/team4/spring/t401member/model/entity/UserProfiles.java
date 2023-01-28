@@ -1,14 +1,15 @@
 package com.campingmapping.team4.spring.t401member.model.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -46,19 +47,30 @@ public class UserProfiles implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer uid;
-  @Column(nullable = false,unique = true,length = 50)
+
+  @Column(nullable = false, unique = true, length = 50)
   private String email;
+
   @JsonIgnore
   private String password;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Enumerated(EnumType.STRING)
+  @Embedded
+  UserName userName;
+
+  @Embedded
+  UserPrivacy userPrivacy;
+
+  @Embedded
+  UserDetail userdDetail;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Collection<Role> roles;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return roles.stream()
-        .map(role -> new SimpleGrantedAuthority(role.name()))
+        .map(role -> new SimpleGrantedAuthority(role.getName()))
         .collect(Collectors.toList());
   }
 

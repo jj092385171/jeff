@@ -275,7 +275,7 @@ h6 {
 #search {
     position: relative;
     padding: 30px 0 20px 0;
-    background: #ffdbb3;
+    background: #f2f2f2;
 }
 
 #search.search-slider {
@@ -338,38 +338,39 @@ h6 {
 #search input:focus,
 #search select:focus,
 #search button:focus {
-    border-color: #CBAC88;
+    border-color: #f7ac93;
 }
 
 #search .btn {
     margin-top: 31px;
     color: #000000;
-    background: #222222;
-    border-color: #222222;
+    background: #CBAC88;
+    border-color: #CBAC88;
 }
 
 #search .btn:hover {
-    color: #222222;
-    background: #CBAC88;
-    border-color: #CBAC88;
+    color: #7b7b7b;
+    background: #ffd6a7;
+    border-color: #ffd6a7;
 }
 
 #search.search-slider .btn {
-    background: #ffffff;
-    border-color: #ffffff;
-}
-
-#search.search-slider .btn:hover {
     background: #CBAC88;
     border-color: #CBAC88;
 }
 
-#search.search-slider input,
+#search.search-slider .btn:hover {
+    background: #ffd6a7;
+    border-color: #ffd6a7;
+}
+
+/* #search.search-slider input,
 #search.search-slider select,
 #search.search-slider button,
 #search.search-slider .input-group-text {
     border: none;
-}
+    border-color: #CBAC88;
+} */
 
 #headerSlider {
     position: relative;

@@ -2,7 +2,6 @@ package com.campingmapping.team4.spring.utils.config;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-@Autowired
 private UserRepository userRepository;
 
 @Override

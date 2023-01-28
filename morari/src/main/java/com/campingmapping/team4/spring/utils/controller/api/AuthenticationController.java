@@ -6,18 +6,14 @@ import java.io.IOException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRequest;
-import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationResponse;
 import com.campingmapping.team4.spring.t401member.model.dto.RegisterRequest;
-import com.campingmapping.team4.spring.utils.config.MyConstants;
 import com.campingmapping.team4.spring.utils.service.AuthenticationService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -71,5 +67,6 @@ public class AuthenticationController {
   // // 重定向到登入頁面
   // response.sendRedirect("/morari");
   // }
+  
 
 }

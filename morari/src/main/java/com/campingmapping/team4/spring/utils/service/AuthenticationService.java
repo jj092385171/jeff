@@ -3,7 +3,6 @@ package com.campingmapping.team4.spring.utils.service;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.RoleRepository;
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRequest;
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationResponse;
@@ -27,7 +27,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-	private final UserRepository repository;
+	private final UserRepository userRepository;
+	private final RoleRepository roleRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
@@ -36,12 +37,13 @@ public class AuthenticationService {
 	// 註冊
 	public Boolean register(RegisterRequest request) {
 		try {
+			Role user = roleRepository.findByName("USER").get();
 			UserProfiles userProfiles = UserProfiles.builder()
 					.email(request.getEmail())
 					.password(passwordEncoder.encode(request.getPassword()))
-					.roles(Arrays.asList(Role.USER))
+					.roles(Arrays.asList(user))
 					.build();
-			repository.save(userProfiles);
+					userRepository.save(userProfiles);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,7 +58,7 @@ public class AuthenticationService {
 					new UsernamePasswordAuthenticationToken(
 							request.getEmail(),
 							request.getPassword()));
-			UserProfiles userProfiles = repository.findByEmail(request.getEmail()).orElseThrow();
+			UserProfiles userProfiles = userRepository.findByEmail(request.getEmail()).orElseThrow();
 			AuthenticationResponse authenticationResponse = jwtService.generateToken(userProfiles,
 					request.getRememberMe());
 			jwtService.refreshTokenToCookie(response, authenticationResponse);
