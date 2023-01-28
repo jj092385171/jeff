@@ -13,10 +13,30 @@ body {
     background: #f2f2f2;
 }
 
+html,
+body {
+    height: 100%;
+    /*外層高度100%*/
+    margin: 0;
+}
+
+.wrapper {
+    min-height: calc(100% - 174.875PX - 60PX);
+    /*減去footer高度*/
+}
+
+.footer {
+    margin: 0;
+    height: 174.875PX;
+    /*設定footer本身高度*/
+    ;
+}
+
 a {
     color: #394648;
     transition: 0.5s;
 }
+
 
 a:hover,
 a:active,
