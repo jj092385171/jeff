@@ -33,7 +33,7 @@ public class JobBean {
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="job")//設一個外來建的集合
 	@JsonIgnore
-	private Collection<ResumeBean> resumes;
+	private Collection<ResumeBean> resume;
 
 	@ManyToOne
 	@JoinColumn(name = "uid")

@@ -22,6 +22,10 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepos
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobRepository;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Service
@@ -50,15 +54,31 @@ public class JobService {
 	}
 	
 	// 改職缺內容
-		public JobBean updateJob(JobBean jobBean) {
-//			jobBean.setUserprofiles(uDao.findById(u).get());
-			return jobDao.save(jobBean);
+		public JobBean updateJob(JobBean jobBean,Integer rackid) {
+			System.out.println(rackid);
+			Optional<JobBean> result = jobDao.findById(rackid);
+		    if (result.isPresent()) {
+		        JobBean jBean = result.get();
+		        // 將前端傳進來的jobBean的值複製到jBean
+		        jBean.setJob(jobBean.getJob());
+		        jBean.setDate(jobBean.getDate());
+		        jBean.setPlace(jobBean.getPlace());
+		        jBean.setRemark(jobBean.getRemark());
+		        jBean.setSalary(jobBean.getSalary());
+		        jBean.setTime(jobBean.getTime());
+		        jBean.setImg(jobBean.getImg());
+		        jBean.setQuantity(jobBean.getQuantity());
+		       
+		        jBean.setRackup(result.get().getRackup());
+//		        jBean.setUserprofiles(result.get().getUserprofiles().getUid());
+		        
+//		        jBean.setUserprofiles(jobBean.getUserprofiles());
+		        // 使用save更新資料庫中的資料
+		        return jobDao.save(jBean);
+		    }
+		    //找不到對應的資料
+		    return null;
 		}
-		
-	// 透過rackID秀圖片
-//	public JobBean findImgByRackID(int rackID) {
-//		return jobDao.findImgByRackID(rackID);	 
-//	}
 
 	// 刪除職缺
 	public void deleteById(int rackID) {
@@ -104,4 +124,9 @@ public class JobService {
         sb = new SerialBlob(b);
         return sb;
     }
+	
+	// 透過rackID秀圖片
+//	public JobBean findImgByRackID(int rackID) {
+//		return jobDao.findImgByRackID(rackID);	 
+//	}
 }

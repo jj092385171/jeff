@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,21 +29,22 @@ public class WorkPageController {
 	@Autowired
 	private JobService jService;
 
-	@GetMapping({ "", "/" })
-	public String workIndex() {
-		return "work/guest/index";
-	}
-	// 啟動我的首頁
-	@GetMapping("/crud.controller")
-	public String processMainAction1() {
-		return "work/admin/crud";
-	}
-
+//	@GetMapping({ "", "/" })
+//	public String workIndex() {
+//		return "work/guest/index";
+//	}
+	
 	// 啟動CRUD
 //	@GetMapping("/jobCRUD.controller")
 //	public String processMainAction1() {
 //		return "work/admin/jobCRUD";
 //	}
+	
+	// 啟動我的首頁
+	@GetMapping("/crud.controller")
+	public String processMainAction1() {
+		return "work/admin/crud";
+	}
 
 	// 啟動insert
 	@PostMapping("/insert.controller")
@@ -62,59 +64,12 @@ public class WorkPageController {
 		return "work/admin/update";
 	}
 
-	// 處理照片格式(進資料庫)
-	@PostMapping("/fileToBlob.controller")
-	public void processImgAction(@RequestParam("img") MultipartFile img) throws IOException {
-		JobBean jBean = new JobBean();
-		InputStream in = img.getInputStream();
-		long size = img.getSize();
-		try {
-			Blob image = jService.fileToBlob(in, size);
-			jBean.setImg(image);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	// 新增
 	@PostMapping("/jobInsert.controller")
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
 		return jService.insert(jobBean, 2);
-	}
-
-	// 修改
-	@PostMapping("/jobUpdate.controller")
-	@ResponseBody
-	public JobBean processUpdateAction(@RequestBody JobBean jBean) {	
-		return jService.updateJob(jBean);
-	}
-
-	// 透過rackid找資料後給前端修改
-	@PostMapping("/selectRackId.controller/{rackID}")
-	@ResponseBody
-	public JobBean processAction4(@PathVariable Integer rackID) {
-		JobBean result = jService.findById(rackID);
-		return result;
-	}
-
-	// 找全部 ok
-	@PostMapping("/jobShowAll.controller")
-	@ResponseBody
-	public List<JobBean> processShowJobAllAction() {
-		List<JobBean> result = jService.findAll();
-		return result;
-	}
-
-	// 秀圖片
-	@GetMapping("/jobImg.controller/{id}")
-	@ResponseBody
-	public InputStream processImgAction(@PathVariable("id") String rackID) throws SQLException {
-		int parseID = Integer.parseInt(rackID);
-		JobBean result = jService.findById(parseID);
-		Blob img = result.getImg();
-		InputStream binaryStream = img.getBinaryStream();
-		return binaryStream;
 	}
 
 	// 刪除
@@ -125,6 +80,30 @@ public class WorkPageController {
 		return "ok";
 	}
 
+	// 修改
+	@PostMapping("/jobUpdate.controller/{rackid}")
+	@ResponseBody
+	public JobBean processUpdateAction(@RequestBody JobBean jBean,@PathVariable Integer rackid) {
+		System.out.println("rackid="+rackid);
+		return jService.updateJob(jBean,rackid);
+	}
+
+	// 透過rackid找資料後給前端修改
+	@PostMapping("/selectRackId.controller/{rackID}")
+	@ResponseBody
+	public JobBean processAction4(@PathVariable Integer rackID) {
+		JobBean result = jService.findById(rackID);
+		return result;
+	}
+
+	// 找全部
+	@PostMapping("/jobShowAll.controller")
+	@ResponseBody
+	public List<JobBean> processShowJobAllAction() {
+		List<JobBean> result = jService.findAll();
+		return result;
+	}
+
 	// 模糊搜尋
 	@PostMapping("/selectLike.controller/{job}")
 	@ResponseBody
@@ -133,8 +112,8 @@ public class WorkPageController {
 		System.out.println(result);
 		if (result.size() == 0) {
 			return null;
-		}else {
-		return result;
+		} else {
+			return result;
 		}
 	}
 
@@ -149,5 +128,28 @@ public class WorkPageController {
 		return result;
 	}
 
+	// 秀圖片
+	@GetMapping("/jobImg.controller/{id}")
+	@ResponseBody
+	public InputStream processImgAction(@PathVariable("id") String rackID) throws SQLException {
+		int parseID = Integer.parseInt(rackID);
+		JobBean result = jService.findById(parseID);
+		Blob img = result.getImg();
+		InputStream binaryStream = img.getBinaryStream();
+		return binaryStream;
+	}
 	
+	// 處理照片格式(進資料庫)
+	@PostMapping("/fileToBlob.controller")
+	public void processImgAction(@RequestParam("img") MultipartFile img) throws IOException {
+		JobBean jBean = new JobBean();
+		InputStream in = img.getInputStream();
+		long size = img.getSize();
+		try {
+			Blob image = jService.fileToBlob(in, size);
+			jBean.setImg(image);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

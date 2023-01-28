@@ -63,21 +63,26 @@
 				function getFormData($form) {
 					var unindexed_array = $form.serializeArray();
 					var indexed_array = {};
-
+					
+					
 					$.map(unindexed_array, function (n, i) {
 						indexed_array[n['name']] = n['value'];
 					});
 					console.log(indexed_array);
 					return indexed_array;
 				}
+// 				var uid = $("input[name='uid']").val();
+// 				console.log(uid); 
 				$.ajax({
-					type: 'POST',
-					url: '/morari/admin/work/jobUpdate.controller',
+					type: 'Post',
+					url: '/morari/admin/work/jobUpdate.controller/'+id,
 					contentType: 'application/json',
 					data: JSON.stringify(getFormData($("#update"))),
 					success: function (response) {
 						$('#showInsert').empty("");
 						$('#su').empty("");
+						$('#update').empty("");
+						$('#img').empty("");
 						if (response == null) {
 							$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 						} else {
