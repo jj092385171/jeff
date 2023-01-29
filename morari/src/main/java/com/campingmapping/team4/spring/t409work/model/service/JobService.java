@@ -70,9 +70,7 @@ public class JobService {
 		        jBean.setQuantity(jobBean.getQuantity());
 		       
 		        jBean.setRackup(result.get().getRackup());
-//		        jBean.setUserprofiles(result.get().getUserprofiles().getUid());
-		        
-//		        jBean.setUserprofiles(jobBean.getUserprofiles());
+//		        jBean.setUserprofiles(result.get().getUserprofiles().getUid());	        
 		        // 使用save更新資料庫中的資料
 		        return jobDao.save(jBean);
 		    }

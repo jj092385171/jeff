@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,9 +20,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
+@ToString(exclude = {"resume"})
 @Entity
 @Table(name = "job")
 public class JobBean {
@@ -31,6 +34,7 @@ public class JobBean {
 	@Column(name = "rackid")
 	private Integer rackid;// 刊登編號
 	
+	@JsonIgnoreProperties("job")
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="job")//設一個外來建的集合
 	@JsonIgnore
 	private Collection<ResumeBean> resume;

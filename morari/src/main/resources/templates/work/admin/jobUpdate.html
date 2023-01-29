@@ -74,7 +74,7 @@
 // 				var uid = $("input[name='uid']").val();
 // 				console.log(uid); 
 				$.ajax({
-					type: 'Post',
+					type: 'Put',
 					url: '/morari/admin/work/jobUpdate.controller/'+id,
 					contentType: 'application/json',
 					data: JSON.stringify(getFormData($("#update"))),
@@ -94,7 +94,7 @@
 						
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
-								var tr = "<tr align='center'>" + "<td>" + response.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
+								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
 									"<td>" + response.quantity + "</td>" + "<td>" + response.place + "</td>" + "<td>" + response.date + "</td>" + "<td>" + response.time + "</td>" + "<td>" + response.remark + "</td>" + "<td>" + response.img + "</td>" +
 									"</tr>";
 								table.append(tr);

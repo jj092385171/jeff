@@ -36,8 +36,9 @@ public class ResumeService {
 	}
 
 	// 新增履歷
-	public ResumeBean insert(ResumeBean rBean, Integer u) {
+	public ResumeBean insert(ResumeBean rBean, Integer u, Integer rackid) {
 		rBean.setUserprofiles(uDao.findById(u).get());
+		rBean.setJob(jDao.findById(rackid).get());
 		return reDao.save(rBean);
 	}
 	

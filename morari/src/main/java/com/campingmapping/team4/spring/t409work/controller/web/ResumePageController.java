@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,31 +21,36 @@ public class ResumePageController {
 
 	@Autowired
 	private ResumeService rService;
-
+	
+	// 啟動我的首頁
+	@GetMapping("/resumeCrud.controller")
+	public String processMainAction1() {
+		return "work/admin/resumeCrud";
+	}
 	// 啟動insert
 	@PostMapping("/insert.controller")
 	public String processMainAction2() {
-		return "resume/admin/insert";
+		return "work/admin/insert";
 	}
 
 	// 啟動select
 	@PostMapping("/select.controller")
 	public String processMainAction3() {
-		return "resume/admin/select";
+		return "work/admin/select";
 	}
 
 	// 啟動update
 	@PostMapping("/update.controller/{u}")
 	public String processMainAction4() {
-		return "resume/admin/update";
+		return "work/admin/update";
 	}
 
 	// 新增
-	@PostMapping("/resumeInsert.controller")
-	@ResponseBody
-	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean) {
-		return rService.insert(rBean, 2);
-	}
+//	@PostMapping("/resumeInsert.controller")
+//	@ResponseBody
+//	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean) {
+//		return rService.insert(rBean, 2);
+//	}
 	
 	// 刪除
 	@DeleteMapping("/jobDelete.controller/{number}")
