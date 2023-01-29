@@ -2,6 +2,8 @@ package com.campingmapping.team4.spring.utils.service;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.UUID;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,8 +41,9 @@ public class AuthenticationService {
 		try {
 			Role roleUser = roleRepository.findByName("USER").get();
 			UserProfiles userProfiles = UserProfiles.builder()
-					.email(request.getEmail())
-					.password(passwordEncoder.encode(request.getPassword()))
+					.email(request.email())
+					.password(passwordEncoder.encode(request.password()))
+					.uid(UUID.randomUUID())
 					.build();
 			userProfiles.getRoles().add(roleUser);
 			userRepository.save(userProfiles);
@@ -56,11 +59,11 @@ public class AuthenticationService {
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
-							request.getEmail(),
-							request.getPassword()));
-			UserProfiles userProfiles = userRepository.findByEmail(request.getEmail()).orElseThrow();
+							request.email(),
+							request.password()));
+			UserProfiles userProfiles = userRepository.findByEmail(request.email()).orElseThrow();
 			AuthenticationResponse authenticationResponse = jwtService.generateToken(userProfiles,
-					request.getRememberMe());
+					request.rememberMe());
 			jwtService.refreshTokenToCookie(response, authenticationResponse);
 			return true;
 		} catch (Exception e) {

@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -79,8 +80,7 @@ public class JwtService {
 
         .signWith(getSignInKey(), SignatureAlgorithm.HS512)
         .compact();
-    return AuthenticationResponse.builder().grantType("bearer").accessToken(accessToken).refreshToken(refreshToken)
-        .build();
+    return new AuthenticationResponse(accessToken, refreshToken, "bearer");
   }
 
   // 驗證令牌是否有效
@@ -90,7 +90,7 @@ public class JwtService {
   }
 
   // 尋找當前使用者的UID
-  public Integer getUId(HttpServletRequest request) {
+  public UUID getUId(HttpServletRequest request) {
     Cookie[] cookies = request.getCookies();
     if (cookies == null || cookies.length == 0) {
       return null;
@@ -104,7 +104,7 @@ public class JwtService {
       return null;
     }
     Claims claims = extractAllClaims(jwt);
-    return (Integer) claims.get("uid");
+    return (UUID) claims.get("uid");
   }
 
   // 設置HttpOnly&Https的Cookie
@@ -129,7 +129,7 @@ public class JwtService {
   public void refreshCheckToken(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain,
       UserDetailsService userDetailsService)
       throws IOException, ServletException {
-    AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+    AuthenticationResponse authenticationResponse;
     // 取得access token和refresh token
     Cookie[] cookies = request.getCookies();
     String accessToken = null;
@@ -188,10 +188,10 @@ public class JwtService {
 
   // 刷新新增令牌至Cookie
   void refreshTokenToCookie(HttpServletResponse response, AuthenticationResponse authenticationResponse) {
-    Cookie accessTokenCookie = setCookie(MyConstants.JWT_COOKIE_NAME, authenticationResponse.getAccessToken());
+    Cookie accessTokenCookie = setCookie(MyConstants.JWT_COOKIE_NAME, authenticationResponse.accessToken());
     response.addCookie(accessTokenCookie);
     Cookie refreshTokenCookie = setCookie(MyConstants.JWT_REFRESH_COOKIE_NAME,
-        authenticationResponse.getRefreshToken());
+        authenticationResponse.refreshToken());
     response.addCookie(refreshTokenCookie);
   }
 

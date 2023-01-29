@@ -41,7 +41,7 @@ public class UserDetail {
 
     // 訂閱
     // @Column(columnDefinition = "default 'N'")
-    private String subscribed;
+    private Boolean subscribed;
 
     // 大頭像
     private String shot;

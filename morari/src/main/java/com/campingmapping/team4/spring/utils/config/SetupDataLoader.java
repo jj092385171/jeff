@@ -3,6 +3,7 @@ package com.campingmapping.team4.spring.utils.config;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -60,6 +61,7 @@ public class SetupDataLoader implements
             userProfiles = UserProfiles.builder()
                     .email(MyConstants.SUPER_ADMIN_NAME)
                     .password(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD))
+                    .uid(UUID.randomUUID())
                     .build();
             userProfiles.getRoles().add(adminRole);
             userRepository.save(userProfiles);

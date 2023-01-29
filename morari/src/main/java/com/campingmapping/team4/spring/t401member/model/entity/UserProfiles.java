@@ -18,11 +18,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -38,8 +37,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
-@Getter@Setter
-@ToString(exclude = { "post", "job", "initiatings", "loginhistories" ,"roles"})
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -48,8 +47,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserProfiles implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer uid;
+  private UUID uid;
+
 
   @Column(nullable = false, unique = true, length = 50)
   private String email;
@@ -70,12 +69,9 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @ManyToMany
   @Builder.Default
-  @JoinTable(
-  name = "user_role",
-  joinColumns = { @JoinColumn(name = "uid") },
-  inverseJoinColumns = { @JoinColumn(name = "rid") }
-  )
-  private Set<Role> roles = new HashSet<>();  
+  @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = {
+      @JoinColumn(name = "rid") })
+  private Set<Role> roles = new HashSet<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -138,5 +134,5 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<LoginHistory> loginhistories;
-  
+
 }

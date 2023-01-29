@@ -17,12 +17,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Builder
-@ToString(exclude = { "userprofiles"})
-@Getter@Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -35,7 +34,7 @@ public class Role {
 
   private String name;
 
-  @JsonIgnore 
+  @JsonIgnore
   @JsonIgnoreProperties("role")
   @Builder.Default
   @ManyToMany(mappedBy = "roles")
