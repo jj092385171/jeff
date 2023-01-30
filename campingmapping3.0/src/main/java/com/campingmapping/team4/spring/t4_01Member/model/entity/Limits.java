@@ -101,7 +101,7 @@ public class Limits {
 	}
 
 	public void setAccount() {
-//		this.account = member.getAccount();
+		this.account = member.getAccount();
 	}
 
 	public void setNomore(String nomore) {

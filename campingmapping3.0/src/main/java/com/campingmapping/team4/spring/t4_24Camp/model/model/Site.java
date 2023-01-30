@@ -1,6 +1,6 @@
 package com.campingmapping.team4.spring.t4_24Camp.model.model;
 
-import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,27 +16,27 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "site")
 @Component
-public class Site implements Serializable{
+public class Site {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "siteID")
-	private int siteID;
+	private Integer siteID;
 	
 	@Column(name = "siteName")
 	private String siteName;
 	
-	@Column(name = "sitePicturesPath")
-	private String sitePicturesPath;
+	@Column(name = "sitePictures")
+	private Blob sitePictures;
 	
 	@Column(name = "totalSites")
-	private int totalSites;
+	private Integer totalSites;
 	
 	@Column(name = "siteMoney")
-	private int siteMoney;
+	private Integer siteMoney;
 	
 	@ManyToOne
-	@JoinColumn(name = "fkCampID")
+	@JoinColumn(name = "fk_campID")
 	private Camp camp;
 	
 	
@@ -44,11 +44,11 @@ public class Site implements Serializable{
 	}
 
 	
-	public int getSiteID() {
+	public Integer getSiteID() {
 		return siteID;
 	}
 
-	public void setSiteID(int siteID) {
+	public void setSiteID(Integer siteID) {
 		this.siteID = siteID;
 	}
 
@@ -60,27 +60,27 @@ public class Site implements Serializable{
 		this.siteName = siteName;
 	}
 
-	public String getSitePicturesPath() {
-		return sitePicturesPath;
+	public Blob getSitePictures() {
+		return sitePictures;
 	}
 
-	public void setSitePicturesPath(String sitePicturesPath) {
-		this.sitePicturesPath = sitePicturesPath;
+	public void setSitePictures(Blob sitePictures) {
+		this.sitePictures = sitePictures;
 	}
 
-	public int getTotalSites() {
+	public Integer getTotalSites() {
 		return totalSites;
 	}
 
-	public void setTotalSites(int totalSites) {
+	public void setTotalSites(Integer totalSites) {
 		this.totalSites = totalSites;
 	}
 
-	public int getSiteMoney() {
+	public Integer getSiteMoney() {
 		return siteMoney;
 	}
 
-	public void setSiteMoney(int siteMoney) {
+	public void setSiteMoney(Integer siteMoney) {
 		this.siteMoney = siteMoney;
 	}
 

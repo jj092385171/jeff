@@ -3,20 +3,18 @@ package com.campingmapping.team4.spring.t4_11Team.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
+import org.hibernate.Session;
 
-import com.campingmapping.team4.spring.t4_11Team.Dao.InitiatingDao;
+import com.campingmapping.team4.spring.t4_11Team.Dao.InitiatingDaoImpl;
 import com.campingmapping.team4.spring.t4_11Team.model.Initiating;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-@Service
-@Transactional
-public class TeamService implements TService{
+public class TeamService implements Service{
 	
-	@Autowired
-	private InitiatingDao iDao;
+	private InitiatingDaoImpl iDao;
+	
+	public TeamService(Session session) {
+		this.iDao = new InitiatingDaoImpl(session);
+	}
 	
 	@Override
 	public Initiating setInitiating(Map<String,String[]> initiating) {
@@ -62,11 +60,6 @@ public class TeamService implements TService{
 	@Override
 	public List<Initiating> selectInitiating(String sql) {
 		return iDao.selectInitiating(sql);
-	}
-
-	@Override
-	public Initiating findById(int initiatingnum) {
-		return iDao.findById(initiatingnum);
 	}
 
 }

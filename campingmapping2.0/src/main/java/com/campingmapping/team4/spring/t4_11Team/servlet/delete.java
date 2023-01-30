@@ -33,10 +33,12 @@ public class delete extends HttpServlet {
 		
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
-		
+		System.out.println("我要刪除囉!!!");
+
 		TeamService teamService = new TeamService(session);
 		String num = request.getParameter("delete");
 		teamService.deleteInitiating(Integer.valueOf(num));
+		System.out.println("刪除成功");
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/view");
 		rd.forward(request, response);

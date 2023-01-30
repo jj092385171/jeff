@@ -1,62 +1,69 @@
 package com.campingmapping.team4.spring.t436mall.model.service.impl;
-// package com.campingmapping.team4.spring.t4_36Mall.model.service.impl;
 
-// import java.sql.SQLException;
-// import java.util.List;
+import java.util.Date;
+import java.util.List;
 
-// import com.campingmapping.team4.spring.t4_36Mall.model.dao.CategoryDao;
-// import
-// com.campingmapping.team4.spring.t4_36Mall.model.dao.impl.CategoryDaoImpl;
-// import com.campingmapping.team4.spring.t4_36Mall.model.entity.Category;
-// import
-// com.campingmapping.team4.spring.t4_36Mall.model.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-// import util.HibernateUtils;
+import com.campingmapping.team4.spring.t436mall.model.dao.repository.CategoryRepository;
+import com.campingmapping.team4.spring.t436mall.model.entity.Category;
+import com.campingmapping.team4.spring.t436mall.model.service.CategoryService;
 
-// public class CategoryServiceImpl implements CategoryService {
+@Service
+@Transactional
+public class CategoryServiceImpl implements CategoryService {
 
-// private final CategoryDao categoryDao = new
-// CategoryDaoImpl(HibernateUtils.getSessionFactory().getCurrentSession());
+	@Autowired
+	public CategoryRepository cDao;
 
-// @Override
-// public void create(Category category) throws SQLException {
-// categoryDao.insert(category);
-// }
+	// 新增一筆產品
+	@Override
+	public Category create(Category category) {
+		Date now = new Date();
+		category.setPdlastupdate(now);
+		category.setPddate(now);
+		cDao.save(category);
 
-// @Override
-// public void delete(int id) throws SQLException {
-// categoryDao.deleteByPd_id(id);
-// }
+		return category;
+	}
 
-// @Override
-// public void update(Category category) throws SQLException {
-// categoryDao.update(category);
-// }
+	// 依Pdid來刪除單筆產品
+	@Override
+	public void deleteByPdid(int id) {
+		cDao.deleteById(id);
+	}
 
-// @Override
-// public Category select(int id) throws SQLException {
-// Category category = categoryDao.selectByPdid(id);
-// return category;
-// }
+	// 依Pdid來修改單筆產品
+	@Override
+	public Category updateByPdid(Category category) {
+		Date now = new Date();
+		category.setPdlastupdate(now);
+		return cDao.save(category);
+	}
 
-// // 透過PdiD秀圖片
-// // @Override
-// // public Category findImgByPdiD(int id) {
-// // try {
-// // DbUtils.begin();
-// // Category cg = categoryDao.findImgByPdiD(id);
-// // DbUtils.commit();
-// // return cg;
-// // } catch (SQLException e) {
-// // DbUtils.rollbacl();
-// // e.printStackTrace();
-// // return null;
-// // }
-// // }
+	// 依Pdid來搜尋單筆產品
+	@Override
+	public Category selectByPdid(int Pdid) {
+		return cDao.findById(Pdid).orElse(null);
+	}
 
-// @Override
-// public List<Category> selectAll() throws SQLException {
-// List<Category> categoryList = categoryDao.selectAll();
-// return categoryList;
-// }
-// }
+	// 搜尋所有產品
+	@Override
+	public List<Category> selectAll() {
+		return cDao.findAll();
+	}
+
+	// 根據購買減少庫存
+	@Override
+	public void updateBuy(List<Category> category) {
+
+		for (Category buy : category) {
+			Category inventory = cDao.findById(buy.getPdid()).get();
+			inventory.setPdinventory(inventory.getPdinventory() - buy.getPdinventory());
+			cDao.save(inventory);
+		}
+	}
+
+}

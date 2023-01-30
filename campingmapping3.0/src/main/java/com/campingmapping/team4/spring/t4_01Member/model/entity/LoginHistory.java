@@ -51,12 +51,12 @@ public class LoginHistory {
 	@ManyToOne
 	@JoinColumn(name = "uid")
 	private Member member;
-//	@Override
-//	public String toString() {
-//		return String.format(
-//				"LoginHistory [lhid=%s, uid=%s, account=%s, ip=%s, logindate=%s, show=%s]",
-//				lhid, member.getUid(), account, ip, logindate, show);
-//	}
+	@Override
+	public String toString() {
+		return String.format(
+				"LoginHistory [lhid=%s, uid=%s, account=%s, ip=%s, logindate=%s, show=%s]",
+				lhid, member.getUid(), account, ip, logindate, show);
+	}
 	
 //	@ManyToOne
 //	@JoinColumn(name = "member_uid")

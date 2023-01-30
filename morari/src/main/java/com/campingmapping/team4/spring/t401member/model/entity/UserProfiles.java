@@ -18,8 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -31,13 +29,13 @@ import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
-import com.campingmapping.team4.spring.t436mall.model.entity.Category;
+import com.campingmapping.team4.spring.t433forum.model.entity.PostComment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
 @Data
-@ToString(exclude = {"job","resume","initiatings","categories","loginHistories"})
+@ToString(exclude = {"job","resume","initiatings","loginHistories"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -46,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserProfiles implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer uid;
   private String account;
   private String password;
@@ -95,8 +93,12 @@ public class UserProfiles implements UserDetails {
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Post> post = new LinkedHashSet<Post>();
+  private Collection<Post> post;
+
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  private Collection<PostComment> postcomments;
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
@@ -111,18 +113,10 @@ public class UserProfiles implements UserDetails {
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Initiating> initiatings = new LinkedHashSet<Initiating>();
+  private Collection<Initiating> initiatings;
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<Category> categories = new LinkedHashSet<Category>();
-
-  @JsonIgnore
-  @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  @Builder.Default
-  private Set<LoginHistory> loginHistories = new LinkedHashSet<LoginHistory>();
+  private Collection<LoginHistory> loginHistories;
 }

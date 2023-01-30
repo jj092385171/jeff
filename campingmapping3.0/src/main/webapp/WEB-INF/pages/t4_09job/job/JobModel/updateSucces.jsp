@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -53,8 +52,8 @@
 		<table class="t1">
 			<thead>
 				<tr>
-					<th>刊登編號</th>
 					<th>uID</th>
+					<th>刊登編號</th>
 					<th>職缺</th>
 					<th>薪水</th>
 					<th>人數</th>
@@ -71,8 +70,8 @@
 
 				<tr>
 
-					<td>${JobBean.rackID}</td>
 					<td>${JobBean.uID}</td>
+					<td>${JobBean.rackID}</td>
 					<td>${JobBean.job}</td>
 					<td>${JobBean.salary}</td>
 					<td>${JobBean.quantity}</td>
@@ -80,7 +79,7 @@
 					<td>${JobBean.date}</td>
 					<td>${JobBean.time}</td>
 					<td><img width="80" height="100"
-						src="<c:url value='img.controller/${JobBean.rackID}'/>" /></td>
+						src="<c:url value='/JobServletImg?id=${JobBean.rackID}'/>" /></td>
 					<td>${JobBean.remark}</td>
 					<td>${JobBean.rackUp}</td>
 					<td>${JobBean.rackDown}</td>
@@ -88,8 +87,8 @@
 			</tbody>
 		</table>
 	</div>
-	<form action="<c:url value='jobCRUD.controller' />" method="POST"
-		enctype="multipart/form-data">
+	<form action="<c:url value='/t4_09job/job/JobModel/jobCRUD.jsp' />"
+		method="POST" enctype="multipart/form-data">
 		<div class="b">
 			<button>回首頁</button>
 		</div>

@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t4_36Shop.model.entity;
 
+import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,17 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
 //商品列表
 @Entity
 @Table(name = "category")
-@Component
 public class Category {
 
 	@Id
-	@Column(name = "pdid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "pdid")
 	private Integer pdid;
 	// 產品編號(pk)
 	@Column(name = "userID")
@@ -38,7 +36,7 @@ public class Category {
 	private String pdtype;
 	// 產品類型
 	@Column(name = "pdpicture")
-	private String pdpicture;
+	private Blob pdpicture;
 	// 照片 vinbinary
 	@Column(name = "pdprice")
 	private int pdprice;
@@ -54,14 +52,6 @@ public class Category {
 	// 商品更新日期
 
 	public Category() {
-	}
-
-	public String getPdpicture() {
-		return pdpicture;
-	}
-
-	public void setPdpicture(String pdpicture) {
-		this.pdpicture = pdpicture;
 	}
 
 	public Integer getPdid() {
@@ -112,6 +102,14 @@ public class Category {
 		this.pdtype = pdtype;
 	}
 
+	public Blob getPdpicture() {
+		return pdpicture;
+	}
+
+	public void setPdpicture(Blob pdpicture) {
+		this.pdpicture = pdpicture;
+	}
+
 	public int getPdprice() {
 		return pdprice;
 	}
@@ -144,9 +142,9 @@ public class Category {
 		this.pdlastupdate = pdlastupdate;
 	}
 
-	public Category(Integer pdid, String userID, String pdname, String pdtitle,
-			String pdcontent, String pdtype, String pdpicture, int pdprice,
-			int pdinventory, Date pddate, Date pdlastupdate) {
+	public Category(Integer pdid, String userID, String pdname, String pdtitle, String pdcontent, String pdtype,
+			Blob pdpicture, int pdprice, int pdinventory, Date pddate, Date pdlastupdate) {
+		super();
 		this.pdid = pdid;
 		this.userID = userID;
 		this.pdname = pdname;
@@ -162,11 +160,10 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [pdid=" + pdid + ", userID=" + userID + ", pdname="
-				+ pdname + ", pdtitle=" + pdtitle + ", pdcontent=" + pdcontent
-				+ ", pdtype=" + pdtype + ", pdpicture=" + pdpicture
-				+ ", pdprice=" + pdprice + ", pdinventory=" + pdinventory
-				+ ", pddate=" + pddate + ", pdlastupdate=" + pdlastupdate + "]";
+		return "Category [pdid=" + pdid + ", userID=" + userID + ", pdname=" + pdname + ", pdtitle=" + pdtitle
+				+ ", pdcontent=" + pdcontent + ", pdtype=" + pdtype + ", pdpicture=" + pdpicture + ", pdprice="
+				+ pdprice + ", pdinventory=" + pdinventory + ", pddate=" + pddate + ", pdlastupdate=" + pdlastupdate
+				+ "]";
 	}
 
 }

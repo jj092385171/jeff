@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name = "initiating")
+@Component
 public class Initiating {
 	
 	@Id
@@ -120,7 +123,6 @@ public class Initiating {
 	
 	public Initiating(int initiatingnum, int postmember, Date postdate, Date startdate, Date enddate,
 			int currentnum, int acceptablenum, String camparea, int pair, String startdatestr, String enddatestr) {
-		super();
 		this.initiatingnum = initiatingnum;
 		this.postmember = postmember;
 		this.postdate = postdate;

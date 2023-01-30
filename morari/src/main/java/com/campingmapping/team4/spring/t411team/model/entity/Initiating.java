@@ -29,7 +29,7 @@ public class Initiating {
 	@ManyToOne
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;
-
+	
 	@Column(name = "postdate")
 	private Date postdate;
 

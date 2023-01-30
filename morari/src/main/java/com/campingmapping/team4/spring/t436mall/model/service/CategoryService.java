@@ -1,22 +1,20 @@
 package com.campingmapping.team4.spring.t436mall.model.service;
-// package com.campingmapping.team4.spring.t4_36Mall.model.service;
 
-// import java.sql.SQLException;
-// import java.util.List;
+import java.util.List;
 
-// import com.campingmapping.team4.spring.t4_36Mall.model.entity.Category;
+import com.campingmapping.team4.spring.t436mall.model.entity.Category;
 
-// public interface CategoryService {
+public interface CategoryService {
 
-// void create(Category category) throws SQLException;
+	public Category create(Category category);
 
-// void delete(int id) throws SQLException;
+	public void deleteByPdid(int id);
 
-// void update(Category category) throws SQLException;
+	public Category updateByPdid(Category category);
 
-// Category select(int id) throws SQLException;
+	public Category selectByPdid(int Pdid);
 
-// Category findImgByPdiD(int id);
+	public List<Category> selectAll();
 
-// List<Category> selectAll() throws SQLException;
-// }
+	public void updateBuy(List<Category> category);
+}

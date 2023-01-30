@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                var campID = JSON.parse(sessionStorage.getItem("campID"));
+
+                var form = $('#form');
+                var div = '';
+
+                div = '營區位名: <input type="text" name="siteName" placeholder="營區位名" value=""><br>'
+                    + '上傳圖片: <input type="file" name="sitePicturesPath" id="sitePicturesPath"><br>'
+                    + '總營位: <input type="text" name="totalSites" placeholder="總營位" value=""><br>'
+                    + '營位金額: <input type="text" name="siteMoney" placeholder="營位金額" value=""><br>'
+                    + '營地編號: <input type="text" name="campID" readonly="readonly" value="' + campID + '"><br>'
+                    + '<input id="send" type="button" value="新增">'
+                form.append(div);
+
+                $('body').on('click', '#send', function () {
+                    var formData = new FormData(form.get(0));
+                    $.ajax({
+                        url: '/morari/admin/camp/insertSite.controller',
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (after) {
+                            $("#form").empty();
+                            var form = $('#form');
+                            var div = '';
+
+                            div = '營區位編號: <input type="text" name="siteName" value="' + after.siteID + '"><br>'
+                                + '營區位名: <input type="text" name="siteName" value="' + after.siteName + '"><br>'
+                                + '圖片: <img width="80" height="100" src="/morari/images/' + after.sitePicturesPath + '"><br>'
+                                + '總營位: <input type="text" name="totalSites" value="' + after.totalSites + '"><br>'
+                                + '營位金額: <input type="text" name="siteMoney" value="' + after.siteMoney + '"><br>'
+                                + '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.camp.campID + '"><br>'
+                                + '<input id="send" type="button" value="新增">'
+                            form.append(div);
+                        }
+                    });
+                });
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form id="form" method="post" enctype="multipart/form-data"></form>
+</body>
+
+</html>

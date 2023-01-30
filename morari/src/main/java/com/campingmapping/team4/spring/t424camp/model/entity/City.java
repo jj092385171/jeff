@@ -1,9 +1,13 @@
 package com.campingmapping.team4.spring.t424camp.model.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,17 +19,21 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "city")
-public class City {
+@Component
+public class City implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cityID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "CITYID")
 	private Integer cityID;
 
-	@Column(name = "cityName")
+	@Column(name = "CITYNAME")
 	private String cityName;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city", cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city")
 	private Set<Camp> camps = new HashSet<Camp>();
 
 	public City() {

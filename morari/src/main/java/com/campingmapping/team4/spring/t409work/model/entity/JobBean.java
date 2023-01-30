@@ -30,7 +30,7 @@ import lombok.ToString;
 public class JobBean {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "rackid")
 	private Integer rackid;// 刊登編號
 	
@@ -42,10 +42,10 @@ public class JobBean {
 	@ManyToOne
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
-	
-//	@Column(name="uid")
-//	@Transient
-//	private Integer uid;
+
+	// @Column(name="uid")
+	// @Transient
+	// private Integer uid;
 
 	@Column(name = "job")
 	private String job;// 職缺

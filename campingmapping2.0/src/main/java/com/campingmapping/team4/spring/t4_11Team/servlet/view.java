@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Controller;
 
 import com.campingmapping.team4.spring.t4_11Team.controller.TeamService;
 import com.campingmapping.team4.spring.t4_11Team.model.Initiating;
@@ -20,21 +21,26 @@ import com.campingmapping.team4.spring.t4_11Team.model.Initiating;
 import util.HibernateUtils;
 
 
-@WebServlet("/view")
+//@WebServlet("/view")
+@Controller
 public class view extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		doPost(request, response);
-//	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.getCurrentSession();
+		
+		System.out.println("回到view找資料");
+
 		
 		TeamService teamService = new TeamService(session);
 		List<Initiating> view = teamService.selectAllInitiating();
