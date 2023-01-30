@@ -34,7 +34,7 @@ public class WorkGuestController {
 	private JobService jService;
 
 	// 啟動我的首頁
-	@GetMapping("/workGuest.controller")
+	@GetMapping("/")
 	public String processMainAction1() {
 		return "work/guest/workGuest";
 	}
