@@ -2,15 +2,41 @@
 <html lang="zh-TW">
 
 <head>
-  <script src="/morariguest/js/head.js"></script>
+  <script src="/morari/guest/js/head.js"></script>
   <!-- sharepage 公用頁面 -->
-  <script src="/morariguest/js/share.js"></script>
+  <script src="/morari/guest/js/share.js"></script>
 
 </head>
 
 <body style="display: none">
   <!-- Header Section Start -->
-  <div class="header"></div>
+  <h3>填寫履歷</h3>
+
+	<form id="insert" enctype="multipart/form-data">
+	
+		刊登編號 <input type="hidden" name="rackid"><br>
+		會員編號 <input type="text" name="uid" value='2' required><br>
+		應徵職缺 <input type="text" name="work" required><br>
+		姓名 <input type="text" name="name" required><br>
+		年次 <input type="text" name="age" required><br>
+		性別 <input type="text" name="gender" required><br>
+		email <input type="text" name="mail" required><br>
+		電話 <input type="text" name="phone" required><br>
+		學歷<textarea name="educational" cols="20" rows="5"></textarea><br>
+		經歷<textarea name="experience" cols="20" rows="5"></textarea><br>
+
+		<input id="send" type="button" value="送出"><br>
+		<input type="reset" value="取消"><br>
+	</form>
+	
+	<form action="/morari/guest/work/workGuest.controller" method="GET"
+		enctype="multipart/form-data">
+		<input type="submit" value="回首頁">
+	</form>
+	<hr>
+	
+	<h3 id="su"></h3>
+	<table id="showInsert"></table>
 
   <!-- Header Section End -->
 
@@ -50,11 +76,13 @@
   <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
 
   <!-- Booking Javascript File -->
-  <script src="/morariguest/js/booking.js" defer></script>
-  <script src="/morariguest/js/jqBootstrapValidation.min.js" defer></script>
+  <script src="/morari/guest/js/booking.js" defer></script>
+  <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
 
   <!-- Main Javascript File -->
   <script src="/morari/guest/js/main.js" defer></script>
+  <script src="/morari/work/gjs/resumeInsert.js" defer></script>
+   <script type="text/javascript"></script>
 
 
 </body>

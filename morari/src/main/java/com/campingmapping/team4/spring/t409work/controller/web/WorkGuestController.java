@@ -42,7 +42,7 @@ public class WorkGuestController {
 	// 啟動insert
 	@PostMapping("/startResumeInsert.controller/{u}")
 	public String processMainAction2() {
-		return "work/guest/resumeInsert";
+		return "work/guest/resumeInsert2";
 	}
 
 	// 啟動select

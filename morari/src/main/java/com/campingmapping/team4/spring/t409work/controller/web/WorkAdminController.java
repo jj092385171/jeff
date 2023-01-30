@@ -34,13 +34,13 @@ public class WorkAdminController {
 	// 啟動我的首頁
 	@GetMapping("/crud.controller")
 	public String processMainAction1() {
-		return "work/admin/crud";
+		return "work/admin/jobCrud";
 	}
 
 	// 啟動insert
 	@PostMapping("/insert.controller")
 	public String processMainAction2() {
-		return "work/admin/jobInsert2";
+		return "work/admin/jobInsert";
 	}
 
 	// 啟動select
