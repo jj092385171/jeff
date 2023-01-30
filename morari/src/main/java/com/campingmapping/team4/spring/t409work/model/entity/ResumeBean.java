@@ -1,6 +1,8 @@
 package com.campingmapping.team4.spring.t409work.model.entity;
 
 
+import java.util.Date;
+
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 
 import jakarta.persistence.Column;
@@ -49,5 +51,7 @@ public class ResumeBean {
 	private String educational;// 學歷
 	@Column(name = "experience")
 	private String experience;// 經驗
+	@Column(name = "ptime")
+	private Date ptime;// 時間
 
 }

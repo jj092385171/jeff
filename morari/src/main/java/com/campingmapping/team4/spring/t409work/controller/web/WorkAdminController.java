@@ -22,23 +22,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 
+//job職缺的後台
+
 @Controller
 @RequestMapping("/admin/work")
-public class WorkPageController {
+public class WorkAdminController {
 
 	@Autowired
 	private JobService jService;
-
-//	@GetMapping({ "", "/" })
-//	public String workIndex() {
-//		return "work/guest/index";
-//	}
-	
-	// 啟動CRUD
-//	@GetMapping("/jobCRUD.controller")
-//	public String processMainAction1() {
-//		return "work/admin/jobCRUD";
-//	}
 	
 	// 啟動我的首頁
 	@GetMapping("/crud.controller")

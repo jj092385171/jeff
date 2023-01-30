@@ -23,6 +23,7 @@ import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 
+// job的前台+resume的前台
 @Controller
 @RequestMapping("/guest/work")
 public class WorkGuestController {
@@ -65,19 +66,6 @@ public class WorkGuestController {
 	public List<JobBean> processShowJobAllAction() {
 		List<JobBean> result = jService.findAll();
 		return result;
-	}
-
-	// 模糊搜尋
-	@PostMapping("/selectLike.controller/{job}")
-	@ResponseBody
-	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
-		List<JobBean> result = jService.findByJobisLike(job);
-		System.out.println(result);
-		if (result.size() == 0) {
-			return null;
-		} else {
-			return result;
-		}
 	}
 
 	// 秀圖片

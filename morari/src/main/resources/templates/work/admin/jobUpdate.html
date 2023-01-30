@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<h3>修改</h3>
+	<h3>修改職缺</h3>
 	<form id="update" enctype="multipart/form-data">
 	
 		會員編號 <input id="1" type="text" name="uid" value='1' required readonly><br>
@@ -71,8 +71,6 @@
 					console.log(indexed_array);
 					return indexed_array;
 				}
-// 				var uid = $("input[name='uid']").val();
-// 				console.log(uid); 
 				$.ajax({
 					type: 'Put',
 					url: '/morari/admin/work/jobUpdate.controller/'+id,
@@ -94,9 +92,18 @@
 						
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
-								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
-									"<td>" + response.quantity + "</td>" + "<td>" + response.place + "</td>" + "<td>" + response.date + "</td>" + "<td>" + response.time + "</td>" + "<td>" + response.remark + "</td>" + "<td>" + response.img + "</td>" +
-									"</tr>";
+								var tr = "<tr align='center'>" + 
+								"<td>" + response.userprofiles.uid +"</td>"+
+								"<td>" + response.rackid + "</td>" + 
+								"<td>" + response.rackup + "</td>" +
+								"<td>" + response.job + "</td>" +
+								"<td>" + response.salary + "</td>" +
+								"<td>" + response.quantity + "</td>" + 
+								"<td>" + response.place + "</td>" + 
+								"<td>" + response.date + "</td>" + 
+								"<td>" + response.time + "</td>" + 
+								"<td>" + response.remark + "</td>" + 
+								"<td>" + response.img + "</td>" +"</tr>";
 								table.append(tr);
 							//});
 						}

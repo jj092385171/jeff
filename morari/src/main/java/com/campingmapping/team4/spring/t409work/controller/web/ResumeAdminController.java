@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 
+// resume履歷的後台
 @Controller
 @RequestMapping("/admin/resume")
-public class ResumePageController {
+public class ResumeAdminController {
 
 	@Autowired
 	private ResumeService rService;
@@ -28,32 +30,25 @@ public class ResumePageController {
 		return "work/admin/resumeCrud";
 	}
 	// 啟動insert
-	@PostMapping("/insert.controller")
-	public String processMainAction2() {
-		return "work/admin/insert";
-	}
+//	@PostMapping("/insert.controller")
+//	public String processMainAction2() {
+//		return "work/admin/insert";
+//	}
 
 	// 啟動select
 	@PostMapping("/select.controller")
 	public String processMainAction3() {
-		return "work/admin/select";
+		return "work/admin/resumeSelect";
 	}
 
 	// 啟動update
-	@PostMapping("/update.controller/{u}")
+	@PostMapping("/update.controller/{number}")
 	public String processMainAction4() {
-		return "work/admin/update";
+		return "work/admin/resumeUpdate";
 	}
-
-	// 新增
-//	@PostMapping("/resumeInsert.controller")
-//	@ResponseBody
-//	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean) {
-//		return rService.insert(rBean, 2);
-//	}
 	
 	// 刪除
-	@DeleteMapping("/jobDelete.controller/{number}")
+	@DeleteMapping("/resumeDelete.controller/{number}")
 	@ResponseBody
 	public String processDeleteAction(@PathVariable Integer number) {
 		rService.deleteById(number);
@@ -61,10 +56,10 @@ public class ResumePageController {
 	}
 	
 	// 修改
-	@PostMapping("/resumeUpdate.controller")
+	@PutMapping("/resumeUpdate.controller/{number}")
 	@ResponseBody
-	public ResumeBean processUpdateAction(@RequestBody ResumeBean rBean) {
-		return rService.updateJob(rBean);
+	public ResumeBean processUpdateAction(@RequestBody ResumeBean rBean,@PathVariable Integer number) {
+		return rService.updateJob(rBean,number);
 	}
 	
 	// 找全部 
@@ -72,6 +67,7 @@ public class ResumePageController {
 	@ResponseBody
 	public List<ResumeBean> processShowResumeAllAction() {
 		List<ResumeBean> result = rService.findAll();
+		System.out.println(result);
 		return result;
 	}
 	
@@ -87,7 +83,7 @@ public class ResumePageController {
 	@PostMapping("/selectUid.controller/{uid}")
 	@ResponseBody
 	public List<ResumeBean> processSelectUidAction(@PathVariable Integer uid) {
-		List<ResumeBean> result = rService.findRid(uid);
+		List<ResumeBean> result = rService.findUid(uid);
 		if (result.size() == 0) {
 			return null;
 		}

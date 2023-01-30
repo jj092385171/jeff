@@ -2,6 +2,7 @@ package com.campingmapping.team4.spring.t409work.model.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,8 @@ public class ResumeService {
 	public ResumeBean insert(ResumeBean rBean, Integer u, Integer rackid) {
 		rBean.setUserprofiles(uDao.findById(u).get());
 		rBean.setJob(jDao.findById(rackid).get());
+		Date currentDate = new Date();
+		rBean.setPtime(currentDate);
 		return reDao.save(rBean);
 	}
 	
@@ -48,8 +51,28 @@ public class ResumeService {
 	}
 	
 	// 改履歷內容
-	public ResumeBean updateJob(ResumeBean rBean) {
-		return reDao.save(rBean);
+	public ResumeBean updateJob(ResumeBean rBean,Integer number) {
+		Optional<ResumeBean> result = reDao.findById(number);
+		if (result.isPresent()) {
+			ResumeBean resumeBean = result.get();
+	        // 將前端傳進來的rBean的值複製到resumeBean
+//			resumeBean.setJob(result.get().getJob().getRackid());
+			resumeBean.setWork(rBean.getWork());
+			resumeBean.setName(rBean.getName());
+			resumeBean.setAge(rBean.getAge());
+			resumeBean.setGender(rBean.getGender());
+			resumeBean.setMail(rBean.getMail());
+			resumeBean.setPhone(rBean.getPhone());
+			resumeBean.setEducational(rBean.getEducational());
+			resumeBean.setExperience(rBean.getExperience());
+			
+			resumeBean.setPtime(result.get().getPtime());
+//	        jBean.setUserprofiles(result.get().getUserprofiles().getUid());	        
+	        // 使用save更新資料庫中的資料
+			return reDao.save(resumeBean);
+	    }
+	    //找不到對應的資料
+	    return null;
 	}
 
 	// 透過number抓一筆資料(有需要嗎?)
@@ -72,7 +95,7 @@ public class ResumeService {
 	}
 	
 	// 透過rackid找應徵的履歷
-	public List<ResumeBean> findRid(Integer rackid ) {
+	public List<ResumeBean> findRid(Integer rackid) {
 		
 		JobBean findById = jDao.findById(rackid).get();
 		Collection<ResumeBean> resume = findById.getResume();

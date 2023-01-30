@@ -30,18 +30,21 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-	<div>
-		<h2>履歷</h2>
+		
+			會員編號:<input id="seu" type="text" name="uid" required> 
+			<button id="selectUid"  onclick='selectUid(document.getElementById("seu").value)'>查詢</button>	
+			
+			刊登編號:<input id="ser" type="text" name="rackid" required> 
+			<button id="selectUid"  onclick='selectRackid(document.getElementById("ser").value)'>查詢</button>	
+					
+					
+					<form action="/morari/admin/resume/resumeCrud.controller" method="GET">
+						<input type="submit" value="回首頁">
+					</form>
+					<hr>
 
-		<form action="select.controller" method="POST">
-			<input type="submit" value="查詢">
-		</form>
-	
-	</div>
-	<hr>
-
-	<table id="showInsert"></table>
-<!--                     <div class="resumeCrud"></div> -->
+					<h3 id="su"></h3>
+					<table id="showInsert"></table>
 
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
@@ -83,7 +86,7 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-    <script src="/morari/work/js/resumeCrud.js" defer></script>
+    <script src="/morari/work/js/resumeSelect.js" defer></script>
     <script type="text/javascript">
     
     </script> 

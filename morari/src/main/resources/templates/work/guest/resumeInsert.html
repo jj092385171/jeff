@@ -66,14 +66,22 @@
 							var h3 = $('#su');
 							h3.prepend('成功送出');
 							var table = $('#showInsert');
-							table.append("<tr><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th></tr>");
+							table.append("<tr><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th></tr>");
 
 						
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
-								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"</td>"+"<td>" + response.work + "</td>" + "<td>" + response.name + "</td>" + "<td>" + response.age + "</td>" +
-									"<td>" + response.gender + "</td>" + "<td>" + response.mail + "</td>" + "<td>" + response.phone + "</td>" + "<td>" + response.educational + "</td>" + 
-									"<td>" + response.experience + "</td>" +"</tr>";
+								var tr = "<tr align='center'>" + 
+								"<td>" + response.userprofiles.uid +"</td>"+
+								"<td>" + response.work + "</td>" + 
+								"<td>" + response.name + "</td>" + 
+								"<td>" + response.age + "</td>" +
+								"<td>" + response.gender + "</td>" +
+								"<td>" + response.mail + "</td>" + 
+								"<td>" + response.phone + "</td>" + 
+								"<td>" + response.educational + "</td>" + 
+								"<td>" + response.experience + "</td>" +
+								"<td>" + response.ptime + "</td>" +"</tr>";
 								table.append(tr);
 							//});
 						}
