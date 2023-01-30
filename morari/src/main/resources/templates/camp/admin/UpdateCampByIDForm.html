@@ -36,16 +36,15 @@
                             var div = '';
 
                             div = '營地編號: <input type="text" name="campID" readonly="readonly" value="' + camp.campID + '"><br>'
-                                + '營地名: <input type="text" name="campName" value="' + camp.campName + '"><br>'
-                                + '縣市編號: <input type="text" name="city.cityID" readonly="readonly" value="' + camp.city.cityID + '"><br>'
-                                + '縣市名: <input type="text" name="city.cityName" readonly="readonly"value="' + camp.city.cityName + '"><br>'
-                                + '縣市選項:' + radio + "<br>"
-                                + '地址: <input type="text" name="location" value="' + camp.location + '"><br>'
+                                + '營地名: <input type="text" name="campName" value="' + camp.campName + '"><span id="errorcampName" style="color: red;"></span><br>'
+                                + '縣市名: <input type="text" name="cityName" readonly="readonly"value="' + camp.city.cityName + '"><br>'
+                                + '縣市選項:' + radio + '<span id="errorcityID" style="color: red;"></span><br>'
+                                + '地址: <input type="text" name="location" value="' + camp.location + '"><span id="errorlocation" style="color: red;"></span><br>'
                                 + '簡介: <input type="text" name="description" value="' + camp.description + '"><br>'
                                 + '圖片: <img width="80" height="100" src="/morari/images/' + camp.campPicturesPath + '"><br>'
-                                + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><br>'
-                                + '標籤選項:' + tags + "<br>"
-                                + '<input id="send" type="button" value="更新">'
+                                + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><span id="errorcampPicturesPath" style="color: red;"></span><br>'
+                                + '標籤選項:' + tags + '<span id="errortagIDs" style="color: red;"></span><br>'
+                                + '<input id="send" type="button" value="更新"><span id="errornone" style="color: red;"></span>'
                             form.append(div);
                         }
                     });
@@ -60,26 +59,46 @@
                             cache: false,
                             processData: false,
                             success: function (after) {
-                                $("#form").empty();
-                                var form = $('#form');
-                                var div = '';
 
-                                div = '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.campID + '"><br>'
-                                    + '營地: <input type="text" name="campName" value="' + after.campName + '"><br>'
-                                    + '縣市編號: <input type="text" name="city.cityID" readonly="readonly" value="' + after.city.cityID + '"><br>'
-                                    + '縣市名: <input type="text" name="city.cityName" readonly="readonly"value="' + after.city.cityName + '"><br>'
-                                    + '縣市選項:' + radio + "<br>"
-                                    + '地址: <input type="text" name="location" value="' + after.location + '"><br>'
-                                    + '簡介: <input type="text" name="description" value="' + after.description + '"><br>'
-                                    + '圖片: <img width="80" height="100" src="/morari/images/' + after.campPicturesPath + '"><br>'
-                                    + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><br>'
-                                    + '標籤選項:' + tags + "<br>"
-                                    + '<input id="send" type="button" value="更新">'
-                                form.append(div);
+                                $("#errorcampName").empty();
+                                $("#errorcampPicturesPath").empty();
+                                $("#errorcityID").empty();
+                                $("#errorlocation").empty();
+                                $("#errortagIDs").empty();
+                                $("#errornone").empty();
+
+                                if (after.error == 'true') {
+                                    $("#errorcampName").append(after.campName);
+                                    $("#errorcampPicturesPath").append(after.campPicturesPath);
+                                    $("#errorcityID").append(after.cityID);
+                                    $("#errorlocation").append(after.location);
+                                    $("#errortagIDs").append(after.tagIDs);
+                                    return;
+                                }
+                                else if (after.error == 'none') {
+                                    $("#errornone").append(after.noData);
+                                    return;
+                                }
+                                else {
+                                    $("#form").empty();
+                                    var form = $('#form');
+                                    var div = '';
+
+                                    div = '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.campID + '"><br>'
+                                        + '營地: <input type="text" name="campName" value="' + after.campName + '"><br>'
+                                        + '縣市名: <input type="text" name="cityName" readonly="readonly"value="' + after.city.cityName + '"><br>'
+                                        + '縣市選項:' + radio + '<br>'
+                                        + '地址: <input type="text" name="location" value="' + after.location + '"><br>'
+                                        + '簡介: <input type="text" name="description" value="' + after.description + '"><br>'
+                                        + '圖片: <img width="80" height="100" src="/morari/images/' + after.campPicturesPath + '"><br>'
+                                        + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><br>'
+                                        + '標籤選項:' + tags + '<br>'
+                                        + '<input id="send" type="button" value="更新">'
+                                    form.append(div);
+                                }
                             }
                         });
                     });
-
                 });
             });
         });

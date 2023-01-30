@@ -27,7 +27,7 @@ public class UpdateSiteByIDController {
 
 	@PostMapping("/updateSiteByID.controller")
 	@ResponseBody
-	public Site updateSiteByID(@RequestParam("siteID") Integer siteID,
+	public Object updateSiteByID(@RequestParam("siteID") Integer siteID,
 			@RequestParam("siteName") @Nullable String siteName,
 			@RequestParam("sitePicturesPath") @Nullable MultipartFile mf,
 			@RequestParam("totalSites") @Nullable Integer totalSites,
@@ -44,13 +44,16 @@ public class UpdateSiteByIDController {
 		}
 
 		// 圖
-		if (mf.isEmpty()) {
+		String fileName = null;
+		if (mf == null || mf.isEmpty()) {
 			errors.put("sitePicturesPath", "必須選擇圖片");
 		}
-		String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
-		String fileName = mf.getOriginalFilename();
-		File saveFilePath = new File(saveFileDir, fileName);
-		mf.transferTo(saveFilePath);
+		else {
+			String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
+			fileName = mf.getOriginalFilename();
+			File saveFilePath = new File(saveFileDir, fileName);
+			mf.transferTo(saveFilePath);
+		}
 
 		// 總營位數
 		if (totalSites == null ) {
@@ -62,18 +65,21 @@ public class UpdateSiteByIDController {
 			errors.put("siteMoney", "必須輸入營位金額");
 		}
 
-//		// 錯誤導回
-//		if (errors != null && !errors.isEmpty()) {
-//			m.addAttribute("campID", campID);
-//			m.addAttribute("errors", errors);
-//
-//			return "t4_24camp/admin/UpdateSiteByIDForm";
-//		}
+		// 錯誤導回
+		if (errors != null && !errors.isEmpty()) {
+			errors.put("error", "true");
+			return errors;
+		}
 
+		
 		Site site = siteService.update(siteID, siteName, fileName, totalSites, siteMoney, campID);
 
-//		m.addAttribute("site", site);
-//		m.addAttribute("what", "更新");
+		// 空值
+		if (site == null) {
+			errors.put("error", "none");
+			errors.put("noData", "查無資料");
+			return errors;
+		}
 
 		return site;
 	}

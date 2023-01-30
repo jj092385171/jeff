@@ -36,6 +36,7 @@ public class InsertCampController {
 		// 存錯誤的map
 		Map<String, String> errors = new HashMap<>();
 
+		
 		// 營地名
 		if (campName == null || campName.trim().length() == 0) {
 			errors.put("campName", "必須輸入營地名稱");
@@ -56,7 +57,6 @@ public class InsertCampController {
 			errors.put("campPicturesPath", "必須選擇圖片");
 		}
 		
-
 		// 縣市
 		if (cityID == null || cityID.length() == 0) {
 			errors.put("cityID", "必須輸入縣市");
@@ -79,6 +79,7 @@ public class InsertCampController {
 			return errors;
 		}
 
+		
 		Camp camp = campService.insert(campName, Integer.valueOf(cityID), location, fileName, description, tagIDs);
 
 		// 空值

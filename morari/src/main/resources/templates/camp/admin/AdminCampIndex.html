@@ -139,49 +139,50 @@
 							contentType: 'application/json',
 							success: function (QueryByCityIDsResult) {
 
+								$("#errorcityIDs").empty();
+
 								if (QueryByCityIDsResult.error == 'true') {
 									$("#errorcityIDs").append(QueryByCityIDsResult.cityIDs);
 									return;
 								}
-								if (QueryByCityIDsResult.error == 'none') {
+								else if (QueryByCityIDsResult.error == 'none') {
 									$("#errorcityIDs").append(QueryByCityIDsResult.noData);
 									return;
 								}
+								else {
+									$("#camptable").empty();
+									var querytable = $('#camptable');
+									var querytr = '';
+									querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+									$.each(QueryByCityIDsResult, function (i, n) {
+										var tagNames = '';
+										n.tags.forEach(element => {
+											tagNames += element.tagName + '/'
+										});
 
-								$("#errorcityIDs").empty();
-								$("#camptable").empty();
-								var querytable = $('#camptable');
-								var querytr = '';
-								querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
-								$.each(QueryByCityIDsResult, function (i, n) {
-									var tagNames = '';
-									n.tags.forEach(element => {
-										tagNames += element.tagName + '/'
+										querytr = "<tbody>"
+											+ "<tr>"
+											+ "<td>" + n.campID + "</td>"
+											+ "<td class='td2'><a href='#'>" + n.campName + "</a></td>"
+											+ "<td>" + n.city.cityName + "</td>"
+											+ "<td>" + '<img width="80" height="100" src="/morari/images/' + n.campPicturesPath + '">' + "</td>"
+											+ "<td>" + n.description + "</td>"
+											+ "<td>" + n.location + "</td>"
+											+ "<td>" + tagNames + "</td>"
+											+ "<td>"
+											+ '<button id="update" type="button" name="campID" value="' + n.campID + '">更新</button>'
+											+ "</td>"
+											+ "<td>"
+											+ '<button id="delete" type="button" name="campID" value="' + n.campID + '">刪除</button>'
+											+ "</td>"
+											+ "<td>"
+											+ '<button id="insertsite" type="button" name="campID" value="' + n.campID + '">新增營區位</button>'
+											+ "</td>"
+											+ "</tr>"
+											+ "</tbody>"
+										querytable.append(querytr);
 									});
-
-									querytr = "<tbody>"
-										+ "<tr>"
-										+ "<td>" + n.campID + "</td>"
-										+ "<td class='td2'><a href='#'>" + n.campName + "</a></td>"
-										+ "<td>" + n.city.cityName + "</td>"
-										+ "<td>" + '<img width="80" height="100" src="/morari/images/' + n.campPicturesPath + '">' + "</td>"
-										+ "<td>" + n.description + "</td>"
-										+ "<td>" + n.location + "</td>"
-										+ "<td>" + tagNames + "</td>"
-										+ "<td>"
-										+ '<button id="update" type="button" name="campID" value="' + n.campID + '">更新</button>'
-										+ "</td>"
-										+ "<td>"
-										+ '<button id="delete" type="button" name="campID" value="' + n.campID + '">刪除</button>'
-										+ "</td>"
-										+ "<td>"
-										+ '<button id="insertsite" type="button" name="campID" value="' + n.campID + '">新增營區位</button>'
-										+ "</td>"
-										+ "</tr>"
-										+ "</tbody>"
-									querytable.append(querytr);
-								});
-
+								}
 							}
 						});
 					});
@@ -198,47 +199,49 @@
 							dataType: 'json',
 							contentType: 'application/json',
 							success: function (QueryByIDResult) {
+
+								$("#errorcampID").empty();
+
 								if (QueryByIDResult.error == 'true') {
 									$("#errorcampID").append(QueryByIDResult.campID);
 									return;
 								}
-								if (QueryByIDResult.error == 'none') {
+								else if (QueryByIDResult.error == 'none') {
 									$("#errorcampID").append(QueryByIDResult.noData);
 									return;
 								}
+								else {
+									$("#camptable").empty();
+									var querytable = $('#camptable');
+									var querytr = '';
+									querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
+									var tagNames = '';
+									QueryByIDResult.tags.forEach(element => {
+										tagNames += element.tagName + '/'
+									});
 
-								$("#errorcampID").empty();
-								$("#camptable").empty();
-								var querytable = $('#camptable');
-								var querytr = '';
-								querytable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>")
-								var tagNames = '';
-								QueryByIDResult.tags.forEach(element => {
-									tagNames += element.tagName + '/'
-								});
-
-								querytr = "<tbody>"
-									+ "<tr>"
-									+ "<td>" + QueryByIDResult.campID + "</td>"
-									+ "<td class='td2'><a href='#'>" + QueryByIDResult.campName + "</a></td>"
-									+ "<td>" + QueryByIDResult.city.cityName + "</td>"
-									+ "<td>" + '<img width="80" height="100" src="/morari/images/' + QueryByIDResult.campPicturesPath + '">' + "</td>"
-									+ "<td>" + QueryByIDResult.description + "</td>"
-									+ "<td>" + QueryByIDResult.location + "</td>"
-									+ "<td>" + tagNames + "</td>"
-									+ "<td>"
-									+ '<button id="update" type="button" name="campID" value="' + QueryByIDResult.campID + '">更新</button>'
-									+ "</td>"
-									+ "<td>"
-									+ '<button id="delete" type="button" name="campID" value="' + QueryByIDResult.campID + '">刪除</button>'
-									+ "</td>"
-									+ "<td>"
-									+ '<button id="insertsite" type="button" name="campID" value="' + QueryByIDResult.campID + '">新增營區位</button>'
-									+ "</td>"
-									+ "</tr>"
-									+ "</tbody>"
-								querytable.append(querytr);
-
+									querytr = "<tbody>"
+										+ "<tr>"
+										+ "<td>" + QueryByIDResult.campID + "</td>"
+										+ "<td class='td2'><a href='#'>" + QueryByIDResult.campName + "</a></td>"
+										+ "<td>" + QueryByIDResult.city.cityName + "</td>"
+										+ "<td>" + '<img width="80" height="100" src="/morari/images/' + QueryByIDResult.campPicturesPath + '">' + "</td>"
+										+ "<td>" + QueryByIDResult.description + "</td>"
+										+ "<td>" + QueryByIDResult.location + "</td>"
+										+ "<td>" + tagNames + "</td>"
+										+ "<td>"
+										+ '<button id="update" type="button" name="campID" value="' + QueryByIDResult.campID + '">更新</button>'
+										+ "</td>"
+										+ "<td>"
+										+ '<button id="delete" type="button" name="campID" value="' + QueryByIDResult.campID + '">刪除</button>'
+										+ "</td>"
+										+ "<td>"
+										+ '<button id="insertsite" type="button" name="campID" value="' + QueryByIDResult.campID + '">新增營區位</button>'
+										+ "</td>"
+										+ "</tr>"
+										+ "</tbody>"
+									querytable.append(querytr);
+								}
 							}
 						});
 					});

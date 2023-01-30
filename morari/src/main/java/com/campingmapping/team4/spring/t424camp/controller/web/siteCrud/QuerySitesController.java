@@ -26,6 +26,7 @@ public class QuerySitesController {
 		return "camp/admin/SitesOfCamp" ;
 	}
 	
+	
 	@GetMapping("/sitesOfCamp.controller/{campID}")
 	@ResponseBody
 	public Set<Site> queryByCamp(@PathVariable("campID") int campID, Model m) {

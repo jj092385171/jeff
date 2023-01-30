@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +52,7 @@ public class InsertOrder {
 		// 存錯誤的map
 		Map<String, String> errors = new HashMap<>();
 		
+		
 		//營區
 		if(siteIds == null || siteIds.length == 0) {
 			errors.put("siteIds", "請選擇營區");
@@ -84,10 +84,19 @@ public class InsertOrder {
 		//使用者
 		Integer uid = jwtService.getUId(httpServletRequest);
 		
+		// 錯誤導回
+		if (errors != null && !errors.isEmpty()) {
+			errors.put("error", "true");
+			return errors;
+		}		
+		
+		
 		Order order = orderService.insert(uid, siteIds, nums, goingtime, leavingtime, campID);
 		if(order == null) {
-			errors.put("order", "訂單新增失敗");
+			errors.put("error", "none");
+			errors.put("noData", "訂單新增失敗");
 		}
+		
 		
 		HttpSession session = httpServletRequest.getSession();
 		session.setAttribute("successOrder", order);
@@ -117,7 +126,6 @@ public class InsertOrder {
 		String form = all.aioCheckOut(obj, null);
 		return form;
 		
-//		return order;
 	}
 
 }
