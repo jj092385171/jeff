@@ -47,11 +47,10 @@ public class UserProfiles implements UserDetails {
   @Id
   private UUID uid;
 
-
   @Column(nullable = false, unique = true, length = 50)
   private String email;
 
-  private String accountId;
+  // private String accountId;
 
   @JsonIgnore
   private String password;
@@ -77,9 +76,8 @@ public class UserProfiles implements UserDetails {
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return roles.stream()
         .map(role -> new SimpleGrantedAuthority(role.getName()))
-        .collect(Collectors.toList());       
+        .collect(Collectors.toList());
   }
-  
 
   @Override
   public String getPassword() {

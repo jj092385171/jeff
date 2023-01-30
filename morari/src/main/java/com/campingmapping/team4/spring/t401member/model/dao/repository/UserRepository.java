@@ -10,7 +10,7 @@ import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 public interface UserRepository extends JpaRepository<UserProfiles, UUID> {
   Optional<UserProfiles> findByEmail(String email);
 
-  Optional<UserProfiles> findByAccountId(String accountId);
+  // Optional<UserProfiles> findByAccountId(String accountId);
 
-  boolean existsByAccountId(String accountId);
+  // boolean existsByAccountId(String accountId);
 }

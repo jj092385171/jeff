@@ -5,10 +5,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.OAuth2Request;
 import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles.UserProfilesBuilder;
-import com.campingmapping.team4.spring.utils.oauth2.OAuth2Request;
 import com.campingmapping.team4.spring.utils.oauth2.authaccount.entity.AuthAccount;
 import com.campingmapping.team4.spring.utils.oauth2.authaccount.repository.AuthAccountRepository;
 
@@ -17,6 +17,7 @@ import jakarta.transaction.Transactional;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,41 +28,29 @@ public class AuthAccountService {
 
   // private final MemberService memberService;
 
-  public UserProfiles findByAccountId(String accountId) {
+  public UserProfiles findByEmail(String email) {
+
     return userRepository
-        .findByAccountId(accountId)
+        .findByEmail(email)
         .orElseThrow(EntityNotFoundException::new);
   }
 
-  private boolean isExistByAccountId(String accountId) {
-    return userRepository.existsByAccountId(accountId);
+  private boolean isExistByEmail(String email) {
+    return userRepository.findByEmail(email).isPresent();
   }
 
   @Transactional
   public UserProfiles createIfFirst(OAuth2Request oAuth2Request) {
-    String accountId = oAuth2Request.accountId();
-    if (isExistByAccountId(accountId)) {
-      return findByAccountId(accountId);
+    String email = oAuth2Request.email();
+    if (isExistByEmail(email)) {
+      return findByEmail(email);
     }
-
     UserProfiles userProfiles = setUpUserProfiles(oAuth2Request);
-    memberService.save(member);
-    AuthAccount authAccount = setUpAuthAccount(oAuth2Request, member);
-    
-
-    return authAccount;
+    return userProfiles;
   }
 
   public Collection<? extends GrantedAuthority> getAuthority(UUID id) {
     return getEntity(id).getRole();
-  }
-
-  private AuthAccount setUpAuthAccount(OAuth2Request oAuth2Request, Member member) {
-    return AuthAccount.builder()
-        .accountId(oAuth2Request.getAccountId())
-        .authProvider(oAuth2Request.getProvider())
-        .member(member)
-        .build();
   }
 
   public Member getLoginUser(Principal principal) {
@@ -69,23 +58,24 @@ public class AuthAccountService {
   }
 
   private UserProfiles setUpUserProfiles(OAuth2Request oAuth2Request) {
-    UserProfilesBuilder userBuilder = UserProfiles.builder();
-    oAuth2Request.email().ifPresent(userBuilder::email);
-    UserProfiles user = userBuilder.build();
-    oAuth2Request
-    .name()
-    .ifPresent(
-        n -> {          
-          UserDetail.builder().nickname(n).build();
-                  });
-
+    UserProfiles user = UserProfiles.builder().email(oAuth2Request.email()).build();
+    UserDetail userDetail = new UserDetail();
+    oAuth2Request.name().ifPresent(
+        name -> {
+          userDetail.setNickname(name);
+        });
+    oAuth2Request.shot().ifPresent(
+        shot -> {
+          userDetail.setShot(shot);
+        });
+    ;
 
     userRepository.save(user);
 
     return user;
   }
 
-  private AuthAccount getEntity(UUID id) {
-    return authAccountRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+  private UserProfiles getEntity(UUID id) {
+    return userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
   }
 }

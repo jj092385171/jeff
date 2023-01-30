@@ -9,9 +9,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.entity.AuthProvider;
+import com.campingmapping.team4.spring.t401member.model.entity.OAuth2Request;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.utils.oauth2.attributemapper.AttributeMapper;
-import com.campingmapping.team4.spring.utils.oauth2.authaccount.entity.AuthAccount;
 import com.campingmapping.team4.spring.utils.oauth2.authaccount.mapper.AuthAccountMapper;
 import com.campingmapping.team4.spring.utils.oauth2.authaccount.service.AuthAccountService;
 
@@ -32,9 +32,9 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
     OAuth2User oAuth2User = super.loadUser(userRequest);
     OAuth2Request oAuth2Request = attributeMapper.mapToUser(authProvider, oAuth2User.getAttributes());
     authAccountService.createIfFirst(oAuth2Request);
-    UserProfiles user = authAccountService.findByAccountId(oAuth2Request.accountId());
+    UserProfiles user = authAccountService.findByEmail(oAuth2Request.email());
     Map<String, Object> userAttributes = authAccountMapper.mapToAttributeMap(user);
 
-    return new DefaultOAuth2User(user.getRoles(), userAttributes, "id");
+    return new DefaultOAuth2User(user.getAuthorities(), userAttributes, "id");
   }
 }
