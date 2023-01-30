@@ -40,7 +40,7 @@ public class WorkAdminController {
 	// 啟動insert
 	@PostMapping("/insert.controller")
 	public String processMainAction2() {
-		return "work/admin/jobInsert";
+		return "work/admin/jobInsert2";
 	}
 
 	// 啟動select
@@ -100,12 +100,11 @@ public class WorkAdminController {
 	@ResponseBody
 	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
 		List<JobBean> result = jService.findByJobisLike(job);
-		System.out.println(result);
-		if (result.size() == 0) {
-			return null;
-		} else {
+		System.out.println("11111111111");
+		System.out.println("result");
+		
 			return result;
-		}
+		
 	}
 
 	// 透過uid搜尋

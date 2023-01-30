@@ -52,11 +52,12 @@
 				type:'POST',
 				url: '/morari/admin/resume/selectRid.controller/'+rackid,
 				dataType:'json',
-				complete: function (data) {
+				success: function (data) {
 					$('#showInsert').empty("");
 					$('#su').empty("");
-					console.log(data);
-					if (data.length === 0) {
+					console.log("data:"+data);
+					
+					if (data.length == 0||data==null) {
 						$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 					} else {
 						var h3 = $('#su'); 

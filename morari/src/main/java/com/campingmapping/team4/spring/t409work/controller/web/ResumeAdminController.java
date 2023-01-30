@@ -84,9 +84,7 @@ public class ResumeAdminController {
 	@ResponseBody
 	public List<ResumeBean> processSelectUidAction(@PathVariable Integer uid) {
 		List<ResumeBean> result = rService.findUid(uid);
-		if (result.size() == 0) {
-			return null;
-		}
+		
 		return result;
 	}
 
@@ -95,9 +93,7 @@ public class ResumeAdminController {
 	@ResponseBody
 	public List<ResumeBean> processSelectRidAction(@PathVariable Integer rackid) {
 		List<ResumeBean> result = rService.findRid(rackid);
-		if (result.size() == 0) {
-			return null;
-		}
+	
 		return result;
 	}
 
