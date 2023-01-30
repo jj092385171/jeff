@@ -34,7 +34,7 @@ public class WorkGuestController {
 	private JobService jService;
 
 	// 啟動我的首頁
-	@GetMapping("/")
+	@GetMapping("/workGuest.controller")
 	public String processMainAction1() {
 		return "work/guest/workGuest";
 	}
@@ -42,7 +42,7 @@ public class WorkGuestController {
 	// 啟動insert
 	@PostMapping("/startResumeInsert.controller/{u}")
 	public String processMainAction2() {
-		return "work/guest/resumeInsert2";
+		return "work/guest/resumeInsert";
 	}
 
 	// 啟動select

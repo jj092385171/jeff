@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
+
 <head>
-<meta charset="UTF-8">
-<title>職缺(使用者)</title>
+  <script src="/morari/guest/js/head.js"></script>
+  <!-- sharepage 公用頁面 -->
+  <script src="/morari/guest/js/share.js"></script>
+
 </head>
-<body>
+
+<body style="display: none">
+  <!-- Header Section Start -->
+  <div class="header"></div>
+
+  <!-- Header Section End -->
+
+
+
+
+
+
+  <!-- 分離範例 -->
+<!--   <div class="test"></div> -->
+<!--   <script src="team/js/test.js"></script> -->
+
 <h2>歡迎加入我們！</h2>
 <div>
 	<form action="resumeSelect.controller" method="POST">
@@ -15,42 +33,41 @@
 
 	<table id="showInsert"></table>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$.ajax({
-				type: 'POST',
-				url: '/morari/admin/work/jobShowAll.controller',
-				contentType: 'application/json',
-				success: function (data) {
-					$('#showInsert').empty("");
 
-					if (data == null) {
-						$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
-					} else {
- 				
-						var table = $('#showInsert');
-						table.append("<tr><th>職缺</th><th>刊登時間</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
 
-						$.each(data, function (i, n) {
-							var tr = "<tr align='center'>" + 
-							"<td>" + n.job + "</td>" + 
-							"<td>" + n.rackup + "</td>" + 
-							"<td>" + n.salary + "</td>" + 
-							"<td>" + n.quantity + "</td>" + 
-							"<td>" + n.place + "</td>" + 
-							"<td>" + n.date + "</td>" + 
-							"<td>" + n.time + "</td>" + 
-							"<td>" + n.remark + "</td>" + 
-							"<td>" + n.img + "</td>" + 
-							"<td><form action='startResumeInsert.controller/"+ n.rackid +"' method='POST'><input type='submit' value='我要應徵'></form></td>";					
-							table.append(tr);
-						});
-					}
-				}
-			});
-		});
-	</script>
-		
+
+  <!-- Footer Section Start -->
+  <div class="footer"></div>
+  <!-- Footer Section End -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+  <!-- Vendor JavaScript File -->
+  <script src="/morari/guest/vendor/jquery/jquery.min.js" ></script>
+  <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+  <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
+  <script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
+  <script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
+  <script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+  <!-- Booking Javascript File -->
+  <script src="/morari/guest/js/booking.js" defer></script>
+  <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
+
+  <!-- Main Javascript File -->
+  <script src="/morari/guest/js/main.js" defer></script>
+
+<!-- 我自己的東西 -->
+ <script type="text/javascript"></script>
+ <script src="/morari/work/gjs/workGuest.js" defer></script>
+
 </body>
+
 </html>

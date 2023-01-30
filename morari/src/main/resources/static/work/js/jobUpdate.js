@@ -49,8 +49,8 @@ $(document).ready(function () {
 							h3.prepend('修改成功');
 							var table = $('#showInsert');
 							table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
-
-						
+//							var date = new Date(response.rackup);
+//							var formattedDate = date.toLocaleDateString("yyyy-MM-dd");
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
 								var tr = "<tr align='center'>" + 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,10 @@ public class WorkAdminController {
 	@ResponseBody
 	public List<JobBean> processShowJobAllAction() {
 		List<JobBean> result = jService.findAll();
+//		SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd");
+//		for (JobBean job : result) {
+//			job.setRackup(sformat.format(job.getRackup()));
+//		}
 		return result;
 	}
 

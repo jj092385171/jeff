@@ -21,13 +21,21 @@ $(document).ready(function() {
 			$('#3').val(data.work);
 			$('#4').val(data.name);
 			$('#5').val(data.age);
-			$('#6').val(data.gender);
+			//			$('#6').val(data.gender);
 			$('#7').val(data.mail);
 			$('#8').val(data.phone);
 			$('#9').val(data.educational);
 			$('#10').val(data.experience);
 			$('11').val(data.ptime);
 
+			switch (data.gender) {
+				case '男':
+					$("#12").attr('checked', true)
+					break;
+				case '女':
+					$("#13").attr('checked', true)
+					break;
+			}
 		}
 	});
 	$("#send").click(function() {
@@ -60,7 +68,7 @@ $(document).ready(function() {
 					var table = $('#showInsert');
 					table.append("<tr><th>刊登編號</th><th>履歷編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th></tr>");
 
-					
+
 					var tr = "<tr align='center'>" +
 						"<td>" + response.job.rackid + "</td>" +
 						"<td>" + response.number + "</td>" +
@@ -73,7 +81,7 @@ $(document).ready(function() {
 						"<td>" + response.phone + "</td>" +
 						"<td>" + response.educational + "</td>" +
 						"<td>" + response.experience + "</td>" +
-						"<td>" + response.ptime + "</td>" +"</tr>";
+						"<td>" + response.ptime + "</td>" + "</tr>";
 					table.append(tr);
 				}
 			}

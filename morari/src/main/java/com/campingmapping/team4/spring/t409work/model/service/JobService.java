@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -45,8 +46,9 @@ public class JobService {
 	public JobBean insert(JobBean jBean,Integer u) {
 		jBean.setUserprofiles(uDao.findById(u).get());
 		Date currentDate = new Date();
+//		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+//		jBean.setRackup(sd.format(currentDate));
 		jBean.setRackup(currentDate);
-		System.out.println(jBean);
 		return jobDao.save(jBean);
 	}
 	

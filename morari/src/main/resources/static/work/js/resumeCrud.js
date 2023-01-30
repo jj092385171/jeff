@@ -20,13 +20,13 @@ $(document).ready(function() {
     				$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
     			} else {
     				var table = $('#showInsert');
-    				table.append("<tr><th>刊登編號</th><th>履歷編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th><th></th></tr>");
+    				table.append("<tr><th>履歷編號</th><th>刊登編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th><th></th></tr>");
 
 
     				$.each(data, function(i, n) {
     					var tr = "<tr align='center'>" + 
-    					"<td>" + n.job.rackid + "</td>" +
     					"<td>" + n.number + "</td>" +
+    					"<td>" + n.job.rackid + "</td>" +
 						"<td>" + n.userprofiles.uid +"</td>"+
 						"<td>" + n.work + "</td>" + 
 						"<td>" + n.name + "</td>" + 
