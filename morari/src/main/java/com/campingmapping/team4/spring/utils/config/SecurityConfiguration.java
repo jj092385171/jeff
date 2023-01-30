@@ -47,7 +47,7 @@ public class SecurityConfiguration {
                 // 登出頁面
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/")                        
                         .logoutSuccessHandler(logoutSuccessHandler)
                         .permitAll())
                 .oauth2Login(oauthLogin -> oauthLogin.loginPage("/login")

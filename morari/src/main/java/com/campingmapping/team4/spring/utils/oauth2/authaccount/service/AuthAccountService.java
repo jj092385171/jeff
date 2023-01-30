@@ -4,11 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles.UserProfilesBuilder;
 import com.campingmapping.team4.spring.utils.oauth2.OAuth2Request;
 import com.campingmapping.team4.spring.utils.oauth2.authaccount.entity.AuthAccount;
 import com.campingmapping.team4.spring.utils.oauth2.authaccount.repository.AuthAccountRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 import java.security.Principal;
 import java.util.Collection;
@@ -17,29 +22,32 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class AuthAccountService {
-  private final AuthAccountRepository authAccountRepository;
-  private final MemberService memberService;
+  // private final AuthAccountRepository authAccountRepository;
+  private final UserRepository userRepository;
 
-  public AuthAccount findByAccountId(String accountId) {
-    return authAccountRepository
+  // private final MemberService memberService;
+
+  public UserProfiles findByAccountId(String accountId) {
+    return userRepository
         .findByAccountId(accountId)
         .orElseThrow(EntityNotFoundException::new);
   }
 
   private boolean isExistByAccountId(String accountId) {
-    return authAccountRepository.existsByAccountId(accountId);
+    return userRepository.existsByAccountId(accountId);
   }
 
   @Transactional
-  public AuthAccount createIfFirst(OAuth2Request oAuth2Request) {
-    String accountId = oAuth2Request.getAccountId();
+  public UserProfiles createIfFirst(OAuth2Request oAuth2Request) {
+    String accountId = oAuth2Request.accountId();
     if (isExistByAccountId(accountId)) {
       return findByAccountId(accountId);
     }
-    Member member = setUpMember(oAuth2Request);
+
+    UserProfiles userProfiles = setUpUserProfiles(oAuth2Request);
     memberService.save(member);
     AuthAccount authAccount = setUpAuthAccount(oAuth2Request, member);
-    authAccountRepository.save(authAccount);
+    
 
     return authAccount;
   }
@@ -60,19 +68,21 @@ public class AuthAccountService {
     return getEntity(UUID.fromString(principal.getName())).getMember();
   }
 
-  private Member setUpMember(OAuth2Request oAuth2Request) {
-    Member.MemberBuilder memberBuilder = Member.builder();
-
+  private UserProfiles setUpUserProfiles(OAuth2Request oAuth2Request) {
+    UserProfilesBuilder userBuilder = UserProfiles.builder();
+    oAuth2Request.email().ifPresent(userBuilder::email);
+    UserProfiles user = userBuilder.build();
     oAuth2Request
-        .getName()
-        .ifPresent(
-            n -> {
-              memberBuilder.name(n);
-              memberBuilder.nickname(n);
-            });
-    oAuth2Request.getEmail().ifPresent(memberBuilder::email);
+    .name()
+    .ifPresent(
+        n -> {          
+          UserDetail.builder().nickname(n).build();
+                  });
 
-    return memberBuilder.build();
+
+    userRepository.save(user);
+
+    return user;
   }
 
   private AuthAccount getEntity(UUID id) {

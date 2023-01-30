@@ -3,9 +3,10 @@ package com.campingmapping.team4.spring.utils.oauth2.attributemapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import com.campingmapping.team4.spring.t401member.model.entity.AuthProvider;
 import com.campingmapping.team4.spring.utils.oauth2.OAuth2Request;
 
-import java.security.AuthProvider;
+
 import java.util.Map;
 
 // 將OAUTH拿到的東西轉換成DTO
