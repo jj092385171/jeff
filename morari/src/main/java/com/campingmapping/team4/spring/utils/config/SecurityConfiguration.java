@@ -51,7 +51,7 @@ public class SecurityConfiguration {
                         .logoutSuccessHandler(logoutSuccessHandler)
                         .permitAll())
                 .oauth2Login(oauthLogin -> oauthLogin.loginPage("/login")
-                // .permitAll())
+                        // .permitAll())
                         .successHandler(new CustomAuthenticationSuccessHandler()))
                 // 若無權限指定路徑
                 // .exceptionHandling(exceptionHandling -> System.out.println("88")
@@ -60,5 +60,4 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
-
 }

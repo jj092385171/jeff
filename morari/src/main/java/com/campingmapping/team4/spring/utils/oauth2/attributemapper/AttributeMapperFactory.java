@@ -2,7 +2,8 @@ package com.campingmapping.team4.spring.utils.oauth2.attributemapper;
 
 import org.springframework.stereotype.Component;
 
-import java.security.AuthProvider;
+import com.campingmapping.team4.spring.t401member.model.entity.AuthProvider;
+
 import java.util.EnumMap;
 import java.util.Map;
 
