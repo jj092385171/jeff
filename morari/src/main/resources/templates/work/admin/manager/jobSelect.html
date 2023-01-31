@@ -30,28 +30,18 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-	<h3>新增職缺</h3>
+                    <div>
+	<h3>查詢</h3>	
+			職缺<input id="sej" type="text" name="job" required>
+			<button id="selectJob"  onclick='selectJob(document.getElementById("sej").value)'>查詢</button>	
 
-	<form id="insert" enctype="multipart/form-data">
+			會員編號:<input id="seu" type="text" name="uid" required> 
+			<button id="selectUid"  onclick='selectUid(document.getElementById("seu").value)'>查詢</button>	
 	
-		會員編號 <input type="text" name="uid" value='1' required><br>
 
-		職缺 <input type="text" name="job" required><br>
-		薪資 <input type="text" name="salary" required><br>
-		人數 <input type="text" name="quantity" required><br>
-		地點 <input type="text" name="place" required><br>
-		可上班日期 <input type="text" name="date" required><br>
-		可上班時段 <input type="text" name="time" required><br>
-		備註<textarea name="remark" cols="20" rows="5"></textarea><br>
+	</div>
+	<br>
 
-		<input id="send" type="button" value="送出"><br>
-		<input type="reset" value="取消"><br>
-	</form>
-
-	<form id=img>
-		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img">
-	</form>
-	
 	<form action="crud.controller" method="GET"
 		enctype="multipart/form-data">
 		<input type="submit" value="回首頁">
@@ -60,7 +50,7 @@
 	
 	<h3 id="su"></h3>
 	<table id="showInsert"></table>
-	
+
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -101,7 +91,7 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-    <script src="/morari/work/js/jobInsert.js" defer></script>
+    <script src="/morari/work/managerJs/jobSelect.js" defer></script>
     <script type="text/javascript">
 
 	</script>

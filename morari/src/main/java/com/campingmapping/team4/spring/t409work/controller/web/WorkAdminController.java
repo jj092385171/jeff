@@ -34,25 +34,25 @@ public class WorkAdminController {
 	// 啟動我的首頁
 	@GetMapping("/crud.controller")
 	public String processMainAction1() {
-		return "work/admin/jobCrud";
+		return "work/admin/manager/jobCrud";
 	}
 
 	// 啟動insert
 	@PostMapping("/insert.controller")
 	public String processMainAction2() {
-		return "work/admin/jobInsert";
+		return "work/admin/manager/jobInsert";
 	}
 
 	// 啟動select
 	@PostMapping("/select.controller")
 	public String processMainAction3() {
-		return "work/admin/jobSelect";
+		return "work/admin/manager/jobSelect";
 	}
 
 	// 啟動update
 	@PostMapping("/update.controller/{u}")
 	public String processMainAction4() {
-		return "work/admin/jobUpdate";
+		return "work/admin/manager/jobUpdate";
 	}
 
 
@@ -93,8 +93,8 @@ public class WorkAdminController {
 	public List<JobBean> processShowJobAllAction() {
 		List<JobBean> result = jService.findAll();
 //		SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd");
-//		for (JobBean job : result) {
-//			job.setRackup(sformat.format(job.getRackup()));
+//		for (JobBean jb : result) {
+//			jb.setRackup(sformat.format(jb.getRackup()));
 //		}
 		return result;
 	}
@@ -104,8 +104,6 @@ public class WorkAdminController {
 	@ResponseBody
 	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
 		List<JobBean> result = jService.findByJobisLike(job);
-		System.out.println("11111111111");
-		System.out.println("result");
 		
 			return result;
 		

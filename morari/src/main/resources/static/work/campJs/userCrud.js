@@ -2,7 +2,7 @@
  $(document).ready(function() {
     	$.ajax({
     		type: 'POST',
-    		url: '/morari/user/work/userSelectUid.controller/'+1,
+    		url: '/morari/admin/user/work/userSelectUid.controller/'+1,
     		contentType: 'application/json',
     		//data: JSON.stringify(getFormData($("#insert"))),
     		success: function(data) {
@@ -40,7 +40,7 @@
     	if (confirm("確定刪除該筆資料(刊登編號:" + rackid + ")?")) {
     		$.ajax({
     			type: 'delete',
-    			url: '/morari/user/work/userDelete.controller/' + rackid,
+    			url: '/morari/admin/user/work/userDelete.controller/' + rackid,
     			dataType: 'TEXT',
     			success: function(data) {
     				alert(data);

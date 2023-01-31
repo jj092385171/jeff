@@ -26,7 +26,7 @@ import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 // job的前台+resume的前台
 @Controller
 @RequestMapping("/guest/work")
-public class WorkGuestController {
+public class GuestController {
 	@Autowired
 	private ResumeService rService;
 

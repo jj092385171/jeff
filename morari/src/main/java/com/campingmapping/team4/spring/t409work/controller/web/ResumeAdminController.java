@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 
-// resume履歷的後台
+// resume(管理者)的後台
 @Controller
 @RequestMapping("/admin/resume")
 public class ResumeAdminController {
@@ -27,7 +27,7 @@ public class ResumeAdminController {
 	// 啟動我的首頁
 	@GetMapping("/resumeCrud.controller")
 	public String processMainAction1() {
-		return "work/admin/resumeCrud";
+		return "work/admin/manager/resumeCrud";
 	}
 	// 啟動insert
 //	@PostMapping("/insert.controller")
@@ -38,13 +38,13 @@ public class ResumeAdminController {
 	// 啟動select
 	@PostMapping("/select.controller")
 	public String processMainAction3() {
-		return "work/admin/resumeSelect";
+		return "work/admin/manager/resumeSelect";
 	}
 
 	// 啟動update
 	@PostMapping("/update.controller/{number}")
 	public String processMainAction4() {
-		return "work/admin/resumeUpdate";
+		return "work/admin/manager/resumeUpdate";
 	}
 	
 	// 刪除
