@@ -26,7 +26,7 @@ import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 // job的前台+resume的前台
 @Controller
 @RequestMapping("/guest/work")
-public class GuestController {
+public class GuestworkController {
 	@Autowired
 	private ResumeService rService;
 
@@ -59,6 +59,13 @@ public class GuestController {
 		System.out.println(result);
 		return rService.insert(rBean,2,rackid);
 	}
+	// 模糊搜尋
+		@PostMapping("/guestSelectLike.controller/{job}")
+		@ResponseBody
+		public List<JobBean> processSelectlikeAction(@PathVariable String job) {
+			List<JobBean> result = jService.findByJobisLike(job);
+				return result;
+		}
 
 	// 找全部
 	@PostMapping("/jobShowAll.controller")

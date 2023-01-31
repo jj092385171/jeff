@@ -25,9 +25,8 @@
 
 <h2>歡迎加入我們！</h2>
 <div>
-	<form action="resumeSelect.controller" method="POST">
-			<input type="submit" value="查詢職缺">
-		</form>
+			職缺<input id="sej" type="text" name="job" required>
+			<button id="selectJob"  onclick='selectJob(document.getElementById("sej").value)'>查詢職缺</button>
 </div>
 	<hr>
 
