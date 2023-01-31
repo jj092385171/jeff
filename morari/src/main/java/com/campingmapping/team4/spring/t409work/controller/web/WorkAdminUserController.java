@@ -95,7 +95,7 @@ public class WorkAdminUserController {
 	@PostMapping("/userMail.controller")
 	@ResponseBody
 	public String processAction4(@RequestBody String email) {
-		mailService.sendEmail(email,"快加入我們吧！","您好，2/24有空來面試嗎?");
+		mailService.sendEmail(email,"快加入我們吧！","您好，我明天要睡飽一點會晚到，不要太想我");
 		
 		return "Success！！！";
 	}
