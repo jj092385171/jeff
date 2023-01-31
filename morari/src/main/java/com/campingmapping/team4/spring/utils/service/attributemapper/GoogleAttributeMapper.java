@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.utils.oauth2.attributemapper;
+package com.campingmapping.team4.spring.utils.service.attributemapper;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.utils.oauth2;
+package com.campingmapping.team4.spring.utils.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -11,9 +11,8 @@ import org.springframework.stereotype.Service;
 import com.campingmapping.team4.spring.t401member.model.entity.AuthProvider;
 import com.campingmapping.team4.spring.t401member.model.entity.OAuth2Request;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.campingmapping.team4.spring.utils.oauth2.attributemapper.AttributeMapper;
-import com.campingmapping.team4.spring.utils.oauth2.authaccount.mapper.AuthAccountMapper;
-import com.campingmapping.team4.spring.utils.oauth2.authaccount.service.AuthAccountService;
+import com.campingmapping.team4.spring.utils.service.attributemapper.AttributeMapper;
+import com.campingmapping.team4.spring.utils.service.attributemapper.AuthAccountMapper;
 
 import java.util.Map;
 
@@ -27,12 +26,17 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
 
   @Override
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+    
+    System.out.println("loaduser in here++++++++++++++++==================");
+
     // 尋找是哪的服務
     AuthProvider authProvider = AuthProvider.valueOf(userRequest.getClientRegistration().getClientName().toUpperCase());
     OAuth2User oAuth2User = super.loadUser(userRequest);
+    // 裝填DTO
     OAuth2Request oAuth2Request = attributeMapper.mapToUser(authProvider, oAuth2User.getAttributes());
-    authAccountService.createIfFirst(oAuth2Request);
-    UserProfiles user = authAccountService.findByEmail(oAuth2Request.email());
+    // 是否創建帳戶
+    UserProfiles user = authAccountService.createIfFirst(oAuth2Request);
+    // 拿取用戶屬性
     Map<String, Object> userAttributes = authAccountMapper.mapToAttributeMap(user);
 
     return new DefaultOAuth2User(user.getAuthorities(), userAttributes, "id");

@@ -15,6 +15,7 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.RoleRepos
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 // import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRoleRepository;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
+import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import jakarta.transaction.Transactional;
 
@@ -47,9 +48,16 @@ public class SetupDataLoader implements
 
         Optional<UserProfiles> userOptional = userRepository.findByEmail(MyConstants.SUPER_ADMIN_NAME);
         UserProfiles userProfiles;
+        UserDetail userDetail = UserDetail.builder()
+        .nickname("卍~超-級=管=理-員~卐")
+        .exp(999999L)
+        .leavel(999999)
+        .point(99999999L)
+        .build();
         try{
         if (userOptional.isPresent()) {
             userProfiles = userOptional.get();
+            userProfiles.setUserddetail(userDetail);
             userProfiles.setEmail(MyConstants.SUPER_ADMIN_NAME);
             userProfiles.setPassword(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD));
             userProfiles.getRoles().clear();
@@ -62,6 +70,7 @@ public class SetupDataLoader implements
                     .email(MyConstants.SUPER_ADMIN_NAME)
                     .password(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD))
                     .uid(UUID.randomUUID())
+                    .userddetail(userDetail)
                     .build();
             userProfiles.getRoles().add(adminRole);
             userRepository.save(userProfiles);

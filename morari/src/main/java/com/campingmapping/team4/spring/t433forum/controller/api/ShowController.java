@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t433forum.controller.api;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class ShowController {
 	
 	// 查會員貼文
 	@GetMapping("/showpostbyuserid.controller/{userid}")
-	public List<Post> processShowPostByUserId(@PathVariable(name = "userid") Integer userId){
+	public List<Post> processShowPostByUserId(@PathVariable(name = "userid") UUID userId){
 		return postService.getUserNonHidePost(userId);
 	}
 

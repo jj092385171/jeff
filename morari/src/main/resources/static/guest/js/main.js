@@ -74,8 +74,9 @@ window.onload = function () {
         // 發送請求時附帶Cookie
         credentials: "include"
     })
-        // .then(response => response.json())
+        .then(response => response.json())
         .then(loginstate => {
+            console.log(loginstate)
             if (loginstate) {
                 // 登入
                 fetch("/morari/guest/share/loginstate.html")

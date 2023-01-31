@@ -3,6 +3,7 @@ package com.campingmapping.team4.spring.t433forum.model.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepos
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t433forum.model.dao.repository.PostRepository;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
+import com.campingmapping.team4.spring.utils.service.JwtService;
 
 @Service
 @Transactional
@@ -20,6 +22,8 @@ public class PostService {
 	private PostRepository postRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private JwtService jwtService;
 
 	// 查單一貼文
 	public Post getPostById(Integer id) {
@@ -33,7 +37,7 @@ public class PostService {
 	}
 
 	// 查會員貼文
-	public List<Post> getUserNonHidePost(Integer userId) {
+	public List<Post> getUserNonHidePost(UUID userId) {
 		UserProfiles uProfiles = userRepository.findById(userId).get();
 		return postRepository.findByuserprofiles(uProfiles);
 	}
@@ -55,7 +59,7 @@ public class PostService {
 
 	// 新增
 	public Post insert(Post post) {
-		Integer uid = 1;
+		UUID uid = jwtService.getUId(null);
 		UserProfiles userProfiles = userRepository.findById(uid).get();
 		post.setUserprofiles(userProfiles);
 

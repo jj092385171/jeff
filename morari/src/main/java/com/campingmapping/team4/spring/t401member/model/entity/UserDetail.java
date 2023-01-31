@@ -30,7 +30,7 @@ public class UserDetail {
 
     // 點數
     // @Column(columnDefinition = "default 0")
-    private Integer point;
+    private Long point;
 
     // 性別
     private Integer gender;

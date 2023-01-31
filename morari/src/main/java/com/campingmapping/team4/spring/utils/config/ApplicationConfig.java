@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
@@ -79,8 +78,4 @@ public class ApplicationConfig {
     };
   }
 
-  @Bean
-  public AuthenticationSuccessHandler authenticationSuccessHandler() {
-    return new CustomAuthenticationSuccessHandler();
-  }
 }

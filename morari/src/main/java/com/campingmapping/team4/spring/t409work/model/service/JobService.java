@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
@@ -39,7 +41,7 @@ public class JobService {
 	}
 
 	// 新增職缺
-	public JobBean insert(JobBean jBean, Integer u) {
+	public JobBean insert(JobBean jBean, UUID u) {
 		jBean.setUserprofiles(uDao.findById(u).get());
 		Date currentDate = new Date();
 		jBean.setRackup(currentDate);
@@ -79,7 +81,7 @@ public class JobService {
 	}
 
 	// 透過會員id找資料
-	public List<JobBean> findUid(Integer uid) {
+	public List<JobBean> findUid(UUID uid) {
 
 		UserProfiles findById = uDao.findById(uid).get();
 		Collection<JobBean> job = findById.getJob();

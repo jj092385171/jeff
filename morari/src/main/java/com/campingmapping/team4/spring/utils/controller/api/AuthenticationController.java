@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRequest;
@@ -50,6 +51,7 @@ public class AuthenticationController {
   }
 
   @PostMapping("/state")
+  @ResponseBody
   public Boolean loginstate(
       HttpServletRequest request) {
     return service.loginstate(request);

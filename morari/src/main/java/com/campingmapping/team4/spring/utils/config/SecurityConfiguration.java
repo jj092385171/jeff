@@ -11,8 +11,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.campingmapping.team4.spring.utils.service.OAuth2UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +32,10 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    private final OAuth2UserServiceImpl oAuth2UserServiceImpl;
+    @Autowired
+    private final AuthenticationSuccessHandler successHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -44,15 +54,19 @@ public class SecurityConfiguration {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .permitAll())
+                // OAuth2登入
+                .oauth2Login(oAuth2 -> oAuth2
+                        .loginPage("/login")
+                        .authorizationEndpoint(authorization -> authorization
+                                .baseUri("/login/oauth2/authorization"))
+                        .userInfoEndpoint(e -> e.userService(oAuth2UserServiceImpl))
+                        .successHandler(successHandler))
                 // 登出頁面
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")                        
+                        .logoutSuccessUrl("/")
                         .logoutSuccessHandler(logoutSuccessHandler)
                         .permitAll())
-                .oauth2Login(oauthLogin -> oauthLogin.loginPage("/login")
-                        // .permitAll())
-                        .successHandler(new CustomAuthenticationSuccessHandler()))
                 // 若無權限指定路徑
                 // .exceptionHandling(exceptionHandling -> System.out.println("88")
                 // exceptionHandling.accessDeniedPage("/home") )
@@ -60,4 +74,6 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
+
+    
 }

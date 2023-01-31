@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.utils.oauth2.authaccount.service;
+package com.campingmapping.team4.spring.utils.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,16 +8,11 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepos
 import com.campingmapping.team4.spring.t401member.model.entity.OAuth2Request;
 import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles.UserProfilesBuilder;
-import com.campingmapping.team4.spring.utils.oauth2.authaccount.entity.AuthAccount;
-import com.campingmapping.team4.spring.utils.oauth2.authaccount.repository.AuthAccountRepository;
-
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -50,28 +45,31 @@ public class AuthAccountService {
   }
 
   public Collection<? extends GrantedAuthority> getAuthority(UUID id) {
-    return getEntity(id).getRole();
+    return getEntity(id).getAuthorities();
   }
 
-  public Member getLoginUser(Principal principal) {
-    return getEntity(UUID.fromString(principal.getName())).getMember();
+  public UserProfiles getLoginUser(Principal principal) {
+    return getEntity(UUID.fromString(principal.getName()));
   }
 
   private UserProfiles setUpUserProfiles(OAuth2Request oAuth2Request) {
-    UserProfiles user = UserProfiles.builder().email(oAuth2Request.email()).build();
+    UserProfiles user = UserProfiles.builder()
+        .email(oAuth2Request.email())
+        .uid(UUID.randomUUID())
+        .build();
     UserDetail userDetail = new UserDetail();
     oAuth2Request.name().ifPresent(
         name -> {
           userDetail.setNickname(name);
+          user.setUserddetail(userDetail);
         });
     oAuth2Request.shot().ifPresent(
         shot -> {
           userDetail.setShot(shot);
+          user.setUserddetail(userDetail);
         });
     ;
-
     userRepository.save(user);
-
     return user;
   }
 

@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.utils.oauth2.authaccount.mapper;
+package com.campingmapping.team4.spring.utils.service.attributemapper;
 
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ public class AuthAccountMapper {
   public Map<String, Object> mapToAttributeMap(UserProfiles user) {
     Map<String, Object> attributes = new HashMap<>();
     attributes.put("id", user.getUid());
-    attributes.put("accountId", user.getAccountId());
+    attributes.put("email", user.getEmail());
 
     return attributes;
   }

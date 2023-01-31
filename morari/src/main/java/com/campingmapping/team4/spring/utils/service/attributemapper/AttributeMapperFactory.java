@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.utils.oauth2.attributemapper;
+package com.campingmapping.team4.spring.utils.service.attributemapper;
 
 import org.springframework.stereotype.Component;
 
@@ -7,11 +7,7 @@ import com.campingmapping.team4.spring.t401member.model.entity.AuthProvider;
 import java.util.EnumMap;
 import java.util.Map;
 
-/**
- * 각 소셜 별로 Mapper을 생성해서 제공하는 Factory
- *
- * @author Hyeonjun Park
- */
+// 不同提供商配對不同的Mapper
 @Component
 public class AttributeMapperFactory {
   private final Map<AuthProvider, AttributeMappable> mapperMap = new EnumMap<>(AuthProvider.class);

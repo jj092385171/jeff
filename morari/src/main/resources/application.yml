@@ -85,6 +85,8 @@ spring:
           github:
             clientId: 79b6681332474f5ad91f
             clientSecret: e67cb760488cc52e98ca8a547922d1d740222db6
+            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            scope: email, profile
           google:
             client-id: 611952345376-olh286m5v2e498h8orje59blgkvss6vo.apps.googleusercontent.com
             client-secret: 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
