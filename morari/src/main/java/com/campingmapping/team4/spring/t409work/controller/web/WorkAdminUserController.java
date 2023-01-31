@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
+import com.campingmapping.team4.spring.t409work.model.service.MailService;
 
 //job職缺(營主)的後台
 @Controller
@@ -22,6 +23,9 @@ import com.campingmapping.team4.spring.t409work.model.service.JobService;
 public class WorkAdminUserController {
 	@Autowired
 	private JobService jService;
+	
+	@Autowired
+	private MailService mailService;
 
 	// 啟動我的首頁
 	@GetMapping("/startCrud.controller")
@@ -87,13 +91,14 @@ public class WorkAdminUserController {
 		JobBean result = jService.findById(rackID);
 		return result;
 	}
+	//寄email
+	@PostMapping("/userMail.controller")
+	@ResponseBody
+	public String processAction4(@RequestBody String email) {
+		mailService.sendEmail(email,"快加入我們吧！","您好，2/24有空來面試嗎?");
+		
+		return "Success！！！";
+	}
 
-	// 模糊搜尋+uid
-//	@PostMapping("/selectLikeAnd.controller/{job}")
-//	@ResponseBody
-//	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
-//		List<JobBean> result = jService.findByUidAndJobisLike(1, job);
-//		return result;
-//
-//	}
+
 }
