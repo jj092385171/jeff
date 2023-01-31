@@ -30,12 +30,16 @@
 				<!-- Begin Page Content(開始主要內容區塊) -->
 				<div class="container-fluid">
 
-					<table id="camptable"></table>
+					<table id="camptable" class="card mb-4 py-3 border-left-info"></table>
 
 					<hr>
 
 					<div>
-						<a href="/morari/admin/camp/indexShowAllCamp.controller">回首頁</a>
+						<span>
+							<a href="/morari/admin/camp/campindex" class="btn btn-info btn-icon-split"><span
+									class="icon text-white-50"><i class="fas fa-house-user"></i></span><span
+									class="text">營地首頁</span></a>
+						</span>
 					</div>
 
 				</div>
@@ -100,25 +104,29 @@
 					var allCamps = data["allCamps"];
 					var camptable = $('#camptable');
 					var camptr = '';
-					camptable.append("<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th></thead>")
+					camptable.append('<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th></thead>')
 					$.each(allCamps, function (i, n) {
 						var tagNames = '';
 						n.tags.forEach(element => {
-							tagNames += element.tagName + '/'
+							tagNames += element.tagName + ' /<br>'
 						});
 
-						camptr = "<tbody>"
-							+ "<tr>"
-							+ "<td>" + n.campID + "</td>"
+						camptr = '<tbody class="card mb-4 py-3 border-bottom-dark">'
+							+ '<tr>'
+							+ '<td>' + n.campID + '</td>'
 							+ '<td class="td2"><a href="#">' + n.campName + '</a></td>'
-							+ "<td>" + n.city.cityName + "</td>"
-							+ "<td>" + '<img width="80" height="100" src="/morari/images/' + n.campPicturesPath + '">' + "</td>"
-							+ "<td>" + n.description + "</td>"
-							+ "<td>" + n.location + "</td>"
-							+ "<td>" + tagNames + "</td>"
-							+ "</tr>"
-							+ "</tbody>"
+							+ '<td>' + n.city.cityName + '</td>'
+							+ '<td>' + '<img width="80" height="100" src="/morari/images/' + n.campPicturesPath + '">' + '</td>'
+							+ '<td>' + n.description + '</td>'
+							+ '<td>' + n.location + '</td>'
+							+ '<td>' + tagNames + '</td>'
+							+ '</tr>'
+							+ '</tbody>'
 						camptable.append(camptr);
+
+						$('th',).width('100px').css("text-align", "center");
+						$('td').width('100px').css("text-align", "center");
+						$('img').width('90px').height('90px');
 					});
 				});
 

@@ -92,9 +92,12 @@ public class InsertOrder {
 		
 		
 		Order order = orderService.insert(uid, siteIds, nums, goingtime, leavingtime, campID);
+		
+		//空值
 		if(order == null) {
 			errors.put("error", "none");
 			errors.put("noData", "訂單新增失敗");
+			return errors;
 		}
 		
 		

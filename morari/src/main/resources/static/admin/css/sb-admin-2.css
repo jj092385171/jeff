@@ -1,4 +1,3 @@
-
 /*!
  * Start Bootstrap - SB Admin 2 v4.1.3 (https://startbootstrap.com/theme/sb-admin-2)
  * Copyright 2013-2021 Start Bootstrap
@@ -79,6 +78,8 @@ body {
   text-align: left;
   background-color: #f2f2f2;
 }
+
+
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
