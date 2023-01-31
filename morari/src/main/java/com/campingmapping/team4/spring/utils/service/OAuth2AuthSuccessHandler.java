@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.utils.service;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationResponse;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -28,22 +28,22 @@ public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
       throws IOException {
     // 拿取用戶資料
     System.out.println("=====================================");
-    System.out.println(authentication.getPrincipal().toString());
-    System.out.println("=====================================");
-    System.out.println(authentication.getDetails().toString());
-    System.out.println("=====================================");
-    System.out.println(authentication.getName());
-    System.out.println("=====================================");
-    System.out.println(authentication.toString());
-    System.out.println("=====================================");
-    System.out.println(authentication.getPrincipal());
-    System.out.println("O2U=====================================");
-    OAuth2User a = (OAuth2User) authentication.getPrincipal();
-    System.out.println(a.getName());
-    System.out.println(a.getAttributes().get("email"));
-    System.out.println("=====================================");
-
-    //  User Attributes: [{   given_name=育群, locale=zh-TW,  name=施育群, family_name=施,  email=suc12345@gmail.com}]
+    System.out.println(authentication);
+    // System.out.println("=====================================");
+    // System.out.println(authentication.getPrincipal().toString());
+    // System.out.println("=====================================");
+    // System.out.println(authentication.getDetails().toString());
+    // System.out.println("=====================================");
+    // System.out.println(authentication.getName());
+    // System.out.println("=====================================");
+    // System.out.println(authentication.toString());
+    // System.out.println("=====================================");
+    // System.out.println(authentication.getPrincipal());
+    // System.out.println("O2U=====================================");
+    // OAuth2User a = (OAuth2User) authentication.getPrincipal();
+    // System.out.println(a.getName());
+    // System.out.println(a.getAttributes().get("email"));
+    // System.out.println("=====================================");
 
     UserProfiles userProfiles = getOAuthUser((OAuth2User) authentication.getPrincipal());
     AuthenticationResponse authenticationResponse = jwtService.generateToken(userProfiles,

@@ -26,7 +26,7 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
 
   @Override
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-    
+
     System.out.println("loaduser in here++++++++++++++++==================");
 
     // 尋找是哪的服務
