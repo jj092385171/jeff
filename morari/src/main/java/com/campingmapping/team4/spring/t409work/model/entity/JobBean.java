@@ -41,6 +41,7 @@ public class JobBean {
 
 	@ManyToOne
 	@JoinColumn(name = "uid")
+	@JsonIgnore
 	private UserProfiles userprofiles;// 會員
 
 	// @Column(name="uid")

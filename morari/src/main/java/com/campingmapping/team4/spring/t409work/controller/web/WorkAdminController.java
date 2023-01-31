@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 
-//job職缺的後台
+//job職缺(管理者)的後台
 
 @Controller
 @RequestMapping("/admin/work")
@@ -117,9 +116,9 @@ public class WorkAdminController {
 	@ResponseBody
 	public List<JobBean> processSelectUidAction(@PathVariable Integer uid) {
 		List<JobBean> result = jService.findUid(uid);
-		if (result.size() == 0) {
-			return null;
-		}
+//		if (result.size() == 0) {
+//			return null;
+//		}
 		return result;
 	}
 
