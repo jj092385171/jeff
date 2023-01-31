@@ -4,6 +4,7 @@ package com.campingmapping.team4.spring.t409work.model.entity;
 import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,6 +53,7 @@ public class ResumeBean {
 	@Column(name = "experience")
 	private String experience;// 經驗
 	@Column(name = "ptime")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date ptime;// 時間
 
 }

@@ -51,7 +51,7 @@ public class WorkAdminUserController {
 	@PostMapping("/userSelectUid.controller/{uid}")
 	@ResponseBody
 	public List<JobBean> processSelectUidAction(@PathVariable Integer uid) {
-		List<JobBean> result = jService.findUid(1);
+		List<JobBean> result = jService.findUid(2);
 //		if (result.size() == 0) {
 //			return null;
 //		}

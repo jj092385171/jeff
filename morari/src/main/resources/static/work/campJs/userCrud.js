@@ -17,7 +17,7 @@
     				$.each(data, function(i, n) {
     					var tr = "<tr align='center'>" +
     						"<td>" + n.userprofiles.uid + "</td>" +
-    						"<td>" + n.rackid + "</td>" +
+    						"<td>" + "<a href='/morari/admin/user/resume/resumeStartCrud.controller/" + n.rackid + "'>" + n.rackid + "</td>" +
     						"<td>" + n.rackup + "</td>" +
     						"<td>" + n.job + "</td>" +
     						"<td>" + n.salary + "</td>" +

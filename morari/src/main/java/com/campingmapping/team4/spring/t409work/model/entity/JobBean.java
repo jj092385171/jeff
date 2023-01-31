@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -64,6 +65,7 @@ public class JobBean {
 	@Column(name = "remark")
 	private String remark;// 備註
 	@Column(name = "rackup")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date rackup;// 上架日期
 
 }
