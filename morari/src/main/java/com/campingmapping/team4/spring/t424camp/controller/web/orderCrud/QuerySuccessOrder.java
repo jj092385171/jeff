@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin/camp")
-public class QueryOrder {
+public class QuerySuccessOrder {
 	
 	@Autowired
 	private HttpServletRequest httpServletRequest;

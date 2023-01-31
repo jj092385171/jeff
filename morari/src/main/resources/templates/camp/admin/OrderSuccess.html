@@ -1,25 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <script src="/morari/admin/js/head.js"></script>
+
+    <!-- sharepage -->
+    <script src="/morari/admin/js/share.js"></script>
+
+</head>
+
+<body id="page-top" style="display: none">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- sidebar -->
+        <div class="sidebarshare"></div>
+        <!-- sidebar end -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- topbar -->
+                <div class="topbarshare"></div>
+                <!-- topbar end -->
+
+                <!-- Begin Page Content(開始主要內容區塊) -->
+                <div class="container-fluid">
+
+                    <table id="ordertable" class="card mb-4 py-3 border-left-info"></table>
+                    <div id="hr"></div>
+                    <table id="orderitemtable" class="card mb-4 py-3 border-bottom-info"></table>
+
+                </div>
+                <!-- /.container-fluid(結束主要內容區塊) -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <div class="footershare"></div>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="loginoutshare"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>
+    <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/morari/admin/vendor/jquery-easing/jquery.easing.min.js" defer></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/morari/admin/js/sb-admin-2.min.js" defer></script>
+
+    <!-- Page level plugins -->
+    <script src="/morari/admin/vendor/chart.js/Chart.min.js" defer></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
+    <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <script type="text/javascript">
         $(function () {
             $(document).ready(function () {
-                $.getJSON('/morari/admin/camp/querySuccessOrder', function (data) {
-                    console.log(data);
+                $.getJSON('/morari/admin/camp/querySuccessOrder', function (after) {
+                    console.log(after);
+                    var ordertable = $('#ordertable');
+                    var ordertr = '';
+
+                    alert("新增訂單成功");
+
+                    ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th></thead>');
+                    ordertr = '<tbody class="card mb-4 py-3 border-bottom-dark">'
+                        + '<tr>'
+                        + '<td>' + after.orderID + '</td>'
+                        + '<td>' + after.camp.campName + '</td>'
+                        + '<td>' + after.camp.city.cityName + '</td>'
+                        + '<td>' + '<img src="/morari/images/' + after.camp.campPicturesPath + '">' + '</td>'
+                        + '<td>' + after.camp.location + '</td>'
+                        + '<td>' + after.userprofiles.username + '</td>'
+                        + '<td>' + after.userprofiles.email + '</td>'
+                        + '<td>' + after.orderTime + '</td>'
+                        + '<td>' + after.goingTime + '</td>'
+                        + '<td>' + after.leavingTime + '</td>'
+                        + '<td>' + after.totalPrice + '</td>'
+                        + '</tr>'
+                        + '</tbody>'
+                    ordertable.append(ordertr);
+
+                    $('#hr').append('<hr>');
+
+                    var orderitemtable = $('#orderitemtable');
+                    var orderitemtr = '';
+
+                    orderitemtable.append('<thead><th>營位名稱</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>');
+
+                    $.each(after.orderitems, function (i, orderitem) {
+                        orderitemtr = '<tbody>'
+                            + '<tr>'
+                            + '<td>' + orderitem.site.siteName + '</td>'
+                            + '<td>' + '<img src="/morari/images/' + orderitem.site.sitePicturesPath + '">' + '</td>'
+                            + '<td>' + orderitem.unitPrice + '</td>'
+                            + '<td>' + orderitem.numbers + '</td>'
+                            + '</tr>'
+                            + '</tbody>'
+                        orderitemtable.append(orderitemtr);
+
+                    });
+
+                    $('th',).width('100px').css("text-align", "center");
+                    $('td').width('100px').css("text-align", "center");
+                    $('img').width('85px').height('85px');
                 });
             });
         });
     </script>
-</head>
 
-<body>
-    <table id="ordertable"></table>
-    <div id="hr"></div>
-    <table id="orderitemtable"></table>
 </body>
 
 </html>

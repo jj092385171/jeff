@@ -49,7 +49,7 @@ public class InsertSiteController {
 			errors.put("sitePicturesPath", "必須選擇圖片");
 		}
 		else {
-			String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
+			String saveFileDir = "C:/gitapp/EEIT56_Team4/morari/src/main/resources/static/images/";
 			fileName = mf.getOriginalFilename();
 			File saveFilePath = new File(saveFileDir, fileName);
 			mf.transferTo(saveFilePath);
