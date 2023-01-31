@@ -47,7 +47,7 @@ public class ResumeBean {
 	@Column(name = "mail")
 	private String mail;// 電子郵件
 	@Column(name = "phone")
-	private Integer phone;// 電話
+	private String phone;// 電話
 	@Column(name = "educational")
 	private String educational;// 學歷
 	@Column(name = "experience")

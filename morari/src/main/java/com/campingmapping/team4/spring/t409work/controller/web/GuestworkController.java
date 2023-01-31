@@ -55,6 +55,7 @@ public class GuestworkController {
 	@PostMapping("/resumeInsert.controller/{rackid}")
 	@ResponseBody
 	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean,@PathVariable Integer rackid) {
+		System.out.println(rBean);
 		ResumeBean result = rService.insert(rBean, 2,rackid);
 		System.out.println(result);
 		return rService.insert(rBean,2,rackid);

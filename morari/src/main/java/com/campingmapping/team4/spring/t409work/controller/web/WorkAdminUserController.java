@@ -89,11 +89,11 @@ public class WorkAdminUserController {
 	}
 
 	// 模糊搜尋+uid
-	@PostMapping("/selectLikeAnd.controller/{job}")
-	@ResponseBody
-	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
-		List<JobBean> result = jService.findByUidAndJobisLike(1, job);
-		return result;
-
-	}
+//	@PostMapping("/selectLikeAnd.controller/{job}")
+//	@ResponseBody
+//	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
+//		List<JobBean> result = jService.findByUidAndJobisLike(1, job);
+//		return result;
+//
+//	}
 }

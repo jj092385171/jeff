@@ -18,7 +18,7 @@ $(document).ready(function() {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 				} else {
 					var h3 = $('#re');
-					h3.prepend('投遞履歷');
+					h3.prepend('投遞履歷結果');
 					var table = $('#showInsert');
 					table.append("<tr><th>刊登編號</th><th>履歷編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th></tr>");
 
@@ -35,7 +35,8 @@ $(document).ready(function() {
 						"<td>" + n.phone + "</td>" +
 						"<td>" + n.educational + "</td>" +
 						"<td>" + n.experience + "</td>" +
-						"<td>" + n.ptime + "</td>" + "</tr>";
+						"<td>" + n.ptime + "</td>" + 
+						"<td><button class='email-btn' data-email='" + n.mail + "'>mail通知面試</button></td>"+"</tr>";
 					table.append(tr);
 				});
 				}

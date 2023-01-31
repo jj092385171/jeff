@@ -42,6 +42,7 @@ public class ResumeService {
 		rBean.setJob(jDao.findById(rackid).get());
 		Date currentDate = new Date();
 		rBean.setPtime(currentDate);
+		System.out.println("rBean="+rBean);
 		return reDao.save(rBean);
 	}
 	

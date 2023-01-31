@@ -96,9 +96,9 @@ public class JobService {
 	}
 
 	// 查職缺+uid
-	public List<JobBean> findByUidAndJobisLike(Integer uid, String job) {
-		return jobDao.findByUidAndJobisLike(1, job);
-	}
+//	public List<JobBean> findByUidAndJobisLike(Integer uid, String job) {
+//		return jobDao.findByUidAndJobisLike(1, job);
+//	}
 
 	// 透過會員id找資料
 	public List<JobBean> findUid(Integer uid) {
