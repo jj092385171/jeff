@@ -27,6 +27,7 @@ public class teamService {
 	public Initiating insert(Initiating i ,UUID uid) {
 		Date postday = new Date();
 		i.setPostdate(postday);
+		System.out.println(uRepo.findById(uid).get().getEmail());
 		i.setUserprofiles(uRepo.findById(uid).get());
 		return iRepo.save(i);
 	}

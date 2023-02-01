@@ -65,7 +65,8 @@ public class SecurityConfiguration {
                     // .exceptionHandling(exceptionHandling -> System.out.println("88")
                     // exceptionHandling.accessDeniedPage("/home") )
                     .sessionManagement(session -> session
-                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                            ;
                             return http.build();
         } catch (Exception e) {
             e.printStackTrace();

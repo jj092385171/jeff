@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -69,7 +70,7 @@ public class OrderService {
 	}
 	
 	//新增訂單
-	public Order insert(Integer uid, Integer[] siteIds, Integer[] nums, Date goingtime, Date leavingtime, Integer campID) {
+	public Order insert(UUID uid, Integer[] siteIds, Integer[] nums, Date goingtime, Date leavingtime, Integer campID) {
 		
 		UserProfiles user = userRepository.findById(uid).get();
 		

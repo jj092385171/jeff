@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -72,7 +73,7 @@ public class IndexOrder {
 		
 		
 		//使用者
-		Integer uid = jwtService.getUId(httpServletRequest);
+		UUID uid = jwtService.getUId(httpServletRequest);
 		
 		List<Camp> recommend = campService.recommendCampToUser(uid);
 		map.put("recommend", recommend);

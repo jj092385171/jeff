@@ -49,9 +49,9 @@ public class TeamPageComtroller {
 
 	@PostMapping("/insertMaterial.controller/{uid}")
 	@ResponseBody
-	public String insert(@RequestBody Initiating i, @PathVariable String uid) {
-		String id = uid.substring(1, uid.length() - 1);
-		teamService.insert(i, null);
+	public String insert(@RequestBody Initiating i, @PathVariable UUID uid) {
+		// String id = uid.substring(1, uid.length() - 1);
+		teamService.insert(i, uid);
 		return "Insert OK";
 	}
 

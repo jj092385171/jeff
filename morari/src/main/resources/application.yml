@@ -32,6 +32,8 @@ spring:
     # driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     # url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
 
+    # password: "0000"
+    # username: sa    
     # password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
     # username: Team4Admin    
 # -------------MYSQL------------- 
@@ -56,11 +58,12 @@ spring:
         '[hbm2ddl.auto]': update
         '[format_sql]': true
     show-sql: true
+
   servlet:
     multipart:
       enabled: true
-      max-file-size: 128KB
-      max-request-size: 128KB
+      max-file-size: 128MB
+      max-request-size: 128MB
   thymeleaf:
     prefix: classpath:/templates/
   web:
