@@ -21,7 +21,7 @@ public class ProductOrderDetailController {
 	
 	@GetMapping("/selectAllByPdorderid.controller/{id}")
 	public String selectAllByPdorderidAllAction() {
-		return "mall/guest/selectOrderdetailById";
+		return "mall/admin/selectOrderdetailById";
 	}
 
 	// 搜尋所有訂單詳情

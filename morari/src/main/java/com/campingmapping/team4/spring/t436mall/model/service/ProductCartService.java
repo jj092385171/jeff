@@ -1,8 +1,6 @@
 package com.campingmapping.team4.spring.t436mall.model.service;
 
 import java.util.List;
-import java.util.UUID;
-
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCart;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVo;
 

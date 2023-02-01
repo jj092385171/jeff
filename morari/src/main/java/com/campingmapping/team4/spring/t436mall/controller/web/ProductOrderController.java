@@ -33,18 +33,19 @@ public class ProductOrderController {
 	
 	@GetMapping("/AllorderAction.controller")
 	public String AllorderAction() {
-		return "mall/guest/orderindex";
+		return "mall/admin/orderindex";
 	}
 	
 	// 根據購物車新增一筆訂單
 	@PostMapping("/create")
 	@ResponseBody
-	public ProductOrder create(@RequestBody List<ProductCartVoRequest> productcartvorequest,
+	public String create(@RequestBody List<ProductCartVoRequest> productcartvorequest,
 			@RequestParam("odrecipient") String odrecipient,
 			@RequestParam("odrecipientphone") String odrecipientphone,
 			@RequestParam("odshippingaddress") String odshippingaddress,
 			@RequestParam("money") Integer money) {
-		return pOServiceImpl.create(productcartvorequest, odrecipient, odrecipientphone, odshippingaddress, money);
+		pOServiceImpl.create(productcartvorequest, odrecipient, odrecipientphone, odshippingaddress, money);
+		return "結帳成功";
 	}
 	// 依orderID來搜尋單筆訂單
 	@GetMapping("/selectById/{id}")

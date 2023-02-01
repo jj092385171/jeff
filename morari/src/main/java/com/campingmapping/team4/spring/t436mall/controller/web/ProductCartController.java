@@ -1,8 +1,6 @@
 package com.campingmapping.team4.spring.t436mall.controller.web;
 
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,7 +43,7 @@ public class ProductCartController {
 	@ResponseBody
 	public String create(@RequestBody ProductCart productcart) {
 		PCServiceImpl.create(productcart);
-		return "insert ok!!";
+		return "添加成功!!";
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@PutMapping("/updataById")
