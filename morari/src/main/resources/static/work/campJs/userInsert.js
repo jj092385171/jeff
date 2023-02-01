@@ -27,7 +27,7 @@ $(document).ready(function () {
 							var h3 = $('#su');
 							h3.prepend('新增成功');
 							var table = $('#showInsert');
-							table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
+							 table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
 
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
