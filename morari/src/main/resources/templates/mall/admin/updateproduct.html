@@ -1,43 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 
 <head>
-<meta charset="UTF8">
-<title>TeamManager</title>
+    <script src="/morari/admin/js/head.js"></script>
+
 <style>
 td {
 	border: 2px black solid;
 }
 </style>
-<script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
 
-<form id="formnew">
-	<h3>修改產品</h3>
-	<input type="text"  name="userid" id="userid" readonly="readonly">會員ID<br>
-	<input type="text"  name="pdid" id="pdid" readonly="readonly">產品ID<br>
-	<input type="text"  name="pdname" id="pdname">產品名稱<br>
-	<input type="text"  name="pdtitle" id="pdtitle">品牌名稱<br>
-	<input type="text"  name="pdcontent" id="pdcontent">產品規格<br>
-	<select name="pdtype" id="pdtype">
-		<option>請選擇產品類別</option>
-		<option>睡袋</option>
-		<option>燈具</option>
-		<option>桌椅</option>
-		<option>火爐/炊具</option>
-		<option>保冷箱</option>
-		<option>登山包</option>
-		<option>戶外服裝</option>
-		<option>登山鞋</option>
-		<option>其他</option>
-	</select>產品類型<br> 
-	<input type="text"  name="pdpicture" id="pdpicture"/>照片<br>
-	<input type="text"  name="pdprice" id="pdprice">價位<br> 
-	<input type="text"  name="pdinventory" id="pdinventory">庫存數量<br>
-	<input type="text"  name="pddate" id="pddate" readonly="readonly">上架時間<br> <br>
-	<input type="button" value="提交" onclick="submitForm()">
-</form>
-
-<script>
+    <!-- sharepage -->
+    <script src="/morari/admin/js/share.js"></script>
+    
+    <script>
     var url = window.location.href;
     var id = url.split("/").pop();
     console.log(id);
@@ -85,10 +61,98 @@ $.ajax({
             	
 	}
 </script>
+
 </head>
 
-<body>
-	<table id="result"></table>
+<body id="page-top" style="display: none">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- sidebar -->
+        <div class="sidebarshare"></div>
+        <!-- sidebar end -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- topbar -->
+                <div class="topbarshare"></div>
+                <!-- topbar end -->
+
+                <!-- Begin Page Content(開始主要內容區塊) -->
+                <div class="container-fluid">
+
+                    <form id="formnew">
+	<h3>修改產品</h3>
+	<input type="text"  name="userid" id="userid" readonly="readonly">會員ID<br>
+	<input type="text"  name="pdid" id="pdid" readonly="readonly">產品ID<br>
+	<input type="text"  name="pdname" id="pdname">產品名稱<br>
+	<input type="text"  name="pdtitle" id="pdtitle">品牌名稱<br>
+	<input type="text"  name="pdcontent" id="pdcontent">產品規格<br>
+	<select name="pdtype" id="pdtype">
+		<option>請選擇產品類別</option>
+		<option>睡袋</option>
+		<option>燈具</option>
+		<option>桌椅</option>
+		<option>火爐/炊具</option>
+		<option>保冷箱</option>
+		<option>登山包</option>
+		<option>戶外服裝</option>
+		<option>登山鞋</option>
+		<option>其他</option>
+	</select>產品類型<br> 
+	<input type="text"  name="pdpicture" id="pdpicture"/>照片<br>
+	<input type="text"  name="pdprice" id="pdprice">價位<br> 
+	<input type="text"  name="pdinventory" id="pdinventory">庫存數量<br>
+	<input type="text"  name="pddate" id="pddate" readonly="readonly">上架時間<br> <br>
+	<input type="button" value="提交" onclick="submitForm()">
+</form>
+<table id="result"></table>
+
+                </div>
+                <!-- /.container-fluid(結束主要內容區塊) -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <div class="footershare"></div>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="loginoutshare"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>
+    <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/morari/admin/vendor/jquery-easing/jquery.easing.min.js" defer></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/morari/admin/js/sb-admin-2.min.js" defer></script>
+
+    <!-- Page level plugins -->
+    <script src="/morari/admin/vendor/chart.js/Chart.min.js" defer></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
+    <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+
 </body>
 
 </html>

@@ -1,8 +1,6 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
 import java.util.Date;
-import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;

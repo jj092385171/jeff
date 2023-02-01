@@ -1,7 +1,5 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
-import java.util.UUID;
-
 public interface ProductOrderVo {
 
 	// p.id, p.userid, d.pdid, d.pdqty, c.pdpicture, c.pdprice, c.pdname

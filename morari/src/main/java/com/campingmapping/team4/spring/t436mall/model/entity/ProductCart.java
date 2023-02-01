@@ -1,7 +1,5 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
-import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -44,7 +44,7 @@ public class ProductCartController {
 	@ResponseBody
 	public String create(@RequestBody ProductCart productcart) {
 		PCServiceImpl.create(productcart);
-		return "insert ok!!";
+		return "添加成功!!";
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@PutMapping("/updataById")
