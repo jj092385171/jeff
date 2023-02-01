@@ -3,10 +3,7 @@ $(function () {
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
 		.then(data => {
-
-			console.log(data)
 			uid = "/morari/showpostbyuserid.controller/" + data
-			console.log(uid)
 		}).then(() => {
 			$.ajax({
 				url:  uid,

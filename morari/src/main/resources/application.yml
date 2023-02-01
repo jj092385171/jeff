@@ -94,3 +94,16 @@ spring:
             clientId: 575077734065145
             clientSecret: 7c35c07c36ee83c1d99c62391736310c
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+  mail:
+    host: smtp.gmail.com
+    username: hcc8462@gmail.com
+    password: fpwrzbaletyxwsoh
+    port: 587
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls: 
+            enable: true
+

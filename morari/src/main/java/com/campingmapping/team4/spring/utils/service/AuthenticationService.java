@@ -21,7 +21,6 @@ import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 // import com.campingmapping.team4.spring.t401member.model.entity.UserRoles;
 import com.campingmapping.team4.spring.utils.config.MyConstants;
 
-import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

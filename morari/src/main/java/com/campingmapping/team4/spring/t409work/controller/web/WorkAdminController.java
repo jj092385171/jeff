@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 //job職缺(管理者)的後台
 
 @Controller
 @RequestMapping("/admin/work")
 public class WorkAdminController {
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
+	private JwtService jwtService;
 
 	@Autowired
 	private JobService jService;
@@ -60,7 +69,8 @@ public class WorkAdminController {
 	@PostMapping("/jobInsert.controller")
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
-		return jService.insert(jobBean, 2);
+		UUID uid = jwtService.getUId(request);
+		return jService.insert(jobBean, uid);
 	}
 
 	// 刪除
@@ -112,7 +122,7 @@ public class WorkAdminController {
 	// 透過uid搜尋
 	@PostMapping("/selectUid.controller/{uid}")
 	@ResponseBody
-	public List<JobBean> processSelectUidAction(@PathVariable Integer uid) {
+	public List<JobBean> processSelectUidAction(@PathVariable UUID uid) {
 		List<JobBean> result = jService.findUid(uid);
 //		if (result.size() == 0) {
 //			return null;

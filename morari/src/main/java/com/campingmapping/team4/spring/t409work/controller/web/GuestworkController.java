@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
-
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +22,20 @@ import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 // job的前台+resume的前台
 @Controller
 @RequestMapping("/guest/work")
 public class GuestworkController {
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
+	private JwtService jwtService;
+
 	@Autowired
 	private ResumeService rService;
 
@@ -54,19 +63,18 @@ public class GuestworkController {
 	// 新增
 	@PostMapping("/resumeInsert.controller/{rackid}")
 	@ResponseBody
-	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean,@PathVariable Integer rackid) {
-		System.out.println(rBean);
-		ResumeBean result = rService.insert(rBean, 2,rackid);
-		System.out.println(result);
-		return rService.insert(rBean,2,rackid);
+	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean, @PathVariable Integer rackid) {
+		UUID uid = jwtService.getUId(request);
+		return rService.insert(rBean, uid, rackid);
 	}
+
 	// 模糊搜尋
-		@PostMapping("/guestSelectLike.controller/{job}")
-		@ResponseBody
-		public List<JobBean> processSelectlikeAction(@PathVariable String job) {
-			List<JobBean> result = jService.findByJobisLike(job);
-				return result;
-		}
+	@PostMapping("/guestSelectLike.controller/{job}")
+	@ResponseBody
+	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
+		List<JobBean> result = jService.findByJobisLike(job);
+		return result;
+	}
 
 	// 找全部
 	@PostMapping("/jobShowAll.controller")

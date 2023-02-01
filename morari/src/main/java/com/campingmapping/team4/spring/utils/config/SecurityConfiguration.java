@@ -13,9 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +28,7 @@ public class SecurityConfiguration {
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
     // @Autowired
-    private final OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuthUserService;
+    // private final OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuthUserService;
     @Autowired
     private final AuthenticationSuccessHandler successHandler;
 
