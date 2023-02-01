@@ -15,7 +15,7 @@ package com.campingmapping.team4.spring.t433forum.model.entity;
 // @Data
 // @NoArgsConstructor
 // @Entity
-// @Table(name = "VoteOption")
+// @Table(name = "voteoption")
 // public class VoteOption {
 
 // @Id

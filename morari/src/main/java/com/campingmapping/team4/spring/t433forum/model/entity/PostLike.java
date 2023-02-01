@@ -1,7 +1,6 @@
 package com.campingmapping.team4.spring.t433forum.model.entity;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,13 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "postcomment")
-public class PostComment {
-
+@Table(name = "postlike")
+public class PostLike {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "postcommentid")
-	private Integer postcommentid;
+	@Column(name = "postlikeid")
+	private int postlikeid;
 	
 	@ManyToOne
 	@JoinColumn(name = "postid")
@@ -35,14 +34,9 @@ public class PostComment {
 	
 	@ManyToOne
 	@JoinColumn(name = "uid")
-	@JsonIgnoreProperties("post")
 	private UserProfiles userprofiles;
 	
-	@Column(name = "postcomment")
-	private String postcomment;
-	@Column(name = "postcommentreport")
-	private Integer postcommentreport;
-	@Column(name = "postcommenthide")
-	private Integer postcommenthide;
-
+	// 喜歡1 不喜歡2
+	@Column(name = "likeorunlike")
+	private int likeorunlike;
 }

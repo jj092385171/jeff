@@ -54,7 +54,7 @@ fetch("/morari/forum/html/updatepost.html")
 						success: function (data) {
 							if (data == true) {
 								alert("更新成功")
-								window.location.href = "/morari/forum/showpostbyuserid.controller";
+								window.location.href = "/morari/admin/forum/forumadminindex";
 							}
 						}
 					});
@@ -141,5 +141,7 @@ fetch("/morari/forum/html/updatepost.html")
 
 	});
 	
+
+
 
 

@@ -28,7 +28,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       FilterChain filterChain) throws ServletException, IOException {
     boolean needAuth = false;
     // 路徑是否需要驗證
-    if (request.getRequestURI().equals("/morari/admin")) {
+    if (request.getRequestURI().equals("/morari/admin/132133213")) {
       needAuth = true;
     }
     if (!needAuth) {

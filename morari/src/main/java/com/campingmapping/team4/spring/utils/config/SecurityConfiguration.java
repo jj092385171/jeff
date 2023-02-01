@@ -43,7 +43,7 @@ public class SecurityConfiguration {
                     .csrf().disable()
                     // 設定是否需要驗證的路徑(更改成使用註釋)
                     .authorizeHttpRequests()
-                    .requestMatchers("/admin").hasAnyAuthority("ADMIN")
+                //     .requestMatchers("/admin").hasAnyAuthority("")
                     .anyRequest().permitAll()
                     .and()
                     // 啟用jwt監聽

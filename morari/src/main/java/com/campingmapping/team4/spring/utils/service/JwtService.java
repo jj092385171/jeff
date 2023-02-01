@@ -104,7 +104,8 @@ public class JwtService {
       return null;
     }
     Claims claims = extractAllClaims(jwt);
-    return (UUID) claims.get("uid");
+    UUID uid = UUID.fromString((String)claims.get("uid"));
+    return uid;
   }
 
   // 設置HttpOnly&Https的Cookie

@@ -8,14 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.campingmapping.team4.spring.t433forum.model.dto.PostAdmin;
+import com.campingmapping.team4.spring.t433forum.model.dto.ShowPostComment;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
+import com.campingmapping.team4.spring.t433forum.model.service.PostCommentService;
 import com.campingmapping.team4.spring.t433forum.model.service.PostService;
 
 @RestController
-public class ShowController {
+public class ShowPostController {
 
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private PostCommentService postCommentService;
 
 	// 查單一貼文
 	@GetMapping("/showpostbyid.controller/{postid}")
@@ -25,7 +30,7 @@ public class ShowController {
 
 	// 查所有貼文
 	@GetMapping("/showall.controller")
-	public List<Post> processShowAllPost() {
+	public List<PostAdmin> processShowAllPost() {
 		return postService.getAllPost();
 	}
 	
@@ -54,4 +59,9 @@ public class ShowController {
 		return postService.getReportPost();
 	}
 	
+	// 查貼文所有留言
+	@GetMapping("/showpostcommentbypostid.controller/{postid}")
+	public List<ShowPostComment> processShowPostCommentByPostId(@PathVariable(name = "postid") Integer postId){
+		return postCommentService.getPostCommentByPostId(postId);
+	}
 }
