@@ -1,13 +1,9 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
-import java.util.UUID;
+public interface ProductOrderDetailVo {
 
-public interface ProductOrderVo {
-
-	// p.id, p.userid, d.pdid, d.pdqty, c.pdpicture, c.pdprice, c.pdname
-	String getid();
-
-	String getuserid();
+	// p.pdorderid, p.pdid, p.pdqty, c.pdpicture, c.pdprice, c.pdname
+	String getpdorderid();
 
 	Integer getpdid();
 

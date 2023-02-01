@@ -19,6 +19,7 @@
 				}
 				console.log(response);
 				response.json().then(function (n) {
+				
 					var tableData = 
 						"<th>產品編號</th>"+"<th>產品名稱</th>"+
 						"<th>會員id</th>"+"<th>品牌名稱</th>"+
@@ -72,14 +73,8 @@
 				$.ajax({
 					   success: function(data){
 					   window.location.href = "/morari/mall/updateproduct.controller/"+pdid;
-					   },
-						error: function(){
-						// 刪除失敗時的處理
-						alert('刪除失敗');
-					}
-				
+					   }
 				  });
-				
 			} else {
 			}
 		}

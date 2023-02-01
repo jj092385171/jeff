@@ -30,46 +30,11 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    Hello Morari
-                    
-<script type="text/javascript">
-	
-		   function load(){
-		   $.ajax({
-			   type:'get',
-			   url:'/mall/selectAllPd',
-			   dataType:'JSON',
-			   contentType:'application/json',
-			   success: function(data){
-				   console.log(data);
-				   $('#showproduct').empty("");
-				   
-				   if(data==null){
-					   $('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
-				   }else{
-					   var table = $('#showproduct');
-					   table.append("<tr id='ptitle'><th>pdid</th><th>pdname</th><th>userid</th><th>pdtitle</th>"+
-							   "<th>pdcontent</th><th>pdtype</th><th>pdpicture</th><th>pdprice</th>"+
-							   "<th>pdinventory</th><th>pddate</th><th>pdlastupdate</th></tr>");
-					   
-					   $.each(data, function(i,n){
-						   var tr = "<tr align='center'>" + "<td><a href='/order/purchaseOrderProduct.controller?pid=" + n.id + "'>" + n.id +
-						            "</a></td>" +
-						            "<td>" + n.pdid + "</td>" + "<td>" + n.pdname + "</td>" +
-						            "<td>" + n.userid + "</td>" +"<td>" + n.pdtitle + "</td>"  +
-						            "<td>" + n.pdcontent + "</td>" +"<td>" + n.pdtype + "</td>"  +
-						            "<td>" + n.pdpicture + "</td>" + "<td>" + n.pdprice + "</td>" +
-						            "<td>" + n.pdinventory + "</td>" +"<td>" + n.pddate + "</td>" +
-						            "<td>" + n.pdlastupdate + "</td>" +
-						            "</tr>";
-						   table.append(tr);
-					   });				   
-				   }
-			   }
-		   });
-	   }
-
-	</script>
+               	<h3>商城管理</h3>
+				<form action="/morari/mall/productcreate.controller"method="GET">
+				<input type="submit" value="新增產品">
+				</form>
+				<table id="result"></table>
 
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
@@ -96,7 +61,7 @@
     <div class="loginoutshare"></div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/morari/admin/vendor/jquery/jquery.min.js" ></script>
+    <script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>
     <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 
     <!-- Core plugin JavaScript-->
@@ -111,6 +76,8 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+    <script src="/morari/mall/js/test2.js" defer></script>
+    <script type="text/javascript"></script>
 
 </body>
 

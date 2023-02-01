@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF8">
+	<title>TeamManager</title>
+	<style>
+		td {
+			border: 2px black solid;
+		}
+	</style>
+	<script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript">
+		var uid;
+		fetch("/morari/utils/getuid")
+			.then(response => response.text())
+			.then(datauid => {
+				// console.log(data)
+				// document.getElementById("uid").value = data;
+				uid = datauid;
+			})
+
+			
+		fetch('/morari/mall/selectAllPd', { method: 'GET' }).then(
+
+
+
+
+
+
+		
+			function (response) {
+				if (response.status != 200) {
+					console.log(response.satus);
+					return;
+				}
+				console.log(response);
+				response.json().then(function (n) {
+					var tableData =
+						"<th>產品名稱</th>" + "<th>品牌名稱</th>" +
+						"<th>產品規格</th>" + "<th>類型</th>" +
+						"<th>照片</th>" + "<th>產品價格</th>" +
+						"<th><input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid("+'"'+uid+'"'+")'></th>";
+					for (var i = 0; i < n.length; i++) {
+						tableData +=
+							"<tr>" +
+							"<td>" + n[i].pdname + "</td>" + "<td>" + n[i].pdtitle + "</td>" +
+							"<td>" + n[i].pdcontent + "</td>" + "<td>" + n[i].pdtype + "</td>" +
+							"<td>" + n[i].pdpicture + "</td>" + "<td>" + n[i].pdprice + "</td>" +
+							"<td><button id='addToCart' type='button' value='n[i].pdid' onclick='addToCart(" + n[i].pdid + ")'>加入購物車</button></td>" +
+							"</tr>"
+					}
+					document.getElementById('result').innerHTML = tableData;
+				});
+			});
+		function addToCart(pdid) {
+			var data = {
+				"pdid": pdid,
+				"userid": uid
+			};
+			$.ajax({
+				type: "POST",
+				url: "/morari/ProductCart/create.controller",
+				data: JSON.stringify(data),
+				contentType: "application/json; charset=utf-8",
+				dataType: "text",
+				success: function (response) {
+					alert(response);
+					// 成功時的回應處理
+				},
+				failure: function (error) {
+					// 失敗時的錯誤處理
+				}
+			});
+		}
+		function selectbyuserid(uid) {
+			$.ajax({
+				success: function (data) {
+					window.location.href = "/morari/ProductCart/queryAllByuserid.controller/" + uid;
+				}
+			});
+		}
+	</script>
+</head>
+
+<body>
+	<h3>凹豆商城</h3>
+	<table id="result"></table>
+</body>
+
+</html>

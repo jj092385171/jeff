@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF8">
+	<title>TeamManager</title>
+	<style>
+		td {
+			border: 2px black solid;
+		}
+	</style>
+	<script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript">
+		fetch('/morari/ProductOrder/selectAll', { method: 'GET' }).then(
+			function (response) {
+				if (response.status != 200) {
+					console.log(response.satus);
+					return;
+				}
+				console.log(response);
+				response.json().then(function (n) {
+					var tableData = 
+						"<th>訂單編號</th>"+"<th>用戶ID</th>"+
+						"<th>出貨狀態</th>"+"<th>訂單成立時間</th>"+
+						"<th>總金額</th>"+"<th>收件人姓名</th>"+
+						"<th>收件人電話</th>"+"<th>收件地址</th>";
+					for (var i = 0; i < n.length; i++) {
+						tableData += 
+							"<tr>" +
+				            "<td>" + n[i].id + "</td>" +"<td>" + n[i].userid + "</td>"  +
+				            "<td>" + n[i].odstatus + "</td>" +"<td>" + n[i].datetime + "</td>"  +
+				            "<td>" + n[i].money + "</td>" +"<td>" + n[i].odrecipient + "</td>" +
+				            "<td>" + n[i].odrecipientphone + "</td>" + "<td>" + n[i].odshippingaddress + "</td>" +
+				            "<td><button id='orderDetail' type='button' value='n[i].id' onclick='orderDetail("+'"'+ n[i].id  +'"'+")'>查看詳情</button></td>"+
+				            "</tr>"
+					}
+					document.getElementById('result').innerHTML = tableData;
+				});
+			});
+		
+		function orderDetail(id) {
+			if (confirm("確定查看(編號:" + id + ")?")) {
+				$.ajax({
+					   success: function(data){
+					   window.location.href = "/morari/ProductOrderDetail/selectAllByPdorderid.controller/"+id;
+					   }
+				  });
+			} else {
+			}
+		}
+		
+	</script>
+</head>
+
+<body>
+	<h3>凹豆商城 訂單管理</h3>
+	<table id="result"></table>
+</body>
+
+</html>

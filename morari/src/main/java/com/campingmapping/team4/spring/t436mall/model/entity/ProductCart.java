@@ -1,5 +1,7 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ public class ProductCart {
 	private Integer id;
 	// 購物車編號 不顯示(pk)
 	@Column(name = "userid")
-	private Integer userid;
+	private String userid;
 	// 會員 ID
 	@Column(name = "pdid")
 	private Integer pdid;

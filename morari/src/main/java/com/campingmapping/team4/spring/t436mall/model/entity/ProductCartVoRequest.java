@@ -1,5 +1,7 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
+import java.util.UUID;
+
 import lombok.Data;
 
 @Data
@@ -7,7 +9,7 @@ public class ProductCartVoRequest {
 
 	public Integer id;
 	// 購物車編號 不顯示(pk)
-	public Integer userid;
+	public String userid;
 	// 會員 ID
 	public Integer pdid;
 	// 產品編號(fk)
