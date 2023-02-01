@@ -136,6 +136,11 @@
 		</dependency> -->
 		<!-- azure blob 圖片API end -->
 
+		<!-- 郵件mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-io</groupId>
