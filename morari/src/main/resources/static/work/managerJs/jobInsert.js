@@ -1,46 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="UTF-8">
-	<title>新增</title>
-</head>
-
-<body>
-	<h3>新增</h3>
-
-	<form id="insert" enctype="multipart/form-data">
-	
-		會員編號 <input type="text" name="uid" value='1' required><br>
-
-		職缺 <input type="text" name="job" required><br>
-		薪資 <input type="text" name="salary" required><br>
-		人數 <input type="text" name="quantity" required><br>
-		地點 <input type="text" name="place" required><br>
-		可上班日期 <input type="text" name="date" required><br>
-		可上班時段 <input type="text" name="time" required><br>
-		備註<textarea name="remark" cols="20" rows="5"></textarea><br>
-
-		<input id="send" type="button" value="送出"><br>
-		<input type="reset" value="取消"><br>
-	</form>
-
-	<form id=img>
-		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img">
-	</form>
-	
-	<form action="crud.controller" method="GET"
-		enctype="multipart/form-data">
-		<input type="submit" value="回首頁">
-	</form>
-	<hr>
-	
-	<h3 id="su"></h3>
-	<table id="showInsert"></table>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
+// 載入 你的.html
+$(document).ready(function () {
 			$("#send").click(function () {
 				function getFormData($form) {
 					var unindexed_array = $form.serializeArray();
@@ -59,7 +18,9 @@
 					data: JSON.stringify(getFormData($("#insert"))),
 					success: function (response) {
 						$('#showInsert').empty("");
-					
+						$('#su').empty("");
+						$('#insert').empty("");
+						$('#img').empty("");
 						if (response == null) {
 							$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 						} else {
@@ -81,7 +42,3 @@
 				});
 			});
 		});
-	</script>
-</body>
-
-</html>

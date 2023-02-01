@@ -1,23 +1,31 @@
 package com.campingmapping.team4.spring.t409work.model.entity;
 
 import java.sql.Blob;
+import java.util.Collection;
 import java.util.Date;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
+@ToString(exclude = {"resume"})
 @Entity
 @Table(name = "job")
 public class JobBean {
@@ -26,15 +34,19 @@ public class JobBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rackid")
 	private Integer rackid;// 刊登編號
+	
+	@JsonIgnoreProperties("job")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="job")//設一個外來建的集合
+	@JsonIgnore
+	private Collection<ResumeBean> resume;
 
 	@ManyToOne
-	// @JsonIgnore
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
-
-	// @Column(name="uid")
-	// @Transient
-	// private Integer uid;
+	
+//	@Column(name="uid")
+//	@Transient
+//	private Integer uid;
 
 	@Column(name = "job")
 	private String job;// 職缺
@@ -53,6 +65,7 @@ public class JobBean {
 	@Column(name = "remark")
 	private String remark;// 備註
 	@Column(name = "rackup")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date rackup;// 上架日期
 
 }

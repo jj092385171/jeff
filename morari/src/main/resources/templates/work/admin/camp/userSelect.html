@@ -30,7 +30,21 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
+	<h3>查詢</h3>	
+			職缺<input id="sej" type="text" name="job" required>
+			<button id="selectJob"  onclick='selectJob(document.getElementById("sej").value)'>查詢</button>	
 
+	</div>
+	<br>
+
+	<form action="startCrud.controller" method="GET"
+		enctype="multipart/form-data">
+		<input type="submit" value="回首頁">
+	</form>
+	<hr>
+	
+	<h3 id="su"></h3>
+	<table id="showInsert"></table>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -71,7 +85,7 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-    <script src="/morari/work/js/insert.js" defer></script>
+    <script src="/morari/work/campJs/userSelect.js" defer></script>
     <script type="text/javascript">
 
 	</script>

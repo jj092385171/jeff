@@ -30,7 +30,32 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
+	   <h3>修改職缺</h3>
+	<form id="update" enctype="multipart/form-data">
+	
+		職缺 <input id="2" type="text" name="job" required><br>
+		薪資 <input id="3" type="text" name="salary" required><br>
+		人數 <input id="4" type="text" name="quantity" required><br>
+		地點 <input id="5" type="text" name="place" required><br>
+		可上班日期 <input id="6" type="text" name="date" required><br>
+		可上班時段 <input id="7" type="text" name="time" required><br>
+		備註<textarea id="8" name="remark" cols="20" rows="5"></textarea><br>
 
+		<input id="send" type="button" value="送出"><br>
+		<input type="reset" value="取消"><br>
+	</form>
+
+<!-- 	<form id=img> -->
+<!-- 		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img"> -->
+<!-- 	</form> -->
+	
+	<form action="/morari/admin/user/work/startCrud.controller" method="GET">
+		<input type="submit" value="回首頁">
+	</form>
+	<hr>
+	
+	<h3 id="su"></h3>
+	<table id="showInsert"></table>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -71,7 +96,7 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-    <script src="/morari/work/js/insert.js" defer></script>
+    <script src="/morari/work/campJs/userUpdate.js" defer></script>
     <script type="text/javascript">
 
 	</script>
