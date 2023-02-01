@@ -20,13 +20,14 @@ import com.campingmapping.team4.spring.t424camp.model.service.TagService;
 
 @Controller
 @RequestMapping("/admin/camp")
-// @SessionAttributes(names = { "allCamps", "cityList", "tagList" })
 public class IndexShowCampsController {
 
 	@Autowired
 	private CampService campService;
+	
 	@Autowired
 	private CityService cityService;
+	
 	@Autowired
 	private TagService tagService;
 	
@@ -38,7 +39,7 @@ public class IndexShowCampsController {
 
 	@GetMapping("/indexShowAllCamp.controller")
 	@ResponseBody
-	public Map<String, Object> processAction(Model m) {
+	public Object processAction(Model m) {
 		List<Camp> allCamps = campService.findAll();
 		List<Tag> tagList = tagService.findAll();
 		List<City> cityList = cityService.findAll();
@@ -47,10 +48,6 @@ public class IndexShowCampsController {
 		map.put("allCamps", allCamps);
 		map.put("tagList", tagList);
 		map.put("cityList", cityList);
-
-		// m.addAttribute("allCamps", allCamps);
-		// m.addAttribute("cityList", cityList);
-		// m.addAttribute("tagList", tagList);
 
 		return map;
 	}

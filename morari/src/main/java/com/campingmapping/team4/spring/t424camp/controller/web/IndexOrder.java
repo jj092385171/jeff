@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t424camp.controller.web;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.entity.Order;
+import com.campingmapping.team4.spring.t424camp.model.service.CampService;
 import com.campingmapping.team4.spring.t424camp.model.service.OrderService;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -26,6 +32,15 @@ public class IndexOrder {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private JwtService jwtService;
+	
+	@Autowired
+	private HttpServletRequest httpServletRequest;
+	
+	@Autowired
+	private CampService campService;
+	
 	
 	@GetMapping("/orderindex")
 	public String showOrderIndex() {
@@ -34,7 +49,7 @@ public class IndexOrder {
 	
 	@GetMapping("/showAllOrders/{page}")
 	@ResponseBody
-	public Map<String, Object> showAllOrder(@PathVariable("page")@Nullable Integer page ) {
+	public Object showAllOrder(@PathVariable("page")@Nullable Integer page ) {
 		if(page == null) {
 			page = 1;
 		}
@@ -54,6 +69,13 @@ public class IndexOrder {
 		
 		long totalOrders = pageList.getTotalElements();
 		map.put("totalOrders", totalOrders);
+		
+		
+		//使用者
+		Integer uid = jwtService.getUId(httpServletRequest);
+		
+		List<Camp> recommend = campService.recommendCampToUser(uid);
+		map.put("recommend", recommend);
 		
 		return map;
 	}

@@ -151,7 +151,7 @@
 
                                 var tagNames = '';
                                 after.tags.forEach(element => {
-                                    tagNames += element.tagName + ' /<br>'
+                                    tagNames += element.tagName + ' /'
                                 });
 
 
@@ -161,7 +161,7 @@
                                     + '地址: <input type="text" name="location" value="' + after.location + '"><br>'
                                     + '簡介: <input type="text" name="description" value="' + after.description + '"><br>'
                                     + '圖片: <img width="80" height="80" src="/morari/images/' + after.campPicturesPath + '"><br>'
-                                    + '標籤:' + tagNames + '<br>'
+                                    + '標籤: ' + tagNames + '<br>'
                                 form.append(div);
                             }
                         }

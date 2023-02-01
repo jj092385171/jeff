@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -36,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
 @Data
-@ToString(exclude = { "post", "job", "initiatings", "loginHistories" })
+@ToString(exclude = { "post", "job", "initiatings", "loginHistories", "CampOrder"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -44,7 +45,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Component
 public class UserProfiles implements UserDetails {
 
-  @Id
+	private static final long serialVersionUID = 1L;
+@Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer uid;
   @Column(nullable = false,unique = true,length = 50)
@@ -121,5 +123,5 @@ public class UserProfiles implements UserDetails {
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  private Collection<Order> CampOrder;
+  private Set<Order> CampOrder;
 }
