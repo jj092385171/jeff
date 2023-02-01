@@ -8,7 +8,7 @@ $(document).ready(function () {
 			document.getElementById("uid").value = data;
 		})
 
-	$("#send").click(function () {
+	 $("#send").click(function () {
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();
 			var indexed_array = {};
