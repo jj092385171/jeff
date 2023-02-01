@@ -1,11 +1,15 @@
 package com.campingmapping.team4.spring.utils.service;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.RoleRepository;
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 import com.campingmapping.team4.spring.t401member.model.entity.OAuth2Request;
+import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,7 +23,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AuthAccountService {
   // private final AuthAccountRepository authAccountRepository;
+  @Autowired
   private final UserRepository userRepository;
+  @Autowired
+  private final RoleRepository roleRepository;
 
   // private final MemberService memberService;
 
@@ -53,10 +60,13 @@ public class AuthAccountService {
   }
 
   private UserProfiles setUpUserProfiles(OAuth2Request oAuth2Request) {
-    UserProfiles user = UserProfiles.builder()
-        .email(oAuth2Request.email())
-        .uid(UUID.randomUUID())
-        .build();
+    UserProfiles user;
+    Role adminRole = roleRepository.findByName("USER").get();
+    user = UserProfiles.builder()
+    .email(oAuth2Request.email())
+    .uid(UUID.randomUUID())
+    .build();
+    user.getRoles().add(adminRole);
     UserDetail userDetail = new UserDetail();
     oAuth2Request.name().ifPresent(
         name -> {

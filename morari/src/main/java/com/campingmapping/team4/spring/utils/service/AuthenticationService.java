@@ -88,7 +88,7 @@ public class AuthenticationService {
 				UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 				islogin = jwtService.isTokenValid(cookiejwt, userDetails);
 			}
-		} catch (ExpiredJwtException e) {
+		} catch (Exception e) {
 			islogin = false;
 		}
 		return islogin;

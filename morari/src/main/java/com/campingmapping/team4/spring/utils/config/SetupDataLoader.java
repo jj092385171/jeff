@@ -40,7 +40,7 @@ public class SetupDataLoader implements
         if (alreadySetup)
             return;
         List<String> roles = Arrays.asList(
-                "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM");
+                "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM","USER");
         roles.forEach(r -> createRoleIfNotFound(r));
 
         // 檢查有無存在生成超級管理員
