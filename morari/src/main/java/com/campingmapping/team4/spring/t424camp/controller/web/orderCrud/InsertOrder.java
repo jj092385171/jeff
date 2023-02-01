@@ -42,7 +42,7 @@ public class InsertOrder {
 	
 	@PostMapping("/insertOrder.controller")
 	@ResponseBody
-	public Object insertOrder(@RequestParam("siteIds")@Nullable Integer[] siteIds,
+	public Object insertOrder (@RequestParam("siteIds")@Nullable Integer[] siteIds,
 			@RequestParam("nums")@Nullable Integer[] nums,
 			@RequestParam("goingdate")@Nullable String goingtimeString, 
 			@RequestParam("leavingdate")@Nullable String leavingtimeString,
@@ -71,10 +71,10 @@ public class InsertOrder {
 			goingtime = sdf.parse(goingtimeString);
 			leavingtime = sdf.parse(leavingtimeString);
 			if(goingtime.after(leavingtime)) {
-				errors.put("timeString", "入營時間不得晚於離營時間");
+				errors.put("timeString", "入營時間 不得晚於 離營時間");
 			}
 			if(goingtime.equals(leavingtime)) {
-				errors.put("timeString", "入營時間與離營時間不得同一天");
+				errors.put("timeString", "入營時間與離營時間 不得同一天");
 			}
 		} catch (ParseException e) {
 			errors.put("timeString", "錯誤日期格式");
@@ -96,7 +96,7 @@ public class InsertOrder {
 		//空值
 		if(order == null) {
 			errors.put("error", "none");
-			errors.put("noData", "訂單新增失敗");
+			errors.put("noData", "訂單已滿, 新增訂單失敗");
 			return errors;
 		}
 		
@@ -128,7 +128,7 @@ public class InsertOrder {
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;
-		
+
 	}
 
 }

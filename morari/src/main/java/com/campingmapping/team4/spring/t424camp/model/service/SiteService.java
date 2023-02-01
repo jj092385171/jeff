@@ -54,7 +54,7 @@ public class SiteService {
 			int campId) {
 		Camp camp = campService.findById(campId);
 
-		Site site = new Site(siteMoney, siteName, sitePicturesPath, totalSites, siteMoney, camp);
+		Site site = new Site(siteID, siteName, sitePicturesPath, totalSites, siteMoney, camp);
 
 		return sRepo.save(site);
 	}
