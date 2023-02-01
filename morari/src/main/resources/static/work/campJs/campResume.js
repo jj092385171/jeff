@@ -15,6 +15,8 @@ $(document).ready(function() {
 			$('#re').empty("");
 
 			if (response == null || response.length == 0) {
+				var h3 = $('#re');
+				h3.prepend('投遞履歷結果');
 				$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 			} else {
 				var h3 = $('#re');
