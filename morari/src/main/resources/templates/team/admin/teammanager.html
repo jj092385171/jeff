@@ -7,6 +7,7 @@
 	<style>
 		td {
 			border: 2px black solid;
+			text-align: center;
 		}
 	</style>
 	<script type="text/javascript">
@@ -22,8 +23,14 @@
 
 				response.json().then(function (data) {
 					var resultText = '';
-					var tableData = "";
 					var optionData= "";
+					
+					var tableData = "";
+					tableData += "<th>"  +"<td>" + "揪團編號" + 
+					"</td>" + "<td>" + "發文會員" + 
+					"</td>" + "<td>" + "發文日期" + "</td>" + "<td>" + "開始日期" + "</td>" + "<td>" +
+					"結束日期" + "</td>" + "<td>" + "目前人數" + "</td>" + "<td>" + "接受人數" + "</td>" +
+					"<td>" + "露營地點" + "</td>" + "<td>" + "配對狀態" + "</td>" + "</th>";
 					optionData += "<option value=" + "0" + '"' + ">" + "請選擇表單號碼" + "</option>"
 					for (var i = 0; i < data.length; i++) {
 						var pDay = new Date(data[i].postdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});
@@ -75,7 +82,7 @@
 					        return t.camparea === item.camparea;
 					    });
 					});
-					optionData += "<option value=" + "0" + '"' + ">" + "請選擇露營地點" + "</option>"
+					optionData += "<option value=" + "0" + ">" + "請選擇露營地點" + "</option>"
 					for (var i = 0; i < campareaData.length; i++){
 						optionData += "<option value=" + campareaData[i].camparea + ">" + campareaData[i].camparea + "</option>"
 					}
@@ -88,7 +95,7 @@
 					        return t.userprofiles === item.userprofiles;
 					    });
 					});
-					optionData += "<option value=" + "0" + '"' + ">" + "請選擇發文會員" + "</option>"
+					optionData += "<option value=" + "0" + ">" + "請選擇發文會員" + "</option>"
 					for (var i = 0; i < uidData.length; i++){
 						optionData += "<option value=" + '"' + uidData[i].userprofiles.uid + '"' + ">" + uidData[i].userprofiles.uid + "</option>"
 					}
@@ -145,6 +152,8 @@
 		     			var inum = formData.get('initiatingnum');
 		     			formData.delete("initiatingnum");
 		     			formData.append("initiatingnum", parseInt(inum));
+		     			var uid = formData.get("userprofiles");
+		     			console.log(uid);
 		     			formData.delete("userprofiles");
 		     			
 		     			console.log(formData)
@@ -156,7 +165,7 @@
 		     			const data = Object.fromEntries(formData);
 						const json = JSON.stringify(data);
 		     			
-		     			fetch('select.controller', {
+		     			fetch('select.controller/{' + uid + '}', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json'
@@ -168,7 +177,19 @@
 								if (response.status == 200) {
 									response.json().then(function (data){
 										var resultText = "";
-										var selectData = "";
+										var tableData = "";
+										tableData += 
+// 										"<th>"  +
+										"<td>" + "揪團編號" + 
+										"</td>" + "<td>" + "發文會員" + 
+										"</td>" + "<td>" + "發文日期" + "</td>" + "<td>" + "開始日期" + "</td>" + "<td>" +
+										"結束日期" + "</td>" + "<td>" + "目前人數" + "</td>" + "<td>" + "接受人數" + "</td>" +
+										"<td>" + "露營地點" + "</td>" + "<td>" + "配對狀態" + "</td>"
+// 										+ "</th>"
+										;
+										if(data.length == 0){
+											tableData = "查無資料";
+										}
 										for (var i = 0; i < data.length; i++) {
 											var pDay = new Date(data[i].postdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});
 											var sDay = new Date(data[i].startdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
@@ -185,7 +206,14 @@
 												+ eDay + " " + data[i].currentnum + " "
 												+ data[i].acceptablenum + " " + data[i].camparea + " "
 												+ pair + "<br/>";
+												
+											tableData += "<tr>" +"<td>" + data[i].initiatingnum + 
+											"</td>" + "<td>" + data[i].userprofiles.uid + 
+											"</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
+											eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
+											"<td>" + data[i].camparea + "</td>" + "<td>" + pair + "</td>" + "</tr>"
 										}
+										document.getElementById('selectResult').innerHTML = tableData;
 										console.log(resultText);
 									});
 								}
@@ -215,6 +243,7 @@
 										</select></li>
 									</ul>
 	</form>
+	<table id="selectResult"></table>
 	<button type="button" onclick="window.location.href='insert.controller'">新增</button>
 </body>
 
