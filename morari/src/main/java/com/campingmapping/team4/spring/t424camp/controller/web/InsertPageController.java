@@ -19,5 +19,15 @@ public class InsertPageController {
 
 		return "camp/admin/InsertSiteForm";
 	}
+	
+	@GetMapping("/insertorderPage")
+	public String insert() {
+		return "camp/admin/InsertOrderPage";
+	}
+	
+	@GetMapping("/insertOrder")
+	public String queryByCityIDsResult() {
+		return "camp/admin/InsertOrder" ;
+	}
 
 }

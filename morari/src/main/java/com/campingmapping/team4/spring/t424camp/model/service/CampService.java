@@ -1,17 +1,22 @@
 package com.campingmapping.team4.spring.t424camp.model.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t424camp.model.dao.repository.CampRepository;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.entity.City;
+import com.campingmapping.team4.spring.t424camp.model.entity.Order;
 import com.campingmapping.team4.spring.t424camp.model.entity.Site;
 import com.campingmapping.team4.spring.t424camp.model.entity.Tag;
 
@@ -30,6 +35,62 @@ public class CampService {
 
 	@Autowired
 	private TagService tagService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	
+	// 透過cityId查Camps
+	public List<Camp> recommendCampToUser(Integer uid) {
+		//user
+		UserProfiles user = userRepository.findById(uid).get();
+		//orders of user
+		Object[] orders = user.getCampOrder().toArray();
+		int ordersMax = orders.length-1;
+		int ordersMin = 0;
+		int ranOrdersNum = ordersMin + (int)(Math.random() * (ordersMax-ordersMin+1));
+		//ranOrder
+		Order ranOrder = (Order) orders[ranOrdersNum];
+		//cityId of ranOrder
+		Integer ranCityID = ranOrder.getCamp().getCity().getCityID();
+		//camps of city
+		boolean flag;
+		List<Camp> campList = campRepository.findByCityId(ranCityID);
+		
+		for(int j=0; j<campList.size(); j++) {
+			flag = false;
+			
+			for(int i=0; i<orders.length; i++) {
+				if(campList.get(j).getCampID() == ((Order) orders[i]).getCamp().getCampID()) {
+					flag = true;
+					break;
+				}
+			}
+			if(flag) {
+				campList.remove(campList.get(j));
+			}
+
+		}
+		
+		List<Camp> resultList = new ArrayList<Camp>();
+		if(campList.size() > 3) {
+			resultList = new ArrayList<Camp>();
+			Random rand = new Random();
+		    HashSet<Integer> set = new HashSet<>();
+		    while (set.size() < 3) {
+		      int num = rand.nextInt(campList.size());
+		      set.add(num);
+		    }
+		    for(int i=0; i<set.size(); i++) {
+		    	Integer index = (Integer) set.toArray()[i];
+		    	resultList.add(campList.get(index));
+		    }
+		    
+		    return resultList;
+		}
+		
+		return campList;
+	}
 
 	// 新增Camp
 	public Camp insert(String campName, Integer cityID, String location, String campPicturesPath, String description,

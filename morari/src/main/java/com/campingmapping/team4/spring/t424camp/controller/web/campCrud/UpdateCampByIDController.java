@@ -25,9 +25,10 @@ public class UpdateCampByIDController {
 	@Autowired
 	private CampService campService;
 
+	
 	@PostMapping("/updateCampByID.controller")
 	@ResponseBody
-	public Camp updateCampByID(@RequestParam("campID") @Nullable Integer campID,
+	public Object updateCampByID(@RequestParam("campID") @Nullable Integer campID,
 			@RequestParam("campName") @Nullable String campName,
 			@RequestParam("campPicturesPath") @Nullable MultipartFile mf,
 			@RequestParam("cityID") @Nullable String cityID, @RequestParam("location") @Nullable String location,
@@ -38,20 +39,23 @@ public class UpdateCampByIDController {
 		Map<String, String> errors = new HashMap<>();
 		m.addAttribute("errors", errors);
 
+		
 		// 營地名
 		if (campName == null || campName.trim().length() == 0) {
 			errors.put("campName", "必須輸入營地名稱");
 		}
 
 		// 圖
-		if (mf.isEmpty()) {
+		String fileName = null;
+		if (mf == null || mf.isEmpty()) {
 			errors.put("campPicturesPath", "必須選擇圖片");
 		}
-		String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
-		String fileName = mf.getOriginalFilename();
-		File saveFilePath = new File(saveFileDir, fileName);
-		mf.transferTo(saveFilePath);
-//		saveFilePath.delete();
+		else {
+			String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
+			fileName = mf.getOriginalFilename();
+			File saveFilePath = new File(saveFileDir, fileName);
+			mf.transferTo(saveFilePath);
+		}
 
 		// 縣市
 		if (cityID == null || cityID.length() == 0) {
@@ -68,18 +72,22 @@ public class UpdateCampByIDController {
 			errors.put("tagIDs", "必須選擇標籤");
 		}
 
-//		// 錯誤導回
-//		if (errors != null && !errors.isEmpty()) {
-//			m.addAttribute("errors", errors);
-//
-//			return "t4_24camp/admin/UpdateCampByIDForm";
-//		}
+		
+		// 錯誤導回
+		if (errors != null && !errors.isEmpty()) {
+			errors.put("error", "true");
+			return errors;
+		}
 
+		
 		Camp camp = campService.update(campID, campName, Integer.valueOf(cityID), location, fileName, description,
 				tagIDs);
 
-//		m.addAttribute("camp", camp);
-//		m.addAttribute("what", "更新");
+		if(camp == null) {
+			errors.put("error", "none");
+			errors.put("noData", "查無資料");
+			return errors;
+		}
 
 		return camp;
 	}

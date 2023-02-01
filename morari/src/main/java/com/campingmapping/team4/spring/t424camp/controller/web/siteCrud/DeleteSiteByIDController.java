@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t424camp.model.service.SiteService;
 
@@ -17,6 +18,7 @@ public class DeleteSiteByIDController {
 	private SiteService siteService;
 
 	@PostMapping("/deleteSiteByID.controller")
+	@ResponseBody
 	public boolean deleteSiteByID(@RequestBody int siteID, Model m) {
 		siteService.deleteById(siteID);
 
