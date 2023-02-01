@@ -166,6 +166,7 @@
                 $('td').width('100px').css("text-align", "center");
                 $('img').width('85px').height('85px');
 
+                console.log(data["recommend"])
                 var promote = $('#promote');
                 var promotediv = '';
                 $.each(data["recommend"], function (i, recommend) {
@@ -173,9 +174,11 @@
                         + '<div class="card border-left-primary shadow h-100 py-2" >'
                         + '<div class="card-body">'
                         + '<div class="row no-gutters align-items-center">'
-                        + '<div class="col mr-2" > '
+                        + '<div class="col mr-2">'
                         + '<div style="display:none">' + recommend.campID + '</div>'
-                        + '<div class="recommendinner" class="h5 mb-0 font-weight-bold text-gray-800"><a href="#">' + recommend.campName + '</a><br><img id="img" src="/morari/images/' + recommend.campPicturesPath + '">' + '</div >'
+                        + '<div class="recommendinner" class="h5 mb-0 font-weight-bold text-gray-800"><a href="#">' + recommend.campName + '</a><br><img id="img" src="/morari/images/' + recommend.campPicturesPath + '">' + '</div>'
+                        + '<div class="recommendinner">' + recommend.city.cityName + '</div>'
+                        + '<div class="recommendinner">' + recommend.location + '</div>'
                         + '</div>'
                         + '</div>'
                         + '</div>'
