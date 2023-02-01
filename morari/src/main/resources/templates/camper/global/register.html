@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <script src="/morari/admin/js/head.js"></script>
@@ -22,35 +22,36 @@
                                             src="/morari/img/camper.png" alt="home" style="max-width: 50px;"></a> Create
                                     an Account!</h1>
                             </div>
-                            <form class="user" id="join">
-                                <div class="form-group ">
-                                    <input type="text" class="form-control form-control-user" id="joinAccount"
-                                        name="account" placeholder="account">
+                            <form class="user" id="register">
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="registeremail"
+                                        name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user" name="password"
-                                            id="joinPassword" placeholder="Password">
+                                            id="registerpassword" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="joinPasswordCheck" placeholder="Repeat Password">
+                                            id="registerpasswordcheck" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
-                                </div>
-
-                                <a href="/morari/login" class="btn btn-primary btn-user btn-block">
+                                <p id="errormsg" style="color: red;"></p>
+                                <a class="btn btn-primary btn-user btn-block" id="Registersubmit"
+                                    onclick="submitForm()">
                                     Register Account
                                 </a>
                                 <hr>
-                                <a href="/morari/index" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                <a href="/morari/oauth2/authorization/google" class="btn btn-google btn-user btn-oauth" id="btn-oauth">
+                                    <i class="fab fa-google fa-fw"></i>
                                 </a>
-                                <a href="/morari/index" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                <a href="/morari/oauth2/authorization/facebook" class="btn btn-facebook btn-user btn-oauth" id="btn-oauth">
+                                    <i class="fab fa-facebook-f fa-fw"></i>
+                                </a>
+                                <a href="/morari/oauth2/authorization/github" class="btn btn-github btn-user btn-oauth"
+                                    id="btn-oauth">
+                                    <i class="fab fa-github fa-fw"></i>
                                 </a>
                             </form>
                             <hr>
@@ -60,6 +61,9 @@
                             <div class="text-center">
                                 <a class="small" href="/morari/login">Already have an account? Login!</a>
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -77,6 +81,39 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/morari/admin/js/sb-admin-2.min.js"></script>
+    <script>
+        function submitForm() {
+            let email = document.getElementById("registeremail").value;
+            let password = document.getElementById("registerpassword").value;
+            let passwordCheck = document.getElementById("registerpasswordcheck").value;
+            let data = {
+                email: email,
+                password: password
+            };
+            // Use fetch API or jQuery.ajax to send data as JSON to server
+            fetch('/morari/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(response => {
+                    if (response.status === 201) {
+                            // success
+                            console.log("register success")
+                            window.location.href = '/morari/login';
+                        } else if(response.status === 409){
+                            document.getElementById("errormsg").innerHTML = "register failed";
+                            console.log("register failed")
+                        }else {
+                            document.getElementById("errormsg").innerHTML = "register failed";
+                            console.log("register failed")
+                        }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
 
 </body>
 

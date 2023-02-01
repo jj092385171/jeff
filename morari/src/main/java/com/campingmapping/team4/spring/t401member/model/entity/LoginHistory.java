@@ -32,7 +32,7 @@ public class LoginHistory {
 
     // lhid
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "loginhistoryid")
     private Integer loginhistoryid;
     // uid

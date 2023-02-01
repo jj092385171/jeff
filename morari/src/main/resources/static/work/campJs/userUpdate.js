@@ -1,5 +1,14 @@
 // 載入 你的.html
 $(document).ready(function () {
+
+let uid;
+	fetch("/morari/utils/getuid")
+	.then(response => response.text())
+	.then(data => {
+		// console.log(data)
+		uid = data;
+	})
+
 			var url = window.location.href;
 			var id = url.split("/").pop();
 			console.log(id);
@@ -9,6 +18,7 @@ $(document).ready(function () {
 				url: '/morari/admin/user/work/userSelectRackId.controller/'+id,
 				dataType: 'json',			
 				success: function (data) {
+					$('#1').val(uid);
 					$('#2').val(data.job);
 					$('#3').val(data.salary);
 					$('#4').val(data.quantity);

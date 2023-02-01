@@ -7,21 +7,41 @@
 }
 
 body {
-    color: #666;
+    color: #2D3739;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
-    background: #ffffff;
+    background: #f2f2f2;
+}
+
+html,
+body {
+    height: 100%;
+    /*外層高度100%*/
+    margin: 0;
+}
+
+.wrapper {
+    min-height: calc(100% - 174.875PX - 60PX);
+    /*減去footer高度*/
+}
+
+.footer {
+    margin: 0;
+    height: 174.875PX;
+    /*設定footer本身高度*/
+    ;
 }
 
 a {
-    color: #222222;
+    color: #394648;
     transition: 0.5s;
 }
+
 
 a:hover,
 a:active,
 a:focus {
-    color: #00CED1;
+    color: #ffdbb3;
     outline: none;
     text-decoration: none;
 }
@@ -64,8 +84,8 @@ h6 {
 .back-to-top {
     position: fixed;
     display: none;
-    background: #222222;
-    color: #00CED1;
+    background: #aeaeae;
+    color: #ffdbb3;
     width: 44px;
     height: 44px;
     text-align: center;
@@ -79,8 +99,8 @@ h6 {
 }
 
 .back-to-top:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #aeaeae;
+    background: #ffdbb3;
 }
 
 .back-to-top i {
@@ -92,7 +112,7 @@ h6 {
 /* ================================================= */
 
 #header {
-    background: #222222;
+    background: #2b3436;
     position: relative;
     height: 60px;
 }
@@ -127,12 +147,14 @@ h6 {
 
 .main-menu ul li:hover a,
 .main-menu ul li.active a {
-    color: #ffffff;
+    color: #ffddb7;
+    background-color: #4e6364;
+    border-radius: 10px;
 }
 
 .main-menu ul li a {
     font-family: 'Roboto Slab', serif;
-    color: #00CED1;
+    color: #CBAC88;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 400;
@@ -142,8 +164,9 @@ h6 {
     display: block;
     transition: color .25s ease, background-color .25s ease;
 }
+
 .mobile-menu-btn {
-    color: #00CED1;
+    color: #CBAC88;
     text-align: center;
     font-size: 30px;
     line-height: 57px;
@@ -157,7 +180,7 @@ h6 {
 
 .mobile-menu {
     display: none;
-    background: #2a2a2a;
+    background: #2b3436;
     border-top: #343434;
 }
 
@@ -188,7 +211,7 @@ h6 {
     padding-right: 25px;
     padding-left: 10px;
     right: 0;
-    color: #fff;
+    color: #CBAC88;
     line-height: 60px;
     cursor: pointer;
     transition: color .25s ease;
@@ -197,10 +220,18 @@ h6 {
     font-weight: 700;
 }
 
-.phone i {
-    padding-right: 10px;
+.phone a {
+
     font-size: 20px;
+    color: #CBAC88
 }
+
+.phone a:hover,
+.phone a:active {
+    color: #ffddb7;
+}
+
+
 @media (max-width: 575.98px) {
     #header .logo {
         padding-left: 5px;
@@ -222,6 +253,7 @@ h6 {
         padding: 0 30px;
     }
 }
+
 @media (max-width: 1199.98px) {
     .main-menu {
         display: none;
@@ -263,15 +295,15 @@ h6 {
     #search.search-slider {
         display: none;
     }
-    
+
     #search.search-home {
         display: block;
     }
-    
+
     #search {
         padding: 30px 0 35px 0;
     }
-    
+
     #search .control-group-kid {
         margin-top: 15px;
     }
@@ -306,38 +338,39 @@ h6 {
 #search input:focus,
 #search select:focus,
 #search button:focus {
-    border-color: #00CED1;
+    border-color: #f7ac93;
 }
 
 #search .btn {
     margin-top: 31px;
-    color: #00CED1;
-    background: #222222;
-    border-color: #222222;
+    color: #000000;
+    background: #CBAC88;
+    border-color: #CBAC88;
 }
 
 #search .btn:hover {
-    color: #222222;
-    background: #00CED1;
-    border-color: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
+    border-color: #ffd6a7;
 }
 
 #search.search-slider .btn {
-    background: #ffffff;
-    border-color: #ffffff;
+    background: #CBAC88;
+    border-color: #CBAC88;
 }
 
 #search.search-slider .btn:hover {
-    background: #00CED1;
-    border-color: #00CED1;
+    background: #ffd6a7;
+    border-color: #ffd6a7;
 }
 
-#search.search-slider input,
+/* #search.search-slider input,
 #search.search-slider select,
 #search.search-slider button,
 #search.search-slider .input-group-text {
     border: none;
-}
+    border-color: #CBAC88;
+} */
 
 #headerSlider {
     position: relative;
@@ -358,7 +391,7 @@ h6 {
 #welcome {
     position: relative;
     padding: 45px 0 60px 0;
-    background: #ffffff;
+    background: #f2f2f2;
     text-align: center;
 }
 
@@ -389,12 +422,12 @@ h6 {
         font-size: 40px;
         font-weight: 700;
     }
-    
+
     #welcome h4 {
         font-size: 30px;
         font-weight: 400;
     }
-    
+
     #welcome p {
         font-size: 18px;
         line-height: 28px;
@@ -407,12 +440,12 @@ h6 {
         font-weight: 700;
         letter-spacing: 0;
     }
-    
+
     #welcome h4 {
         font-size: 20px;
         font-weight: 400;
     }
-    
+
     #welcome p {
         font-size: 16px;
         line-height: 26px;
@@ -422,14 +455,15 @@ h6 {
 #welcome a {
     display: inline-block;
     padding: 7px 30px;
-    color: #00CED1;
-    background: #222222;
+    color: #000000;
+    background: #CBAC88;
     border-radius: 30px;
 }
 
 #welcome a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
+
 }
 
 /* ================================================= */
@@ -674,21 +708,21 @@ h6 {
 
 #about .content-col a {
     display: inline-block;
-    background: #222222;
     font-weight: 400;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     padding: 8px 30px;
     border-radius: 30px;
 }
 
 #about .content-col a:hover {
-    background: #00CED1;
-    color: #222222;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
-#about .content-col a:focus {
+/* #about .content-col a:focus {
     color: #fff;
-}
+} */
 
 /* ================================================= */
 /* ------------------ Rooms Style ------------------ */
@@ -798,7 +832,7 @@ h6 {
         margin-right: 10px;
         margin-bottom: 10px;
     }
-    
+
 }
 
 #rooms .room-icon li.icon-1 {
@@ -890,9 +924,9 @@ h6 {
 #rooms .room-link a {
     display: inline-block;
     padding: 7px 30px;
-    color: #00CED1;
     border-radius: 30px;
-    background: #222222;
+    color: #000000;
+    background: #CBAC88;
 }
 
 #rooms .room-link a:first-child {
@@ -900,8 +934,8 @@ h6 {
 }
 
 #rooms .room-link a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #rooms hr {
@@ -914,7 +948,7 @@ h6 {
     padding: 0px 8px 5px 8px;
     font-size: 25px;
     border-radius: 20px;
-    background: #00CED1;
+    background: #CBAC88;
     color: #fff;
 }
 
@@ -941,15 +975,15 @@ h6 {
     display: inline-block;
     margin: 0 auto;
     padding: 8px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     cursor: pointer;
     border: none;
 }
 
 .modal .modal-body a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 .modal .port-slider-nav .slick-track {
@@ -995,26 +1029,26 @@ h6 {
 #subscribe .subscribe-form input[type="email"]:focus {
     box-shadow: none;
     outline: 0 none;
-    border-color: #00CED1;
+    border-color: #CBAC88;
+    ;
 }
 
 @media only screen and (max-width: 479px) {
     #subscribe .subscribe-form input[type="email"] {
-        text-align: center; 
-    } 
+        text-align: center;
+    }
 }
 
 input::-webkit-input-placeholder,
 input:-moz-placeholder,
 input::-moz-placeholder,
 input:-ms-input-placeholder,
-input::-ms-input-placeholder { 
-    color: white; 
+input::-ms-input-placeholder {
+    color: white;
 }
 
 #subscribe .subscribe-form button {
     font-size: 22px;
-    color: #00CED1;
     height: 50px;
     position: absolute;
     right: 0;
@@ -1022,18 +1056,19 @@ input::-ms-input-placeholder {
     line-height: 1px;
     padding: 6px 30px;
     margin-right: -1px;
-    background: #222222;
     border: none;
     border-radius: 30px;
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
     transition: all .3s;
+    color: #434343;
+    background: #CBAC88;
 }
 
 #subscribe .subscribe-form button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #subscribe .subscribe-form button:focus {
@@ -1047,7 +1082,7 @@ input::-ms-input-placeholder {
         position: static;
         margin-top: 15px;
         width: 100%;
-    } 
+    }
 }
 
 /* ================================================= */
@@ -1071,7 +1106,7 @@ input::-ms-input-placeholder {
 #booking .form-control,
 #booking .custom-select {
     height: 35px;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(123, 123, 123);
     border-radius: 30px;
     line-height: 24px;
     padding: 5px 20px;
@@ -1083,7 +1118,8 @@ input::-ms-input-placeholder {
 
 #booking .form-control:focus,
 #booking .custom-select:focus {
-    border-color: #00CED1;
+
+    border-color: #f7ac93;
     box-shadow: none;
     outline: 0 none;
 }
@@ -1091,20 +1127,20 @@ input::-ms-input-placeholder {
 #booking .button button {
     display: inline-block;
     font-size: 16px;
-    color: #00CED1;
     line-height: 24px;
     padding: 10px 30px 8px 30px;
     border-radius: 30px;
-    background: #222222;
     border: none;
     font-weight: 400;
     cursor: pointer;
     transition: all .3s;
+    color: #000000;
+    background: #CBAC88;
 }
 
 #booking .button button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #booking .help-block ul {
@@ -1128,8 +1164,8 @@ input::-ms-input-placeholder {
     font-family: 'Roboto Slab', serif;
     display: inline-block;
     padding: 15px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #4b4b4b;
+    background: #CBAC88;
     font-size: 28px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -1137,8 +1173,8 @@ input::-ms-input-placeholder {
 }
 
 #call-us a:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 /* ================================================= */
@@ -1163,12 +1199,13 @@ input::-ms-input-placeholder {
     padding: 30px 15px;
     margin-bottom: 15px;
     text-align: center;
-    background: #222222;
+    background: #2b3436;
+    ;
     border-radius: 30px;
 }
 
 #contact .contact-info .info-item i {
-    color: #00CED1;
+    color: #CBAC88;
     font-size: 30px;
     margin-bottom: 15px;
 }
@@ -1192,7 +1229,7 @@ input::-ms-input-placeholder {
 }
 
 #contact .contact-info .info-item a:hover {
-    color: #00CED1;
+    color: #CBAC88;
 }
 
 #contact .contact-form {
@@ -1222,7 +1259,8 @@ input::-ms-input-placeholder {
     border-radius: 30px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
     textarea:focus,
     input:focus {
         font-size: 16px;
@@ -1233,14 +1271,14 @@ input::-ms-input-placeholder {
 #contact .contact-form input[type="text"]:focus,
 #contact .contact-form input[type="email"]:focus,
 #contact .contact-form textarea:focus {
-    border-color: #00CED1;
+    border-color: #f7ac93;
 }
 
 #contact .contact-form button {
     display: inline-block;
     padding: 8px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     font-size: 18px;
     font-weight: 400;
     border: none;
@@ -1250,8 +1288,8 @@ input::-ms-input-placeholder {
 }
 
 #contact .contact-form button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #contact .help-block ul {
@@ -1277,7 +1315,7 @@ input::-ms-input-placeholder {
     #login .container .col-md-6:first-child {
         margin-bottom: 30px;
     }
-} 
+}
 
 #login .login-form {
     position: relative;
@@ -1303,7 +1341,7 @@ input::-ms-input-placeholder {
     border-radius: 30px;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
     input:focus {
         font-size: 16px;
         background: #fff;
@@ -1313,14 +1351,14 @@ input::-ms-input-placeholder {
 #login .login-form input[type="text"]:focus,
 #login .login-form input[type="email"]:focus,
 #login .login-form input[type="password"]:focus {
-    border-color: #00CED1;
+    border-color: #f7ac93;
 }
 
 #login .login-form button {
     display: inline-block;
     padding: 8px 30px;
-    background: #222222;
-    color: #00CED1;
+    color: #000000;
+    background: #CBAC88;
     font-size: 18px;
     font-weight: 400;
     border: none;
@@ -1330,8 +1368,8 @@ input::-ms-input-placeholder {
 }
 
 #login .login-form button:hover {
-    color: #222222;
-    background: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 /* ================================================= */
@@ -1342,7 +1380,8 @@ input::-ms-input-placeholder {
     position: relative;
     padding: 30px 0 25px 0;
     text-align: center;
-    background: #222222;
+    background: #2b3436;
+    color: #8a755c;
 }
 
 #footer .social {
@@ -1351,11 +1390,11 @@ input::-ms-input-placeholder {
 }
 
 #footer a {
-    color: #00CED1;
+    color: #CBAC88;
 }
 
 #footer a:hover {
-    color: #ffffff;
+    color: #ffddb7;
 }
 
 #footer .social a {
@@ -1363,15 +1402,15 @@ input::-ms-input-placeholder {
     width: 40px;
     height: 40px;
     padding: 5px 10px;
-    background: #00CED1;
-    color: #222222;
+    color: #2b3436;
+    background: #CBAC88;
     font-size: 20px;
     border-radius: 30px;
 }
 
 #footer .social a:hover {
-    background: #ffffff;
-    color: #00CED1;
+    color: #7b7b7b;
+    background: #ffd6a7;
 }
 
 #footer ul {
@@ -1388,7 +1427,7 @@ input::-ms-input-placeholder {
     list-style-type: none;
     padding: 0 10px 0 3px;
     line-height: 15px;
-    border-right: 1px solid #ffffff;
+    border-right: 0px solid #ffffff;
 }
 
 #footer ul li:last-child {
@@ -1398,4 +1437,519 @@ input::-ms-input-placeholder {
 #footer p {
     margin: 0;
     font-size: 18px;
+}
+
+.dropdown img {
+    max-height: 50px;
+    border-radius: 100%;
+}
+
+
+
+.dropdown-content {
+    right: 10px;
+    left: auto;
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+    float: left;
+    padding: 8px 0;
+    margin: 0.125rem 0 0;
+    color: #858796;
+    text-align: left;
+    list-style: none;
+    background-color: #2b3436;
+    background-clip: padding-box;
+    border-radius: 0.35rem;
+
+
+
+
+}
+
+a.dropdown-item {
+    padding: 4px 24px;
+    font-size: 13.6px;
+    font-weight: 400;
+    line-height: 20.4px;
+}
+
+a.dropdown-item:hover,
+a.dropdown-item:focus {
+    background-color: #4E6364;
+    color: #CBAC88;
+    text-decoration: none;
+}
+
+a.dropdown-item.active,
+a.dropdown-item:active {
+    background-color: #4E6364;
+    color: #CBAC88;
+    text-decoration: none;
+}
+
+a.dropdown-item.disabled,
+a.dropdown-item:disabled {
+    color: #b7b9cc;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+.modal-header,
+.modal-body {
+    padding: 16px;
+    font-family: "Nunito";
+}
+
+.modal-title {
+
+    line-height: 1.5;
+
+    font-size: 20px;
+    font-weight: 400;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    font-family: "Nunito";
+    outline: 0;
+    text-align: left;
+    width: auto;
+    margin: 0;
+    color: #2D3739;
+    text-align: left;
+
+}
+
+#logoutclose {
+    line-height: 24px;
+    padding: 16px;
+    margin: -16px;
+    margin-left: 289.975px;
+    font-size: 24px;
+    font-family: "Nunito";
+    color: #000;
+    float: right;
+    display: block;
+    background-color: #00000000;
+}
+
+#modal-body {
+    font-family: "Nunito";
+    color: #2D3739;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #2D3739;
+    text-align: left;
+}
+
+#modal-footer {
+    padding: 12px;
+    font-family: "Nunito";
+    font-size: 16px;
+}
+
+#logoutx {
+    font-family: "Nunito";
+    font-size: 16px;
+    margin: 4px;
+    padding: 6px 12px;
+}
+
+#logoutbtn {
+    font-family: "Nunito";
+    font-size: 16px;
+    margin: 4px;
+    padding: 6px 12px;
+    color: #000;
+    background-color: #CBAC88;
+}
+
+#logoutbtn:hover,
+#logoutbtn:active,
+#logoutbtn:focus {
+    color: #858796;
+    background-color: #ffddb7;
+}
+
+.error {
+    color: #5a5c69;
+    font-size: 7rem;
+    position: relative;
+    line-height: 1;
+    width: 12.5rem;
+}
+
+@-webkit-keyframes noise-anim {
+    0% {
+        clip: rect(49px, 9999px, 40px, 0);
+    }
+
+    5% {
+        clip: rect(75px, 9999px, 72px, 0);
+    }
+
+    10% {
+        clip: rect(97px, 9999px, 93px, 0);
+    }
+
+    15% {
+        clip: rect(15px, 9999px, 9px, 0);
+    }
+
+    20% {
+        clip: rect(14px, 9999px, 92px, 0);
+    }
+
+    25% {
+        clip: rect(18px, 9999px, 94px, 0);
+    }
+
+    30% {
+        clip: rect(17px, 9999px, 20px, 0);
+    }
+
+    35% {
+        clip: rect(71px, 9999px, 59px, 0);
+    }
+
+    40% {
+        clip: rect(42px, 9999px, 84px, 0);
+    }
+
+    45% {
+        clip: rect(56px, 9999px, 25px, 0);
+    }
+
+    50% {
+        clip: rect(46px, 9999px, 14px, 0);
+    }
+
+    55% {
+        clip: rect(47px, 9999px, 1px, 0);
+    }
+
+    60% {
+        clip: rect(64px, 9999px, 58px, 0);
+    }
+
+    65% {
+        clip: rect(89px, 9999px, 92px, 0);
+    }
+
+    70% {
+        clip: rect(56px, 9999px, 39px, 0);
+    }
+
+    75% {
+        clip: rect(80px, 9999px, 71px, 0);
+    }
+
+    80% {
+        clip: rect(8px, 9999px, 13px, 0);
+    }
+
+    85% {
+        clip: rect(66px, 9999px, 68px, 0);
+    }
+
+    90% {
+        clip: rect(68px, 9999px, 4px, 0);
+    }
+
+    95% {
+        clip: rect(56px, 9999px, 14px, 0);
+    }
+
+    100% {
+        clip: rect(28px, 9999px, 53px, 0);
+    }
+}
+
+@keyframes noise-anim {
+    0% {
+        clip: rect(49px, 9999px, 40px, 0);
+    }
+
+    5% {
+        clip: rect(75px, 9999px, 72px, 0);
+    }
+
+    10% {
+        clip: rect(97px, 9999px, 93px, 0);
+    }
+
+    15% {
+        clip: rect(15px, 9999px, 9px, 0);
+    }
+
+    20% {
+        clip: rect(14px, 9999px, 92px, 0);
+    }
+
+    25% {
+        clip: rect(18px, 9999px, 94px, 0);
+    }
+
+    30% {
+        clip: rect(17px, 9999px, 20px, 0);
+    }
+
+    35% {
+        clip: rect(71px, 9999px, 59px, 0);
+    }
+
+    40% {
+        clip: rect(42px, 9999px, 84px, 0);
+    }
+
+    45% {
+        clip: rect(56px, 9999px, 25px, 0);
+    }
+
+    50% {
+        clip: rect(46px, 9999px, 14px, 0);
+    }
+
+    55% {
+        clip: rect(47px, 9999px, 1px, 0);
+    }
+
+    60% {
+        clip: rect(64px, 9999px, 58px, 0);
+    }
+
+    65% {
+        clip: rect(89px, 9999px, 92px, 0);
+    }
+
+    70% {
+        clip: rect(56px, 9999px, 39px, 0);
+    }
+
+    75% {
+        clip: rect(80px, 9999px, 71px, 0);
+    }
+
+    80% {
+        clip: rect(8px, 9999px, 13px, 0);
+    }
+
+    85% {
+        clip: rect(66px, 9999px, 68px, 0);
+    }
+
+    90% {
+        clip: rect(68px, 9999px, 4px, 0);
+    }
+
+    95% {
+        clip: rect(56px, 9999px, 14px, 0);
+    }
+
+    100% {
+        clip: rect(28px, 9999px, 53px, 0);
+    }
+}
+
+.error:after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -1px 0 #e74a3b;
+    top: 0;
+    color: #5a5c69;
+    background: #f8f9fc;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: noise-anim 2s infinite linear alternate-reverse;
+}
+
+@-webkit-keyframes noise-anim-2 {
+    0% {
+        clip: rect(16px, 9999px, 10px, 0);
+    }
+
+    5% {
+        clip: rect(22px, 9999px, 29px, 0);
+    }
+
+    10% {
+        clip: rect(6px, 9999px, 68px, 0);
+    }
+
+    15% {
+        clip: rect(85px, 9999px, 95px, 0);
+    }
+
+    20% {
+        clip: rect(65px, 9999px, 91px, 0);
+    }
+
+    25% {
+        clip: rect(93px, 9999px, 68px, 0);
+    }
+
+    30% {
+        clip: rect(10px, 9999px, 27px, 0);
+    }
+
+    35% {
+        clip: rect(37px, 9999px, 25px, 0);
+    }
+
+    40% {
+        clip: rect(12px, 9999px, 23px, 0);
+    }
+
+    45% {
+        clip: rect(40px, 9999px, 18px, 0);
+    }
+
+    50% {
+        clip: rect(19px, 9999px, 71px, 0);
+    }
+
+    55% {
+        clip: rect(2px, 9999px, 35px, 0);
+    }
+
+    60% {
+        clip: rect(16px, 9999px, 69px, 0);
+    }
+
+    65% {
+        clip: rect(8px, 9999px, 65px, 0);
+    }
+
+    70% {
+        clip: rect(30px, 9999px, 57px, 0);
+    }
+
+    75% {
+        clip: rect(14px, 9999px, 4px, 0);
+    }
+
+    80% {
+        clip: rect(39px, 9999px, 30px, 0);
+    }
+
+    85% {
+        clip: rect(22px, 9999px, 35px, 0);
+    }
+
+    90% {
+        clip: rect(58px, 9999px, 71px, 0);
+    }
+
+    95% {
+        clip: rect(34px, 9999px, 90px, 0);
+    }
+
+    100% {
+        clip: rect(67px, 9999px, 68px, 0);
+    }
+}
+
+@keyframes noise-anim-2 {
+    0% {
+        clip: rect(16px, 9999px, 10px, 0);
+    }
+
+    5% {
+        clip: rect(22px, 9999px, 29px, 0);
+    }
+
+    10% {
+        clip: rect(6px, 9999px, 68px, 0);
+    }
+
+    15% {
+        clip: rect(85px, 9999px, 95px, 0);
+    }
+
+    20% {
+        clip: rect(65px, 9999px, 91px, 0);
+    }
+
+    25% {
+        clip: rect(93px, 9999px, 68px, 0);
+    }
+
+    30% {
+        clip: rect(10px, 9999px, 27px, 0);
+    }
+
+    35% {
+        clip: rect(37px, 9999px, 25px, 0);
+    }
+
+    40% {
+        clip: rect(12px, 9999px, 23px, 0);
+    }
+
+    45% {
+        clip: rect(40px, 9999px, 18px, 0);
+    }
+
+    50% {
+        clip: rect(19px, 9999px, 71px, 0);
+    }
+
+    55% {
+        clip: rect(2px, 9999px, 35px, 0);
+    }
+
+    60% {
+        clip: rect(16px, 9999px, 69px, 0);
+    }
+
+    65% {
+        clip: rect(8px, 9999px, 65px, 0);
+    }
+
+    70% {
+        clip: rect(30px, 9999px, 57px, 0);
+    }
+
+    75% {
+        clip: rect(14px, 9999px, 4px, 0);
+    }
+
+    80% {
+        clip: rect(39px, 9999px, 30px, 0);
+    }
+
+    85% {
+        clip: rect(22px, 9999px, 35px, 0);
+    }
+
+    90% {
+        clip: rect(58px, 9999px, 71px, 0);
+    }
+
+    95% {
+        clip: rect(34px, 9999px, 90px, 0);
+    }
+
+    100% {
+        clip: rect(67px, 9999px, 68px, 0);
+    }
+}
+
+.error:before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: 1px 0 #4e73df;
+    top: 0;
+    color: #5a5c69;
+    background: #f8f9fc;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: noise-anim-2 3s infinite linear alternate-reverse;
 }

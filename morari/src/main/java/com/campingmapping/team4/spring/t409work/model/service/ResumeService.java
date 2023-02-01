@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ResumeService {
 	}
 
 	// 新增履歷
-	public ResumeBean insert(ResumeBean rBean, Integer u, Integer rackid) {
+	public ResumeBean insert(ResumeBean rBean, UUID u, Integer rackid) {
 		rBean.setUserprofiles(uDao.findById(u).get());
 		rBean.setJob(jDao.findById(rackid).get());
 		Date currentDate = new Date();
@@ -87,7 +88,7 @@ public class ResumeService {
 	}
 
 	// 透過會員id找履歷
-	public List<ResumeBean> findUid(Integer uid) {
+	public List<ResumeBean> findUid(UUID uid) {
 
 		UserProfiles findById = uDao.findById(uid).get();
 		Collection<ResumeBean> resume = findById.getResume();

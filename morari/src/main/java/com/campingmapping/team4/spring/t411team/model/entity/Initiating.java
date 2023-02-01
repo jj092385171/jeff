@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Initiating {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "initiatingnum")
 	private Integer initiatingnum;
 

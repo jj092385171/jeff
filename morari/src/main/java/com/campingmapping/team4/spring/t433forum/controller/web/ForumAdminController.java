@@ -13,5 +13,15 @@ public class ForumAdminController {
         return "forum/admin/admin";
     }
 
+	// 顯示新增貼文頁面
+	@GetMapping("/showinsertadmin.controller")
+	public String processShowInsert() {
+		return "forum/admin/newpost";
+	}
 	
+	// 顯示修改貼文
+	@GetMapping("/showupdateadmin.controller/*")
+	public String processShowUpdate() {
+		return "forum/admin/updatepost";
+	}
 }

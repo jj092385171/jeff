@@ -22,7 +22,7 @@ public class Category {
 
 	@Id
 	@Column(name = "pdid")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer pdid;
 	// 產品編號(pk)
 	@Column(name = "userid")

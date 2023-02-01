@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,7 +83,7 @@ public class ResumeAdminController {
 	// 透過uid搜尋
 	@PostMapping("/selectUid.controller/{uid}")
 	@ResponseBody
-	public List<ResumeBean> processSelectUidAction(@PathVariable Integer uid) {
+	public List<ResumeBean> processSelectUidAction(@PathVariable UUID uid) {
 		List<ResumeBean> result = rService.findUid(uid);
 		
 		return result;

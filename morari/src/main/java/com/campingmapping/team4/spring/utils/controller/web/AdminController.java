@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+// @PreAuthorize("hasAnyAuthority('USER')")
 @RequestMapping("/admin")
 public class AdminController {
     @GetMapping({ "", "/" })

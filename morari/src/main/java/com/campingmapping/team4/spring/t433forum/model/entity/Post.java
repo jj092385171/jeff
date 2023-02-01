@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 public class Post {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "postid")
 	private Integer postid;
 
@@ -39,43 +40,45 @@ public class Post {
 
 	@Column(name = "title", nullable = false)
 	private String title;
-
-	@Column(name = "content", nullable = false)
+	
+	@Column(name = "content", nullable = false, length = Integer.MAX_VALUE)
 	private String content;
-
+	
 	@Column(name = "people")
 	private Integer people;
-
+	
 	@Column(name = "price")
 	private Integer price;
-
+	
 	@Column(name = "county")
 	private String county;
-
+	
 	@Column(name = "startdate")
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date startdate;
-
+	
 	@Column(name = "enddate")
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date enddate;
-
+	
 	@Column(name = "score")
 	private Integer score;
-
+	
 	@Column(name = "releasedate")
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date releasedate;
-
+	
 	@Column(name = "userlike")
 	private Integer userlike;
-
+	
 	@Column(name = "userunlike")
 	private Integer userunlike;
-
+	
+	// 檢舉1 未檢舉0
 	@Column(name = "postreport")
 	private Integer postreport;
-
+	
+	// 隱藏1 未隱藏0
 	@Column(name = "posthide")
 	private Integer posthide;
 

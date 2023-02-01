@@ -1,5 +1,7 @@
 // 載入 你的.html
 $(document).ready(function () {
+
+
 			$("#send").click(function () {
 				function getFormData($form) {
 					var unindexed_array = $form.serializeArray();

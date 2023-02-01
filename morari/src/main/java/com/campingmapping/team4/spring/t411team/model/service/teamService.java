@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class teamService {
 	@Autowired
 	private UserRepository uRepo;
 	
-	public Initiating insert(Initiating i ,Integer uid) {
+	public Initiating insert(Initiating i ,UUID uid) {
 		Date postday = new Date();
 		i.setPostdate(postday);
 		i.setUserprofiles(uRepo.findById(uid).get());

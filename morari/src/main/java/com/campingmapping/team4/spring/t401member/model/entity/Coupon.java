@@ -37,7 +37,7 @@ public class Coupon {
     // couponid
     // ID
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "couponid")
     private Integer couponid;
     // couponcode

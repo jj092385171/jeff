@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 import com.campingmapping.team4.spring.t409work.model.service.MailService;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 //job職缺(營主)的後台
 @Controller
 @RequestMapping("/admin/user/work")
 public class WorkAdminUserController {
 	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
 	private JobService jService;
-	
+
+	@Autowired
+	private JwtService jwtService;
+
 	@Autowired
 	private MailService mailService;
 
@@ -54,11 +64,11 @@ public class WorkAdminUserController {
 	// 透過uid搜尋
 	@PostMapping("/userSelectUid.controller/{uid}")
 	@ResponseBody
-	public List<JobBean> processSelectUidAction(@PathVariable Integer uid) {
-		List<JobBean> result = jService.findUid(2);
-//		if (result.size() == 0) {
-//			return null;
-//		}
+	public List<JobBean> processSelectUidAction(@PathVariable UUID uid) {
+		List<JobBean> result = jService.findUid(uid);
+		// if (result.size() == 0) {
+		// return null;
+		// }
 		return result;
 	}
 
@@ -66,7 +76,8 @@ public class WorkAdminUserController {
 	@PostMapping("/userInsert.controller")
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
-		return jService.insert(jobBean, 1);
+		UUID uid = jwtService.getUId(request);
+		return jService.insert(jobBean, uid);
 	}
 
 	// 刪除
@@ -84,6 +95,7 @@ public class WorkAdminUserController {
 		System.out.println("rackid=" + rackid);
 		return jService.updateJob(jBean, rackid);
 	}
+
 	// 透過rackid找資料後給前端修改
 	@PostMapping("/userSelectRackId.controller/{rackID}")
 	@ResponseBody
@@ -91,14 +103,14 @@ public class WorkAdminUserController {
 		JobBean result = jService.findById(rackID);
 		return result;
 	}
-	//寄email
+
+	// 寄email
 	@PostMapping("/userMail.controller")
 	@ResponseBody
 	public String processAction4(@RequestBody String email) {
-		mailService.sendEmail(email,"快加入我們吧！","您好，我明天要睡飽一點會晚到，不要太想我");
-		
+		mailService.sendEmail(email, "快加入我們吧！", "您好，我明天要睡飽一點會晚到，不要太想我");
+
 		return "Success！！！";
 	}
-
 
 }

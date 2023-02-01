@@ -30,30 +30,36 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="email" class="form-control form-control-user" id="useremail"
+                                                name="email" aria-describedby="emailHelp" placeholder="Enter Email...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="userpassword" name="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
+                                                <p id="errormsg" style="color: red;"></p>
                                             </div>
                                         </div>
-                                        <a href="/morari/index" class="btn btn-primary btn-user btn-block">
+                                        <a class="btn btn-primary btn-user btn-block" onclick="submitForm()">
                                             Login
                                         </a>
                                         <hr>
-                                        <a href="/morari/index" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        <a href="/morari/login/oauth2/authorization/google" class="btn btn-google btn-user btn-oauth"
+                                            id="btn-oauth">
+                                            <i class="fab fa-google fa-fw"></i>
                                         </a>
-                                        <a href="/morari/index" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                        <a href="/morari/login/oauth2/authorization/facebook"
+                                            class="btn btn-facebook btn-user btn-oauth" id="btn-oauth">
+                                            <i class="fab fa-facebook-f fa-fw"></i>
+                                        </a>
+                                        <a href="/morari/login/oauth2/authorization/github" class="btn btn-github btn-user btn-oauth"
+                                            id="btn-oauth">
+                                            <i class="fab fa-github fa-fw"></i>
                                         </a>
                                     </form>
                                     <hr>
@@ -84,6 +90,42 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/morari/admin/js/sb-admin-2.min.js"></script>
+
+    <script>
+        function submitForm() {
+            const data = {
+                email: document.getElementById("useremail").value,
+                password: document.getElementById("userpassword").value,
+                rememberMe: document.getElementById("customCheck").checked
+            }
+
+            fetch("/morari/api/auth/authenticate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(
+                    response => {
+                        
+                        if (response.status === 201) {
+                            // success
+                            console.log("login success")
+                            window.location.href = '/morari/home';
+                        } else if(response.status === 401){
+                            document.getElementById("errormsg").innerHTML = "Invalid Email or Password";
+                            console.log("Invalid Email or Password")
+                        }else {
+                            document.getElementById("errormsg").innerHTML = "login failed";
+                            console.log("login failed")
+                        }
+                    })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+    </script>
 
 </body>
 

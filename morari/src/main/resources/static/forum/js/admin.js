@@ -1,14 +1,3 @@
-// 載入 你的.html
-//fetch("/morari/forum/html/newpost.html")
-//    .then(response => response.text())
-//    .then(html => {
-//        // 將載入的 HTML 放入 .footer 元素中
-//        document.querySelector(".newpost").innerHTML = html;
-//    });
-
-// 送資料判斷
-	
-    
 // 顯示畫面
 $(function(){
 	$.ajax({
@@ -22,11 +11,75 @@ $(function(){
 			$.each(data, function(i,n){
 				// i=index 第幾個 n=element 元素
 				var tr = "<tr align='center'>" + 
-				"<td>" + n.postid + "</td><td>" + n.userid + "</td><td>" + n.title + "</td><td>" + n.content +"</td><td>" + n.people + "</td><td>" + 
+				"<td>" + n.postid + "</td><td>" + n.uid + "</td><td>" + n.title + "</td><td>" + n.content +"</td><td>" + n.people + "</td><td>" + 
 				n.price + "</td><td>" + n.county + "</td><td>" + n.startdate + "</td><td>" + n.enddate + "</td><td>" + n.score + "</td><td>" + 
-				n.releasedate + "</td><td>" + n.userlike + "</td><td>" + n.userunlike + "</td><td>" + n.postreport + "</td><td>" + n.posthide + "</td><td><a href='/morari/forum/showupdate.controller/" + n.postid + "'>修改貼文</a></td></tr>";
+				n.releasedate + "</td><td>" + n.userlike + "</td><td>" + n.userunlike + "</td><td>" + n.postreport + "</td><td>" + n.posthide +
+				
+				// "<button onclick='window.location.href = \"/morari/forum/showupdate.controller/" + n.postid + "\"'>修改貼文</button>" +
+				
+				"</td><td><button onclick='window.location.href = \"/morari/admin/forum/showupdateadmin.controller/" + n.postid + "\"'>修改貼文</button></td>";
+				
+				
+				if(n.posthide == 0){
+					tr += "<td><from><button onclick=hidepost(" + n.postid + ")>隱藏貼文</button></from></td>";
+				}else{
+					tr += "<td><from><button onclick=cancelhidepost(" + n.postid + ")>取消隱藏貼文</button></from></td>";
+				}
+				
+				if(n.postreport == 1){
+					tr += "<td><from><button onclick=cancelreportpost(" + n.postid + ")>取消檢舉貼文</button></from></td>";
+				}
+				
+				tr += "</tr>";
 				table.append(tr);
 			});
 		}
+	
 	});
+	
 });
+
+function hidepost(id){
+	$.ajax({
+		type:"put",
+		url:"/morari/hidepost.controller/" + id,
+		dataType:"JSON",
+		contentType:"application/json",
+		success: function(data){
+			if(data == true){
+				alert("隱藏成功")
+				location.reload();
+			}
+		}
+	});
+}
+	
+function cancelhidepost(id){
+	$.ajax({
+		type:"put",
+		url:"/morari/cancelhidepost.controller/" + id,
+		dataType:"JSON",
+		contentType:"application/json",
+		success: function(data){
+			if(data == true){
+				alert("取消隱藏成功")
+				location.reload();
+			}
+		}
+	});
+}
+
+function cancelreportpost(id){
+	$.ajax({
+		type:"put",
+		url:"/morari/cancelreportpost.controller/" + id,
+		dataType:"JSON",
+		contentType:"application/json",
+		success: function(data){
+			if(data == true){
+				alert("取消檢舉成功")
+				location.reload();
+			}
+		}
+	});
+}

@@ -9,7 +9,8 @@ $(document).ready(function () {
 				url: '/morari/admin/work/selectRackId.controller/'+id,
 				dataType: 'json',			
 				success: function (data) {
-// 					$('#1').val(data.uid);
+					console.log(data.userprofiles.uid)
+					$('#1').val(data.userprofiles.uid);
 					$('#2').val(data.job);
 					$('#3').val(data.salary);
 					$('#4').val(data.quantity);

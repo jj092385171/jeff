@@ -17,9 +17,9 @@ public class Vote {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "voteId")
-	private int voteId;
-	@Column(name = "voteName")
-	private String voteName;
+	@Column(name = "voteid")
+	private int voteid;
+	@Column(name = "votename")
+	private String votename;
 
 }
