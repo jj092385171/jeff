@@ -108,6 +108,9 @@
 	<!-- Page level custom scripts -->
 	<script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
 	<script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+	<!-- datatables js -->
+	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
+	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 	<script type="text/javascript">
@@ -172,13 +175,13 @@
 											+ '<td>' + n.location + '</td>'
 											+ '<td>' + tagNames + '</td>'
 											+ '<td>'
-											+ '<button style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>'
+											+ '<button class="morariUpdate" style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>'
 											+ '</td>'
 											+ '<td>'
-											+ '<button style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>'
+											+ '<button class="morariDelete" style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>'
 											+ '</td>'
 											+ '<td>'
-											+ '<button style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-plus"></i></a></button>'
+											+ '<button class="morariInsert" style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-plus"></i></a></button>'
 											+ '</td>'
 											+ '</tr>'
 											+ '</tbody>'

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -82,7 +83,7 @@ public class InsertOrder {
 		}
 		
 		//使用者
-		Integer uid = jwtService.getUId(httpServletRequest);
+		UUID uid = jwtService.getUId(httpServletRequest);
 		
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
@@ -124,7 +125,7 @@ public class InsertOrder {
 		obj.setTradeDesc("test Description");
 		obj.setItemName(items);
 		obj.setReturnURL("http://211.23.128.214:5000");
-		obj.setClientBackURL("https://localhost:8080/morari/admin/camp/querySuccessOrderPage");
+		obj.setClientBackURL("https://localhost:8443/morari/admin/camp/querySuccessOrderPage");
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;

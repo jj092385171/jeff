@@ -40,7 +40,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 		ProductOrder order = new ProductOrder();
 		Date now = new Date();
 		order.setDatetime(now);
-		order.setId(UUID.randomUUID().toString());
+		order.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		order.setOdstatus("未出貨");
 		order.setUserid(productcartvorequest.get(0).getUserid());
 		order.setOdrecipient(odrecipient);
@@ -66,7 +66,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 	}
 	// 依userID來搜尋所有訂單
 	@Override
-	public List<ProductOrder> selectAllByUserId(Integer userid) {
+	public List<ProductOrder> selectAllByUserId(String userid) {
 		return pDao.findByUserid(userid);
 	}
 	// 搜尋所有訂單(只有後臺能使用)

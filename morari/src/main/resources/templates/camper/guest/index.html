@@ -11,21 +11,22 @@
   <!-- Header Section Start -->
   <div class="header"></div>
   <!-- Header Section End -->
+  <div class="wrapper">
 
 
 
 
 
-  <!-- 分離範例 -->
-  <!-- <div class="test"></div>
+    <!-- 分離範例 -->
+    <!-- <div class="test"></div>
   <script src="/morari/camper/js/test.js"></script> -->
 
 
-  <input type="button" id="btm">
 
 
 
 
+  </div>
   <!-- Footer Section Start -->
   <div class="footer"></div>
   <!-- Footer Section End -->
@@ -55,28 +56,6 @@
   <script src="/morari/guest/js/main.js" defer></script>
 
 
-  <script type="text/javascript">
-    $(function () {
-      $('#btm').click(function () {
-        $.ajax({
-          type: 'get',
-          url: '/morari/json/profiles2.json',
-          success: function (data) {
-            let jd = []
-            jd = data;
-            console.log(jd[0].name)
-            console.log(jd[1].name)
-            console.log(jd[2].name)
-            console.log(jd[0].age)
-            console.log(jd[1].age)
-            console.log(jd[2].age)
-
-          },
-        });
-      });
-    });
-
-  </script>
 
 
 </body>

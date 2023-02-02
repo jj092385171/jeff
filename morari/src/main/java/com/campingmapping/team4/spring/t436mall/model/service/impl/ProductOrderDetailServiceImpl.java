@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t436mall.model.dao.repository.ProductOrderDetailRepository;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderDetail;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderDetailVo;
 import com.campingmapping.team4.spring.t436mall.model.service.ProductOrderDetailService;
 
 @Service
@@ -29,7 +30,7 @@ public class ProductOrderDetailServiceImpl implements ProductOrderDetailService 
 	}
 	// 根據訂單編號搜尋所有訂單詳情
 	@Override
-	public List<ProductOrderDetail> selectAllByPdorderid(String pdorderid) {
+	public List<ProductOrderDetailVo> selectAllByPdorderid(String pdorderid) {
 		return pODDao.findByPdorderid(pdorderid);
 	}
 }

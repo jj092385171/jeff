@@ -1,10 +1,9 @@
 <form>
 	<h3>貼文</h3>
 	<input type="submit" formaction="/morari/forum" value="回討論區">
-	<input type="submit" formaction="" value="回個人貼文">
+	<input type="submit" formaction="/morari/forum/showpostbyuserid.controller" value="回個人貼文">
 </form>
 <form>
-	<input type="hidden" name="postId" value="${resultPost.postId}">
 	<div>
 		<label>標題:</label>
 		<input type="text" name="title" id="title" size="80" disabled>
@@ -44,33 +43,13 @@
 	<div>
 		<label>喜歡本貼文人數:</label>
 		<input type="text" name="userLike" id="userLike" size="30" disabled>
-		<input type="submit" formaction="" value="喜歡">
+		<input type="button" id="like" value="喜歡">
 	</div>
 	<div>	
 		<label>不喜歡本貼文人數:</label>
 		<input type="text" name="userUnlike" id="userUnlike" size="30" disabled>
-		<input type="submit" formaction="" value="不喜歡">
+		<input type="button" id="unlike" value="不喜歡">
 	</div>
-	<input type="submit" value="檢舉貼文" onclick="return confirm('是否確定檢舉貼文?');">
+	<input type="button" id="sub" value="檢舉貼文">
 </form>
-
-	
 <hr>
-<form action="insertPostComment" method="post">
-	<h3>留言</h3>
-	<input type="hidden" name="postId" value="${resultPost.postId}">
-	<label>新增留言:</label>
-    <input type="text" name="comment" maxlength="100" size="100" required="required">
-    <input type="submit" value="送出留言"><br>
-</form>
-	<table>
-		<c:forEach var="postComment" items="${resultpostComment}">
-        	<tr>
-        		<td>
-        			留言者ID：${postComment.userId}<br>
-        			留言內容：${postComment.postComment}
-<!--         			<input type="submit" formaction="" value="隱藏留言"> -->
-        		</td>
-        	</tr>
-        </c:forEach>		
-	</table>

@@ -26,7 +26,7 @@ public class Category {
 	private Integer pdid;
 	// 產品編號(pk)
 	@Column(name = "userid")
-	private Integer userid;
+	private String userid;
 	// 會員 ID
 	@Column(name = "pdname")
 	private String pdname;

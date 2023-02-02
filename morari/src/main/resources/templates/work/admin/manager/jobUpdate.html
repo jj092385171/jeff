@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <script src="/morari/admin/js/head.js"></script>
+
+    <!-- sharepage -->
+    <script src="/morari/admin/js/share.js"></script>
+
+</head>
+
+<body id="page-top" style="display: none">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- sidebar -->
+        <div class="sidebarshare"></div>
+        <!-- sidebar end -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- topbar -->
+                <div class="topbarshare"></div>
+                <!-- topbar end -->
+
+                <!-- Begin Page Content(開始主要內容區塊) -->
+                <div class="container-fluid">
+<!-- 這裡 -->
+                   <h3>修改職缺</h3>
+	<form id="update" enctype="multipart/form-data">
+	
+		會員編號 <input id="1" type="text" name="uid" value='1' required readonly><br>
+
+		職缺 <input id="2" type="text" name="job" required><br>
+		薪資 <input id="3" type="text" name="salary" required><br>
+		人數 <input id="4" type="text" name="quantity" required><br>
+		地點 <input id="5" type="text" name="place" required><br>
+		可上班日期 <input id="6" type="text" name="date" required><br>
+		可上班時段 <input id="7" type="text" name="time" required><br>
+		備註<textarea id="8" name="remark" cols="20" rows="5"></textarea><br>
+
+		<input id="send" type="button" value="送出"><br>
+		<input type="reset" value="取消"><br>
+	</form>
+
+<!-- 	<form id=img> -->
+<!-- 		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img"> -->
+<!-- 	</form> -->
+	
+	<form action="/morari/admin/work/crud.controller" method="GET">
+		<input type="submit" value="回首頁">
+	</form>
+	<hr>
+	
+	<h3 id="su"></h3>
+	<table id="showInsert"></table>
+
+                </div>
+                <!-- /.container-fluid(結束主要內容區塊) -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <div class="footershare"></div>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="loginoutshare"></div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/morari/admin/vendor/jquery/jquery.min.js" ></script>
+    <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/morari/admin/vendor/jquery-easing/jquery.easing.min.js" defer></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/morari/admin/js/sb-admin-2.min.js" defer></script>
+
+    <!-- Page level plugins -->
+    <script src="/morari/admin/vendor/chart.js/Chart.min.js" defer></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
+    <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+    <script src="/morari/work/managerJs/jobUpdate.js" defer></script>
+    <script type="text/javascript">
+
+	</script>
+
+</body>
+
+</html>

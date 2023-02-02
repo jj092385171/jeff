@@ -1,25 +1,25 @@
 package com.campingmapping.team4.spring.t401member.model.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-
+import lombok.Setter;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
+import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t424camp.model.entity.Order;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
@@ -36,8 +37,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Builder
-@Data
-@ToString(exclude = { "post", "job", "initiatings", "loginHistories", "CampOrder"})
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -45,23 +46,38 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Component
 public class UserProfiles implements UserDetails {
 
-	private static final long serialVersionUID = 1L;
-@Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer uid;
-  @Column(nullable = false,unique = true,length = 50)
+  @Id
+  private UUID uid;
+
+  @Column(nullable = false, unique = true, length = 50)
   private String email;
+
+  // private String accountId;
+
   @JsonIgnore
   private String password;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Enumerated(EnumType.STRING)
-  private Collection<Role> roles;
+  @Embedded
+  UserName username;
+
+  @Embedded
+  UserPrivacy userprivacy;
+
+  @Embedded
+  UserDetail userddetail;
+
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @ManyToMany
+  @Builder.Default
+  @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = {
+      @JoinColumn(name = "rid") })
+  private Set<Role> roles = new HashSet<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return roles.stream()
-        .map(role -> new SimpleGrantedAuthority(role.name()))
+        .map(role -> new SimpleGrantedAuthority(role.getName()))
         .collect(Collectors.toList());
   }
 
@@ -94,34 +110,40 @@ public class UserProfiles implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
-
+// PO文
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Post> post;
-
+// 留言
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<PostComment> postcomments;
-
+// 職缺
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<JobBean> job;
+// 履歷
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  private Collection<ResumeBean> resume;
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Initiating> initiatings;
-
+// 登入歷史
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  private Collection<LoginHistory> loginHistories;
-  
+  private Collection<LoginHistory> loginhistories;
+// Camp訂單
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Set<Order> CampOrder;
+
 }

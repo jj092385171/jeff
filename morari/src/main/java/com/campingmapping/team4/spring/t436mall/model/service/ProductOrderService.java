@@ -16,7 +16,7 @@ public interface ProductOrderService {
 	// 依orderID來搜尋單筆訂單
 	public List<ProductOrderVo> selectById(String id);
 	// 依userID來搜尋所有訂單
-	public List<ProductOrder> selectAllByUserId(Integer userid);
+	public List<ProductOrder> selectAllByUserId(String userid);
 	// 搜尋所有訂單(只有後臺能使用)
 	public List<ProductOrder> selectAll();
 	// 修改訂單狀態

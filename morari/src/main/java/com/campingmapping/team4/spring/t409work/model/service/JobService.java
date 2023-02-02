@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
@@ -39,24 +41,39 @@ public class JobService {
 	}
 
 	// 新增職缺
-	public JobBean insert(JobBean jBean, Integer u) {
+	public JobBean insert(JobBean jBean, UUID u) {
 		jBean.setUserprofiles(uDao.findById(u).get());
 		Date currentDate = new Date();
+//		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+//		jBean.setRackup(sd.format(currentDate));
 		jBean.setRackup(currentDate);
-		System.out.println(jBean);
 		return jobDao.save(jBean);
 	}
 
 	// 改職缺內容
-	public JobBean updateJob(JobBean jobBean) {
-		// jobBean.setUserprofiles(uDao.findById(u).get());
-		return jobDao.save(jobBean);
-	}
+	public JobBean updateJob(JobBean jobBean, Integer rackid) {
+		System.out.println(rackid);
+		Optional<JobBean> result = jobDao.findById(rackid);
+		if (result.isPresent()) {
+			JobBean jBean = result.get();
+			// 將前端傳進來的jobBean的值複製到jBean
+			jBean.setJob(jobBean.getJob());
+			jBean.setDate(jobBean.getDate());
+			jBean.setPlace(jobBean.getPlace());
+			jBean.setRemark(jobBean.getRemark());
+			jBean.setSalary(jobBean.getSalary());
+			jBean.setTime(jobBean.getTime());
+			jBean.setImg(jobBean.getImg());
+			jBean.setQuantity(jobBean.getQuantity());
 
-	// 透過rackID秀圖片
-	// public JobBean findImgByRackID(int rackID) {
-	// return jobDao.findImgByRackID(rackID);
-	// }
+			jBean.setRackup(result.get().getRackup());
+//		        jBean.setUserprofiles(result.get().getUserprofiles().getUid());	        
+			// 使用save更新資料庫中的資料
+			return jobDao.save(jBean);
+		}
+		// 找不到對應的資料
+		return null;
+	}
 
 	// 刪除職缺
 	public void deleteById(int rackID) {
@@ -78,8 +95,13 @@ public class JobService {
 		return jobDao.findByJobisLike(job);
 	}
 
+	// 查職缺+uid
+//	public List<JobBean> findByUidAndJobisLike(Integer uid, String job) {
+//		return jobDao.findByUidAndJobisLike(1, job);
+//	}
+
 	// 透過會員id找資料
-	public List<JobBean> findUid(Integer uid) {
+	public List<JobBean> findUid(UUID uid) {
 
 		UserProfiles findById = uDao.findById(uid).get();
 		Collection<JobBean> job = findById.getJob();
@@ -103,4 +125,9 @@ public class JobService {
 		sb = new SerialBlob(b);
 		return sb;
 	}
+
+	// 透過rackID秀圖片
+//	public JobBean findImgByRackID(int rackID) {
+//		return jobDao.findImgByRackID(rackID);	 
+//	}
 }

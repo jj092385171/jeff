@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,60 +37,63 @@ public class CampService {
 
 	@Autowired
 	private TagService tagService;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
-	
+
 	// 透過cityId查Camps
-	public List<Camp> recommendCampToUser(Integer uid) {
-		//user
+	public List<Camp> recommendCampToUser(UUID uid) {
+		// user
+		System.out.println("=1===================================");
 		UserProfiles user = userRepository.findById(uid).get();
-		//orders of user
+		// orders of user
+
+		System.out.println("=2===================================");
+
 		Object[] orders = user.getCampOrder().toArray();
-		int ordersMax = orders.length-1;
+		int ordersMax = orders.length - 1;
 		int ordersMin = 0;
-		int ranOrdersNum = ordersMin + (int)(Math.random() * (ordersMax-ordersMin+1));
-		//ranOrder
+		int ranOrdersNum = ordersMin + (int) (Math.random() * (ordersMax - ordersMin + 1));
+		// ranOrder
 		Order ranOrder = (Order) orders[ranOrdersNum];
-		//cityId of ranOrder
+		// cityId of ranOrder
 		Integer ranCityID = ranOrder.getCamp().getCity().getCityID();
-		//camps of city
+		// camps of city
 		boolean flag;
 		List<Camp> campList = campRepository.findByCityId(ranCityID);
-		
-		for(int j=0; j<campList.size(); j++) {
+
+		for (int j = 0; j < campList.size(); j++) {
 			flag = false;
-			
-			for(int i=0; i<orders.length; i++) {
-				if(campList.get(j).getCampID() == ((Order) orders[i]).getCamp().getCampID()) {
+
+			for (int i = 0; i < orders.length; i++) {
+				if (campList.get(j).getCampID() == ((Order) orders[i]).getCamp().getCampID()) {
 					flag = true;
 					break;
 				}
 			}
-			if(flag) {
+			if (flag) {
 				campList.remove(campList.get(j));
 			}
 
 		}
-		
+
 		List<Camp> resultList = new ArrayList<Camp>();
-		if(campList.size() > 3) {
+		if (campList.size() > 3) {
 			resultList = new ArrayList<Camp>();
 			Random rand = new Random();
-		    HashSet<Integer> set = new HashSet<>();
-		    while (set.size() < 3) {
-		      int num = rand.nextInt(campList.size());
-		      set.add(num);
-		    }
-		    for(int i=0; i<set.size(); i++) {
-		    	Integer index = (Integer) set.toArray()[i];
-		    	resultList.add(campList.get(index));
-		    }
-		    
-		    return resultList;
+			HashSet<Integer> set = new HashSet<>();
+			while (set.size() < 3) {
+				int num = rand.nextInt(campList.size());
+				set.add(num);
+			}
+			for (int i = 0; i < set.size(); i++) {
+				Integer index = (Integer) set.toArray()[i];
+				resultList.add(campList.get(index));
+			}
+
+			return resultList;
 		}
-		
+
 		return campList;
 	}
 
@@ -111,7 +116,7 @@ public class CampService {
 
 	// 找全部Camp
 	public List<Camp> findAll() {
-		return campRepository.findAll();
+		return campRepository.findAll(Sort.by("campID"));
 	}
 
 	// Id找Camp
@@ -148,18 +153,18 @@ public class CampService {
 		Camp camp = findById(campId);
 
 		if (camp != null) {
-//			//fkCityId設null
-//			camp.setCity(null);
-//
-//			//刪除TagOfCamp
-//			Set<Tag> tags = camp.getTags();
-//			if(tags.size() != 0) {
-//				Iterator<Tag> it1 = tags.iterator();
-//				while (it1.hasNext()) {
-//					it1.remove();
-//				}
-//			}
-//			
+			// //fkCityId設null
+			// camp.setCity(null);
+			//
+			// //刪除TagOfCamp
+			// Set<Tag> tags = camp.getTags();
+			// if(tags.size() != 0) {
+			// Iterator<Tag> it1 = tags.iterator();
+			// while (it1.hasNext()) {
+			// it1.remove();
+			// }
+			// }
+			//
 			// 刪除SiteOfCamp
 			Set<Site> sites = camp.getSites();
 			if (sites.size() != 0) {

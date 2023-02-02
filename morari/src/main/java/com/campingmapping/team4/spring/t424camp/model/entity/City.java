@@ -40,8 +40,13 @@ public class City implements Serializable {
 	
 	public City() {
 	}
-
 	
+	public City(String cityName) {
+		super();
+		this.cityName = cityName;
+	}
+
+
 	public Integer getCityID() {
 		return cityID;
 	}

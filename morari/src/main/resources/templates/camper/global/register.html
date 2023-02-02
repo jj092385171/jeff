@@ -37,16 +37,21 @@
                                             id="registerpasswordcheck" placeholder="Repeat Password">
                                     </div>
                                 </div>
+                                <p id="errormsg" style="color: red;"></p>
                                 <a class="btn btn-primary btn-user btn-block" id="Registersubmit"
                                     onclick="submitForm()">
                                     Register Account
                                 </a>
                                 <hr>
-                                <a href="/morari/index" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                <a href="/morari/oauth2/authorization/google" class="btn btn-google btn-user btn-oauth" id="btn-oauth">
+                                    <i class="fab fa-google fa-fw"></i>
                                 </a>
-                                <a href="/morari/index" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                <a href="/morari/oauth2/authorization/facebook" class="btn btn-facebook btn-user btn-oauth" id="btn-oauth">
+                                    <i class="fab fa-facebook-f fa-fw"></i>
+                                </a>
+                                <a href="/morari/oauth2/authorization/github" class="btn btn-github btn-user btn-oauth"
+                                    id="btn-oauth">
+                                    <i class="fab fa-github fa-fw"></i>
                                 </a>
                             </form>
                             <hr>
@@ -56,6 +61,9 @@
                             <div class="text-center">
                                 <a class="small" href="/morari/login">Already have an account? Login!</a>
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -88,26 +96,23 @@
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' }
             })
-                .then(res => res.json())
                 .then(response => {
-                    // Handle response from server
-
-                    let nextpath = getCookie("targetUrl");
-
-                    function getCookie(name) {
-                        let value = "; " + document.cookie;
-                        let parts = value.split("; " + name + "=");
-                        if (parts.length == 2) return parts.pop().split(";").shift();
-                    }
-                    if (jwt) {
-                        window.location.replace("/dashboard");
-                    }
-
-
+                    if (response.status === 201) {
+                            // success
+                            console.log("register success")
+                            window.location.href = '/morari/login';
+                        } else if(response.status === 409){
+                            document.getElementById("errormsg").innerHTML = "register failed";
+                            console.log("register failed")
+                        }else {
+                            document.getElementById("errormsg").innerHTML = "register failed";
+                            console.log("register failed")
+                        }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error("Error:", error);
+                });
         }
-    </script>
     </script>
 
 </body>

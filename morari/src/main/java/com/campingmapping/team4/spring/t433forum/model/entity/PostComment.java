@@ -26,21 +26,18 @@ public class PostComment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "postcommentId")
-	private Integer postcommentId;
-
+	@Column(name = "postcommentid")
+	private Integer postcommentid;
+	
 	@ManyToOne
 	@JoinColumn(name = "postid")
 	private Post post;
-
-	// @ManyToOne
-	// @JoinColumn(name="userId")
-	// private Member member;
+	
 	@ManyToOne
 	@JoinColumn(name = "uid")
 	@JsonIgnoreProperties("post")
 	private UserProfiles userprofiles;
-
+	
 	@Column(name = "postcomment")
 	private String postcomment;
 	@Column(name = "postcommentreport")

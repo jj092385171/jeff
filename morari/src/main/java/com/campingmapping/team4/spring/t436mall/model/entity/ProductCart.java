@@ -21,7 +21,7 @@ public class ProductCart {
 	private Integer id;
 	// 購物車編號 不顯示(pk)
 	@Column(name = "userid")
-	private Integer userid;
+	private String userid;
 	// 會員 ID
 	@Column(name = "pdid")
 	private Integer pdid;

@@ -68,4 +68,56 @@
 
 window.onload = function () {
     document.body.style.display = 'block';
+    // 登入狀態驗證
+    fetch("/morari/api/auth/state", {
+        method: "POST",
+        // 發送請求時附帶Cookie
+        credentials: "include"
+    })
+        .then(response => response.json())
+        .then(loginstate => {
+            console.log(loginstate)
+            if (loginstate) {
+                // 登入
+                fetch("/morari/guest/share/loginstate.html")
+                    .then(response => response.text())
+                    .then(html => {
+                        // 將載入的 HTML 放入 .footer 元素中
+                        document.getElementById("loginstate").innerHTML = html;
+                    });
+            } else {
+                // 未登入
+                document.getElementById("loginstate").innerHTML = '<a class="fa fa-user" href="/morari/login"> login</a>';
+            }
+        })
+        .catch(error => {
+            console.log('Error:', error);
+        });
+
+
+    // 監聽頁面上的點擊事件
+    document.addEventListener("click", function (event) {
+
+        console.log("in")
+
+        let loginstate = document.getElementById("loginstate");
+        let dropdownContent = document.getElementById("dropdown-content");
+        if (event.target !== loginstate && event.target.parentNode !== loginstate &&
+            event.target !== dropdownContent && event.target.parentNode !== dropdownContent) {
+            dropdownContent.style.display = "none";
+        }
+    });
+
 }
+// 切換下拉選單顯示/隱藏
+function toggleDropdown() {
+    let dropdownContent = document.getElementById("dropdown-content");
+    if (dropdownContent.style.display === "none") {
+        dropdownContent.style.display = "block";
+
+        console.log(dropdownContent.style.display)
+
+    } else {
+        dropdownContent.style.display = "none";
+    }
+};
