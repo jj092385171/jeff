@@ -60,7 +60,7 @@ public class InsertOrder {
 		
 		//數量
 		if(Arrays.asList(nums).stream().filter(num -> num > 0).count() == 0) {
-			errors.put("nums", "請選擇數量");
+			errors.put("nums", "至少選擇其中一個營位的數量");
 		}
 		
 		//出入營日期
