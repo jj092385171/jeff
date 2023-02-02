@@ -22,53 +22,54 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @Controller
 @RequestMapping("/team")
 public class TeamPageComtroller {
-
+	
 	@GetMapping({ "", "/" })
 	public String teamIndex() {
 		return "team/guest/index";
 	}
-
+	
 	@Autowired
 	private teamService teamService;
-
+	
+	//套版出現問題
 	@RequestMapping("/teammanager.controller")
-	public String processmainAction() {
+	public String  processmainAction() {
 		return "team/admin/teammanager";
 	}
-
+	
 	@RequestMapping("/insert.controller")
 	public String intoInsertAction() {
 		return "team/admin/insert";
 	}
-
+	
 	@GetMapping("/view.controller")
 	@ResponseBody
-	public List<Initiating> showAll() throws JsonProcessingException {
+	public List<Initiating> showAll() throws JsonProcessingException{
 		List<Initiating> view = teamService.findAll();
 		return view;
 	}
-
+	
 	@PostMapping("/insertMaterial.controller/{uid}")
 	@ResponseBody
-	public String insert(@RequestBody Initiating i, @PathVariable UUID uid) {
-		// String id = uid.substring(1, uid.length() - 1);
+	public String insert(@RequestBody Initiating i , @PathVariable UUID uid) {
+		// String id = uid.substring(1, uid.length()-1);
 		teamService.insert(i, uid);
 		return "Insert OK";
 	}
-
+	
 	@DeleteMapping("/delete.controller/{id}")
 	@ResponseBody
 	public String delete(@PathVariable("id") String id) {
-		String initiatingnum = id.substring(1, id.length() - 1);
+		String initiatingnum = id.substring(1,id.length()-1);
 		teamService.delete(Integer.valueOf(initiatingnum));
 		return "Delete OK";
 	}
-
+	
 	@GetMapping("/update.controller")
 	public String display() {
 		return "team/admin/update";
 	}
-
+	
 	@PutMapping("/updateMaterial.controller")
 	@ResponseBody
 	public String update(@RequestBody Initiating i) {
@@ -92,10 +93,14 @@ public class TeamPageComtroller {
 			List<Initiating> selectResult = teamService.selectDynamic(id, i.getStartdate(), i.getEnddate(), i.getCamparea());
 			result.addAll(selectResult);
 		}
-		for (Initiating j : result) {
-			System.out.println(j.getInitiatingnum()+j.getPostdate().toString()+j.getStartdate().toString()+j.getEnddate().toString()+"uid=" +j.getUserprofiles().getUid()+
-					"|" + j.getCurrentnum()+j.getAcceptablenum()+j.getCamparea()+j.getPair());
-		}
+		return result;
+	}
+	
+	@PostMapping("/findById.controller/{id}")
+	@ResponseBody
+	public Initiating findById(@PathVariable("id") String id){
+		String initiatingnum = id.substring(1,id.length()-1);
+		Initiating result = teamService.findById(Integer.valueOf(initiatingnum));
 		return result;
 	}
 

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t411team.model.Dao.repository.InitiatingRepository;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 
@@ -28,7 +27,6 @@ public class teamService {
 	public Initiating insert(Initiating i ,UUID uid) {
 		Date postday = new Date();
 		i.setPostdate(postday);
-		System.out.println(uRepo.findById(uid).get().getEmail());
 		i.setUserprofiles(uRepo.findById(uid).get());
 		return iRepo.save(i);
 	}
@@ -86,12 +84,12 @@ public class teamService {
 		
 		if(!uid.equals("0") && result.size() != 0) {
 			Initiating i = new Initiating();
-			i.setUserprofiles(uRepo.findById(UUID.fromString(camparea)).get());
+			i.setUserprofiles(uRepo.findById(UUID.fromString(uid)).get());
 			List<Initiating> uList = iRepo.findByUserprofiles(i.getUserprofiles());
 			result.retainAll(uList);
 		}else if(!uid.equals("0") && result.size() == 0 && judge != false) {
 			Initiating i = new Initiating();
-			i.setUserprofiles(uRepo.findById(UUID.fromString(camparea)).get());
+			i.setUserprofiles(uRepo.findById(UUID.fromString(uid)).get());
 			List<Initiating> uList = iRepo.findByUserprofiles(i.getUserprofiles());
 			result.addAll(uList);
 		}

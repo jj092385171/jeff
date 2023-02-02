@@ -15,7 +15,7 @@ public interface InitiatingRepository extends JpaRepository<Initiating, Integer>
 	public List<Initiating> findByEnddateLessThanEqual(Date enddate);
 	
 	public List<Initiating> findByStartdateGreaterThanEqualAndEnddateLessThanEqual(Date startdate, Date enddate);
-
+	
 	public List<Initiating> findByCamparea(String camparea);
 	
 	public List<Initiating> findByUserprofiles(UserProfiles uid);
