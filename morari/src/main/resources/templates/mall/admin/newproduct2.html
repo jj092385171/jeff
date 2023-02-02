@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF8">
+	<title>TeamManager</title>
+	<style>
+		td {
+			border: 2px black solid;
+		}
+	</style>
+	<script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
+	<form id="formnew">
+		<h3>新增產品</h3>
+		<input type="text" value='' name="userid" id="userid" readonly>會員ID<br>
+		<input type="text" value='1' name="pdname" id="pdname">產品名稱<br>
+		<input type="text" value='1' name="pdtitle" id="pdtitle">品牌名稱<br>
+		<input type="text" value='1' name="pdcontent" id="pdcontent">產品規格<br>
+		<select name="pdtype">
+			<option>請選擇產品類別</option>
+			<option>睡袋</option>
+			<option>燈具</option>
+			<option>桌椅</option>
+			<option>火爐/炊具</option>
+			<option>保冷箱</option>
+			<option>登山包</option>
+			<option>戶外服裝</option>
+			<option>登山鞋</option>
+			<option>其他</option>
+		</select>產品類型<br> <input type="text" value='1' name="pdpicture" />照片<br>
+		<input type="text" value='1' name="pdprice">價位<br> <input type="text" value='1' name="pdinventory">庫存數量<br> <br>
+		<input type="button" value="提交" onclick="submitForm()">
+	</form>
+
+	<script>
+		// 拿取UID
+		// let uid;
+		fetch("/morari/utils/getuid")
+			.then(response => response.text())
+			.then(data => {
+				// console.log(data)
+				document.getElementById("userid").value = data;
+			})
+
+		function submitForm() {
+			// 取得表單資料
+			var formData = new FormData(document.getElementById("formnew"));
+			var jsonData = {};
+			for (var [key, value] of formData.entries()) {
+				jsonData[key] = value;
+			}
+			$.ajax({
+				type: 'post',
+				url: '/morari/mall/create.controller',
+				dataType: 'text',
+				contentType: 'application/json',
+				data: JSON.stringify(jsonData),
+				success: function (data) {
+					alert(data);
+					window.location.href = "/morari/mall/productqueryallmain.controller";
+				}
+			});
+
+		}
+	</script>
+</head>
+
+<body>
+	<table id="result"></table>
+</body>
+
+</html>

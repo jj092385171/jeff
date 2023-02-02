@@ -17,10 +17,10 @@ import com.campingmapping.team4.spring.t424camp.model.service.SiteService;
 @Controller
 @RequestMapping("/admin/camp")
 public class UpdatePageController {
-
+	
 	@Autowired
 	private CampService campService;
-
+	
 	@Autowired
 	private SiteService siteService;
 	
@@ -30,13 +30,18 @@ public class UpdatePageController {
 		return "camp/admin/UpdateCampByIDForm" ;
 	}
 
+	@GetMapping("/UpdateSiteByIDForm")
+	public String toUpadteSitePage() {
+		return "camp/admin/UpdateSiteByIDForm" ;
+	}
+	
 	@PostMapping("/upadteCampPage.controller")
 	@ResponseBody
 	public Camp upadteCampPage(@RequestBody int campID, Model m) {
 
 		Camp camp = campService.findById(campID);
 
-//		m.addAttribute("camp", camp);
+		m.addAttribute("camp", camp);
 
 		return camp;
 	}
@@ -47,7 +52,7 @@ public class UpdatePageController {
 
 		Site site = siteService.findBySiteId(siteID);
 
-//		m.addAttribute("site", site);
+		m.addAttribute("site", site);
 
 		return site;
 	}

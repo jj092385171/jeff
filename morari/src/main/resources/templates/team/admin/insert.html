@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +17,30 @@ window.onload = function(){
 		    return data;
 		}, {});
 	  
+	  const today = new Date();
+	  today.setDate(today.getDate() - 1);
+	  const startDate = new Date(formData['startdate']);
+	  const endDate = new Date(formData['enddate']);
+
+	  if (startDate > endDate) {
+	    alert("開始日期不可小於結束日起，這不是時間旅行！！！");
+	    return;
+	  } else if (startDate < today || endDate < today) {
+	    alert("抱歉我們無法讓你回到過去，請重新選擇時間");
+	    return;
+	  }
+	  
 	  const value = formData['userprofiles'];
 	  const data = {uid : value};
 	  delete formData['userprofiles'];
 	  
 	  const json = JSON.stringify(formData);
 	  
-	  fetch('/morari/team/insertMaterial.controller/{'+ data.uid + '}', {
+	  var result = confirm("確定要新增本筆資料嗎");
+	  
+	  if(result){
+		  
+	  fetch('/morari/team/insertMaterial.controller/'+ data.uid, {
 		  method: 'POST',
 		  headers: {
 		    'Content-Type': 'application/json'
@@ -33,6 +52,9 @@ window.onload = function(){
 		    	location.href="/morari/team/teammanager.controller";
 		    }
 		  });
+		  
+	  }
+	  
 	});
 }
 </script>
@@ -41,7 +63,7 @@ window.onload = function(){
 	<h3>新增</h3>
 	<form id="insert">
 		發文會員:<input type="text" id="userprofiles" name="userprofiles"
-			onkeyup="value=value.replace(/[^\d]/g,'') " required
+			required
 			placeholder="請輸入會員編號,僅限數字"><br> 起始日期:<input type="date"
 			id="startdate" name="startdate" required><br> 結束日期:<input
 			type="date" id="enddate" name="enddate" required><br>

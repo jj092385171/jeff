@@ -27,7 +27,7 @@ public class InsertSiteController {
 
 	@PostMapping("/insertSite.controller")
 	@ResponseBody
-	public Site insertSite(@RequestParam("siteName") @Nullable String siteName,
+	public Object insertSite(@RequestParam("siteName") @Nullable String siteName,
 			@RequestParam("sitePicturesPath") @Nullable MultipartFile mf,
 			@RequestParam("totalSites") @Nullable Integer totalSites,
 			@RequestParam("siteMoney") @Nullable Integer siteMoney, @RequestParam("campID") int campID, Model m)
@@ -37,19 +37,23 @@ public class InsertSiteController {
 		Map<String, String> errors = new HashMap<>();
 		m.addAttribute("errors", errors);
 
+		
 		// 營區位名
 		if (siteName == null || siteName.trim().length() == 0) {
 			errors.put("siteName", "必須輸入營區位名稱");
 		}
 
 		// 圖
-		if (mf.isEmpty()) {
+		String fileName = null;
+		if (mf == null || mf.isEmpty()) {
 			errors.put("sitePicturesPath", "必須選擇圖片");
 		}
-		String saveFileDir = "C:/gitapp/EEIT56_Team4/campingmapping3.0/src/main/webapp/WEB-INF/resources/images/";
-		String fileName = mf.getOriginalFilename();
-		File saveFilePath = new File(saveFileDir, fileName);
-		mf.transferTo(saveFilePath);
+		else {
+			String saveFileDir = "C:/gitapp/EEIT56_Team4/morari/src/main/resources/static/images/";
+			fileName = mf.getOriginalFilename();
+			File saveFilePath = new File(saveFileDir, fileName);
+			mf.transferTo(saveFilePath);
+		}
 
 		// 總營位數
 		if (totalSites == null ) {
@@ -61,20 +65,22 @@ public class InsertSiteController {
 			errors.put("siteMoney", "必須輸入營位金額");
 		}
 
-//		// 錯誤導回
-//		if (errors != null && !errors.isEmpty()) {
-//			m.addAttribute("campID", campID);
-//			m.addAttribute("errors", errors);
-//
-//			return "t4_24camp/admin/InsertSiteForm";
-//		}
+		// 錯誤導回
+		if (errors != null && !errors.isEmpty()) {
+			errors.put("error", "true");
+			return errors;
+		}
 
-		Site site = siteService.insert(siteName, fileName, totalSites, siteMoney,
-				campID);
+		
+		Site site = siteService.insert(siteName, fileName, totalSites, siteMoney, campID);
 
-//		m.addAttribute("site", site);
-//		m.addAttribute("what", "新增");
-
+		// 空值
+		if (site == null) {
+			errors.put("error", "none");
+			errors.put("noData", "查無資料");
+			return errors;
+		}
+		
 		return site;
 	}
 

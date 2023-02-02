@@ -1,7 +1,6 @@
 package com.campingmapping.team4.spring.t436mall.model.service;
 
 import java.util.List;
-
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCart;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVo;
 
@@ -14,9 +13,9 @@ public interface ProductCartService {
 	// 依cartid刪除購物車
 	public void deleteById(Integer id);
 	// 依userid清空購物車、或結帳
-	public void deleteAllByUserId(Integer userid);
+	public void deleteAllByUserId(String userid);
 	// 依userID查詢購物車資料
-	public List<ProductCartVo> selectAllByUserId(Integer userid);
+	public List<ProductCartVo> selectAllByUserId(String userid);
 	// 查詢購物車所有資料(後台)
 	public List<ProductCartVo> selectAllVo();
 }

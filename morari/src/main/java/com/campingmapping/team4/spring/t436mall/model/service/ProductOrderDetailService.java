@@ -3,6 +3,7 @@ package com.campingmapping.team4.spring.t436mall.model.service;
 import java.util.List;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderDetail;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderDetailVo;
 
 public interface ProductOrderDetailService {
 
@@ -11,5 +12,5 @@ public interface ProductOrderDetailService {
 	// 搜尋所有訂單詳情
 	public List<ProductOrderDetail> selectAll();
 	// 根據訂單編號搜尋所有訂單詳情
-	public List<ProductOrderDetail> selectAllByPdorderid(String pdorderid);
+	public List<ProductOrderDetailVo> selectAllByPdorderid(String pdorderid);
 }

@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t411team.controller.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,9 +50,9 @@ public class TeamPageComtroller {
 
 	@PostMapping("/insertMaterial.controller/{uid}")
 	@ResponseBody
-	public String insert(@RequestBody Initiating i, @PathVariable String uid) {
-		String id = uid.substring(1, uid.length() - 1);
-		teamService.insert(i, null);
+	public String insert(@RequestBody Initiating i, @PathVariable UUID uid) {
+		// String id = uid.substring(1, uid.length() - 1);
+		teamService.insert(i, uid);
 		return "Insert OK";
 	}
 
@@ -77,16 +78,24 @@ public class TeamPageComtroller {
 		teamService.update(i);
 		return "update OK";
 	}
-
-	@PostMapping("/select.controller")
+	
+	@PostMapping("/select.controller/{uid}")
 	@ResponseBody
-	public List<Initiating> select(@RequestBody Initiating i) {
-		// DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		String uid = "";
-		// Date std = sdf.parse("1900-01-01");
-		// Date ed = sdf.parse("2099-12-31");
-
-		List<Initiating> result = teamService.selectDynamic(uid, i.getStartdate(), i.getEnddate(), i.getCamparea());
+	public List<Initiating> select(@RequestBody Initiating i, @PathVariable String uid){
+		List<Initiating> result = new ArrayList<>();
+		
+		if(i.getInitiatingnum()!=0) {
+			Initiating uidResult = teamService.findById(i.getInitiatingnum());
+			result.add(uidResult);
+		}else {
+			String id = uid.substring(1, uid.length()-1);
+			List<Initiating> selectResult = teamService.selectDynamic(id, i.getStartdate(), i.getEnddate(), i.getCamparea());
+			result.addAll(selectResult);
+		}
+		for (Initiating j : result) {
+			System.out.println(j.getInitiatingnum()+j.getPostdate().toString()+j.getStartdate().toString()+j.getEnddate().toString()+"uid=" +j.getUserprofiles().getUid()+
+					"|" + j.getCurrentnum()+j.getAcceptablenum()+j.getCamparea()+j.getPair());
+		}
 		return result;
 	}
 

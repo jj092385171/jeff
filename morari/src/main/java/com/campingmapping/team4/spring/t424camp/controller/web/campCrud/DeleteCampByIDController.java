@@ -21,10 +21,7 @@ public class DeleteCampByIDController {
 	@ResponseBody
 	public boolean deleteCampByID(@RequestBody int campID, Model m) {
 		campService.deleteById(campID);
-//		m.addAttribute("ID", "campID: " + Integer.toString(campID) + " 刪除成功");
-
 		return true;
-
 	}
 
 }

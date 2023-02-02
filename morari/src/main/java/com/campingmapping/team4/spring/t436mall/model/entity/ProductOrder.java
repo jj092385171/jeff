@@ -1,7 +1,6 @@
 package com.campingmapping.team4.spring.t436mall.model.entity;
 
 import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -22,7 +21,7 @@ public class ProductOrder {
 	private String id;
 	// 訂單編號(自動產生亂碼)(pk)
 	@Column(name = "userid")
-	private Integer userid;
+	private String userid;
 	// 會員 ID
 	@Column(name = "odstatus")
 	private String odstatus;

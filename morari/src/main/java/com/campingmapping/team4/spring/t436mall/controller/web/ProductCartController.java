@@ -31,38 +31,47 @@ public class ProductCartController {
 
 	@GetMapping("/productcartqueryallmain.controller")
 	public String processQueryAllAction() {
-		return "mall/admin/productcartindex";
+		return "mall/guest/productcartindex";
+	}
+	
+	@GetMapping("/queryAllByuserid.controller/{userid}")
+	public String queryAllByuseridAction() {
+		return "mall/guest/selectAllByUserId";
 	}
 	
 	// 依userid新增一筆購物車資料
-	@PostMapping("/create")
+	@PostMapping("/create.controller")
 	@ResponseBody
-	public ProductCart create(@RequestBody ProductCart productcart) {
-		return PCServiceImpl.create(productcart);
+	public String create(@RequestBody ProductCart productcart) {
+		PCServiceImpl.create(productcart);
+		return "添加成功!!";
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@PutMapping("/updataById")
 	@ResponseBody
-	public ProductCart updataById(@RequestBody ProductCart productcart) {
-		return PCServiceImpl.updataById(productcart);
+	public String updataById(@RequestBody ProductCart productcart) {
+		PCServiceImpl.updataById(productcart);
+		return "updata ok!!";
 	}
 	// 依id刪除購物車
 	@DeleteMapping("/deleteById/{id}")
 	@ResponseBody
-	public void deleteById(@PathVariable Integer id) {
+	public String deleteById(@PathVariable Integer id) {
 		PCServiceImpl.deleteById(id);
+		return "delete ok!!";
 	}
 	
 	// 依userid清空購物車、或結帳
 	@DeleteMapping("/deleteAllByUserId/{userid}")
 	@ResponseBody
-	public void deleteAllByUserId(@PathVariable Integer userid) {
+	public String deleteAllByUserId(@PathVariable String userid) {
 		PCServiceImpl.deleteAllByUserId(userid);
+		return "delete ok!!";
 	}
 	// 依userID查詢購物車資料
 	@GetMapping("/selectAllByUserId/{userid}")
 	@ResponseBody
-	public List<ProductCartVo> selectAllByUserId(@PathVariable Integer userid) {
+	public List<ProductCartVo> selectAllByUserId(@PathVariable String userid) {
 		return PCServiceImpl.selectAllByUserId(userid);
 	}
 	// 查詢購物車所有資料(後台)

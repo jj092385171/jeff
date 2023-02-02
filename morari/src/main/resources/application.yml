@@ -32,8 +32,15 @@ spring:
      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
      url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
 
+<<<<<<< HEAD
      password: "0000"
      username: sa     
+=======
+    # password: "0000"
+    # username: sa    
+     password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
+     username: Team4Admin    
+>>>>>>> fc6c6fe4cf6c9ab52a8d8a4d3369991aeb276403
 # -------------MYSQL------------- 
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://localhost:3306/campDB?serverTimezone=UTC&useSSL=false
@@ -44,6 +51,7 @@ spring:
     properties:
       hibernate:
 # -------------MSSQL------------- 
+<<<<<<< HEAD
          dialect: org.hibernate.dialect.SQLServer2016Dialect
          '[allow_update_outside_transaction]': true
          '[hbm2ddl.auto]': update
@@ -56,11 +64,26 @@ spring:
 #        '[hbm2ddl.auto]': update
 #        '[format_sql]': true
 #    show-sql: true
+=======
+        dialect: org.hibernate.dialect.SQLServer2016Dialect
+        '[allow_update_outside_transaction]': true
+        '[hbm2ddl.auto]': update
+        '[format_sql]': true
+    show-sql: true
+# -------------MYSQL-------------
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#        '[allow_update_outside_transaction]': true
+        # '[hbm2ddl.auto]': create
+#        '[hbm2ddl.auto]': update
+#        '[format_sql]': true
+#    show-sql: true
+
+>>>>>>> fc6c6fe4cf6c9ab52a8d8a4d3369991aeb276403
   servlet:
     multipart:
       enabled: true
-      max-file-size: 128KB
-      max-request-size: 128KB
+      max-file-size: 128MB
+      max-request-size: 128MB
   thymeleaf:
     prefix: classpath:/templates/
   web:

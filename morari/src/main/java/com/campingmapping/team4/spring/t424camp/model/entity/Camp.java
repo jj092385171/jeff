@@ -28,6 +28,7 @@ public class Camp implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CAMPID")
@@ -50,6 +51,7 @@ public class Camp implements Serializable {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+
 	// @JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tagofcamp", joinColumns = {
@@ -60,7 +62,12 @@ public class Camp implements Serializable {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
 	private Set<Site> sites = new HashSet<Site>();
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
+	private Set<Order> campOrders = new HashSet<Order>();
 
+	
 	public Camp() {
 	}
 
@@ -75,7 +82,7 @@ public class Camp implements Serializable {
 		this.description = description;
 		this.tags = tags;
 	}
-
+	
 	public Camp(String campName, City city, String location, String campPicturesPath, String description,
 			Set<Tag> tags) {
 		super();
@@ -87,6 +94,7 @@ public class Camp implements Serializable {
 		this.tags = tags;
 	}
 
+	
 	public Integer getCampID() {
 		return campID;
 	}
@@ -151,4 +159,18 @@ public class Camp implements Serializable {
 		this.sites = sites;
 	}
 
+	public Set<Order> getCampOrders() {
+		return campOrders;
+	}
+
+	public void setCampOrders(Set<Order> campOrders) {
+		this.campOrders = campOrders;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
+	
 }
