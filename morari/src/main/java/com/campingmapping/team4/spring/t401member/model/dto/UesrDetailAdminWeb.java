@@ -21,7 +21,7 @@ public record UesrDetailAdminWeb(
         Integer leavel,
         Integer point,
         Date registerdata,
-        String subscribed,
+        Boolen subscribed,
         String shot,
         String about) {
 
