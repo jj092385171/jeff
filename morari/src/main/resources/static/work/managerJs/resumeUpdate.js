@@ -11,7 +11,7 @@ $(document).ready(function() {
 		dataType: 'json',
 		success: function(data) {
 			$('#1').val(data.job.rackid);
-			//$('#2').val(data.uid);
+			$('#2').val(data.userprofiles.uid);
 			$('#3').val(data.work);
 			$('#4').val(data.name);
 			$('#5').val(data.age);
@@ -20,7 +20,7 @@ $(document).ready(function() {
 			$('#8').val(data.phone);
 			$('#9').val(data.educational);
 			$('#10').val(data.experience);
-			$('11').val(data.ptime);
+			$('#11').val(data.ptime);
 
 			switch (data.gender) {
 				case '男':
