@@ -57,7 +57,7 @@ public class SetupDataLoader implements
         try{
         if (userOptional.isPresent()) {
             userProfiles = userOptional.get();
-            userProfiles.setUserddetail(userDetail);
+            userProfiles.setUserdetail(userDetail);
             userProfiles.setEmail(MyConstants.SUPER_ADMIN_NAME);
             userProfiles.setPassword(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD));
             userProfiles.getRoles().clear();
@@ -70,7 +70,7 @@ public class SetupDataLoader implements
                     .email(MyConstants.SUPER_ADMIN_NAME)
                     .password(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD))
                     .uid(UUID.randomUUID())
-                    .userddetail(userDetail)
+                    .userdetail(userDetail)
                     .build();
             userProfiles.getRoles().add(adminRole);
             userRepository.save(userProfiles);

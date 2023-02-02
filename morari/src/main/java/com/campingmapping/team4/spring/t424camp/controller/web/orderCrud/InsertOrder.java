@@ -43,7 +43,7 @@ public class InsertOrder {
 	
 	@PostMapping("/insertOrder.controller")
 	@ResponseBody
-	public Object insertOrder(@RequestParam("siteIds")@Nullable Integer[] siteIds,
+	public Object insertOrder (@RequestParam("siteIds")@Nullable Integer[] siteIds,
 			@RequestParam("nums")@Nullable Integer[] nums,
 			@RequestParam("goingdate")@Nullable String goingtimeString, 
 			@RequestParam("leavingdate")@Nullable String leavingtimeString,
@@ -61,7 +61,7 @@ public class InsertOrder {
 		
 		//數量
 		if(Arrays.asList(nums).stream().filter(num -> num > 0).count() == 0) {
-			errors.put("nums", "請選擇數量");
+			errors.put("nums", "至少選擇其中一個營位的數量");
 		}
 		
 		//出入營日期
@@ -72,10 +72,10 @@ public class InsertOrder {
 			goingtime = sdf.parse(goingtimeString);
 			leavingtime = sdf.parse(leavingtimeString);
 			if(goingtime.after(leavingtime)) {
-				errors.put("timeString", "入營時間不得晚於離營時間");
+				errors.put("timeString", "入營時間 不得晚於 離營時間");
 			}
 			if(goingtime.equals(leavingtime)) {
-				errors.put("timeString", "入營時間與離營時間不得同一天");
+				errors.put("timeString", "入營時間與離營時間 不得同一天");
 			}
 		} catch (ParseException e) {
 			errors.put("timeString", "錯誤日期格式");
@@ -83,7 +83,7 @@ public class InsertOrder {
 		}
 		
 		//使用者
-	UUID uid = jwtService.getUId(httpServletRequest);
+		UUID uid = jwtService.getUId(httpServletRequest);
 		
 		// 錯誤導回
 		if (errors != null && !errors.isEmpty()) {
@@ -97,7 +97,7 @@ public class InsertOrder {
 		//空值
 		if(order == null) {
 			errors.put("error", "none");
-			errors.put("noData", "訂單新增失敗");
+			errors.put("noData", "訂單已滿, 新增訂單失敗");
 			return errors;
 		}
 		
@@ -129,7 +129,7 @@ public class InsertOrder {
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;
-		
+
 	}
 
 }
