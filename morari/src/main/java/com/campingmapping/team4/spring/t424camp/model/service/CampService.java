@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -115,7 +116,7 @@ public class CampService {
 
 	// 找全部Camp
 	public List<Camp> findAll() {
-		return campRepository.findAll();
+		return campRepository.findAll(Sort.by("campID"));
 	}
 
 	// Id找Camp
