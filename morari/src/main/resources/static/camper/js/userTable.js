@@ -49,7 +49,7 @@ $(function () {
 					.DataTable(
 						{
 							"ajax": {
-								"url": "/campingmapping/ShowMemberServlet",
+								"url": "/morari/admin/camper/api/showall",
 								"type": "POST",
 								// 發送請求
 								"dataSrc": ""

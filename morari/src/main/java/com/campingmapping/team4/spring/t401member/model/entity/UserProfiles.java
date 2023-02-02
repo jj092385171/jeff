@@ -58,13 +58,16 @@ public class UserProfiles implements UserDetails {
   private String password;
 
   @Embedded
-  UserName usernames;
+  @Builder.Default
+  UserName usernames=new UserName();
 
   @Embedded
-  UserPrivacy userprivacy;
+  @Builder.Default
+  UserPrivacy userprivacy=new UserPrivacy();
 
   @Embedded
-  UserDetail userdetail;
+  @Builder.Default
+  UserDetail userdetail=new UserDetail();
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")

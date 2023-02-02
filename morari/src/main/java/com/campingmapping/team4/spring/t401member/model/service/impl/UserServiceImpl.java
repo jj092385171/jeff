@@ -22,34 +22,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UesrDetailAdminWeb> showAllUser() {
-        
+
         List<UesrDetailAdminWeb> list = new ArrayList<UesrDetailAdminWeb>();
         List<UserProfiles> users = userRepository.findAll();
         users.forEach(u -> {
             // UesrDetailAdminWeb userWeb ;
             UserName n = u.getUsernames();
-            UserDetail  d = u.getUserdetail();
+            UserDetail d = u.getUserdetail();
             UserPrivacy p = u.getUserprivacy();
-            // UesrDetailAdminWeb udw=
-            new UesrDetailAdminWeb(
-                u.getUid(),
-                d.getNickname(),
-                n.getFirstname(),
-                n.getLastname(),
-                u.getEmail(),
-                p.getPhone(),
-                u.getRoles(),
-                p.getBirthday(),
-                p.getAddress(),
-                d.getGender(),
-                d.getExp(),
-                d.getLeavel(),
-                d.getPoint(),
-                d.getRegisterdata(),
-                d.getSubscribed(),
-                d.getShot(),
-                d.getAbout());
-
+            UesrDetailAdminWeb udw = new UesrDetailAdminWeb(
+                    u.getUid(),
+                    d.getNickname(),
+                    n.getFirstname(),
+                    n.getLastname(),
+                    u.getEmail(),
+                    p.getPhone(),
+                    u.getRoles(),
+                    p.getBirthday(),
+                    p.getAddress(),
+                    d.getGender(),
+                    d.getExp(),
+                    d.getLeavel(),
+                    d.getPoint(),
+                    d.getRegisterdata(),
+                    d.getSubscribed(),
+                    d.getShot(),
+                    d.getAbout());
+            list.add(udw);
         });
         return list;
     }

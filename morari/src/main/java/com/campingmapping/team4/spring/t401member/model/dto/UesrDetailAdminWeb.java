@@ -19,9 +19,9 @@ public record UesrDetailAdminWeb(
         Integer gender,
         Long exp,
         Integer leavel,
-        Integer point,
+        Long point,
         Date registerdata,
-        Boolen subscribed,
+        Boolean subscribed,
         String shot,
         String about) {
 
