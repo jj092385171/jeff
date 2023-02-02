@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class CampingmappingApplication {
 
-	
-
 	public static void main(String[] args) {
 		SpringApplication.run(CampingmappingApplication.class, args);
 	}
