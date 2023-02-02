@@ -11393,8 +11393,8 @@ a:focus {
 
 .sidebar .nav-item .nav-link .img-profile,
 .topbar .nav-item .nav-link .img-profile {
-  height: 2rem;
-  width: 2rem;
+  height: 2rem  !important;
+  width: 2rem  !important;
 }
 
 .topbar {
@@ -11483,8 +11483,8 @@ a:focus {
 }
 
 .topbar .dropdown-list .dropdown-item .dropdown-list-image img {
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2.5rem  !important;
+  width: 2.5rem  !important;
 }
 
 .topbar .dropdown-list .dropdown-item .dropdown-list-image .status-indicator {
