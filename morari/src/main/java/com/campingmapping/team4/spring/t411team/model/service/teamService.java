@@ -67,15 +67,21 @@ public class teamService {
 			}
 		}else if(startdate != null && enddate == null) {
 			dateList = iRepo.findByStartdateGreaterThanEqual(startdate);
+			if(dateList.size() == 0) {
+				judge = false;
+			}
 		}else if (startdate == null && enddate != null) {
 			dateList = iRepo.findByEnddateLessThanEqual(enddate);
+			if(dateList.size() == 0) {
+				judge = false;
+			}
 		}
 		
 		if(dateList.size() != 0 && !camparea.equals("0")) {
 			campareaList = iRepo.findByCamparea(camparea);
 			result.addAll(dateList);
 			result.retainAll(campareaList);
-		}else if (dateList.size()!= 0 && camparea.equals("0")) {
+		}else if (dateList.size() != 0 && camparea.equals("0")) {
 			result.addAll(dateList);
 		}else if(dateList.size() == 0 && !camparea.equals("0") && judge != false){
 			campareaList = iRepo.findByCamparea(camparea);
