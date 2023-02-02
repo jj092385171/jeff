@@ -40,6 +40,7 @@ function selectJob(job) {
 		});
 	};
 	function selectUid(uid) {
+		console.log(uid);
 		$.ajax({
 			type:'POST',
 			url: '/morari/admin/work/selectUid.controller/'+uid,
@@ -47,7 +48,7 @@ function selectJob(job) {
 			success: function (data) {
 				$('#showInsert').empty("");
 				$('#su').empty("");
-				if (data.length === 0) {
+				if (data.length == 0||data== null) {
 					var h3 = $('#su');
 					h3.prepend('查詢結果');
 					var table = $('#showInsert');

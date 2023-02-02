@@ -84,19 +84,19 @@
                     div.append('<div><span>營位編號</span><span>營位名</span><span>圖片</span><span>總營位</span><span>營位金額</span></div>');
                     $.each(data, function (i, n) {
                         tmp = '<div id="order' + n.siteID + '">'
-                            + '<span name="siteID">' + n.siteID + '<span id="errorsiteID" style="color: red;"></span></span>'
+                            + '<span name="siteID">' + n.siteID + '<span class="errorsiteID" style="color: red;"></span></span>'
                             + '<span>' + n.siteName + '</span>'
                             + '<span>' + '<img width="80" height="100" src="/morari/images/' + n.sitePicturesPath + '">' + '</span>'
                             + '<span>' + n.totalSites + '</span>'
                             + '<span name="unitPrice">' + n.siteMoney + '</span>'
-                            + '<span name="numbers"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-calculator"></i></a>預約數量:</span><input name="num" type="number" min="0" step="1" value="0"><span><span id="errornumbers" style="color: red;"></span>'
+                            + '<span name="numbers"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-calculator"></i></a>預約數量:</span><input name="num" type="number" min="0" step="1" value="0"><span><span class="errornumbers" style="color: red;"></span>'
                             + '</div>'
                         div.append(tmp);
 
                     });
                     div.append('<span>入營時間:<input type="date" name="goingdate"></span>');
                     div.append('<span>離營時間:<input type="date" name="leavingdate"><br>');
-                    div.append('<button id="addOrder" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-primary btn-icon-split"><span class="icon text-white-50"><i class="fas fa-calculator"></i></span><span class="text">結帳</span></a></span></button><span id="errornone" style="color: red;"></span>')
+                    div.append('<button id="addOrder" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-primary btn-icon-split"><span class="icon text-white-50"><i class="fas fa-calculator"></i></span><span class="text">結帳</span></a></span></button><span id="errordate" style="color: red;"></span></button><span id="errornone" style="color: red;"></span>')
 
 
                     $('span').css("margin", '20px');
@@ -132,13 +132,15 @@
                         cache: false,
                         processData: false,
                         success: function (after) {
-                            $("#errorsiteID").empty();
-                            $("#errornumbers").empty();
+                            $(".errorsiteID").empty();
+                            $(".errornumbers").empty();
                             $("#errordate").empty();
+                            $("#errornone").empty();
 
+                            console.log(after)
                             if (after.error == 'true') {
-                                $("#errorsiteID").append(after.siteIds);
-                                $("#errornumbers").append(after.nums);
+                                $(".errorsiteID").append(after.siteIds);
+                                $(".errornumbers").append(after.nums);
                                 $("#errordate").append(after.timeString);
                                 return;
                             }

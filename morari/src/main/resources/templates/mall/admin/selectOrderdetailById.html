@@ -7,53 +7,53 @@
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
 
-	<style>
-td {
-	border: 2px black solid;
-}
-</style>
+    <style>
+        td {
+            border: 2px black solid;
+        }
+    </style>
 
-<script>
-    var url = window.location.href;
-    var id = url.split("/").pop();
-    console.log(id);
-</script>
-<script type="text/javascript">
-fetch('/morari/ProductOrderDetail/selectAllByPdorderid/'+id, { method: 'GET' }).then(
-		function (response) {
-			if (response.status != 200) {
-				console.log(response.satus);
-				return;
-			}
-			console.log(response);
-			response.json().then(function (n) {
-				
-				var tableData = 
-					"<th>產品名稱</th>"+"<th>產品價格</th>"+
-					"<th>數量</th>"+	"<th>照片</th>"+
-					"<th>小計</th>";
-				var total = 0;
-				if(n.length==0){
-					alert("暫無希望購買的產品");
-				}else{
-					for (var i = 0; i < n.length; i++) {
-					var money = n[i].pdprice*n[i].pdqty
-					total += money; // 累加money到total
-					tableData += 
-						"<tr>" +
-			            "<td>" + n[i].pdname + "</td>" +"<td>" + n[i].pdprice + "</td>"  +
-			            "<td>" +n[i].pdqty+ "</td>"  +"<td>" + n[i].pdpicture + "</td>"  +
-			            "<td>" + money + "</td>" +
-			            "</tr>"
-				}
-					tableData += "<tr><td colspan='4'>訂單金額總計</td><td colspan='2'>" + total+'$'+ "</td></tr>";
-				}
-				
-				document.getElementById('result').innerHTML = tableData;
-			});
-			
-		});
-</script>
+    <script>
+        var url = window.location.href;
+        var id = url.split("/").pop();
+        console.log(id);
+    </script>
+    <script type="text/javascript">
+        fetch('/morari/ProductOrderDetail/selectAllByPdorderid/' + id, { method: 'GET' }).then(
+            function (response) {
+                if (response.status != 200) {
+                    console.log(response.satus);
+                    return;
+                }
+                console.log(response);
+                response.json().then(function (n) {
+
+                    var tableData =
+                        "<th>產品名稱</th>" + "<th>產品價格</th>" +
+                        "<th>數量</th>" + "<th>照片</th>" +
+                        "<th>小計</th>";
+                    var total = 0;
+                    if (n.length == 0) {
+                        alert("暫無希望購買的產品");
+                    } else {
+                        for (var i = 0; i < n.length; i++) {
+                            var money = n[i].pdprice * n[i].pdqty
+                            total += money; // 累加money到total
+                            tableData +=
+                                "<tr>" +
+                                "<td>" + n[i].pdname + "</td>" + "<td>" + n[i].pdprice + "</td>" +
+                                "<td>" + n[i].pdqty + "</td>" + "<td>" + n[i].pdpicture + "</td>" +
+                                "<td>" + money + "</td>" +
+                                "</tr>"
+                        }
+                        tableData += "<tr><td colspan='4'>訂單金額總計</td><td colspan='2'>" + total + '$' + "</td></tr>";
+                    }
+
+                    document.getElementById('result').innerHTML = tableData;
+                });
+
+            });
+    </script>
 
 </head>
 
