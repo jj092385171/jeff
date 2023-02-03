@@ -56,7 +56,7 @@
 
 					<hr>
 
-					<table id="camptable" class="card mb-4 py-3 border-left-info"></table>
+					<table id="camptable"></table>
 
 					<hr>
 
@@ -270,10 +270,14 @@
 					var allCamps = data["allCamps"];
 					console.log(allCamps);
 					$('#camptable').DataTable({
-						// "ajax": 'allCamps.json',
-						// "columns": [
-						// 	{ allCamps: 'campID', title: "營地編號" }
-						// ]
+						"data": allCamps,
+						"columns": [
+							{ data: 'campID', title: "營地編號" },
+							{ data: 'campName', title: "營地名" },
+							{ data: 'city.cityName', title: "城市名" },
+							{ data: 'campPicturesPath', title: "圖片" },
+							// '<img id="img" src="/morari/images/' + campPicturesPath + '">'
+						]
 					});
 
 					// var camptable = $('#camptable');
