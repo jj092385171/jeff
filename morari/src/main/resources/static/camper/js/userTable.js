@@ -1,4 +1,4 @@
-function delmember(account) {
+function delmember(uid) {
 
 
 	if (confirm('確認刪除資料?') == true) {
@@ -50,7 +50,7 @@ $(function () {
 						{
 							"ajax": {
 								"url": "/morari/admin/camper/api/showall",
-								"type": "POST",
+								"type": "GET",
 								// 發送請求
 								"dataSrc": ""
 							},
@@ -67,12 +67,12 @@ $(function () {
 									}
 								},
 								{
-									"data": 'account'
+									"data": 'email'
 									, "render": function (
 										data, type,
 										row, meta) {
-										i = data;
-										return '<td id="' + "acc" + i + '">' + data + '</td>'
+										vallist.push(data)
+										return data
 									}
 								},
 								{
@@ -103,34 +103,16 @@ $(function () {
 									}
 								},
 								{
-									"data": 'exp'
-									, "render": function (
-										data, type,
-										row, meta) {
-										vallist.push(data)
-										return data
-									}
-								},
-								{
-									"data": 'leavel'
-									, "render": function (
-										data, type,
-										row, meta) {
-										vallist.push(data)
-										return data
-									}
-								},
-								{
-									"data": 'point'
-									, "render": function (
-										data, type,
-										row, meta) {
-										vallist.push(data)
-										return data
-									}
-								},
-								{
 									"data": 'phone'
+									, "render": function (
+										data, type,
+										row, meta) {
+										vallist.push(data)
+										return data
+									}
+								},
+								{
+									"data": 'role'
 									, "render": function (
 										data, type,
 										row, meta) {
@@ -158,7 +140,7 @@ $(function () {
 									}
 								},
 								{
-									"data": 'email'
+									"data": 'gender'
 									, "render": function (
 										data, type,
 										row, meta) {
@@ -167,7 +149,26 @@ $(function () {
 									}
 								},
 								{
-									"data": 'gender'
+									"data": 'leavel'
+									, "render": function (
+										data, type,
+										row, meta) {
+										vallist.push(data)
+										return data
+									}
+								},
+								{
+									"data": 'exp'
+									, "render": function (
+										data, type,
+										row, meta) {
+										vallist.push(data)
+										return data
+									}
+								},
+
+								{
+									"data": 'point'
 									, "render": function (
 										data, type,
 										row, meta) {
@@ -200,18 +201,25 @@ $(function () {
 										data, type,
 										row, meta) {
 										vallist.push(data)
-
 										return data
-
 									}
 								},
 								{
-									"data": "address",
+									"data": 'about'
+									, "render": function (
+										data, type,
+										row, meta) {
+										vallist.push(data)
+										return data
+									}
+								},
+								{
+									"data": "uid",
 									render: function (data, type, row) {
 
 
-										return '<button type="button" class="btn btn-warning btn-sm" id=' + "'" + "edit" + i + "'" + ' onclick= "editmember( ' + "'" + vallist + "'" + ')">編輯</button> ' +
-											'<button type="button" class="btn btn-danger btn-sm"id=' + "'" + "del" + i + "'" + 'onclick= "delmember(' + "'" + i + "'" + ' )" >刪除</button>'
+										return '<button type="button" class="btn btn-warning btn-sm" id=' + "'" + "edit" + data + "'" + ' onclick= "editmember( ' + "'" + data + "'" + ')">編輯</button> ' +
+											'<button type="button" class="btn btn-danger btn-sm"id=' + "'" + "del" + data + "'" + 'onclick= "delmember(' + data + ' )" >刪除</button>'
 									}
 								}
 

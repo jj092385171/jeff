@@ -71,12 +71,12 @@ public class AuthAccountService {
     oAuth2Request.name().ifPresent(
         name -> {
           userDetail.setNickname(name);
-          user.setUserddetail(userDetail);
+          user.setUserdetail(userDetail);
         });
     oAuth2Request.shot().ifPresent(
         shot -> {
           userDetail.setShot(shot);
-          user.setUserddetail(userDetail);
+          user.setUserdetail(userDetail);
         });
     ;
     userRepository.save(user);
