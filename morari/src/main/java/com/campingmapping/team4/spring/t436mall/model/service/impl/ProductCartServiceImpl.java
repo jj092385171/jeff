@@ -22,7 +22,6 @@ public class ProductCartServiceImpl implements ProductCartService {
 	public ProductCart create(ProductCart productcart) {
 		
 		
-		
 		productcart.setCtqty(1);
 		return pcDao.save(productcart);
 	}

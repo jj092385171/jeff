@@ -44,6 +44,7 @@
 					var total = 0;
 					if (n.length == 0) {
 						alert("暫無希望購買的產品");
+						location.replace(" https://localhost:8443/morari/ProductCart/productcartqueryallmain.controller ")
 					} else {
 						for (var i = 0; i < n.length; i++) {
 							var money = n[i].pdprice * n[i].ctqty
