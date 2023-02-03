@@ -40,15 +40,12 @@ public class SetupDataLoader implements
     // private UserRoleRepository userRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    
     @Autowired
     private TagRepository tagRepository;
-
+    
     @Autowired
     private CityRepository cityRepository;
-
-    // @Autowired
-    // private Tag tag;
 
     @Override
     @Transactional
@@ -71,27 +68,23 @@ public class SetupDataLoader implements
                 .exp(999999L)
                 .leavel(999999)
                 .point(99999999L)
+                .registerdata(new Date())
                 .build();
+        // Name
+        UserName userName = UserName.builder().firstname("").build();
+        // Privacy
+        UserPrivacy userPrivacy = UserPrivacy.builder().address("").build();
         try {
             if (userOptional.isPresent()) {
                 userProfiles = userOptional.get();
-                userProfiles.setUserddetail(userDetail);
+                userProfiles.setUserdetail(userDetail);
+                userProfiles.setUsernames(userName);
+                userProfiles.setUserprivacy(userPrivacy);
                 userProfiles.setEmail(MyConstants.SUPER_ADMIN_NAME);
                 userProfiles.setPassword(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD));
                 userProfiles.getRoles().clear();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
-
-                String[] tags = { "大草原", "夜景", "親子娛樂" };
-                for (int i = 0; i < tags.length; i++) {
-                    createTagIfNotFound(tags[i]);
-                }
-
-                String[] citys = { "新北", "桃園", "苗栗" };
-                for (int i = 0; i < citys.length; i++) {
-                    createCityIfNotFound(citys[i]);
-                }
-
             } else {
                 // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
 
@@ -105,6 +98,16 @@ public class SetupDataLoader implements
                         .build();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
+
+                String[] tags = { "大草原", "夜景", "親子娛樂" };
+                for (int i = 0; i < tags.length; i++) {
+                    createTagIfNotFound(tags[i]);
+                }
+
+                String[] citys = { "新北", "桃園", "苗栗" };
+                for (int i = 0; i < citys.length; i++) {
+                    createCityIfNotFound(citys[i]);
+                }
             }
 
         } catch (Exception e) {
