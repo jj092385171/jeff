@@ -30,10 +30,10 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    <h3>揪團管理</h3>
+                <h3>揪團管理</h3>
 				<button type="button" onclick="window.location.href='insert.controller'">新增</button>
 				
-				<table id="result"></table>
+				<table id="result" class="table is-striped"></table>
 				
 				<form id="select">
 				<button type="button" name="select">條件查詢</button>
@@ -45,11 +45,6 @@
 				</select>
 				<select id="camparea" name="camparea">
 				</select>
-				</form>
-				
-				<form>
-				<button type="button">模糊搜尋</button>
-				<input type="text">
 				</form>
 				
 				<table id="selectResult"></table>
@@ -80,7 +75,7 @@
     <div class="loginoutshare"></div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>
+    <script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
     <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 
     <!-- Core plugin JavaScript-->
@@ -96,7 +91,10 @@
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
 	
-	<script src="/morari/team/initiating/view.js" defer></script>
+	<script src="/morari/admin/vendor/datatables/datatables13.js" ></script>
+    <script src="/morari/admin/vendor/datatables/datatableresponsive.js" ></script>
+    
+	<script src="/morari/team/initiating/viewDatable.js" defer></script>
 	
 </body>
 

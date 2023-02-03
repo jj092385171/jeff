@@ -9,7 +9,6 @@ fetch('view.controller', { method: 'GET' }).then(
 
 
 				response.json().then(function (data) {
-					var resultText = '';
 					var optionData= "";
 					
 					var tableData = "";
@@ -29,12 +28,6 @@ fetch('view.controller', { method: 'GET' }).then(
 							pair = "不可配對"
 						}
 						
-						resultText += data[i].initiatingnum + " " 
-						+ data[i].userprofiles.uid
-							+ " " + data[i].postdate + " " + data[i].startdate + " "
-							+ data[i].enddate + " " + data[i].currentnum + " "
-							+ data[i].acceptablenum + " " + data[i].camparea + " "
-							+ data[i].pair + "<br/>";
 							
 						tableData += "<tr>" + "<td><form " + 
 						"action=" + "/delete.controller/" + "{" + data[i].initiatingnum + "}" + 
@@ -174,42 +167,7 @@ fetch('view.controller', { method: 'GET' }).then(
 								console.log(response);
 								if (response.status == 200) {
 									response.json().then(function (data){
-										var resultText = "";
-										var tableData = "";
-										tableData += 
-										"<td>" + "揪團編號" + 
-										"</td>" + "<td>" + "發文會員" + 
-										"</td>" + "<td>" + "發文日期" + "</td>" + "<td>" + "開始日期" + "</td>" + "<td>" +
-										"結束日期" + "</td>" + "<td>" + "目前人數" + "</td>" + "<td>" + "接受人數" + "</td>" +
-										"<td>" + "露營地點" + "</td>" + "<td>" + "配對狀態" + "</td>"
-										;
-										if(data.length == 0){
-											tableData = "查無資料";
-										}
-										for (var i = 0; i < data.length; i++) {
-											var pDay = new Date(data[i].postdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});
-											var sDay = new Date(data[i].startdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
-											var eDay = new Date(data[i].enddate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
-											
-											var pair = "可配對";
-											if (data[i].pair != 0) {
-												pair = "不可配對"
-											}
-											
-											resultText += data[i].initiatingnum + " " 
-											+ data[i].userprofiles.uid
-												+ " " + pDay + " " + sDay + " "
-												+ eDay + " " + data[i].currentnum + " "
-												+ data[i].acceptablenum + " " + data[i].camparea + " "
-												+ pair + "<br/>";
-												
-											tableData += "<tr>" +"<td>" + data[i].initiatingnum + 
-											"</td>" + "<td>" + data[i].userprofiles.uid + 
-											"</td>" + "<td>" + pDay + "</td>" + "<td>" + sDay + "</td>" + "<td>" +
-											eDay + "</td>" + "<td>" + data[i].currentnum + "</td>" + "<td>" + data[i].acceptablenum + "</td>" +
-											"<td>" + data[i].camparea + "</td>" + "<td>" + pair + "</td>" + "</tr>"
-										}
-										document.getElementById('selectResult').innerHTML = tableData;
+									
 									});
 								}
 							});
