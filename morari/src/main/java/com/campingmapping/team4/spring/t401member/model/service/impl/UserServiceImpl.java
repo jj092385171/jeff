@@ -27,11 +27,12 @@ public class UserServiceImpl implements UserService {
         List<UserProfiles> users = userRepository.findAll();
         users.forEach(u -> {
             // UesrDetailAdminWeb userWeb ;
+            System.out.println(u.getUserdetail().toString());
             UserName n = u.getUsernames();
             UserDetail d = u.getUserdetail();
             UserPrivacy p = u.getUserprivacy();
             UesrDetailAdminWeb udw = new UesrDetailAdminWeb(
-                    u.getUid(),
+                    u.getUid().toString(),
                     d.getNickname(),
                     n.getFirstname(),
                     n.getLastname(),

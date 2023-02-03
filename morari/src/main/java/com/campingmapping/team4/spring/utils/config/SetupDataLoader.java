@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.utils.config;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,11 +57,12 @@ public class SetupDataLoader implements
                 .exp(999999L)
                 .leavel(999999)
                 .point(99999999L)
+                .registerdata(new Date())
                 .build();
         // Name
-        UserName userName = UserName.builder().build();
+        UserName userName = UserName.builder().firstname("").build();
         // Privacy
-        UserPrivacy userPrivacy = UserPrivacy.builder().build();
+        UserPrivacy userPrivacy = UserPrivacy.builder().address("").build();
         try {
             if (userOptional.isPresent()) {
                 userProfiles = userOptional.get();
