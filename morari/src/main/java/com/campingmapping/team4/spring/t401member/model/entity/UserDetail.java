@@ -50,4 +50,7 @@ public class UserDetail {
     @Lob
     // @Column(columnDefinition = "default '這個用戶什麼都沒留下~~'")
     private String about;
+
+
+    
 }
