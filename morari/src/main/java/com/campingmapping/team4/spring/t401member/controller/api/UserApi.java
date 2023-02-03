@@ -10,21 +10,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.campingmapping.team4.spring.t401member.model.service.UserService;
+import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
+import com.campingmapping.team4.spring.t401member.model.service.*;
 
 @Controller
 @RequestMapping("admin/camper/api")
 public class UserApi {
-
-@Autowired
-UserService userService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/showall")
     @ResponseBody
-    public List<UserProfiles> getAllUser() {
-        // return userService.showAllUser();
-        return null;
+    public List<UesrDetailAdminWeb> getAllUser() {
+        return userService.showAllUser();
     }
     @GetMapping("/{uid}")
     @ResponseBody

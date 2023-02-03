@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ import com.campingmapping.team4.spring.t424camp.model.entity.City;
 import com.campingmapping.team4.spring.t424camp.model.entity.Order;
 import com.campingmapping.team4.spring.t424camp.model.entity.Site;
 import com.campingmapping.team4.spring.t424camp.model.entity.Tag;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 @Transactional
@@ -39,16 +43,20 @@ public class CampService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private JwtService jwtService;
+	
+	@Autowired
+	private HttpServletRequest httpServletRequest;
+	
 
 	// 透過cityId查Camps
 	public List<Camp> recommendCampToUser(UUID uid) {
 		// user
-		System.out.println("=1===================================");
 		UserProfiles user = userRepository.findById(uid).get();
+
 		// orders of user
-
-		System.out.println("=2===================================");
-
 		Object[] orders = user.getCampOrder().toArray();
 		int ordersMax = orders.length - 1;
 		int ordersMin = 0;
@@ -107,15 +115,19 @@ public class CampService {
 		}
 
 		City city = cityService.findById(cityID);
+		
+		//使用者
+		UUID uid = jwtService.getUId(httpServletRequest);
+		UserProfiles user = userRepository.findById(uid).get();
 
-		Camp camp = new Camp(campName, city, location, campPicturesPath, description, tags);
+		Camp camp = new Camp(campName, city, location, campPicturesPath, description, tags, user);
 
 		return campRepository.save(camp);
 	}
 
 	// 找全部Camp
 	public List<Camp> findAll() {
-		return campRepository.findAll();
+		return campRepository.findAll(Sort.by("campID"));
 	}
 
 	// Id找Camp
@@ -141,8 +153,12 @@ public class CampService {
 		}
 
 		City city = cityService.findById(cityID);
+		
+		//使用者
+		UUID uid = jwtService.getUId(httpServletRequest);
+		UserProfiles user = userRepository.findById(uid).get();
 
-		Camp camp = new Camp(campID, campName, city, location, campPicturesPath, description, tags);
+		Camp camp = new Camp(campID, campName, city, location, campPicturesPath, description, tags, user);
 
 		return campRepository.save(camp);
 	}

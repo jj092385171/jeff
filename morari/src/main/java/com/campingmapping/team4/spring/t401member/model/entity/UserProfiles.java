@@ -30,6 +30,7 @@ import org.springframework.stereotype.Component;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
+import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.entity.Order;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
 import com.campingmapping.team4.spring.t433forum.model.entity.PostComment;
@@ -58,13 +59,16 @@ public class UserProfiles implements UserDetails {
   private String password;
 
   @Embedded
-  UserName username;
+  @Builder.Default
+  UserName usernames=new UserName();
 
   @Embedded
-  UserPrivacy userprivacy;
+  @Builder.Default
+  UserPrivacy userprivacy=new UserPrivacy();
 
   @Embedded
-  UserDetail userddetail;
+  @Builder.Default
+  UserDetail userdetail=new UserDetail();
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
@@ -145,5 +149,10 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Set<Order> CampOrder;
+// Camp
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  private Set<Camp> camp;
 
 }

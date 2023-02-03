@@ -98,8 +98,8 @@ spring:
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
   mail:
     host: smtp.gmail.com
-    username: hcc8462@gmail.com
-    password: fpwrzbaletyxwsoh
+    username: 
+    password: 
     port: 587
     protocol: smtp
     properties:

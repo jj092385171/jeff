@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -52,6 +52,11 @@ public class Camp implements Serializable {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
+	@ManyToOne
+	@JoinColumn(name = "FKUSERID")
+	private UserProfiles userprofiles;
+
+	
 	// @JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tagofcamp", joinColumns = {
@@ -76,7 +81,7 @@ public class Camp implements Serializable {
 	}
 
 	public Camp(Integer campID, String campName, City city, String location, String campPicturesPath,
-			String description, Set<Tag> tags) {
+			String description, Set<Tag> tags, UserProfiles userprofiles) {
 		super();
 		this.campID = campID;
 		this.campName = campName;
@@ -85,10 +90,11 @@ public class Camp implements Serializable {
 		this.campPicturesPath = campPicturesPath;
 		this.description = description;
 		this.tags = tags;
+		this.userprofiles = userprofiles;
 	}
 
 	public Camp(String campName, City city, String location, String campPicturesPath, String description,
-			Set<Tag> tags) {
+			Set<Tag> tags, UserProfiles userprofiles) {
 		super();
 		this.campName = campName;
 		this.city = city;
@@ -96,6 +102,7 @@ public class Camp implements Serializable {
 		this.campPicturesPath = campPicturesPath;
 		this.description = description;
 		this.tags = tags;
+		this.userprofiles = userprofiles;
 	}
 
 	public Integer getCampID() {
@@ -174,4 +181,13 @@ public class Camp implements Serializable {
 		return serialVersionUID;
 	}
 
+	public UserProfiles getUserprofiles() {
+		return userprofiles;
+	}
+
+	public void setUserprofiles(UserProfiles userprofiles) {
+		this.userprofiles = userprofiles;
+	}
+
+	
 }

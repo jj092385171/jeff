@@ -1,7 +1,0 @@
-{
-    "java.compile.nullAnalysis.mode": "automatic",
-    "workbench.settings.openDefaultKeybindings": true,
-    "java.debug.settings.onBuildFailureProceed": true,
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "commentTranslate.source": "Google"
-}
