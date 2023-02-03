@@ -34,9 +34,19 @@ $(document).ready(function () {
 						
 							//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 								console.log("response:"+response);
-								var tr = "<tr align='center'>" + "<td>" + response.userprofiles.uid +"</td>"+"<td>" + response.rackid + "</td>" +  "<td>" + response.rackup + "</td>" + "<td>" + response.job + "</td>" + "<td>" + response.salary + "</td>" +
-									"<td>" + response.quantity + "</td>" + "<td>" + response.place + "</td>" + "<td>" + response.date + "</td>" + "<td>" + response.time + "</td>" + "<td>" + response.remark + "</td>" + "<td>" + response.img + "</td>" +
-									"</tr>";
+								var tr = "<tr align='center'>" + 
+								"<td>" + n.userprofiles.uid + "</td>" +
+    							"<td>" + n.rackid + "</td>" +
+    							"<td>" + n.rackup + "</td>" +
+    							"<td>" + n.job + "</td>" +
+    							"<td>" + n.salary + "</td>" +
+    							"<td>" + n.quantity + "</td>" +
+    							"<td>" + n.camp.city +n.camp.location+ "</td>" +
+    							"<td>" + n.date + "</td>" +
+    							"<td>" + n.time + "</td>" +
+    							"<td>" + n.remark + "</td>" +
+    							"<td>" + n.camp.campPicturesPath + "</td>" +
+								"</tr>";
 								table.append(tr);
 							//});
 						}

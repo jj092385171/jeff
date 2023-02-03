@@ -1,9 +1,5 @@
 package com.campingmapping.team4.spring.t409work.model.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -11,13 +7,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
@@ -44,8 +37,6 @@ public class JobService {
 	public JobBean insert(JobBean jBean, UUID u) {
 		jBean.setUserprofiles(uDao.findById(u).get());
 		Date currentDate = new Date();
-//		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-//		jBean.setRackup(sd.format(currentDate));
 		jBean.setRackup(currentDate);
 		return jobDao.save(jBean);
 	}
@@ -59,11 +50,9 @@ public class JobService {
 			// 將前端傳進來的jobBean的值複製到jBean
 			jBean.setJob(jobBean.getJob());
 			jBean.setDate(jobBean.getDate());
-			jBean.setPlace(jobBean.getPlace());
 			jBean.setRemark(jobBean.getRemark());
 			jBean.setSalary(jobBean.getSalary());
 			jBean.setTime(jobBean.getTime());
-			jBean.setImg(jobBean.getImg());
 			jBean.setQuantity(jobBean.getQuantity());
 
 			jBean.setRackup(result.get().getRackup());
@@ -95,11 +84,6 @@ public class JobService {
 		return jobDao.findByJobisLike(job);
 	}
 
-	// 查職缺+uid
-//	public List<JobBean> findByUidAndJobisLike(Integer uid, String job) {
-//		return jobDao.findByUidAndJobisLike(1, job);
-//	}
-
 	// 透過會員id找資料
 	public List<JobBean> findUid(UUID uid) {
 
@@ -109,25 +93,6 @@ public class JobService {
 		return arrayList;
 	}
 
-	// 圖片轉blob
-	public Blob fileToBlob(InputStream is, long size) throws IOException, SerialException, SQLException {
-		byte[] b = new byte[(int) size];
-		is.read(b);
-		return new SerialBlob(b);
-	}
 
-	public Blob fileToBlob(MultipartFile photo) throws IOException, SQLException {
-		InputStream is = photo.getInputStream();
-		long size = photo.getSize();
-		byte[] b = new byte[(int) size];
-		SerialBlob sb = null;
-		is.read(b);
-		sb = new SerialBlob(b);
-		return sb;
-	}
 
-	// 透過rackID秀圖片
-//	public JobBean findImgByRackID(int rackID) {
-//		return jobDao.findImgByRackID(rackID);	 
-//	}
 }

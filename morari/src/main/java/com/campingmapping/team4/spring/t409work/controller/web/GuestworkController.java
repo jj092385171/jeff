@@ -85,27 +85,27 @@ public class GuestworkController {
 	}
 
 	// 秀圖片
-	@GetMapping("/jobImg.controller/{id}")
-	@ResponseBody
-	public InputStream processImgAction(@PathVariable("id") String rackID) throws SQLException {
-		int parseID = Integer.parseInt(rackID);
-		JobBean result = jService.findById(parseID);
-		Blob img = result.getImg();
-		InputStream binaryStream = img.getBinaryStream();
-		return binaryStream;
-	}
+//	@GetMapping("/jobImg.controller/{id}")
+//	@ResponseBody
+//	public InputStream processImgAction(@PathVariable("id") String rackID) throws SQLException {
+//		int parseID = Integer.parseInt(rackID);
+//		JobBean result = jService.findById(parseID);
+//		Blob img = result.getImg();
+//		InputStream binaryStream = img.getBinaryStream();
+//		return binaryStream;
+//	}
 
 	// 處理照片格式(進資料庫)
-	@PostMapping("/fileToBlob.controller")
-	public void processImgAction(@RequestParam("img") MultipartFile img) throws IOException {
-		JobBean jBean = new JobBean();
-		InputStream in = img.getInputStream();
-		long size = img.getSize();
-		try {
-			Blob image = jService.fileToBlob(in, size);
-			jBean.setImg(image);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@PostMapping("/fileToBlob.controller")
+//	public void processImgAction(@RequestParam("img") MultipartFile img) throws IOException {
+//		JobBean jBean = new JobBean();
+//		InputStream in = img.getInputStream();
+//		long size = img.getSize();
+//		try {
+//			Blob image = jService.fileToBlob(in, size);
+//			jBean.setImg(image);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }
