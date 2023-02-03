@@ -54,7 +54,7 @@ fetch('view.controller', { method: 'GET' }).then(
       				{ data: 'pair', title: '配對狀態' },
 
       							],
-      				lengthMenu: [5, 10, 15],
+      				lengthMenu: [5, 10, 15, 20],
       				language: {
 					"lengthMenu":     "顯示 _MENU_ 筆資料",
 					"info":           "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
