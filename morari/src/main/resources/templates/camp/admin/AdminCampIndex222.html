@@ -108,10 +108,10 @@
 	<!-- Page level custom scripts -->
 	<script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
 	<script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<!-- datatables js -->
 	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
 	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 	<script type="text/javascript">
 		$(function () {
@@ -268,46 +268,38 @@
 
 
 					var allCamps = data["allCamps"];
-					console.log(allCamps);
-					$('#camptable').DataTable({
-						// "ajax": 'allCamps.json',
-						// "columns": [
-						// 	{ allCamps: 'campID', title: "營地編號" }
-						// ]
+					var camptable = $('#camptable');
+					var camptr = '';
+					camptable.append('<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>')
+					$.each(allCamps, function (i, n) {
+						var tagNames = '';
+						n.tags.forEach(element => {
+							tagNames += element.tagName + ' /<br>'
+						});
+
+						camptr = '<tbody class="card mb-4 py-3 border-bottom-dark">'
+							+ '<tr>'
+							+ '<td>' + n.campID + '</td>'
+							+ '<td class="td2"><a href="#">' + n.campName + '</a></td>'
+							+ '<td>' + n.city.cityName + '</td>'
+							+ '<td>' + '<img id="img" src="/morari/images/' + n.campPicturesPath + '">' + '</td>'
+							+ '<td>' + n.description + '</td>'
+							+ '<td>' + n.location + '</td>'
+							+ '<td>' + tagNames + '</td>'
+							+ '<td>'
+							+ '<button style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>'
+							+ '</td>'
+							+ '<td>'
+							+ '<button style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>'
+							+ '</td>'
+							+ '<td>'
+							+ '<button style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-plus"></i></a></button>'
+							+ '</td>'
+							+ '</tr>'
+							+ '</tbody>'
+						camptable.append(camptr);
+
 					});
-
-					// var camptable = $('#camptable');
-					// var camptr = '';
-					// camptable.append('<thead><th>營地編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>描述</th><th>地點</th><th>標籤</th><th>更新</th><th>刪除</th><th>新增營區位</th></thead>')
-					// $.each(allCamps, function (i, n) {
-					// 	var tagNames = '';
-					// 	n.tags.forEach(element => {
-					// 		tagNames += element.tagName + ' /<br>'
-					// 	});
-
-					// 	camptr = '<tbody class="card mb-4 py-3 border-bottom-dark">'
-					// 		+ '<tr>'
-					// 		+ '<td>' + n.campID + '</td>'
-					// 		+ '<td class="td2"><a href="#">' + n.campName + '</a></td>'
-					// 		+ '<td>' + n.city.cityName + '</td>'
-					// 		+ '<td>' + '<img id="img" src="/morari/images/' + n.campPicturesPath + '">' + '</td>'
-					// 		+ '<td>' + n.description + '</td>'
-					// 		+ '<td>' + n.location + '</td>'
-					// 		+ '<td>' + tagNames + '</td>'
-					// 		+ '<td>'
-					// 		+ '<button style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>'
-					// 		+ '</td>'
-					// 		+ '<td>'
-					// 		+ '<button style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>'
-					// 		+ '</td>'
-					// 		+ '<td>'
-					// 		+ '<button style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + n.campID + '"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-plus"></i></a></button>'
-					// 		+ '</td>'
-					// 		+ '</tr>'
-					// 		+ '</tbody>'
-					// 	camptable.append(camptr);
-
-					// });
 
 					$('#inputid').width('100px').css("margin-left", "25px");
 					$('th').width('90px').css("text-align", "center");
