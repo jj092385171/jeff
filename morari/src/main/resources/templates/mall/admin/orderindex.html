@@ -13,46 +13,7 @@
         }
     </style>
 
-    <script type="text/javascript">
-        fetch('/morari/ProductOrder/selectAll', { method: 'GET' }).then(
-            function (response) {
-                if (response.status != 200) {
-                    console.log(response.satus);
-                    return;
-                }
-                console.log(response);
-                response.json().then(function (n) {
-                    var tableData =
-                        "<th>訂單編號</th>" + "<th>用戶ID</th>" +
-                        "<th>出貨狀態</th>" + "<th>訂單成立時間</th>" +
-                        "<th>總金額</th>" + "<th>收件人姓名</th>" +
-                        "<th>收件人電話</th>" + "<th>收件地址</th>";
-                    for (var i = 0; i < n.length; i++) {
-                        tableData +=
-                            "<tr>" +
-                            "<td>" + n[i].id + "</td>" + "<td>" + n[i].userid + "</td>" +
-                            "<td>" + n[i].odstatus + "</td>" + "<td>" + n[i].datetime + "</td>" +
-                            "<td>" + n[i].money + "</td>" + "<td>" + n[i].odrecipient + "</td>" +
-                            "<td>" + n[i].odrecipientphone + "</td>" + "<td>" + n[i].odshippingaddress + "</td>" +
-                            "<td><button id='orderDetail' type='button' value='n[i].id' onclick='orderDetail(" + '"' + n[i].id + '"' + ")'>查看詳情</button></td>" +
-                            "</tr>"
-                    }
-                    document.getElementById('result').innerHTML = tableData;
-                });
-            });
 
-        function orderDetail(id) {
-            if (confirm("確定查看(編號:" + id + ")?")) {
-                $.ajax({
-                    success: function (data) {
-                        window.location.href = "/morari/ProductOrderDetail/selectAllByPdorderid.controller/" + id;
-                    }
-                });
-            } else {
-            }
-        }
-
-    </script>
 
 </head>
 
@@ -105,7 +66,7 @@
     <div class="loginoutshare"></div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>
+    <script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
     <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 
     <!-- Core plugin JavaScript-->
@@ -120,6 +81,73 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+
+    <script src="/morari/admin/vendor/datatables/datatables13.js"></script>
+    <script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
+
+    <script type="text/javascript">
+        fetch('/morari/ProductOrder/selectAll', { method: 'GET' }).then(
+            function (response) {
+                if (response.status != 200) {
+                    console.log(response.satus);
+                    return;
+                }
+                console.log(response);
+                response.json().then(function (n) {
+
+                    $('#result').DataTable({
+                        data: n,
+                        responsive: true,
+                        columns: [
+
+                            { data: 'id', title: '訂單編號' },
+                            { data: 'userid', title: '用戶ID' },
+                            { data: 'odstatus', title: '出貨狀態' },
+                            { data: 'datetime', title: '訂單成立時間' },
+                            { data: 'money', title: '總金額' },
+                            { data: 'odrecipient', title: '收件人姓名' },
+                            { data: 'odrecipientphone', title: '收件人電話' },
+                            { data: 'odshippingaddress', title: '收件地址' },
+
+                            {
+                                data: null, title: '查看詳情',
+                                render: function (data, type, row) {
+                                	
+                                    return  "<button id='orderDetail' type='button' value='n[i].id' onclick='orderDetail(\"" + row.id + "\")'>查看詳情</button>";
+                                }
+                            },
+
+
+                        ],
+                        lengthMenu: [5, 10, 15, 20],
+                        language: {
+                            "lengthMenu": "顯示 _MENU_ 筆資料",
+                            "info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+                            "search": "搜尋：",
+                            "paginate": {
+                                "next": "下一頁",
+                                "previous": "上一頁"
+                            }
+                        }
+
+                    });
+
+
+                });
+            });
+
+        function orderDetail(id) {
+            if (confirm("確定查看(編號:" + id + ")?")) {
+                $.ajax({
+                    success: function (data) {
+                        window.location.href = "/morari/ProductOrderDetail/selectAllByPdorderid.controller/" + id;
+                    }
+                });
+            } else {
+            }
+        }
+
+    </script>
 
 </body>
 
