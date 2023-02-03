@@ -5,6 +5,14 @@
 	<meta charset="UTF-8">
 	<title>新增</title>
 	<script type="text/javascript">
+	fetch("/morari/utils/getuid")
+	.then(response => response.text())
+	.then(data => {
+		// console.log(data)
+		document.getElementById("userid").value = data;
+	})	
+	
+	
 		window.onload = function () {
 			const form = document.getElementById('insert');
 
@@ -29,9 +37,9 @@
 					return;
 				}
 
-				const value = formData['userprofiles'];
-				const data = { uid: value };
-				delete formData['userprofiles'];
+				const value = formData['userid'];
+				const data = { uuid: value };
+				delete formData['userid'];
 
 				const json = JSON.stringify(formData);
 
@@ -39,7 +47,7 @@
 
 				if (result) {
 
-					fetch('/morari/team/insertMaterial.controller/' + data.uid , {
+					fetch('/morari/team/insertMaterial.controller/' + data.uuid , {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
@@ -62,8 +70,8 @@
 <body>
 	<h3>新增</h3>
 	<form id="insert">
-		發文會員:<input type="text" id="userprofiles" name="userprofiles" 
-			required placeholder="請輸入會員編號,僅限數字"><br> 起始日期:<input type="date" id="startdate" name="startdate"
+		發文會員:<input type="text" id="userid" name="userid" 
+			><br> 起始日期:<input type="date" id="startdate" name="startdate"
 			required><br> 結束日期:<input type="date" id="enddate" name="enddate" required><br>
 		現有人數:<input type="text" id="currentnum" name="currentnum" onkeyup="value=value.replace(/[^\d]/g,'') " required
 			placeholder="請輸入現有人數,僅限數字"><br>
