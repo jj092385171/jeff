@@ -39,7 +39,7 @@
                 <div class="container-fluid">
 
                     <h3>凹豆商城 訂單管理</h3>
-                    <table id="result"></table>
+                    <table id="result" class="table is-striped"></table>
 
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
@@ -82,7 +82,8 @@
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
 
-    <script src="/morari/admin/vendor/datatables/datatables13.js"></script>
+	<!-- datatable -->
+	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
     <script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
 
     <script type="text/javascript">
@@ -112,8 +113,8 @@
                             {
                                 data: null, title: '查看詳情',
                                 render: function (data, type, row) {
-                                	
-                                    return  "<button id='orderDetail' type='button' value='n[i].id' onclick='orderDetail(\"" + row.id + "\")'>查看詳情</button>";
+
+                                    return "<button id='orderDetail' type='button' value='n[i].id' onclick='orderDetail(\"" + row.id + "\")'>查看詳情</button>";
                                 }
                             },
 
