@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 import com.campingmapping.team4.spring.t409work.model.service.MailService;
+import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,13 +45,13 @@ public class WorkAdminUserController {
 	}
 
 	// 啟動insert
-	@PostMapping("/startInsert.controller")
+	@GetMapping("/startInsert.controller/{c}")
 	public String processMainAction2() {
 		return "work/admin/camp/userInsert";
 	}
 
 	// 啟動select
-	@PostMapping("/startSelect.controller")
+	@PostMapping("/startSelect.controller/{u}")
 	public String processMainAction3() {
 		return "work/admin/camp/userSelect";
 	}
@@ -111,6 +112,14 @@ public class WorkAdminUserController {
 		mailService.sendEmail(email, "快加入我們吧！", "您好，我明天要睡飽一點會晚到，不要太想我");
 
 		return "Success！！！";
+	}
+	// 透過uid搜尋camp的東西
+	@PostMapping("/selectUUid.controller/{uid}")
+	@ResponseBody
+	public List<Camp> processSelectUUidAction(@PathVariable UUID uid) {
+		List<Camp> result = jService.findUUid(uid);
+		
+		return result;
 	}
 
 }

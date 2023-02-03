@@ -1,30 +1,50 @@
 // 載入 你的.html
-$(document).ready(function () {
+$(document).ready(function() {
 
-		let uid;
-		fetch("/morari/utils/getuid")
+	let uid;
+	fetch("/morari/utils/getuid")
 		.then(response => response.text())
 		.then(data => {
 			// console.log(data)
 			uid = data;
-		}).then(()=>{
+		}).then(() => {
+			//找營地名稱
+			$("#campId").click(function() {
 
+				$('#campName').empty("");
+				$.ajax({
+					type: 'POST',
+					url: '/morari/admin/user/work/selectUUid.controller/' + uid,
+					contentType: 'application/json',
+					success: function(data) {
+						console.log(data);
+						$.each(data, function(i, n) {
+							var table = $('#campName');
+							var tr = "<tr align='center'>" +
+								"<td>" + "<a href='/morari/admin/user/work/startInsert.controller/" + n.campID + "'>" + n.campName + "</td>" +
+								"</tr>"
+							table.append(tr);
+						});
+					}
+				})
+
+			})
 
 			$.ajax({
 				type: 'POST',
 				url: '/morari/admin/user/work/userSelectUid.controller/' + uid,
 				contentType: 'application/json',
 				//data: JSON.stringify(getFormData($("#insert"))),
-				success: function (data) {
+				success: function(data) {
 					$('#showInsert').empty("");
-		
+
 					if (data == null) {
 						$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 					} else {
 						var table = $('#showInsert');
 						table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
-		
-						$.each(data, function (i, n) {
+
+						$.each(data, function(i, n) {
 							var tr = "<tr align='center'>" +
 								"<td>" + n.userprofiles.uid + "</td>" +
 								"<td>" + "<a href='/morari/admin/user/resume/resumeStartCrud.controller/" + n.rackid + "'>" + n.rackid + "</td>" +
@@ -55,7 +75,7 @@ function userDelete(rackid) {
 			type: 'delete',
 			url: '/morari/admin/user/work/userDelete.controller/' + rackid,
 			dataType: 'TEXT',
-			success: function (data) {
+			success: function(data) {
 				alert(data);
 				location.reload();
 			}

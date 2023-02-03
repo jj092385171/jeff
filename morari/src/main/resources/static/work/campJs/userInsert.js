@@ -1,7 +1,7 @@
 
 
 // 載入 你的.html
-$(document).ready(function () {
+$(document).ready(function() {
 	// let uid;
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
@@ -9,13 +9,15 @@ $(document).ready(function () {
 			// console.log(data)
 			document.getElementById("uid").value = data;
 		})
-
-	$("#send").click(function () {
+	var url = window.location.href;
+	var id = url.split("/").pop();
+	console.log(id);
+	$("#send").click(function() {
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();
 			var indexed_array = {};
 
-			$.map(unindexed_array, function (n, i) {
+			$.map(unindexed_array, function(n, i) {
 				indexed_array[n['name']] = n['value'];
 			});
 
@@ -26,7 +28,7 @@ $(document).ready(function () {
 			url: '/morari/admin/user/work/userInsert.controller',
 			contentType: 'application/json',
 			data: JSON.stringify(getFormData($("#insert"))),
-			success: function (response) {
+			success: function(response) {
 				$('#showInsert').empty("");
 				$('#su').empty("");
 				$('#insert').empty("");

@@ -91,17 +91,13 @@ public class JobService {
 	// 透過會員id找資料
 	public List<JobBean> findUid(UUID uid) {
 
-		UserProfiles findById = uDao.findById(uid).get();
-		Collection<JobBean> job = findById.getJob();
-		
+		Collection<JobBean> job = uDao.findById(uid).get().getJob();
 		ArrayList<JobBean> arrayList = new ArrayList<JobBean>(job);
 		return arrayList;
 	}
+	// 透過uid搜尋camp的東西
 	public ArrayList<Camp> findUUid(UUID uid) {
-		
-		UserProfiles findById = uDao.findById(uid).get();
-		Collection<Camp> camp = findById.getCamp();
-		;
+		Collection<Camp> camp = uDao.findById(uid).get().getCamp();
 		ArrayList<Camp> arrayList = new ArrayList<Camp>(camp);
 		return arrayList;
 	}

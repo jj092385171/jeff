@@ -15,27 +15,7 @@ $(document).ready(function () {
 			// console.log(data)
 			uid = data;
 		}).then(() => {
-			//找營地名稱
-			$("#campId").click(function () {
-
-				$('#campName').empty("");
-				$.ajax({
-					type: 'POST',
-					url: '/morari/admin/work/selectUUid.controller/' + uid,
-					contentType: 'application/json',
-					success: function (data) {
-						console.log(data);
-						$.each(data, function (i, n) {
-						var table = $('#campName');
-						var tr = "<tr align='center'>" +
-							"<td>" + n.camp.campName + "</td>" +
-							"</tr>"
-						table.append(tr);
-					});
-					}
-				})
-
-			})
+			
 			//找全部
 			$.ajax({
 				type: 'POST',
