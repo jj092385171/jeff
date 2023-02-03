@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
+import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.service.CampService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
@@ -119,6 +120,15 @@ public class WorkAdminController {
 	@ResponseBody
 	public List<JobBean> processSelectUidAction(@PathVariable UUID uid) {
 		List<JobBean> result = jService.findUid(uid);
+		
+		return result;
+	}
+	// 透過uid搜尋camp的東西
+	@PostMapping("/selectUUid.controller/{uid}")
+	@ResponseBody
+	public List<Camp> processSelectUUidAction(@PathVariable UUID uid) {
+		List<Camp> result = jService.findUUid(uid);
+		
 		return result;
 	}
 

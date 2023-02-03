@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -16,6 +17,8 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepos
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobRepository;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
+import com.campingmapping.team4.spring.t424camp.model.dao.repository.CampRepository;
+import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 
 @Service
 @Transactional
@@ -26,6 +29,7 @@ public class JobService {
 
 	@Autowired
 	private UserRepository uDao;
+	
 
 	// 秀全部
 	public List<JobBean> findAll() {
@@ -89,7 +93,16 @@ public class JobService {
 
 		UserProfiles findById = uDao.findById(uid).get();
 		Collection<JobBean> job = findById.getJob();
+		
 		ArrayList<JobBean> arrayList = new ArrayList<JobBean>(job);
+		return arrayList;
+	}
+	public ArrayList<Camp> findUUid(UUID uid) {
+		
+		UserProfiles findById = uDao.findById(uid).get();
+		Collection<Camp> camp = findById.getCamp();
+		;
+		ArrayList<Camp> arrayList = new ArrayList<Camp>(camp);
 		return arrayList;
 	}
 

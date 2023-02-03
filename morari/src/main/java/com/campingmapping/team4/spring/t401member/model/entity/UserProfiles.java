@@ -153,6 +153,6 @@ public class UserProfiles implements UserDetails {
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  private Set<Camp> camp;
+  private Collection<Camp> camp;
 
 }
