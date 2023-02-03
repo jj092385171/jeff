@@ -6,13 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,28 +42,33 @@ public class IndexOrder {
 		return "camp/admin/AdminOrderIndex";
 	}
 	
-	@GetMapping("/showAllOrders/{page}")
+//	@GetMapping("/showAllOrders/{page}")
+//	public Object showAllOrder(@PathVariable("page")@Nullable Integer page ) {
+	@GetMapping("/showAllOrders")
 	@ResponseBody
-	public Object showAllOrder(@PathVariable("page")@Nullable Integer page ) {
-		if(page == null) {
-			page = 1;
-		}
+	public Object showAllOrder() {
+//		if(page == null) {
+//			page = 1;
+//		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int pageSize = 3;
-		Pageable pageable = PageRequest.of(page-1, pageSize);
-		Page<Order> pageList = orderService.getByPage(pageable);
+//		int pageSize = 3;
+//		Pageable pageable = PageRequest.of(page-1, pageSize);
+//		Page<Order> pageList = orderService.getByPage(pageable);
+//		
+//		
+//		List<Order> orderList = pageList.getContent();
+//		map.put("orderList", orderList);
+//		
+//		int totalPages = pageList.getTotalPages();
+//		map.put("totalPages", totalPages);
+//		
+//		long totalOrders = pageList.getTotalElements();
+//		map.put("totalOrders", totalOrders);
 		
-		
-		List<Order> orderList = pageList.getContent();
+		List<Order> orderList = orderService.findAll();
 		map.put("orderList", orderList);
-		
-		int totalPages = pageList.getTotalPages();
-		map.put("totalPages", totalPages);
-		
-		long totalOrders = pageList.getTotalElements();
-		map.put("totalOrders", totalOrders);
 		
 		
 		//使用者

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
@@ -117,9 +118,13 @@ public class InsertOrder {
 		}
 		
 		
+	    Random rand = new Random();
+	    int randomNum = rand.nextInt(10000);
+	    String randomNumString = String.format("%04d", randomNum);
+		
 		AllInOne all = new AllInOne("");
 		AioCheckOutALL obj = new AioCheckOutALL();
-		obj.setMerchantTradeNo("Product0000" + order.getOrderID());
+		obj.setMerchantTradeNo("product" + randomNumString + + order.getOrderID());
 		obj.setMerchantTradeDate(nowString);
 		obj.setTotalAmount(order.getTotalPrice().toString());
 		obj.setTradeDesc("test Description");
