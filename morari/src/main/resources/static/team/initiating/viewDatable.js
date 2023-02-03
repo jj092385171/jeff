@@ -20,6 +20,7 @@ fetch('view.controller', { method: 'GET' }).then(
 					
 					$('#result').DataTable({
       				data: data,
+      				responsive: true,
       				columns: [
         				{
         			data: null,
@@ -151,7 +152,6 @@ fetch('view.controller', { method: 'GET' }).then(
 								console.log(response);
 								if (response.status == 200) {
 									response.json().then(function (data){
-										var resultText = "";
 										var tableData = "";
 										tableData += 
 										"<td>" + "揪團編號" + 
@@ -172,13 +172,6 @@ fetch('view.controller', { method: 'GET' }).then(
 											if (data[i].pair != 0) {
 												pair = "不可配對"
 											}
-											
-											resultText += data[i].initiatingnum + " " 
-											+ data[i].userprofiles.uid
-												+ " " + pDay + " " + sDay + " "
-												+ eDay + " " + data[i].currentnum + " "
-												+ data[i].acceptablenum + " " + data[i].camparea + " "
-												+ pair + "<br/>";
 												
 											tableData += "<tr>" +"<td>" + data[i].initiatingnum + 
 											"</td>" + "<td>" + data[i].userprofiles.uid + 
