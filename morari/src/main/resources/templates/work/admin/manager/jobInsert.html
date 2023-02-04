@@ -34,23 +34,29 @@
 
 	<form id="insert" enctype="multipart/form-data">
 
-		會員編號<input type="text" name="uid" id="uid"><br>
-		職缺 <input type="text" name="job" required><br>
+		會員編號 <input type="text" name="uid" id="uid" required><br>
+		營區名稱 <input id="1" type="text" name="campname" required><br>
+		職缺		<select name="job">
+					<option>--請選擇--</option>
+					<option value="廚師">廚師</option>
+					<option value="廚助">廚助</option>
+					<option value="櫃台">櫃台</option>
+					<option value="房務員">房務員</option>
+					<option value="清潔員">清潔員</option>
+					<option value="假日工讀生">假日工讀生</option>
+					<option value="夜間值班員">夜間值班員</option>
+				</select><br>
 		薪資 <input type="text" name="salary" required><br>
 		人數 <input type="text" name="quantity" required><br>
-<!-- 		地點 <input type="text" name="place" required><br> -->
-		可上班日期 <input type="text" name="date" required><br>
-		可上班時段 <input type="text" name="time" required><br>
+		上班日期 <input type="text" name="date" required><br>
+		上班時段 <input type="text" name="time" required><br>
 		備註<textarea name="remark" cols="20" rows="5"></textarea><br>
-
+<!-- 		 //照片 -->
+	 	<input id="3" type="hidden" name="img" required><br>
 		<input id="send" type="button" value="送出"><br>
 		<input type="reset" value="取消"><br>
 	</form>
 
-<!-- 	<form id=img> -->
-<!-- 		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img"> -->
-<!-- 	</form> -->
-	
 	<form action="crud.controller" method="GET"
 		enctype="multipart/form-data">
 		<input type="submit" value="回首頁">

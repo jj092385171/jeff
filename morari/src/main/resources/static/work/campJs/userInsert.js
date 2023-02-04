@@ -52,22 +52,23 @@ $(document).ready(function() {
 					var h3 = $('#su');
 					h3.prepend('新增成功');
 					var table = $('#showInsert');
-					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
+					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
 
 					//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
 					console.log("response:" + response);
 					var tr = "<tr align='center'>" +
 						"<td>" + response.userprofiles.uid + "</td>" +
 						"<td>" + response.rackid + "</td>" +
-						"<td>" + response.rackup + "</td>" +
+						"<td>" + response.campname + "</td>" +
+						"<td>" + response.place + "</td>" +
 						"<td>" + response.job + "</td>" +
 						"<td>" + response.salary + "</td>" +
 						"<td>" + response.quantity + "</td>" +
-						"<td>" + response.place + "</td>" +
 						"<td>" + response.date + "</td>" +
 						"<td>" + response.time + "</td>" +
+						"<td>" + response.rackup + "</td>" +
 						"<td>" + response.remark + "</td>" +
-						"<td>" + response.img + "</td>" + "</tr>";
+						"<td><img width='80' height='80' src='/morari/src/main/resources/static/images/'"+response.img +"></td>" + "</tr>";
 					table.append(tr);
 					//});
 				}

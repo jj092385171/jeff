@@ -30,30 +30,34 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-                   <h3>修改職缺</h3>
+         <h3>修改職缺</h3>
 	<form id="update" enctype="multipart/form-data">
 	
-		會員編號 <input id="1" type="text" name="uid" value='1' required readonly><br>
-
-		職缺 <input id="2" type="text" name="job" required><br>
-		薪資 <input id="3" type="text" name="salary" required><br>
-		人數 <input id="4" type="text" name="quantity" required><br>
-		地點 <input id="5" type="text" name="place" required><br>
-		可上班日期 <input id="6" type="text" name="date" required><br>
-		可上班時段 <input id="7" type="text" name="time" required><br>
+		會員編號 <input id="1" type="text" name="uid"  readonly><br>
+		營區名稱 <input id="2" type="text" name="campname" readonly><br>
+		地址 <input id="3" type="text" name="place" readonly><br>
+		職缺	<select name="job">
+					<option id="10" value="廚師">廚師</option>
+					<option id="11" value="廚助">廚助</option>
+					<option id="12" value="櫃台">櫃台</option>
+					<option id="13" value="房務員">房務員</option>
+					<option id="14" value="清潔員">清潔員</option>
+					<option id="15" value="假日工讀生">假日工讀生</option>
+					<option id="16" value="夜間值班員">夜間值班員</option>
+			</select><br>
+		薪資 <input id="4" type="text" name="salary" required><br>
+		人數 <input id="5" type="text" name="quantity" required><br>
+		上班日期 <input id="6" type="text" name="date" required><br>
+		上班時段 <input id="7" type="text" name="time" required><br>
 		備註<textarea id="8" name="remark" cols="20" rows="5"></textarea><br>
-
+<!-- 		 //照片 -->
+	 	<input id="9" type="hidden" name="img" required><br>
+		
 		<input id="send" type="button" value="送出"><br>
 		<input type="reset" value="取消"><br>
 	</form>
 
-<!-- 	<form id=img> -->
-<!-- 		照片上傳 <input accept=".jpg,.pnp,.jfif" type="file" name="img"> -->
-<!-- 	</form> -->
-	
-	<form action="/morari/admin/work/crud.controller" method="GET">
-		<input type="submit" value="回首頁">
-	</form>
+    <input onclick="window.location.href='/morari/admin/work/crud.controller'" value="回首頁" type="button">
 	<hr>
 	
 	<h3 id="su"></h3>

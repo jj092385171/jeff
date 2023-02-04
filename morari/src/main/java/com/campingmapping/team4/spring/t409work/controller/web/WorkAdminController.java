@@ -58,7 +58,7 @@ public class WorkAdminController {
 	}
 
 	// 啟動update
-	@PostMapping("/update.controller/{u}")
+	@PostMapping("/startUpdate.controller/{u}")
 	public String processMainAction4() {
 		return "work/admin/manager/jobUpdate";
 	}
@@ -129,6 +129,15 @@ public class WorkAdminController {
 	public List<Camp> processSelectUUidAction(@PathVariable UUID uid) {
 		List<Camp> result = jService.findUUid(uid);
 		
+		return result;
+	}
+	// 透過campname搜尋camp的東西
+	@PostMapping("/selectCampname.controller")
+	@ResponseBody
+	public Camp processSelectCampnameAction(@RequestBody String campname) {
+		System.out.println(campname);
+		Camp result = jService.findByCampisLike(campname);
+		System.out.println("result="+result);
 		return result;
 	}
 

@@ -108,5 +108,10 @@ public class JobService {
 		Camp camp = campDao.findById(campid).get();
 		return camp;
 	}
+	// 透過campName搜尋camp的東西
+	public Camp findByCampisLike(String campName) {
+		Camp camp = campDao.findByCampName(campName);
+		return camp;
+	}
 
 }
