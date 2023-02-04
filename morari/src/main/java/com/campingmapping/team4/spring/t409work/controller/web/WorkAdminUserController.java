@@ -121,5 +121,12 @@ public class WorkAdminUserController {
 		
 		return result;
 	}
+	// 透過campid搜尋camp的東西
+	@PostMapping("/selectCampid.controller/{campid}")
+	@ResponseBody
+	public Camp processSelectCampidAction(@PathVariable Integer campid) {
+		Camp result = jService.findCampid(campid);
+		return result;
+	}
 
 }

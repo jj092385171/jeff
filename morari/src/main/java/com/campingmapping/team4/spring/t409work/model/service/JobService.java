@@ -30,6 +30,8 @@ public class JobService {
 	@Autowired
 	private UserRepository uDao;
 	
+	@Autowired 
+	private CampRepository campDao;
 
 	// 秀全部
 	public List<JobBean> findAll() {
@@ -101,7 +103,10 @@ public class JobService {
 		ArrayList<Camp> arrayList = new ArrayList<Camp>(camp);
 		return arrayList;
 	}
-
-
+	// 透過campid搜尋camp的東西
+	public Camp findCampid(Integer campid) {
+		Camp camp = campDao.findById(campid).get();
+		return camp;
+	}
 
 }

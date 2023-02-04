@@ -74,9 +74,9 @@ public class Camp implements Serializable {
 	private Set<Order> campOrders = new HashSet<Order>();
 	
 	//09的
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp")
-	private Collection<JobBean> job;
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp")
+//	private Collection<JobBean> job;
 
 	public Camp() {
 	}

@@ -6,12 +6,25 @@ $(document).ready(function() {
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
 		.then(data => {
-			// console.log(data)
 			document.getElementById("uid").value = data;
 		})
 	var url = window.location.href;
-	var id = url.split("/").pop();
-	console.log(id);
+	var campid = url.split("/").pop();
+	console.log(campid);
+
+
+	$.ajax({
+		type: 'POST',
+		url: '/morari/admin/user/work/selectCampid.controller/' + campid,
+		dataType: 'json',
+		success: function(data) {
+			$('#1').val(data.campName);
+			$('#2').val(data.city.cityName+data.location);
+			$('#3').val(data.campPicturesPath);
+		
+		}
+	});
+
 	$("#send").click(function() {
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();

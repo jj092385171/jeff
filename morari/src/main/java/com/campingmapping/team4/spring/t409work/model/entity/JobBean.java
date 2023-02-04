@@ -36,14 +36,19 @@ public class JobBean {
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
 	
-	@ManyToOne
-	@JoinColumn(name = "camp") // 營區地點、照片
-	private Camp camp;
+//	@ManyToOne
+//	@JoinColumn(name = "camp") // 營區地點、照片
+//	private Camp camp;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rackid")
 	private Integer rackid;// 刊登編號
+	
+	@Column(name = "campname")
+	private String campname;// 營地名稱
+	@Column(name = "place")
+	private String place;// 地點
 	@Column(name = "job")
 	private String job;// 職缺
 	@Column(name = "salary")
@@ -59,5 +64,7 @@ public class JobBean {
 	@Column(name = "rackup")
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date rackup;// 上架日期
+	@Column(name = "img")
+	private String img;// 照片
 
 }
