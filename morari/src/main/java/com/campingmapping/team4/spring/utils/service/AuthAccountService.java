@@ -11,12 +11,15 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepos
 import com.campingmapping.team4.spring.t401member.model.entity.OAuth2Request;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
+import com.campingmapping.team4.spring.t401member.model.entity.UserName;
+import com.campingmapping.team4.spring.t401member.model.entity.UserPrivacy;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -61,13 +64,22 @@ public class AuthAccountService {
 
   private UserProfiles setUpUserProfiles(OAuth2Request oAuth2Request) {
     UserProfiles user;
+    // Name
+    UserName userName = UserName.builder().firstname("").build();
+    // Privacy
+    UserPrivacy userPrivacy = UserPrivacy.builder().address("").build();
     Role adminRole = roleRepository.findByName("USER").get();
     user = UserProfiles.builder()
     .email(oAuth2Request.email())
     .uid(UUID.randomUUID())
+    .usernames(userName)
+    .userprivacy(userPrivacy)
     .build();
     user.getRoles().add(adminRole);
-    UserDetail userDetail = new UserDetail();
+    // Detail
+    UserDetail userDetail = UserDetail.builder()
+    .registerdata(new Date())
+    .build();
     oAuth2Request.name().ifPresent(
         name -> {
           userDetail.setNickname(name);
