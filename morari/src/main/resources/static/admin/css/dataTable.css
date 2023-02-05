@@ -322,6 +322,10 @@ div.dataTables_wrapper div.dataTables_filter input {
   width: auto;
   vertical-align: middle;
   border-radius: 5px;
+  border: 1px;
+}
+div.dataTables_wrapper div.dataTables_filter input:focus-visible {
+  border: 1px !important;
 }
 div.dataTables_wrapper div.dataTables_info {
   padding-top: 0.5em;
@@ -2267,12 +2271,12 @@ fieldset[disabled] .button {
   margin-right: 0.25rem;
 }
 
-.container {
+/* .container {
   flex-grow: 1;
   margin: 0 auto;
   position: relative;
   width: auto;
-}
+} */
 
 .container.is-fluid {
   max-width: none !important;
@@ -2281,11 +2285,11 @@ fieldset[disabled] .button {
   width: 100%;
 }
 
-@media screen and (min-width: 1024px) {
+/* @media screen and (min-width: 1024px) {
   .container {
     max-width: 960px;
   }
-}
+} */
 
 @media screen and (max-width: 1215px) {
   .container.is-widescreen:not(.is-max-desktop) {
@@ -2299,7 +2303,7 @@ fieldset[disabled] .button {
   }
 }
 
-@media screen and (min-width: 1216px) {
+/* @media screen and (min-width: 1216px) {
   .container:not(.is-max-desktop) {
     max-width: 1152px;
   }
@@ -2309,7 +2313,7 @@ fieldset[disabled] .button {
   .container:not(.is-max-desktop):not(.is-max-widescreen) {
     max-width: 1344px;
   }
-}
+} */
 
 .content li + li {
   margin-top: 0.25em;
@@ -10292,7 +10296,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 
 .p-5 {
-  padding: 1.5rem !important;
+  padding: 1px !important;
 }
 
 .pt-5 {
@@ -12394,3 +12398,29 @@ div.dtr-modal div.dtr-modal-background {
   border-bottom-right-radius: 10px;
 }
 
+#rolecheckbox label {
+  margin: 0px;
+}
+
+#rolecheckbox input[type="checkbox"] {
+  display: none; 
+}
+
+#rolecheckbox input:checked + .button {
+  background: #5e7380; 
+  color: #fff;
+}
+
+#rolecheckbox .button {
+  display: inline-block; 
+  margin: 0px; 
+  padding: 5px 10px; 
+  background: #f7f7f7; 
+  color: #333; 
+  cursor: pointer; 
+}
+
+#rolecheckbox .button:hover {
+  background: #bbb; 
+  color: #fff; 
+}

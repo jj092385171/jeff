@@ -6324,7 +6324,7 @@ a.close.disabled {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1040;
+  z-index: 39;
   width: 100vw;
   height: 100vh;
   background-color: #000;
@@ -12166,6 +12166,11 @@ form.user .form-control-user {
   border-radius: 10rem;
   padding: 1.5rem 1rem;
 }
+form.user .form-control-edit {
+  font-size: 0.8rem;
+  border-radius: 10rem;
+  /* padding: 1.5rem 1rem; */
+}
 
 form.user .btn-user {
   font-size: 0.8rem;
@@ -12695,4 +12700,9 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+dialog{
+  border: 0px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
 }

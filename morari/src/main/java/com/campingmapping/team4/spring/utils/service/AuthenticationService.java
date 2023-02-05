@@ -3,6 +3,7 @@ package com.campingmapping.team4.spring.utils.service;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -60,7 +61,7 @@ public class AuthenticationService {
 			UserDetail userDetail = UserDetail.builder()
 					.nickname(request.email())
 					.exp(1L)
-					.leavel(1)
+					.level(1)
 					.point(100L)
 					.gender(0)
 					.registerdata(new Date())
@@ -129,5 +130,10 @@ public class AuthenticationService {
 	public String getshot(HttpServletRequest request) {
 		UUID uid = jwtService.getUId(request);
 		return userRepository.findById(uid).get().getUserdetail().getShot();
+	}
+
+	@Transactional
+	public List<Role> getroles() {		
+		return roleRepository.findAll();
 	}
 }

@@ -3,6 +3,7 @@ package com.campingmapping.team4.spring.utils.controller.api;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRequest;
 import com.campingmapping.team4.spring.t401member.model.dto.RegisterRequest;
+import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.utils.service.AuthenticationService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,8 +63,14 @@ public class AuthenticationController {
 
   @GetMapping("/shot")
   @ResponseBody
-  public String getshot(HttpServletRequest request){
+  public String getshot(HttpServletRequest request) {
     return service.getshot(request);
+  }
+
+  @GetMapping("/roles")
+  @ResponseBody
+  public List<Role> getroles() {
+    return service.getroles();
   }
 
   // @PostMapping("/logout")

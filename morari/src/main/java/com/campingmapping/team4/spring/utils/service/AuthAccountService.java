@@ -80,7 +80,7 @@ public class AuthAccountService {
     UserDetail userDetail = UserDetail.builder()
         .nickname("")
         .exp(1L)
-        .leavel(1)
+        .level(1)
         .point(100L)
         .gender(0)
         .registerdata(new Date())

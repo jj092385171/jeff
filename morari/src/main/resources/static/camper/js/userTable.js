@@ -32,10 +32,88 @@ function deluser(index) {
 };
 
 function edituser(index) {
+	fetch("/morari/camper/html/useredit.html")
+		.then(response => response.text())
+		.then(html => {
+			// USER編輯html
+			document.querySelector(".useredit").innerHTML = html;
+			// 生成roles選項
+			const rolecheckbox = document.getElementById('rolecheckbox');
+			fetch('/morari/api/auth/roles')
+				.then(response => response.json())
+				.then(roles => {
+					roles.forEach(role => {
+						const label = document.createElement('label');
+						const checkbox = document.createElement('input');
+						checkbox.type = 'checkbox';
+						checkbox.name = 'roletype';
+						checkbox.value = role.name;
+						checkbox.checked = 'checked';
+						const span = document.createElement('span');
+						span.className = 'form-control form-control-edit round button';
+						span.innerText = role.name;
+						label.appendChild(checkbox);
+						label.appendChild(span);
+						rolecheckbox.appendChild(label);
+					});
 
-	console.log(receivedData)
-	console.log(receivedData[index])
-	console.log(receivedData[index].uid)
+					// 拿取欄位資訊帶入編輯欄位
+					let userdata = receivedData[index];
+					document.getElementById("uid").innerHTML = '<img src="https://storage.googleapis.com/morari/adminshot" alt="shot" style="max-width: 150px; padding: 0px; border: 1px ; border-radius: 10px;" id="shot" class="btn"> <input type="file" class="form-control-file" id="shotInput" accept="image/*" style="display: none;">' + userdata.uid;
+					for (const key in userdata) {
+						if (userdata.hasOwnProperty(key)) {
+							const element = userdata[key];
+							if (key == "shot") {
+								document.getElementById("shot").src = element;
+							} else if (key == "roles") {
+								element.forEach(r => {
+									const roles = r.name;
+									let checkboxes = document.getElementsByName("roletype");
+									checkboxes.forEach(checkbox => {
+										if (roles.includes(checkbox.value)) {
+											checkbox.checked = true;
+										} else {
+											checkbox.checked = false;
+										}
+									}
+									)
+								});
+							}
+							else {
+								document.getElementById(key).value = element;
+							}
+						}
+					}
+
+					// dialog顯示
+					document.querySelector(".useredit").showModal();
+
+				});
+
+
+
+			// 關閉dialog按鈕
+			const closeButton = document.getElementById("closeuseredit");
+			closeButton.addEventListener("click", function () {
+				document.querySelector(".useredit").close();
+			});
+
+			// 點取圖片開啟上傳檔案
+			document.getElementById("shot").addEventListener("click", function () {
+				document.getElementById("shotInput").click();
+			});
+			//   把圖片讀取後顯示
+			document.getElementById("shotInput").addEventListener("change", function () {
+				let file = this.files[0];
+				let reader = new FileReader();
+				reader.onload = function (e) {
+					document.getElementById("shot").src = e.target.result;
+				};
+				reader.readAsDataURL(file);
+			});
+
+
+		})
 	// 		$("#edform").
 
 }
@@ -44,24 +122,6 @@ fetch("/morari/camper/html/usertable.html")
 	.then(html => {
 		// 將載入的 HTML 放入 .footer 元素中
 		document.querySelector(".usertablediv").innerHTML = html;
-
-		// $(function () {
-		// 	var userdata;
-		// 	fetch('/morari/admin/camper/api/showall', {
-		// 		method: 'GET'
-		// 	})
-		// 		.then(response => response.json())
-		// 		.then(data => {
-		// 			userdata=data
-		// 		})
-		// 		.catch(error => {
-		// 			console.error('Error:', error);
-		// 		})
-
-		$('#memberlist tbody').on('click', 'tr', function () {
-			let index = table.row(this).index();
-			console.log('You clicked on row ' + index);
-		});
 		var table
 		$(document)
 			.ready(
@@ -82,6 +142,7 @@ fetch("/morari/camper/html/usertable.html")
 								},
 								// processing : true,
 								// serverSide : true,
+								"pagingType":   "full_numbers",
 								"columns": [
 									{
 										"data": 'uid'
@@ -208,7 +269,7 @@ fetch("/morari/camper/html/usertable.html")
 										// }
 									},
 									{
-										"data": 'leavel'
+										"data": 'level'
 										, "title": "等級"
 										// , "render": function (
 										// 	data, type,
@@ -293,8 +354,8 @@ fetch("/morari/camper/html/usertable.html")
 
 								],
 
-								dom: 'Bfrtip'
-								,
+								// dom: 'Bfrtip'
+								// ,
 								responsive: true,
 								columnDefs: [
 									{
@@ -499,35 +560,35 @@ fetch("/morari/camper/html/usertable.html")
 								// 	},
 								// 	"value" : "內容"
 								// },
-								// "editor" : {
-								// 	"close" : "關閉",
-								// 	"create" : {
-								// 		"button" : "新增",
-								// 		"title" : "新增資料",
-								// 		"submit" : "送出新增"
+								// "editor": {
+								// 	"close": "關閉",
+								// 	"create": {
+								// 		"button": "新增",
+								// 		"title": "新增資料",
+								// 		"submit": "送出新增"
 								// 	},
-								// 	"remove" : {
-								// 		"button" : "刪除",
-								// 		"title" : "刪除資料",
-								// 		"submit" : "送出刪除",
-								// 		"confirm" : {
-								// 			"_" : "您確定要刪除您所選取的 %d 筆資料嗎？",
-								// 			"1" : "您確定要刪除您所選取的 1 筆資料嗎？"
+								// 	"remove": {
+								// 		"button": "刪除",
+								// 		"title": "刪除資料",
+								// 		"submit": "送出刪除",
+								// 		"confirm": {
+								// 			"_": "您確定要刪除您所選取的 %d 筆資料嗎？",
+								// 			"1": "您確定要刪除您所選取的 1 筆資料嗎？"
 								// 		}
 								// 	},
-								// 	"error" : {
-								// 		"system" : "系統發生錯誤(更多資訊)"
+								// 	"error": {
+								// 		"system": "系統發生錯誤(更多資訊)"
 								// 	},
-								// 	"edit" : {
-								// 		"button" : "修改",
-								// 		"title" : "修改資料",
-								// 		"submit" : "送出修改"
+								// 	"edit": {
+								// 		"button": "修改",
+								// 		"title": "修改資料",
+								// 		"submit": "送出修改"
 								// 	},
-								// 	"multi" : {
-								// 		"title" : "多重值",
-								// 		"info" : "您所選擇的多筆資料中，此欄位包含了不同的值。若您想要將它們都改為同一個值，可以在此輸入，要不然它們會保留各自原本的值。",
-								// 		"restore" : "復原",
-								// 		"noMulti" : "此輸入欄需單獨輸入，不容許多筆資料一起修改"
+								// 	"multi": {
+								// 		"title": "多重值",
+								// 		"info": "您所選擇的多筆資料中，此欄位包含了不同的值。若您想要將它們都改為同一個值，可以在此輸入，要不然它們會保留各自原本的值。",
+								// 		"restore": "復原",
+								// 		"noMulti": "此輸入欄需單獨輸入，不容許多筆資料一起修改"
 								// 	}
 								// },
 								// "autoFill" : {
@@ -542,10 +603,10 @@ fetch("/morari/camper/html/usertable.html")
 								// 	"excel" : "Excel",
 								// 	"pdf" : "PDF",
 								// 	"print" : "列印",
-								// 	"copy" : "複製",
+									"copy" : "複製",
 								// 	"colvis" : "欄位顯示",
 								// 	"colvisRestore" : "重置欄位顯示",
-								// 	"csv" : "CSV",
+									"csv" : "CSV",
 								// 	"pageLength" : {
 								// 		"-1" : "顯示全部",
 								// 		"_" : "顯示 %d 筆"
@@ -639,19 +700,22 @@ fetch("/morari/camper/html/usertable.html")
 
 								initComplete: function () {
 									table.responsive.recalc();
-								  }
+								},
+								"paging":true,
+								"searching":true,
+
 
 							})
-
+					// 選取整ROW
 					$('#memberlist tbody').on('click', 'tr', function () {
 						let index = table.row(this).index();
-						console.log('You clicked on row ' + index);
+						// console.log('You clicked on row ' + index);
 					});
 
 					// 表頭不換行
 					$('#memberlist thead tr th').css('white-space', 'nowrap');
 					table.responsive.recalc();
-					setTimeout(function() {
+					setTimeout(function () {
 						table.responsive.recalc();
 					}, 1000);
 

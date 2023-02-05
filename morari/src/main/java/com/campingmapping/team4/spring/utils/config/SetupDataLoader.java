@@ -65,12 +65,13 @@ public class SetupDataLoader implements
         UserDetail userDetail = UserDetail.builder()
                 .nickname("燚~超-級=管=理-員~燚")
                 .exp(999999L)
-                .leavel(999999)
+                .level(999999)
                 .point(99999999L)
                 .gender(0)
                 .subscribed(false)
                 .shot("https://storage.googleapis.com/morari/adminshot")
                 .about("想幹嘛就幹嘛")
+                .registerdata(new Date())
                 .build();
         try {
             if (userOptional.isPresent()) {

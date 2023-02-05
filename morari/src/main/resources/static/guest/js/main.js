@@ -85,10 +85,9 @@ window.onload = function () {
                         document.getElementById("loginstate").innerHTML = html;
                         // 找用戶照片放入SRC
                         fetch("/morari/api/auth/shot")
-                        .then(response => response.text())
-                        .then(shotUrl => {
-                            let imgElement = document.querySelector('.userShot');
-                            imgElement.src = shotUrl;
+                            .then(response => response.text())
+                            .then(shotUrl => {
+                                document.querySelector('.userShot').src = shotUrl;
                             })
                     });
             } else {

@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
                     p.getAddress(),
                     d.getGender(),
                     d.getExp(),
-                    d.getLeavel(),
+                    d.getLevel(),
                     d.getPoint(),
                     d.getRegisterdata(),
                     d.getSubscribed(),
