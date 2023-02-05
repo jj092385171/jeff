@@ -140,9 +140,21 @@ fetch("/morari/camper/html/usertable.html")
 										return data;
 									}
 								},
+								lengthMenu: [5, 10, 15, 20],
+								language: {
+									"lengthMenu": "顯示 _MENU_ 筆資料",
+									"info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+									"search": "搜尋：",
+									"paginate": {
+										"next": "下一頁",
+										"previous": "上一頁",
+										"first": "首頁",
+										"last": "末頁",
+									}
+								},
 								// processing : true,
 								// serverSide : true,
-								"pagingType":   "full_numbers",
+								"pagingType": "full_numbers",
 								"columns": [
 									{
 										"data": 'uid'
@@ -603,10 +615,10 @@ fetch("/morari/camper/html/usertable.html")
 								// 	"excel" : "Excel",
 								// 	"pdf" : "PDF",
 								// 	"print" : "列印",
-									"copy" : "複製",
+								// "copy": "複製",
 								// 	"colvis" : "欄位顯示",
 								// 	"colvisRestore" : "重置欄位顯示",
-									"csv" : "CSV",
+								// "csv": "CSV",
 								// 	"pageLength" : {
 								// 		"-1" : "顯示全部",
 								// 		"_" : "顯示 %d 筆"
@@ -701,11 +713,20 @@ fetch("/morari/camper/html/usertable.html")
 								initComplete: function () {
 									table.responsive.recalc();
 								},
-								"paging":true,
-								"searching":true,
+								"paging": true,
+								"searching": true,
 
 
 							})
+					// 翻頁響應刷新
+					$('.dataTables_paginate').on('click', function () {
+						console.log("翻")
+						table.responsive.recalc();
+						setTimeout(function () {
+							table.responsive.recalc();
+						}, 500);
+	
+					});
 					// 選取整ROW
 					$('#memberlist tbody').on('click', 'tr', function () {
 						let index = table.row(this).index();
@@ -715,9 +736,12 @@ fetch("/morari/camper/html/usertable.html")
 					// 表頭不換行
 					$('#memberlist thead tr th').css('white-space', 'nowrap');
 					table.responsive.recalc();
+					// 響應刷新
 					setTimeout(function () {
 						table.responsive.recalc();
 					}, 1000);
+
+
 
 
 				});
