@@ -43,29 +43,7 @@ public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     // 是否創建帳戶
     // UserProfiles user = authAccountService.createIfFirst(oAuth2Request);
     authAccountService.createIfFirst(oAuth2Request);
-    // 拿取用戶屬性
-    // Map<String, Object> userAttributes = authAccountMapper.mapToAttributeMap(user);
-
     // 拿取用戶資料
-    // System.out.println("=====================================");
-    // System.out.println(authentication);
-    // System.out.println("=====================================");
-    // System.out.println(authentication.getPrincipal());
-    // System.out.println("=====================================");
-    // System.out.println(authentication.getDetails());
-    // System.out.println("=====================================");
-    // System.out.println(authentication.getName());
-    // System.out.println("=====================================");
-    // System.out.println(authentication.toString());
-    // System.out.println("=====================================");
-    // System.out.println(authentication.getPrincipal());
-    // System.out.println("O2U=====================================");
-    // OAuth2User a = (OAuth2User) authentication.getPrincipal();
-    // System.out.println(a.getName());
-    // System.out.println(a.getAttributes().get("email"));
-    // System.out.println(a.getAttributes().get("name"));
-    // System.out.println("=====================================");
-
     UserProfiles userProfiles = getOAuthUser((OAuth2User) authentication.getPrincipal());
     AuthenticationResponse authenticationResponse = jwtService.generateToken(userProfiles,
         false);

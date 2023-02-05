@@ -51,18 +51,27 @@ public class SetupDataLoader implements
 
         Optional<UserProfiles> userOptional = userRepository.findByEmail(MyConstants.SUPER_ADMIN_NAME);
         UserProfiles userProfiles;
+        // Name
+        UserName userName = UserName.builder()
+                .firstname("camp")
+                .lastname("morari")
+                .build();
+        // Privacy
+        UserPrivacy userPrivacy = UserPrivacy.builder()
+                .address("morari")
+                .phone("0912345678")
+                .build();
         // Detail
         UserDetail userDetail = UserDetail.builder()
-                .nickname("卍~超-級=管=理-員~卐")
+                .nickname("燚~超-級=管=理-員~燚")
                 .exp(999999L)
                 .leavel(999999)
                 .point(99999999L)
-                .registerdata(new Date())
+                .gender(0)
+                .subscribed(false)
+                .shot("https://storage.googleapis.com/morari/adminshot")
+                .about("想幹嘛就幹嘛")
                 .build();
-        // Name
-        UserName userName = UserName.builder().firstname("").build();
-        // Privacy
-        UserPrivacy userPrivacy = UserPrivacy.builder().address("").build();
         try {
             if (userOptional.isPresent()) {
                 userProfiles = userOptional.get();
@@ -76,7 +85,8 @@ public class SetupDataLoader implements
                 userRepository.save(userProfiles);
             } else {
                 // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
-
+                userDetail.setRegisterdata(new Date());
+                userPrivacy.setBirthday(new Date());
                 userProfiles = UserProfiles.builder()
                         .email(MyConstants.SUPER_ADMIN_NAME)
                         .password(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD))

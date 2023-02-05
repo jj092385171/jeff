@@ -64,22 +64,38 @@ public class AuthAccountService {
 
   private UserProfiles setUpUserProfiles(OAuth2Request oAuth2Request) {
     UserProfiles user;
+
     // Name
-    UserName userName = UserName.builder().firstname("").build();
+    UserName userName = UserName.builder()
+        .firstname("")
+        .lastname("")
+        .build();
     // Privacy
-    UserPrivacy userPrivacy = UserPrivacy.builder().address("").build();
-    Role adminRole = roleRepository.findByName("USER").get();
-    user = UserProfiles.builder()
-    .email(oAuth2Request.email())
-    .uid(UUID.randomUUID())
-    .usernames(userName)
-    .userprivacy(userPrivacy)
-    .build();
-    user.getRoles().add(adminRole);
+    UserPrivacy userPrivacy = UserPrivacy.builder()
+        .address("")
+        .birthday(null)
+        .phone("")
+        .build();
     // Detail
     UserDetail userDetail = UserDetail.builder()
-    .registerdata(new Date())
-    .build();
+        .nickname("")
+        .exp(1L)
+        .leavel(1)
+        .point(100L)
+        .gender(0)
+        .registerdata(new Date())
+        .subscribed(false)
+        .shot("https://storage.googleapis.com/morari/defaultshot")
+        .about("暫時沒有留下什麼")
+        .build();
+    Role adminRole = roleRepository.findByName("USER").get();
+    user = UserProfiles.builder()
+        .email(oAuth2Request.email())
+        .uid(UUID.randomUUID())
+        .usernames(userName)
+        .userprivacy(userPrivacy)
+        .build();
+    user.getRoles().add(adminRole);
     oAuth2Request.name().ifPresent(
         name -> {
           userDetail.setNickname(name);

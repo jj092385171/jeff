@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,11 +52,17 @@ public class AuthenticationController {
 
   }
 
-  @PostMapping("/state")
+  @GetMapping("/state")
   @ResponseBody
   public Boolean loginstate(
       HttpServletRequest request) {
     return service.loginstate(request);
+  }
+
+  @GetMapping("/shot")
+  @ResponseBody
+  public String getshot(HttpServletRequest request){
+    return service.getshot(request);
   }
 
   // @PostMapping("/logout")
@@ -70,6 +77,5 @@ public class AuthenticationController {
   // // 重定向到登入頁面
   // response.sendRedirect("/morari");
   // }
-  
 
 }
