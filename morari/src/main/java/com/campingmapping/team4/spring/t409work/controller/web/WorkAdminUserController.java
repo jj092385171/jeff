@@ -57,7 +57,7 @@ public class WorkAdminUserController {
 	}
 
 	// 啟動update
-	@PostMapping("/startUpdate.controller/{u}")
+	@GetMapping("/startUpdate.controller/{u}")
 	public String processMainAction4() {
 		return "work/admin/camp/userUpdate";
 	}
@@ -86,7 +86,7 @@ public class WorkAdminUserController {
 	@ResponseBody
 	public String processDeleteAction(@PathVariable Integer rackID) {
 		jService.deleteById(rackID);
-		return "ok";
+		return "刪除成功";
 	}
 
 	// 修改

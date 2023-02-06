@@ -46,7 +46,7 @@ public class WorkAdminController {
 	}
 
 	// 啟動insert
-	@PostMapping("/insert.controller")
+	@GetMapping("/insert.controller")
 	public String processMainAction2() {
 		return "work/admin/manager/jobInsert";
 	}
@@ -58,7 +58,7 @@ public class WorkAdminController {
 	}
 
 	// 啟動update
-	@PostMapping("/startUpdate.controller/{u}")
+	@GetMapping("/startUpdate.controller/{u}")
 	public String processMainAction4() {
 		return "work/admin/manager/jobUpdate";
 	}
@@ -80,7 +80,7 @@ public class WorkAdminController {
 	@ResponseBody
 	public String processDeleteAction(@PathVariable Integer rackID) {
 		jService.deleteById(rackID);
-		return "ok";
+		return "刪除成功";
 	}
 
 	// 修改

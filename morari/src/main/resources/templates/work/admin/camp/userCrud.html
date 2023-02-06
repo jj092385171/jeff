@@ -32,16 +32,16 @@
 <!-- 這裡 -->
 	<div>
 		<h2>職缺(營主)</h2>
+		<button id="campId" class="btn btn-success btn-icon-split">
+		<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+		<span class="text">新增職缺</span></button>
 
-		<form>
-			<input id="campId" type="button" value="新增職缺">
-		</form>
 	<table id="campName"></table>
 
 	</div>
 	<hr>
 
-	<table id="showInsert"></table>
+	<table id="showInsert" class="table is-striped"></table>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -82,6 +82,10 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+    <!-- datatables js -->
+	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
+	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
+	
     <script src="/morari/work/campJs/userCrud.js" defer></script>
     <script type="text/javascript">
 

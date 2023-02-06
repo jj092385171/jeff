@@ -43,7 +43,7 @@ public class ResumeAdminController {
 	}
 
 	// 啟動update
-	@PostMapping("/update.controller/{number}")
+	@GetMapping("/update.controller/{number}")
 	public String processMainAction4() {
 		return "work/admin/manager/resumeUpdate";
 	}
@@ -53,7 +53,7 @@ public class ResumeAdminController {
 	@ResponseBody
 	public String processDeleteAction(@PathVariable Integer number) {
 		rService.deleteById(number);
-		return "ok";
+		return "刪除成功";
 	}
 	
 	// 修改

@@ -1,64 +1,151 @@
 // 載入 你的.html
 
-
 $(document).ready(function() {
-//    fetch("/morari/work/html/resumeCrud.html")
-//	.then(response => response.text())
-//	.then(html => {
-//		// 將載入的 HTML 放入 .footer 元素中
-//		document.querySelector(".resumeCrud").innerHTML = html;
-//	});
-    	$.ajax({
-    		type: 'POST',
-    		url: '/morari/admin/resume/resumeShowAll.controller',
-    		contentType: 'application/json',
-    		//data: JSON.stringify(getFormData($("#insert"))),
-    		success: function(data) {
-    			$('#showInsert').empty("");
 
-    			if (data == null) {
-    				$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
-    			} else {
-    				var table = $('#showInsert');
-    				table.append("<tr><th>履歷編號</th><th>刊登編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th><th></th></tr>");
+	let uid;
+	fetch("/morari/utils/getuid")
+		.then(response => response.text())
+		.then(data => {
+			// console.log(data)
+			uid = data;
+		}).then(() => {
+
+			$.ajax({
+				type: 'POST',
+				url: '/morari/admin/resume/resumeShowAll.controller',
+				contentType: 'application/json',
+				success: function(response) {
+					$('#showResume').empty("");
+					$('#showResume').DataTable({
+						"data": response,
+						"columns":
+							[
+								{
+									data: 'userprofiles.uid',
+									title: "會員編號",
+									width: "80px"
+								},
+								{
+									data: 'number',
+									title: "履歷編號",
+									width: "80px",
+								},
+								{
+									data: 'job.rackid',
+									title: "刊登編號",
+									width: "80px"
+								},
 
 
-    				$.each(data, function(i, n) {
-    					var tr = "<tr align='center'>" + 
-    					"<td>" + n.number + "</td>" +
-    					"<td>" + n.job.rackid + "</td>" +
-						"<td>" + n.userprofiles.uid +"</td>"+
-						"<td>" + n.work + "</td>" + 
-						"<td>" + n.name + "</td>" + 
-						"<td>" + n.age + "</td>" +
-						"<td>" + n.gender + "</td>" +
-						"<td>" + n.mail + "</td>" + 
-						"<td>" + n.phone + "</td>" + 
-						"<td>" + n.educational + "</td>" + 
-						"<td>" + n.experience + "</td>" +
-						"<td>" + n.ptime + "</td>" +
-    					"<td><form action='update.controller/" + n.number + "' method='POST'><input type='submit' value='修改'></form></td>" +
-    					"<td><button id='delete' onclick='resumeDelete(" + n.number + ")'>刪除</button></td>" + "</tr>";
-    					table.append(tr);
-    				});
-    			}
-    		}
-    	});
+								{
+									data: 'work',
+									title: "應徵職缺",
+									width: "80px"
+								},
 
-    });
-    function resumeDelete(number) {
-    	if (confirm("確定刪除該筆資料(履歷編號:" + number + ")?")) {
-    		$.ajax({
-    			type: 'delete',
-    			url: '/morari/admin/resume/resumeDelete.controller/' + number,
-    			dataType: 'TEXT',
-    			success: function(data) {
-    				alert(data);
-    				location.reload();
-    			}
-    		});
-    	} else {
-    	}
-    };
+								{
+									data: 'name',
+									title: "姓名",
+									width: "100px",
+								},
+
+								{
+									data: 'age',
+									title: "年次",
+									width: "80px"
+								},
+
+								{
+									data: 'gender',
+									title: "性別",
+									width: "70px"
+								},
+
+								{
+									data: 'mail',
+									title: "email",
+									width: "100px"
+								},
+
+								{
+									data: 'phone',
+									title: "電話",
+									width: "100px"
+								},
+
+								{
+									data: 'educational',
+									title: "學歷",
+									width: "120px"
+								},
+
+								{
+									data: 'experience',
+									title: "經歷",
+									width: "130px"
+								},
+
+								{
+									data: 'ptime',
+									title: "填寫時間",
+									width: "60px"
+								},
+
+								{
+									title: "修改",
+									width: "80px",
+									render: function(data, type, row) {
+										return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+
+									}
+								},
+								{
+									title: "刪除",
+									width: "80px",
+									render: function(data, type, row) {
+										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeDelete(' + row.number + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+									}
+								},
+
+							],
+
+						lengthMenu: [5, 10, 15, 20],
+						language: {
+							"lengthMenu": "顯示_MENU_ 筆資料",
+							"info": "第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+							"search": "搜尋：",
+							"paginate": {
+								"previous": " 上一頁__",
+								"next": "__下一頁"
+							}
+						}
+					});
+				}
+			});
+		});
+});
+
+function resumeDelete(number) {
+	if (confirm("確定刪除該筆資料(履歷編號:" + number + ")?")) {
+		$.ajax({
+			type: 'delete',
+			url: '/morari/admin/resume/resumeDelete.controller/' + number,
+			dataType: 'TEXT',
+			success: function(data) {
+				alert(data);
+				location.reload();
+			}
+		});
+	} else {
+	}
+};
+
+function jobUpdate(number) {
+	window.location.href = '/morari/admin/resume/update.controller/' + number
+
+};
+
+
+
 
 
