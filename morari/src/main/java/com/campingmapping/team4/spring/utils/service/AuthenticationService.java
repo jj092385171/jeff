@@ -126,11 +126,6 @@ public class AuthenticationService {
 		}
 		return islogin;
 	}
-	@Transactional
-	public String getshot(HttpServletRequest request) {
-		UUID uid = jwtService.getUId(request);
-		return userRepository.findById(uid).get().getUserdetail().getShot();
-	}
 
 	@Transactional
 	public List<Role> getroles() {		

@@ -61,12 +61,6 @@ public class AuthenticationController {
     return service.loginstate(request);
   }
 
-  @GetMapping("/shot")
-  @ResponseBody
-  public String getshot(HttpServletRequest request) {
-    return service.getshot(request);
-  }
-
   @GetMapping("/roles")
   @ResponseBody
   public List<Role> getroles() {

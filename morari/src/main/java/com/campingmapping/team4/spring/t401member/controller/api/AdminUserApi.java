@@ -15,7 +15,7 @@ import com.campingmapping.team4.spring.t401member.model.service.*;
 
 @Controller
 @RequestMapping("admin/camper/api")
-public class UserApi {
+public class AdminUserApi {
     @Autowired
     UserService userService;
 
@@ -24,24 +24,25 @@ public class UserApi {
     public List<UesrDetailAdminWeb> getAllUser() {
         return userService.showAllUser();
     }
+
     @GetMapping("/{uid}")
     @ResponseBody
     public String getUser() {
         return null;
     }
+
     @DeleteMapping("/{uid}")
     @ResponseBody
     public String delUser() {
         return null;
     }
+
     @PutMapping("/{uid}")
     @ResponseBody
     public String updateUser() {
         return null;
     }
 
-    
-
-
+   
 
 }

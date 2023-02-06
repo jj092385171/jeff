@@ -84,7 +84,7 @@ window.onload = function () {
                         // 將載入的 HTML 放入 .footer 元素中
                         document.getElementById("loginstate").innerHTML = html;
                         // 找用戶照片放入SRC
-                        fetch("/morari/api/auth/shot")
+                        fetch("/morari/guest/camper/api/shot")
                             .then(response => response.text())
                             .then(shotUrl => {
                                 document.querySelector('.userShot').src = shotUrl;

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // @PreAuthorize("hasAnyAuthority('USER')")
 @RequestMapping("/admin")
 public class AdminController {
+
+    // @PreAuthorize("hasAnyAuthority('SUPERADMIN')")
     @GetMapping({ "", "/" })
     public String index() {
         return "admin";

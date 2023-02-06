@@ -71,7 +71,7 @@ public class UserProfiles implements UserDetails {
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @Builder.Default
   @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = {
       @JoinColumn(name = "rid") })

@@ -5160,7 +5160,7 @@ fieldset[disabled] .select select:hover {
 
 .dropdown-menu {
   display: none;
-  left: 0;
+  left: auto;
   min-width: 12rem;
   padding-top: 4px;
   position: absolute;

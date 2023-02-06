@@ -1,122 +1,4 @@
-
 var receivedData;
-function deluser(index) {
-
-
-	if (confirm('確認刪除資料?') == true) {
-
-		// console.log("del "+uid)
-
-		// $.ajax({
-		// 	url: "/campingmapping/DelMemberServlet",
-		// 	type: "POST",
-		// 	//提交方式
-		// 	data: { "account": account },
-		// 	dataType: "text",
-		// }).done(function (data) {
-		// 	if (data == 1) {
-		// 		alert('刪除成功')
-		// 		location.reload()
-		// 	} else {
-		// 		alert('刪除失敗')
-
-		// 	}
-
-		// })
-
-
-	} else {
-		// console.log('您已取消確認');
-	}
-
-};
-
-function edituser(index) {
-	fetch("/morari/camper/html/useredit.html")
-		.then(response => response.text())
-		.then(html => {
-			// USER編輯html
-			document.querySelector(".useredit").innerHTML = html;
-			// 生成roles選項
-			const rolecheckbox = document.getElementById('rolecheckbox');
-			fetch('/morari/api/auth/roles')
-				.then(response => response.json())
-				.then(roles => {
-					roles.forEach(role => {
-						const label = document.createElement('label');
-						const checkbox = document.createElement('input');
-						checkbox.type = 'checkbox';
-						checkbox.name = 'roletype';
-						checkbox.value = role.name;
-						checkbox.checked = 'checked';
-						const span = document.createElement('span');
-						span.className = 'form-control form-control-edit round button';
-						span.innerText = role.name;
-						label.appendChild(checkbox);
-						label.appendChild(span);
-						rolecheckbox.appendChild(label);
-					});
-
-					// 拿取欄位資訊帶入編輯欄位
-					let userdata = receivedData[index];
-					document.getElementById("uid").innerHTML = '<img src="https://storage.googleapis.com/morari/adminshot" alt="shot" style="max-width: 150px; padding: 0px; border: 1px ; border-radius: 10px;" id="shot" class="btn"> <input type="file" class="form-control-file" id="shotInput" accept="image/*" style="display: none;">' + userdata.uid;
-					for (const key in userdata) {
-						if (userdata.hasOwnProperty(key)) {
-							const element = userdata[key];
-							if (key == "shot") {
-								document.getElementById("shot").src = element;
-							} else if (key == "roles") {
-								element.forEach(r => {
-									const roles = r.name;
-									let checkboxes = document.getElementsByName("roletype");
-									checkboxes.forEach(checkbox => {
-										if (roles.includes(checkbox.value)) {
-											checkbox.checked = true;
-										} else {
-											checkbox.checked = false;
-										}
-									}
-									)
-								});
-							}
-							else {
-								document.getElementById(key).value = element;
-							}
-						}
-					}
-
-					// dialog顯示
-					document.querySelector(".useredit").showModal();
-
-				});
-
-
-
-			// 關閉dialog按鈕
-			const closeButton = document.getElementById("closeuseredit");
-			closeButton.addEventListener("click", function () {
-				document.querySelector(".useredit").close();
-			});
-
-			// 點取圖片開啟上傳檔案
-			document.getElementById("shot").addEventListener("click", function () {
-				document.getElementById("shotInput").click();
-			});
-			//   把圖片讀取後顯示
-			document.getElementById("shotInput").addEventListener("change", function () {
-				let file = this.files[0];
-				let reader = new FileReader();
-				reader.onload = function (e) {
-					document.getElementById("shot").src = e.target.result;
-				};
-				reader.readAsDataURL(file);
-			});
-
-
-		})
-	// 		$("#edform").
-
-}
 fetch("/morari/camper/html/usertable.html")
 	.then(response => response.text())
 	.then(html => {
@@ -725,7 +607,7 @@ fetch("/morari/camper/html/usertable.html")
 						setTimeout(function () {
 							table.responsive.recalc();
 						}, 500);
-	
+
 					});
 					// 選取整ROW
 					$('#memberlist tbody').on('click', 'tr', function () {
@@ -797,3 +679,130 @@ fetch("/morari/camper/html/usertable.html")
 		// https://datatables.net/examples/basic_init/dom.html
 
 	});
+
+
+function edituser(index) {
+	fetch("/morari/camper/html/useredit.html")
+		.then(response => response.text())
+		.then(html => {
+			// USER編輯html
+			document.querySelector(".useredit").innerHTML = html;
+			// 生成roles選項
+			const rolecheckbox = document.getElementById('rolecheckbox');
+			fetch('/morari/api/auth/roles')
+				.then(response => response.json())
+				.then(roles => {
+					roles.forEach(role => {
+						const label = document.createElement('label');
+						const checkbox = document.createElement('input');
+						checkbox.type = 'checkbox';
+						checkbox.name = 'roletype';
+						checkbox.value = role.name;
+						checkbox.checked = 'checked';
+						const span = document.createElement('span');
+						span.className = 'form-control form-control-edit round button';
+						span.innerText = role.name;
+						label.appendChild(checkbox);
+						label.appendChild(span);
+						rolecheckbox.appendChild(label);
+					});
+
+					// 拿取欄位資訊帶入編輯欄位
+					let userdata = receivedData[index];
+					document.getElementById("uid").innerHTML = '<img src="https://storage.googleapis.com/morari/adminshot" alt="shot" style="max-width: 80px; padding: 0px; border: 1px ; border-radius: 10px;" id="shot" class="btn"> <input type="file" class="form-control-file" id="shotInput" accept="image/*" style="display: none;">' + userdata.uid;
+					for (const key in userdata) {
+						if (userdata.hasOwnProperty(key)) {
+							const element = userdata[key];
+							if (key == "shot") {
+								document.getElementById("shot").src = element;
+							} else if (key == "roles") {
+								element.forEach(r => {
+									const roles = r.name;
+									let checkboxes = document.getElementsByName("roletype");
+									checkboxes.forEach(checkbox => {
+										if (roles.includes(checkbox.value)) {
+											checkbox.checked = true;
+										} else {
+											checkbox.checked = false;
+										}
+									}
+									)
+								});
+							}
+							else {
+								document.getElementById(key).value = element;
+							}
+						}
+					}
+
+					// dialog顯示
+					document.querySelector(".useredit").showModal();
+					// 點取圖片開啟上傳檔案
+					document.getElementById("shot").addEventListener("click", function () {
+						document.getElementById("shotInput").click();
+					});
+
+
+					// 關閉dialog按鈕
+					const closeButton = document.getElementById("closeuseredit");
+					closeButton.addEventListener("click", function () {
+						document.querySelector(".useredit").close();
+					});
+
+
+					//   把圖片讀取後顯示
+					document.getElementById("shotInput").addEventListener("change", function () {
+						let file = this.files[0];
+						let reader = new FileReader();
+						reader.onload = function (e) {
+							document.getElementById("shot").src = e.target.result;
+						};
+						reader.readAsDataURL(file);
+					});
+
+
+				});
+
+
+
+
+
+
+		})
+	// 		$("#edform").
+
+}
+
+function deluser(index) {
+
+
+	if (confirm('確認刪除資料?') == true) {
+
+		// console.log("del "+uid)
+
+		// $.ajax({
+		// 	url: "/campingmapping/DelMemberServlet",
+		// 	type: "POST",
+		// 	//提交方式
+		// 	data: { "account": account },
+		// 	dataType: "text",
+		// }).done(function (data) {
+		// 	if (data == 1) {
+		// 		alert('刪除成功')
+		// 		location.reload()
+		// 	} else {
+		// 		alert('刪除失敗')
+
+		// 	}
+
+		// })
+
+
+	} else {
+		// console.log('您已取消確認');
+	}
+
+};
+
+
+
