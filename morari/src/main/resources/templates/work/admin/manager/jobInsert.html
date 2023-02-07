@@ -33,9 +33,10 @@
 	<h3>新增職缺</h3>
 
 	<form id="insert" enctype="multipart/form-data">
-
-		會員編號 <input type="text" name="uid" id="uid" required><br>
-		營區名稱 <input id="1" type="text" name="campname" required><br>
+	
+		會員編號 <input type="text" name="uid" id="uid" readonly><br>
+		營區名稱 <input id="1" type="text" name="campname" readonly><br>
+		地址 <input id="2" type="text" name="place" readonly><br>
 		職缺		<select name="job">
 					<option>--請選擇--</option>
 					<option value="廚師">廚師</option>
@@ -51,13 +52,14 @@
 		上班日期 <input type="text" name="date" required><br>
 		上班時段 <input type="text" name="time" required><br>
 		備註<textarea name="remark" cols="20" rows="5"></textarea><br>
+		
 <!-- 		 //照片 -->
 	 	<input id="3" type="hidden" name="img" required><br>
 		<input id="send" type="button" value="送出"><br>
 		<input type="reset" value="取消"><br>
 	</form>
 
-	<form action="crud.controller" method="GET"
+	<form action="/morari/admin/work/crud.controller" method="GET"
 		enctype="multipart/form-data">
 		<input type="submit" value="回首頁">
 	</form>

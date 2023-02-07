@@ -16,6 +16,39 @@ $(document).ready(function() {
 			uid = data;
 		}).then(() => {
 
+			$("#campId").click(function() {
+
+				$('#campID').empty("");
+				var div = $('#campID');
+				var input = "<form>輸入會員編號<input type='text' id='uuid'><input type='button' value='查詢' onclick='submitForm()'></form>";
+				div.append(input);
+			})
+
+
+
+
+
+
+
+
+			//				$.ajax({
+			//					type: 'POST',
+			//					url: '/morari/admin/user/work/selectUUid.controller/' + uid,
+			//					contentType: 'application/json',
+			//					success: function(data) {
+			//						console.log(data);
+			//						$.each(data, function(i, n) {
+			//							var table = $('#campName');
+			//							var tr = "<tr align='center'>" +
+			//								"<td>" + "<a href='/morari/admin/user/work/startInsert.controller/" + n.campID + "'>" + n.campName + "</td>" +
+			//								"</tr>"
+			//							table.append(tr);
+			//						});
+			//					}
+			//				})
+
+
+
 			//找全部
 			$.ajax({
 				type: 'POST',
@@ -103,7 +136,7 @@ $(document).ready(function() {
 								width: "100px",
 								render: function(data, type, row) {
 									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
-								
+
 								}
 							},
 							{
@@ -115,7 +148,7 @@ $(document).ready(function() {
 							},
 
 						],
-						
+
 						lengthMenu: [5, 10, 15, 20],
 						language: {
 							"lengthMenu": "顯示_MENU_ 筆資料",
@@ -130,24 +163,44 @@ $(document).ready(function() {
 				}
 			});
 		});
-		})
-	function jobDelete(rackid) {
-		if (confirm("確定刪除該筆資料(刊登編號:" + rackid + ")?")) {
-			$.ajax({
-				type: 'delete',
-				url: '/morari/admin/work/jobDelete.controller/' + rackid,
-				dataType: 'TEXT',
-				success: function(data) {
-					alert(data);
-					location.reload();
-				}
+})
+function jobDelete(rackid) {
+	if (confirm("確定刪除該筆資料(刊登編號:" + rackid + ")?")) {
+		$.ajax({
+			type: 'delete',
+			url: '/morari/admin/work/jobDelete.controller/' + rackid,
+			dataType: 'TEXT',
+			success: function(data) {
+				alert(data);
+				location.reload();
+			}
+		});
+	} else {
+	}
+};
+function jobUpdate(rackid) {
+	window.location.href = '/morari/admin/work/startUpdate.controller/' + rackid
+
+};
+
+// 新增 會員編號查詢秀營地
+function submitForm() {
+	var input1 = document.getElementById("uuid").value;
+	$.ajax({
+		type: 'POST',
+		url: '/morari/admin/user/work/selectUUid.controller/' + input1,
+		contentType: 'application/json',
+		success: function(data) {
+			$('#campName').empty("");
+			$.each(data, function(i, n) {
+				var table = $('#campName');
+				var tr = "<tr align='center'>" +
+					"<td>" + "<a href='/morari/admin/work/insert.controller/" + n.campID + "'>" + n.campName + "</td>" +
+					"</tr>"
+				table.append(tr);
 			});
-		} else {
 		}
-	};
-	function jobUpdate(rackid) {
-			window.location.href = '/morari/admin/work/startUpdate.controller/'+rackid
-		
-	};
+	})
+}
 
 

@@ -20,15 +20,16 @@ $(document).ready(function() {
 						"data": response,
 						"columns":
 							[
-								{
-									data: 'userprofiles.uid',
-									title: "會員編號",
-									width: "80px"
-								},
+
 								{
 									data: 'number',
 									title: "履歷編號",
 									width: "80px",
+								},
+								{
+									data: 'userprofiles.uid',
+									title: "會員編號",
+									width: "80px"
 								},
 								{
 									data: 'job.rackid',

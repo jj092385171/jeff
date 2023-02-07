@@ -14,8 +14,8 @@ public interface CampRepository extends JpaRepository<Camp, Integer> {
 	@Query(value = "select * from camp where fkcityid = :fkcityid", nativeQuery = true)
 	List<Camp>findByCityId(@Param("fkcityid") int cityId);
 	
-	@Query(value = "SELECT c.camppicturespath, c.location, ci.cityname "
-			+"FROM camp c "
-			+"LEFT JOIN city ci ON c.fkcityid = ci.cityid WHERE c.campname = ?1", nativeQuery = true)
-	public Camp findByCampName(String campName);
+//	@Query(value = "SELECT c.camppicturespath, c.location, ci.cityname "
+//			+"FROM camp c "
+//			+"LEFT JOIN city ci ON c.fkcityid = ci.cityid WHERE c.campname = ?1", nativeQuery = true)
+//	public Camp findByCampName(String campName);
 }

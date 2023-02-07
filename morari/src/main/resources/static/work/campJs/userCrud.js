@@ -46,11 +46,11 @@ $(document).ready(function() {
 								return "<a href='/morari/admin/user/resume/resumeStartCrud.controller/" + row.rackid + "'>" + row.rackid 
 								}
 							},
-							{
-								data: 'userprofiles.uid',
-								title: "會員編號",
-								width: "100px"
-							},
+//							{
+//								data: 'userprofiles.uid',
+//								title: "會員編號",
+//								width: "100px"
+//							},
 
 							{
 								data: 'campname',

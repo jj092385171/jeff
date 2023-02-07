@@ -46,7 +46,7 @@ public class WorkAdminController {
 	}
 
 	// 啟動insert
-	@GetMapping("/insert.controller")
+	@GetMapping("/insert.controller/{c}")
 	public String processMainAction2() {
 		return "work/admin/manager/jobInsert";
 	}
@@ -69,7 +69,6 @@ public class WorkAdminController {
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
 		UUID uid = jwtService.getUId(request);
-		campService.findById(0);
 		
 		JobBean insert = jService.insert(jobBean, uid);
 		return insert;
@@ -124,22 +123,19 @@ public class WorkAdminController {
 		return result;
 	}
 	// 透過uid搜尋camp的東西
-	@PostMapping("/selectUUid.controller/{uid}")
+	@PostMapping("/selectUUid.controller")
 	@ResponseBody
-	public List<Camp> processSelectUUidAction(@PathVariable UUID uid) {
+	public List<Camp> processSelectUUidAction(@RequestBody UUID uid) {
 		List<Camp> result = jService.findUUid(uid);
-		
 		return result;
 	}
 	// 透過campname搜尋camp的東西
-	@PostMapping("/selectCampname.controller")
-	@ResponseBody
-	public Camp processSelectCampnameAction(@RequestBody String campname) {
-		System.out.println(campname);
-		Camp result = jService.findByCampisLike(campname);
-		System.out.println("result="+result);
-		return result;
-	}
+//	@PostMapping("/selectCampname.controller")
+//	@ResponseBody
+//	public Camp processSelectCampnameAction(@RequestBody String campname) {
+//		Camp result = jService.findByCampisLike(campname);
+//		return result;
+//	}
 
 	// 秀圖片
 //	@GetMapping("/jobImg.controller/{id}")
