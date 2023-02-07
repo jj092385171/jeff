@@ -36,8 +36,15 @@ public class Tag implements Serializable {
 	@ManyToMany(mappedBy = "tags")
 	private Set<Camp> camps = new HashSet<>();
 
+	
 	public Tag() {
 	}
+
+	public Tag(String tagName) {
+		super();
+		this.tagName = tagName;
+	}
+
 
 	public Integer getTagID() {
 		return tagID;

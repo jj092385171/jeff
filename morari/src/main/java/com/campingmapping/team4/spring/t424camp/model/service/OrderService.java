@@ -69,6 +69,21 @@ public class OrderService {
 		return findAll;
 	}
 	
+	//查詢全部訂單
+	public List<Order> findAll() {
+		List<Order> findAll = orderRepository.findAll();
+		Date now = new Date();
+		
+		for (Order order : findAll) {
+			Date leavingTime = order.getLeavingTime();
+			if(leavingTime.before(now)) {
+				order.setStatus("訂單已完成");
+				orderRepository.save(order);
+			}
+		}
+		return findAll;
+	}
+	
 	//新增訂單
 	public Order insert(UUID uid, Integer[] siteIds, Integer[] nums, Date goingtime, Date leavingtime, Integer campID) {
 		
