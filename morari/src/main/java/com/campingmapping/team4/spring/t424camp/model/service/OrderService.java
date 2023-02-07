@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t424camp.model.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -138,6 +139,31 @@ public class OrderService {
 		}
 		
 		return true;
+	}
+	
+	//回傳60天內哪個日期是滿位
+	public List<Integer> returnFulledDay(Site site) {
+		Calendar cal = Calendar.getInstance();
+		int counter = 0;
+		
+		Date go = new Date();
+		
+		List<Integer> fullDates = new ArrayList<Integer>();
+		while(counter <= 30) {
+			
+			List<Orderitem> items = orderitemRepository.findBySiteidAndLessThanGoingDate(site.getSiteID(), go);
+			long totalNums = items.stream().mapToInt(Orderitem::getNumbers).sum();
+			if ((site.getTotalSites() - totalNums) <= 0) {
+				fullDates.add(counter);
+			}
+			cal.setTime(go);
+			cal.add(Calendar.DATE, 1);
+			go = cal.getTime();
+			
+			counter++;
+		}
+		
+		return fullDates;
 	}
 	
 	

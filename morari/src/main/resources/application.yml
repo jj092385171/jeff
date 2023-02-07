@@ -4,6 +4,7 @@ server:
   #   path: /error
   #   whitelabel:
   #     enabled: false
+     
   port: 8443
   servlet:
     context-path: /morari

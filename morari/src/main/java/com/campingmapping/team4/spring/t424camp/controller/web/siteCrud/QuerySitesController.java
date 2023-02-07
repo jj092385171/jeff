@@ -19,13 +19,12 @@ public class QuerySitesController {
 
 	@Autowired
 	private SiteService siteService;
-
+	
 	
 	@GetMapping("/SitesOfCamp")
 	public String queryByCityIDsResult() {
 		return "camp/admin/SitesOfCamp" ;
 	}
-	
 	
 	@GetMapping("/sitesOfCamp.controller/{campID}")
 	@ResponseBody
