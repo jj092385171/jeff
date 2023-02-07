@@ -817,7 +817,12 @@ function deluser(index) {
 function saveedit() {
 	formData.append("file", file);
 	formData.append("uid", edituid);
-
+	fetch("/morari/guest/camper/api/shot",{
+		method: "PUT",
+		body: formData
+	}).then(
+		
+	)
 
 	document.getElementById("usereditform").submit();
 }

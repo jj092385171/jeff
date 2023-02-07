@@ -2,12 +2,15 @@ package com.campingmapping.team4.spring.utils.config;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.*;
 import com.google.common.collect.Lists;
 
+@Service
 public class GoogleFileUtil {
 
     // public static void main(String[] args) throws IOException {
