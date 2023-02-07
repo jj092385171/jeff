@@ -2,11 +2,12 @@
 <html lang="zh-TW">
 
 <head>
+
     <script src="/morari/admin/js/head.js"></script>
 
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
-
+	<link rel="stylesheet" href="/morari/admin/css/dataTable.css">
 </head>
 
 <body id="page-top" style="display: none">
@@ -31,19 +32,23 @@
                 <div class="container-fluid">
 <!-- 這裡 -->
 	<div>
-		<h2>職缺(管理者)</h2>
-
-		<form action="insert.controller" method="post">
-			<input type="submit" value="新增職缺">
-		</form>
-
-		<form action="select.controller" method="POST">
-			<input type="submit" value="查詢">
-		</form>
+		<h2>職缺管理(後臺)</h2>
+		<button id="campId" class="btn btn-success btn-icon-split">
+		<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+		<span class="text">新增職缺</span></button>
 	</div>
+	
+	<div id="campID"></div>
+
+	<table id="campName" ></table>
+		
+<!-- 		<form action=".controller" method="POST"> -->
+<!-- 			輸入會員編號<input type='text' id='uuid'> -->
+<!-- 			<input type="submit" value="送出"></form> -->
+	
 	<hr>
 
-	<table id="showInsert"></table>
+	<table id="showInsert" class="table is-striped"></table>
 
 
                 </div>
@@ -86,7 +91,12 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-    <script src="/morari/work/managerJs/jobCrud.js" defer></script>
+   
+    	<!-- datatables js -->
+	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
+	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
+	
+	<script src="/morari/work/managerJs/jobCrud.js" defer></script>
     <script type="text/javascript">
 
     </script>
