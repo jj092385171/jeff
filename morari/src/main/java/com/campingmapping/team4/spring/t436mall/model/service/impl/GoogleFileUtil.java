@@ -9,13 +9,13 @@ import java.nio.file.Paths;
 
 public class GoogleFileUtil {
     public static void main(String[] args) throws IOException {
-        String filepath = uploadFile("test", "ryantestpicture");
+        String filepath = uploadFile("test2", "ryantestpicture");
         System.out.println("公开访问地址是：：：：" + filepath);
     }
 
     public static String uploadFile(String fileName,String bucketName) throws IOException {
         //要上传的本地文件的绝对路径
-        String filePath = "C:/Users/User/Pictures/images001.jpg";
+        String filePath = "C:/Users/User/Pictures/images003.jpg";
 
         //读取本地存储的服务账号的json密钥，拿到该服务账号的权限
         GoogleCredentials credentials= GoogleCredentials.fromStream(new FileInputStream("C:/Users/User/Downloads/applied-tractor-376716-f3bc9fb13e63.json"))

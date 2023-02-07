@@ -28,7 +28,7 @@
 		function submitForm() {
 			// 取得表單資料
 			var formData = new FormData(document.getElementById("formnew"));
-			var jsonData = {"picture":picture};
+			var jsonData = {};
 			for (var [key, value] of formData.entries()) {
 				jsonData[key] = value;
 			}
@@ -87,11 +87,14 @@
 							<option>戶外服裝</option>
 							<option>登山鞋</option>
 							<option>其他</option>
-						</select>產品類型<br> <input type="file" value='測試用產品' name="pdpicture" />照片<br>
-						<input type="text" value='' name="pdprice" 
-						onkeyup="value=value.replace(/[^\d]/g,'') " required placeholder="請輸入價位,僅限數字">價位<br> 
-						<input type="text" value='' name="pdinventory" 
-						onkeyup="value=value.replace(/[^\d]/g,'') " required placeholder="請輸入庫存數量,僅限數字">庫存數量<br> <br>
+						</select>產品類型<br>
+<!-- 						<input type="file" value='測試用產品' name="pdpicture" /> -->
+						<input type="text" value='測試用產品' name="pdpicture" />
+						<br>
+						<input type="text" value='' name="pdprice" onkeyup="value=value.replace(/[^\d]/g,'') " required
+							placeholder="請輸入價位,僅限數字">價位<br>
+						<input type="text" value='' name="pdinventory" onkeyup="value=value.replace(/[^\d]/g,'') "
+							required placeholder="請輸入庫存數量,僅限數字">庫存數量<br> <br>
 						<input type="button" value="提交" onclick="submitForm()">
 					</form>
 					<table id="result"></table>
@@ -119,6 +122,44 @@
 
 	<!-- Logout Modal-->
 	<div class="loginoutshare"></div>
+
+	<script>
+	
+	function upload(e) {
+        var file = e.files[0];
+        if (!file) {
+            return;
+        }
+
+        //檔案上傳
+        //...
+        //檔案上傳
+
+        //上傳後將檔案清除
+        e.value = '';
+    }
+	
+		document.querySelector('input[type="file"]').addEventListener('change', function (event) {
+			// 获取文件
+			var file = event.target.files[0];
+
+			// 发送请求到控制器
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/morari/uploadpicturetogoogle.controller');
+			xhr.send(file);
+			console.log(file);
+// 			处理响应
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+					// 获取响应数据
+					var responseData = xhr.responseText;
+					console.log(responseData);
+					this.value = responseData;
+				}
+			};
+		});
+	</script>
+
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>

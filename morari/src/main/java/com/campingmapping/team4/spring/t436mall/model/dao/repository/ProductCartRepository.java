@@ -28,5 +28,11 @@ public interface ProductCartRepository extends JpaRepository<ProductCart, Intege
 			+ " FROM productcart p"
 			+ " LEFT JOIN category c ON  p.pdid = c.pdid", nativeQuery = true)
 	public List<ProductCartVo> findAllVo();
+	
+	
+	@Query(value = "SELECT * FROM productcart WHERE userid= ?1 and pdid= ?2", nativeQuery = true)
+	public ProductCart findByUseridPdid(String userid,Integer pdid);
+	
+	
 
 }
