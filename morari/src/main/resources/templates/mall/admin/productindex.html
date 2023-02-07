@@ -40,9 +40,10 @@
 				<div class="container-fluid">
 
 					<h3>商城管理</h3>
-					<form action="/morari/mall/productcreate.controller" method="GET">
-						<input type="submit" value="新增產品">
-					</form>
+						<button id="create" class="btn btn-success btn-icon-split" onclick='create()'>
+							<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+							<span class="text">新增產品</span>
+						</button>
 					<table id="result" class="table is-striped"></table>
 
 				</div>
@@ -62,8 +63,7 @@
 	<!-- End of Page Wrapper -->
 
 	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top">
-		<i class="fas fa-angle-up"></i>
+	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
 	</a>
 
 	<!-- Logout Modal-->
@@ -90,61 +90,114 @@
 	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
 
 	<script type="text/javascript">
-		fetch('/morari/mall/selectAllPd', { method: 'GET' }).then(
-			function (response) {
-				if (response.status != 200) {
-					console.log(response.satus);
-					return;
-				}
-				console.log(response);
-				response.json().then(function (n) {
+		fetch('/morari/mall/selectAllPd', {
+			method: 'GET'
+		})
+			.then(
+				function (response) {
+					if (response.status != 200) {
+						console.log(response.satus);
+						return;
+					}
+					console.log(response);
+					response
+						.json()
+						.then(
+							function (n) {
 
-					$('#result').DataTable({
-						data: n,
-						responsive: true,
-						columns: [
+								$('#result')
+									.DataTable(
+										{
+											data: n,
+											responsive: true,
+											columns: [
 
-							{ data: 'pdid', title: '產品編號' },
-							{ data: 'pdname', title: '產品名稱' },
-							{ data: 'userid', title: '會員id' },
-							{ data: 'pdtitle', title: '品牌名稱' },
-							{ data: 'pdcontent', title: '產品規格' },
-							{ data: 'pdtype', title: '類型' },
-							{ data: 'pdpicture', title: '照片' },
-							{ data: 'pdprice', title: '產品價格' },
-							{ data: 'pdinventory', title: '產品庫存' },
-							{ data: 'pddate', title: '上架時間' },
-							{ data: 'pdlastupdate', title: '產品修改時間' },
-							{
-								data: null, title: '修改',
-								render: function (data, type, row) {
-									return `<button id='update' type='button' value='n[i].pdid' onclick='updateProduct(${data.pdid})'>修改</button>`;
-								}
-							},
-							{
-								data: null, title: '刪除',
-								render: function (data, type, row) {
-									return `<button id='delete' type='button' value='n[i].pdid' onclick='confirmDelete(${data.pdid})'>刪除</button>`;
-								}
-							},
+												{
+													data: 'pdid',
+													title: '產品編號'
+												},
+												{
+													data: 'pdname',
+													title: '產品名稱'
+												},
+												{
+													data: 'userid',
+													title: '會員id'
+												},
+												{
+													data: 'pdtitle',
+													title: '品牌名稱'
+												},
+												{
+													data: 'pdcontent',
+													title: '產品規格'
+												},
+												{
+													data: 'pdtype',
+													title: '類型'
+												},
+												{
+													data: 'pdpicture',
+													title: '照片'
+												},
+												{
+													data: 'pdprice',
+													title: '產品價格'
+												},
+												{
+													data: 'pdinventory',
+													title: '產品庫存'
+												},
+												{
+													data: 'pddate',
+													title: '上架時間'
+												},
+												{
+													data: 'pdlastupdate',
+													title: '產品修改時間'
+												},
+												{
+													data: null,
+													title: '修改',
+													render: function (
+														data,
+														type,
+														row) {
+														return `<button id='update' style="border:none;background-color:transparent" type='button' value='n[i].pdid' onclick='updateProduct(${data.pdid})'><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>`;
+													}
+												},
+												{
+													data: null,
+													title: '刪除',
+													render: function (
+														data,
+														type,
+														row) {
+														return `<button id='delete' style="border:none;background-color:transparent" type='button' value='n[i].pdid' onclick='confirmDelete(${data.pdid})'><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>`;
+													}
+												},
 
-						],
-						lengthMenu: [5, 10, 15, 20],
-						language: {
-							"lengthMenu": "顯示 _MENU_ 筆資料",
-							"info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
-							"search": "搜尋：",
-							"paginate": {
-								"next": "下一頁",
-								"previous": "上一頁"
-							}
-						}
+											],
+											lengthMenu: [
+												5,
+												10,
+												15,
+												20],
+											language: {
+												"lengthMenu": "顯示 _MENU_ 筆資料",
+												"info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+												"search": "搜尋：",
+												"paginate": {
+													"next": "下一頁",
+													"previous": "上一頁"
+												}
+											}
 
-					});
+										});
+
+							});
 
 				});
-
-			});
 
 		function confirmDelete(pdid) {
 			if (confirm("確定刪除此項產品資料(編號:" + pdid + ")?")) {
@@ -168,15 +221,21 @@
 		function updateProduct(pdid) {
 			if (confirm("確定修改此項產品資料(編號:" + pdid + ")?")) {
 				$.ajax({
-					success: function (data) {
-						window.location.href = "/morari/mall/updateproduct.controller/" + pdid;
-					}
-				});
+						success: function (data) {
+							window.location.href = "/morari/mall/updateproduct.controller/"
+								+ pdid;
+						}
+					});
 			} else {
 			}
 		}
-
-
+		function create() {
+			$.ajax({
+					success: function (data) {
+						window.location.href = "/morari/mall/productcreate.controller";
+					}
+				});
+		}
 	</script>
 
 </body>

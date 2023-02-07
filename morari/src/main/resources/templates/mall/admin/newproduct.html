@@ -28,7 +28,7 @@
 		function submitForm() {
 			// 取得表單資料
 			var formData = new FormData(document.getElementById("formnew"));
-			var jsonData = {};
+			var jsonData = {"picture":picture};
 			for (var [key, value] of formData.entries()) {
 				jsonData[key] = value;
 			}
