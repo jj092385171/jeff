@@ -27,6 +27,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/admin/work")
 public class WorkAdminController {
+	
 	@Autowired
 	private HttpServletRequest request;
 
@@ -35,9 +36,6 @@ public class WorkAdminController {
 
 	@Autowired
 	private JobService jService;
-	
-	@Autowired
-	private CampService campService;
 	
 	// 啟動我的首頁
 	@GetMapping("/crud.controller")

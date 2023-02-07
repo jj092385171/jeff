@@ -30,43 +30,19 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-	<h3>新增職缺</h3>
+	<form  id="sendMail">
+		e-mail<input id="mail" name="mail"type="text" readonly><br>
+		主旨<input id="subject" name="subject" type="text"><br>
+		內容<textarea id="content" name="remark" cols="100" rows="20"></textarea><br>
 
-	<form id="insert" enctype="multipart/form-data">
-	
-		會員編號 <input type="text" name="uid" id="uid" readonly><br>
-		營區名稱 <input id="1" type="text" name="campname" readonly><br>
-		地址 <input id="2" type="text" name="place" readonly><br>
-		職缺		<select name="job">
-					<option>--請選擇--</option>
-					<option value="廚師">廚師</option>
-					<option value="廚助">廚助</option>
-					<option value="櫃台">櫃台</option>
-					<option value="房務員">房務員</option>
-					<option value="清潔員">清潔員</option>
-					<option value="假日工讀生">假日工讀生</option>
-					<option value="夜間值班員">夜間值班員</option>
-				</select><br>
-		薪資 <input type="text" name="salary" required><br>
-		人數 <input type="text" name="quantity" required><br>
-		上班日期 <input type="text" name="date" required><br>
-		上班時段 <input type="text" name="time" required><br>
-		備註<textarea name="remark" cols="20" rows="5"></textarea><br>
-<!-- 		 //照片 -->
-	 	<input id="3" type="hidden" name="img" required><br>
-		<input id="send" type="button" value="送出"><br>
+		<input id="send" type="submit" value="送出"><br>
 		<input type="reset" value="取消"><br>
+
 	</form>
 
-	<form action="/morari/admin/work/crud.controller" method="GET"
-		enctype="multipart/form-data">
-		<input type="submit" value="回首頁">
+	<form action="/morari/admin/user/work/startCrud.controller" method="GET">
+		<input type="submit" value="回上一頁">
 	</form>
-	<hr>
-	
-	<h3 id="su"></h3>
-	<table id="showInsert"></table>
-	
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -107,7 +83,8 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-    <script src="/morari/work/managerJs/jobInsert.js" defer></script>
+    
+    <script src="/morari/work/campJs/mailInsert.js" defer></script>
     <script type="text/javascript">
 
 	</script>

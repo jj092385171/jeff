@@ -38,28 +38,14 @@ $(document).ready(function() {
 						"<td>" + n.educational + "</td>" +
 						"<td>" + n.experience + "</td>" +
 						"<td>" + n.ptime + "</td>" +
-						"<td><button class='mail' data-email='" + n.mail + "'>mail通知面試</button></td>" + "</tr>";
+						"<td><button class='mail' onclick='mailInsert(" + n.number + ")'>mail通知面試</button></td>" + "</tr>";
 					table.append(tr);
 				});
 			}
-			$('.mail').on('click', function() {
-				var email = $(this).data('email');
-				if (confirm("確定寄出email到:" + email + "?")) {
-					$.ajax({
-						type: 'post',
-						url: '/morari/admin/user/work/userMail.controller',
-						contentType: 'application/json',
-						data: JSON.stringify(email),
-						success: function(response) {
-							alert(response);
-							location.reload();
-						}
-					});
-				} else {
-				}
-
-			});
 		}
 	});
 });
+function mailInsert(number) {
+	window.location.href = '/morari/admin/user/work/startMail.controller/' + number
+}
 

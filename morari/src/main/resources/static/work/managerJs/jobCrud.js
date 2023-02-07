@@ -24,31 +24,6 @@ $(document).ready(function() {
 				div.append(input);
 			})
 
-
-
-
-
-
-
-
-			//				$.ajax({
-			//					type: 'POST',
-			//					url: '/morari/admin/user/work/selectUUid.controller/' + uid,
-			//					contentType: 'application/json',
-			//					success: function(data) {
-			//						console.log(data);
-			//						$.each(data, function(i, n) {
-			//							var table = $('#campName');
-			//							var tr = "<tr align='center'>" +
-			//								"<td>" + "<a href='/morari/admin/user/work/startInsert.controller/" + n.campID + "'>" + n.campName + "</td>" +
-			//								"</tr>"
-			//							table.append(tr);
-			//						});
-			//					}
-			//				})
-
-
-
 			//找全部
 			$.ajax({
 				type: 'POST',
@@ -180,7 +155,6 @@ function jobDelete(rackid) {
 };
 function jobUpdate(rackid) {
 	window.location.href = '/morari/admin/work/startUpdate.controller/' + rackid
-
 };
 
 // 新增 會員編號查詢秀營地
