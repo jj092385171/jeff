@@ -1,7 +1,4 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "workbench.settings.openDefaultKeybindings": true,
-    "java.debug.settings.onBuildFailureProceed": true,
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "commentTranslate.source": "Google"
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

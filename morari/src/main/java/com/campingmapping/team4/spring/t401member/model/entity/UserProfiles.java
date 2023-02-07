@@ -72,7 +72,7 @@ public class UserProfiles implements UserDetails {
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @Builder.Default
   @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = {
       @JoinColumn(name = "rid") })
@@ -149,10 +149,10 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Set<Order> CampOrder;
-// Camp
+
+  // Camp
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Camp> camp;
-
 }

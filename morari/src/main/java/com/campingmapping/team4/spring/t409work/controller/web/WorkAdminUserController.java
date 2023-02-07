@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
@@ -19,6 +20,8 @@ import com.campingmapping.team4.spring.t409work.model.service.JobService;
 import com.campingmapping.team4.spring.t409work.model.service.MailService;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.utils.service.JwtService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -62,6 +65,12 @@ public class WorkAdminUserController {
 		return "work/admin/camp/userUpdate";
 	}
 
+	// 啟動mail
+	@GetMapping("/startMail.controller/{m}")
+	public String processMainAction5() {
+		return "work/admin/camp/mailInsert";
+	}
+	
 	// 透過uid搜尋
 	@PostMapping("/userSelectUid.controller/{uid}")
 	@ResponseBody
@@ -108,10 +117,11 @@ public class WorkAdminUserController {
 	// 寄email
 	@PostMapping("/userMail.controller")
 	@ResponseBody
-	public String processAction4(@RequestBody String email) {
-		mailService.sendEmail(email, "快加入我們吧！", "您好，我明天要睡飽一點會晚到，不要太想我");
+	public String processAction4(@RequestParam("mail") String toMail,
+			@RequestParam("subject") String subject,@RequestParam("remark") String message) {
+		mailService.sendEmail(toMail,subject,message );
 
-		return "Success！！！";
+		return "成功寄出e-mail！！！";
 	}
 	// 透過uid搜尋camp的東西
 	@PostMapping("/selectUUid.controller/{uid}")
