@@ -1,24 +1,21 @@
-<form class="user" id="register" style="margin: 10px;">
+<form class="user" id="usereditform" style="margin: 10px;" action="" method="post">
     <div class="text-center">
         <div> <button class="close" type="button" id="closeuseredit">
                 <span>×</span>
             </button>
             <!-- uid和大頭貼 -->
         </div>
-
-
         <div class="text-center" >
             <h1 class="h4 text-gray-900 mb-4" id="uid">
                 <img src="https://storage.googleapis.com/morari/adminshot" alt="shot" style="max-width: 150px;"
-                    id="shot" class="btn
-            ">
+                    id="shot" class="btn">
                 <input type="file" class="form-control-file" id="shotInput" accept="image/*"
                     style="display: none; padding: 0px; border: 0px; border-radius: 5px;">
                 uid
             </h1>
         </div>
 
-
+<input type="hidden" name="uid" id="formuid" value="">
 
 
 
@@ -89,8 +86,8 @@
                     <!-- subscribed -->
                     <div class="mb-3 col-sm-6" style="padding-left: 0; padding-right: 0;">
                         <select class="form-control form-control-edit" id="subscribed" name="subscribed">
-                            <option value="1">已訂閱</option>
-                            <option value="0">未訂閱</option>
+                            <option value="ture">已訂閱</option>
+                            <option value="false">未訂閱</option>
                         </select>
                     </div>
                 </div>

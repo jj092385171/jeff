@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,24 +23,12 @@ public class AdminUserApi {
     public List<UesrDetailAdminWeb> getAllUser() {
         return userService.showAllUser();
     }
-
-    @GetMapping("/{uid}")
+    @PutMapping("/updatuser")
     @ResponseBody
-    public String getUser() {
-        return null;
+    public List<UesrDetailAdminWeb> updateUser() {
+        return userService.showAllUser();
     }
 
-    @DeleteMapping("/{uid}")
-    @ResponseBody
-    public String delUser() {
-        return null;
-    }
-
-    @PutMapping("/{uid}")
-    @ResponseBody
-    public String updateUser() {
-        return null;
-    }
 
    
 

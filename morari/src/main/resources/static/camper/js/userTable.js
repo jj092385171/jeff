@@ -1,4 +1,6 @@
 var receivedData;
+var file;
+var edituid;
 fetch("/morari/camper/html/usertable.html")
 	.then(response => response.text())
 	.then(html => {
@@ -602,7 +604,6 @@ fetch("/morari/camper/html/usertable.html")
 							})
 					// 翻頁響應刷新
 					$('.dataTables_paginate').on('click', function () {
-						console.log("翻")
 						table.responsive.recalc();
 						setTimeout(function () {
 							table.responsive.recalc();
@@ -728,8 +729,17 @@ function edituser(index) {
 									}
 									)
 								});
-							}
-							else {
+							} else if (key == "birthday") {
+								console.log(element)
+								let today = moment(Date.parse(element)).format('YYYY-MM-DD');
+								console.log(today)
+								// birthdayInput.value = today;
+								document.getElementById("birthday").value = today;
+							} else if (key == "uid") {
+								edituid = element;
+								document.getElementById(key).value = element;
+								document.getElementById("formuid").value = element;
+							} else {
 								document.getElementById(key).value = element;
 							}
 						}
@@ -752,7 +762,8 @@ function edituser(index) {
 
 					//   把圖片讀取後顯示
 					document.getElementById("shotInput").addEventListener("change", function () {
-						let file = this.files[0];
+						file = this.files[0];
+						console.log(file)
 						let reader = new FileReader();
 						reader.onload = function (e) {
 							document.getElementById("shot").src = e.target.result;
@@ -803,6 +814,12 @@ function deluser(index) {
 	}
 
 };
+function saveedit() {
+	formData.append("file", file);
+	formData.append("uid", edituid);
 
+
+	document.getElementById("usereditform").submit();
+}
 
 
