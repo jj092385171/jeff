@@ -1,9 +1,5 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
+import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
+import com.campingmapping.team4.spring.t424camp.model.service.CampService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,6 +36,9 @@ public class WorkAdminController {
 	@Autowired
 	private JobService jService;
 	
+	@Autowired
+	private CampService campService;
+	
 	// 啟動我的首頁
 	@GetMapping("/crud.controller")
 	public String processMainAction1() {
@@ -47,7 +46,7 @@ public class WorkAdminController {
 	}
 
 	// 啟動insert
-	@PostMapping("/insert.controller")
+	@GetMapping("/insert.controller/{c}")
 	public String processMainAction2() {
 		return "work/admin/manager/jobInsert";
 	}
@@ -59,7 +58,7 @@ public class WorkAdminController {
 	}
 
 	// 啟動update
-	@PostMapping("/update.controller/{u}")
+	@GetMapping("/startUpdate.controller/{u}")
 	public String processMainAction4() {
 		return "work/admin/manager/jobUpdate";
 	}
@@ -70,7 +69,9 @@ public class WorkAdminController {
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
 		UUID uid = jwtService.getUId(request);
-		return jService.insert(jobBean, uid);
+		
+		JobBean insert = jService.insert(jobBean, uid);
+		return insert;
 	}
 
 	// 刪除
@@ -78,14 +79,13 @@ public class WorkAdminController {
 	@ResponseBody
 	public String processDeleteAction(@PathVariable Integer rackID) {
 		jService.deleteById(rackID);
-		return "ok";
+		return "刪除成功";
 	}
 
 	// 修改
 	@PutMapping("/jobUpdate.controller/{rackid}")
 	@ResponseBody
 	public JobBean processUpdateAction(@RequestBody JobBean jBean,@PathVariable Integer rackid) {
-		System.out.println("rackid="+rackid);
 		return jService.updateJob(jBean,rackid);
 	}
 
@@ -102,10 +102,6 @@ public class WorkAdminController {
 	@ResponseBody
 	public List<JobBean> processShowJobAllAction() {
 		List<JobBean> result = jService.findAll();
-//		SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd");
-//		for (JobBean jb : result) {
-//			jb.setRackup(sformat.format(jb.getRackup()));
-//		}
 		return result;
 	}
 
@@ -113,8 +109,7 @@ public class WorkAdminController {
 	@PostMapping("/selectLike.controller/{job}")
 	@ResponseBody
 	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
-		List<JobBean> result = jService.findByJobisLike(job);
-		
+		List<JobBean> result = jService.findByJobisLike(job);		
 			return result;
 		
 	}
@@ -124,34 +119,46 @@ public class WorkAdminController {
 	@ResponseBody
 	public List<JobBean> processSelectUidAction(@PathVariable UUID uid) {
 		List<JobBean> result = jService.findUid(uid);
-//		if (result.size() == 0) {
-//			return null;
-//		}
+		
 		return result;
 	}
+	// 透過uid搜尋camp的東西
+	@PostMapping("/selectUUid.controller")
+	@ResponseBody
+	public List<Camp> processSelectUUidAction(@RequestBody UUID uid) {
+		List<Camp> result = jService.findUUid(uid);
+		return result;
+	}
+	// 透過campname搜尋camp的東西
+//	@PostMapping("/selectCampname.controller")
+//	@ResponseBody
+//	public Camp processSelectCampnameAction(@RequestBody String campname) {
+//		Camp result = jService.findByCampisLike(campname);
+//		return result;
+//	}
 
 	// 秀圖片
-	@GetMapping("/jobImg.controller/{id}")
-	@ResponseBody
-	public InputStream processImgAction(@PathVariable("id") String rackID) throws SQLException {
-		int parseID = Integer.parseInt(rackID);
-		JobBean result = jService.findById(parseID);
-		Blob img = result.getImg();
-		InputStream binaryStream = img.getBinaryStream();
-		return binaryStream;
-	}
+//	@GetMapping("/jobImg.controller/{id}")
+//	@ResponseBody
+//	public InputStream processImgAction(@PathVariable("id") String rackID) throws SQLException {
+//		int parseID = Integer.parseInt(rackID);
+//		JobBean result = jService.findById(parseID);
+//		Blob img = result.getImg();
+//		InputStream binaryStream = img.getBinaryStream();
+//		return binaryStream;
+//	}
 	
 	// 處理照片格式(進資料庫)
-	@PostMapping("/fileToBlob.controller")
-	public void processImgAction(@RequestParam("img") MultipartFile img) throws IOException {
-		JobBean jBean = new JobBean();
-		InputStream in = img.getInputStream();
-		long size = img.getSize();
-		try {
-			Blob image = jService.fileToBlob(in, size);
-			jBean.setImg(image);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@PostMapping("/fileToBlob.controller")
+//	public void processImgAction(@RequestParam("img") MultipartFile img) throws IOException {
+//		JobBean jBean = new JobBean();
+//		InputStream in = img.getInputStream();
+//		long size = img.getSize();
+//		try {
+//			Blob image = jService.fileToBlob(in, size);
+//			jBean.setImg(image);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

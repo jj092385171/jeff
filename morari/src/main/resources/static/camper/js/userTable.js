@@ -101,7 +101,7 @@ $(function () {
 										vallist.push(data)
 										return data
 									}
-								}, 
+								},
 								{
 									"data": 'phone'
 									, "render": function (
@@ -166,7 +166,7 @@ $(function () {
 										return data
 									}
 								},
-								
+
 								{
 									"data": 'point'
 									, "render": function (
@@ -175,7 +175,7 @@ $(function () {
 										vallist.push(data)
 										return data
 									}
-								},					
+								},
 								{
 									"data": "registerdata"
 									, "render": function (
@@ -219,7 +219,7 @@ $(function () {
 
 
 										return '<button type="button" class="btn btn-warning btn-sm" id=' + "'" + "edit" + data + "'" + ' onclick= "editmember( ' + "'" + data + "'" + ')">編輯</button> ' +
-											'<button type="button" class="btn btn-danger btn-sm"id=' + "'" + "del" + data + "'" + 'onclick= "delmember(' + data +  ' )" >刪除</button>'
+											'<button type="button" class="btn btn-danger btn-sm"id=' + "'" + "del" + data + "'" + 'onclick= "delmember(' + data + ' )" >刪除</button>'
 									}
 								}
 
