@@ -20,6 +20,11 @@ import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserName;
 import com.campingmapping.team4.spring.t401member.model.entity.UserPrivacy;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.campingmapping.team4.spring.t424camp.model.dao.repository.CityRepository;
+import com.campingmapping.team4.spring.t424camp.model.dao.repository.TagRepository;
+import com.campingmapping.team4.spring.t424camp.model.entity.City;
+import com.campingmapping.team4.spring.t424camp.model.entity.Tag;
+
 import jakarta.transaction.Transactional;
 
 @Component
@@ -36,6 +41,12 @@ public class SetupDataLoader implements
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private TagRepository tagRepository;
+    
+    @Autowired
+    private CityRepository cityRepository;
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -45,6 +56,16 @@ public class SetupDataLoader implements
         List<String> roles = Arrays.asList(
                 "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER");
         roles.forEach(r -> createRoleIfNotFound(r));
+
+        String[] tags = { "大草原", "夜景", "親子娛樂" };
+        for (int i = 0; i < tags.length; i++) {
+            createTagIfNotFound(tags[i]);
+        }
+
+        String[] citys = { "新北", "桃園", "苗栗" };
+        for (int i = 0; i < citys.length; i++) {
+            createCityIfNotFound(citys[i]);
+        }
 
         // 檢查有無存在生成超級管理員
         Role adminRole = roleRepository.findByName("SUPERADMIN").get();
@@ -98,6 +119,9 @@ public class SetupDataLoader implements
                         .build();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
+
+
+
             }
 
         } catch (Exception e) {
@@ -111,5 +135,16 @@ public class SetupDataLoader implements
     public Role createRoleIfNotFound(String name) {
         return roleRepository.findByName(name)
                 .orElseGet(() -> roleRepository.save(Role.builder().name(name).build()));
+    }
+    @Transactional
+    public Tag createTagIfNotFound(String tagName) {
+        return tagRepository.findByTagName(tagName)
+                .orElseGet(() -> tagRepository.save(new Tag(tagName)));
+    }
+
+    @Transactional
+    public City createCityIfNotFound(String cityName) {
+        return cityRepository.findByCityName(cityName)
+                .orElseGet(() -> cityRepository.save(new City(cityName)));
     }
 }
