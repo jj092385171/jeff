@@ -82,13 +82,13 @@ public class ResumeAdminController {
 	}
 	
 	// 透過uid搜尋
-	@PostMapping("/selectUid.controller/{uid}")
-	@ResponseBody
-	public List<ResumeBean> processSelectUidAction(@PathVariable UUID uid) {
-		List<ResumeBean> result = rService.findUid(uid);
-		
-		return result;
-	}
+//	@PostMapping("/selectUid.controller/{uid}")
+//	@ResponseBody
+//	public ResumeBean processSelectUidAction(@PathVariable UUID uid) {
+//		ResumeBean result = rService.findByUid(uid);
+//		
+//		return result;
+//	}
 
 	// 透過rackid搜尋(在企業主端秀出來用)
 	@PostMapping("/selectRid.controller/{rackid}")

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +50,7 @@ public class GuestworkController {
 	}
 
 	// 啟動insert
-	@PostMapping("/startResumeInsert.controller/{u}")
+	@GetMapping("/startResumeInsert.controller")
 	public String processMainAction2() {
 		return "work/guest/resumeInsert";
 	}
@@ -61,18 +62,34 @@ public class GuestworkController {
 	}
 
 	// 新增
-	@PostMapping("/resumeInsert.controller/{rackid}")
+	@PostMapping("/resumeInsert.controller{uid}")
 	@ResponseBody
-	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean, @PathVariable Integer rackid) {
+	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean) {
 		UUID uid = jwtService.getUId(request);
-		return rService.insert(rBean, uid, rackid);
+		return rService.insert(rBean, uid);
 	}
 
+	// 修改
+	@PostMapping("/updateResume.controller/{rackid}")
+	@ResponseBody
+	public String processUpdateAction(@RequestBody ResumeBean rBean,@PathVariable Integer rackid) {
+		rService.updateResume(rBean,rackid);
+		System.out.println("111111111111");
+		return "完成應徵動作！";
+	}
 	// 模糊搜尋
 	@PostMapping("/guestSelectLike.controller/{job}")
 	@ResponseBody
 	public List<JobBean> processSelectlikeAction(@PathVariable String job) {
 		List<JobBean> result = jService.findByJobisLike(job);
+		return result;
+	}
+	// 透過uid找履歷
+	@PostMapping("/guestSelectResume.controller/{uid}")
+	@ResponseBody
+	public ResumeBean processSelectUidAction(@PathVariable UUID uid) {
+		ResumeBean result = rService.findByUid(uid) ;
+		System.out.println("22222222222222");
 		return result;
 	}
 

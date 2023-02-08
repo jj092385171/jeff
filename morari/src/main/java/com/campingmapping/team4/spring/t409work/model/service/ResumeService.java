@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,15 +40,22 @@ public class ResumeService {
 	}
 
 	// 新增履歷
-	public ResumeBean insert(ResumeBean rBean, UUID u, Integer rackid) {
+	public ResumeBean insert(ResumeBean rBean, UUID u) {
 		rBean.setUserprofiles(uDao.findById(u).get());
-		rBean.setJob(jDao.findById(rackid).get());
-		Date currentDate = new Date();
-		rBean.setPtime(currentDate);
-		System.out.println("rBean="+rBean);
+//		rBean.setJob(jDao.findById(rackid).get());
+//		Date currentDate = new Date();
+//		rBean.setPtime(currentDate);
 		return reDao.save(rBean);
 	}
-	
+
+	// 把rackid塞進履歷
+	public ResumeBean updateResume(ResumeBean rBean,Integer rackid) {
+		Optional<ResumeBean> findById = reDao.findById(rBean.getNumber());
+		ResumeBean resumeBean = findById.get();
+		resumeBean.setJob(jDao.findById(rackid).get());
+		return reDao.save(resumeBean);
+	}
+
 	// 刪除履歷
 	public void deleteById(int number) {
 		reDao.deleteById(number);
@@ -66,9 +75,9 @@ public class ResumeService {
 			resumeBean.setMail(rBean.getMail());
 			resumeBean.setPhone(rBean.getPhone());
 			resumeBean.setEducational(rBean.getEducational());
-			resumeBean.setExperience(rBean.getExperience());
+			resumeBean.setSkill(rBean.getSkill());
 			
-			resumeBean.setPtime(result.get().getPtime());
+//			resumeBean.setPtime(result.get().getPtime());
 //	        jBean.setUserprofiles(result.get().getUserprofiles().getUid());	        
 	        // 使用save更新資料庫中的資料
 			return reDao.save(resumeBean);
@@ -88,12 +97,15 @@ public class ResumeService {
 	}
 
 	// 透過會員id找履歷
-	public List<ResumeBean> findUid(UUID uid) {
-
-		UserProfiles findById = uDao.findById(uid).get();
-		Collection<ResumeBean> resume = findById.getResume();
-		ArrayList<ResumeBean> arrayList = new ArrayList<ResumeBean>(resume);
-		return arrayList;
+	public ResumeBean findByUid(UUID uid) {
+		ResumeBean result= uDao.findById(uid).get().getResume();
+		return result;
+//		ResumeBean result = null;
+//		Optional<UserProfiles> profile = uDao.findById(uid);
+//		if (profile.isPresent()) {
+//		    result = profile.get().getResume();
+//		}
+//		return result;
 	}
 	
 	// 透過rackid找應徵的履歷

@@ -10,24 +10,24 @@ $(document).ready(function() {
 		url: '/morari/admin/resume/selectNumber.controller/' + id,
 		dataType: 'json',
 		success: function(data) {
-			$('#1').val(data.job.rackid);
-			$('#2').val(data.userprofiles.uid);
-			$('#3').val(data.work);
-			$('#4').val(data.name);
-			$('#5').val(data.age);
+//			$('#1').val(data.job.rackid);
+			$('#1').val(data.userprofiles.uid);
+//			$('#3').val(data.work);
+			$('#2').val(data.name);
+			$('#3').val(data.age);
 			//			$('#6').val(data.gender);
-			$('#7').val(data.mail);
-			$('#8').val(data.phone);
-			$('#9').val(data.educational);
-			$('#10').val(data.experience);
-			$('#11').val(data.ptime);
+			$('#6').val(data.mail);
+			$('#7').val(data.phone);
+			$('#8').val(data.educational);
+			$('#9').val(data.skill);
+//			$('#11').val(data.ptime);
 
 			switch (data.gender) {
 				case '男':
-					$("#12").attr('checked', true)
+					$("#4").attr('checked', true)
 					break;
 				case '女':
-					$("#13").attr('checked', true)
+					$("#5").attr('checked', true)
 					break;
 			}
 		}
