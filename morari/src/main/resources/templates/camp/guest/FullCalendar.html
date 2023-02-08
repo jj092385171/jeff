@@ -18,7 +18,8 @@
     <script type="text/javascript">
         $(function () {
             $(document).ready(function () {
-                $.getJSON('/morari/camp/returnFulledDay/' + 1, function (data) {
+                var campID = JSON.parse(sessionStorage.getItem("campID"));
+                $.getJSON('/morari/camp/returnFulledDay/' + campID, function (data) {
                     var events = [];
                     $.each(data, function (i, n) {
                         events.push({
