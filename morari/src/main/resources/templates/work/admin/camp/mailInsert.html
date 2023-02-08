@@ -30,16 +30,18 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
+
 	<form  id="sendMail">
+		
 		e-mail<input id="mail" name="mail"type="text" readonly><br>
 		主旨<input id="subject" name="subject" type="text"><br>
-		內容<textarea id="content" name="remark" cols="100" rows="20"></textarea><br>
+		內容<textarea id="editor" name="remark" cols="100" rows="100"></textarea><br>
 
 		<input id="send" type="submit" value="送出"><br>
 		<input type="reset" value="取消"><br>
 
 	</form>
-
+	
 	<form action="/morari/admin/user/work/startCrud.controller" method="GET">
 		<input type="submit" value="回上一頁">
 	</form>
@@ -83,11 +85,11 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-    
     <script src="/morari/work/campJs/mailInsert.js" defer></script>
-    <script type="text/javascript">
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js" defer></script>
+    <script type="text/javascript">	</script>
 
-	</script>
+
 
 </body>
 
