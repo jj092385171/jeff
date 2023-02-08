@@ -40,10 +40,10 @@
 				<div class="container-fluid">
 
 					<h3>商城管理</h3>
-						<button id="create" class="btn btn-success btn-icon-split" onclick='create()'>
-							<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
-							<span class="text">新增產品</span>
-						</button>
+					<button id="create" class="btn btn-success btn-icon-split" onclick='create()'>
+						<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+						<span class="text">新增產品</span>
+					</button>
 					<table id="result" class="table is-striped"></table>
 
 				</div>
@@ -227,20 +227,20 @@
 		function updateProduct(pdid) {
 			if (confirm("確定修改此項產品資料(編號:" + pdid + ")?")) {
 				$.ajax({
-						success: function (data) {
-							window.location.href = "/morari/mall/updateproduct.controller/"
-								+ pdid;
-						}
-					});
+					success: function (data) {
+						window.location.href = "/morari/mall/updateproduct.controller/"
+							+ pdid;
+					}
+				});
 			} else {
 			}
 		}
 		function create() {
 			$.ajax({
-					success: function (data) {
-						window.location.href = "/morari/mall/productcreate.controller";
-					}
-				});
+				success: function (data) {
+					window.location.href = "/morari/mall/productcreate.controller";
+				}
+			});
 		}
 	</script>
 
