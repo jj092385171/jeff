@@ -96,8 +96,8 @@
               + '</div>'
               + '<div class="col-md-6">'
               + '<div class="room-des">'
-              + '<input type="hidden" value="' + n.siteID + '"><span class="errorsiteID" style="color: red;"></span>'
-              + '<h3>' + n.siteName + '</h3>'
+              + '<input type="hidden" value="' + n.siteID + '">'
+              + '<h3 name="siteID">' + n.siteName + '</h3><span class="errorsiteID" style="color: red;"></span>'
               + '<h1 name="unitPrice">$' + n.siteMoney + '<span>/Night</span ></h1 > '
               + '<ul class="room-size">'
               + '<li><i class="fa fa-arrow-right"></i>Total&nbsp;:&nbsp;' + n.totalSites + '</li>'
@@ -114,12 +114,29 @@
               //         <a href="#" data-toggle="modal" data-target="#modal-id">Read More</a>
               //         <a href="#">Book Now</a>
               //       </div>
+              + '<div form-row>'
+              + '<div class="control-group col-sm-6">'
+              + '<label>Check - In</label>'
+              + '<input type="date" class="form-control name="goingdate"/>'
+              + '<p class="help-block text-danger"></p>'
+              + '</div>'
+              + '<div class="control-group col-sm-6">'
+              + '<label>Check - Out</label>'
+              + '<input type="date" class="form-control name="leavingdate"/>'
+              + '<p class="help-block text-danger"></p>'
+              + '</div>'
+              + '<div>'
+
+              + '</div>'
+              + '<div class="room-link">'
+              + '<button id="addOrder" style="border:none;background-color:transparent" type="button"><a href="#">結帳</a><span id="errordate" style="color: red;"></span><span id="errornone" style="color: red;"></span></button>'
+              + '</div>'
+              + '</div>'
               + '</div >'
               + '</div >'
               + '</div>'
               + '</div>'
             siderow.append(tmp);
-
           });
 
           // $.each(data, function (i, n) {
@@ -154,43 +171,43 @@
           let goingdate = $($('#div').find('input[name="goingdate"]').get(0)).val();
           let leavingdate = $($('#div').find('input[name="leavingdate"]').get(0)).val();
 
-          var formData = new FormData();
-          formData.append('siteIds', siteIds);
-          formData.append('nums', nums);
-          formData.append('goingdate', goingdate);
-          formData.append('leavingdate', leavingdate);
-          formData.append('campID', campID);
+          // var formData = new FormData();
+          // formData.append('siteIds', siteIds);
+          // formData.append('nums', nums);
+          // formData.append('goingdate', goingdate);
+          // formData.append('leavingdate', leavingdate);
+          // formData.append('campID', campID);
+          // 
+          // $.ajax({
+          //   url: '/morari/admin/camp/insertOrder.controller',
+          //   type: 'post',
+          //   data: formData,
+          //   contentType: false,
+          //   cache: false,
+          //   processData: false,
+          //   success: function (after) {
+          //     $(".errorsiteID").empty();
+          //     $(".errornumbers").empty();
+          //     $("#errordate").empty();
+          //     $("#errornone").empty();
 
-          $.ajax({
-            url: '/morari/admin/camp/insertOrder.controller',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (after) {
-              $(".errorsiteID").empty();
-              $(".errornumbers").empty();
-              $("#errordate").empty();
-              $("#errornone").empty();
-
-              console.log(after)
-              if (after.error == 'true') {
-                $(".errorsiteID").append(after.siteIds);
-                $(".errornumbers").append(after.nums);
-                $("#errordate").append(after.timeString);
-                return;
-              }
-              else if (after.error == 'none') {
-                $("#errornone").append(after.noData);
-                return;
-              }
-              else {
-                $("#div").empty();
-                $("#div").append(after);
-              }
-            }
-          });
+          //     console.log(after)
+          //     if (after.error == 'true') {
+          //       $(".errorsiteID").append(after.siteIds);
+          //       $(".errornumbers").append(after.nums);
+          //       $("#errordate").append(after.timeString);
+          //       return;
+          //     }
+          //     else if (after.error == 'none') {
+          //       $("#errornone").append(after.noData);
+          //       return;
+          //     }
+          //     else {
+          //       $("#div").empty();
+          //       $("#div").append(after);
+          //     }
+          //   }
+          // });
         });
       });
     });
