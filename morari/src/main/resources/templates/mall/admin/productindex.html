@@ -137,8 +137,14 @@
 													title: '類型'
 												},
 												{
-													data: 'pdpicture',
-													title: '照片'
+													data: null,
+													title: '照片',
+													render: function (
+														data,
+														type,
+														row) {
+														return `<img src='${data.pdpicture}' style="max-width: 150px;">`;
+													}
 												},
 												{
 													data: 'pdprice',

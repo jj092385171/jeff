@@ -2,7 +2,6 @@ package com.campingmapping.team4.spring.utils.config;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +13,7 @@ import com.google.common.collect.Lists;
 @Service
 public class GoogleFileUtil {
 
-    public static String uploadFile(MultipartFile files) throws IOException{
+    public static String uploadFile(String fileName,MultipartFile files) throws IOException{
     //Google 服務的金鑰
     InputStream inputStream = GoogleFileUtil.class.getResourceAsStream("/keystore/googlekey.json");
     GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream)
@@ -24,7 +23,6 @@ public class GoogleFileUtil {
     // 檔案轉為byte
     byte[] bytes = files.getBytes();
     //上傳到指定的雲端儲存中
-    String fileName=UUID.randomUUID().toString();
     BlobId blobId=BlobId.of(MyConstants.GOOGLE_BUCKETNAME,fileName);
     BlobInfo blobInfo=BlobInfo.newBuilder(blobId).build();
     Blob blob = storage.create(blobInfo, bytes);

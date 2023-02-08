@@ -30,6 +30,9 @@
 			var formData = new FormData(document.getElementById("formnew"));
 			var jsonData = {};
 			for (var [key, value] of formData.entries()) {
+				if (value instanceof File) {
+					continue;
+				}
 				jsonData[key] = value;
 			}
 			$.ajax({
@@ -88,14 +91,15 @@
 							<option>登山鞋</option>
 							<option>其他</option>
 						</select>產品類型<br>
-<!-- 						<input type="file" value='測試用產品' name="pdpicture" /> -->
-						<input type="text" value='測試用產品' name="pdpicture" />
-						<br>
-						<input type="text" value='' name="pdprice" onkeyup="value=value.replace(/[^\d]/g,'') " required
-							placeholder="請輸入價位,僅限數字">價位<br>
-						<input type="text" value='' name="pdinventory" onkeyup="value=value.replace(/[^\d]/g,'') "
-							required placeholder="請輸入庫存數量,僅限數字">庫存數量<br> <br>
-						<input type="button" value="提交" onclick="submitForm()">
+						<input type="hidden" value='' id="pdpicture" name="pdpicture" />
+						<img src="https://storage.googleapis.com/ryantestpicture/finger" alt="finger"
+							style="max-width: 150px;" id="finger" class="btn">
+						<input type="file" class="form-control-file" id="newjpg" accept="image/*"
+							style="display: none; padding: 0px; border: 0px; border-radius: 5px;">
+						<br> <input type="text" value='' name="pdprice" onkeyup="value=value.replace(/[^\d]/g,'') "
+							required placeholder="請輸入價位,僅限數字">價位<br> <input type="text" value='' name="pdinventory"
+							onkeyup="value=value.replace(/[^\d]/g,'') " required placeholder="請輸入庫存數量,僅限數字">庫存數量<br>
+						<br> <input type="button" value="提交" onclick="submitForm()">
 					</form>
 					<table id="result"></table>
 
@@ -116,53 +120,17 @@
 	<!-- End of Page Wrapper -->
 
 	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top">
-		<i class="fas fa-angle-up"></i>
+	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
 	</a>
 
 	<!-- Logout Modal-->
 	<div class="loginoutshare"></div>
 
-	<script>
-	
-	function upload(e) {
-        var file = e.files[0];
-        if (!file) {
-            return;
-        }
 
-        //檔案上傳
-        //...
-        //檔案上傳
-
-        //上傳後將檔案清除
-        e.value = '';
-    }
-	
-		document.querySelector('input[type="file"]').addEventListener('change', function (event) {
-			// 获取文件
-			var file = event.target.files[0];
-
-			// 发送请求到控制器
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '/morari/uploadpicturetogoogle.controller');
-			xhr.send(file);
-			console.log(file);
-// 			处理响应
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-					// 获取响应数据
-					var responseData = xhr.responseText;
-					console.log(responseData);
-					this.value = responseData;
-				}
-			};
-		});
-	</script>
 
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>
+	<script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
 	<script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 
 	<!-- Core plugin JavaScript-->
@@ -177,6 +145,41 @@
 	<!-- Page level custom scripts -->
 	<script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
 	<script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+
+	<script>
+
+		document.getElementById("finger").addEventListener("click", function () {
+			document.getElementById("newjpg").click();
+		});
+		document.getElementById("newjpg").addEventListener("change", function () {
+			file = this.files[0];
+			console.log(file)
+			let reader = new FileReader();
+			reader.onload = function (e) {
+				document.getElementById("finger").src = e.target.result;
+			};
+			reader.readAsDataURL(file);
+		});
+
+		$(document).ready(function () {
+			$('input[type="file"]').change(function () {
+				var file = this.files[0];
+				var formData = new FormData();
+				formData.append('file', file);
+				$.ajax({
+					type: 'POST',
+					url: '/morari/uploadpicturetogoogle.controller',
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (responseData) {
+						console.log(responseData);
+						document.getElementById("pdpicture").value = responseData;
+					}
+				});
+			});
+		});
+	</script>
 
 </body>
 
