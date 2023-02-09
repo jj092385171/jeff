@@ -99,14 +99,21 @@
 						//div.style.display="block";
 						div.click = "selectbyid()";
 						//设置子div的其他属性，直接通过字符串连接的方式连接即可。动态值放在引号外面就行
-						div.innerHTML = '<div id="' + n[i].pdid + '" class="btn"><img  src="' + n[i].pdpicture + '" style="max-width: 220px;" alt="img"><div class="homepage-slider-caption"><h3>' + n[i].pdname + '</h3><h4>NT$' + n[i].pdprice + '</h4></div></div> ';
+						div.innerHTML = '<div class="item"><div id="' + n[i].pdid + 
+						'" class="btn"><img  src="' + n[i].pdpicture + 
+						'" style="max-width: 220px;" alt="img"><div class="homepage-slider-caption"><h3>' + n[i].pdname +
+						'</h3><h4>NT$' + n[i].pdprice + '</h4></div></div></div> ';
 
 						banners.appendChild(div);
 						(function (i) {
 							var elementId = n[i].pdid;
 							document.getElementById(elementId).addEventListener("click", function () {
 								// 觸發控制器的代碼
-								console.log('Parent Capturing');
+								$.ajax({
+									success: function () {
+										window.location.href = "/morari/mall/productselectbypdid.controller/" + elementId;
+									}
+								});
 							});
 						})(i);
 

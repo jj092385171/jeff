@@ -42,6 +42,11 @@ public class MallPageComtroller {
 	public String processupdateAction() {
 		return "mall/admin/updateproduct";
 	}
+	
+	@GetMapping("/productselectbypdid.controller/{id}")
+	public String processQueryByPdIdAction() {
+		return "mall/guest/productselectbypdid";
+	}
 
 	// 新增一筆產品
 	@PostMapping("/create.controller")
