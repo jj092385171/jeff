@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t424camp.controller.web.campCrud;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.service.CampService;
+import com.campingmapping.team4.spring.utils.config.GoogleFileUtil;
 
 @Controller
 @RequestMapping("/admin/camp")
@@ -46,15 +46,16 @@ public class UpdateCampByIDController {
 		}
 
 		// 圖
-		String fileName = null;
+		String filePath = null;
 		if (mf == null || mf.isEmpty()) {
 			errors.put("campPicturesPath", "必須選擇圖片");
 		}
 		else {
-			String saveFileDir = "C:/gitapp/EEIT56_Team4/morari/src/main/resources/static/images/";
-			fileName = mf.getOriginalFilename();
-			File saveFilePath = new File(saveFileDir, fileName);
-			mf.transferTo(saveFilePath);
+//			String saveFileDir = "C:/gitapp/EEIT56_Team4/morari/src/main/resources/static/images/";
+			String fileName = mf.getOriginalFilename();
+//			File saveFilePath = new File(saveFileDir, fileName);
+//			mf.transferTo(saveFilePath);
+			filePath = GoogleFileUtil.uploadFile("camp_" + fileName, mf);
 		}
 
 		// 縣市
@@ -80,7 +81,7 @@ public class UpdateCampByIDController {
 		}
 
 		
-		Camp camp = campService.update(campID, campName, Integer.valueOf(cityID), location, fileName, description,
+		Camp camp = campService.update(campID, campName, Integer.valueOf(cityID), location, filePath, description,
 				tagIDs);
 
 		if(camp == null) {

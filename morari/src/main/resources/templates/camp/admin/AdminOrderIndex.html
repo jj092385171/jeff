@@ -7,6 +7,7 @@
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
     <link rel="stylesheet" href="/morari/admin/css/dataTable.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
 
 </head>
 
@@ -31,7 +32,7 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    <table id="ordertable" class="table is-striped"></table>
+                    <table id="ordertable" class="card mb-4 py-3 border-left-info"></table>
 
                     <table id="changeP"></table>
 
@@ -49,6 +50,10 @@
                     <br>
 
                     推薦營地:<div id="promote" class="row"></div>
+
+                    <!-- <hr>
+
+                    <div id="calendar"></div> -->
 
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
@@ -94,164 +99,164 @@
     <script src="/morari/admin/vendor/datatables/datatables13.js"></script>
     <script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <!-- datatables js -->
-    <script src="/morari/admin/vendor/datatables/datatables13.js"></script>
-    <script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 
     <script type="text/javascript">
-        // $(function () {
-        //     $(document).ready(function () {
-        //         load(1);
-        //     });
-        // });
+        $(function () {
+            $(document).ready(function () {
+                load(1);
+            });
+        });
 
-        // function load(indexPage) {
-        // $.getJSON('/morari/admin/camp/showAllOrders/' + indexPage, function (data) {
-        $(document).ready(function () {
-            $.getJSON('/morari/admin/camp/showAllOrders', function (data) {
-                var orderData = data["orderList"]
+        function load(indexPage) {
+            $.getJSON('/morari/admin/camp/showAllOrders/' + indexPage, function (data) {
+                // $(document).ready(function () {
+                //     $.getJSON('/morari/admin/camp/showAllOrders', function (data) {
+                // var orderData = data["orderList"]
 
-                $('#ordertable').DataTable({
-                    "data": orderData,
-                    "columns": [
-                        { data: 'orderID', title: "訂單編號", width: "120px" },
-                        { data: 'camp.campName', title: "營地名", width: "120px" },
-                        { data: 'camp.city.cityName', title: "城市名", width: "120px" },
-                        { data: 'camp.location', title: "地點", width: "120px" },
-                        {
-                            data: 'camp.campPicturesPath',
-                            title: "圖片",
-                            width: "100px",
-                            render: function (data, type, row) {
-                                return '<img src="/morari/images/' + data + '"/>';
-                            }
-                        },
-                        { data: 'userprofiles.username', title: "訂購者", width: "120px" },
-                        { data: 'orderTime', title: "成立時間", width: "120px" },
-                        { data: 'goingTime', title: "入營時間", width: "120px" },
-                        { data: 'leavingTime', title: "離營時間", width: "120px" },
-                        { data: 'totalPrice', title: "總金額", width: "120px" },
-                        { data: 'status', title: "訂單狀態", width: "120px" },
-                        {
-                            title: "明細展開",
-                            width: "100px",
-                            render: function (data, type, row) {
-                                return '<input type="button" value="明細展開" onclick="showOrderInfo(' + row.orderID + ')">';
-                            }
-                        }
-                    ],
-                    "createdRow": function (row, data, dataIndex) {
-                        $(row).addClass('empty-row');
-                        var orderitems = data.orderitems;
-                        console.log(orderitems)
-                        // 根據需求對orderitems進行處理
-                        for (var i = 0; i < orderitems.length; i++) {
-                            $(row).append('<td>' + orderitems[i].ABC + '</td>');
-                        }
-                    },
-                    lengthMenu: [5, 10, 15, 20],
-                    language: {
-                        "lengthMenu": "顯示_MENU_ 筆資料",
-                        "info": "第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
-                        "search": "搜尋：",
-                        "paginate": {
-                            "previous": " 上一頁__",
-                            "next": "__下一頁"
-                        }
+                // $('#ordertable').DataTable({
+                //     "data": orderData,
+                //     "columns": [
+                //         { data: 'orderID', title: "訂單編號", width: "120px" },
+                //         { data: 'camp.campName', title: "營地名", width: "120px" },
+                //         { data: 'camp.city.cityName', title: "城市名", width: "120px" },
+                //         { data: 'camp.location', title: "地點", width: "120px" },
+                //         {
+                //             data: 'camp.campPicturesPath',
+                //             title: "圖片",
+                //             width: "100px",
+                //             render: function (data, type, row) {
+                //                 return '<img src="/morari/images/' + data + '"/>';
+                //             }
+                //         },
+                //         { data: 'userprofiles.username', title: "訂購者", width: "120px" },
+                //         { data: 'orderTime', title: "成立時間", width: "120px" },
+                //         { data: 'goingTime', title: "入營時間", width: "120px" },
+                //         { data: 'leavingTime', title: "離營時間", width: "120px" },
+                //         { data: 'totalPrice', title: "總金額", width: "120px" },
+                //         { data: 'status', title: "訂單狀態", width: "120px" },
+                //         {
+                //             title: "明細展開",
+                //             width: "100px",
+                //             render: function (data, type, row) {
+                //                 return '<input type="button" value="明細展開" onclick="showOrderInfo(' + row.orderID + ')">';
+                //             }
+                //         }
+                //     ],
+                //     "createdRow": function (row, data, dataIndex) {
+                //         $(row).addClass('empty-row');
+                //         var orderitems = data.orderitems;
+                //         console.log(orderitems)
+                //         // 根據需求對orderitems進行處理
+                //         for (var i = 0; i < orderitems.length; i++) {
+                //             $(row).append('<td>' + orderitems[i].ABC + '</td>');
+                //         }
+                //     },
+                //     lengthMenu: [5, 10, 15, 20],
+                //     language: {
+                //         "lengthMenu": "顯示_MENU_ 筆資料",
+                //         "info": "第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+                //         "search": "搜尋：",
+                //         "paginate": {
+                //             "previous": " 上一頁__",
+                //             "next": "__下一頁"
+                //         }
 
-                    }
-                });
-
-
-
-                //     $('#ordertable').empty();
-                //     $('#changeP').empty();
-                //     var ordertable = $('#ordertable');
-                //     var ordertr = '';
-
-                //     ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th><th>訂單狀態</th><th>明細</th></thead>');
-
-                //     $.each(data["orderList"], function (i, oneorder) {
-                //         ordertr = '<tbody>'
-                //             + '<tr>'
-                //             + '<td>' + oneorder.orderID + '</td>'
-                //             + '<td>' + oneorder.camp.campName + '</td>'
-                //             + '<td>' + oneorder.camp.city.cityName + '</td>'
-                //             + '<td>' + '<img src="/morari/images/' + oneorder.camp.campPicturesPath + '">' + '</td>'
-                //             + '<td>' + oneorder.camp.location + '</td>'
-                //             + '<td>' + oneorder.userprofiles.username + '</td>'
-                //             + '<td>' + oneorder.userprofiles.email + '</td>'
-                //             + '<td>' + oneorder.orderTime + '</td>'
-                //             + '<td>' + oneorder.goingTime + '</td>'
-                //             + '<td>' + oneorder.leavingTime + '</td>'
-                //             + '<td>' + oneorder.totalPrice + '</td>'
-                //             + '<td>' + oneorder.status + '</td>'
-                //             + '<td><input type="button" value="明細展開" onclick="showOrderInfo(' + oneorder.orderID + ')"></td>'
-                //             + '</tr>'
-                //     + '<tr id="orderInfo' + oneorder.orderID + '" style="display : none;" ><td colspan="4">'
-                //     + '<table id="orderitemtable" class="card mb-4 py-3 border-bottom-info">'
-                //     + '<thead><th>營位名</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>';
-
-                // $.each(oneorder.orderitems, function (i, orderitem) {
-                //     ordertr += '<tbody>'
-                //         + '<tr>'
-                //         + '<td>' + orderitem.site.siteName + '</td>'
-                //         + '<td>' + '<img src="/morari/images/' + orderitem.site.sitePicturesPath + '">' + '</td>'
-                //         + '<td>' + orderitem.unitPrice + '</td>'
-                //         + '<td>' + orderitem.numbers + '</td>'
-                //         + '</tr>'
-                //         + '</tbody>'
+                //     }
                 // });
 
-                //         ordertr += '</table></td></tr></tbody>'
-                //         ordertable.append('<hr>');
-                //         ordertable.append(ordertr);
-                //     });
 
-                //     var totalPages = data["totalPages"];
-                //     var totalOrders = data["totalOrders"];
 
-                //     var buttons = '';
-                //     for (var i = 1; i <= totalPages; i++) {
-                //         buttons += '<button type="button" onclick="load(' + i + ')" value="' + i + '">' + i + '</button>'
-                //     }
+                $('#ordertable').empty();
+                $('#changeP').empty();
+                var ordertable = $('#ordertable');
+                var ordertr = '';
 
-                //     var changeP = $('#changeP');
-                //     var changetr = '';
-                //     changetr = '<tr id="tr2">'
-                //         + '<td>' + 'Total Pages:' + '<br>' + totalPages + '</td>'
-                //         + '<td>' + 'Total Orders:' + '<br>' + totalOrders + '</td>'
-                //         + '<td>' + 'Page:' + '<br>' + buttons + '</td>'
-                //         + '</tr>'
-                //     changeP.append(changetr);
+                ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th><th>訂單狀態</th><th>明細</th></thead>');
 
-                //     $('th').width('100px').css("text-align", "center");
-                //     $('td').width('100px').css("text-align", "center");
-                //     $('img').width('85px').height('85px');
+                $.each(data["orderList"], function (i, oneorder) {
+                    ordertr = '<tbody>'
+                        + '<tr>'
+                        + '<td>' + oneorder.orderID + '</td>'
+                        + '<td>' + oneorder.camp.campName + '</td>'
+                        + '<td>' + oneorder.camp.city.cityName + '</td>'
+                        + '<td>' + '<img src="' + oneorder.camp.campPicturesPath + '">' + '</td>'
+                        + '<td>' + oneorder.camp.location + '</td>'
+                        + '<td>' + oneorder.userprofiles.username + '</td>'
+                        + '<td>' + oneorder.userprofiles.email + '</td>'
+                        + '<td>' + oneorder.orderTime + '</td>'
+                        + '<td>' + oneorder.goingTime + '</td>'
+                        + '<td>' + oneorder.leavingTime + '</td>'
+                        + '<td>' + oneorder.totalPrice + '</td>'
+                        + '<td>' + oneorder.status + '</td>'
+                        + '<td><input type="button" value="明細展開" onclick="showOrderInfo(' + oneorder.orderID + ')"></td>'
+                        + '</tr>'
+                        + '<tr id="orderInfo' + oneorder.orderID + '" style="display : none;" ><td colspan="4">'
+                        + '<table id="orderitemtable" class="card mb-4 py-3 border-bottom-info">'
+                        + '<thead><th>營位名</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>';
 
-                //     var promote = $('#promote');
-                //     var promotediv = '';
-                //     $.each(data["recommend"], function (i, recommend) {
-                //         promotediv = '<div class="col-xl-3 col-md-6 mb-4">'
-                //             + '<div class="card border-left-primary shadow h-100 py-2" >'
-                //             + '<div class="card-body">'
-                //             + '<div class="row no-gutters align-items-center">'
-                //             + '<div class="col mr-2">'
-                //             + '<div style="display:none">' + recommend.campID + '</div>'
-                //             + '<div class="recommendinner" class="h5 mb-0 font-weight-bold text-gray-800"><a href="#">' + recommend.campName + '</a><br><img id="img" src="/morari/images/' + recommend.campPicturesPath + '">' + '</div>'
-                //             + '<div class="recommendinner">' + recommend.city.cityName + '</div>'
-                //             + '<div class="recommendinner">' + recommend.location + '</div>'
-                //             + '</div>'
-                //             + '</div>'
-                //             + '</div>'
-                //             + '</div>'
-                //             + '</div>'
+                    $.each(oneorder.orderitems, function (i, orderitem) {
+                        ordertr += '<tbody>'
+                            + '<tr>'
+                            + '<td>' + orderitem.site.siteName + '</td>'
+                            + '<td>' + '<img src="' + orderitem.site.sitePicturesPath + '">' + '</td>'
+                            + '<td>' + orderitem.unitPrice + '</td>'
+                            + '<td>' + orderitem.numbers + '</td>'
+                            + '</tr>'
+                            + '</tbody>'
+                    });
 
-                //         promote.append(promotediv);
-                //     });
+                    ordertr += '</table></td></tr></tbody>'
+                    ordertable.append('<hr>');
+                    ordertable.append(ordertr);
+                });
 
-                //     $('.recommendinner').css("text-align", "center");
-                //     $('img').width('85px').height('85px');
+                var totalPages = data["totalPages"];
+                var totalOrders = data["totalOrders"];
+
+                var buttons = '';
+                for (var i = 1; i <= totalPages; i++) {
+                    buttons += '<button type="button" onclick="load(' + i + ')" value="' + i + '">' + i + '</button>'
+                }
+
+                var changeP = $('#changeP');
+                var changetr = '';
+                changetr = '<tr id="tr2">'
+                    + '<td>' + 'Total Pages:' + '<br>' + totalPages + '</td>'
+                    + '<td>' + 'Total Orders:' + '<br>' + totalOrders + '</td>'
+                    + '<td>' + 'Page:' + '<br>' + buttons + '</td>'
+                    + '</tr>'
+                changeP.append(changetr);
+
+                $('th').width('100px').css("text-align", "center");
+                $('td').width('100px').css("text-align", "center");
+                $('img').width('85px').height('85px');
+
+                var promote = $('#promote');
+                var promotediv = '';
+                $.each(data["recommend"], function (i, recommend) {
+                    promotediv = '<div class="col-xl-3 col-md-6 mb-4">'
+                        + '<div class="card border-left-primary shadow h-100 py-2" >'
+                        + '<div class="card-body">'
+                        + '<div class="row no-gutters align-items-center">'
+                        + '<div class="col mr-2">'
+                        + '<div style="display:none">' + recommend.campID + '</div>'
+                        + '<div class="recommendinner" class="h5 mb-0 font-weight-bold text-gray-800"><a href="#">' + recommend.campName + '</a><br><img id="img" src="' + recommend.campPicturesPath + '">' + '</div>'
+                        + '<div class="recommendinner">' + recommend.city.cityName + '</div>'
+                        + '<div class="recommendinner">' + recommend.location + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+
+                    promote.append(promotediv);
+                });
+
+                $('.recommendinner').css("text-align", "center");
+                $('img').width('85px').height('85px');
             });
 
             $('#promote').on('click', '.recommendinner', function () {
@@ -260,8 +265,19 @@
                 sessionStorage.setItem("campID", JSON.stringify(campID));
                 window.location.href = '/morari/admin/camp/insertOrder';
             });
-        });
-        // }
+            // });
+
+
+            // $('#calendar').fullCalendar({
+            //     height: 500, // 設定 Calendar 的高度
+            //     width: 500, // 設定 Calendar 的寬度
+            //     header: {
+            //         left: '',
+            //         center: 'title',
+            //     }
+            // });
+
+        }
 
         function showOrderInfo(orderId) {
             var order = $('#orderInfo' + orderId);

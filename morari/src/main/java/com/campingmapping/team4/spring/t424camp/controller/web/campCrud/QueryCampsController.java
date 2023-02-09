@@ -46,7 +46,7 @@ public class QueryCampsController {
 		List<Camp> camps = cityService.findCampsByCityIds(cityIDs);
 		
 		// 空值
-		if (camps == null) {
+		if (camps.size() == 0) {
 			errors.put("error", "none");
 			errors.put("noData", "查無資料");
 			return errors;

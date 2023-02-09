@@ -86,7 +86,7 @@
                         tmp = '<div id="order' + n.siteID + '">'
                             + '<span name="siteID">' + n.siteID + '<span class="errorsiteID" style="color: red;"></span></span>'
                             + '<span>' + n.siteName + '</span>'
-                            + '<span>' + '<img width="80" height="100" src="/morari/images/' + n.sitePicturesPath + '">' + '</span>'
+                            + '<span>' + '<img width="80" height="100" src="' + n.sitePicturesPath + '">' + '</span>'
                             + '<span>' + n.totalSites + '</span>'
                             + '<span name="unitPrice">' + n.siteMoney + '</span>'
                             + '<span name="numbers"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-calculator"></i></a>預約數量:</span><input name="num" type="number" min="0" step="1" value="0"><span><span class="errornumbers" style="color: red;"></span>'
@@ -101,6 +101,7 @@
 
                     $('span').css("margin", '20px');
                     $('input').width(130);
+                    $('img').width('100px').height('100px');
                 });
 
 
@@ -114,6 +115,8 @@
                         siteIds.push(siteId);
                         nums.push(num);
                     });
+                    let div = $('#div').find('input[name="goingdate"]')
+                    console.log(div)
                     let goingdate = $($('#div').find('input[name="goingdate"]').get(0)).val();
                     let leavingdate = $($('#div').find('input[name="leavingdate"]').get(0)).val();
 

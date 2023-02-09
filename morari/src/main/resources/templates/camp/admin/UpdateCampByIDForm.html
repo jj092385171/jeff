@@ -110,11 +110,13 @@
                                 + '縣市選項:' + radio + '<span id="errorcityID" style="color: red;"></span><br>'
                                 + '地址: <input type="text" name="location" value="' + camp.location + '"><span id="errorlocation" style="color: red;"></span><br>'
                                 + '簡介: <input type="text" name="description" value="' + camp.description + '"><br>'
-                                + '圖片: <img width="80" height="100" src="/morari/images/' + camp.campPicturesPath + '"><br>'
+                                + '圖片: <img src="' + camp.campPicturesPath + '"><br>'
                                 + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><span id="errorcampPicturesPath" style="color: red;"></span><br>'
                                 + '標籤選項:' + tags + '<span id="errortagIDs" style="color: red;"></span><br>'
                                 + '<button id="send" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-warning btn-icon-split"><span class="icon text-white-50"><i class="fas fa-user-edit"></i></span><span class="text">營地更新</span></a></span></button><span id="errornone" style="color: red;"></span>'
                             form.append(div);
+
+                            $('img').width('100px').height('100px');
                         }
                     });
 
@@ -165,9 +167,11 @@
                                         + '縣市名: <input type="text" name="cityName" readonly="readonly"value="' + after.city.cityName + '"><br>'
                                         + '地址: <input type="text" name="location" value="' + after.location + '"><br>'
                                         + '簡介: <input type="text" name="description" value="' + after.description + '"><br>'
-                                        + '圖片: <img width="80" height="80" src="/morari/images/' + after.campPicturesPath + '"><br>'
+                                        + '圖片: <img src="' + after.campPicturesPath + '"><br>'
                                         + '標籤: ' + tagNames + '<br>'
                                     form.append(div);
+
+                                    $('img').width('100px').height('100px');
                                 }
                             }
                         });

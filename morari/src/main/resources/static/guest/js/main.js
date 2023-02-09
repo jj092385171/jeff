@@ -107,6 +107,7 @@ window.onload = function () {
         if (event.target !== loginstate && event.target.parentNode !== loginstate &&
             event.target !== dropdownContent && event.target.parentNode !== dropdownContent) {
             dropdownContent.style.display = "none";
+           
         }
     });
 

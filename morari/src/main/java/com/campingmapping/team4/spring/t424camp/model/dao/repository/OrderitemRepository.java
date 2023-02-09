@@ -11,7 +11,7 @@ import com.campingmapping.team4.spring.t424camp.model.entity.Orderitem;
 
 public interface OrderitemRepository extends JpaRepository<Orderitem, Integer> {
 	
-	@Query(value = "select * from camporderitem where fksiteid = :fksiteid and goingtime <= :goingtime and leavingtime >= :goingtime", nativeQuery = true)
+	@Query(value = "select * from camporderitem where fksiteid = :fksiteid and goingtime <= :goingtime and leavingtime > :goingtime", nativeQuery = true)
 	  List<Orderitem> findBySiteidAndLessThanGoingDate(@Param("fksiteid") int fksiteid,
 	                                 @Param("goingtime") Date goingtime);
 
