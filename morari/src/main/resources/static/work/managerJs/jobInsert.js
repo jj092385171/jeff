@@ -62,7 +62,7 @@ $(document).ready(function() {
 						"<td>" + response.time + "</td>" +
 						"<td>" + response.rackup + "</td>" +
 						"<td>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='/morari/src/main/resources/static/images/'" + response.img + "></td>" + "</tr>";
+						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + "</tr>";
 					table.append(tr);
 				}
 			}

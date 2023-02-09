@@ -8,7 +8,6 @@ $(document).ready(function() {
 		type: 'Post',
 		url: '/morari/admin/user/resume/userResumeRackId.controller/' + id,
 		contentType: 'application/json',
-		//			data: JSON.stringify(getFormData($("#update"))),
 		success: function(response) {
 			console.log("response:" + response);
 			$('#showInsert').empty("");
@@ -22,22 +21,18 @@ $(document).ready(function() {
 				var h3 = $('#re');
 				h3.prepend('投遞履歷結果');
 				var table = $('#showInsert');
-				table.append("<tr><th>刊登編號</th><th>履歷編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th></tr>");
+				table.append("<tr><th>會員編號</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>專業技能</th></tr>");
 
 				$.each(response, function(i, n) {
 					var tr = "<tr align='center'>" +
-						"<td>" + n.job.rackid + "</td>" +
-						"<td>" + n.number + "</td>" +
 						"<td>" + n.userprofiles.uid + "</td>" +
-						"<td>" + n.work + "</td>" +
 						"<td>" + n.name + "</td>" +
 						"<td>" + n.age + "</td>" +
 						"<td>" + n.gender + "</td>" +
 						"<td>" + n.mail + "</td>" +
 						"<td>" + n.phone + "</td>" +
 						"<td>" + n.educational + "</td>" +
-						"<td>" + n.experience + "</td>" +
-						"<td>" + n.ptime + "</td>" +
+						"<td>" + n.skill + "</td>" +
 						"<td><button class='mail' onclick='mailInsert(" + n.number + ")'>mail通知面試</button></td>" + "</tr>";
 					table.append(tr);
 				});

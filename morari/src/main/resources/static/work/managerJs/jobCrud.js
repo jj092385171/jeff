@@ -103,7 +103,10 @@ $(document).ready(function() {
 							{
 								data: 'img',
 								title: "照片",
-								width: "100px"
+								width: "100px",
+								render: function(data, type, row) {
+									return '<img src="' + data + '"/>';
+								}
 							},
 
 							{

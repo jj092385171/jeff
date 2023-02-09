@@ -1,13 +1,13 @@
 // 載入 你的.html
 $(document).ready(function() {
 
-//	let uid;
-//	fetch("/morari/utils/getuid")
-//		.then(response => response.text())
-//		.then(data => {
-//			// console.log(data)
-//			uid = data;
-//		})
+	//	let uid;
+	//	fetch("/morari/utils/getuid")
+	//		.then(response => response.text())
+	//		.then(data => {
+	//			// console.log(data)
+	//			uid = data;
+	//		})
 
 	var url = window.location.href;
 	var id = url.split("/").pop();
@@ -76,7 +76,7 @@ $(document).ready(function() {
 				$('#su').empty("");
 				$('#update').empty("");
 				$('#img').empty("");
-				
+
 				if (response == null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 				} else {
@@ -98,7 +98,7 @@ $(document).ready(function() {
 						"<td>" + response.time + "</td>" +
 						"<td>" + response.rackup + "</td>" +
 						"<td>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='/morari/src/main/resources/static/images/'" + response.img + "></td>" + "</tr>";
+						"<td><img width='80' height='80' src='" + response.img + "'></td>" + "</tr>";
 					table.append(tr);
 					//});
 				}

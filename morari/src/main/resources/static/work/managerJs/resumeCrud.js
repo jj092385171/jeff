@@ -31,18 +31,6 @@ $(document).ready(function() {
 									title: "會員編號",
 									width: "80px"
 								},
-//								{
-//									data: 'job.rackid',
-//									title: "刊登編號",
-//									width: "80px"
-//								},
-
-
-//								{
-//									data: 'work',
-//									title: "應徵職缺",
-//									width: "80px"
-//								},
 
 								{
 									data: 'name',
@@ -85,12 +73,6 @@ $(document).ready(function() {
 									title: "專業技能",
 									width: "130px"
 								},
-
-//								{
-//									data: 'ptime',
-//									title: "填寫時間",
-//									width: "60px"
-//								},
 
 								{
 									title: "修改",

@@ -89,7 +89,7 @@ $(document).ready(function() {
 						"<td>" + response.date + "</td>" +
 						"<td>" + response.time + "</td>" +
 						"<td>" + response.remark + "</td>" +
-						"<td>" + response.img + "</td>" + "</tr>";
+						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + "</tr>";
 					table.append(tr);
 					//});
 				}

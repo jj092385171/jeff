@@ -23,7 +23,7 @@ $(document).ready(function() {
 			} else {
 
 				var table = $('#showInsert');
-				table.append("<tr><th>職缺</th><th>刊登時間</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
+				table.append("<tr><th>職缺</th><th>刊登時間</th><th>薪資</th><th>人數</th><th>地點</th><th>上班日期</th><th>上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
 
 				$.each(data, function(i, n) {
 					var tr = "<tr align='center'>" +
@@ -35,7 +35,7 @@ $(document).ready(function() {
 						"<td>" + n.date + "</td>" +
 						"<td>" + n.time + "</td>" +
 						"<td>" + n.remark + "</td>" +
-						"<td>" + n.img + "</td>" +
+						"<td><img width='80' height='80' src='"+ n.img +"'></td>" + 
 						"<td><button id='mailResume' onclick='mailResume(" + n.rackid + " )'>我要應徵</button></td></tr>";
 					table.append(tr);
 				});
@@ -76,7 +76,7 @@ function selectJob(job) {
 				var h3 = $('#su');
 				h3.prepend('查詢結果');
 				var table = $('#showInsert');
-				table.append("<tr><th>職缺</th><th>刊登時間</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
+				table.append("<tr><th>職缺</th><th>刊登時間</th><th>薪資</th><th>人數</th><th>地點</th><th>上班日期</th><th>上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
 
 				$.each(data, function(i, n) {
 					console.log("data:" + data);
@@ -89,7 +89,7 @@ function selectJob(job) {
 						"<td>" + n.date + "</td>" +
 						"<td>" + n.time + "</td>" +
 						"<td>" + n.remark + "</td>" +
-						"<td>" + n.img + "</td>" +
+						"<td><img width='80' height='80' src='" + n.img + "'></td>" + 
 						"<td><button id='mailResume' onclick='mailResume(" + n.rackid + " )'></button></td></tr>";
 					table.append(tr);
 				});
