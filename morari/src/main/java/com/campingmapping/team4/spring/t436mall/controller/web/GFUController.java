@@ -17,7 +17,6 @@ public class GFUController {
 	@PostMapping("/uploadpicturetogoogle.controller")
 	@ResponseBody
 	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
-		System.out.println("123");
 		String fileName="pd"+UUID.randomUUID().toString();
 		return GoogleFileUtil.uploadFile(fileName,file);
 	}
