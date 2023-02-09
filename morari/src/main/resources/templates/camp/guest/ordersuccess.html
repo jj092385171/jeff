@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <script src="/morari/guest/js/head.js"></script>
+  <!-- sharepage 公用頁面 -->
+  <script src="/morari/guest/js/share.js"></script>
+</head>
+
+<body style="display: none">
+  <!-- Header Section Start -->
+  <div class="header"></div>
+  <!-- Header Section End -->
+  <div class="wrapper">
+
+
+
+
+
+    <!-- 分離範例 -->
+    <!-- <div class="test"></div>
+  <script src="/morari/camper/js/test.js"></script> -->
+
+
+
+
+
+
+  </div>
+  <!-- Footer Section Start -->
+  <div class="footer"></div>
+  <!-- Footer Section End -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+  <!-- Vendor JavaScript File -->
+  <script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+  <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+  <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
+  <script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
+  <script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
+  <script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+  <!-- Booking Javascript File -->
+  <script src="/morari/guest/js/booking.js" defer></script>
+  <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
+
+  <!-- Main Javascript File -->
+  <script src="/morari/guest/js/main.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $(document).ready(function () {
+        $.getJSON('/morari/camp/querySuccessOrderByGuest', function (after) {
+
+          console.log(after)
+
+          // var ordertable = $('#ordertable');
+          // var ordertr = '';
+
+          // alert("新增訂單成功");
+
+          // ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th></thead>');
+          // ordertr = '<tbody class="card mb-4 py-3 border-bottom-dark">'
+          //   + '<tr>'
+          //   + '<td>' + after.orderID + '</td>'
+          //   + '<td>' + after.camp.campName + '</td>'
+          //   + '<td>' + after.camp.city.cityName + '</td>'
+          //   + '<td>' + '<img src="' + after.camp.campPicturesPath + '">' + '</td>'
+          //   + '<td>' + after.camp.location + '</td>'
+          //   + '<td>' + after.userprofiles.username + '</td>'
+          //   + '<td>' + after.userprofiles.email + '</td>'
+          //   + '<td>' + after.orderTime + '</td>'
+          //   + '<td>' + after.goingTime + '</td>'
+          //   + '<td>' + after.leavingTime + '</td>'
+          //   + '<td>' + after.totalPrice + '</td>'
+          //   + '</tr>'
+          //   + '</tbody>'
+          // ordertable.append(ordertr);
+
+          // $('#hr').append('<hr>');
+
+          // var orderitemtable = $('#orderitemtable');
+          // var orderitemtr = '';
+
+          // orderitemtable.append('<thead><th>營位名稱</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>');
+
+          // $.each(after.orderitems, function (i, orderitem) {
+          //   orderitemtr = '<tbody>'
+          //     + '<tr>'
+          //     + '<td>' + orderitem.site.siteName + '</td>'
+          //     + '<td>' + '<img src="' + orderitem.site.sitePicturesPath + '">' + '</td>'
+          //     + '<td>' + orderitem.unitPrice + '</td>'
+          //     + '<td>' + orderitem.numbers + '</td>'
+          //     + '</tr>'
+          //     + '</tbody>'
+          //   orderitemtable.append(orderitemtr);
+
+          // });
+
+          // $('th',).width('100px').css("text-align", "center");
+          // $('td').width('100px').css("text-align", "center");
+          // $('img').width('85px').height('85px');
+        });
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>
