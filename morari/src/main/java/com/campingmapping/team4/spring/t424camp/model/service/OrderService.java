@@ -149,7 +149,7 @@ public class OrderService {
 		Date go = new Date();
 		
 		List<Integer> fullDates = new ArrayList<Integer>();
-		while(counter <= 30) {
+		while(counter <= 60) {
 			
 			List<Orderitem> items = orderitemRepository.findBySiteidAndLessThanGoingDate(site.getSiteID(), go);
 			long totalNums = items.stream().mapToInt(Orderitem::getNumbers).sum();

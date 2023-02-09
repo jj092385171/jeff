@@ -60,17 +60,15 @@ public class returnFulledDays {
 		    map.put(date, 1);
 		  }
 		}
-		
+
 		List<Integer> resultlist = new ArrayList<Integer>();
 		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 		  if (entry.getValue() == size) {
 		    // 找到次數為 size 的某一物件
 		    resultlist.add(entry.getKey());
-		    break;
 		  }
 		}
 
-		
 		return resultlist;
 	}
 
