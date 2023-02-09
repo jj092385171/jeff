@@ -30,20 +30,22 @@
 	<!-- Header Section End -->
 
 	<!-- 分離範例 -->
-	<table id="result"></table>
-	<div id="amenities">
-		<div class="container">
-			<div class="section-header">
-
-				<h2>凹豆商城</h2>
-				<p>
-					<input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
-				</p>
-			</div>
-			<div id="banners" class="row">
-			</div>
-		</div>
-	</div>
+			<div id="rooms">
+            <div class="container">
+                <div class="section-header">
+                    <h2>凹豆商城</h2>
+                    <p>
+                        <input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
+                    </p>
+                </div>
+                <div id="banners" class="row">
+                                      
+                </div>
+                <div id="rooms">
+        </div>
+            </div>
+        </div>
+	
 	<script src="/morari/mall/js/test.js"></script>
 
 	<!-- Footer Section Start -->
@@ -98,21 +100,38 @@
 					//创建一个div
 					var div = document.createElement("div");
 					//设置div的id
-// 					div.id = "abc";
+					// 					div.id = "abc";
 					//设置div的class
 					div.className = "col-md-12 room";
 					//设置style
 					//div.style.display="block";
 					div.click = "selectbyid()";
 					//设置子div的其他属性，直接通过字符串连接的方式连接即可。动态值放在引号外面就行
-					div.innerHTML = '<div class="row"><div class="col-md-6">'+
-					'<div class="room-img"><img src="' + n.pdpicture + '"></div>'+
-					'</div><div class="col-md-6">' +
-						'<div class="room-des"><h3>' + n.pdname + '</h3><h1>' + n.pdprice + '</h1>' +
-						'<ul class="room-size"><li><i class="fa fa-arrow-right"></i>' + n.pdcontent + '</li>' +
-						'<li><i class="fa fa-arrow-right"></i>' + n.pdtype + '</li></ul><div class="room-link">' +
-						'<a href="#" onclick="addToCart(' + n.pdid + ')" data-toggle="modal" data-target="#modal-id">加入購物車</a></br><a href="https://localhost:8443/morari/ProductCart/productcartqueryallmain.controller">返回商城</a>' +
-						'</div></div></div></div>';
+					div.innerHTML =
+						
+                   '<div class="row">'+
+                        '<div class="col-md-6">'+
+                            '<div class="room-img">'+
+                                '<img src="'+n.pdpicture+'" style="max-height:500px">'+
+                                '<a href="'+n.pdpicture+'"></a>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="col-md-6">'+
+                            '<div class="room-des">'+
+                                '<h3>'+n.pdname+'</h3>'+
+                                '<h1>NT$'+n.pdprice+'</h1>'+
+                                '<ul class="room-size">'+
+                                    '<li><i class="fa fa-arrow-right"></i>品牌: '+n.pdcontent+'</li>'+
+                                    '<li><i class="fa fa-arrow-right"></i>類型: '+n.pdtype+' </li>'+
+                                '</ul>'+
+                                
+                                '<div class="room-link">'+
+                                    '<a href="#" data-toggle="modal" data-target="#modal-id" onclick="addToCart(' + n.pdid + ')">加入購物車</a>'+
+                                    '<a href="https://localhost:8443/morari/ProductCart/productcartqueryallmain.controller">返回商城</a>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>';
 
 					banners.appendChild(div);
 

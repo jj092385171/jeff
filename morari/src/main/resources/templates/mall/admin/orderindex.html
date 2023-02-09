@@ -94,6 +94,8 @@
                     return;
                 }
                 console.log(response);
+                $(document).ready(function() {
+
                 response.json().then(function (n) {
 
                     $('#result').DataTable({
@@ -135,6 +137,8 @@
 
 
                 });
+                });
+                
             });
 
         function orderDetail(id) {
