@@ -3,14 +3,13 @@ var uid;
 
 $(document).ready(function() {
 
-
-
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
 		.then(data => {
 			// console.log(data)
 			uid = data;
 		})
+
 
 	$.ajax({
 		type: 'POST',
@@ -57,7 +56,7 @@ function mailResume(rackid) {
 				type: 'POST',
 				url: '/morari/guest/work/updateResume.controller/' + rackid,
 				contentType: 'application/json',
-				data:JSON.stringify(resume),
+				data: JSON.stringify(resume),
 				success: function(response) {
 					console.log(response);
 					alert(response);

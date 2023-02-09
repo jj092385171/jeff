@@ -5,27 +5,54 @@
   <script src="/morari/guest/js/head.js"></script>
   <!-- sharepage 公用頁面 -->
   <script src="/morari/guest/js/share.js"></script>
+
 </head>
 
 <body style="display: none">
   <!-- Header Section Start -->
   <div class="header"></div>
+
   <!-- Header Section End -->
-  <div class="wrapper">
 
 
 
 
 
-    <!-- 分離範例 -->
-    <!-- <div class="test"></div>
-  <script src="/morari/camper/js/test.js"></script> -->
-	<div>
-		<button id="resume">簡歷</button>
-		<table id="items"></table>
-	</div>
 
-  </div>
+  <!-- 分離範例 -->
+<!--   <div class="test"></div> -->
+<!--   <script src="team/js/test.js"></script> -->
+
+<h3>修改簡歷</h3>
+					<form id="update" enctype="multipart/form-data">
+<!-- 						刊登編號 <input id="1" type="text" name="rackid" readonly> <br> -->
+						會員編號 <input id="1" type="text" name="uid"  readonly><br>
+<!-- 						應徵職缺 <input id="3" type="text" name="work" required><br> -->
+						姓名 <input id="2" type="text" name="name" required><br>
+						年次 <input id="3" type="text" name="age" required><br>
+						性別 <input id="4"type="radio" name="gender" value="男" > 男
+							<input id="5"type="radio" name="gender" value="女"> 女<br>
+						email <input id="6" type="text" name="mail" required><br>
+						電話 <input id="7" type="text" name="phone" required><br>
+						學歷<textarea id="8" name="educational" cols="20" rows="5"></textarea><br> 
+						專業技能<textarea id="9" name="skill" cols="20" rows="5"></textarea><br>
+						
+						<input id="send" type="button" value="送出"><br>
+						<input type="reset" value="取消"><br>
+					</form>
+
+<!-- 					<form action="/morari/admin/resume/resumeCrud.controller" method="GET"> -->
+<!-- 						<input type="submit" value="回首頁"> -->
+<!-- 					</form> -->
+					<hr>
+
+					<h3 id="su"></h3>
+					<table id="showInsert"></table>
+
+
+
+
+
   <!-- Footer Section Start -->
   <div class="footer"></div>
   <!-- Footer Section End -->
@@ -34,7 +61,7 @@
 
 
   <!-- Vendor JavaScript File -->
-  <script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+  <script src="/morari/guest/vendor/jquery/jquery.min.js" ></script>
   <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
   <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
   <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
@@ -53,11 +80,10 @@
 
   <!-- Main Javascript File -->
   <script src="/morari/guest/js/main.js" defer></script>
+
 <!-- 我自己的東西 -->
  <script type="text/javascript"></script>
- <script src="/morari/camper/js/workResume.js" defer></script>
-
-
+ <script src="/morari/camper/js/resumeUpdate.js" defer></script>
 
 </body>
 

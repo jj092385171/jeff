@@ -52,7 +52,7 @@ public class GuestworkController {
 	// 啟動insert
 	@GetMapping("/startResumeInsert.controller")
 	public String processMainAction2() {
-		return "work/guest/resumeInsert";
+		return "camper/guest/resumeInsert";
 	}
 
 	// 啟動select
@@ -61,22 +61,36 @@ public class GuestworkController {
 		return "work/guest/resumeSelect";
 	}
 
+	// 啟動update
+	@GetMapping("/update.controller")
+	public String processMainAction4() {
+		return "camper/guest/resumeUpdate";
+	}
+
 	// 新增
-	@PostMapping("/resumeInsert.controller{uid}")
+	@PostMapping("/resumeInsert.controller")
 	@ResponseBody
 	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean) {
 		UUID uid = jwtService.getUId(request);
+		System.out.println("111111111111111");
 		return rService.insert(rBean, uid);
 	}
 
-	// 修改
-	@PostMapping("/updateResume.controller/{rackid}")
+	// 修改履歷 前台
+	@PutMapping("/resumeUpdate.controller/{number}")
 	@ResponseBody
-	public String processUpdateAction(@RequestBody ResumeBean rBean,@PathVariable Integer rackid) {
-		rService.updateResume(rBean,rackid);
-		System.out.println("111111111111");
-		return "完成應徵動作！";
+	public ResumeBean processUpdateAction(@RequestBody ResumeBean rBean, @PathVariable Integer number) {
+		return rService.updateJob(rBean, number);
 	}
+
+	// 修改
+//	@PostMapping("/updateResume.controller/{rackid}")
+//	@ResponseBody
+//	public String processUpdateAction(@RequestBody ResumeBean rBean,@PathVariable Integer rackid) {
+//		rService.updateResume(rBean,rackid);
+//		System.out.println("111111111111");
+//		return "完成應徵動作！";
+//	}
 	// 模糊搜尋
 	@PostMapping("/guestSelectLike.controller/{job}")
 	@ResponseBody
@@ -84,12 +98,12 @@ public class GuestworkController {
 		List<JobBean> result = jService.findByJobisLike(job);
 		return result;
 	}
+
 	// 透過uid找履歷
-	@PostMapping("/guestSelectResume.controller/{uid}")
+	@GetMapping("/guestSelectResume.controller/{uid}")
 	@ResponseBody
 	public ResumeBean processSelectUidAction(@PathVariable UUID uid) {
-		ResumeBean result = rService.findByUid(uid) ;
-		System.out.println("22222222222222");
+		ResumeBean result = rService.findByUid(uid);
 		return result;
 	}
 

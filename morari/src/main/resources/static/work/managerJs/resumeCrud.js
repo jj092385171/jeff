@@ -96,7 +96,7 @@ $(document).ready(function() {
 									title: "修改",
 									width: "80px",
 									render: function(data, type, row) {
-										return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
 
 									}
 								},
@@ -141,7 +141,7 @@ function resumeDelete(number) {
 	}
 };
 
-function jobUpdate(number) {
+function resumeUpdate(number) {
 	window.location.href = '/morari/admin/resume/update.controller/' + number
 
 };

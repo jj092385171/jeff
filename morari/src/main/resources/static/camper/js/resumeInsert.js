@@ -4,7 +4,6 @@ $(document).ready(function() {
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
 		.then(data => {
-			//			document.getElementById("uid").value = data;
 			document.getElementById("uid").value = data;
 		})
 
@@ -19,9 +18,7 @@ $(document).ready(function() {
 			console.log(indexed_array);
 			return indexed_array;
 		}
-		//		var url = window.location.href;
-		//		var id = url.split("/").pop();
-		//		console.log(id);
+
 		$.ajax({
 			type: 'POST',
 			url: '/morari/guest/work/resumeInsert.controller',

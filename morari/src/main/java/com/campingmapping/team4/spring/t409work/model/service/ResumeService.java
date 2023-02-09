@@ -49,12 +49,12 @@ public class ResumeService {
 	}
 
 	// 把rackid塞進履歷
-	public ResumeBean updateResume(ResumeBean rBean,Integer rackid) {
-		Optional<ResumeBean> findById = reDao.findById(rBean.getNumber());
-		ResumeBean resumeBean = findById.get();
-		resumeBean.setJob(jDao.findById(rackid).get());
-		return reDao.save(resumeBean);
-	}
+//	public ResumeBean updateResume(ResumeBean rBean,Integer rackid) {
+//		Optional<ResumeBean> findById = reDao.findById(rBean.getNumber());
+//		ResumeBean resumeBean = findById.get();
+//		resumeBean.setJobs(jDao.findById(rackid).get());
+//		return reDao.save(resumeBean);
+//	}
 
 	// 刪除履歷
 	public void deleteById(int number) {
@@ -68,7 +68,6 @@ public class ResumeService {
 			ResumeBean resumeBean = result.get();
 	        // 將前端傳進來的rBean的值複製到resumeBean
 //			resumeBean.setJob(result.get().getJob().getRackid());
-			resumeBean.setWork(rBean.getWork());
 			resumeBean.setName(rBean.getName());
 			resumeBean.setAge(rBean.getAge());
 			resumeBean.setGender(rBean.getGender());
@@ -112,7 +111,7 @@ public class ResumeService {
 	public List<ResumeBean> findRid(Integer rackid) {
 		
 		JobBean findById = jDao.findById(rackid).get();
-		Collection<ResumeBean> resume = findById.getResume();
+		Collection<ResumeBean> resume = findById.getResumes();
 		ArrayList<ResumeBean> arrayList = new ArrayList<ResumeBean>(resume);
 		return arrayList;
 	}

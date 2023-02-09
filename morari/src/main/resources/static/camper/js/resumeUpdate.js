@@ -1,38 +1,38 @@
 // 載入 你的.html
-
+let uid;
 $(document).ready(function() {
-	var url = window.location.href;
-	var id = url.split("/").pop();
-	console.log(id);
 
-	$.ajax({
-		type: 'POST',
-		url: '/morari/admin/resume/selectNumber.controller/' + id,
-		dataType: 'json',
-		success: function(data) {
-//			$('#1').val(data.job.rackid);
-			$('#1').val(data.userprofiles.uid);
-//			$('#3').val(data.work);
-			$('#2').val(data.name);
-			$('#3').val(data.age);
-			//			$('#6').val(data.gender);
-			$('#6').val(data.mail);
-			$('#7').val(data.phone);
-			$('#8').val(data.educational);
-			$('#9').val(data.skill);
-//			$('#11').val(data.ptime);
+	fetch("/morari/utils/getuid")
+		.then(response => response.text())
+		.then(data => {
+			// console.log(data)
+			uid = data;
+		}).then(() => {
 
-			switch (data.gender) {
-				case '男':
-					$("#4").attr('checked', true)
-					break;
-				case '女':
-					$("#5").attr('checked', true)
-					break;
-			}
-		}
-	});
-	$("#send").click(function() {
+			$.ajax({
+				type: 'GET',
+				url: '/morari/guest/work/guestSelectResume.controller/' + uid,
+				contentType: 'application/json',
+				success: function(data) {
+					console.log(data);
+					console.log(data.unmber);
+					$('#1').val(data.userprofiles.uid);
+					$('#2').val(data.name);
+					$('#3').val(data.age);
+					$('#6').val(data.mail);
+					$('#7').val(data.phone);
+					$('#8').val(data.educational);
+					$('#9').val(data.skill);
+
+					switch (data.gender) {
+						case '男':
+							$("#4").attr('checked', true)
+							break;
+						case '女':
+							$("#5").attr('checked', true)
+							break;
+					}
+					$("#send").click(function() {
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();
 			var indexed_array = {};
@@ -45,7 +45,7 @@ $(document).ready(function() {
 		}
 		$.ajax({
 			type: 'Put',
-			url: '/morari/admin/resume/resumeUpdate.controller/' + id,
+			url: '/morari/admin/resume/resumeUpdate.controller/' + data.number,
 			contentType: 'application/json',
 			data: JSON.stringify(getFormData($("#update"))),
 			success: function(response) {
@@ -78,4 +78,9 @@ $(document).ready(function() {
 			}
 		});
 	});
-});
+				}
+			})
+		})
+		
+
+})
