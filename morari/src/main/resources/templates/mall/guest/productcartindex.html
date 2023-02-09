@@ -2,24 +2,80 @@
 <html lang="zh-TW">
 
 <head>
-  <script src="/morari/guest/js/head.js"></script>
-  <!-- sharepage 公用頁面 -->
-  <script src="/morari/guest/js/share.js"></script>
+	<script src="/morari/guest/js/head.js"></script>
+	<!-- sharepage 公用頁面 -->
+	<script src="/morari/guest/js/share.js"></script>
 
-<style>
+	<style>
 		td {
 			border: 2px black solid;
 		}
 	</style>
-	
-	<script type="text/javascript">
+
+
+
+</head>
+
+<body style="display: none">
+	<!-- Header Section Start -->
+	<div class="header"></div>
+
+	<!-- Header Section End -->
+
+	<!-- 分離範例 -->
+	<script src="/morari/mall/js/test.js"></script>
+	<!-- Amenities Section Start -->
+	<div id="amenities">
+		<div class="container">
+			<div class="section-header">
+
+				<h2>凹豆商城</h2>
+				<p>
+					<input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
+				</p>
+			</div>
+			<div class="row" id="banners">
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer Section Start -->
+	<div class="footer"></div>
+	<!-- Footer Section End -->
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+	<!-- Vendor JavaScript File -->
+	<script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+	<script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+	<script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+	<script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
+	<script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
+	<script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
+	<script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
+	<script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
+	<script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
+	<script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+	<script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+	<script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+	<!-- Booking Javascript File -->
+	<script src="/morari/guest/js/booking.js" defer></script>
+	<script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
+
+	<!-- Main Javascript File -->
+	<script src="/morari/guest/js/main.js" defer></script>
+
+	<script>
 		var uid;
 		fetch("/morari/utils/getuid")
 			.then(response => response.text())
 			.then(datauid => {
 				uid = datauid;
 			})
-			
+
 		fetch('/morari/mall/selectAllPd', { method: 'GET' }).then(
 
 			function (response) {
@@ -29,43 +85,88 @@
 				}
 				console.log(response);
 				response.json().then(function (n) {
-					var tableData =
-						"<th>產品名稱</th>" + "<th>品牌名稱</th>" +
-						"<th>產品規格</th>" + "<th>類型</th>" +
-						"<th>照片</th>" + "<th>產品價格</th>" +
-						"<th><input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid("+'"'+uid+'"'+")'></th>";
+					var banners = document.getElementById("banners");
 					for (var i = 0; i < n.length; i++) {
-						tableData +=
-							"<tr>" +
-							"<td>" + n[i].pdname + "</td>" + "<td>" + n[i].pdtitle + "</td>" +
-							"<td>" + n[i].pdcontent + "</td>" + "<td>" + n[i].pdtype + "</td>" +
-							"<td>" + n[i].pdpicture + "</td>" + "<td>" + n[i].pdprice + "</td>" +
-							"<td><button id='addToCart' type='button' value='n[i].pdid' onclick='addToCart(" + n[i].pdid + ")'>加入購物車</button></td>" +
-							"</tr>"
+						//创建一个div
+						var div = document.createElement("div");
+
+
+						//设置div的id
+						div.id = "abc";
+						//设置div的class
+						div.className = "col-md-3 col-sm-6";
+						//设置style
+						//div.style.display="block";
+						div.click = "selectbyid()";
+						//设置子div的其他属性，直接通过字符串连接的方式连接即可。动态值放在引号外面就行
+						div.innerHTML = '<div id="' + n[i].pdid + '" class="btn"><img  src="' + n[i].pdpicture + '" style="max-width: 220px;" alt="img"><div class="homepage-slider-caption"><h3>' + n[i].pdname + '</h3><h4>NT$' + n[i].pdprice + '</h4></div></div> ';
+
+						banners.appendChild(div);
+						(function (i) {
+							var elementId = n[i].pdid;
+							document.getElementById(elementId).addEventListener("click", function () {
+								// 觸發控制器的代碼
+								console.log('Parent Capturing');
+							});
+						})(i);
+
 					}
-					document.getElementById('result').innerHTML = tableData;
 				});
 			});
-		function addToCart(pdid) {
-			var data = {
-				"pdid": pdid,
-				"userid": uid
-			};
-			$.ajax({
-				type: "POST",
-				url: "/morari/ProductCart/create.controller",
-				data: JSON.stringify(data),
-				contentType: "application/json; charset=utf-8",
-				dataType: "text",
-				success: function (response) {
-					alert(response);
-					// 成功時的回應處理
-				},
-				failure: function (error) {
-					// 失敗時的錯誤處理
-				}
-			});
-		}
+		// 		elements.addEventListener('click', function () {
+		// 			// 						    // 觸發控制器的代碼
+		// 			console.log('Parent Capturing');
+		// 		});
+		// 			function (response) {
+		// 				if (response.status != 200) {
+		// 					console.log(response.satus);
+		// 					return;
+		// 				}
+		// 				console.log(response);
+		// 				response.json().then(function (n) {
+		// 					var tableData =
+		// 						"<th>產品名稱</th>" + "<th>品牌名稱</th>" +
+		// 						"<th>產品規格</th>" + "<th>類型</th>" +
+		// 						"<th>照片</th>" + "<th>產品價格</th>" +
+		// 						"<th><input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(" + '"' + uid + '"' + ")'></th>";
+		// 					for (var i = 0; i < n.length; i++) {
+		// 						tableData +=
+		// 							"<tr>" +
+		// 							"<td>" + n[i].pdname + "</td>" + "<td>" + n[i].pdtitle + "</td>" +
+		// 							"<td>" + n[i].pdcontent + "</td>" + "<td>" + n[i].pdtype + "</td>" +
+		// 							"<td><img src='" + n[i].pdpicture + "' style='max-width: 150px;'></td>"
+		// 							+ "<td>" + n[i].pdprice + "</td>" +
+		// 							"<td><button id='addToCart' type='button' value='n[i].pdid' onclick='addToCart(" + n[i].pdid + ")'>加入購物車</button></td>" +
+		// 							"</tr>"
+		// 					}
+		// 					document.getElementById('result').innerHTML = tableData;
+		// 				});
+		// 			});
+		// 		var abc = document.getElementById('abc');
+		// 		parent.addEventListener('click', function () {
+		// 			console.log('Parent Capturing');
+		// 		}, true);
+
+		// 		function addToCart(pdid) {
+		// 			var data = {
+		// 				"pdid": pdid,
+		// 				"userid": uid
+		// 			};
+		// 			$.ajax({
+		// 				type: "POST",
+		// 				url: "/morari/ProductCart/create.controller",
+		// 				data: JSON.stringify(data),
+		// 				contentType: "application/json; charset=utf-8",
+		// 				dataType: "text",
+		// 				success: function (response) {
+		// 					alert(response);
+		// 					// 成功時的回應處理
+		// 				},
+		// 				failure: function (error) {
+		// 					// 失敗時的錯誤處理
+		// 				}
+		// 			});
+		// 		}
 		function selectbyuserid(uid) {
 			$.ajax({
 				success: function (data) {
@@ -73,49 +174,8 @@
 				}
 			});
 		}
+
 	</script>
-
-</head>
-
-<body style="display: none">
-  <!-- Header Section Start -->
-  <div class="header"></div>
-
-  <!-- Header Section End -->
-
-  <!-- 分離範例 -->
-	<h3>凹豆商城</h3>
-	<table id="result"></table>
-  <script src="/morari/mall/js/test.js"></script>
-
-  <!-- Footer Section Start -->
-  <div class="footer"></div>
-  <!-- Footer Section End -->
-
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
-
-  <!-- Vendor JavaScript File -->
-  <script src="/morari/guest/vendor/jquery/jquery.min.js" ></script>
-  <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
-  <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
-  <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
-  <script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
-  <script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
-  <script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
-  <script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
-  <script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
-  <script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
-  <script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
-  <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
-
-  <!-- Booking Javascript File -->
-  <script src="/morari/guest/js/booking.js" defer></script>
-  <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
-
-  <!-- Main Javascript File -->
-  <script src="/morari/guest/js/main.js" defer></script>
-
 
 </body>
 

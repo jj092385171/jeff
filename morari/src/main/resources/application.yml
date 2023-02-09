@@ -4,6 +4,7 @@ server:
   #   path: /error
   #   whitelabel:
   #     enabled: false
+     
   port: 8443
   servlet:
     context-path: /morari
@@ -34,8 +35,8 @@ spring:
 
     password: "0000"
     username: sa    
-#    password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
-#    username: Team4Admin    
+    # password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
+    # username: Team4Admin    
 # -------------MYSQL------------- 
     # driver-class-name: com.mysql.cj.jdbc.Driver
     # url: jdbc:mysql://localhost:3306/campDB?serverTimezone=UTC&useSSL=false

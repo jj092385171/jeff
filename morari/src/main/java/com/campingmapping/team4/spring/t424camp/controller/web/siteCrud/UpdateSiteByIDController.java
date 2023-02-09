@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t424camp.controller.web.siteCrud;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t424camp.model.entity.Site;
 import com.campingmapping.team4.spring.t424camp.model.service.SiteService;
+import com.campingmapping.team4.spring.utils.config.GoogleFileUtil;
 
 @Controller
 @RequestMapping("/admin/camp")
@@ -44,15 +44,17 @@ public class UpdateSiteByIDController {
 		}
 
 		// 圖
-		String fileName = null;
+		String filePath = null;
 		if (mf == null || mf.isEmpty()) {
 			errors.put("sitePicturesPath", "必須選擇圖片");
 		}
 		else {
-			String saveFileDir = "C:/gitapp/EEIT56_Team4/morari/src/main/resources/static/images/";
-			fileName = mf.getOriginalFilename();
-			File saveFilePath = new File(saveFileDir, fileName);
-			mf.transferTo(saveFilePath);
+//			String saveFileDir = "C:/gitapp/EEIT56_Team4/morari/src/main/resources/static/images/";
+			String fileName = mf.getOriginalFilename();
+//			File saveFilePath = new File(saveFileDir, fileName);
+//			mf.transferTo(saveFilePath);
+			filePath = GoogleFileUtil.uploadFile("site_" + fileName, mf);
+			
 		}
 
 		// 總營位數
@@ -72,7 +74,7 @@ public class UpdateSiteByIDController {
 		}
 
 		
-		Site site = siteService.update(siteID, siteName, fileName, totalSites, siteMoney, campID);
+		Site site = siteService.update(siteID, siteName, filePath, totalSites, siteMoney, campID);
 
 		// 空值
 		if (site == null) {

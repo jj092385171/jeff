@@ -13,11 +13,6 @@ import com.google.common.collect.Lists;
 @Service
 public class GoogleFileUtil {
 
-    // public static void main(String[] args) throws IOException {
-    //     String filepath = uploadFile("測試1", "morari");
-    //     System.out.println("網址：：：：" + filepath);
-    // }
-
     public static String uploadFile(String fileName,MultipartFile files) throws IOException{
     //Google 服務的金鑰
     InputStream inputStream = GoogleFileUtil.class.getResourceAsStream("/keystore/googlekey.json");

@@ -40,6 +40,12 @@ public class SetupDataLoader implements
     // private UserRoleRepository userRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private TagRepository tagRepository;
+    
+    @Autowired
+    private CityRepository cityRepository;
 
     @Autowired
     private TagRepository tagRepository;
@@ -105,6 +111,17 @@ public class SetupDataLoader implements
                 userProfiles.getRoles().clear();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
+                
+                String[] tags = { "大草原", "夜景", "親子娛樂" };
+                for (int i = 0; i < tags.length; i++) {
+                    createTagIfNotFound(tags[i]);
+                }
+
+                String[] citys = { "新北", "桃園", "苗栗" };
+                for (int i = 0; i < citys.length; i++) {
+                    createCityIfNotFound(citys[i]);
+                }
+                
             } else {
                 // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
                 userDetail.setRegisterdata(new Date());
@@ -136,6 +153,7 @@ public class SetupDataLoader implements
         return roleRepository.findByName(name)
                 .orElseGet(() -> roleRepository.save(Role.builder().name(name).build()));
     }
+    
     @Transactional
     public Tag createTagIfNotFound(String tagName) {
         return tagRepository.findByTagName(tagName)
