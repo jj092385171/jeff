@@ -19,17 +19,18 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-//@ToString(exclude = {"resumes"})
+@ToString(exclude = {"resumes"})
 @Entity
 @Table(name = "job")
 public class JobBean {
 	
 	@ManyToMany(mappedBy = "jobs")
 	@JsonIgnore
-	private Collection<ResumeBean> resumes = new HashSet<>();
+	private Collection<ResumeBean> resumes = new HashSet<>();//外來鍵集合
 
 	@ManyToOne
 	@JoinColumn(name = "uid")

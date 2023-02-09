@@ -28,7 +28,7 @@ public class ResumeBean {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "resume_job", joinColumns = @JoinColumn(name = "number"), 
 				inverseJoinColumns = @JoinColumn(name = "rackid"))
-	private Collection<JobBean> jobs = new HashSet<>();
+	private Collection<JobBean> jobs = new HashSet<>();//外來鍵集合
 
 	@OneToOne
 	@JoinColumn(name = "uid")

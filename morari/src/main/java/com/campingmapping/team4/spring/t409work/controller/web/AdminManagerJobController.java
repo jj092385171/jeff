@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/admin/work")
-public class WorkAdminController {
+public class AdminManagerJobController {
 	
 	@Autowired
 	private HttpServletRequest request;

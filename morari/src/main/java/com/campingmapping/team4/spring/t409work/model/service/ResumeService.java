@@ -42,19 +42,8 @@ public class ResumeService {
 	// 新增履歷
 	public ResumeBean insert(ResumeBean rBean, UUID u) {
 		rBean.setUserprofiles(uDao.findById(u).get());
-//		rBean.setJob(jDao.findById(rackid).get());
-//		Date currentDate = new Date();
-//		rBean.setPtime(currentDate);
 		return reDao.save(rBean);
 	}
-
-	// 把rackid塞進履歷
-//	public ResumeBean updateResume(ResumeBean rBean,Integer rackid) {
-//		Optional<ResumeBean> findById = reDao.findById(rBean.getNumber());
-//		ResumeBean resumeBean = findById.get();
-//		resumeBean.setJobs(jDao.findById(rackid).get());
-//		return reDao.save(resumeBean);
-//	}
 
 	// 刪除履歷
 	public void deleteById(int number) {
@@ -99,25 +88,18 @@ public class ResumeService {
 	public ResumeBean findByUid(UUID uid) {
 		ResumeBean result = uDao.findById(uid).get().getResume();
 		return result;
-//		ResumeBean result = null;
-//		Optional<UserProfiles> profile = uDao.findById(uid);
-//		if (profile.isPresent()) {
-//		    result = profile.get().getResume();
-//		}
-//		return result;
-	}
-
-	// 透過rackid找應徵的履歷
-	public List<ResumeBean> findRid(Integer rackid) {
-
-		JobBean findById = jDao.findById(rackid).get();
-		Collection<ResumeBean> resume = findById.getResumes();
-		ArrayList<ResumeBean> arrayList = new ArrayList<ResumeBean>(resume);
-		return arrayList;
 	}
 
 	// 存job到resumes裡
 	public ResumeBean save(ResumeBean resume) {
 		return reDao.save(resume);
+	}
+	
+	// 透過rackid找應徵的履歷
+	public Collection<ResumeBean> findRid(Integer rackID) {
+		Collection<ResumeBean> resumes = jDao.findById(rackID).get().getResumes();
+		System.out.println("resumes="+resumes);
+		return resumes;
+		
 	}
 }

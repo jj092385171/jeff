@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpServletRequest;
 //job職缺(營主)的後台
 @Controller
 @RequestMapping("/admin/user/work")
-public class WorkAdminUserController {
+public class AdminCampJobController {
 	@Autowired
 	private HttpServletRequest request;
 

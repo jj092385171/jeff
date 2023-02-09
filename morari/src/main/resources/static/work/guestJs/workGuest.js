@@ -91,6 +91,7 @@ function selectJob(job) {
 						"<td>" + n.remark + "</td>" +
 						"<td><img width='80' height='80' src='" + n.img + "'></td>" + 
 						"<td><button id='mailResume' onclick='mailResume(" + n.rackid + " )'></button></td></tr>";
+						"<td><button id='mailResume' onclick='mailResume(" + n.rackid + " )'>我要應徵</button></td></tr>";
 					table.append(tr);
 				});
 			}

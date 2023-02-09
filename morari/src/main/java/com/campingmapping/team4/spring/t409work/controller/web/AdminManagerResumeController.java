@@ -20,7 +20,7 @@ import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 // resume(管理者)的後台
 @Controller
 @RequestMapping("/admin/resume")
-public class ResumeAdminController {
+public class AdminManagerResumeController {
 
 	@Autowired
 	private ResumeService rService;
