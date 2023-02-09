@@ -34,7 +34,7 @@ public class ResumeBean {
 	
 	@ManyToOne
 	@JoinColumn(name = "rackid")
-	private JobBean job;// 刊登編號
+	private JobBean job;// 刊登編號 //job是變數名稱
 
 	@Column(name = "work")
 	private String work;// 職缺

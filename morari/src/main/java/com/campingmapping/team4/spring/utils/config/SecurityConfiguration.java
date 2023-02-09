@@ -6,19 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import com.campingmapping.team4.spring.utils.service.LogoutSuccessHandlerImpl;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-// @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true,
-// jsr250Enabled = true)
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration {
 
     @Autowired
@@ -26,14 +26,15 @@ public class SecurityConfiguration {
     @Autowired
     private final AuthenticationProvider authenticationProvider;
     @Autowired
-    private LogoutSuccessHandler logoutSuccessHandler;
+    private LogoutSuccessHandlerImpl logoutSuccessHandler;
     // @Autowired
-    // private final OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuthUserService;
+    // private final OAuth2UserService<OAuth2UserRequest, OAuth2User>
+    // oAuthUserService;
     @Autowired
     private final AuthenticationSuccessHandler successHandler;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)  {
+    public SecurityFilterChain filterChain(HttpSecurity http) {
         try {
             http
                     // 關閉CSRF
@@ -41,10 +42,10 @@ public class SecurityConfiguration {
                     .headers(h->h
                     		.frameOptions().sameOrigin())
                     // 設定是否需要驗證的路徑(更改成使用註釋)
-                    .authorizeHttpRequests()
-                //     .requestMatchers("/admin").hasAnyAuthority("")
-                    .anyRequest().permitAll()
-                    .and()
+                    .authorizeHttpRequests(a -> a
+                            .requestMatchers("/admin").hasAnyAuthority("SUPERADMIN")
+                            .anyRequest().permitAll()
+                            )
                     // 啟用jwt監聽
                     .authenticationProvider(authenticationProvider)
                     .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -60,16 +61,17 @@ public class SecurityConfiguration {
                     // 登出頁面
                     .logout(logout -> logout
                             .logoutUrl("/logout")
-                            .logoutSuccessUrl("/")
                             .logoutSuccessHandler(logoutSuccessHandler)
+                            .logoutSuccessUrl("/")
                             .permitAll())
                     // 若無權限指定路徑
-                    // .exceptionHandling(exceptionHandling -> System.out.println("88")
-                    // exceptionHandling.accessDeniedPage("/home") )
+                    // .exceptionHandling(exceptionHandling -> {
+                    // System.out.println("88");
+                    // exceptionHandling.accessDeniedPage("/home");
+                    // })
                     .sessionManagement(session -> session
-                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                            ;
-                            return http.build();
+                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+            return http.build();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

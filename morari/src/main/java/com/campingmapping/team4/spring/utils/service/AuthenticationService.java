@@ -2,6 +2,8 @@ package com.campingmapping.team4.spring.utils.service;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +19,9 @@ import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationReques
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationResponse;
 import com.campingmapping.team4.spring.t401member.model.dto.RegisterRequest;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
+import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
+import com.campingmapping.team4.spring.t401member.model.entity.UserName;
+import com.campingmapping.team4.spring.t401member.model.entity.UserPrivacy;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 // import com.campingmapping.team4.spring.t401member.model.entity.UserRoles;
 import com.campingmapping.team4.spring.utils.config.MyConstants;
@@ -24,6 +29,7 @@ import com.campingmapping.team4.spring.utils.config.MyConstants;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,13 +42,40 @@ public class AuthenticationService {
 	private final UserDetailsService userDetailsService;
 
 	// 註冊
+	@Transactional
 	public Boolean register(RegisterRequest request) {
 		try {
 			Role roleUser = roleRepository.findByName("USER").get();
+			// Name
+			UserName userName = UserName.builder()
+					.firstname("")
+					.lastname("")
+					.build();
+			// Privacy
+			UserPrivacy userPrivacy = UserPrivacy.builder()
+					.address("")
+					.birthday(null)
+					.phone("")
+					.build();
+			// Detail
+			UserDetail userDetail = UserDetail.builder()
+					.nickname(request.email())
+					.exp(1L)
+					.level(1)
+					.point(100L)
+					.gender(0)
+					.registerdata(new Date())
+					.subscribed(false)
+					.shot("https://storage.googleapis.com/morari/defaultshot")
+					.about("暫時沒有留下什麼")
+					.build();
 			UserProfiles userProfiles = UserProfiles.builder()
 					.email(request.email())
 					.password(passwordEncoder.encode(request.password()))
 					.uid(UUID.randomUUID())
+					.userdetail(userDetail)
+					.usernames(userName)
+					.userprivacy(userPrivacy)
 					.build();
 			userProfiles.getRoles().add(roleUser);
 			userRepository.save(userProfiles);
@@ -54,6 +87,7 @@ public class AuthenticationService {
 	}
 
 	// 登入
+	@Transactional
 	public Boolean authenticate(AuthenticationRequest request, HttpServletResponse response) {
 		try {
 			authenticationManager.authenticate(
@@ -91,5 +125,10 @@ public class AuthenticationService {
 			islogin = false;
 		}
 		return islogin;
+	}
+
+	@Transactional
+	public List<Role> getroles() {		
+		return roleRepository.findAll();
 	}
 }

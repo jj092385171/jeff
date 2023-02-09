@@ -3,7 +3,7 @@ fetch("/morari/guest/share/header.html")
   .then(html => {
     // 將載入的 HTML 放入 .header 元素中
     document.querySelector(".header").innerHTML = html;
-    var currentURL = window.location.href;
+    let currentURL = window.location.href;
 
     // 判斷當前網頁的位置
     if (currentURL.indexOf("home") !== -1) {

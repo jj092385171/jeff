@@ -16,15 +16,20 @@ public class ProductCartServiceImpl implements ProductCartService {
 
 	@Autowired
 	public ProductCartRepository pcDao;
-	
+
 	// 依userid新增一筆購物車資料
 	@Override
 	public ProductCart create(ProductCart productcart) {
-		
-		
-		
-		productcart.setCtqty(1);
-		return pcDao.save(productcart);
+		ProductCart original = pcDao.findByUseridPdid(productcart.getUserid(),
+				productcart.getPdid());
+		if (original == null) {
+
+			productcart.setCtqty(1);
+			return pcDao.save(productcart);
+		}
+		original.setCtqty(original.getCtqty() + 1);
+		return pcDao.save(original);
+
 	}
 	// 依cartid來增加or減少購物車產品數量
 	@Override
@@ -33,7 +38,7 @@ public class ProductCartServiceImpl implements ProductCartService {
 		productcart.setPdid(original.getPdid());
 		productcart.setUserid(original.getUserid());
 		return pcDao.save(productcart);
-		
+
 	}
 	// 依id刪除購物車
 	@Override
@@ -54,6 +59,11 @@ public class ProductCartServiceImpl implements ProductCartService {
 	@Override
 	public List<ProductCartVo> selectAllVo() {
 		return pcDao.findAllVo();
+	}
+	// 查詢產品是否已在用戶購物車內(前台)
+	@Override
+	public ProductCart findByUseridPdid(String userid, Integer pdid) {
+		return pcDao.findByUseridPdid(userid, pdid);
 	}
 
 }

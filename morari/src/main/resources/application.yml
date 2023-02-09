@@ -32,10 +32,11 @@ spring:
 # -------------MSSQL------------- 
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
-    password: "0000"
-    username: sa
-#    password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
-#    username: Team4Admin    
+
+    # password: "0000"
+    # username: sa    
+    password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
+    username: Team4Admin    
 # -------------MYSQL------------- 
     # driver-class-name: com.mysql.cj.jdbc.Driver
     # url: jdbc:mysql://localhost:3306/campDB?serverTimezone=UTC&useSSL=false
@@ -99,8 +100,8 @@ spring:
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
   mail:
     host: smtp.gmail.com
-    username: 
-    password: 
+    username: camppingmapping@gmail.com
+    password: EEIT56cm
     port: 587
     protocol: smtp
     properties:

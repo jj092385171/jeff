@@ -11,12 +11,15 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepos
 import com.campingmapping.team4.spring.t401member.model.entity.OAuth2Request;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
+import com.campingmapping.team4.spring.t401member.model.entity.UserName;
+import com.campingmapping.team4.spring.t401member.model.entity.UserPrivacy;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -61,13 +64,38 @@ public class AuthAccountService {
 
   private UserProfiles setUpUserProfiles(OAuth2Request oAuth2Request) {
     UserProfiles user;
+
+    // Name
+    UserName userName = UserName.builder()
+        .firstname("")
+        .lastname("")
+        .build();
+    // Privacy
+    UserPrivacy userPrivacy = UserPrivacy.builder()
+        .address("")
+        .birthday(null)
+        .phone("")
+        .build();
+    // Detail
+    UserDetail userDetail = UserDetail.builder()
+        .nickname("")
+        .exp(1L)
+        .level(1)
+        .point(100L)
+        .gender(0)
+        .registerdata(new Date())
+        .subscribed(false)
+        .shot("https://storage.googleapis.com/morari/defaultshot")
+        .about("暫時沒有留下什麼")
+        .build();
     Role adminRole = roleRepository.findByName("USER").get();
     user = UserProfiles.builder()
-    .email(oAuth2Request.email())
-    .uid(UUID.randomUUID())
-    .build();
+        .email(oAuth2Request.email())
+        .uid(UUID.randomUUID())
+        .usernames(userName)
+        .userprivacy(userPrivacy)
+        .build();
     user.getRoles().add(adminRole);
-    UserDetail userDetail = new UserDetail();
     oAuth2Request.name().ifPresent(
         name -> {
           userDetail.setNickname(name);

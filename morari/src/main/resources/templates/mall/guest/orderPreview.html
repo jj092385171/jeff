@@ -2,9 +2,9 @@
 <html lang="zh-TW">
 
 <head>
-  <script src="/morari/guest/js/head.js"></script>
-  <!-- sharepage 公用頁面 -->
-  <script src="/morari/guest/js/share.js"></script>
+	<script src="/morari/guest/js/head.js"></script>
+	<!-- sharepage 公用頁面 -->
+	<script src="/morari/guest/js/share.js"></script>
 
 	<style>
 		td {
@@ -42,7 +42,8 @@
 							tableData +=
 								"<tr>" +
 								"<td>" + njs[i].pdname + "</td>" + "<td>" + njs[i].pdprice + "</td>" +
-								"<td>" + njs[i].ctqty + "</td>" + "<td>" + njs[i].pdpicture + "</td>" +
+								"<td>" + njs[i].ctqty + "</td>" +
+								"<td><img src='" + njs[i].pdpicture + "' style='max-width: 150px;'></td>" +
 								"<td style='text-align:right'>" + money + '$' + "</td>" +
 								"</tr>"
 						}
@@ -74,12 +75,12 @@
 				alert('收件地址未填寫');
 				return;
 			}
-			
+
 			if (confirm("確定提交訂單?")) {
 
 				$.ajax({
 					type: 'post',
-					url: '/morari/ProductOrder/create?odrecipient='+odrecipient+"&odrecipientphone="+odrecipientphone+"&odshippingaddress="+odshippingaddress+"&money="+total,
+					url: '/morari/ProductOrder/create?odrecipient=' + odrecipient + "&odrecipientphone=" + odrecipientphone + "&odshippingaddress=" + odshippingaddress + "&money=" + total,
 					data: JSON.stringify(njsdata),
 					dataType: 'text',
 					contentType: "application/json",
@@ -100,52 +101,52 @@
 </head>
 
 <body style="display: none">
-  <!-- Header Section Start -->
-  <div class="header"></div>
+	<!-- Header Section Start -->
+	<div class="header"></div>
 
-  <!-- Header Section End -->
-
-
-
-
-
-  <!-- 分離範例 -->
-  <table id="result"></table>
-  <script src="/morari/mall/js/test.js"></script>
+	<!-- Header Section End -->
 
 
 
 
 
+	<!-- 分離範例 -->
+	<table id="result"></table>
+	<script src="/morari/mall/js/test.js"></script>
 
 
-  <!-- Footer Section Start -->
-  <div class="footer"></div>
-  <!-- Footer Section End -->
-
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
 
-  <!-- Vendor JavaScript File -->
-  <script src="/morari/guest/vendor/jquery/jquery.min.js" ></script>
-  <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
-  <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
-  <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
-  <script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
-  <script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
-  <script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
-  <script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
-  <script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
-  <script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
-  <script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
-  <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
 
-  <!-- Booking Javascript File -->
-  <script src="/morari/guest/js/booking.js" defer></script>
-  <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
 
-  <!-- Main Javascript File -->
-  <script src="/morari/guest/js/main.js" defer></script>
+
+	<!-- Footer Section Start -->
+	<div class="footer"></div>
+	<!-- Footer Section End -->
+
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+	<!-- Vendor JavaScript File -->
+	<script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+	<script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+	<script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+	<script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
+	<script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
+	<script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
+	<script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
+	<script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
+	<script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
+	<script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+	<script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+	<script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+	<!-- Booking Javascript File -->
+	<script src="/morari/guest/js/booking.js" defer></script>
+	<script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
+
+	<!-- Main Javascript File -->
+	<script src="/morari/guest/js/main.js" defer></script>
 
 
 </body>

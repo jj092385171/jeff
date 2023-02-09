@@ -1,17 +1,15 @@
 package com.campingmapping.team4.spring.utils.service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Date;
@@ -20,11 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationResponse;
@@ -104,12 +98,12 @@ public class JwtService {
       return null;
     }
     Claims claims = extractAllClaims(jwt);
-    UUID uid = UUID.fromString((String)claims.get("uid"));
+    UUID uid = UUID.fromString((String) claims.get("uid"));
     return uid;
   }
 
   // 設置HttpOnly&Https的Cookie
-  private Cookie setCookie(String key, String value) {
+  public Cookie setCookie(String key, String value) {
     Cookie cookie = new Cookie(key, value);
     cookie.setPath("/");
     cookie.setHttpOnly(true);
@@ -126,69 +120,8 @@ public class JwtService {
         .orElse(null);
   }
 
-  // 驗證刷新過期令牌
-  public void refreshCheckToken(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain,
-      UserDetailsService userDetailsService)
-      throws IOException, ServletException {
-    AuthenticationResponse authenticationResponse;
-    // 取得access token和refresh token
-    Cookie[] cookies = request.getCookies();
-    String accessToken = null;
-    String refreshToken = null;
-    if (cookies != null) {
-      accessToken = getToken(cookies, MyConstants.JWT_COOKIE_NAME);
-      refreshToken = getToken(cookies, MyConstants.JWT_REFRESH_COOKIE_NAME);
-    }
-    if (accessToken == null || accessToken.isEmpty()) {
-      // JWT空 跳轉登入畫面
-      response.sendRedirect("/morari/login");
-      return;
-    }
-    Boolean remember = (Boolean) extractAllClaims(refreshToken).get("remember");
-    String email = extractUsername(accessToken);
-    UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-    if (isTokenExpired(accessToken)) {
-      if (isTokenExpired(refreshToken)) {
-        // 如果access token和refresh token都過期，刪除token
-        removeToken(response);
-        // 跳轉登入
-        response.sendRedirect("/morari/login");
-        return;
-      } else {
-        // 檢查refresh token是否有效(過期=無效不需在驗證一次是否過期)
-        if (isTokenValid(refreshToken, userDetails)) {
-          // 生成新令牌
-          authenticationResponse = generateToken(userDetails, remember);
-          // 刷新Cookie
-          refreshTokenToCookie(response, authenticationResponse);
-          // 設置安全上下文
-          securityContext(userDetails, request);
-          // 繼續導向
-          filterChain.doFilter(request, response);
-          return;
-        } else {
-          // access token過期refresh token驗證失敗
-          // 清空有JWT的Cookie
-          removeToken(response);
-          // 跳轉登入
-          response.sendRedirect("/morari/login");
-          return;
-        }
-      }
-    } else if (isTokenValid(accessToken, userDetails)) {
-      // 設置安全上下文
-      securityContext(userDetails, request);
-      filterChain.doFilter(request, response);
-      return;
-    } else {
-      // access token驗證失敗
-      response.sendRedirect("/morari/login");
-      return;
-    }
-  }
-
   // 刷新新增令牌至Cookie
-  void refreshTokenToCookie(HttpServletResponse response, AuthenticationResponse authenticationResponse) {
+  public void refreshTokenToCookie(HttpServletResponse response, AuthenticationResponse authenticationResponse) {
     Cookie accessTokenCookie = setCookie(MyConstants.JWT_COOKIE_NAME, authenticationResponse.accessToken());
     response.addCookie(accessTokenCookie);
     Cookie refreshTokenCookie = setCookie(MyConstants.JWT_REFRESH_COOKIE_NAME,
@@ -197,48 +130,54 @@ public class JwtService {
   }
 
   // 清空雙JWT
-  private void removeToken(HttpServletResponse response) {
+  public void removeToken(HttpServletResponse response) {
     Cookie accessTokenCookie = setCookie(MyConstants.JWT_COOKIE_NAME,
         null);
+    accessTokenCookie.setMaxAge(0);
     response.addCookie(accessTokenCookie);
+    
     Cookie refreshTokenCookie = setCookie(MyConstants.JWT_REFRESH_COOKIE_NAME,
         null);
+    refreshTokenCookie.setMaxAge(0);
     response.addCookie(refreshTokenCookie);
+
+    Cookie googleCookie = setCookie(MyConstants.GOOGLE_COOKIE_NAME,
+        null);
+    googleCookie.setMaxAge(0);
+    googleCookie.setHttpOnly(true);
+    googleCookie.setSecure(true);
+    googleCookie.setPath("/morari");;
+    response.addCookie(googleCookie);
   }
 
   // 是否過期
-  private boolean isTokenExpired(String token) {
+  public boolean isTokenExpired(String token) {
     return extractExpiration(token).before(new Date());
   }
 
   // 拿取過期時間
-  private Date extractExpiration(String token) {
+  public Date extractExpiration(String token) {
     return extractClaim(token, Claims::getExpiration);
   }
 
   // 拿取全部內容
-  private Claims extractAllClaims(String token) {
-    return Jwts
-        .parserBuilder()
-        .setSigningKey(getSignInKey())
-        .build()
-        .parseClaimsJws(token)
-        .getBody();
+  public Claims extractAllClaims(String token) {
+    try {
+      return Jwts
+          .parserBuilder()
+          .setSigningKey(getSignInKey())
+          .build()
+          .parseClaimsJws(token)
+          .getBody();
+    } catch (ExpiredJwtException e) {
+      return e.getClaims();
+    }
+
   }
 
-  private Key getSignInKey() {
+  public Key getSignInKey() {
     byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
     return Keys.hmacShaKeyFor(keyBytes);
   }
 
-  // 設置安全上下文
-  private void securityContext(UserDetails userDetails, HttpServletRequest request) {
-    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-        userDetails,
-        null,
-        userDetails.getAuthorities());
-    authToken.setDetails(
-        new WebAuthenticationDetailsSource().buildDetails(request));
-    SecurityContextHolder.getContext().setAuthentication(authToken);
-  }
 }

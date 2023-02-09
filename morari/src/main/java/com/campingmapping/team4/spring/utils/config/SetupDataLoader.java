@@ -20,11 +20,6 @@ import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserName;
 import com.campingmapping.team4.spring.t401member.model.entity.UserPrivacy;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.campingmapping.team4.spring.t424camp.model.dao.repository.CityRepository;
-import com.campingmapping.team4.spring.t424camp.model.dao.repository.TagRepository;
-import com.campingmapping.team4.spring.t424camp.model.entity.City;
-import com.campingmapping.team4.spring.t424camp.model.entity.Tag;
-
 import jakarta.transaction.Transactional;
 
 @Component
@@ -40,12 +35,6 @@ public class SetupDataLoader implements
     // private UserRoleRepository userRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
-    @Autowired
-    private TagRepository tagRepository;
-    
-    @Autowired
-    private CityRepository cityRepository;
 
     @Override
     @Transactional
@@ -62,18 +51,28 @@ public class SetupDataLoader implements
 
         Optional<UserProfiles> userOptional = userRepository.findByEmail(MyConstants.SUPER_ADMIN_NAME);
         UserProfiles userProfiles;
+        // Name
+        UserName userName = UserName.builder()
+                .firstname("camp")
+                .lastname("morari")
+                .build();
+        // Privacy
+        UserPrivacy userPrivacy = UserPrivacy.builder()
+                .address("morari")
+                .phone("0912345678")
+                .build();
         // Detail
         UserDetail userDetail = UserDetail.builder()
-                .nickname("卍~超-級=管=理-員~卐")
+                .nickname("燚~超-級=管=理-員~燚")
                 .exp(999999L)
-                .leavel(999999)
+                .level(999999)
                 .point(99999999L)
+                .gender(0)
+                .subscribed(false)
+                .shot("https://storage.googleapis.com/morari/adminshot")
+                .about("想幹嘛就幹嘛")
                 .registerdata(new Date())
                 .build();
-        // Name
-        UserName userName = UserName.builder().firstname("").build();
-        // Privacy
-        UserPrivacy userPrivacy = UserPrivacy.builder().address("").build();
         try {
             if (userOptional.isPresent()) {
                 userProfiles = userOptional.get();
@@ -87,7 +86,8 @@ public class SetupDataLoader implements
                 userRepository.save(userProfiles);
             } else {
                 // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
-
+                userDetail.setRegisterdata(new Date());
+                userPrivacy.setBirthday(new Date());
                 userProfiles = UserProfiles.builder()
                         .email(MyConstants.SUPER_ADMIN_NAME)
                         .password(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD))
@@ -98,16 +98,6 @@ public class SetupDataLoader implements
                         .build();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
-
-                String[] tags = { "大草原", "夜景", "親子娛樂" };
-                for (int i = 0; i < tags.length; i++) {
-                    createTagIfNotFound(tags[i]);
-                }
-
-                String[] citys = { "新北", "桃園", "苗栗" };
-                for (int i = 0; i < citys.length; i++) {
-                    createCityIfNotFound(citys[i]);
-                }
             }
 
         } catch (Exception e) {
@@ -121,17 +111,5 @@ public class SetupDataLoader implements
     public Role createRoleIfNotFound(String name) {
         return roleRepository.findByName(name)
                 .orElseGet(() -> roleRepository.save(Role.builder().name(name).build()));
-    }
-
-    @Transactional
-    public Tag createTagIfNotFound(String tagName) {
-        return tagRepository.findByTagName(tagName)
-                .orElseGet(() -> tagRepository.save(new Tag(tagName)));
-    }
-
-    @Transactional
-    public City createCityIfNotFound(String cityName) {
-        return cityRepository.findByCityName(cityName)
-                .orElseGet(() -> cityRepository.save(new City(cityName)));
     }
 }

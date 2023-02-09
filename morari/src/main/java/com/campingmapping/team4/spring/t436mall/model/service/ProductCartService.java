@@ -18,4 +18,6 @@ public interface ProductCartService {
 	public List<ProductCartVo> selectAllByUserId(String userid);
 	// 查詢購物車所有資料(後台)
 	public List<ProductCartVo> selectAllVo();
+	// 查詢產品是否已在用戶購物車內(前台)
+	public ProductCart findByUseridPdid(String userid,Integer pdid);
 }

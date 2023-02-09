@@ -30,11 +30,6 @@ public class ResumeAdminController {
 	public String processMainAction1() {
 		return "work/admin/manager/resumeCrud";
 	}
-	// 啟動insert
-//	@PostMapping("/insert.controller")
-//	public String processMainAction2() {
-//		return "work/admin/insert";
-//	}
 
 	// 啟動select
 	@PostMapping("/select.controller")
@@ -43,9 +38,15 @@ public class ResumeAdminController {
 	}
 
 	// 啟動update
-	@PostMapping("/update.controller/{number}")
+	@GetMapping("/update.controller/{number}")
 	public String processMainAction4() {
 		return "work/admin/manager/resumeUpdate";
+	}
+	
+	// 啟動mail輸入
+	@GetMapping("/startMail.controller/{m}")
+	public String processMainAction5() {
+		return "work/admin/manager/mailInsert";
 	}
 	
 	// 刪除
@@ -53,7 +54,7 @@ public class ResumeAdminController {
 	@ResponseBody
 	public String processDeleteAction(@PathVariable Integer number) {
 		rService.deleteById(number);
-		return "ok";
+		return "刪除成功";
 	}
 	
 	// 修改

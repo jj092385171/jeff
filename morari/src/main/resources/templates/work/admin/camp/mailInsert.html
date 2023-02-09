@@ -3,9 +3,10 @@
 
 <head>
     <script src="/morari/admin/js/head.js"></script>
-	
+
+    <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
-	
+
 </head>
 
 <body id="page-top" style="display: none">
@@ -28,9 +29,20 @@
 
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
+<!-- 這裡 -->
+	<form  id="sendMail">
+		e-mail<input id="mail" name="mail"type="text" readonly><br>
+		主旨<input id="subject" name="subject" type="text"><br>
+		內容<textarea id="content" name="remark" cols="100" rows="20"></textarea><br>
 
-                   
+		<input id="send" type="submit" value="送出"><br>
+		<input type="reset" value="取消"><br>
 
+	</form>
+
+	<form action="/morari/admin/user/work/startCrud.controller" method="GET">
+		<input type="submit" value="回上一頁">
+	</form>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -56,7 +68,7 @@
     <div class="loginoutshare"></div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/morari/admin/vendor/jquery/jquery.min.js" defer></script>
+    <script src="/morari/admin/vendor/jquery/jquery.min.js" ></script>
     <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 
     <!-- Core plugin JavaScript-->
@@ -72,6 +84,11 @@
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
     
+    <script src="/morari/work/campJs/mailInsert.js" defer></script>
+    <script type="text/javascript">
+
+	</script>
+
 </body>
 
 </html>

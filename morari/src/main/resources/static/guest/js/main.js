@@ -70,13 +70,12 @@ window.onload = function () {
     document.body.style.display = 'block';
     // 登入狀態驗證
     fetch("/morari/api/auth/state", {
-        method: "POST",
+        method: "Get",
         // 發送請求時附帶Cookie
         credentials: "include"
     })
         .then(response => response.json())
         .then(loginstate => {
-            console.log(loginstate)
             if (loginstate) {
                 // 登入
                 fetch("/morari/guest/share/loginstate.html")
@@ -84,6 +83,12 @@ window.onload = function () {
                     .then(html => {
                         // 將載入的 HTML 放入 .footer 元素中
                         document.getElementById("loginstate").innerHTML = html;
+                        // 找用戶照片放入SRC
+                        fetch("/morari/guest/camper/api/shot")
+                            .then(response => response.text())
+                            .then(shotUrl => {
+                                document.querySelector('.userShot').src = shotUrl;
+                            })
                     });
             } else {
                 // 未登入
@@ -97,9 +102,6 @@ window.onload = function () {
 
     // 監聽頁面上的點擊事件
     document.addEventListener("click", function (event) {
-
-        console.log("in")
-
         let loginstate = document.getElementById("loginstate");
         let dropdownContent = document.getElementById("dropdown-content");
         if (event.target !== loginstate && event.target.parentNode !== loginstate &&
@@ -115,9 +117,6 @@ function toggleDropdown() {
     let dropdownContent = document.getElementById("dropdown-content");
     if (dropdownContent.style.display === "none") {
         dropdownContent.style.display = "block";
-
-        console.log(dropdownContent.style.display)
-
     } else {
         dropdownContent.style.display = "none";
     }

@@ -26,7 +26,7 @@ public class UserDetail {
 
     // 等級
     // @Column(columnDefinition = "default 1")
-    private Integer leavel;
+    private Integer level;
 
     // 點數
     // @Column(columnDefinition = "default 0")

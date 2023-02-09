@@ -16,7 +16,7 @@ public record UesrDetailAdminWeb(
         String address,
         Integer gender,
         Long exp,
-        Integer leavel,
+        Integer level,
         Long point,
         Date registerdata,
         Boolean subscribed,

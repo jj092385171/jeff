@@ -3,9 +3,11 @@ package com.campingmapping.team4.spring.utils.controller.api;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t401member.model.dto.AuthenticationRequest;
 import com.campingmapping.team4.spring.t401member.model.dto.RegisterRequest;
+import com.campingmapping.team4.spring.t401member.model.entity.Role;
 import com.campingmapping.team4.spring.utils.service.AuthenticationService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,11 +54,17 @@ public class AuthenticationController {
 
   }
 
-  @PostMapping("/state")
+  @GetMapping("/state")
   @ResponseBody
   public Boolean loginstate(
       HttpServletRequest request) {
     return service.loginstate(request);
+  }
+
+  @GetMapping("/roles")
+  @ResponseBody
+  public List<Role> getroles() {
+    return service.getroles();
   }
 
   // @PostMapping("/logout")
@@ -70,6 +79,5 @@ public class AuthenticationController {
   // // 重定向到登入頁面
   // response.sendRedirect("/morari");
   // }
-  
 
 }

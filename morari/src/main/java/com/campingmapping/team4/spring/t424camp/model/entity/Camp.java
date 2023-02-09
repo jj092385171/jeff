@@ -1,12 +1,14 @@
 package com.campingmapping.team4.spring.t424camp.model.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -29,7 +31,6 @@ public class Camp implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CAMPID")
@@ -67,12 +68,16 @@ public class Camp implements Serializable {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
 	private Set<Site> sites = new HashSet<Site>();
-	
+
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
 	private Set<Order> campOrders = new HashSet<Order>();
-
 	
+	//09的
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp")
+//	private Collection<JobBean> job;
+
 	public Camp() {
 	}
 
@@ -88,7 +93,7 @@ public class Camp implements Serializable {
 		this.tags = tags;
 		this.userprofiles = userprofiles;
 	}
-	
+
 	public Camp(String campName, City city, String location, String campPicturesPath, String description,
 			Set<Tag> tags, UserProfiles userprofiles) {
 		super();
@@ -101,7 +106,6 @@ public class Camp implements Serializable {
 		this.userprofiles = userprofiles;
 	}
 
-	
 	public Integer getCampID() {
 		return campID;
 	}
