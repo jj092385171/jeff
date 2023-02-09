@@ -55,5 +55,4 @@ public class ResumeBean {
 	@Column(name = "skill")
 	private String skill;// 專業技能
 
-
 }

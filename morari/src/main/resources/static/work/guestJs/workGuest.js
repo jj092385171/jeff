@@ -47,26 +47,18 @@ $(document).ready(function() {
 function mailResume(rackid) {
 	$.ajax({
 		type: 'POST',
-		url: '/morari/guest/work/guestSelectResume.controller/' + uid,
-		dataType: 'json',
-		success: function(resume) {
-			console.log(resume);
-
-			$.ajax({
-				type: 'POST',
-				url: '/morari/guest/work/updateResume.controller/' + rackid,
-				contentType: 'application/json',
-				data: JSON.stringify(resume),
-				success: function(response) {
-					console.log(response);
-					alert(response);
-					window.location.href = '/morari/guest/work/workGuest.controller';
-				}
-			});
+		url: '/morari/guest/work/applyJob.controller/' + uid + '/' + rackid,
+		dataType: 'TEXT',
+		success: function(data) {
+			console.log(data);
+			alert(data);
+			window.location.href = '/morari/guest/work/workGuest.controller';
 		}
 	});
-
 }
+
+
+
 
 function selectJob(job) {
 	$.ajax({

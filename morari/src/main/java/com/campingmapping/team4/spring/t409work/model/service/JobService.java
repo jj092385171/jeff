@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +28,8 @@ public class JobService {
 
 	@Autowired
 	private UserRepository uDao;
-	
-	@Autowired 
+
+	@Autowired
 	private CampRepository campDao;
 
 	// 秀全部
@@ -97,21 +96,23 @@ public class JobService {
 		ArrayList<JobBean> arrayList = new ArrayList<JobBean>(job);
 		return arrayList;
 	}
+
 	// 透過uid搜尋camp的東西
 	public ArrayList<Camp> findUUid(UUID uid) {
 		Collection<Camp> camp = uDao.findById(uid).get().getCamp();
 		ArrayList<Camp> arrayList = new ArrayList<Camp>(camp);
 		return arrayList;
 	}
+
 	// 透過campid搜尋camp的東西
 	public Camp findCampid(Integer campid) {
 		Camp camp = campDao.findById(campid).get();
 		return camp;
 	}
-//	// 透過campName搜尋camp的東西
-//	public Camp findByCampisLike(String campName) {
-//		Camp camp = campDao.findByCampName(campName);
-//		return camp;
-//	}
+
+	// 存履歷到jobs裡
+	public JobBean save(JobBean job) {
+		return jobDao.save(job);
+	}
 
 }

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
@@ -42,6 +45,9 @@ public class GuestworkController {
 
 	@Autowired
 	private JobService jService;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	// 啟動我的首頁
 	@GetMapping("/workGuest.controller")
@@ -72,7 +78,6 @@ public class GuestworkController {
 	@ResponseBody
 	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean) {
 		UUID uid = jwtService.getUId(request);
-		System.out.println("111111111111111");
 		return rService.insert(rBean, uid);
 	}
 
@@ -83,14 +88,7 @@ public class GuestworkController {
 		return rService.updateJob(rBean, number);
 	}
 
-	// 修改
-//	@PostMapping("/updateResume.controller/{rackid}")
-//	@ResponseBody
-//	public String processUpdateAction(@RequestBody ResumeBean rBean,@PathVariable Integer rackid) {
-//		rService.updateResume(rBean,rackid);
-//		System.out.println("111111111111");
-//		return "完成應徵動作！";
-//	}
+	
 	// 模糊搜尋
 	@PostMapping("/guestSelectLike.controller/{job}")
 	@ResponseBody
@@ -113,6 +111,25 @@ public class GuestworkController {
 	public List<JobBean> processShowJobAllAction() {
 		List<JobBean> result = jService.findAll();
 		return result;
+	}
+	
+	// 職缺應徵投履歷
+	@PostMapping("/applyJob.controller/{uid}/{rackid}")
+	@ResponseBody
+	public String applyJob(@PathVariable("uid") UUID uid,
+						@PathVariable("rackid") Integer rackid) {
+	   // 通過uid找到履歷
+		ResumeBean resume = userRepository.findById(uid).get().getResume();
+	   // 通過rackid找到職缺
+	   JobBean job = jService.findById(rackid);
+	   // 將職缺加入履歷的jobs中
+	   resume.getJobs().add(job);
+	   // 將履歷加入職缺的resumes中
+	   job.getResumes().add(resume);
+	   // 儲存履歷和職缺
+	   rService.save(resume);
+	   jService.save(job);
+	   return "完成應徵！";
 	}
 
 	// 秀圖片

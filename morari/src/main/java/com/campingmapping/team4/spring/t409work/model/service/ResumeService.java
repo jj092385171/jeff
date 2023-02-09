@@ -29,7 +29,7 @@ public class ResumeService {
 
 	@Autowired
 	private UserRepository uDao;
-	
+
 	@Autowired
 	private JobRepository jDao;
 
@@ -60,13 +60,13 @@ public class ResumeService {
 	public void deleteById(int number) {
 		reDao.deleteById(number);
 	}
-	
+
 	// 改履歷內容
-	public ResumeBean updateJob(ResumeBean rBean,Integer number) {
+	public ResumeBean updateJob(ResumeBean rBean, Integer number) {
 		Optional<ResumeBean> result = reDao.findById(number);
 		if (result.isPresent()) {
 			ResumeBean resumeBean = result.get();
-	        // 將前端傳進來的rBean的值複製到resumeBean
+			// 將前端傳進來的rBean的值複製到resumeBean
 //			resumeBean.setJob(result.get().getJob().getRackid());
 			resumeBean.setName(rBean.getName());
 			resumeBean.setAge(rBean.getAge());
@@ -75,14 +75,14 @@ public class ResumeService {
 			resumeBean.setPhone(rBean.getPhone());
 			resumeBean.setEducational(rBean.getEducational());
 			resumeBean.setSkill(rBean.getSkill());
-			
+
 //			resumeBean.setPtime(result.get().getPtime());
 //	        jBean.setUserprofiles(result.get().getUserprofiles().getUid());	        
-	        // 使用save更新資料庫中的資料
+			// 使用save更新資料庫中的資料
 			return reDao.save(resumeBean);
-	    }
-	    //找不到對應的資料
-	    return null;
+		}
+		// 找不到對應的資料
+		return null;
 	}
 
 	// 透過number抓一筆資料(有需要嗎?)
@@ -97,7 +97,7 @@ public class ResumeService {
 
 	// 透過會員id找履歷
 	public ResumeBean findByUid(UUID uid) {
-		ResumeBean result= uDao.findById(uid).get().getResume();
+		ResumeBean result = uDao.findById(uid).get().getResume();
 		return result;
 //		ResumeBean result = null;
 //		Optional<UserProfiles> profile = uDao.findById(uid);
@@ -106,13 +106,18 @@ public class ResumeService {
 //		}
 //		return result;
 	}
-	
+
 	// 透過rackid找應徵的履歷
 	public List<ResumeBean> findRid(Integer rackid) {
-		
+
 		JobBean findById = jDao.findById(rackid).get();
 		Collection<ResumeBean> resume = findById.getResumes();
 		ArrayList<ResumeBean> arrayList = new ArrayList<ResumeBean>(resume);
 		return arrayList;
+	}
+
+	// 存job到resumes裡
+	public ResumeBean save(ResumeBean resume) {
+		return reDao.save(resume);
 	}
 }
