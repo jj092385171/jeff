@@ -47,9 +47,10 @@ spring:
       hibernate:
 # -------------MSSQL------------- 
         dialect: org.hibernate.dialect.SQLServer2016Dialect
-        '[allow_update_outside_transaction]': true
-        '[hbm2ddl.auto]': update
-        '[format_sql]': true
+        allow_update_outside_transaction: true
+        format_sql: true
+        hbm2ddl:
+          auto: update
     show-sql: true
 # -------------MYSQL-------------
         # dialect: org.hibernate.dialect.MySQL8Dialect
@@ -100,7 +101,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: camppingmapping@gmail.com
-    password: EEIT56cm
+    password: qmwwvqnergjzkdzq
     port: 587
     protocol: smtp
     properties:

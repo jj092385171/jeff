@@ -60,22 +60,23 @@ public class UserProfiles implements UserDetails {
 
   @Embedded
   @Builder.Default
-  UserName usernames=new UserName();
+  UserName usernames = new UserName();
 
   @Embedded
   @Builder.Default
-  UserPrivacy userprivacy=new UserPrivacy();
+  UserPrivacy userprivacy = new UserPrivacy();
 
   @Embedded
   @Builder.Default
-  UserDetail userdetail=new UserDetail();
+  UserDetail userdetail = new UserDetail();
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @ManyToMany(fetch = FetchType.EAGER)
   @Builder.Default
-  @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = {
-      @JoinColumn(name = "rid") })
+  @JoinTable(name = "user_role", joinColumns = {
+      @JoinColumn(name = "uid") }, inverseJoinColumns = {
+          @JoinColumn(name = "rid") })
   private Set<Role> roles = new HashSet<>();
 
   @Override
@@ -114,22 +115,23 @@ public class UserProfiles implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
-// PO文
+
+  // PO文
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Post> post;
-// 留言
+  // 留言
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<PostComment> postcomments;
-// 職缺
+  // 職缺
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<JobBean> job;
-// 履歷
+  // 履歷
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
@@ -139,12 +141,12 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Initiating> initiatings;
-// 登入歷史
+  // 登入歷史
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<LoginHistory> loginhistories;
-// Camp訂單
+  // Camp訂單
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")

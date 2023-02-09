@@ -10,8 +10,6 @@ fetch("/morari/camper/html/usertable.html")
 		$(document)
 			.ready(
 				function () {
-
-
 					table = $('#memberlist')
 						.DataTable(
 							{
@@ -698,6 +696,7 @@ function edituser(index) {
 						const checkbox = document.createElement('input');
 						checkbox.type = 'checkbox';
 						checkbox.name = 'roletype';
+						checkbox.id = role.rid;
 						checkbox.value = role.name;
 						checkbox.checked = 'checked';
 						const span = document.createElement('span');
@@ -710,14 +709,16 @@ function edituser(index) {
 
 					// 拿取欄位資訊帶入編輯欄位
 					let userdata = receivedData[index];
-					document.getElementById("uid").innerHTML = '<img src="https://storage.googleapis.com/morari/adminshot" alt="shot" style="max-width: 80px; padding: 0px; border: 1px ; border-radius: 10px;" id="shot" class="btn"> <input type="file" class="form-control-file" id="shotInput" accept="image/*" style="display: none;">' + userdata.uid;
+					document.getElementById("titleuid").innerHTML = '<img src="https://storage.googleapis.com/morari/adminshot" alt="shot" style="max-width: 80px; padding: 0px; border: 1px ; border-radius: 10px;" id="shotimg" class="btn"> <input type="file" class="form-control-file" id="shotInput" accept="image/*" style="display: none;">' + userdata.uid;
 					for (const key in userdata) {
 						if (userdata.hasOwnProperty(key)) {
 							const element = userdata[key];
 							if (key == "shot") {
-								document.getElementById("shot").src = element;
+								document.getElementById("shotimg").src = element;
+								document.getElementById("shot").value = element;
 							} else if (key == "roles") {
 								element.forEach(r => {
+									console.log(r.rid)
 									const roles = r.name;
 									let checkboxes = document.getElementsByName("roletype");
 									checkboxes.forEach(checkbox => {
@@ -730,25 +731,22 @@ function edituser(index) {
 									)
 								});
 							} else if (key == "birthday") {
-								console.log(element)
 								let today = moment(Date.parse(element)).format('YYYY-MM-DD');
-								console.log(today)
 								// birthdayInput.value = today;
 								document.getElementById("birthday").value = today;
 							} else if (key == "uid") {
 								edituid = element;
 								document.getElementById(key).value = element;
-								document.getElementById("formuid").value = element;
+								document.getElementById("titleuid").value = element;
 							} else {
 								document.getElementById(key).value = element;
 							}
 						}
 					}
-
 					// dialog顯示
 					document.querySelector(".useredit").showModal();
 					// 點取圖片開啟上傳檔案
-					document.getElementById("shot").addEventListener("click", function () {
+					document.getElementById("shotimg").addEventListener("click", function () {
 						document.getElementById("shotInput").click();
 					});
 
@@ -763,10 +761,9 @@ function edituser(index) {
 					//   把圖片讀取後顯示
 					document.getElementById("shotInput").addEventListener("change", function () {
 						file = this.files[0];
-						console.log(file)
 						let reader = new FileReader();
 						reader.onload = function (e) {
-							document.getElementById("shot").src = e.target.result;
+							document.getElementById("shotimg").src = e.target.result;
 						};
 						reader.readAsDataURL(file);
 					});
@@ -818,13 +815,63 @@ function saveedit() {
 	let formData = new FormData();
 	formData.append("file", file);
 	formData.append("uid", edituid);
-	fetch("/morari/guest/camper/api/shot",{
-		method: "PUT",
-		body: formData
-	}).then(response=>response.text())
-	.then(a=>console.log(a))
 
-	document.getElementById("usereditform").submit();
+	let inputFile = document.getElementById("shotInput");
+	if (inputFile.files.length > 0) {
+		console.log("有選擇的檔案");
+		fetch("/morari/guest/camper/api/shot", {
+			method: "PUT",
+			body: formData
+		}).then(response => response.text())
+			.then(a => {
+				document.getElementById("shot").value = a;
+				getuservalue();
+			})
+	} else {
+		getuservalue();
+	}
+
+
+
+	// document.getElementById("usereditform").submit();
+}
+function getuservalue() {
+	let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+	let rolesvalues = [];
+	for (var i = 0; i < checkboxes.length; i++) {
+		rolesvalues.push({
+			rid: checkboxes[i].id,
+			name: checkboxes[i].value
+		});
+	}
+	console.log(rolesvalues);
+	let data = {
+		uid: document.getElementById("uid").value,
+		nickname: document.getElementById("nickname").value,
+		firstname: document.getElementById("firstname").value,
+		lastname: document.getElementById("lastname").value,
+		email: document.getElementById("email").value,
+		phone: document.getElementById("phone").value,
+		roles: rolesvalues,
+		birthday: document.getElementById("birthday").value,
+		address: document.getElementById("address").value,
+		gender: document.getElementById("gender").value,
+		exp: document.getElementById("exp").value,
+		level: document.getElementById("level").value,
+		point: document.getElementById("point").value,
+		registerdata: document.getElementById("registerdata").value,
+		subscribed: document.getElementById("subscribed").checked,
+		shot: document.getElementById("shot").value,
+		about: document.getElementById("about").value
+	};
+	console.log(data.roles)
+	fetch("/morari/admin/camper/api/user",{
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(data)
+	})
 }
 
 
