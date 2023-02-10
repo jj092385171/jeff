@@ -14,4 +14,5 @@ public interface UserService {
 
     public String getNickname(HttpServletRequest request);
 
+    public void adminUpdateUser(UesrDetailAdminWeb user);
 }

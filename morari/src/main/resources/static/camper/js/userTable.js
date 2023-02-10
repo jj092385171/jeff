@@ -592,22 +592,20 @@ fetch("/morari/camper/html/usertable.html")
 								// 	responsivePriority : 2,
 								// }, 
 
-								initComplete: function () {
-									table.responsive.recalc();
-								},
+								
 								"paging": true,
 								"searching": true,
 
 
 							})
 					// 翻頁響應刷新
-					$('.dataTables_paginate').on('click', function () {
-						table.responsive.recalc();
-						setTimeout(function () {
-							table.responsive.recalc();
-						}, 500);
+					// $('.dataTables_paginate').on('click', function () {
+					// 	table.responsive.recalc();
+					// 	setTimeout(function () {
+					// 		table.responsive.recalc();
+					// 	}, 500);
 
-					});
+					// });
 					// 選取整ROW
 					$('#memberlist tbody').on('click', 'tr', function () {
 						let index = table.row(this).index();
@@ -620,7 +618,10 @@ fetch("/morari/camper/html/usertable.html")
 					// 響應刷新
 					setTimeout(function () {
 						table.responsive.recalc();
-					}, 1000);
+					}, 500);
+					// setTimeout(function () {
+					// 	table.responsive.recalc();
+					// }, 1000);
 
 
 
