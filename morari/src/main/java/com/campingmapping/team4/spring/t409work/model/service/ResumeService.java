@@ -96,8 +96,8 @@ public class ResumeService {
 	}
 	
 	// 透過rackid找應徵的履歷
-	public Collection<ResumeBean> findRid(Integer rackID) {
-		Collection<ResumeBean> resumes = jDao.findById(rackID).get().getResumes();
+	public Collection<ResumeBean> findRid(Integer rackid) {
+		Collection<ResumeBean> resumes = jDao.findById(rackid).get().getResumes();
 		System.out.println("resumes="+resumes);
 		return resumes;
 		

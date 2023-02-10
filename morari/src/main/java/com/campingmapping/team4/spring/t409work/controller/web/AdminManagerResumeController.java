@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -93,8 +94,8 @@ public class AdminManagerResumeController {
 	// 透過rackid搜尋(在企業主端秀出來用)
 	@PostMapping("/selectRid.controller/{rackid}")
 	@ResponseBody
-	public List<ResumeBean> processSelectRidAction(@PathVariable Integer rackid) {
-		List<ResumeBean> result = rService.findRid(rackid);
+	public Collection<ResumeBean> processSelectRidAction(@PathVariable Integer rackid) {
+		Collection<ResumeBean> result = rService.findRid(rackid);
 	
 		return result;
 	}
