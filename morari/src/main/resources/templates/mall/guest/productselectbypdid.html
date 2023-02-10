@@ -10,6 +10,11 @@
 		td {
 			border: 2px black solid;
 		}
+
+		.modal-dialog {
+			width: 100vw;
+			height: 100vh;
+		}
 	</style>
 
 	<script>
@@ -30,22 +35,30 @@
 	<!-- Header Section End -->
 
 	<!-- 分離範例 -->
+	<div id="rooms">
+		<div class="container">
+			<div class="section-header">
+				<h2>凹豆商城</h2>
+				<p>
+					<input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
+				</p>
+			</div>
+			<div id="banners" class="row">
+				<div class="modal fade bs-example-modal-lg text-center" id="imgModal" tabindex="-1" role="dialog"
+					data-toggle="modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" style="display:inline-block;width:auto;">
+						<div class="modal-content">
+							<div id="imgshow"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
 			<div id="rooms">
-            <div class="container">
-                <div class="section-header">
-                    <h2>凹豆商城</h2>
-                    <p>
-                        <input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
-                    </p>
-                </div>
-                <div id="banners" class="row">
-                                      
-                </div>
-                <div id="rooms">
-        </div>
-            </div>
-        </div>
-	
+			</div>
+		</div>
+	</div>
+
 	<script src="/morari/mall/js/test.js"></script>
 
 	<!-- Footer Section Start -->
@@ -95,7 +108,7 @@
 				}
 				console.log(response);
 				response.json().then(function (n) {
-					console.log(n);
+					// 					console.log(n);
 					var banners = document.getElementById("banners");
 					//创建一个div
 					var div = document.createElement("div");
@@ -108,30 +121,29 @@
 					div.click = "selectbyid()";
 					//设置子div的其他属性，直接通过字符串连接的方式连接即可。动态值放在引号外面就行
 					div.innerHTML =
-						
-                   '<div class="row">'+
-                        '<div class="col-md-6">'+
-                            '<div class="room-img">'+
-                                '<img src="'+n.pdpicture+'" style="max-height:500px">'+
-                                '<a href="'+n.pdpicture+'"></a>'+
-                            '</div>'+
-                        '</div>'+
-                        '<div class="col-md-6">'+
-                            '<div class="room-des">'+
-                                '<h3>'+n.pdname+'</h3>'+
-                                '<h1>NT$'+n.pdprice+'</h1>'+
-                                '<ul class="room-size">'+
-                                    '<li><i class="fa fa-arrow-right"></i>品牌: '+n.pdcontent+'</li>'+
-                                    '<li><i class="fa fa-arrow-right"></i>類型: '+n.pdtype+' </li>'+
-                                '</ul>'+
-                                
-                                '<div class="room-link">'+
-                                    '<a href="#" data-toggle="modal" data-target="#modal-id" onclick="addToCart(' + n.pdid + ')">加入購物車</a>'+
-                                    '<a href="https://localhost:8443/morari/ProductCart/productcartqueryallmain.controller">返回商城</a>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>';
+
+						'<div class="row">' +
+						'<div class="col-md-6">' +
+						'<div class="room-img">' +
+						'<img src="' + n.pdpicture + '"  style="width:700px;max-height:500px;cursor: pointer;" onclick="showMaxImg(this)">' +
+						'</div>' +
+						'</div>' +
+						'<div class="col-md-6">' +
+						'<div class="room-des">' +
+						'<h3>' + n.pdname + '</h3>' +
+						'<h1>NT$' + n.pdprice + '</h1>' +
+						'<ul class="room-size">' +
+						'<li><i class="fa fa-arrow-right"></i>品牌: ' + n.pdcontent + '</li>' +
+						'<li><i class="fa fa-arrow-right"></i>類型: ' + n.pdtype + ' </li>' +
+						'</ul>' +
+
+						'<div class="room-link">' +
+						'<a href="#" data-toggle="modal" data-target="#modal-id" onclick="addToCart(' + n.pdid + ')">加入購物車</a>' +
+						'<a href="https://localhost:8443/morari/ProductCart/productcartqueryallmain.controller">返回商城</a>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>';
 
 					banners.appendChild(div);
 
@@ -163,6 +175,11 @@
 					// 失敗時的錯誤處理
 				}
 			});
+		}
+		function showMaxImg(obj) {
+			var src = $(obj).attr("src");
+			$("#imgModal").find("#imgshow").html("<img src='" + src + "' class='carousel-inner img-responsive img-rounded' data-dismiss='modal'>");
+			$("#imgModal").modal('show');
 		}
 	</script>
 </body>
