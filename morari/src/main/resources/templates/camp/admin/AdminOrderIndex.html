@@ -108,6 +108,7 @@
 
                 $('#ordertable').empty();
                 $('#changeP').empty();
+                $('#promote').empty();
                 var ordertable = $('#ordertable');
                 var ordertr = '';
 
@@ -198,7 +199,6 @@
 
             $('#promote').on('click', '.recommendinner', function () {
                 var campID = $(this).prev().text();
-                console.log(campID);
                 sessionStorage.setItem("campID", JSON.stringify(campID));
                 window.location.href = '/morari/admin/camp/insertOrder';
 

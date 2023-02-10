@@ -1,6 +1,8 @@
 package com.campingmapping.team4.spring.t424camp.controller.web.siteCrud;
 
+import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +32,22 @@ public class QuerySitesController {
 	@ResponseBody
 	public Set<Site> queryByCamp(@PathVariable("campID") int campID, Model m) {
 
-		return siteService.findSiteByCampId(campID);
+	    Set<Site> sites = siteService.findSiteByCampId(campID);
+	    Set<Site> sortedSites = new TreeSet<Site>(new Comparator<Site>() {
+	        @Override
+	        public int compare(Site site1, Site site2) {
+	            return Integer.compare(site1.getSiteID(), site2.getSiteID());
+	        }
+	    });
+	    sortedSites.addAll(sites);
+
+	    return sortedSites;
 	}
+
+
+
+
+
 
 }
 

@@ -140,49 +140,58 @@
 									$('#camptable').DataTable({
 										"data": QueryByCityIDsResult,
 										"columns": [
-											{ data: 'campID', title: "營地編號", width: "120px" },
+											{ data: 'campID', title: "營地編號", width: "120px", responsivePriority: 10 },
 											{
 												data: 'campName',
 												title: "營地名",
 												width: "100px",
 												render: function (data, type, row) {
 													return '<a href="#" class="td2">' + data + '</a>';
-												}
+												},
+												responsivePriority: 9
 											},
-											{ data: 'city.cityName', title: "城市名", width: "100px" },
-											{ data: 'location', title: "地點" },
+											{ data: 'city.cityName', title: "城市名", width: "100px", responsivePriority: 8 },
+											{ data: 'location', title: "地點", responsivePriority: 7 },
 											{
 												data: 'campPicturesPath',
 												title: "圖片",
 												width: "100px",
 												render: function (data, type, row) {
 													return '<img src="' + data + '"/>';
-												}
+												},
+												responsivePriority: 6
 											},
-											{ data: 'description', title: "描述", width: "100px" },
+											{ data: 'description', title: "描述", width: "100px", responsivePriority: 5 },
 											{
+												data: 'description',
 												title: "更新",
 												width: "100px",
 												render: function (data, type, row) {
 													return '<button style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
-												}
+												},
+												responsivePriority: 3
 											},
 											{
+												data: 'description',
 												title: "刪除",
 												width: "100px",
 												render: function (data, type, row) {
 													return '<button style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
-												}
+												},
+												responsivePriority: 2
 											},
 											{
+												data: 'description',
 												title: "新增營位",
 												width: "100px",
 												render: function (data, type, row) {
 													return '<button style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-plus"></i></a></button>';
-												}
+												},
+												responsivePriority: 1
 											},
 
 										],
+										responsive: true,
 										lengthMenu: [5, 10, 15, 20],
 										language: {
 											"lengthMenu": "顯示_MENU_ 筆資料",
@@ -204,49 +213,58 @@
 					$('#camptable').DataTable({
 						"data": allCamps,
 						"columns": [
-							{ data: 'campID', title: "營地編號", width: "120px" },
+							{ data: 'campID', title: "營地編號", width: "120px", responsivePriority: 10 },
 							{
 								data: 'campName',
 								title: "營地名",
 								width: "100px",
 								render: function (data, type, row) {
 									return '<a href="#" class="td2">' + data + '</a>';
-								}
+								},
+								responsivePriority: 9
 							},
-							{ data: 'city.cityName', title: "城市名", width: "100px" },
-							{ data: 'location', title: "地點" },
+							{ data: 'city.cityName', title: "城市名", width: "100px", responsivePriority: 8 },
+							{ data: 'location', title: "地點", responsivePriority: 7 },
 							{
 								data: 'campPicturesPath',
 								title: "圖片",
 								width: "100px",
 								render: function (data, type, row) {
 									return '<img src="' + data + '"/>';
-								}
+								},
+								responsivePriority: 6
 							},
-							{ data: 'description', title: "描述", width: "100px" },
+							{ data: 'description', title: "描述", width: "100px", responsivePriority: 5 },
 							{
+								data: 'description',
 								title: "更新",
 								width: "100px",
 								render: function (data, type, row) {
 									return '<button style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
-								}
+								},
+								responsivePriority: 3
 							},
 							{
+								data: 'description',
 								title: "刪除",
 								width: "100px",
 								render: function (data, type, row) {
 									return '<button style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
-								}
+								},
+								responsivePriority: 2
 							},
 							{
+								data: 'description',
 								title: "新增營位",
 								width: "100px",
 								render: function (data, type, row) {
 									return '<button style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-plus"></i></a></button>';
-								}
+								},
+								responsivePriority: 1
 							},
 
 						],
+						responsive: true,
 						lengthMenu: [5, 10, 15, 20],
 						language: {
 							"lengthMenu": "顯示_MENU_ 筆資料",
@@ -256,7 +274,6 @@
 								"previous": " 上一頁__",
 								"next": "__下一頁"
 							}
-
 						}
 
 					});
