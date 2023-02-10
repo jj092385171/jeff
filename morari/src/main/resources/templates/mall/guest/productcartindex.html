@@ -99,74 +99,30 @@
 						//div.style.display="block";
 						div.click = "selectbyid()";
 						//设置子div的其他属性，直接通过字符串连接的方式连接即可。动态值放在引号外面就行
-						div.innerHTML = '<div id="' + n[i].pdid + '" class="btn"><img  src="' + n[i].pdpicture + '" style="max-width: 220px;" alt="img"><div class="homepage-slider-caption"><h3>' + n[i].pdname + '</h3><h4>NT$' + n[i].pdprice + '</h4></div></div> ';
+						div.innerHTML = '<div id="' + n[i].pdid + '" class="item" style="cursor: pointer;">' +
+							'<img  src="' + n[i].pdpicture + '" style="max-height: 130px;" alt="img">' +
+							'<div class="homepage-slider-caption">' +
+							'<h3>' + n[i].pdname + '</h3>' +
+							'<h4>NT$' + n[i].pdprice + '</h4>' +
+							'</div>' +
+							'</div> ';
 
 						banners.appendChild(div);
 						(function (i) {
 							var elementId = n[i].pdid;
 							document.getElementById(elementId).addEventListener("click", function () {
 								// 觸發控制器的代碼
-								console.log('Parent Capturing');
+								$.ajax({
+									success: function () {
+										window.location.href = "/morari/mall/productselectbypdid.controller/" + elementId;
+									}
+								});
 							});
 						})(i);
 
 					}
 				});
 			});
-		// 		elements.addEventListener('click', function () {
-		// 			// 						    // 觸發控制器的代碼
-		// 			console.log('Parent Capturing');
-		// 		});
-		// 			function (response) {
-		// 				if (response.status != 200) {
-		// 					console.log(response.satus);
-		// 					return;
-		// 				}
-		// 				console.log(response);
-		// 				response.json().then(function (n) {
-		// 					var tableData =
-		// 						"<th>產品名稱</th>" + "<th>品牌名稱</th>" +
-		// 						"<th>產品規格</th>" + "<th>類型</th>" +
-		// 						"<th>照片</th>" + "<th>產品價格</th>" +
-		// 						"<th><input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(" + '"' + uid + '"' + ")'></th>";
-		// 					for (var i = 0; i < n.length; i++) {
-		// 						tableData +=
-		// 							"<tr>" +
-		// 							"<td>" + n[i].pdname + "</td>" + "<td>" + n[i].pdtitle + "</td>" +
-		// 							"<td>" + n[i].pdcontent + "</td>" + "<td>" + n[i].pdtype + "</td>" +
-		// 							"<td><img src='" + n[i].pdpicture + "' style='max-width: 150px;'></td>"
-		// 							+ "<td>" + n[i].pdprice + "</td>" +
-		// 							"<td><button id='addToCart' type='button' value='n[i].pdid' onclick='addToCart(" + n[i].pdid + ")'>加入購物車</button></td>" +
-		// 							"</tr>"
-		// 					}
-		// 					document.getElementById('result').innerHTML = tableData;
-		// 				});
-		// 			});
-		// 		var abc = document.getElementById('abc');
-		// 		parent.addEventListener('click', function () {
-		// 			console.log('Parent Capturing');
-		// 		}, true);
-
-		// 		function addToCart(pdid) {
-		// 			var data = {
-		// 				"pdid": pdid,
-		// 				"userid": uid
-		// 			};
-		// 			$.ajax({
-		// 				type: "POST",
-		// 				url: "/morari/ProductCart/create.controller",
-		// 				data: JSON.stringify(data),
-		// 				contentType: "application/json; charset=utf-8",
-		// 				dataType: "text",
-		// 				success: function (response) {
-		// 					alert(response);
-		// 					// 成功時的回應處理
-		// 				},
-		// 				failure: function (error) {
-		// 					// 失敗時的錯誤處理
-		// 				}
-		// 			});
-		// 		}
 		function selectbyuserid(uid) {
 			$.ajax({
 				success: function (data) {
