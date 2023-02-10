@@ -37,6 +37,7 @@ import com.campingmapping.team4.spring.t433forum.model.entity.PostComment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 @Builder
 @Getter
 @Setter

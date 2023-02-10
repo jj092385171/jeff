@@ -51,10 +51,6 @@
 
                     推薦營地:<div id="promote" class="row"></div>
 
-                    <!-- <hr>
-
-                    <div id="calendar"></div> -->
-
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -100,9 +96,6 @@
     <script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-
     <script type="text/javascript">
         $(function () {
             $(document).ready(function () {
@@ -112,62 +105,6 @@
 
         function load(indexPage) {
             $.getJSON('/morari/admin/camp/showAllOrders/' + indexPage, function (data) {
-                // $(document).ready(function () {
-                //     $.getJSON('/morari/admin/camp/showAllOrders', function (data) {
-                // var orderData = data["orderList"]
-
-                // $('#ordertable').DataTable({
-                //     "data": orderData,
-                //     "columns": [
-                //         { data: 'orderID', title: "訂單編號", width: "120px" },
-                //         { data: 'camp.campName', title: "營地名", width: "120px" },
-                //         { data: 'camp.city.cityName', title: "城市名", width: "120px" },
-                //         { data: 'camp.location', title: "地點", width: "120px" },
-                //         {
-                //             data: 'camp.campPicturesPath',
-                //             title: "圖片",
-                //             width: "100px",
-                //             render: function (data, type, row) {
-                //                 return '<img src="/morari/images/' + data + '"/>';
-                //             }
-                //         },
-                //         { data: 'userprofiles.username', title: "訂購者", width: "120px" },
-                //         { data: 'orderTime', title: "成立時間", width: "120px" },
-                //         { data: 'goingTime', title: "入營時間", width: "120px" },
-                //         { data: 'leavingTime', title: "離營時間", width: "120px" },
-                //         { data: 'totalPrice', title: "總金額", width: "120px" },
-                //         { data: 'status', title: "訂單狀態", width: "120px" },
-                //         {
-                //             title: "明細展開",
-                //             width: "100px",
-                //             render: function (data, type, row) {
-                //                 return '<input type="button" value="明細展開" onclick="showOrderInfo(' + row.orderID + ')">';
-                //             }
-                //         }
-                //     ],
-                //     "createdRow": function (row, data, dataIndex) {
-                //         $(row).addClass('empty-row');
-                //         var orderitems = data.orderitems;
-                //         console.log(orderitems)
-                //         // 根據需求對orderitems進行處理
-                //         for (var i = 0; i < orderitems.length; i++) {
-                //             $(row).append('<td>' + orderitems[i].ABC + '</td>');
-                //         }
-                //     },
-                //     lengthMenu: [5, 10, 15, 20],
-                //     language: {
-                //         "lengthMenu": "顯示_MENU_ 筆資料",
-                //         "info": "第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
-                //         "search": "搜尋：",
-                //         "paginate": {
-                //             "previous": " 上一頁__",
-                //             "next": "__下一頁"
-                //         }
-
-                //     }
-                // });
-
-
 
                 $('#ordertable').empty();
                 $('#changeP').empty();
@@ -264,19 +201,8 @@
                 console.log(campID);
                 sessionStorage.setItem("campID", JSON.stringify(campID));
                 window.location.href = '/morari/admin/camp/insertOrder';
+
             });
-            // });
-
-
-            // $('#calendar').fullCalendar({
-            //     height: 500, // 設定 Calendar 的高度
-            //     width: 500, // 設定 Calendar 的寬度
-            //     header: {
-            //         left: '',
-            //         center: 'title',
-            //     }
-            // });
-
         }
 
         function showOrderInfo(orderId) {
@@ -286,8 +212,8 @@
             } else {
                 order.css("display", "none");
             }
-
         }
+
     </script>
 
 </body>

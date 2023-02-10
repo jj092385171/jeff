@@ -1,4 +1,4 @@
-package com.campingmapping.team4.spring.t424camp.controller.web;
+package com.campingmapping.team4.spring.t424camp.controller.web.guest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,10 +24,9 @@ import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @Controller
-@RequestMapping("/admin/camp")
-public class IndexOrder {
+@RequestMapping("/camp")
+public class myOrders {
 	
 	@Autowired
 	private OrderService orderService;
@@ -42,26 +41,27 @@ public class IndexOrder {
 	private CampService campService;
 	
 	
-	@GetMapping("/orderindex")
-	public String showOrderIndex() {
-		return "camp/admin/AdminOrderIndex";
+	@GetMapping("/myOrders")
+	public String toMyOrderIndex() {
+		return "camp/guest/myOrderIndex";
 	}
 	
-//	@GetMapping("/showAllOrders")
-//	@ResponseBody
-//	public Object showAllOrder() {
-	@GetMapping("/showAllOrders/{page}")
+	@GetMapping("/myOrders/{page}")
 	@ResponseBody
-	public Object showAllOrder(@PathVariable("page")@Nullable Integer page ) {
+	public Object showMyOrders(@PathVariable("page")@Nullable Integer page ) {
 		if(page == null) {
 			page = 1;
 		}
 		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//使用者
+		UUID uid = jwtService.getUId(httpServletRequest);
 		
 		int pageSize = 3;
 		Pageable pageable = PageRequest.of(page-1, pageSize);
-		Page<Order> pageList = orderService.getByPage(pageable);
+		Page<Order> pageList = orderService.getByPageAndUID(pageable, uid);
 		
 		List<Order> orderList = pageList.getContent();
 		map.put("orderList", orderList);
@@ -71,13 +71,6 @@ public class IndexOrder {
 		
 		long totalOrders = pageList.getTotalElements();
 		map.put("totalOrders", totalOrders);
-		
-//		List<Order> orderList = orderService.findAll();
-//		map.put("orderList", orderList);
-		
-		
-		//使用者
-		UUID uid = jwtService.getUId(httpServletRequest);
 		
 		List<Camp> recommend = campService.recommendCampToUser(uid);
 		map.put("recommend", recommend);

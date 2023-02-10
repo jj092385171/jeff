@@ -34,7 +34,7 @@ public class City implements Serializable {
 	private String cityName;
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
 	private Set<Camp> camps = new HashSet<Camp>();
 
 	

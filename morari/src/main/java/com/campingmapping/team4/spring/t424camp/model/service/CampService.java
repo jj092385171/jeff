@@ -51,11 +51,10 @@ public class CampService {
 	private HttpServletRequest httpServletRequest;
 	
 
-	// 透過cityId查Camps
+	// 推薦Camps
 	public List<Camp> recommendCampToUser(UUID uid) {
 		// user
 		UserProfiles user = userRepository.findById(uid).get();
-
 		// orders of user
 		Object[] orders = user.getCampOrder().toArray();
 		int ordersMax = orders.length - 1;
@@ -97,10 +96,9 @@ public class CampService {
 				Integer index = (Integer) set.toArray()[i];
 				resultList.add(campList.get(index));
 			}
-
 			return resultList;
 		}
-
+		
 		return campList;
 	}
 

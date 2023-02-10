@@ -50,7 +50,7 @@ public class InsertOrders {
 	
 	@PostMapping("/insertOrderByGuest")
 	@ResponseBody
-	public Object insertOrder (@RequestParam("siteIds")@Nullable Integer[] siteIds,
+	public Object insertOrderByGuest (@RequestParam("siteIds")@Nullable Integer[] siteIds,
 			@RequestParam("nums")@Nullable Integer[] nums,
 			@RequestParam("goingdate")@Nullable String goingtimeString, 
 			@RequestParam("leavingdate")@Nullable String leavingtimeString,
@@ -136,31 +136,12 @@ public class InsertOrders {
 		obj.setTradeDesc("test Description");
 		obj.setItemName(items);
 		obj.setReturnURL("http://211.23.128.214:5000");
-		obj.setClientBackURL("https://localhost:8443/morari/camp/guestordersuccess");
+		obj.setClientBackURL("https://localhost:8443/morari/camp/myOrders");
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;
 
 	}
-	
-	
-	
-	@GetMapping("/guestordersuccess")
-	public String toGuestOrderSuccess() {
-		return "camp/guest/ordersuccess";
-	}
-	
-	@GetMapping("/querySuccessOrderByGuest")
-	@ResponseBody
-	public Object querySuccessOrderByGuest() {
-		
-		HttpSession session = httpServletRequest.getSession();
-		
-		Order order = (Order) session.getAttribute("successOrderByGuest");
-		
-		order.setStatus("訂單付款成功");
-		
-		return orderService.update(order);
-	}
+
 	
 }

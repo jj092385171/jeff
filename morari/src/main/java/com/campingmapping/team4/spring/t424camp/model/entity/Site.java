@@ -50,7 +50,7 @@ public class Site implements Serializable {
 	private Camp camp;
 	
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "site")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "site")
 	private Set<Orderitem> orderitems = new HashSet<Orderitem>();
 
 	

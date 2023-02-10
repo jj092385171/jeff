@@ -1,14 +1,12 @@
 package com.campingmapping.team4.spring.t424camp.model.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -59,18 +57,18 @@ public class Camp implements Serializable {
 
 	
 	// @JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tagofcamp", joinColumns = {
 			@JoinColumn(name = "FKCAMPID", referencedColumnName = "CAMPID") }, inverseJoinColumns = {
 					@JoinColumn(name = "FKTAGID", referencedColumnName = "TAGID") })
 	private Set<Tag> tags = new HashSet<>();
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp")
 	private Set<Site> sites = new HashSet<Site>();
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "camp")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp")
 	private Set<Order> campOrders = new HashSet<Order>();
 	
 	//09的

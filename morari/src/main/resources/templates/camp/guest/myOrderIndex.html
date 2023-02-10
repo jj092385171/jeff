@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <script src="/morari/guest/js/head.js"></script>
+    <!-- sharepage 公用頁面 -->
+    <script src="/morari/guest/js/share.js"></script>
+</head>
+
+<body style="display: none">
+    <!-- Header Section Start -->
+    <div class="header"></div>
+    <!-- Header Section End -->
+    <div class="wrapper">
+
+
+        <table id="ordertable" class="card mb-4 py-3 border-left-info"></table>
+
+        <table id="changeP"></table>
+
+        <hr>
+
+        <div>
+            <span>
+                <a href="/morari/admin/camp/insertorderPage" class="btn btn-success btn-icon-split"><span
+                        class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">訂單新增</span></a>
+            </span>
+        </div>
+
+        <hr>
+        <br>
+
+        推薦營地:<div id="promote" class="row"></div>
+
+
+        <!-- 分離範例 -->
+        <!-- <div class="test"></div>
+  <script src="/morari/camper/js/test.js"></script> -->
+
+
+
+
+
+
+    </div>
+    <!-- Footer Section Start -->
+    <div class="footer"></div>
+    <!-- Footer Section End -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+    <!-- Vendor JavaScript File -->
+    <script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+    <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+    <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
+    <script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
+    <script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
+    <script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
+    <script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
+    <script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
+    <script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+    <script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+    <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
+
+    <!-- Booking Javascript File -->
+    <script src="/morari/guest/js/booking.js" defer></script>
+    <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
+
+    <!-- Main Javascript File -->
+    <script src="/morari/guest/js/main.js" defer></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                load(1);
+            });
+        });
+
+        function load(indexPage) {
+            $.getJSON('/morari/camp/myOrders/' + indexPage, function (data) {
+
+                console.log(data)
+
+                //     $('#ordertable').empty();
+                //     $('#changeP').empty();
+                //     var ordertable = $('#ordertable');
+                //     var ordertr = '';
+
+                //     ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th><th>訂單狀態</th><th>明細</th></thead>');
+
+                //     $.each(data["orderList"], function (i, oneorder) {
+                //         ordertr = '<tbody>'
+                //             + '<tr>'
+                //             + '<td>' + oneorder.orderID + '</td>'
+                //             + '<td>' + oneorder.camp.campName + '</td>'
+                //             + '<td>' + oneorder.camp.city.cityName + '</td>'
+                //             + '<td>' + '<img src="' + oneorder.camp.campPicturesPath + '">' + '</td>'
+                //             + '<td>' + oneorder.camp.location + '</td>'
+                //             + '<td>' + oneorder.userprofiles.username + '</td>'
+                //             + '<td>' + oneorder.userprofiles.email + '</td>'
+                //             + '<td>' + oneorder.orderTime + '</td>'
+                //             + '<td>' + oneorder.goingTime + '</td>'
+                //             + '<td>' + oneorder.leavingTime + '</td>'
+                //             + '<td>' + oneorder.totalPrice + '</td>'
+                //             + '<td>' + oneorder.status + '</td>'
+                //             + '<td><input type="button" value="明細展開" onclick="showOrderInfo(' + oneorder.orderID + ')"></td>'
+                //             + '</tr>'
+                //             + '<tr id="orderInfo' + oneorder.orderID + '" style="display : none;" ><td colspan="4">'
+                //             + '<table id="orderitemtable" class="card mb-4 py-3 border-bottom-info">'
+                //             + '<thead><th>營位名</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>';
+
+                //         $.each(oneorder.orderitems, function (i, orderitem) {
+                //             ordertr += '<tbody>'
+                //                 + '<tr>'
+                //                 + '<td>' + orderitem.site.siteName + '</td>'
+                //                 + '<td>' + '<img src="' + orderitem.site.sitePicturesPath + '">' + '</td>'
+                //                 + '<td>' + orderitem.unitPrice + '</td>'
+                //                 + '<td>' + orderitem.numbers + '</td>'
+                //                 + '</tr>'
+                //                 + '</tbody>'
+                //         });
+
+                //         ordertr += '</table></td></tr></tbody>'
+                //         ordertable.append('<hr>');
+                //         ordertable.append(ordertr);
+                //     });
+
+                //     var totalPages = data["totalPages"];
+                //     var totalOrders = data["totalOrders"];
+
+                //     var buttons = '';
+                //     for (var i = 1; i <= totalPages; i++) {
+                //         buttons += '<button type="button" onclick="load(' + i + ')" value="' + i + '">' + i + '</button>'
+                //     }
+
+                //     var changeP = $('#changeP');
+                //     var changetr = '';
+                //     changetr = '<tr id="tr2">'
+                //         + '<td>' + 'Total Pages:' + '<br>' + totalPages + '</td>'
+                //         + '<td>' + 'Total Orders:' + '<br>' + totalOrders + '</td>'
+                //         + '<td>' + 'Page:' + '<br>' + buttons + '</td>'
+                //         + '</tr>'
+                //     changeP.append(changetr);
+
+                //     $('th').width('100px').css("text-align", "center");
+                //     $('td').width('100px').css("text-align", "center");
+                //     $('img').width('85px').height('85px');
+
+                //     var promote = $('#promote');
+                //     var promotediv = '';
+                //     $.each(data["recommend"], function (i, recommend) {
+                //         promotediv = '<div class="col-xl-3 col-md-6 mb-4">'
+                //             + '<div class="card border-left-primary shadow h-100 py-2" >'
+                //             + '<div class="card-body">'
+                //             + '<div class="row no-gutters align-items-center">'
+                //             + '<div class="col mr-2">'
+                //             + '<div style="display:none">' + recommend.campID + '</div>'
+                //             + '<div class="recommendinner" class="h5 mb-0 font-weight-bold text-gray-800"><a href="#">' + recommend.campName + '</a><br><img id="img" src="' + recommend.campPicturesPath + '">' + '</div>'
+                //             + '<div class="recommendinner">' + recommend.city.cityName + '</div>'
+                //             + '<div class="recommendinner">' + recommend.location + '</div>'
+                //             + '</div>'
+                //             + '</div>'
+                //             + '</div>'
+                //             + '</div>'
+                //             + '</div>'
+
+                //         promote.append(promotediv);
+                //     });
+
+                //     $('.recommendinner').css("text-align", "center");
+                //     $('img').width('85px').height('85px');
+                // });
+
+                // $('#promote').on('click', '.recommendinner', function () {
+                //     var campID = $(this).prev().text();
+                //     console.log(campID);
+                //     sessionStorage.setItem("campID", JSON.stringify(campID));
+                //     window.location.href = '/morari/admin/camp/insertOrder';
+
+            });
+        }
+
+        function showOrderInfo(orderId) {
+            var order = $('#orderInfo' + orderId);
+            if (order.css("display") == "none") {
+                order.css("display", "");
+            } else {
+                order.css("display", "none");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
