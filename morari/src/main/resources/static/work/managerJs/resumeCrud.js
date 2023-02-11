@@ -10,6 +10,14 @@ $(document).ready(function() {
 			uid = data;
 		}).then(() => {
 
+			$("#campId").click(function() {
+
+				$('#campID').empty("");
+				var div = $('#campID');
+				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input type='button' value='新增' onclick='submitForm()'></form>";
+				div.append(input);
+			})
+
 			$.ajax({
 				type: 'POST',
 				url: '/morari/admin/resume/resumeShowAll.controller',
@@ -128,6 +136,26 @@ function resumeUpdate(number) {
 
 };
 
+// 新增履歷 透過會員編號確定是否有無寫過
+function submitForm() {
+	var input1 = document.getElementById("uuid").value;
+	$.ajax({
+		type: 'POST',
+		url: '/morari/admin/resume/resumeSelectUid.controller/' + input1,
+		contentType: 'application/json',
+		success: function(data) {
+			
+			if(data == null || data.length == 0){
+				
+				window.location.href = '/morari/admin/resume/startResumeInsert.controller/' + input1
+			}else{
+				alert("該會員已填寫過履歷");
+			}
+			
+		}
+	});
+
+}
 
 
 

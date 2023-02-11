@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 				$('#campID').empty("");
 				var div = $('#campID');
-				var input = "<form>輸入會員編號<input type='text' id='uuid'><input type='button' value='查詢' onclick='submitForm()'></form>";
+				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input type='button' value='查詢' onclick='submitForm()'></form>";
 				div.append(input);
 			})
 

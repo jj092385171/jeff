@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
+import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
+import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.t424camp.model.service.CampService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
@@ -36,6 +38,8 @@ public class AdminManagerJobController {
 
 	@Autowired
 	private JobService jService;
+	
+	
 	
 	// 啟動我的首頁
 	@GetMapping("/crud.controller")
@@ -62,7 +66,8 @@ public class AdminManagerJobController {
 	}
 
 
-	// 新增
+	
+	// 新增職缺
 	@PostMapping("/jobInsert.controller")
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {

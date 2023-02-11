@@ -1,13 +1,9 @@
 package com.campingmapping.team4.spring.t409work.model.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +13,6 @@ import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepos
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobRepository;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.ResumeRepository;
-import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 
 @Service
@@ -86,20 +81,31 @@ public class ResumeService {
 
 	// 透過會員id找履歷
 	public ResumeBean findByUid(UUID uid) {
-		ResumeBean result = uDao.findById(uid).get().getResume();
-		return result;
+		System.out.println("11111111111111111111111111111111 uid=" + uid);
+		try {
+			Optional<UserProfiles> user = uDao.findById(uid);
+			if (user.isPresent()) {
+				ResumeBean result = user.get().getResume();
+				return result;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	// 存job到resumes裡
 	public ResumeBean save(ResumeBean resume) {
 		return reDao.save(resume);
 	}
-	
+
 	// 透過rackid找應徵的履歷
 	public Collection<ResumeBean> findRid(Integer rackid) {
 		Collection<ResumeBean> resumes = jDao.findById(rackid).get().getResumes();
-		System.out.println("resumes="+resumes);
 		return resumes;
-		
+
 	}
 }

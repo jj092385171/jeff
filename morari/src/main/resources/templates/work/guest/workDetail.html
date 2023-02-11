@@ -5,55 +5,48 @@
   <script src="/morari/guest/js/head.js"></script>
   <!-- sharepage 公用頁面 -->
   <script src="/morari/guest/js/share.js"></script>
-
 </head>
 
 <body style="display: none">
   <!-- Header Section Start -->
   <div class="header"></div>
-
   <!-- Header Section End -->
+  <div class="wrapper">
 
 
 
 
 
+    <!-- 分離範例 -->
+    <!-- <div class="test"></div>
+  <script src="/morari/camper/js/test.js"></script> -->
 
-  <!-- 分離範例 -->
-<!--   <div class="test"></div> -->
-<!--   <script src="team/js/test.js"></script> -->
+	<div id="rooms">
+		<div class="container">
+			<div class="section-header">
+				<h2>職缺</h2>
+				<p>
+				</p>
+			</div>
+			<div id="banners" class="row">
+				<div class="modal fade bs-example-modal-lg text-center" id="imgModal" tabindex="-1" role="dialog"
+					data-toggle="modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg" style="display:inline-block;width:auto;">
+						<div class="modal-content">
+							<div id="imgshow"></div>
+						</div>
+					</div>
+				</div>
 
-<h3>填寫簡歷</h3>
-
-	<form id="insert" enctype="multipart/form-data">
-	
-		<input type="hidden" name="rackid" ><br>
-		會員編號 <input type="text" name="uid" id="uid" required readonly><br>
-		姓名 <input type="text" name="name" required><br>
-		年次 <input type="number" name="age" required><br>
-		性別 <input type="radio" name="gender" value="男" checked> 男
-			<input type="radio" name="gender" value="女"> 女<br>
-		email <input type="text" name="mail" required><br>
-		電話 <input type="number" name="phone" required><br>
-		學歷<textarea name="educational" cols="20" rows="5"></textarea><br>
-		專業技能<textarea name="skill" cols="20" rows="5"></textarea><br>
-
-		<input id="send" type="button" value="送出"><br>
-		<input type="reset" value="取消"><br>
-	</form>
-	
-<!-- 	<form action="/morari/guest/work/workGuest.controller" method="GET" -->
-<!-- 		enctype="multipart/form-data"> -->
-<!-- 		<input type="submit" value="回首頁"> -->
-<!-- 	</form> -->
-	<hr>
-	
-	<h3 id="su"></h3>
-	<table id="showInsert"></table>
+			</div>
+			<div id="rooms">
+			</div>
+		</div>
+	</div>
 
 
 
-
+  </div>
   <!-- Footer Section Start -->
   <div class="footer"></div>
   <!-- Footer Section End -->
@@ -62,7 +55,7 @@
 
 
   <!-- Vendor JavaScript File -->
-  <script src="/morari/guest/vendor/jquery/jquery.min.js" ></script>
+  <script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
   <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
   <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
   <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
@@ -81,10 +74,11 @@
 
   <!-- Main Javascript File -->
   <script src="/morari/guest/js/main.js" defer></script>
-
 <!-- 我自己的東西 -->
  <script type="text/javascript"></script>
- <script src="/morari/camper/js/resumeInsert.js" defer></script>
+ <script src="/morari/work/guestJs/workDetail.js" defer></script>
+
+
 
 </body>
 

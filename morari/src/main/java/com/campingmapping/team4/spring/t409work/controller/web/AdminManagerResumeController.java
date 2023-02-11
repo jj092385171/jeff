@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 // resume(管理者)的後台
 @Controller
@@ -25,11 +28,23 @@ public class AdminManagerResumeController {
 
 	@Autowired
 	private ResumeService rService;
-	
+
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
+	private JwtService jwtService;
+
 	// 啟動我的首頁
 	@GetMapping("/resumeCrud.controller")
 	public String processMainAction1() {
 		return "work/admin/manager/resumeCrud";
+	}
+
+	// 啟動履歷insert
+	@GetMapping("/startResumeInsert.controller/{uid}")
+	public String processMainAction2() {
+		return "work/admin/manager/resumeInsert";
 	}
 
 	// 啟動select
@@ -43,13 +58,13 @@ public class AdminManagerResumeController {
 	public String processMainAction4() {
 		return "work/admin/manager/resumeUpdate";
 	}
-	
+
 	// 啟動mail輸入
 	@GetMapping("/startMail.controller/{m}")
 	public String processMainAction5() {
 		return "work/admin/manager/mailInsert";
 	}
-	
+
 	// 刪除
 	@DeleteMapping("/resumeDelete.controller/{number}")
 	@ResponseBody
@@ -57,15 +72,15 @@ public class AdminManagerResumeController {
 		rService.deleteById(number);
 		return "刪除成功";
 	}
-	
+
 	// 修改
 	@PutMapping("/resumeUpdate.controller/{number}")
 	@ResponseBody
-	public ResumeBean processUpdateAction(@RequestBody ResumeBean rBean,@PathVariable Integer number) {
-		return rService.updateJob(rBean,number);
+	public ResumeBean processUpdateAction(@RequestBody ResumeBean rBean, @PathVariable Integer number) {
+		return rService.updateJob(rBean, number);
 	}
-	
-	// 找全部 
+
+	// 找全部
 	@PostMapping("/resumeShowAll.controller")
 	@ResponseBody
 	public List<ResumeBean> processShowResumeAllAction() {
@@ -73,7 +88,7 @@ public class AdminManagerResumeController {
 		System.out.println(result);
 		return result;
 	}
-	
+
 	// 透過number找資料後給前端修改
 	@PostMapping("/selectNumber.controller/{number}")
 	@ResponseBody
@@ -81,23 +96,33 @@ public class AdminManagerResumeController {
 		ResumeBean result = rService.findById(number);
 		return result;
 	}
-	
-	// 透過uid搜尋
-//	@PostMapping("/selectUid.controller/{uid}")
-//	@ResponseBody
-//	public ResumeBean processSelectUidAction(@PathVariable UUID uid) {
-//		ResumeBean result = rService.findByUid(uid);
-//		
-//		return result;
-//	}
+
+	// 透過uid搜尋resume
+	@PostMapping("/resumeSelectUid.controller/{uid}")
+	@ResponseBody
+	public ResumeBean processSelectUidAction(@PathVariable UUID uid) {
+		ResumeBean result = rService.findByUid(uid);
+		if (result == null) {
+			return null;
+		}
+		return result;
+	}
 
 	// 透過rackid搜尋(在企業主端秀出來用)
 	@PostMapping("/selectRid.controller/{rackid}")
 	@ResponseBody
 	public Collection<ResumeBean> processSelectRidAction(@PathVariable Integer rackid) {
 		Collection<ResumeBean> result = rService.findRid(rackid);
-	
+
 		return result;
+	}
+
+	// 新增履歷
+	@PostMapping("/resumeInsert.controller/{uid}")
+	@ResponseBody
+	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean,@PathVariable("uid") UUID uid) {
+//		UUID uid = jwtService.getUId(request);
+		return rService.insert(rBean, uid);
 	}
 
 }

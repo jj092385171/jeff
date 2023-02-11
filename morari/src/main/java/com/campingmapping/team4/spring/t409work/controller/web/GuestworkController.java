@@ -45,7 +45,7 @@ public class GuestworkController {
 
 	@Autowired
 	private JobService jService;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -73,7 +73,13 @@ public class GuestworkController {
 		return "camper/guest/resumeUpdate";
 	}
 
-	// 新增
+	// 啟動workDetail
+	@GetMapping("/workDetail.controller/{rackid}")
+	public String processMainAction5() {
+		return "work/guest/workDetail";
+	}
+
+	// 新增履歷
 	@PostMapping("/resumeInsert.controller")
 	@ResponseBody
 	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean) {
@@ -88,7 +94,14 @@ public class GuestworkController {
 		return rService.updateJob(rBean, number);
 	}
 
-	
+	// 透過rackid找資料後給前端修改
+	@PostMapping("/guestSelectRackId.controller/{rackID}")
+	@ResponseBody
+	public JobBean processAction4(@PathVariable Integer rackID) {
+		JobBean result = jService.findById(rackID);
+		return result;
+	}
+
 	// 模糊搜尋
 	@PostMapping("/guestSelectLike.controller/{job}")
 	@ResponseBody
@@ -112,25 +125,42 @@ public class GuestworkController {
 		List<JobBean> result = jService.findAll();
 		return result;
 	}
-	
+
 	// 職缺應徵投履歷
 	@PostMapping("/applyJob.controller/{uid}/{rackid}")
 	@ResponseBody
-	public String applyJob(@PathVariable("uid") UUID uid,
-						@PathVariable("rackid") Integer rackid) {
-	   // 通過uid找到履歷
-		ResumeBean resume = userRepository.findById(uid).get().getResume();
-	   // 通過rackid找到職缺
-	   JobBean job = jService.findById(rackid);
-	   // 將職缺加入履歷的jobs中
-	   resume.getJobs().add(job);
-	   // 將履歷加入職缺的resumes中
-	   job.getResumes().add(resume);
-	   // 儲存履歷和職缺
-	   rService.save(resume);
-	   jService.save(job);
-	   return "完成應徵！";
+	public boolean applyJob(@PathVariable("uid") UUID uid, @PathVariable("rackid") Integer rackid) {
+		// 通過uid找到履歷
+		
+		try {
+			// 通過uid找到履歷
+			Optional<UserProfiles> findById = userRepository.findById(uid);
+			if (!findById.isPresent()) {
+			return false;
+			}
+			ResumeBean resume = findById.get().getResume();
+			if (resume == null) {
+			return false;
+			}
+		    // 通過rackid找到職缺
+		    JobBean job = jService.findById(rackid);
+		    if (job == null) {
+		        return false;
+		    }
+		    // 將職缺加入履歷的jobs中
+		    resume.getJobs().add(job);
+		    // 將履歷加入職缺的resumes中
+		    job.getResumes().add(resume);
+		    // 儲存履歷和職缺
+		    rService.save(resume);
+		    jService.save(job);
+		    return true;
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    return false;
+		}
 	}
+	
 
 	// 秀圖片
 //	@GetMapping("/jobImg.controller/{id}")
