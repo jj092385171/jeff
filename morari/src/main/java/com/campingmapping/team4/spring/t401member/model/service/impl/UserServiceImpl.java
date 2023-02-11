@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t401member.model.service.UserService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
@@ -62,6 +63,30 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+    }
+
+    @Override
+    public Boolean updateaccountlocked(UUID uid, Boolean accountnonlocked) {
+        try {
+            UserProfiles userProfiles = userRepository.findById(uid).get();
+            userProfiles.setAccountnonlocked(accountnonlocked);
+            userRepository.save(userProfiles);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean updateenabled(UUID uid, Boolean isenabled) {
+        try {
+            UserProfiles userProfiles = userRepository.findById(uid).get();
+            userProfiles.setIsenabled(isenabled);
+            userRepository.save(userProfiles);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

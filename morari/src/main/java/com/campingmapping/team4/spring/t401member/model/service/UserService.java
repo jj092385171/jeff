@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t401member.model.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
 
@@ -15,4 +16,8 @@ public interface UserService {
     public String getNickname(HttpServletRequest request);
 
     public Boolean adminUpdateUser(UesrDetailAdminWeb user);
+
+    public Boolean updateaccountlocked(UUID uid, Boolean accountnonlocked);
+
+    public Boolean updateenabled(UUID uid, Boolean isenabled);
 }

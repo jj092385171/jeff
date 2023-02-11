@@ -44,11 +44,15 @@ public class AuthenticationController {
 
   @PostMapping("/authenticate")
   public ResponseEntity<Void> authenticate(
-      @RequestBody AuthenticationRequest request, HttpServletResponse response) {
-    if (service.authenticate(request, response)) {
+      @RequestBody AuthenticationRequest request, HttpServletResponse response) throws IOException {
+
+    if (service.authenticate(request, response) == null) {
+      // 被封鎖403
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    } else if (service.authenticate(request, response)) {
       return ResponseEntity.status(HttpStatus.CREATED).build();
     } else {
-      // 驗證失敗
+      // 帳密錯誤401
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 

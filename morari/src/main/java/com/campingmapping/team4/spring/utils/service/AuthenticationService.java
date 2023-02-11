@@ -6,7 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.security.auth.login.AccountLockedException;
+
+import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -103,7 +109,25 @@ public class AuthenticationService {
 					request.rememberMe());
 			jwtService.refreshTokenToCookie(response, authenticationResponse);
 			return true;
-		} catch (Exception e) {
+		} 
+		catch (LockedException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (AccountExpiredException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (DisabledException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (CredentialsExpiredException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

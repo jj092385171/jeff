@@ -11,14 +11,14 @@
     <div class="container">
 
         <!-- Outer Row -->
-        <div class="row justify-content-center" >
+        <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0" >
+                    <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -49,16 +49,16 @@
                                             Login
                                         </a>
                                         <hr>
-                                        <a href="/morari/login/oauth2/authorization/google" class="btn btn-google btn-user btn-oauth"
-                                            id="btn-oauth">
+                                        <a href="/morari/login/oauth2/authorization/google"
+                                            class="btn btn-google btn-user btn-oauth" id="btn-oauth">
                                             <i class="fab fa-google fa-fw"></i>
                                         </a>
                                         <a href="/morari/login/oauth2/authorization/facebook"
                                             class="btn btn-facebook btn-user btn-oauth" id="btn-oauth">
                                             <i class="fab fa-facebook-f fa-fw"></i>
                                         </a>
-                                        <a href="/morari/login/oauth2/authorization/github" class="btn btn-github btn-user btn-oauth"
-                                            id="btn-oauth">
+                                        <a href="/morari/login/oauth2/authorization/github"
+                                            class="btn btn-github btn-user btn-oauth" id="btn-oauth">
                                             <i class="fab fa-github fa-fw"></i>
                                         </a>
                                     </form>
@@ -92,6 +92,19 @@
     <script src="/morari/admin/js/sb-admin-2.min.js"></script>
 
     <script>
+
+        // 擷取錯誤訊息
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+        var error = getUrlParameter('error');
+        if (error === 'user_not_authorized') {
+            document.getElementById("errormsg").innerHTML = "user not authorized, please contact us.";
+        }
+
         function submitForm() {
             const data = {
                 email: document.getElementById("useremail").value,
@@ -108,17 +121,16 @@
             })
                 .then(
                     response => {
-                        
+
                         if (response.status === 201) {
                             // success
-                            console.log("login success")
                             window.location.href = '/morari/home';
-                        } else if(response.status === 401){
+                        } else if (response.status === 401) {
                             document.getElementById("errormsg").innerHTML = "Invalid Email or Password";
-                            console.log("Invalid Email or Password")
+                        }else if (response.status === 403) {
+                            document.getElementById("errormsg").innerHTML = "ser not authorized, please contact us.";
                         }else {
                             document.getElementById("errormsg").innerHTML = "login failed";
-                            console.log("login failed")
                         }
                     })
                 .catch(error => {

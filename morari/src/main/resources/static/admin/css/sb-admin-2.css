@@ -3351,9 +3351,10 @@ fieldset:disabled a.btn {
   display: block;
   width: 100%;
 }
+
 #btn-oauth {
   /* display: block; */
-  float: inline-start; 
+  float: inline-start;
   border-radius: 100%;
 }
 
@@ -11394,7 +11395,7 @@ a:focus {
 
 .sidebar .nav-item .nav-link .img-profile,
 .topbar .nav-item .nav-link .img-profile {
-  height: 50px  !important;
+  height: 50px !important;
   /* width: 2rem  !important; */
 }
 
@@ -11484,8 +11485,8 @@ a:focus {
 }
 
 .topbar .dropdown-list .dropdown-item .dropdown-list-image img {
-  height: 2.5rem  !important;
-  width: 2.5rem  !important;
+  height: 2.5rem !important;
+  width: 2.5rem !important;
 }
 
 .topbar .dropdown-list .dropdown-item .dropdown-list-image .status-indicator {
@@ -12166,6 +12167,7 @@ form.user .form-control-user {
   border-radius: 10rem;
   padding: 1.5rem 1rem;
 }
+
 form.user .form-control-edit {
   font-size: 0.8rem;
   border-radius: 10rem;
@@ -12701,7 +12703,8 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
-dialog{
+
+dialog {
   border: 0px;
   border-radius: 10px;
   box-shadow: 0 0 10px #000;

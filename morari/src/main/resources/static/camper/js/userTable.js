@@ -70,9 +70,9 @@ fetch("/morari/camper/html/usertable.html")
 											data, type,
 											row, meta) {
 											if (data) {
-												return '<input type="button" class="user_edit_button_ture" onclick="enabled(\'' + row.uid + '\')" value="已啟用">'
+												return '<input type="button" class="user_edit_button_ture" onclick="enabled(\'' + meta.row + '\')" value="已啟用">'
 											} else {
-												return '<input type="button" class="user_edit_button_false" onclick="enabled(\'' + row.uid + '\')" value="未啟用">'
+												return '<input type="button" class="user_edit_button_false" onclick="enabled(\'' + meta.row + '\')" value="未啟用">'
 											}
 										}
 										, responsivePriority: 15
@@ -84,9 +84,9 @@ fetch("/morari/camper/html/usertable.html")
 											data, type,
 											row, meta) {
 											if (data) {
-												return '<input type="button" class="user_edit_button_ture" onclick="accountlocked(\'' + row.uid + '\')" value="未鎖定">'
+												return '<input type="button" class="user_edit_button_ture" onclick="accountlocked(\'' + meta.row + '\')" value="未鎖定">'
 											} else {
-												return '<input type="button" class="user_edit_button_false" onclick="accountlocked(\'' + row.uid + '\')" value="已封鎖">'
+												return '<input type="button" class="user_edit_button_false" onclick="accountlocked(\'' + meta.row + '\')" value="已封鎖">'
 											}
 										}
 										, responsivePriority: 16
@@ -196,14 +196,14 @@ fetch("/morari/camper/html/usertable.html")
 									{
 
 										render: function (data, type, row, meta) {
-											return '<button style=\"border:none;background-color:transparent\"  onclick=\"edituser(\'' + meta.row + '\')\"><a class=\"btn btn-warning btn-circle\"><i class=\"fas fa-user-edit\"></i></a></button>'
+											return '<button class=\"datatable_edit_button\" onclick=\"edituser(\'' + meta.row + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 										}
 										, responsivePriority: 11
 									},
 									{
 
 										render: function (data, type, row, meta) {
-											return '<button style=\"border:none;background-color:transparent\"   onclick=\"deluser(\'' + meta.row + '\')\"><a  class=\"btn btn-danger btn-circle\"><i class=\"fas fa-trash-alt\"></i></a></button>'
+											return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + meta.row + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 										}
 										, responsivePriority: 12
 									}
@@ -421,11 +421,10 @@ function getuservalue() {
 		registerdata: document.getElementById("registerdata").value,
 		subscribed: document.getElementById("subscribed").value,
 		shot: document.getElementById("shot").value,
-		about: document.getElementById("about").value
+		about: document.getElementById("about").value,
+		accountnonlocked: document.getElementById("accountnonlocked").value,
+		isenabled: document.getElementById("isenabled").value,
 	};
-
-	console.log(document.getElementById("subscribed").value)
-
 	fetch("/morari/admin/camper/api/user", {
 		method: "PUT",
 		headers: {
@@ -445,11 +444,48 @@ function getuservalue() {
 		})
 }
 // 權限修改
-function accountlocked(uid) {
-
+function accountlocked(index) {
+	let userdata = receivedData[index];
+	let accountnonlocked = !userdata.accountnonlocked;
+	fetch("/morari/admin/camper/api/accountlocked/" + userdata.uid, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: accountnonlocked
+	})
+		.then(response => {
+			console.log(response.status)
+			if (response.status == 200) {
+				alert('修改成功');
+				window.location.reload();
+			} else {
+				alert('修改失敗');
+				window.location.reload();
+			}
+		})
 }
 // 帳戶啟用
-function enabled(uid) {
+function enabled(index) {
+	let userdata = receivedData[index];
+	let isenabled = !userdata.isenabled;
+	fetch("/morari/admin/camper/api/enabled/" + userdata.uid, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: isenabled
+	})
+		.then(response => {
+			console.log(response.status)
+			if (response.status == 200) {
+				alert('修改成功');
+				window.location.reload();
+			} else {
+				alert('修改失敗');
+				window.location.reload();
+			}
+		})
 
 }
 
