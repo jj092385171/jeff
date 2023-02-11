@@ -92,7 +92,7 @@ spring:
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           google:
             client-id: 611952345376-olh286m5v2e498h8orje59blgkvss6vo.apps.googleusercontent.com
-            client-secret: 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
+            client-secret: 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
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           facebook:
             clientId: 575077734065145
