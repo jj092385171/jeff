@@ -29,10 +29,13 @@ public class AdminUserApi {
     @PutMapping("/user")
     @ResponseBody
     public ResponseEntity<Void> updateUser(@RequestBody UesrDetailAdminWeb user) {
-        
-        System.out.println(user.roles().toString());
 
-        return ResponseEntity.ok().build();
+        Boolean saveSuccess = userService.adminUpdateUser(user);
+        if (saveSuccess) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.ok().build();
+        }
     }
 
 }

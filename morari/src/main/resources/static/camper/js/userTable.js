@@ -121,7 +121,9 @@ fetch("/morari/camper/html/usertable.html")
 											data, type,
 											row, meta) {
 											let rolesname = "";
+											console.log(data)
 											data.forEach(role => {
+												// console.log(role)
 												rolesname += role.name + "<br>"
 											});
 											return rolesname
@@ -592,7 +594,7 @@ fetch("/morari/camper/html/usertable.html")
 								// 	responsivePriority : 2,
 								// }, 
 
-								
+
 								"paging": true,
 								"searching": true,
 
@@ -719,17 +721,17 @@ function edituser(index) {
 								document.getElementById("shot").value = element;
 							} else if (key == "roles") {
 								element.forEach(r => {
-									console.log(r.rid)
 									const roles = r.name;
-									let checkboxes = document.getElementsByName("roletype");
-									checkboxes.forEach(checkbox => {
-										if (roles.includes(checkbox.value)) {
-											checkbox.checked = true;
-										} else {
-											checkbox.checked = false;
+									console.log(roles)
+									console.log("--------------")
+									let checkboxes = document.getElementById("rolecheckbox").getElementsByTagName("input");
+									for (let index = 0; index < checkboxes.length; index++) {
+										const element = checkboxes[index];
+										if (roles.includes(element.value)) {
+											element.checked = false;
 										}
+
 									}
-									)
 								});
 							} else if (key == "birthday") {
 								let today = moment(Date.parse(element)).format('YYYY-MM-DD');
@@ -741,6 +743,11 @@ function edituser(index) {
 								document.getElementById("titleuid").value = element;
 							} else {
 								document.getElementById(key).value = element;
+							}
+							let checkboxes = document.getElementById("rolecheckbox").getElementsByTagName("input");
+							for (let index = 0; index < checkboxes.length; index++) {
+								const element = checkboxes[index];
+								element.checked = !element.checked;
 							}
 						}
 					}
@@ -816,9 +823,7 @@ function saveedit() {
 	let formData = new FormData();
 	formData.append("file", file);
 	formData.append("uid", edituid);
-
-	let inputFile = document.getElementById("shotInput");
-	if (inputFile.files.length > 0) {
+	if (file) {
 		console.log("有選擇的檔案");
 		fetch("/morari/guest/camper/api/shot", {
 			method: "PUT",
@@ -866,7 +871,7 @@ function getuservalue() {
 		about: document.getElementById("about").value
 	};
 	console.log(data.roles)
-	fetch("/morari/admin/camper/api/user",{
+	fetch("/morari/admin/camper/api/user", {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json"

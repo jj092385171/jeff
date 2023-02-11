@@ -23,16 +23,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JwtService jwtService;
     @Autowired
-    UesrDetailAdminWebDTOMapper udamapper;
+    UserProfilesMapperUesrDetailAdminWebDTO uesrpProfilesMapperUesrDetailAdminWebDTO;
+    @Autowired
+    UesrDetailAdminWebDTOMapperUserProfiles uesrDetailAdminWebDTOMapperUserProfiles;
 
     @Override
     @Transactional
     public List<UesrDetailAdminWeb> showAllUser() {
 
         return userRepository.findAll()
-        .stream()
-        .map(udamapper)
-        .collect(Collectors.toList());
+                .stream()
+                .map(uesrpProfilesMapperUesrDetailAdminWebDTO)
+                .collect(Collectors.toList());
 
     }
 
@@ -51,7 +53,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void adminUpdateUser(UesrDetailAdminWeb user) {
+    @Transactional
+    public Boolean adminUpdateUser(UesrDetailAdminWeb user) {
+        try {
+            userRepository.save(uesrDetailAdminWebDTOMapperUserProfiles.apply(user));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 

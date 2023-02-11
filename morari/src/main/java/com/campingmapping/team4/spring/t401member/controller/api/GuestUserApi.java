@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.spring6.web.webflux.ISpringWebFluxWebSession;
-
 import com.campingmapping.team4.spring.t401member.model.service.*;
 import com.campingmapping.team4.spring.utils.config.GoogleFileUtil;
 
@@ -34,7 +32,6 @@ public class GuestUserApi {
     @ResponseBody
     public String putShot(@RequestParam("uid") String id,
             @RequestParam("file") MultipartFile file) throws IOException {
-                System.out.println(file.isEmpty());
         return GoogleFileUtil.uploadFile("usershot"+id, file);
     }
 
