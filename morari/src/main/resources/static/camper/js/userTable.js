@@ -1,6 +1,7 @@
 var receivedData;
 var file;
 var edituid;
+var editin;
 fetch("/morari/camper/html/usertable.html")
 	.then(response => response.text())
 	.then(html => {
@@ -22,7 +23,10 @@ fetch("/morari/camper/html/usertable.html")
 										return data;
 									}
 								},
-								lengthMenu: [5, 10, 15, 20],
+								"lengthChange": true,
+								"lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]],
+								"paging": true,
+								"searching": true,
 								language: {
 									"lengthMenu": "顯示 _MENU_ 筆資料",
 									"info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
@@ -60,6 +64,34 @@ fetch("/morari/camper/html/usertable.html")
 											}
 											return " ";
 										}
+									},
+									{
+										"data": 'isenabled'
+										, "title": "啟用"
+										, "render": function (
+											data, type,
+											row, meta) {
+												if (data) {
+													return '<p style="color: #FFF;border-radius: 10px;background-color: rgb(119, 206, 119);white-space:nowrap; padding: 5px;" > 已啟用 </p>'
+												} else {
+													return '<p style="color: #FFF;border-radius: 10px;background-color: rgb(206, 119, 119);white-space:nowrap; padding: 5px;" > 未啟用 </p>'
+												}
+										}
+										, responsivePriority: 15
+									},
+									{
+										"data": 'accountnonlocked'
+										, "title": "鎖定"
+										, "render": function (
+											data, type,
+											row, meta) {
+											if (data) {
+												return '<p style="color: #FFF;border-radius: 10px;background-color: rgb(119, 206, 119);white-space:nowrap; padding: 5px;" > 未鎖定 </p>'
+											} else {
+												return '<p style="color: #FFF;border-radius: 10px;background-color: rgb(206, 119, 119);white-space:nowrap; padding: 5px;" > 已鎖定 </p>'
+											}
+										}
+										, responsivePriority: 16
 									},
 									{
 										"data": 'email'
@@ -121,9 +153,7 @@ fetch("/morari/camper/html/usertable.html")
 											data, type,
 											row, meta) {
 											let rolesname = "";
-											console.log(data)
 											data.forEach(role => {
-												// console.log(role)
 												rolesname += role.name + "<br>"
 											});
 											return rolesname
@@ -211,12 +241,15 @@ fetch("/morari/camper/html/usertable.html")
 									{
 										"data": 'subscribed'
 										, "title": "訂閱狀態"
-										// , "render": function (
-										// 	data, type,
-										// 	row, meta) {
-										// 	vallist.push(data)
-										// 	return data
-										// }
+										, "render": function (
+											data, type,
+											row, meta) {
+											if (data) {
+												return "已訂閱"												
+											} else {
+												return "未訂閱"												
+											}
+										}
 									},
 
 									{
@@ -593,21 +626,23 @@ fetch("/morari/camper/html/usertable.html")
 								// 	targets : [ 17 ],
 								// 	responsivePriority : 2,
 								// }, 
-
-
-								"paging": true,
-								"searching": true,
-
-
 							})
 					// 翻頁響應刷新
-					// $('.dataTables_paginate').on('click', function () {
-					// 	table.responsive.recalc();
-					// 	setTimeout(function () {
-					// 		table.responsive.recalc();
-					// 	}, 500);
+					$('.dataTables_paginate').on('click', function () {
+						table.responsive.recalc();
+						setTimeout(function () {
+							table.responsive.recalc();
+						}, 500);
 
-					// });
+					});
+					// 頁面顯示響應刷新
+					$('#memberlist_length select').on('change', function () {
+						table.responsive.recalc();
+						setTimeout(function () {
+							table.responsive.recalc();
+						}, 500);
+
+					});
 					// 選取整ROW
 					$('#memberlist tbody').on('click', 'tr', function () {
 						let index = table.row(this).index();
@@ -621,14 +656,7 @@ fetch("/morari/camper/html/usertable.html")
 					setTimeout(function () {
 						table.responsive.recalc();
 					}, 500);
-					// setTimeout(function () {
-					// 	table.responsive.recalc();
-					// }, 1000);
-
-
-
-
-				});
+					});
 		// searching”:
 		// 是否開啟搜尋欄位，參數值有true/false。
 
@@ -684,6 +712,7 @@ fetch("/morari/camper/html/usertable.html")
 
 
 function edituser(index) {
+	editin = index;
 	fetch("/morari/camper/html/useredit.html")
 		.then(response => response.text())
 		.then(html => {
@@ -722,12 +751,10 @@ function edituser(index) {
 							} else if (key == "roles") {
 								element.forEach(r => {
 									const roles = r.name;
-									console.log(roles)
-									console.log("--------------")
 									let checkboxes = document.getElementById("rolecheckbox").getElementsByTagName("input");
 									for (let index = 0; index < checkboxes.length; index++) {
 										const element = checkboxes[index];
-										if (roles.includes(element.value)) {
+										if (roles == element.value) {
 											element.checked = false;
 										}
 
@@ -757,14 +784,11 @@ function edituser(index) {
 					document.getElementById("shotimg").addEventListener("click", function () {
 						document.getElementById("shotInput").click();
 					});
-
-
 					// 關閉dialog按鈕
 					const closeButton = document.getElementById("closeuseredit");
 					closeButton.addEventListener("click", function () {
 						document.querySelector(".useredit").close();
 					});
-
 
 					//   把圖片讀取後顯示
 					document.getElementById("shotInput").addEventListener("change", function () {
@@ -775,24 +799,15 @@ function edituser(index) {
 						};
 						reader.readAsDataURL(file);
 					});
-
-
 				});
-
-
-
-
-
-
 		})
-	// 		$("#edform").
-
 }
 
 function deluser(index) {
 
 
 	if (confirm('確認刪除資料?') == true) {
+		let userdata = receivedData[index];
 
 		// console.log("del "+uid)
 
@@ -836,10 +851,6 @@ function saveedit() {
 	} else {
 		getuservalue();
 	}
-
-
-
-	// document.getElementById("usereditform").submit();
 }
 function getuservalue() {
 	let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -850,7 +861,6 @@ function getuservalue() {
 			name: checkboxes[i].value
 		});
 	}
-	console.log(rolesvalues);
 	let data = {
 		uid: document.getElementById("uid").value,
 		nickname: document.getElementById("nickname").value,
@@ -866,11 +876,13 @@ function getuservalue() {
 		level: document.getElementById("level").value,
 		point: document.getElementById("point").value,
 		registerdata: document.getElementById("registerdata").value,
-		subscribed: document.getElementById("subscribed").checked,
+		subscribed: document.getElementById("subscribed").value,
 		shot: document.getElementById("shot").value,
 		about: document.getElementById("about").value
 	};
-	console.log(data.roles)
+
+	console.log(document.getElementById("subscribed").value)
+
 	fetch("/morari/admin/camper/api/user", {
 		method: "PUT",
 		headers: {
@@ -878,6 +890,16 @@ function getuservalue() {
 		},
 		body: JSON.stringify(data)
 	})
+		.then(response => {
+			console.log(response.status)
+			if (response.status == 200) {
+				alert('修改成功');
+				window.location.reload();
+			} else {
+				alert('修改失敗');
+				window.location.reload();
+			}
+		})
 }
 
 

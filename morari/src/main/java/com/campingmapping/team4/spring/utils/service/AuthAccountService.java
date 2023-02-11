@@ -94,6 +94,10 @@ public class AuthAccountService {
         .uid(UUID.randomUUID())
         .usernames(userName)
         .userprivacy(userPrivacy)
+        .accountnonexpired(true)
+        .iscredentialsnonexpired(true)
+        .isenabled(true)
+        .accountnonlocked(true)
         .build();
     user.getRoles().add(adminRole);
     oAuth2Request.name().ifPresent(

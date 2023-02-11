@@ -33,7 +33,9 @@ public class UserProfilesMapperUesrDetailAdminWebDTO implements Function<UserPro
                 userDetail.getRegisterdata(),
                 userDetail.getSubscribed(),
                 userDetail.getShot(),
-                userDetail.getAbout());
+                userDetail.getAbout(),
+                userProfiles.getIsenabled(),
+                userProfiles.getAccountnonlocked());
 
     }
 

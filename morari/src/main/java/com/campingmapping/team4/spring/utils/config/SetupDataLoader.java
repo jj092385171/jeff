@@ -57,15 +57,11 @@ public class SetupDataLoader implements
                 "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER");
         roles.forEach(r -> createRoleIfNotFound(r));
 
-        String[] tags = { "大草原", "夜景", "親子娛樂" };
-        for (int i = 0; i < tags.length; i++) {
-            createTagIfNotFound(tags[i]);
-        }
+        List<String> tags = Arrays.asList( "大草原", "夜景", "親子娛樂" );
+        tags.forEach(t->createTagIfNotFound(t));
 
-        String[] citys = { "新北", "桃園", "苗栗" };
-        for (int i = 0; i < citys.length; i++) {
-            createCityIfNotFound(citys[i]);
-        }
+        List<String> citys = Arrays.asList( "新北", "桃園", "苗栗" );
+        citys.forEach(c->createCityIfNotFound(c));
 
         // 檢查有無存在生成超級管理員
         Role adminRole = roleRepository.findByName("SUPERADMIN").get();
@@ -90,7 +86,7 @@ public class SetupDataLoader implements
                 .point(99999999L)
                 .gender(0)
                 .subscribed(false)
-                .shot("https://storage.googleapis.com/morari/adminshot")
+                .shot("https://storage.googleapis.com/morariphoto/adminshot")
                 .about("想幹嘛就幹嘛")
                 .registerdata(new Date())
                 .build();
@@ -104,6 +100,10 @@ public class SetupDataLoader implements
                 userProfiles.setPassword(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD));
                 userProfiles.getRoles().clear();
                 userProfiles.getRoles().add(adminRole);
+                userProfiles.setAccountnonexpired(true);
+                userProfiles.setAccountnonlocked(true);
+                userProfiles.setIscredentialsnonexpired(true);
+                userProfiles.setIsenabled(true);
                 userRepository.save(userProfiles);
             } else {
                 // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
@@ -116,6 +116,10 @@ public class SetupDataLoader implements
                         .userdetail(userDetail)
                         .usernames(userName)
                         .userprivacy(userPrivacy)
+                        .accountnonexpired(true)
+                        .iscredentialsnonexpired(true)
+                        .isenabled(true)
+                        .accountnonlocked(true)
                         .build();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);

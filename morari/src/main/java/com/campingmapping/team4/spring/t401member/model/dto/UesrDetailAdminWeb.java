@@ -21,6 +21,8 @@ public record UesrDetailAdminWeb(
         Date registerdata,
         Boolean subscribed,
         String shot,
-        String about) {
+        String about,
+        Boolean isenabled,
+        Boolean accountnonlocked) {
 
 }

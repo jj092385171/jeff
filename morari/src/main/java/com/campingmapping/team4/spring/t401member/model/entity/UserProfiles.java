@@ -57,6 +57,14 @@ public class UserProfiles implements UserDetails {
 
   @JsonIgnore
   private String password;
+  // 帳號是否過期
+  private Boolean accountnonexpired;
+  // 帳號是否封鎖
+  private Boolean accountnonlocked;
+  // 憑證是否過期
+  private Boolean iscredentialsnonexpired;
+  // 帳號是否啟用
+  private Boolean isenabled;
 
   @Embedded
   @Builder.Default
@@ -98,22 +106,22 @@ public class UserProfiles implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    return true;
+    return accountnonexpired;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return true;
+    return accountnonlocked;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return true;
+    return iscredentialsnonexpired;
   }
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return isenabled;
   }
 
   // PO文

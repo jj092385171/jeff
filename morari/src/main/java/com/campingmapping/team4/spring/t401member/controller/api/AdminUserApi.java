@@ -3,6 +3,7 @@ package com.campingmapping.team4.spring.t401member.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +33,11 @@ public class AdminUserApi {
 
         Boolean saveSuccess = userService.adminUpdateUser(user);
         if (saveSuccess) {
+            // 成功回傳200
             return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.ok().build();
+            // 失敗回傳500
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

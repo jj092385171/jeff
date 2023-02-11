@@ -71,9 +71,9 @@ public class SecurityConfiguration {
                             .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
             return http.build();
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+                e.printStackTrace();
+                return null;
+            }
     }
 
 }

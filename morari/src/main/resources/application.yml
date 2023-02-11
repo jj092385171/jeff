@@ -63,8 +63,8 @@ spring:
   servlet:
     multipart:
       enabled: true
-      max-file-size: 128MB
-      max-request-size: 128MB
+      max-file-size: 5MB
+      max-request-size: 5MB
   thymeleaf:
     prefix: classpath:/templates/
   web:
@@ -91,9 +91,9 @@ spring:
             clientSecret: e67cb760488cc52e98ca8a547922d1d740222db6
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           google:
-            client-id: 611952345376-olh286m5v2e498h8orje59blgkvss6vo.apps.googleusercontent.com
-            client-secret: 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
-            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            client-id: 267849938917-relfgk37j113s98afpdg2vftmapmpu14.apps.googleusercontent.com
+            client-secret: GOGOCSPX-hGpgQNs6yJKa7SJIGmVPd7xPePod
+            # redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           facebook:
             clientId: 575077734065145
             clientSecret: 7c35c07c36ee83c1d99c62391736310c

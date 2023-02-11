@@ -66,7 +66,7 @@ public class AuthenticationService {
 					.gender(0)
 					.registerdata(new Date())
 					.subscribed(false)
-					.shot("https://storage.googleapis.com/morari/defaultshot")
+					.shot("https://storage.googleapis.com/morariphoto/defaultshot")
 					.about("暫時沒有留下什麼")
 					.build();
 			UserProfiles userProfiles = UserProfiles.builder()
@@ -76,6 +76,10 @@ public class AuthenticationService {
 					.userdetail(userDetail)
 					.usernames(userName)
 					.userprivacy(userPrivacy)
+					.accountnonexpired(true)
+					.iscredentialsnonexpired(true)
+					.isenabled(true)
+					.accountnonlocked(true)
 					.build();
 			userProfiles.getRoles().add(roleUser);
 			userRepository.save(userProfiles);

@@ -42,6 +42,8 @@ public class UesrDetailAdminWebDTOMapperUserProfiles implements Function<UesrDet
         userProfiles.setUserdetail(userdetail);
         userProfiles.setUsernames(usernames);
         userProfiles.setUserprivacy(userprivacy);
+        userProfiles.setAccountnonlocked(uesrDetailAdminWeb.accountnonlocked());
+        userProfiles.setIsenabled(uesrDetailAdminWeb.isenabled());
         return userProfiles;
     }
 
