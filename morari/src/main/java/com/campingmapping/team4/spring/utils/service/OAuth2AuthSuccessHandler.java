@@ -32,8 +32,7 @@ public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
   public void onAuthenticationSuccess(
       HttpServletRequest request, HttpServletResponse response, Authentication authentication)
       throws IOException {
-    // 尋找是哪的服務
-    System.out.println("100");
+    // 尋找是哪的服務;
     String uri = request.getRequestURI();
     String[] parts = uri.split("/");
     String provider = parts[parts.length - 1];

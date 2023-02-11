@@ -11,9 +11,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.campingmapping.team4.spring.utils.service.LogoutSuccessHandlerImpl;
+import com.campingmapping.team4.spring.utils.service.OAuth2AuthSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +31,7 @@ public class SecurityConfiguration {
     // private final OAuth2UserService<OAuth2UserRequest, OAuth2User>
     // oAuthUserService;
     @Autowired
-    private final AuthenticationSuccessHandler successHandler;
+    private final OAuth2AuthSuccessHandler  successHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
