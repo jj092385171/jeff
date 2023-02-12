@@ -161,6 +161,11 @@ function submitForm() {
 		contentType: 'application/json',
 		success: function(data) {
 			$('#campName').empty("");
+			
+			if(data == null || data.length == 0){
+				alert("該會員尚未新增營地資料")
+			}else{
+				
 			$.each(data, function(i, n) {
 				var table = $('#campName');
 				var tr = "<tr align='center'>" +
@@ -168,6 +173,9 @@ function submitForm() {
 					"</tr>"
 				table.append(tr);
 			});
+				
+			}
+			
 		}
 	})
 }

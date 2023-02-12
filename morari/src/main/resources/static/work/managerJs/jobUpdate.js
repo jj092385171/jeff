@@ -65,7 +65,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$('#showInsert').empty("");
 				$('#su').empty("");
-				$('#update').empty("");
+				$('#booking').remove();
 				$('#img').empty("");
 				if (response == null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
@@ -89,7 +89,8 @@ $(document).ready(function() {
 						"<td>" + response.date + "</td>" +
 						"<td>" + response.time + "</td>" +
 						"<td>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + "</tr>";
+						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + 
+						"</tr>";
 					table.append(tr);
 					//});
 				}

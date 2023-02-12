@@ -81,7 +81,6 @@ public class ResumeService {
 
 	// 透過會員id找履歷
 	public ResumeBean findByUid(UUID uid) {
-		System.out.println("11111111111111111111111111111111 uid=" + uid);
 		try {
 			Optional<UserProfiles> user = uDao.findById(uid);
 			if (user.isPresent()) {

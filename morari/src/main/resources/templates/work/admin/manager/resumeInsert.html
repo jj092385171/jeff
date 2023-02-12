@@ -30,29 +30,94 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-	<h3>填寫簡歷</h3>
+	<div id="booking">
+            <div class="container">
+                <div class="section-header">
+                    <h2>填寫簡歷</h2>
+                    <p>
+                        
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="">
+                            <div ></div>
+                            <form  id="insert" >
+                                <div class="form-row">
+                                    <div class="control-group col-sm-6">
+                                        <label>會員編號</label>
+                                        <input type="text" class="form-control" name="uid" id="uid" style="border-radius: 10%;border: 2px solid gray" required="required" readonly />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group col-sm-6">
+                                        <label>姓名</label>
+                                        <input type="text" class="form-control" name="name" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="control-group col-sm-6">
+                                        <label>年次</label>
+                                        <input type="text" class="form-control" name="age" style="border-radius: 10%;border: 2px solid gray"placeholder="民國" required="required" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group col-sm-6">
+                                        <label>Email</label>
+                                        <input type="text" class="form-control"  name="mail" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="control-group col-sm-6">
+                                        <label>電話</label>
+                                        <input type="text" class="form-control" name="phone" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group col-sm-6">
+                                    	<label>性別</label><br>
+                                    	<input type="radio" name="gender" value="男"> 男
+										<input type="radio" name="gender" value="女"> 女
+										<p class="help-block text-danger"></p>
+                                	</div>
+                                </div>
+                                <div class="control-group">
+                                    <label>學歷</label>
+                                    <textarea class="form-control" name="educational" cols="20" rows="5"style="border-radius: 10%;border: 2px solid gray" required="required" ></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="control-group">
+                                    <label>專業技能</label>
+                                     <textarea class="form-control" name="skill"  cols="20" rows="5" style="border-radius: 10%;border: 2px solid gray"required="required" ></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <input id="send" type="button" value="送出">
+								<input type="reset" value="取消"><br>
+                        
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- 	<h3>填寫簡歷</h3> -->
 
-	<form id="insert" enctype="multipart/form-data">
+<!-- 	<form id="insert" enctype="multipart/form-data"> -->
 	
-		<input type="hidden" name="rackid" ><br>
-		會員編號 <input type="text" name="uid" id="uid" required readonly><br>
-		姓名 <input type="text" name="name" required><br>
-		年次 <input type="number" name="age" required><br>
-		性別 <input type="radio" name="gender" value="男" checked> 男
-			<input type="radio" name="gender" value="女"> 女<br>
-		email <input type="text" name="mail" required><br>
-		電話 <input type="number" name="phone" required><br>
-		學歷<textarea name="educational" cols="20" rows="5"></textarea><br>
-		專業技能<textarea name="skill" cols="20" rows="5"></textarea><br>
+<!-- 		會員編號 <input type="text" name="uid" id="uid" required readonly><br> -->
+<!-- 		姓名 <input type="text" name="name" required><br> -->
+<!-- 		年次 <input type="number" name="age" required><br> -->
+<!-- 		性別 <input type="radio" name="gender" value="男" checked> 男 -->
+<!-- 			<input type="radio" name="gender" value="女"> 女<br> -->
+<!-- 		email <input type="text" name="mail" required><br> -->
+<!-- 		電話 <input type="number" name="phone" required><br> -->
+<!-- 		學歷<textarea name="educational" cols="20" rows="5"></textarea><br> -->
+<!-- 		專業技能<textarea name="skill" cols="20" rows="5"></textarea><br> -->
 
-		<input id="send" type="button" value="送出"><br>
-		<input type="reset" value="取消"><br>
-	</form>
-	
-<!-- 	<form action="/morari/guest/work/workGuest.controller" method="GET" -->
-<!-- 		enctype="multipart/form-data"> -->
-<!-- 		<input type="submit" value="回首頁"> -->
+<!-- 		<input id="send" type="button" value="送出"><br> -->
+<!-- 		<input type="reset" value="取消"><br> -->
 <!-- 	</form> -->
+	
+
 	<hr>
 	
 	<h3 id="su"></h3>

@@ -10,17 +10,13 @@ $(document).ready(function() {
 		url: '/morari/admin/resume/selectNumber.controller/' + id,
 		dataType: 'json',
 		success: function(data) {
-//			$('#1').val(data.job.rackid);
 			$('#1').val(data.userprofiles.uid);
-//			$('#3').val(data.work);
 			$('#2').val(data.name);
 			$('#3').val(data.age);
-			//			$('#6').val(data.gender);
 			$('#6').val(data.mail);
 			$('#7').val(data.phone);
 			$('#8').val(data.educational);
 			$('#9').val(data.skill);
-//			$('#11').val(data.ptime);
 
 			switch (data.gender) {
 				case '男':
@@ -52,7 +48,7 @@ $(document).ready(function() {
 				console.log("response:" + response);
 				$('#showInsert').empty("");
 				$('#su').empty("");
-				$('#update').empty("");
+				$('#booking').remove();
 				$('#img').empty("");
 				if (response == null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");

@@ -52,7 +52,7 @@ $(document).ready(function() {
 				console.log("response:" + response);
 				$('#showInsert').empty("");
 				$('#su').empty("");
-				$('#update').empty("");
+				$('#booking').remove();
 				$('#img').empty("");
 				if (response == null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");

@@ -148,6 +148,7 @@ function submitForm() {
 			if(data == null || data.length == 0){
 				
 				window.location.href = '/morari/admin/resume/startResumeInsert.controller/' + input1
+			
 			}else{
 				alert("該會員已填寫過履歷");
 			}

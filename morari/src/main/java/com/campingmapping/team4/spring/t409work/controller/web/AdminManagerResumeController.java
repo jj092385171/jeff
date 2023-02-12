@@ -101,11 +101,17 @@ public class AdminManagerResumeController {
 	@PostMapping("/resumeSelectUid.controller/{uid}")
 	@ResponseBody
 	public ResumeBean processSelectUidAction(@PathVariable UUID uid) {
-		ResumeBean result = rService.findByUid(uid);
-		if (result == null) {
+		
+		try {
+			ResumeBean result = rService.findByUid(uid);
+			if (result == null) {
+				return null;
+			}
+			return result;
+		} catch (Exception e) {
 			return null;
 		}
-		return result;
+		
 	}
 
 	// 透過rackid搜尋(在企業主端秀出來用)

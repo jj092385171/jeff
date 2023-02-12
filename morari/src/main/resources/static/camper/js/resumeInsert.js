@@ -27,7 +27,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$('#showInsert').empty("");
 				$('#su').empty("");
-				$('#insert').empty("");
+				$('#booking').remove();
 				console.log(response);
 				if (response == null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");

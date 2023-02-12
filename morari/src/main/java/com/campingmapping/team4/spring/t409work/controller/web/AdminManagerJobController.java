@@ -129,8 +129,16 @@ public class AdminManagerJobController {
 	@PostMapping("/selectUUid.controller")
 	@ResponseBody
 	public List<Camp> processSelectUUidAction(@RequestBody UUID uid) {
-		List<Camp> result = jService.findUUid(uid);
-		return result;
+		try {
+			List<Camp> result = jService.findUUid(uid);
+			System.out.println("222222222222222222222222222222222");
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("111111111111111111111111111111111111111111111111111111111");
+			return null;
+		}
+		
 	}
 	// 透過campname搜尋camp的東西
 //	@PostMapping("/selectCampname.controller")
