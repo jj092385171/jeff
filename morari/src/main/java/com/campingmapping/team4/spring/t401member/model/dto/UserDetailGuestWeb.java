@@ -1,6 +1,6 @@
 package com.campingmapping.team4.spring.t401member.model.dto;
 
-public record UesrDetailguestWeb(
+public record UserDetailGuestWeb(
         String uid,
         String nickname,
         Long exp,
@@ -8,6 +8,4 @@ public record UesrDetailguestWeb(
         Long point,
         String shot,
         String about
-        ) {
-
-}
+        ) {}

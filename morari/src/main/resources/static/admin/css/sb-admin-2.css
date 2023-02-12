@@ -12691,6 +12691,7 @@ footer.bg-foot {
 }
 
 footer.sticky-footer {
+  margin-top: 5px;
   padding: 2rem 0;
   flex-shrink: 0;
 }

@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
-import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
-import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailGuestEdit;
-import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailguestWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailAdminWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestEdit;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestWeb;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t401member.model.service.UserService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
@@ -26,21 +26,23 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JwtService jwtService;
     @Autowired
-    UserProfilesMapperUesrDetailAdminWebDTO uesrpProfilesMapperUesrDetailAdminWebDTO;
+    UserProfilesMapperUesrDetailAdminWebDTO userpProfilesMapperUesrDetailAdminWebDTO;
     @Autowired
-    UesrDetailAdminWebDTOMapperUserProfiles uesrDetailAdminWebDTOMapperUserProfiles;
+    UserDetailAdminWebDTOMapperUserProfiles userDetailAdminWebDTOMapperUserProfiles;
     @Autowired
-    UserProfilesMapperUesrDetailguestWebDTO userProfilesMapperUesrDetailguestWebDTO;
+    UserProfilesMapperUesrDetailGuestWebDTO userProfilesMapperUesrDetailguestWebDTO;
     @Autowired
     UserProfilesMapperUesrDetailGuestEditDTO userProfilesMapperUesrDetailGuestEditDTO;
+    @Autowired
+    UserDetailGuestEditDTOMapperUserProfiles userDetailGuestEditDTOMapperUserProfiles;
 
     @Override
     @Transactional
-    public List<UesrDetailAdminWeb> showAllUser() {
+    public List<UserDetailAdminWeb> showAllUser() {
 
         return userRepository.findAll()
                 .stream()
-                .map(uesrpProfilesMapperUesrDetailAdminWebDTO)
+                .map(userpProfilesMapperUesrDetailAdminWebDTO)
                 .collect(Collectors.toList());
 
     }
@@ -61,9 +63,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Boolean adminUpdateUser(UesrDetailAdminWeb user) {
+    public Boolean adminUpdateUser(UserDetailAdminWeb user) {
         try {
-            userRepository.save(uesrDetailAdminWebDTOMapperUserProfiles.apply(user));
+            userRepository.save(userDetailAdminWebDTOMapperUserProfiles.apply(user));
             return true;
         } catch (Exception e) {
             return false;
@@ -72,6 +74,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Boolean updateaccountlocked(UUID uid, Boolean accountnonlocked) {
         try {
             UserProfiles userProfiles = userRepository.findById(uid).get();
@@ -84,6 +87,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Boolean updateenabled(UUID uid, Boolean isenabled) {
         try {
             UserProfiles userProfiles = userRepository.findById(uid).get();
@@ -96,16 +100,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UesrDetailguestWeb getUserDetail(UUID uid) {
+    @Transactional
+    public UserDetailGuestWeb getUserDetail(UUID uid) {
         return userProfilesMapperUesrDetailguestWebDTO.apply(userRepository.findById(uid).get());
     }
 
     @Override
-    public UesrDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
+    @Transactional
+    public UserDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
         UUID uid = jwtService.getUId(request);
         UserProfiles userProfiles = userRepository.findById(uid).get();
-        UesrDetailGuestEdit uesrDetailGuestEdit = userProfilesMapperUesrDetailGuestEditDTO.apply(userProfiles);
+        UserDetailGuestEdit uesrDetailGuestEdit = userProfilesMapperUesrDetailGuestEditDTO.apply(userProfiles);
         return uesrDetailGuestEdit;
+    }
+
+    @Override
+    @Transactional
+    public Boolean guestUpdateUser(UserDetailGuestEdit user) {
+        try {
+            userRepository.save(userDetailGuestEditDTOMapperUserProfiles.apply(user));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

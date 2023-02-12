@@ -63,20 +63,20 @@ fetch("/morari/camper/html/usertable.html")
 											return " ";
 										}
 									},
-									{
-										"data": 'isenabled'
-										, "title": "啟用"
-										, "render": function (
-											data, type,
-											row, meta) {
-											if (data) {
-												return '<input type="button" class="user_edit_button_ture" onclick="enabled(\'' + meta.row + '\')" value="已啟用">'
-											} else {
-												return '<input type="button" class="user_edit_button_false" onclick="enabled(\'' + meta.row + '\')" value="未啟用">'
-											}
-										}
-										, responsivePriority: 15
-									},
+									// {
+									// 	"data": 'isenabled'
+									// 	, "title": "啟用"
+									// 	, "render": function (
+									// 		data, type,
+									// 		row, meta) {
+									// 		if (data) {
+									// 			return '<input type="button" class="user_edit_button_ture" onclick="enabled(\'' + meta.row + '\')" value="已啟用">'
+									// 		} else {
+									// 			return '<input type="button" class="user_edit_button_false" onclick="enabled(\'' + meta.row + '\')" value="未啟用">'
+									// 		}
+									// 	}
+									// 	, responsivePriority: 15
+									// },
 									{
 										"data": 'accountnonlocked'
 										, "title": "鎖定"
@@ -195,13 +195,14 @@ fetch("/morari/camper/html/usertable.html")
 									},
 									{
 
+										"title": "修改",
 										render: function (data, type, row, meta) {
 											return '<button class=\"datatable_edit_button\" onclick=\"edituser(\'' + meta.row + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 										}
 										, responsivePriority: 11
 									},
 									{
-
+										"title": "刪除",
 										render: function (data, type, row, meta) {
 											return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + meta.row + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 										}
@@ -302,9 +303,9 @@ function edituser(index) {
 									}
 								});
 							} else if (key == "birthday") {
-								let today = moment(Date.parse(element)).format('YYYY-MM-DD');
+								let birthday = moment(Date.parse(element)).format('YYYY-MM-DD');
 								// birthdayInput.value = today;
-								document.getElementById("birthday").value = today;
+								document.getElementById("birthday").value = birthday;
 							} else if (key == "uid") {
 								edituid = element;
 								document.getElementById(key).value = element;
@@ -381,7 +382,6 @@ function saveedit() {
 	formData.append("file", file);
 	formData.append("uid", edituid);
 	if (file) {
-		console.log("有選擇的檔案");
 		fetch("/morari/guest/camper/api/shot", {
 			method: "PUT",
 			body: formData

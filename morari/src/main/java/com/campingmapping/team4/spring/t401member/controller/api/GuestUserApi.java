@@ -4,18 +4,23 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailguestWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestEdit;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestWeb;
 import com.campingmapping.team4.spring.t401member.model.service.*;
 import com.campingmapping.team4.spring.utils.config.GoogleFileUtil;
+import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -26,6 +31,8 @@ public class GuestUserApi {
     UserService userService;
     // @Autowired
     // GoogleFileUtil googleFileUtil;
+    @Autowired
+    JwtService jwtService;
 
     @GetMapping("/shot")
     @ResponseBody
@@ -37,7 +44,7 @@ public class GuestUserApi {
     @ResponseBody
     public String putShot(@RequestParam("uid") String id,
             @RequestParam("file") MultipartFile file) throws IOException {
-        return GoogleFileUtil.uploadFile("usershot"+id, file);
+        return GoogleFileUtil.uploadFile("usershot" + id, file);
     }
 
     @GetMapping("/nickname")
@@ -48,9 +55,27 @@ public class GuestUserApi {
 
     @GetMapping("/userdetail/{uid}")
     @ResponseBody
-    public UesrDetailguestWeb getUserDetail(@PathVariable("uid") UUID uid) {
+    public UserDetailGuestWeb getUserDetail(@PathVariable("uid") UUID uid) {
         return userService.getUserDetail(uid);
     }
 
-
+    @PutMapping("/userdetail/{uid}")
+    @ResponseBody
+    public ResponseEntity<Void> updateUserDetail(@PathVariable("uid") UUID uid,
+            @RequestBody UserDetailGuestEdit uesrDetailGuestEdit,
+            HttpServletRequest request) {
+        if (jwtService.getUId(request).equals(uid)) {
+            Boolean saveSuccess = userService.guestUpdateUser(uesrDetailGuestEdit);
+            if (saveSuccess) {
+                // 成功回傳200
+                return ResponseEntity.ok().build();
+            } else {
+                // 失敗回傳500
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } else {
+            // 修改UID比對錯誤401
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }

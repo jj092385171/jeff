@@ -2,17 +2,17 @@ package com.campingmapping.team4.spring.t401member.model.service.impl;
 
 import java.util.function.Function;
 import org.springframework.stereotype.Service;
-import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailguestWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestWeb;
 import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 
 @Service
-public class UserProfilesMapperUesrDetailguestWebDTO implements Function<UserProfiles, UesrDetailguestWeb> {
+public class UserProfilesMapperUesrDetailGuestWebDTO implements Function<UserProfiles, UserDetailGuestWeb> {
 
     @Override
-    public UesrDetailguestWeb apply(UserProfiles userProfiles) {
+    public UserDetailGuestWeb apply(UserProfiles userProfiles) {
         UserDetail userDetail = userProfiles.getUserdetail();
-        return new UesrDetailguestWeb(
+        return new UserDetailGuestWeb(
                 userProfiles.getUid().toString(),
                 userDetail.getNickname(),
                 userDetail.getExp(),

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Set;
 import com.campingmapping.team4.spring.t401member.model.entity.Role;
 
-public record UesrDetailAdminWeb(
+public record UserDetailAdminWeb(
         String uid,
         String nickname,
         String firstname,

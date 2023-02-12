@@ -12,13 +12,13 @@
     box-shadow: 0 0 10px;
 }
 .userpage-button {
-    box-shadow: 0.7px 0.7px 3px;
+    /* box-shadow: 0.7px 0.7px 3px; */
     color: rgb(61, 61, 61) !important;
     width: 130px;
     text-align: center;
 }
 .userpage-set {
-    box-shadow: 0.7px 0.7px 3px;
+    /* box-shadow: 0.7px 0.7px 3px; */
     color: rgb(61, 61, 61) !important;
     text-align: center;
 }

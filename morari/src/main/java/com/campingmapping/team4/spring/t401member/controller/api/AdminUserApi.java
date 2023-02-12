@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
-import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailGuestEdit;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailAdminWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestEdit;
 import com.campingmapping.team4.spring.t401member.model.service.*;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,14 +28,14 @@ public class AdminUserApi {
 
     @GetMapping("/showall")
     @ResponseBody
-    public List<UesrDetailAdminWeb> getAllUser() {
+    public List<UserDetailAdminWeb> getAllUser() {
         return userService.showAllUser();
     }
 
     // Admin update user
     @PutMapping("/user")
     @ResponseBody
-    public ResponseEntity<Void> updateUser(@RequestBody UesrDetailAdminWeb user) {
+    public ResponseEntity<Void> updateUser(@RequestBody UserDetailAdminWeb user) {
 
         Boolean saveSuccess = userService.adminUpdateUser(user);
         if (saveSuccess) {
@@ -77,7 +77,7 @@ public class AdminUserApi {
 
     @GetMapping("/guestdetail")
     @ResponseBody
-    public UesrDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
+    public UserDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
         return userService.getUesrDetailGuestEdit(request);
     }
 

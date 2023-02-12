@@ -2,7 +2,7 @@ package com.campingmapping.team4.spring.t401member.model.dto;
 
 import java.util.Date;
 
-public record UesrDetailGuestEdit(
+public record UserDetailGuestEdit(
                 String uid,
                 String nickname,
                 String firstname,
