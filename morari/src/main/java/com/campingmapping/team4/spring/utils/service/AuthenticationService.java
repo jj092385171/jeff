@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.security.auth.login.AccountLockedException;
-
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -29,7 +27,6 @@ import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserName;
 import com.campingmapping.team4.spring.t401member.model.entity.UserPrivacy;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-// import com.campingmapping.team4.spring.t401member.model.entity.UserRoles;
 import com.campingmapping.team4.spring.utils.config.MyConstants;
 
 import jakarta.servlet.http.Cookie;

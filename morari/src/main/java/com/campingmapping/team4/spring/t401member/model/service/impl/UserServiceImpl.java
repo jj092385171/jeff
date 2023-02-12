@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
 import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailGuestEdit;
+import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailguestWeb;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t401member.model.service.UserService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
@@ -27,6 +29,10 @@ public class UserServiceImpl implements UserService {
     UserProfilesMapperUesrDetailAdminWebDTO uesrpProfilesMapperUesrDetailAdminWebDTO;
     @Autowired
     UesrDetailAdminWebDTOMapperUserProfiles uesrDetailAdminWebDTOMapperUserProfiles;
+    @Autowired
+    UserProfilesMapperUesrDetailguestWebDTO userProfilesMapperUesrDetailguestWebDTO;
+    @Autowired
+    UserProfilesMapperUesrDetailGuestEditDTO userProfilesMapperUesrDetailGuestEditDTO;
 
     @Override
     @Transactional
@@ -87,6 +93,19 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public UesrDetailguestWeb getUserDetail(UUID uid) {
+        return userProfilesMapperUesrDetailguestWebDTO.apply(userRepository.findById(uid).get());
+    }
+
+    @Override
+    public UesrDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
+        UUID uid = jwtService.getUId(request);
+        UserProfiles userProfiles = userRepository.findById(uid).get();
+        UesrDetailGuestEdit uesrDetailGuestEdit = userProfilesMapperUesrDetailGuestEditDTO.apply(userProfiles);
+        return uesrDetailGuestEdit;
     }
 
 }

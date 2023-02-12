@@ -89,6 +89,13 @@ window.onload = function () {
                             .then(shotUrl => {
                                 document.querySelector('.userShot').src = shotUrl;
                             })
+                        // 找UID放入href
+                        fetch("/morari/utils/getuid")
+                            .then(response => response.text())
+                            .then(uid => {
+                                document.querySelector('#camperpage a').href = "/morari/camper/"+uid;
+                            })
+
                     });
             } else {
                 // 未登入

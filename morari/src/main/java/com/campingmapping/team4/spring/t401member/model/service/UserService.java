@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailGuestEdit;
+import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailguestWeb;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,4 +22,8 @@ public interface UserService {
     public Boolean updateaccountlocked(UUID uid, Boolean accountnonlocked);
 
     public Boolean updateenabled(UUID uid, Boolean isenabled);
+
+    public UesrDetailguestWeb getUserDetail(UUID uid);
+
+    public UesrDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request);
 }

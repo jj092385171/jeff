@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/camper")
 public class CamperAdminComtroller {
 
-    @GetMapping({ "", "/" })
+    @GetMapping()
     public String camperIndex() {
         return "camper/admin/index";
+    }
+    @GetMapping("/guestedit")
+    public String guestEdit() {
+        return "camper/admin/guestedit";
     }
 
 }

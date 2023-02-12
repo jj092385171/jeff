@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailAdminWeb;
+import com.campingmapping.team4.spring.t401member.model.dto.UesrDetailGuestEdit;
 import com.campingmapping.team4.spring.t401member.model.service.*;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("admin/camper/api")
@@ -29,6 +32,7 @@ public class AdminUserApi {
         return userService.showAllUser();
     }
 
+    // Admin update user
     @PutMapping("/user")
     @ResponseBody
     public ResponseEntity<Void> updateUser(@RequestBody UesrDetailAdminWeb user) {
@@ -43,9 +47,9 @@ public class AdminUserApi {
         }
     }
 
-    @PutMapping("/accountlocked/{UID}")
+    @PutMapping("/accountlocked/{uid}")
     @ResponseBody
-    public ResponseEntity<Void> accountlocked(@PathVariable("UID") UUID uid,
+    public ResponseEntity<Void> accountlocked(@PathVariable("uid") UUID uid,
             @RequestBody Boolean accountnonlocked) {
 
         Boolean saveSuccess = userService.updateaccountlocked(uid, accountnonlocked);
@@ -58,9 +62,9 @@ public class AdminUserApi {
         }
     }
 
-    @PutMapping("/enabled/{UID}")
+    @PutMapping("/enabled/{uid}")
     @ResponseBody
-    public ResponseEntity<Void> enabled(@PathVariable("UID") UUID uid, @RequestBody Boolean isenabled) {
+    public ResponseEntity<Void> enabled(@PathVariable("uid") UUID uid, @RequestBody Boolean isenabled) {
         Boolean saveSuccess = userService.updateenabled(uid, isenabled);
         if (saveSuccess) {
             // 成功回傳200
@@ -69,6 +73,12 @@ public class AdminUserApi {
             // 失敗回傳500
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping("/guestdetail")
+    @ResponseBody
+    public UesrDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
+        return userService.getUesrDetailGuestEdit(request);
     }
 
 }
