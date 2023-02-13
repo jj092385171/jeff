@@ -47,11 +47,11 @@ $(document).ready(function() {
 				'<h1>' + data.job + '</h1>' +
 				'<h2>月薪$' + data.salary + '起</h2>' +
 				'<ul class="room-size">' +
-				'<li><i class="fa fa-arrow-right"></i>營區: ' + data.campname + '</li>' +
+				'<li><i class="fa fa-arrow-right"></i>營區: ' + data.campname + '</li>' +'<br>' +
 				'<li><i class="fa fa-arrow-right"></i>地點: ' + data.place + ' </li>' + '<br>' +
-				'<li><i class="fa fa-arrow-right"></i>上班日期: ' + data.date + ' </li>' +
+				'<li><i class="fa fa-arrow-right"></i>上班日期: ' + data.date + ' </li>' +'<br>' +
 				'<li><i class="fa fa-arrow-right"></i>上班時段: ' + data.time + ' </li>' + '<br>' +
-				'<li><i class="fa fa-arrow-right"></i>人數: ' + data.quantity + ' </li>' +
+				'<li><i class="fa fa-arrow-right"></i>人數: ' + data.quantity + ' </li>' +'<br>' +
 				'<li><i class="fa fa-arrow-right"></i>備註: ' + data.remark + ' </li>' +
 				'</ul>' +
 

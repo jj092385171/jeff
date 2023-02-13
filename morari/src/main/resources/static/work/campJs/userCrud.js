@@ -34,8 +34,8 @@ $(document).ready(function() {
 				url: '/morari/admin/user/work/userSelectUid.controller/' + uid,
 				contentType: 'application/json',
 				success: function(response) {
-					$('#showInsert').empty("");
-					$('#showInsert').DataTable({
+					$('#showAllJob').empty("");
+					$('#showAllJob').DataTable({
 						"data": response,
 						"columns": [
 

@@ -22,8 +22,8 @@ $(document).ready(function() {
 				url: '/morari/admin/work/jobShowAll.controller',
 				contentType: 'application/json',
 				success: function(response) {
-					$('#showInsert').empty("");
-					$('#showInsert').DataTable({
+					$('#showAll').empty("");
+					$('#showAll').DataTable({
 						"data": response,
 						"columns": [
 
@@ -105,15 +105,32 @@ $(document).ready(function() {
 								title: "修改",
 								width: "100px",
 								render: function(data, type, row) {
-									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+									return '<button class=\"datatable_edit_button\" onclick=\"jobUpdate(\'' + row.rackid + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 
 								}
 							},
+//							 {
+//
+//          "title": "修改",
+//          render: function (data, type, row, meta) {
+//           return '<button class=\"datatable_edit_button\" onclick=\"edituser(\'' + meta.row + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
+//          }
+//          , responsivePriority: 11
+//         },
+//         {
+//          "title": "刪除",
+//          render: function (data, type, row, meta) {
+//           return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + meta.row + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
+//          }
+//          , responsivePriority: 12
+//         }
 							{
 								title: "刪除",
 								width: "100px",
 								render: function(data, type, row) {
-									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+									return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + row.rackid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 								}
 							},
 
