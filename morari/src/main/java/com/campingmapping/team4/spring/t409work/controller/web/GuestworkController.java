@@ -54,11 +54,17 @@ public class GuestworkController {
 	public String processMainAction1() {
 		return "work/guest/workGuest";
 	}
+	
+	// 啟動後臺簡歷
+	@GetMapping("/resume.controller")
+	public String processMainAction6() {
+		return "camper/admin/resume";
+	}
 
 	// 啟動insert
 	@GetMapping("/startResumeInsert.controller")
 	public String processMainAction2() {
-		return "camper/guest/resumeInsert";
+		return "camper/admin/resumeInsert";
 	}
 
 	// 啟動select
@@ -68,9 +74,9 @@ public class GuestworkController {
 	}
 
 	// 啟動update
-	@GetMapping("/update.controller")
+	@PostMapping("/update.controller")
 	public String processMainAction4() {
-		return "camper/guest/resumeUpdate";
+		return "camper/admin/resumeUpdate";
 	}
 
 	// 啟動workDetail
@@ -87,12 +93,14 @@ public class GuestworkController {
 		return rService.insert(rBean, uid);
 	}
 
-	// 修改履歷 前台
+	// 修改履歷 後台
 	@PutMapping("/resumeUpdate.controller/{number}")
 	@ResponseBody
-	public ResumeBean processUpdateAction(@RequestBody ResumeBean rBean, @PathVariable Integer number) {
-		return rService.updateJob(rBean, number);
+	public String processUpdateAction(@RequestBody ResumeBean rBean, @PathVariable Integer number) {
+		 rService.updateJob(rBean, number);
+		 return "修改完成！";
 	}
+	
 
 	// 透過rackid找資料後給前端修改
 	@PostMapping("/guestSelectRackId.controller/{rackID}")
