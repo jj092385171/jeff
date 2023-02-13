@@ -179,4 +179,42 @@ public class Order implements Serializable {
 	}
 
 	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Order [orderID=");
+		builder.append(orderID);
+		builder.append(", userprofilesName=");
+		builder.append(userprofiles.getUsername());
+		builder.append(", userprofilesEmail=");
+		builder.append(userprofiles.getEmail());
+		builder.append(", orderTime=");
+		builder.append(orderTime);
+		builder.append(", goingTime=");
+		builder.append(goingTime);
+		builder.append(", leavingTime=");
+		builder.append(leavingTime);
+		builder.append(", status=");
+		builder.append(status);
+		builder.append(", totalPrice=");
+		builder.append(totalPrice);
+		builder.append(", campName=");
+		builder.append(camp.getCampName());
+		builder.append(", location=");
+		builder.append(camp.getLocation());
+		builder.append(", cityName=");
+		builder.append(camp.getCity().getCityName());
+		for (Orderitem orderitem : orderitems) {
+			builder.append(", siteName=");
+			builder.append(orderitem.getSite().getSiteName());
+			builder.append(", unitPrice=");
+			builder.append(orderitem.getUnitPrice());
+			builder.append(", numbers=");
+			builder.append(orderitem.getNumbers());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
+	
 }

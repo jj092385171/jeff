@@ -103,11 +103,11 @@
 					var citytable = $('#citytable');
 					var citys = '';
 					var citytr = '';
-					citytable.append('<thead><th class="long"><h4>縣市查詢營地</h4></th></thead>')
+					citytable.append('<thead><th class="long"><b>═══縣市查詢營地═══</b></th></thead>')
 					$.each(cityList, function (i, n) {
 						citys += '<input id="checkcity" type="checkbox" name="cityID" value="' + n.cityID + '" />' + n.cityName
 					});
-					citytr += '<tbody><tr><td class="long">' + citys + '</td><td><input type="submit" value="查詢"><span id="errorcityIDs" style="color: red;"></span></td></tr></tbody>'
+					citytr += '<tbody><tr><td class="longlong">' + citys + '</td><td><input type="submit" value="查詢"><span id="errorcityIDs" style="color: red;"></span></td></tr></tbody>'
 					citytable.append(citytr);
 
 					$('#cityform').on('submit', function (e) {
@@ -167,7 +167,7 @@
 												title: "更新",
 												width: "100px",
 												render: function (data, type, row) {
-													return '<button style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+													return '<button class=\"datatable_edit_button\" id="update" type="button" name="campID" value="' + row.campID + '"><i class=\"fas fa-sliders-h\"></i></button>';
 												},
 												responsivePriority: 3
 											},
@@ -176,7 +176,7 @@
 												title: "刪除",
 												width: "100px",
 												render: function (data, type, row) {
-													return '<button style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+													return '<button class=\"datatable_del_button\" id="delete" type="button" name="campID" value="' + row.campID + '"><i class=\"fas fa-trash-alt\"></i></button>';
 												},
 												responsivePriority: 2
 											},
@@ -185,7 +185,7 @@
 												title: "新增營位",
 												width: "100px",
 												render: function (data, type, row) {
-													return '<button style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-success btn-circle"><i class="fas fa-plus"></i></a></button>';
+													return '<button style="border:none;background-color:transparent" id="insertsite" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-success btn-circle btn-lg"><i class="fas fa-plus"></i></a></button>';
 												},
 												responsivePriority: 1
 											},
@@ -240,7 +240,7 @@
 								title: "更新",
 								width: "100px",
 								render: function (data, type, row) {
-									return '<button style="border:none;background-color:transparent" id="update" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+									return '<button class=\"datatable_edit_button\" id="update" type="button" name="campID" value="' + row.campID + '"><i class=\"fas fa-sliders-h\"></i></button>';
 								},
 								responsivePriority: 3
 							},
@@ -249,7 +249,7 @@
 								title: "刪除",
 								width: "100px",
 								render: function (data, type, row) {
-									return '<button style="border:none;background-color:transparent" id="delete" type="button" name="campID" value="' + row.campID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+									return '<button class=\"datatable_del_button\" id="delete" type="button" name="campID" value="' + row.campID + '"><i class=\"fas fa-trash-alt\"></i></button>';
 								},
 								responsivePriority: 2
 							},
@@ -317,7 +317,8 @@
 					$('td').width('90px').css("text-align", "center");
 					$('img').width('85px').height('85px');
 					$('input[name="cityID"]').width('20px').css("text-align", "center");
-					$('.long').width('200px');
+					$('.long').width('200px').css("font-size", "18px").css("color", "SaddleBrown");
+					$('.longlong').width('400px');
 				});
 
 				$('#camptable').on('click', '.td2', function () {

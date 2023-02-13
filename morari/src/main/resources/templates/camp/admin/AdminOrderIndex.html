@@ -32,6 +32,26 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
+                    <div>
+                        <span>
+                            <a href="/morari/admin/camp/outputCsv" class="btn btn-secondary btn-icon-split"><span
+                                    class="icon text-white-50"><i class="fas fa-arrow-right"></i></span><span
+                                    class="text">輸出CSV</span></a>
+                        </span>
+                        <span>
+                            <a href="/morari/admin/camp/outputJson" class="btn btn-secondary btn-icon-split"><span
+                                    class="icon text-white-50"><i class="fas fa-arrow-right"></i></span><span
+                                    class="text">輸出JSON</span></a>
+                        </span>
+                        <span>
+                            <a href="#" id="pdf" class="btn btn-secondary btn-icon-split"><span
+                                    class="icon text-white-50"><i class="fas fa-arrow-right"></i></span><span
+                                    class="text">輸出PDF</span></a>
+                        </span>
+                    </div>
+
+                    <hr>
+
                     <table id="ordertable" class="card mb-4 py-3 border-left-info"></table>
 
                     <table id="changeP"></table>
@@ -96,6 +116,9 @@
     <script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.9/jspdf.plugin.autotable.js"></script>
     <script type="text/javascript">
         $(function () {
             $(document).ready(function () {
@@ -115,7 +138,7 @@
                 ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th><th>訂單狀態</th><th>明細</th></thead>');
 
                 $.each(data["orderList"], function (i, oneorder) {
-                    ordertr = '<tbody>'
+                    ordertr = '<tbody class="card mb-4 py-3 border-bottom-primary">'
                         + '<tr>'
                         + '<td>' + oneorder.orderID + '</td>'
                         + '<td>' + oneorder.camp.campName + '</td>'
@@ -203,6 +226,53 @@
                 window.location.href = '/morari/admin/camp/insertOrder';
 
             });
+
+            document.getElementById("pdf").addEventListener("click", function () {
+                var btn = document.getElementById("pdf");
+                var value = btn.innerHTML;
+                $.ajax({
+                    url: '/morari/admin/camp/outputPdf',
+                    method: "get",
+                    dataType: "text",
+                    data: {
+                        key: value
+                    },
+                    success: (function (data) {
+                        var doc = new jsPDF('l', 'pt');
+                        doc.addFileToVFS('msyh.ttf', data);//隨便取
+                        //1:隨便取,2:轉換二位元時的命名,3:normal
+                        doc.addFont('msyh.ttf', 'msyh', 'normal');
+                        //跟上面第二個一樣
+                        doc.setFont('msyh');
+                        doc.setFontSize(28);//字的大小
+                        doc.text('訂單總覽', 375, 40);//標題位置
+
+                        //把不要輸出在PDF上的表格隱藏
+                        var elems = document.querySelectorAll(".no-print");
+                        elems.forEach(function (elem) {
+                            elem.style.display = "none";
+                        });
+                        //重新抓取要輸出的表格內容
+                        var element = document.getElementById("ordertable");
+                        //設定表格屬性
+                        doc.autoTable({
+                            html: element,
+                            startY: 60,
+                            styles: {
+                                font: 'msyh',
+                                fontStyle: 'normal',
+                                fontSize: 14,
+                            }
+                        });
+                        //輸出PDF
+                        doc.save('orders.pdf');
+                        //把表格顯示開回去
+                        elems.forEach(function (elem) {
+                            elem.style.display = "block";
+                        })//elems	                 
+                    })//success
+                })//ajax
+            });//onclick
         }
 
         function showOrderInfo(orderId) {

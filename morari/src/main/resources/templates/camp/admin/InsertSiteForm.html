@@ -30,9 +30,10 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    <h4>新增營位</h4>
+                    <div class="long"><b>═══新增營區═══</b></div>
 
                     <hr>
+                    <br>
 
                     <form id="form" method="post" enctype="multipart/form-data"></form>
 
@@ -97,6 +98,8 @@
                     + '<button id="one" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">一鍵輸入</span></a></span></button>'
                     + '<button id="send" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">營地新增</span></a></span></button><span id="errornone" style="color: red;"></span>'
                 form.append(div);
+                    
+                $('.long').width('400px').css("font-size", "25px").css("color", "SaddleBrown");
 
                 $('body').on('click', '#send', function () {
                     // console.log(form);
@@ -144,6 +147,7 @@
                                 form.append(div);
 
                                 $('img').width('100px').height('100px');
+                                $('.long').width('400px').css("font-size", "25px").css("color", "SaddleBrown");
                             }
                         }
                     });

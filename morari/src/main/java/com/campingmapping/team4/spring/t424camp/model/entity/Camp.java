@@ -67,6 +67,7 @@ public class Camp implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp")
 	private Set<Site> sites = new HashSet<Site>();
 
+	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "camp")
 	private Set<Order> campOrders = new HashSet<Order>();

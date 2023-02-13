@@ -30,7 +30,7 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    <table id="sitetable"></table>
+                    <table id="sitetable" class="card mb-4 py-3 border-left-info"></table>
 
                     <hr>
 
@@ -94,7 +94,7 @@
                     sitetable.append('<thead><th>營位編號</th><th>營位名</th><th>圖片</th><th>總營位</th><th>營位金額</th><th>更新</th><th>刪除</th></thead>');
                     $.each(data, function (i, n) {
 
-                        sitetr = '<tbody>'
+                        sitetr = '<tbody class="card mb-4 py-3 border-bottom-dark">'
                             + '<tr>'
                             + '<td>' + n.siteID + '</td>'
                             + '<td>' + n.siteName + '</td>'
@@ -102,10 +102,10 @@
                             + '<td>' + n.totalSites + '</td>'
                             + '<td>' + n.siteMoney + '</td>'
                             + '<td>'
-                            + '<button style="border:none;background-color:transparent" id="update" type="button" name="siteID" value="' + n.siteID + '"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>'
+                            + '<button class=\"datatable_edit_button\" id="update" type="button" name="siteID" value="' + n.siteID + '"><i class=\"fas fa-sliders-h\"></i></button>'
                             + '</td>'
                             + '<td>'
-                            + '<button style="border:none;background-color:transparent" id="delete" type="button" name="siteID" value="' + n.siteID + '"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>'
+                            + '<button class=\"datatable_del_button\" id="delete" type="button" name="siteID" value="' + n.siteID + '"><i class=\"fas fa-trash-alt\"></i></button>'
                             + '</td>'
                             + '</tr>'
                             + '</tbody>'
