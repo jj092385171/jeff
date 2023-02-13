@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
-import com.campingmapping.team4.spring.utils.service.JwtService;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 // resume(管理者)的後台
 @Controller
@@ -29,11 +27,6 @@ public class AdminManagerResumeController {
 	@Autowired
 	private ResumeService rService;
 
-	@Autowired
-	private HttpServletRequest request;
-
-	@Autowired
-	private JwtService jwtService;
 
 	// 啟動我的首頁
 	@GetMapping("/resumeCrud.controller")
@@ -101,7 +94,6 @@ public class AdminManagerResumeController {
 	@PostMapping("/resumeSelectUid.controller/{uid}")
 	@ResponseBody
 	public ResumeBean processSelectUidAction(@PathVariable UUID uid) {
-		
 		try {
 			ResumeBean result = rService.findByUid(uid);
 			if (result == null) {
@@ -119,7 +111,6 @@ public class AdminManagerResumeController {
 	@ResponseBody
 	public Collection<ResumeBean> processSelectRidAction(@PathVariable Integer rackid) {
 		Collection<ResumeBean> result = rService.findRid(rackid);
-
 		return result;
 	}
 
@@ -127,7 +118,6 @@ public class AdminManagerResumeController {
 	@PostMapping("/resumeInsert.controller/{uid}")
 	@ResponseBody
 	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean,@PathVariable("uid") UUID uid) {
-//		UUID uid = jwtService.getUId(request);
 		return rService.insert(rBean, uid);
 	}
 

@@ -21,7 +21,7 @@ $(document).ready(function() {
 						$.each(data, function(i, n) {
 							var table = $('#campName');
 							var tr = "<tr align='center'>" +
-								"<td>" + "<a href='/morari/admin/user/work/startInsert.controller/" + n.campID + "'>" + n.campName + "</td>" +
+								"<td>" + "<a style='color: 	#FF8C00;' href='/morari/admin/user/work/startInsert.controller/" + n.campID + "'>" + n.campName + "</td>" +
 								"</tr>"
 							table.append(tr);
 						});
@@ -41,9 +41,9 @@ $(document).ready(function() {
 
 							{
 								title: "刊登編號",
-								width: "80px",
+								width: "40px",
 								render: function(data, type, row) {
-								return "<a href='/morari/admin/user/resume/resumeStartCrud.controller/" + row.rackid + "'>" + row.rackid 
+									return "<a style='color:#FF8C00' href='/morari/admin/user/resume/resumeStartCrud.controller/" + row.rackid + "'>" + row.rackid+'<i class="fa-solid fa-file"></i>'
 								}
 							},
 
@@ -56,6 +56,11 @@ $(document).ready(function() {
 							{
 								data: 'place',
 								title: "地點",
+								width: "100px"
+							},
+							{
+								data: 'type',
+								title: "類型",
 								width: "100px"
 							},
 
@@ -114,20 +119,21 @@ $(document).ready(function() {
 								title: "修改",
 								width: "100px",
 								render: function(data, type, row) {
-									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
-								
+//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+									return '<button class=\"datatable_edit_button\" onclick=\"jobUpdate(\'' + row.rackid + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 								}
 							},
 							{
 								title: "刪除",
 								width: "100px",
 								render: function(data, type, row) {
-									return '<button style="border:none;background-color:transparent" id="delete"  onclick="userDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+									//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="userDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+									return '<button class=\"datatable_del_button\"   onclick=\"userDelete(\'' + row.rackid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 								}
 							},
 
 						],
-						
+
 						lengthMenu: [5, 10, 15, 20],
 						language: {
 							"lengthMenu": "顯示_MENU_ 筆資料",
@@ -158,6 +164,6 @@ function userDelete(rackid) {
 	}
 };
 function jobUpdate(rackid) {
-			window.location.href = '/morari/admin/user/work/startUpdate.controller/'+rackid
-		
-	};
+	window.location.href = '/morari/admin/user/work/startUpdate.controller/' + rackid
+
+};

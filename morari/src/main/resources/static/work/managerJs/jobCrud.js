@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 				$('#campID').empty("");
 				var div = $('#campID');
-				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input type='button' value='查詢' onclick='submitForm()'></form>";
+				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input class='btn btn-success btn-icon-split' type='button' value='查詢' onclick='submitForm()'></form>";
 				div.append(input);
 			})
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
 							{
 								data: 'rackid',
 								title: "刊登編號",
-								width: "80px",
+								width: "40px",
 							},
 							{
 								data: 'userprofiles.uid',
@@ -47,6 +47,11 @@ $(document).ready(function() {
 							{
 								data: 'place',
 								title: "地點",
+								width: "100px"
+							},
+							{
+								data: 'type',
+								title: "類型",
 								width: "100px"
 							},
 
@@ -130,7 +135,7 @@ $(document).ready(function() {
 								width: "100px",
 								render: function(data, type, row) {
 //									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
-									return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + row.rackid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
+									return '<button class=\"datatable_del_button\"   onclick=\"jobDelete(\'' + row.rackid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 								}
 							},
 
@@ -186,7 +191,7 @@ function submitForm() {
 			$.each(data, function(i, n) {
 				var table = $('#campName');
 				var tr = "<tr align='center'>" +
-					"<td>" + "<a href='/morari/admin/work/insert.controller/" + n.campID + "'>" + n.campName + "</td>" +
+					"<td>" + "<a style='color: 	#FF8C00' href='/morari/admin/work/insert.controller/" + n.campID + "'>" + n.campName + "</td>" +
 					"</tr>"
 				table.append(tr);
 			});

@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
-import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
-import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
-import com.campingmapping.team4.spring.t424camp.model.service.CampService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -72,7 +69,6 @@ public class AdminManagerJobController {
 	@ResponseBody
 	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
 		UUID uid = jwtService.getUId(request);
-		
 		JobBean insert = jService.insert(jobBean, uid);
 		return insert;
 	}
@@ -131,11 +127,8 @@ public class AdminManagerJobController {
 	public List<Camp> processSelectUUidAction(@RequestBody UUID uid) {
 		try {
 			List<Camp> result = jService.findUUid(uid);
-			System.out.println("222222222222222222222222222222222");
 			return result;
-			
 		} catch (Exception e) {
-			System.out.println("111111111111111111111111111111111111111111111111111111111");
 			return null;
 		}
 		

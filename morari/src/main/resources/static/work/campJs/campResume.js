@@ -76,7 +76,7 @@ $(document).ready(function() {
 								{
 									width: "130px",
 									render: function(data, type, row) {
-										return "<button class='mail' onclick='mailInsert(" + row.number + ")'>mail通知面試</button>";
+										return "<button  class='btn btn-success btn-icon-split' onclick='mailInsert(" + row.number + ")'>mail通知面試</button>";
 									}
 								},
 							],

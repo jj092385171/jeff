@@ -11,8 +11,8 @@ public interface JobRepository extends JpaRepository<JobBean, Integer> {
 
 	@Query(value = "from JobBean where job like concat('%',?1,'%')")
 	public List<JobBean> findByJobisLike(String job);
-
 	
-//	@Query(value = "select * from JobBean where uid = ?1" ,nativeQuery = true)
-//	public List<JobBean> findByUid(Integer uid);	
+	@Query(value = "from JobBean where type like concat('%',?1,'%')")
+	public List<JobBean> findByTypeisLike(String type);
+
 }

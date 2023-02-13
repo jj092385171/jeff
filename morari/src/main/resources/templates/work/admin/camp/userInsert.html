@@ -30,7 +30,7 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-	 <h2>新增職缺</h2>
+	<div class="long"><b>═══新增職缺═══</b></div>
 	<div id="booking">
             <div class="container">
                 <div class="section-header">
@@ -47,16 +47,30 @@
                                         <input type="text" class="form-control" name="uid" id="uid" style="border-radius: 10%;border: 2px solid gray" required="required" readonly />
                                         <p class="help-block text-danger"></p>
                                     </div>
+                                </div>
+                                <div class="form-row">
+                                    
                                     <div class="control-group col-sm-6">
                                         <label>營區名稱</label>
                                         <input id="1" type="text" name="campname" class="form-control"  style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required" readonly />
                                         <p class="help-block text-danger"></p>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="control-group col-sm-6">
+                                 	 <div class="control-group col-sm-6">
                                         <label>地址</label>
                                         <input id="2" type="text" name="place" class="form-control"  style="border-radius: 10%;border: 2px solid gray"placeholder="民國" required="required" readonly/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                   
+                                    <div class="control-group col-sm-6">
+                                        <label>類型</label>
+                                        <select class="custom-select" name="type" required="required" style="border-radius: 10%;border: 2px solid gray"  />
+                                        <option disabled selected>請選擇</option>
+                                        <option value="短期工讀">短期工讀</option>
+                                        <option value="長期工作">長期工作</option>
+                                        <option value="打工換宿">打工換宿</option>
+                                        </select>
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="control-group col-sm-6">
@@ -68,7 +82,6 @@
                                         <option value="櫃台">櫃台</option>
                                         <option value="房務員">房務員</option>
                                         <option value="清潔員">清潔員</option>
-                                        <option value="假日工讀生">假日工讀生</option>
                                         <option value="夜間值班員">夜間值班員</option>
                                         </select>
                                         <p class="help-block text-danger"></p>
@@ -77,7 +90,7 @@
                                 <div class="form-row">
                                     <div class="control-group col-sm-6">
                                         <label>薪資</label>
-                                        <input type="number" class="form-control" name="salary" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <input type="text" class="form-control" name="salary" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="control-group col-sm-6">
@@ -103,8 +116,8 @@
                                     <textarea class="form-control" name="remark" cols="20" rows="5"style="border-radius: 10%;border: 2px solid gray" required="required" ></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <input id="send" type="button" value="送出">
-								<input type="reset" value="取消"><br>
+                                <input class="btn btn-success btn-icon-split" id="send" type="button" value="送出">
+								<input class="btn btn-success btn-icon-split" type="reset" value="取消"><br>
 <!--                         		照片 -->
                         		<input id="3" type="hidden" name="img" required><br>
                             </form>

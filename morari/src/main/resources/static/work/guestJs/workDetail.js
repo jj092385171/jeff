@@ -39,20 +39,21 @@ $(document).ready(function() {
 				'<div class="row">' +
 				'<div class="col-md-6">' +
 				'<div class="room-img">' +
-				'<img src="' + data.img + '"  style="width:700px;max-height:500px;cursor: pointer;">' +
+				'<img src="' + data.img + '"  style="width:500px;max-height:400px;cursor: pointer;">' +
 				'</div>' +
 				'</div>' +
 				'<div class="col-md-6">' +
-				'<div class="room-des">' +
+//				'<div class="room-des">' +
 				'<h1>' + data.job + '</h1>' +
-				'<h2>月薪$' + data.salary + '起</h2>' +
+				'<h3>◇薪水：' + data.salary + '</h3>' +
+				'<h3>◇類型：' + data.type + '</h3>' +
 				'<ul class="room-size">' +
-				'<li><i class="fa fa-arrow-right"></i>營區: ' + data.campname + '</li>' +'<br>' +
-				'<li><i class="fa fa-arrow-right"></i>地點: ' + data.place + ' </li>' + '<br>' +
-				'<li><i class="fa fa-arrow-right"></i>上班日期: ' + data.date + ' </li>' +'<br>' +
-				'<li><i class="fa fa-arrow-right"></i>上班時段: ' + data.time + ' </li>' + '<br>' +
-				'<li><i class="fa fa-arrow-right"></i>人數: ' + data.quantity + ' </li>' +'<br>' +
-				'<li><i class="fa fa-arrow-right"></i>備註: ' + data.remark + ' </li>' +
+				'<li>營區： ' + data.campname + '</li>' +'<br>' +
+				'<li>地點：' + data.place + ' </li>' + '<br>' +
+				'<li>上班日期： ' + data.date + ' </li>' +'<br>' +
+				'<li>上班時段： ' + data.time + ' </li>' + '<br>' +
+				'<li>人數： ' + data.quantity + ' </li>' +'<br>' +
+				'<li>備註： ' + data.remark + ' </li>' +
 				'</ul>' +
 
 				'<div class="room-link">' +
@@ -79,8 +80,10 @@ function mailResume(rackid) {
 					window.location.href = '/morari/guest/work/startResumeInsert.controller';
 				}
 			} else {
-				alert("完成應徵囉！靜待佳音~");
+				if (confirm("確定應徵嗎?")) {
+					alert("完成應徵囉，靜待佳音~")
 				window.location.href = '/morari/guest/work/workGuest.controller';
+				}
 			}
 		}
 	});

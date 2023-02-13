@@ -29,22 +29,59 @@
 
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
-<!-- 這裡 -->
 
-	<form  id="sendMail">
+<div id="booking">
+            <div class="container">
+                <div class="section-header">
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="">
+                            <div ></div>
+                            <form  id="sendMail" >
+                                <div class="form-row">
+                                    <div class="control-group col-sm-6">
+                                        <label>E-mail</label>
+                                        <input id="mail" name="mail" type="text" class="form-control"   style="border-radius: 10%;border: 2px solid gray" required="required" readonly />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="control-group col-sm-6">
+                                        <label>主旨</label>
+                                        <input id="subject" name="subject" type="text" class="form-control"   style="border-radius: 10%;border: 2px solid gray" required="required"  />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label>內容</label>
+                                    <textarea  id="editor" name="remark" class="form-control"  cols="40" rows="20"style="border-radius: 2%;border: 2px solid gray"  ></textarea>
+                                   
+                                </div>
+                              <input class="btn btn-success btn-icon-split" id="send" type="submit" value="寄出">
+							<input class="btn btn-success btn-icon-split" type="reset" value="取消"><br>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- 	<form  id="sendMail"> -->
 		
-		e-mail<input id="mail" name="mail"type="text" readonly><br>
-		主旨<input id="subject" name="subject" type="text"><br>
-		內容<textarea id="editor" name="remark" cols="100" rows="100"></textarea><br>
+<!-- 		e-mail<input id="mail" name="mail"type="text" readonly><br> -->
+<!-- 		主旨<input id="subject" name="subject" type="text"><br> -->
+<!-- 		內容<textarea id="editor" name="remark" cols="100" rows="100"></textarea><br> -->
 
-		<input id="send" type="submit" value="送出"><br>
-		<input type="reset" value="取消"><br>
+<!-- 		<input class="btn btn-success btn-icon-split" id="send" type="submit" value="寄出"> -->
+<!-- 		<input class="btn btn-success btn-icon-split" type="reset" value="取消"><br> -->
 
-	</form>
+<!-- 	</form> -->
 	
-	<form action="/morari/admin/user/work/startCrud.controller" method="GET">
-		<input type="submit" value="回上一頁">
-	</form>
+<!-- 	<form action="/morari/admin/user/work/startCrud.controller" method="GET"> -->
+<!-- 		<input type="submit" value="回上一頁"> -->
+<!-- 	</form> -->
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -86,7 +123,7 @@
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
     <script src="/morari/work/campJs/mailInsert.js" defer></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js" defer></script>
+<!--     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js" defer></script> -->
     <script type="text/javascript">	</script>
 
 

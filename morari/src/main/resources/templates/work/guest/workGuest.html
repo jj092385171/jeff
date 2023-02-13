@@ -5,6 +5,7 @@
   <script src="/morari/guest/js/head.js"></script>
   <!-- sharepage 公用頁面 -->
   <script src="/morari/guest/js/share.js"></script>
+  <link rel="stylesheet" href="https://kit.fontawesome.com/609970ed36.css" crossorigin="anonymous">
 </head>
 
 <body style="display: none">
@@ -28,33 +29,37 @@
 <!-- 	</form> -->
 
 	
-<!-- 	<div> -->
-<!-- 			職缺<input id="sej" type="text" name="job" required> -->
-<!-- 			<button id="selectJob"  onclick='selectJob(document.getElementById("sej").value)'>查詢職缺</button> -->
-<!-- 	</div> -->
-<!-- 	<hr> -->
-	
-<!-- 	<table id="showInsert"></table> -->
 
+
+<!-- 	<table id="showInsert"></table> -->
  		<div id="amenities">
             <div class="container">
                 <div class="section-header">
                     <h2>歡迎加入我們！</h2>
+                   
                     <p></p>
+        
                </div>
-               <div class="row" id="banners"></div>
-<!--                 <div class="row"> -->
-<!--                     <div class="col-md-3 col-sm-6"> -->
-<!--                         <div class="item"> -->
-<!--                             <i class="icon icon-2"></i> -->
-<!--                             <h3>Air Conditioner</h3> -->
-<!--                             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit.</p> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
+       			 <div style="display: flex; justify-content: space-between;">
+  					<div>
+    					<h3 >類型</h3>
+  						<button id="selectType" class="btn btn-success btn-icon-split" style="margin: 0 auto;display: block;" value="長期工作" onclick='selectType($(this).val())'>長期工作</button><br>
+  						<button id="selectType" class="btn btn-success btn-icon-split" style="margin: 0 auto;display: block;" value="短期工讀" onclick='selectType($(this).val())'>短期工讀</button><br>
+  						<button id="selectType" class="btn btn-success btn-icon-split" style="margin: 0 auto;display: block;" value="打工換宿" onclick='selectType($(this).val())'>打工換宿<i class="fa-solid fa-magnifying-glass"></i></button>
+  					</div>
+  				<div>
+  			  		<h3 style="text-align: center">職缺查詢</h3>
+    		 		<input id="sej" type="text" name="job" style="margin: 0 auto;display: block;border-radius: 10%;" required>
+   			 		<button id="selectJob" class="btn btn-success btn-icon-split" style="margin: 0 auto;display: block;" onclick='selectJob(document.getElementById("sej").value)'>查詢<i class="fa-solid fa-magnifying-glass"></i></button>
+ 		 		</div>
+			</div>
+				<hr style="border: none; border-top: 2px solid black;">	
+             
+            	 <table id="showSelect" style=" margin: 0 auto"></table>
+            	 <div class="row" id="banners"></div>
             </div>
+            
         </div>
-
 
 
 

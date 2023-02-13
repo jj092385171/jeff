@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 				$('#campID').empty("");
 				var div = $('#campID');
-				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input type='button' value='新增' onclick='submitForm()'></form>";
+				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input class='btn btn-success btn-icon-split 'type='button' value='新增' onclick='submitForm()'></form>";
 				div.append(input);
 			})
 
@@ -86,15 +86,16 @@ $(document).ready(function() {
 									title: "修改",
 									width: "80px",
 									render: function(data, type, row) {
-										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
-
+										//										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+										return '<button class=\"datatable_edit_button\" onclick=\"resumeUpdate(\'' + row.number + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 									}
 								},
 								{
 									title: "刪除",
 									width: "80px",
 									render: function(data, type, row) {
-										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeDelete(' + row.number + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+//										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeDelete(' + row.number + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+										return '<button class=\"datatable_del_button\"   onclick=\"resumeDelete(\'' + row.number + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 									}
 								},
 
@@ -144,15 +145,15 @@ function submitForm() {
 		url: '/morari/admin/resume/resumeSelectUid.controller/' + input1,
 		contentType: 'application/json',
 		success: function(data) {
-			
-			if(data == null || data.length == 0){
-				
+
+			if (data == null || data.length == 0) {
+
 				window.location.href = '/morari/admin/resume/startResumeInsert.controller/' + input1
-			
-			}else{
+
+			} else {
 				alert("該會員已填寫過履歷");
 			}
-			
+
 		}
 	});
 

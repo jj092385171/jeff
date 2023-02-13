@@ -20,8 +20,6 @@ import com.campingmapping.team4.spring.t409work.model.service.JobService;
 import com.campingmapping.team4.spring.t409work.model.service.MailService;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.campingmapping.team4.spring.utils.service.JwtService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -76,9 +74,6 @@ public class AdminCampJobController {
 	@ResponseBody
 	public List<JobBean> processSelectUidAction(@PathVariable UUID uid) {
 		List<JobBean> result = jService.findUid(uid);
-		// if (result.size() == 0) {
-		// return null;
-		// }
 		return result;
 	}
 
@@ -102,7 +97,6 @@ public class AdminCampJobController {
 	@PutMapping("/userUpdate.controller/{rackid}")
 	@ResponseBody
 	public JobBean processUpdateAction(@RequestBody JobBean jBean, @PathVariable Integer rackid) {
-		System.out.println("rackid=" + rackid);
 		return jService.updateJob(jBean, rackid);
 	}
 

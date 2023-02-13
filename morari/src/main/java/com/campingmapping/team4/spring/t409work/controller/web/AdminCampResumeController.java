@@ -1,7 +1,6 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

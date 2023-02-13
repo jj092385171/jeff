@@ -43,6 +43,17 @@ $(document).ready(function() {
 					$("#16").attr('selected', true)
 					break;
 			}
+			switch (data.type) {
+				case '短期工讀':
+					$("#17").attr('selected', true)
+					break;
+				case '長期工作':
+					$("#18").attr('selected', true)
+					break;
+				case '打工換宿':
+					$("#19").attr('selected', true)
+					break;
+			}
 		}
 	});
 	$("#send").click(function() {
@@ -73,24 +84,22 @@ $(document).ready(function() {
 					var h3 = $('#su');
 					h3.prepend('修改成功');
 					var table = $('#showInsert');
-					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th></tr>");
-					//							var date = new Date(response.rackup);
-					//							var formattedDate = date.toLocaleDateString("yyyy-MM-dd");
-					//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
-					console.log("response:" + response);
-					var tr = "<tr align='center'>" +
-						"<td>" + response.userprofiles.uid + "</td>" +
-						"<td>" + response.rackid + "</td>" +
-						"<td>" + response.rackup + "</td>" +
-						"<td>" + response.job + "</td>" +
-						"<td>" + response.salary + "</td>" +
-						"<td>" + response.quantity + "</td>" +
-						"<td>" + response.place + "</td>" +
-						"<td>" + response.date + "</td>" +
-						"<td>" + response.time + "</td>" +
-						"<td>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + 
-						"</tr>";
+					table.append("<tr align='center'><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>類型</th></th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
+					
+					var tr = "<tr>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.userprofiles.uid + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.rackid + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.campname + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.place + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.type + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.job + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.salary + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.quantity + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.date + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.time + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.rackup + "</td>" +
+						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.remark + "</td>" +
+						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + "</tr>";
 					table.append(tr);
 					//});
 				}

@@ -12,12 +12,12 @@ $(document).ready(function() {
 		}
 	});
 	//文字編譯器
-ClassicEditor.create( document.querySelector( '#editor' ) )
-                      .then( editor => {
-                                 console.log( editor );
-                            } ).catch( error => {
-                                      console.error( error );
-                                } );
+//	ClassicEditor.create(document.querySelector('#editor'))
+//		.then(editor => {
+//			console.log(editor);
+//		}).catch(error => {
+//			console.error(error);
+//		});
 	$("#sendMail").submit(function(event) {
 		event.preventDefault();
 		$.ajax({
@@ -26,8 +26,10 @@ ClassicEditor.create( document.querySelector( '#editor' ) )
 			data: $(this).serialize(),
 			datatype: 'TEXT',
 			success: function(response) {
-				alert(response);
-				window.location.href = '/morari/admin/user/work/startCrud.controller';
+				if (confirm("確定寄出嗎?")) {
+					alert(response);
+					window.location.href = '/morari/admin/user/work/startCrud.controller';
+				}
 			}
 		});
 	});

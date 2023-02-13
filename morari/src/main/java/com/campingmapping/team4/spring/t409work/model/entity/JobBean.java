@@ -45,6 +45,8 @@ public class JobBean {
 	private String campname;// 營地名稱
 	@Column(name = "place")
 	private String place;// 地點
+	@Column(name = "type")
+	private String type;// 職缺種類
 	@Column(name = "job")
 	private String job;// 職缺
 	@Column(name = "salary")

@@ -51,7 +51,6 @@ public class ResumeService {
 		if (result.isPresent()) {
 			ResumeBean resumeBean = result.get();
 			// 將前端傳進來的rBean的值複製到resumeBean
-//			resumeBean.setJob(result.get().getJob().getRackid());
 			resumeBean.setName(rBean.getName());
 			resumeBean.setAge(rBean.getAge());
 			resumeBean.setGender(rBean.getGender());
@@ -59,10 +58,7 @@ public class ResumeService {
 			resumeBean.setPhone(rBean.getPhone());
 			resumeBean.setEducational(rBean.getEducational());
 			resumeBean.setSkill(rBean.getSkill());
-
-//			resumeBean.setPtime(result.get().getPtime());
 //	        jBean.setUserprofiles(result.get().getUserprofiles().getUid());	        
-			// 使用save更新資料庫中的資料
 			return reDao.save(resumeBean);
 		}
 		// 找不到對應的資料
@@ -105,6 +101,5 @@ public class ResumeService {
 	public Collection<ResumeBean> findRid(Integer rackid) {
 		Collection<ResumeBean> resumes = jDao.findById(rackid).get().getResumes();
 		return resumes;
-
 	}
 }
