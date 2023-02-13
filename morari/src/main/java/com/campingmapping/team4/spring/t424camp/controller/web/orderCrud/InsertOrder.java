@@ -130,7 +130,7 @@ public class InsertOrder {
 		obj.setTradeDesc("test Description");
 		obj.setItemName(items);
 		obj.setReturnURL("http://211.23.128.214:5000");
-		obj.setClientBackURL("https://localhost:8443/morari/admin/camp/querySuccessOrderPage");
+		obj.setClientBackURL("https://localhost:8443/morari/admin/camp/orderindex");
 		obj.setNeedExtraPaidInfo("N");
 		String form = all.aioCheckOut(obj, null);
 		return form;

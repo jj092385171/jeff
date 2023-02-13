@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,11 +54,10 @@ public class CampService {
 	private HttpServletRequest httpServletRequest;
 	
 
-	// 透過cityId查Camps
+	// 推薦Camps
 	public List<Camp> recommendCampToUser(UUID uid) {
 		// user
 		UserProfiles user = userRepository.findById(uid).get();
-
 		// orders of user
 		Object[] orders = user.getCampOrder().toArray();
 		int ordersMax = orders.length - 1;
@@ -97,10 +99,9 @@ public class CampService {
 				Integer index = (Integer) set.toArray()[i];
 				resultList.add(campList.get(index));
 			}
-
 			return resultList;
 		}
-
+		
 		return campList;
 	}
 
@@ -123,6 +124,14 @@ public class CampService {
 		Camp camp = new Camp(campName, city, location, campPicturesPath, description, tags, user);
 
 		return campRepository.save(camp);
+	}
+	
+	//查詢全部訂單, 分頁, 順序
+	public Page<Camp> getByPage(Pageable pageable) {
+		Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("campID"));
+		Page<Camp> findAll = campRepository.findAll(sortedPageable);
+		
+		return findAll;
 	}
 
 	// 找全部Camp

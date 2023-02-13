@@ -30,9 +30,10 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    <h4>新增營位</h4>
+                    <div class="long"><b>═══新增營區═══</b></div>
 
                     <hr>
+                    <br>
 
                     <form id="form" method="post" enctype="multipart/form-data"></form>
 
@@ -88,13 +89,17 @@
                 var form = $('#form');
                 var div = '';
 
-                div = '營區位名: <input type="text" name="siteName" placeholder="營區位名" ><span id="errorSiteName" style="color: red;"></span><br>'
+                div = '營區位名: <input type="text" id="siteName" name="siteName" placeholder="營區位名" ><span id="errorSiteName" style="color: red;"></span><br>'
+                    + '<img src="" id="showimg">'
                     + '上傳圖片: <input type="file" name="sitePicturesPath" id="sitePicturesPath"><span id="errorsitePicturesPath" style="color: red;"></span><br>'
-                    + '總營位: <input type="text" name="totalSites" placeholder="總營位" ><span id="errortotalSites" style="color: red;"></span><br>'
-                    + '營位金額: <input type="text" name="siteMoney" placeholder="營位金額" ><span id="errorsiteMoney" style="color: red;"></span><br>'
+                    + '總營位: <input type="text" id="totalSites" name="totalSites" placeholder="總營位" ><span id="errortotalSites" style="color: red;"></span><br>'
+                    + '營位金額: <input type="text" id="siteMoney" name="siteMoney" placeholder="營位金額" ><span id="errorsiteMoney" style="color: red;"></span><br>'
                     + '營地編號: <input type="text" name="campID" readonly="readonly" value="' + campID + '"><br>'
+                    + '<button id="one" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">一鍵輸入</span></a></span></button>'
                     + '<button id="send" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">營地新增</span></a></span></button><span id="errornone" style="color: red;"></span>'
                 form.append(div);
+                    
+                $('.long').width('400px').css("font-size", "25px").css("color", "SaddleBrown");
 
                 $('body').on('click', '#send', function () {
                     // console.log(form);
@@ -140,13 +145,29 @@
                                     + '營位金額: <input type="text" name="siteMoney" value="' + after.siteMoney + '"><br>'
                                     + '營地編號: <input type="text" name="campID" readonly="readonly" value="' + after.camp.campID + '"><br>'
                                 form.append(div);
-                                    
+
                                 $('img').width('100px').height('100px');
+                                $('.long').width('400px').css("font-size", "25px").css("color", "SaddleBrown");
                             }
                         }
                     });
                 });
 
+                $('body').on('click', '#one', function () {
+                    $('#siteName').val('新增範例營地');
+                    $('#totalSites').val(10);
+                    $('#siteMoney').val(100);
+                });
+
+                $('body').on('change', '#sitePicturesPath', function () {
+                    file = this.files[0];
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#showimg").attr("src", e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                    $('img').width('100px').height('100px');
+                });
             });
         });
     </script>

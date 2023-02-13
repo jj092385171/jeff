@@ -24,11 +24,11 @@
             enim at venenatis tincidunt.
           </p>
         </div>
-        
+
         <hr>
 
-        <iframe src="/morari/camp/fullCalendar" scrolling="no" frameborder="0" width="800"
-            height="500" style="margin: 0 auto; display: block;"></iframe>
+        <iframe src="/morari/camp/fullCalendar" scrolling="no" frameborder="0" width="800" height="500"
+          style="margin: 0 auto; display: block;"></iframe>
 
         <hr>
 
@@ -165,7 +165,7 @@
           formData.append('campID', campID);
 
           $.ajax({
-            url: '/morari/admin/camp/insertOrder.controller',
+            url: '/morari/camp/insertOrderByGuest',
             type: 'post',
             data: formData,
             contentType: false,

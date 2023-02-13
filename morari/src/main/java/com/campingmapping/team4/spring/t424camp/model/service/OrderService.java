@@ -10,7 +10,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,11 +57,29 @@ public class OrderService {
 		return orderRepository.findById(orderId).get();
 	}
 	
-	//查詢全部訂單, 分頁
-	public Page<Order> getByPage(Pageable pageable) {
-		Page<Order> findAll = orderRepository.findAll(pageable);
+	//UID查詢訂單, 分頁, 倒序
+	public Page<Order> getByPageAndUID(Pageable pageable, UUID fkuserid) {
+		Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("orderID").descending());
+		
+		Page<Order> findMy = orderRepository.findMyOrdersByUID(sortedPageable, fkuserid);
 		Date now = new Date();
 		
+		for (Order order : findMy) {
+			Date leavingTime = order.getLeavingTime();
+			if(leavingTime.before(now)) {
+				order.setStatus("訂單已完成");
+				orderRepository.save(order);
+			}
+		}
+		return findMy;
+	}
+	
+	//查詢全部訂單, 分頁, 倒序
+	public Page<Order> getByPage(Pageable pageable) {
+		Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("orderID").descending());
+		Page<Order> findAll = orderRepository.findAll(sortedPageable);
+		Date now = new Date();
+
 		for (Order order : findAll) {
 			Date leavingTime = order.getLeavingTime();
 			if(leavingTime.before(now)) {
@@ -69,6 +89,8 @@ public class OrderService {
 		}
 		return findAll;
 	}
+
+
 	
 	//查詢全部訂單
 	public List<Order> findAll() {
@@ -110,7 +132,7 @@ public class OrderService {
 			}
 		}
 		
-		Order order = new Order(user, now, goingtime, leavingtime, "訂單成立", totalPrice, camp, orderitems);
+		Order order = new Order(user, now, goingtime, leavingtime, "訂單付款成功", totalPrice, camp, orderitems);
 		
 		order =  orderRepository.save(order);
 		

@@ -30,9 +30,10 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    <h4>新增營地</h4>
+                    <div class="long"><b>═══新增營地═══</b></div>
 
                     <hr>
+                    <br>
 
                     <form id="form" method="post" enctype="multipart/form-data"></form>
 
@@ -100,15 +101,18 @@
 
                     var div = '';
 
-                    div = '營地名: <input type="text" name="campName" placeholder="營地名" ><span id="errorcampName" style="color: red;"></span><br>'
+                    div = '營地名: <input type="text" id="campName" name="campName" placeholder="營地名" ><span id="errorcampName" style="color: red;"></span><br>'
                         + '縣市選項:' + radio + '<span id="errorcityID" style="color: red;"></span><br>'
-                        + '地址: <input type="text" name="location" placeholder="地址" ><span id="errorlocation" style="color: red;"></span><br>'
-                        + '簡介: <input type="text" name="description" placeholder="描述"><br>'
+                        + '地址: <input type="text" id="location" name="location" placeholder="地址" ><span id="errorlocation" style="color: red;"></span><br>'
+                        + '簡介: <input type="text" id="description" name="description" placeholder="描述"><br>'
+                        + '<img src="" id="showimg">'
                         + '上傳圖片: <input type="file" name="campPicturesPath" id="campPicturesPath"><span id="errorcampPicturesPath" style="color: red;"></span><br>'
                         + '標籤選項:' + tags + '<span id="errortagIDs" style="color: red;"></span><br>'
+                        + '<button id="one" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">一鍵輸入</span></a></span></button>'
                         + '<button id="send" style="border:none;background-color:transparent" type="button"><span><a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"><i class="fas fa-plus"></i></span><span class="text">營地新增</span></a></span></button><span id="errornone" style="color: red;"></span>'
                     form.append(div);
-                        
+
+                    $('.long').width('400px').css("font-size", "25px").css("color", "SaddleBrown");
                 });
 
                 $('body').on('click', '#send', function () {
@@ -164,12 +168,29 @@
                                     + '圖片: <img src="' + after.campPicturesPath + '"><br>'
                                     + '標籤: ' + tagNames + '<br>'
                                 form.append(div);
-                                    
+
                                 $('img').width('100px').height('100px');
                             }
                         }
                     });
                 });
+
+                $('body').on('click', '#one', function () {
+                    $('#campName').val('新增範例營地');
+                    $('#location').val('新增範例地址');
+                    $('#description').val('新增範例簡介');
+                });
+
+                $('body').on('change', '#campPicturesPath', function () {
+                    file = this.files[0];
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#showimg").attr("src", e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                    $('img').width('100px').height('100px');
+                });
+
             });
         });
     </script>
