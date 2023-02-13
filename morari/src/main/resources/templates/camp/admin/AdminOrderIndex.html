@@ -138,7 +138,7 @@
                 ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th><th>訂單狀態</th><th>明細</th></thead>');
 
                 $.each(data["orderList"], function (i, oneorder) {
-                    ordertr = '<tbody class="card mb-4 py-3 border-bottom-primary">'
+                    ordertr = '<tbody>'
                         + '<tr>'
                         + '<td>' + oneorder.orderID + '</td>'
                         + '<td>' + oneorder.camp.campName + '</td>'
@@ -156,15 +156,15 @@
                         + '</tr>'
                         + '<tr id="orderInfo' + oneorder.orderID + '" style="display : none;" ><td colspan="4">'
                         + '<table id="orderitemtable" class="card mb-4 py-3 border-bottom-info">'
-                        + '<thead><th>營位名</th><th>圖片</th><th>單價</th><th>訂位數量</th></thead>';
+                        + '<thead><th>營位名</th><th>單價</th><th>訂位數量</th><th>圖片</th></thead>';
 
                     $.each(oneorder.orderitems, function (i, orderitem) {
                         ordertr += '<tbody>'
                             + '<tr>'
                             + '<td>' + orderitem.site.siteName + '</td>'
-                            + '<td>' + '<img src="' + orderitem.site.sitePicturesPath + '">' + '</td>'
                             + '<td>' + orderitem.unitPrice + '</td>'
                             + '<td>' + orderitem.numbers + '</td>'
+                            + '<td>' + '<img src="' + orderitem.site.sitePicturesPath + '">' + '</td>'
                             + '</tr>'
                             + '</tbody>'
                     });
