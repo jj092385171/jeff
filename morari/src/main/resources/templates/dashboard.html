@@ -3,11 +3,10 @@
 
 <head>
     <script src="/morari/admin/js/head.js"></script>
-    
+
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
-    <link rel="stylesheet" href="/morari/camper/css/useredit.css">
-    <link rel="stylesheet" href="/morari/admin/css/dataTable.css">
+
 </head>
 
 <body id="page-top" style="display: none">
@@ -31,8 +30,25 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    <!-- 嵌入式網頁 -->
-                    <div class="usertablediv"></div>
+
+
+                    <!-- Content Row -->
+                   
+
+                            <!-- Area Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">近1個月註冊人數</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="registerdate"></canvas>
+                                    </div>
+                                    <!-- <hr>
+                                    近1個月註冊人數 -->
+                                    <!-- <code>/js/demo/chart-area-demo.js</code> file. -->
+                                </div>
+                            </div>
 
 
 
@@ -56,8 +72,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    <!-- user edit -->
-    <dialog class="useredit"></dialog>
+
     <!-- Logout Modal-->
     <div class="loginoutshare"></div>
 
@@ -75,17 +90,12 @@
     <script src="/morari/admin/vendor/chart.js/Chart.min.js" defer></script>
 
     <!-- Page level custom scripts -->
-    <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
-    <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+    <script src="/morari/admin/js/registerdatechart.js" defer></script>
 
-    <!-- datatables js -->
-    <script src="/morari/admin/vendor/datatables/datatables13.js"></script>
-    <script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
     <script src="/morari/admin/vendor/uitls/timeData.js"></script>
 
-    <!-- camper js -->
-    <!-- <script src="/morari/camper/js/alluser.js" ></script> -->
-    <script src="/morari/camper/js/userTable.js"></script>
+
+
 
 </body>
 

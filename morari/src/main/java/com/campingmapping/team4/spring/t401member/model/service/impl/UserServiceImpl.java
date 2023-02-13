@@ -1,10 +1,13 @@
 package com.campingmapping.team4.spring.t401member.model.service.impl;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
@@ -124,6 +127,20 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Date> getUserRegisterDate() {
+        return userRepository.findAll().stream().map(UserProfiles -> UserProfiles.getUserdetail().getRegisterdata())
+                .toList();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getUserRoles(HttpServletRequest request) {
+        Collection<? extends GrantedAuthority> authorities = userRepository.findById(jwtService.getUId(request)).get().getAuthorities(); 
+        authorities.forEach(a->System.out.println(a));
+        System.out.println(authorities);
+        return userRepository.findById(jwtService.getUId(request)).get().getAuthorities();
     }
 
 }

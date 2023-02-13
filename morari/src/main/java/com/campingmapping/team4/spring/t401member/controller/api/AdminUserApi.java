@@ -1,11 +1,14 @@
 package com.campingmapping.team4.spring.t401member.controller.api;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,5 +83,17 @@ public class AdminUserApi {
     public UserDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
         return userService.getUesrDetailGuestEdit(request);
     }
+    @GetMapping("/userregisterdate")
+    @ResponseBody
+    public List<Date> getUserRegisterDate() {
+        return userService.getUserRegisterDate();
+    }
+    @GetMapping("/userroles")
+    @ResponseBody
+    public Collection<? extends GrantedAuthority> getuserroles(HttpServletRequest request) {
+        return userService.getUserRoles(request);
+    }
+
+
 
 }

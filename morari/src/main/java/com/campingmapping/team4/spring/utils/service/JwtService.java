@@ -55,6 +55,7 @@ public class JwtService {
     UserProfiles userProfile = (UserProfiles) userDetails;
     extraClaims.put("uid", userProfile.getUid());
     extraClaims.put("remember", rememberMe);
+    extraClaims.put("lastLoginTime", String.valueOf(System.currentTimeMillis()));
     // 製作refreshToken
     String refreshToken = Jwts.builder()
         .setClaims(extraClaims)

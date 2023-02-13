@@ -68,6 +68,17 @@
 
 window.onload = function () {
     document.body.style.display = 'block';
+    // 查看權限
+    fetch('/morari/admin/camper/api/userroles')
+  .then(response => response.json())
+  .then(data => {
+    // 判斷是否有 SUPERADMIN 或 ADMIN 角色
+    if (data.some(role => role.authority === 'SUPERADMIN' || role.authority === 'ADMIN')) {
+      // 顯示編輯按鈕
+      document.getElementById('edit-button-header').style = '';
+      document.getElementById('edit-button-fotter').style = '';
+    }
+  });
     // 登入狀態驗證
     fetch("/morari/api/auth/state", {
         method: "Get",
