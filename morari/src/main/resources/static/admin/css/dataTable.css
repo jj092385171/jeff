@@ -5,19 +5,20 @@
   border: 0;
   width: 35px;
   height: 35px;
-  box-shadow: 0.7px 0.7px 3px #000000;
-  background-color: #b5a073;
+  /* box-shadow: 0.7px 0.7px 3px #000000; */
+
+  background-color: #ffa042;
   color: #ffffff;
 }
 
 .datatable_edit_button:hover {
-  box-shadow: 0.7px 0.7px 5px #000000;
-  background-color: #a59269;
+  /* box-shadow: 0.7px 0.7px 5px #000000; */
+  background-color: #ffaf60;
 }
 
 .datatable_edit_button:active {
-  box-shadow: 0.7px 0.7px 1px #000000;
-  background-color: #b5a073;
+  /* box-shadow: 0.7px 0.7px 1px #000000; */
+  background-color: #ffa042;
 }
 
 
@@ -29,17 +30,88 @@
   height: 35px;
   color: #FFF;
   background-color: #ff4e4e;
-  box-shadow: 0.7px 0.7px 3px #000000;
+  /* box-shadow: 0.7px 0.7px 3px #000000; */
 }
 
 .datatable_del_button:hover {
-  box-shadow: 0.7px 0.7px 5px #000000;
-  background-color: #d84343;
+  /* box-shadow: 0.7px 0.7px 5px #000000; */
+  background-color: #fc0000;
 }
 
 .datatable_del_button:active {
-  box-shadow: 0.7px 0.7px 1px #000000;
+  /* box-shadow: 0.7px 0.7px 1px #000000; */
   background-color: #ff4e4e;
+}
+
+.datatable_hide_button {
+  border-radius: 100%;
+  border: 0;
+  width: 35px;
+  height: 35px;
+  background-color: #007979;
+  color: #ffffff;
+}
+
+.datatable_hide_button:hover {
+  background-color: #00AEAE;
+}
+
+.datatable_hide_button:active {
+  background-color: #007979;
+}
+
+
+.datatable_report_button {
+  border-radius: 100%;
+  border: 0;
+  width: 35px;
+  height: 35px;
+  background-color: #8080C0;
+  color: #ffffff;
+}
+
+.datatable_report_button:hover {
+  background-color: #A6A6D2;
+}
+
+.datatable_report_button:active {
+  background-color: #8080C0;
+}
+
+
+.datatable_search_button {
+  border-radius: 100%;
+  border: 0;
+  width: 35px;
+  height: 35px;
+  background-color: #0066CC;
+  color: #ffffff;
+}
+
+.datatable_search_button:hover {
+  background-color: #0080FF;
+}
+
+.datatable_search_button:active {
+  background-color: #0066CC;
+}
+
+
+.datatable_lottery_button {
+  border-radius: 100%;
+  border: 0;
+  width: 35px;
+  height: 35px;
+  background-color: #FF95CA;
+  color: #ffffff;
+}
+
+.datatable_lottery_button:hover {
+  background-color: #FFC1E0;
+}
+
+.datatable_lottery_button:active {
+  background-color: #FF95CA;
 }
 
 table.dataTable td.dt-control {

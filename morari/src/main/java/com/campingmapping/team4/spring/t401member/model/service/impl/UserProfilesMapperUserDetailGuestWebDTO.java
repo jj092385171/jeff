@@ -7,7 +7,7 @@ import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 
 @Service
-public class UserProfilesMapperUesrDetailGuestWebDTO implements Function<UserProfiles, UserDetailGuestWeb> {
+public class UserProfilesMapperUserDetailGuestWebDTO implements Function<UserProfiles, UserDetailGuestWeb> {
 
     @Override
     public UserDetailGuestWeb apply(UserProfiles userProfiles) {

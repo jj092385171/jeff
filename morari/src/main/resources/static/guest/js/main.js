@@ -93,7 +93,9 @@ window.onload = function () {
                         fetch("/morari/utils/getuid")
                             .then(response => response.text())
                             .then(uid => {
-                                document.querySelector('#camperpage a').href = "/morari/camper/"+uid;
+                                document.querySelector('.camperpage a').href = "/morari/camper/" + uid;
+                                let mobile = document.querySelector('.mobile-menu')
+                                mobile.querySelector('.camperpage a').href = "/morari/camper/" + uid;
                             })
 
                     });

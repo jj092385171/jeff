@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDetailAdminWebDTOMapperUserProfiles userDetailAdminWebDTOMapperUserProfiles;
     @Autowired
-    UserProfilesMapperUesrDetailGuestWebDTO userProfilesMapperUesrDetailguestWebDTO;
+    UserProfilesMapperUserDetailGuestWebDTO userProfilesMapperUserDetailguestWebDTO;
     @Autowired
-    UserProfilesMapperUesrDetailGuestEditDTO userProfilesMapperUesrDetailGuestEditDTO;
+    UserProfilesMapperUesrDetailGuestEditDTO userProfilesMapperUserDetailGuestEditDTO;
     @Autowired
     UserDetailGuestEditDTOMapperUserProfiles userDetailGuestEditDTOMapperUserProfiles;
 
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDetailGuestWeb getUserDetail(UUID uid) {
-        return userProfilesMapperUesrDetailguestWebDTO.apply(userRepository.findById(uid).get());
+        return userProfilesMapperUserDetailguestWebDTO.apply(userRepository.findById(uid).get());
     }
 
     @Override
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
     public UserDetailGuestEdit getUesrDetailGuestEdit(HttpServletRequest request) {
         UUID uid = jwtService.getUId(request);
         UserProfiles userProfiles = userRepository.findById(uid).get();
-        UserDetailGuestEdit uesrDetailGuestEdit = userProfilesMapperUesrDetailGuestEditDTO.apply(userProfiles);
+        UserDetailGuestEdit uesrDetailGuestEdit = userProfilesMapperUserDetailGuestEditDTO.apply(userProfiles);
         return uesrDetailGuestEdit;
     }
 
