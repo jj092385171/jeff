@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -142,9 +143,10 @@ public class UserProfiles implements UserDetails {
   // 履歷
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
-  private Collection<ResumeBean> resume;
-
+  @OneToOne
+  // (fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  private ResumeBean resume;
+  // PO文
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")

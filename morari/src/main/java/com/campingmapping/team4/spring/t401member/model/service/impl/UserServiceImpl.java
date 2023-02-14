@@ -137,9 +137,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<? extends GrantedAuthority> getUserRoles(HttpServletRequest request) {
-        Collection<? extends GrantedAuthority> authorities = userRepository.findById(jwtService.getUId(request)).get().getAuthorities(); 
-        authorities.forEach(a->System.out.println(a));
-        System.out.println(authorities);
         return userRepository.findById(jwtService.getUId(request)).get().getAuthorities();
     }
 

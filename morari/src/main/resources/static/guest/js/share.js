@@ -6,11 +6,11 @@ fetch("/morari/guest/share/header.html")
     let currentURL = window.location.href;
 
     // 判斷當前網頁的位置
-    if (currentURL.indexOf("home") !== -1) {
-      // 如果當前網頁是首頁，則將 "home" 選項標記為 "active"
-      document.querySelector(".homepage").classList.add("active");
-    }
-    else if (currentURL.indexOf("about") !== -1) {
+    // if (currentURL.indexOf("home") !== -1) {
+    //   // 如果當前網頁是首頁，則將 "home" 選項標記為 "active"
+    //   document.querySelector(".homepage").classList.add("active");
+    // }
+    if (currentURL.indexOf("about") !== -1) {
       // 如果當前網頁是 "About" 頁面，則將 "about" 選項標記為 "active"
       document.querySelector(".aboutpage").classList.add("active");
     }

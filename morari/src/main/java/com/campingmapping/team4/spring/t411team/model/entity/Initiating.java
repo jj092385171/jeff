@@ -93,6 +93,6 @@ public class Initiating {
 	@Column(name = "title")
 	private String title;
 	
-	private MultipartFile img;
+	private String img;
 
 }

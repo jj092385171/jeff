@@ -57,10 +57,10 @@ public class SetupDataLoader implements
                 "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER");
         roles.forEach(r -> createRoleIfNotFound(r));
 
-        List<String> tags = Arrays.asList( "大草原", "夜景", "親子娛樂" );
+        List<String> tags = Arrays.asList( "大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲" );
         tags.forEach(t->createTagIfNotFound(t));
 
-        List<String> citys = Arrays.asList( "新北", "桃園", "苗栗" );
+        List<String> citys = Arrays.asList( "新北", "桃園", "新竹", "苗栗", "南投", "宜蘭", "台東" );
         citys.forEach(c->createCityIfNotFound(c));
 
         // 檢查有無存在生成超級管理員
