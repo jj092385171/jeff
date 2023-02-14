@@ -39,6 +39,9 @@ public class SecurityConfiguration {
             http
                     // 關閉CSRF
                     .csrf().disable()
+                //     Frame 同源設定
+                    .headers(h->h
+                    .frameOptions().sameOrigin())
                     // 設定是否需要驗證的路徑(更改成使用註釋)
                     .authorizeHttpRequests(a -> a
                             .requestMatchers("/admin").hasAnyAuthority("SUPERADMIN")

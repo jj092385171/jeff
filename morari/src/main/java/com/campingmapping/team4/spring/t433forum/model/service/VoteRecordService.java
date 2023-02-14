@@ -77,24 +77,26 @@ public class VoteRecordService {
 	}
 
 	// 抽獎並記錄得獎者
-	public Vote updateWinner(@PathVariable Integer voteid){
+	public Vote updateWinner(@PathVariable Integer voteid) {
 		Vote vote = voteRepository.findById(voteid).get();
-		if(vote.getWinner() == null) {
-			Map<Integer,UserProfiles> map = new HashMap<>();
-			int i=0;
+		if (vote.getWinner() == null) {
+			Map<Integer, UserProfiles> map = new HashMap<>();
+			int i = 0;
 			List<VoteOption> voteOptions = voteOptionRepository.findByVote(vote);
-			for(VoteOption option : voteOptions){
+			for (VoteOption option : voteOptions) {
 				List<VoteRecord> voteRecord = voteRecordRepository.findByVoteoption(option);
-				if(voteRecord.size() == 0) {
-					return null;
-				}
-				for(VoteRecord record : voteRecord){
+				for (VoteRecord record : voteRecord) {
 					UserProfiles user = record.getUserprofiles();
-					map.put(i, user);
-					i++;
+					if(user != null){
+						map.put(i, user);
+						i++;
+					}
 				}
 			}
-			int random = (int)(Math.random() * i);
+			if (i == 0) {
+				return null;
+			}
+			int random = (int) (Math.random() * i);
 			UserProfiles winner = map.get(random);
 			vote.setWinner(winner);
 			voteRepository.save(vote);

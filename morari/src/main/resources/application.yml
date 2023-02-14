@@ -110,4 +110,7 @@ spring:
           auth: true
           starttls: 
             enable: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 

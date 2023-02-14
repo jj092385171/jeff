@@ -36,7 +36,7 @@ public class ProductOrderController {
 		return "mall/admin/orderindex";
 	}
 
-	@GetMapping("/selectorderbyuseridAction.controller/{id}")
+	@GetMapping("/selectorderbyuseridAction.controller")
 	public String selectorderbyuseridAction() {
 		return "mall/guest/selectorderbyuserid";
 	}
