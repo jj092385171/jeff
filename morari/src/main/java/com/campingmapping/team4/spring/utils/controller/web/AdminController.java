@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     // @PreAuthorize("hasAnyAuthority('SUPERADMIN')")
-    @GetMapping({ "", "/" })
+    @GetMapping("/dashboard")
     public String index() {
-        return "admin";
+        return "dashboard";
     }
 
 }

@@ -2,6 +2,7 @@
 <html lang="zh-TW">
 
 <head>
+	<link rel="stylesheet" href="/morari/admin/css/dataTable.css">
     <script src="/morari/admin/js/head.js"></script>
 
     <!-- sharepage -->
@@ -30,8 +31,19 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 
-                    Hello Morari
-
+                    <!-- 我自己的東西 -->
+				    <form action="/morari/admin/forum/showinsertvoteadmin.controller">
+				    	<button>新增投票</button>
+				    </form>
+				    <br>
+				    <table id="allvote" class="table is-striped" style="width:100%">
+				        <thead></thead>
+				    	<tbody></tbody>
+				    </table>
+				    
+				    
+				    
+                    
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -65,15 +77,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/morari/admin/js/sb-admin-2.min.js" defer></script>
-
-    <!-- Page level plugins -->
-    <script src="/morari/admin/vendor/chart.js/Chart.min.js" defer></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
-    <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-
-
+    
+    <!-- datatables js -->
+    <script src="/morari/admin/vendor/datatables/datatables13.js" ></script>
+    <script src="/morari/admin/vendor/datatables/datatableresponsive.js" ></script>
+	
+	<!-- 我自己的東西 -->
+	<script src="/morari/forum/js/voteadmin.js"></script> 
 
 </body>
 

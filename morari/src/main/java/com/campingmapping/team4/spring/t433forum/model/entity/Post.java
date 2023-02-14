@@ -44,6 +44,9 @@ public class Post {
 	@Column(name = "content", nullable = false, length = Integer.MAX_VALUE)
 	private String content;
 	
+	@Column(name = "picture")
+	private String picture;
+	
 	@Column(name = "people")
 	private Integer people;
 	

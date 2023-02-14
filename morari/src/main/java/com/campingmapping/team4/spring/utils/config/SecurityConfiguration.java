@@ -11,9 +11,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.campingmapping.team4.spring.utils.service.LogoutSuccessHandlerImpl;
+import com.campingmapping.team4.spring.utils.service.OAuth2AuthSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +31,7 @@ public class SecurityConfiguration {
     // private final OAuth2UserService<OAuth2UserRequest, OAuth2User>
     // oAuthUserService;
     @Autowired
-    private final AuthenticationSuccessHandler successHandler;
+    private final OAuth2AuthSuccessHandler  successHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
@@ -39,8 +39,9 @@ public class SecurityConfiguration {
             http
                     // 關閉CSRF
                     .csrf().disable()
+                //     Frame 同源設定
                     .headers(h->h
-                    		.frameOptions().sameOrigin())
+                    .frameOptions().sameOrigin())
                     // 設定是否需要驗證的路徑(更改成使用註釋)
                     .authorizeHttpRequests(a -> a
                             .requestMatchers("/admin").hasAnyAuthority("SUPERADMIN")
@@ -73,9 +74,9 @@ public class SecurityConfiguration {
                             .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
             return http.build();
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+                e.printStackTrace();
+                return null;
+            }
     }
 
 }

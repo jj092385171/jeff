@@ -24,6 +24,11 @@ public class ProductOrderDetailController {
 		return "mall/admin/selectOrderdetailById";
 	}
 
+	@GetMapping("/selectorderdetailbyuserid.controller/{id}")
+	public String selectorderdetailbyuseridAllAction() {
+		return "mall/guest/selectorderdetailbyuserid";
+	}
+
 	// 搜尋所有訂單詳情
 	@GetMapping("/selectAll")
 	@ResponseBody

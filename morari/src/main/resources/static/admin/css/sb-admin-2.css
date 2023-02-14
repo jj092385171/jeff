@@ -77,7 +77,8 @@ body {
   line-height: 1.5;
   color: #2D3739;
   text-align: left;
-  background-color: #2B3436;
+  /* background-color: #2B3436; */
+  background-color: #4e6364;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -3351,9 +3352,10 @@ fieldset:disabled a.btn {
   display: block;
   width: 100%;
 }
+
 #btn-oauth {
   /* display: block; */
-  float: inline-start; 
+  float: inline-start;
   border-radius: 100%;
 }
 
@@ -4538,7 +4540,8 @@ input[type="button"].btn-block {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  /* padding: 0.5rem 1rem; */
+  padding: 0;
 }
 
 .navbar .container,
@@ -7116,7 +7119,7 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #4e6364 !important;
+  background-color: #2D3739 !important;
 
 }
 
@@ -11117,7 +11120,8 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #2b3436;
+  background-color: #4e6364;
+  /* background-color: #2b3436; */
   /* background-color: black; */
   /* background-image: linear-gradient(180deg, #212529 10%, #666 100%); */
   background-size: cover;
@@ -11394,13 +11398,13 @@ a:focus {
 
 .sidebar .nav-item .nav-link .img-profile,
 .topbar .nav-item .nav-link .img-profile {
-  height: 50px  !important;
+  height: 50px !important;
   /* width: 2rem  !important; */
 }
 
-.topbar {
-  /* height: 4.375rem; */
-}
+/* .topbar {
+  height: 4.375rem;
+} */
 
 .topbar #sidebarToggleTop {
   height: 2.5rem;
@@ -11432,10 +11436,14 @@ a:focus {
 }
 
 .topbar .nav-item .nav-link {
-  height: 4.375rem;
+  /* height: 4.375rem; */
+  height: 60px;
   display: flex;
   align-items: center;
-  padding: 0 0.75rem;
+  /* padding: 0 0.75rem; */
+
+  padding-left: 10px;
+  padding-right: 25px;
 }
 
 .topbar .nav-item .nav-link:focus {
@@ -11484,8 +11492,8 @@ a:focus {
 }
 
 .topbar .dropdown-list .dropdown-item .dropdown-list-image img {
-  height: 2.5rem  !important;
-  width: 2.5rem  !important;
+  height: 2.5rem !important;
+  width: 2.5rem !important;
 }
 
 .topbar .dropdown-list .dropdown-item .dropdown-list-image .status-indicator {
@@ -12166,6 +12174,7 @@ form.user .form-control-user {
   border-radius: 10rem;
   padding: 1.5rem 1rem;
 }
+
 form.user .form-control-edit {
   font-size: 0.8rem;
   border-radius: 10rem;
@@ -12689,6 +12698,7 @@ footer.bg-foot {
 }
 
 footer.sticky-footer {
+  margin-top: 5px;
   padding: 2rem 0;
   flex-shrink: 0;
 }
@@ -12701,7 +12711,8 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
-dialog{
+
+dialog {
   border: 0px;
   border-radius: 10px;
   box-shadow: 0 0 10px #000;

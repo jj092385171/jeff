@@ -25,9 +25,9 @@
             enim at venenatis tincidunt.
           </p>
         </div>
-        
 
-        <form id="cityform" method="post" >
+
+        <form id="cityform" method="post">
           <table id="citytable"></table>
         </form>
 
@@ -128,6 +128,7 @@
               }
               else if (QueryByCityIDsResult.error == 'none') {
                 $(".row").empty();
+                $('#changeP').empty();
                 $("#errorcityIDs").append(QueryByCityIDsResult.noData);
                 return;
               }

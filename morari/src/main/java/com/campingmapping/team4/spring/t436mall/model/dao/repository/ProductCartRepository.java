@@ -19,7 +19,7 @@ public interface ProductCartRepository extends JpaRepository<ProductCart, Intege
 	public void deleteAllByUserid(String userid);
 	// 結帳->新增訂單
 	// 依userID查詢購物車資料
-	@Query(value = "SELECT p.id, p.userid, p.pdid, p.ctqty, c.pdpicture, c.pdprice, c.pdname"
+	@Query(value = "SELECT p.id, p.userid, p.pdid, p.ctqty, c.pdpicture, c.pdprice, c.pdname,c.pdinventory"
 			+ " FROM productcart p"
 			+ " LEFT JOIN category c ON  p.pdid = c.pdid WHERE p.userid= ?1", nativeQuery = true)
 	public List<ProductCartVo> findByUserid(String userid);

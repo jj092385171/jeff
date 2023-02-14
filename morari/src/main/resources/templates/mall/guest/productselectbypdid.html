@@ -22,50 +22,55 @@
 		var id = url.split("/").pop();
 	</script>
 
-
-	<script>
-	</script>
-
 </head>
 
 <body style="display: none">
 	<!-- Header Section Start -->
 	<div class="header"></div>
-
 	<!-- Header Section End -->
+	<div class="wrapper">
 
-	<!-- 分離範例 -->
-	<div id="rooms">
-		<div class="container">
-			<div class="section-header">
-				<h2>凹豆商城</h2>
-				<p>
-					<input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
-				</p>
-			</div>
-			<div id="banners" class="row">
-				<div class="modal fade bs-example-modal-lg text-center" id="imgModal" tabindex="-1" role="dialog"
-					data-toggle="modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg" style="display:inline-block;width:auto;">
-						<div class="modal-content">
-							<div id="imgshow"></div>
+
+
+
+
+		<!-- 分離範例 -->
+
+		<div id="rooms">
+			<div class="container">
+				<div class="section-header">
+					<h2>凹豆商城</h2>
+					<p>
+						<input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
+					</p>
+				</div>
+				<div id="banners" class="row">
+					<div class="modal fade bs-example-modal-lg text-center" id="imgModal" tabindex="-1" role="dialog"
+						data-toggle="modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg" style="display:inline-block;width:auto;">
+							<div class="modal-content">
+								<div id="imgshow"></div>
+							</div>
 						</div>
 					</div>
-				</div>
 
-			</div>
-			<div id="rooms">
+				</div>
+				<div id="rooms">
+				</div>
 			</div>
 		</div>
+
+
+
+
+
 	</div>
-
-	<script src="/morari/mall/js/test.js"></script>
-
 	<!-- Footer Section Start -->
 	<div class="footer"></div>
 	<!-- Footer Section End -->
 
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
 
 	<!-- Vendor JavaScript File -->
 	<script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
@@ -182,6 +187,8 @@
 			$("#imgModal").modal('show');
 		}
 	</script>
+
+
 </body>
 
 </html>

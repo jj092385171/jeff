@@ -1,6 +1,6 @@
 // 載入 你的.html
 var uid;
-$(document).ready(function() {
+$(document).ready(function () {
 
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
@@ -15,14 +15,14 @@ $(document).ready(function() {
 				type: 'GET',
 				url: '/morari/guest/work/guestSelectResume.controller/' + uid,
 				contentType: 'application/json',
-				success: function(data) {
+				success: function (data) {
 					console.log(data);
 					if (data == null || data.length == 0) {
 						$('#booking').remove();
 						var table = $('#items');
 						var tr = "<tr align='center'>" +
 							"<td colspan='2'>暫無資料</td>" +
-							"<td>" + "<form action='/morari/guest/work/startResumeInsert.controller'><input type = 'submit' value = '新增簡歷' ></form> " + "</td>" +
+							"<td>" + "<form action='/morari/guest/work/startResumeInsert.controller'><input class='btn btn-success btn-icon-split' type = 'submit' value = '新增簡歷' ></form> " + "</td>" +
 							"</tr>"
 						table.append(tr);
 					} else {

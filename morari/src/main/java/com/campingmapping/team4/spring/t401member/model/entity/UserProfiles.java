@@ -47,6 +47,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "userprofiles")
 @Component
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class UserProfiles implements UserDetails {
 
   @Id
@@ -59,25 +60,34 @@ public class UserProfiles implements UserDetails {
 
   @JsonIgnore
   private String password;
+  // 帳號是否過期
+  private Boolean accountnonexpired;
+  // 帳號是否封鎖
+  private Boolean accountnonlocked;
+  // 憑證是否過期
+  private Boolean iscredentialsnonexpired;
+  // 帳號是否啟用
+  private Boolean isenabled;
 
   @Embedded
   @Builder.Default
-  UserName usernames=new UserName();
+  UserName usernames = new UserName();
 
   @Embedded
   @Builder.Default
-  UserPrivacy userprivacy=new UserPrivacy();
+  UserPrivacy userprivacy = new UserPrivacy();
 
   @Embedded
   @Builder.Default
-  UserDetail userdetail=new UserDetail();
+  UserDetail userdetail = new UserDetail();
 
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @ManyToMany(fetch = FetchType.EAGER)
   @Builder.Default
-  @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = {
-      @JoinColumn(name = "rid") })
+  @JoinTable(name = "user_role", joinColumns = {
+      @JoinColumn(name = "uid") }, inverseJoinColumns = {
+          @JoinColumn(name = "rid") })
   private Set<Role> roles = new HashSet<>();
 
   @Override
@@ -99,55 +109,69 @@ public class UserProfiles implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    return true;
+    return accountnonexpired;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return true;
+    return accountnonlocked;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return true;
+    return iscredentialsnonexpired;
   }
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return isenabled;
   }
+<<<<<<< HEAD
 //履歷
  @JsonIgnore
  @JsonIgnoreProperties("userprofiles")
  @OneToOne(fetch = FetchType.LAZY, mappedBy = "userprofiles")
  private ResumeBean resume;
 // PO文
+=======
+
+  // PO文
+>>>>>>> origin/01
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Post> post;
-// 留言
+  // 留言
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<PostComment> postcomments;
-// 職缺
+  // 職缺
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<JobBean> job;
+<<<<<<< HEAD
 
 
+=======
+  // 履歷
+  @JsonIgnore
+  @JsonIgnoreProperties("userprofiles")
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  private ResumeBean resume;
+  // PO文
+>>>>>>> origin/01
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<Initiating> initiatings;
-// 登入歷史
+  // 登入歷史
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<LoginHistory> loginhistories;
-// Camp訂單
+  // Camp訂單
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")

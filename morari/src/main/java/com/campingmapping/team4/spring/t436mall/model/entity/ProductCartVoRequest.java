@@ -19,4 +19,5 @@ public class ProductCartVoRequest {
 	// 價位
 	public String pdname;
 	// 產品名稱
+	public Integer pdinventory;
 }

@@ -1,16 +1,25 @@
 <img class="userShot" src="#" alt="shot" onclick="toggleDropdown()">
 <div class="dropdown-content" id="dropdown-content" style="display: none;">
-    <a class="dropdown-item" href="/morari/guest/work/resume.controller">
+    <a class="dropdown-item" href="/morari/admin/camper/guestedit">
         <i class="fas fa-user fa-sm fa-fw mr-2 "></i>
         我的簡歷
     </a>
-    <a class="dropdown-item" href="#">
-        <i class="fas fa-cogs fa-sm fa-fw mr-2 "></i>
-        Settings
+    <a class="dropdown-item" href="/morari/guest/work/resume.controller">
+        <i class="fas fa-file-invoice fa-sm fa-fw mr-2 "></i>
+        Resume
     </a>
-    <a class="dropdown-item" href="#">
-        <i class="fas fa-list fa-sm fa-fw mr-2 "></i>
-        Activity Log
+    <a class="dropdown-item" href="/morari/ProductOrder/selectorderbyuseridAction.controller">
+        <i class="fas fa-hand-holding-usd fa-sm fa-fw mr-2 "></i>
+        Mall Order
+    </a>
+    <a class="dropdown-item" href="/morari/ProductCart/queryAllByuserid.controller">
+        <i class="fas fa-shopping-cart fa-sm fa-fw mr-2 "></i>
+        Mall Cart
+    </a>
+    <a class="dropdown-item" href="/morari/camp/myOrders">
+        <i class="fas fa-phone-volume  fa-sm fa-fw mr-2 "></i>
+        Camp Order
+
     </a>
     <a class="dropdown-item" href="https://localhost:8443/morari/camp/myOrders">
         <i class="fas fa-phone-volume"></i>
@@ -33,7 +42,8 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body" id="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body" id="modal-body">Select "Logout" below if you are ready to end your current session.
+            </div>
             <div class="modal-footer" id="modal-footer">
                 <button class="btn btn-secondary" id="logoutx" type="button" data-dismiss="modal">Cancel</button>
                 <form action="/morari/logout" method="post" style="margin: 0;padding: 0;line-height: 0;">

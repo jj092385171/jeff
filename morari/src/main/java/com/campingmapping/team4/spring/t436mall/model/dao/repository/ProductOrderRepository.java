@@ -17,7 +17,7 @@ public interface ProductOrderRepository extends	JpaRepository<ProductOrder, Inte
 	// 根據購物車新增一筆訂單
 	// 依userID來修改單筆產品(只有後臺能使用)
 	// 依orderID來搜尋單筆訂單
-	@Query(value = "SELECT p.id, p.userid, d.pdid, d.pdqty, c.pdpicture, c.pdprice, c.pdname"
+	@Query(value = "SELECT p.id, p.userid, p.datetime, d.pdid, p.money, p.odshippingaddress, p.odrecipient, p.odrecipientphone, d.pdqty, c.pdpicture, c.pdprice, c.pdname"
 			+ " FROM productorder p"
 			+ " LEFT JOIN productorderdetail d ON  p.id = d.pdorderid"
 			+" LEFT JOIN category c ON d.pdid = c.pdid WHERE p.id= ?1", nativeQuery = true)

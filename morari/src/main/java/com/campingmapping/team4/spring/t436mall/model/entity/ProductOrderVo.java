@@ -7,7 +7,17 @@ public interface ProductOrderVo {
 
 	String getuserid();
 
+	String getdatetime();
+
 	Integer getpdid();
+
+	Integer getmoney();
+
+	String getodshippingaddress();
+
+	String getodrecipient();
+
+	String getodrecipientphone();
 
 	Integer getpdqty();
 

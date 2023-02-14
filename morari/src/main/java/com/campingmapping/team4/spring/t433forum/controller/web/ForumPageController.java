@@ -31,9 +31,21 @@ public class ForumPageController {
 		return "forum/guest/showpost";
 	}
 	
+	// 會員顯示貼文內容
+	@GetMapping("/usershowpost.controller/*")
+	public String processUserShowPost() {
+		return "forum/guest/usershowpost";
+	}
+	
 	// 顯示修改貼文
 	@GetMapping("/showupdate.controller/*")
 	public String processShowUpdate() {
 		return "forum/guest/updatepost";
+	}
+	
+	// 顯示投票頁面
+	@GetMapping("/showvote.controller")
+	public String processShowVote() {
+		return "forum/guest/vote";
 	}
 }

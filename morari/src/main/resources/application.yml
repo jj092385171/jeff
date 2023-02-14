@@ -47,10 +47,11 @@ spring:
       hibernate:
 # -------------MSSQL------------- 
         dialect: org.hibernate.dialect.SQLServer2016Dialect
-        '[allow_update_outside_transaction]': true
-        '[hbm2ddl.auto]': update
-        '[format_sql]': true
-    show-sql: true
+        allow_update_outside_transaction: true
+        format_sql: true
+        hbm2ddl:
+          auto: update
+    # show-sql: true
 # -------------MYSQL-------------
         # dialect: org.hibernate.dialect.MySQL8Dialect
         # '[allow_update_outside_transaction]': true
@@ -90,8 +91,8 @@ spring:
             clientSecret: e67cb760488cc52e98ca8a547922d1d740222db6
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           google:
-            client-id: 611952345376-olh286m5v2e498h8orje59blgkvss6vo.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 134414512944-tboh8b5p2i28prj0hao29qlt9cei62on.apps.googleusercontent.com
+            client-secret: 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
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           facebook:
             clientId: 575077734065145
@@ -109,4 +110,7 @@ spring:
           auth: true
           starttls: 
             enable: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 

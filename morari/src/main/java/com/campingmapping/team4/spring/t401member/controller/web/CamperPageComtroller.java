@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/camper")
 public class CamperPageComtroller {
 
-    @GetMapping({ "", "/" })
+    @GetMapping("/notlogin")
     public String camperIndex() {
         return "camper/guest/index";
+    }
+    @GetMapping("/{uid}")
+    public String camperDetail() {
+        return "camper/guest/camperDetail";
     }
 
 }

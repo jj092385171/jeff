@@ -107,7 +107,7 @@
 					$.each(cityList, function (i, n) {
 						citys += '<input id="checkcity" type="checkbox" name="cityID" value="' + n.cityID + '" />' + n.cityName
 					});
-					citytr += '<tbody><tr><td class="longlong">' + citys + '</td><td><input type="submit" value="查詢"><span id="errorcityIDs" style="color: red;"></span></td></tr></tbody>'
+					citytr += '<tbody><tr><td class="longlong">' + citys + '</td><td class="longlongbtn"><input type="submit" value="查詢"><span id="errorcityIDs" style="color: red;"></span></td></tr></tbody>'
 					citytable.append(citytr);
 
 					$('#cityform').on('submit', function (e) {
@@ -318,7 +318,8 @@
 					$('img').width('85px').height('85px');
 					$('input[name="cityID"]').width('20px').css("text-align", "center");
 					$('.long').width('200px').css("font-size", "18px").css("color", "SaddleBrown");
-					$('.longlong').width('400px');
+					$('.longlong').width('380px');
+					$('.longlongbtn').width('150px');
 				});
 
 				$('#camptable').on('click', '.td2', function () {

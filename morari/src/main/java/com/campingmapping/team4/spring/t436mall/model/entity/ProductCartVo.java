@@ -16,5 +16,6 @@ public interface ProductCartVo {
 	// 價位
 	String getpdname();
 	// 產品名稱
+	Integer getpdinventory();
 
 }

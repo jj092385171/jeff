@@ -99,116 +99,129 @@
 						console.log(response.satus);
 						return;
 					}
-					$(document).ready(function() {
+					var table
+					$(document).ready(
+						function () {
+							console.log(response);
+							response.json().then(
+								function (n) {
+									table = $(
+										'#result')
+										.DataTable(
+											{
+												data: n,
+												responsive: true,
+												columns: [
 
-					console.log(response);
-					response
-						.json()
-						.then(
-							function (n) {
+													{
+														data: 'pdid',
+														title: '產品編號',
+														responsivePriority: 1
+													},
+													{
+														data: 'pdname',
+														title: '產品名稱',
+														responsivePriority: 2
+													},
+													{
+														data: 'userid',
+														title: '會員id',
+														responsivePriority: 13
+													},
+													{
+														data: 'pdtitle',
+														title: '品牌名稱',
+														responsivePriority: 3
+													},
+													{
+														data: 'pdcontent',
+														title: '產品規格',
+														responsivePriority: 9
+													},
+													{
+														data: 'pdtype',
+														title: '類型',
+														responsivePriority: 4
+													},
+													{
+														data: null,
+														title: '照片',
+														render: function (
+															data,
+															type,
+															row) {
+															return `<img src='${data.pdpicture}' style="max-width: 150px;">`;
+														},
+														responsivePriority: 5
+													},
+													{
+														data: 'pdprice',
+														title: '產品價格',
+														responsivePriority: 6
+													},
+													{
+														data: 'pdinventory',
+														title: '產品庫存',
+														responsivePriority: 8
+													},
+													{
+														data: 'pddate',
+														title: '上架時間',
+														responsivePriority: 7
+													},
+													{
+														data: 'pdlastupdate',
+														title: '產品修改時間',
+														responsivePriority: 10
+													},
+													{
+														data: null,
+														"title": "修改",
+														render: function (data, type, row, meta) {
+															return '<button class=\"datatable_edit_button\" onclick=\"edituser(\'' + row.pdid + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
+														}
+														, responsivePriority: 11
+													},
+													{
+														data: null,
+														"title": "刪除",
+														render: function (data, type, row, meta) {
+															return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + row.pdid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
+														}
+														, responsivePriority: 12
+													},
 
-								$('#result')
-									.DataTable(
-										{
-											data: n,
-											responsive: true,
-											columns: [
-
-												{
-													data: 'pdid',
-													title: '產品編號'
-												},
-												{
-													data: 'pdname',
-													title: '產品名稱'
-												},
-												{
-													data: 'userid',
-													title: '會員id'
-												},
-												{
-													data: 'pdtitle',
-													title: '品牌名稱'
-												},
-												{
-													data: 'pdcontent',
-													title: '產品規格'
-												},
-												{
-													data: 'pdtype',
-													title: '類型'
-												},
-												{
-													data: null,
-													title: '照片',
-													render: function (
-														data,
-														type,
-														row) {
-														return `<img src='${data.pdpicture}' style="max-width: 150px;">`;
+												],
+												lengthMenu: [
+													5,
+													10,
+													15,
+													20],
+												language: {
+													"lengthMenu": "顯示 _MENU_ 筆資料",
+													"info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+													"search": "搜尋：",
+													"paginate": {
+														"next": "下一頁",
+														"previous": "上一頁"
 													}
-												},
-												{
-													data: 'pdprice',
-													title: '產品價格'
-												},
-												{
-													data: 'pdinventory',
-													title: '產品庫存'
-												},
-												{
-													data: 'pddate',
-													title: '上架時間'
-												},
-												{
-													data: 'pdlastupdate',
-													title: '產品修改時間'
-												},
-												{
-													data: null,
-													title: '修改',
-													render: function (
-														data,
-														type,
-														row) {
-														return `<button id='update' style="border:none;background-color:transparent" type='button' value='n[i].pdid' onclick='updateProduct(${data.pdid})'><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>`;
-													}
-												},
-												{
-													data: null,
-													title: '刪除',
-													render: function (
-														data,
-														type,
-														row) {
-														return `<button id='delete' style="border:none;background-color:transparent" type='button' value='n[i].pdid' onclick='confirmDelete(${data.pdid})'><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>`;
-													}
-												},
-
-											],
-											lengthMenu: [
-												5,
-												10,
-												15,
-												20],
-											language: {
-												"lengthMenu": "顯示 _MENU_ 筆資料",
-												"info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
-												"search": "搜尋：",
-												"paginate": {
-													"next": "下一頁",
-													"previous": "上一頁"
 												}
-											}
 
-										});
+											});
 
-							});
-					});
+									setTimeout(
+										function () {
+											table.responsive
+												.recalc();
+										},
+										1000);
+
+								});
+						});
 
 				});
 
-		function confirmDelete(pdid) {
+		function deluser(pdid) {
 			if (confirm("確定刪除此項產品資料(編號:" + pdid + ")?")) {
 				$.ajax({
 					url: '/morari/mall/deleteByPdid/' + pdid,
@@ -227,23 +240,25 @@
 			} else {
 			}
 		}
-		function updateProduct(pdid) {
+		function edituser(pdid) {
 			if (confirm("確定修改此項產品資料(編號:" + pdid + ")?")) {
-				$.ajax({
-					success: function (data) {
-						window.location.href = "/morari/mall/updateproduct.controller/"
-							+ pdid;
-					}
-				});
+				$
+					.ajax({
+						success: function (data) {
+							window.location.href = "/morari/mall/updateproduct.controller/"
+								+ pdid;
+						}
+					});
 			} else {
 			}
 		}
 		function create() {
-			$.ajax({
-				success: function (data) {
-					window.location.href = "/morari/mall/productcreate.controller";
-				}
-			});
+			$
+				.ajax({
+					success: function (data) {
+						window.location.href = "/morari/mall/productcreate.controller";
+					}
+				});
 		}
 	</script>
 

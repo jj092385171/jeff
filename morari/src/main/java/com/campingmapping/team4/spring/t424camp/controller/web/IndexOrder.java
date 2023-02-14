@@ -62,7 +62,6 @@ public class IndexOrder {
 		int pageSize = 3;
 		Pageable pageable = PageRequest.of(page-1, pageSize);
 		Page<Order> pageList = orderService.getByPage(pageable);
-		
 		List<Order> orderList = pageList.getContent();
 		map.put("orderList", orderList);
 		
