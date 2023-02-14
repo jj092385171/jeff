@@ -29,8 +29,8 @@ Promise.all([fetch1, fetch2]).then(results => {
 					alert("請輸入內容");
 					return;
 				}
-				if ($("#price").val() < 0) {
-					alert("輸入金額不可小於0");
+				if($("#price").val() < 0 || $("#price").val() > 2147483647){
+					alert("輸入金額有誤");
 					return;
 				}
 				if($("#endDate").val() == "" && $("#startDate").val() !== "" || $("#endDate").val() !== "" && $("#startDate").val() == ""){
@@ -153,6 +153,12 @@ Promise.all([fetch1, fetch2]).then(results => {
 		// 更新照片
 		$("#newpicture").change(function(){
 			file = this.files[0];
+			if(file.size > 1000000){
+				alert("照片大小限制1MB，請更換照片");
+				file = "";
+				$("#newpicture").val("");
+				return;
+		    }
 			let reader = new FileReader();
 			reader.onload = function (e) {
 				$("#picture").attr("src", e.target.result);

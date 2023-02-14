@@ -168,12 +168,12 @@ fetch("/morari/forum/html/updatepost.html")
 			// 更新照片
 			$("#newpicture").change(function(){
 				file = this.files[0];
-				if (file.size > 1000000) {
+				if(file.size > 1000000){
 					alert("照片大小限制1MB，請更換照片");
 					file = "";
-					$("#picture").val("");
+					$("#newpicture").val("");
 					return;
-				}
+			    }
 				let reader = new FileReader();
 				reader.onload = function (e) {
 					$("#picture").attr("src", e.target.result);
