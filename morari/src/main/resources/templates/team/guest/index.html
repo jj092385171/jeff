@@ -103,8 +103,15 @@
 									var tableData = "";
 
 									var pagebtn = "";
-
+									
+									var five = 5;
+									
 									datalength = data.length;
+									
+									if(datalength < 5){
+										five = datalength
+									}
+									
 
 									pages = Math.ceil(datalength / 5);
 
@@ -113,10 +120,9 @@
 									for (var x = 0; x < pages; x++) {
 										pagebtn += '<button type="button" onclick="load(' + (x + 1) + ')" value="' + (x + 1) + '">' + (x + 1) + '</button>';
 									}
-
-									for (var i = 0; i < 5; i++) {
-
-										console.log(data.length);
+									
+									
+									for (var i = 0; i < five; i++) {
 
 										var pDay = new Date(data[i].postdate).toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit' });
 										var sDay = new Date(data[i].startdate).toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit' });;
@@ -285,7 +291,8 @@
 								'</ul>' +
 								'<span>' + data[i].introduction + '</span>' +
 								'<div class="room-link">' +
-								'<a href="#" data-toggle="modal" data-target="#modal-id">' + data[i].thumbsUp + '</a>' +
+								'<a href="#" data-toggle="modal" data-target="#modal-id">瀏覽數： ' + data[i].viewingCount + '</a>' +
+								'<a href="#" data-toggle="modal" data-target="#modal-id">按讚數' + data[i].thumbsUp + '</a><br><br>' +
 								'<a name="ThumbsUp" id="' + data[i].initiatingnum + '"' + 'href="#" data-toggle="modal" data-target="#modal-id" onclick="changeColor(this);">讚</a>' +
 								'<a href="#" data-toggle="modal" data-target="#modal-id" onclick=' + '"moreInformation(' + data[i].initiatingnum + ');">更多資訊</a>' +
 								'</div>' +
