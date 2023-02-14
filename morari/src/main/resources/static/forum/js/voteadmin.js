@@ -117,7 +117,8 @@ function changevoting(id) {
 				contentType: "application/json",
 				success: function (data) {
 					if (data == true) {
-						alert("結束投票成功")
+						alert("結束投票成功");
+						location.reload();
 					}
 				}
 			});
@@ -134,7 +135,8 @@ function changevoting(id) {
 				contentType: "application/json",
 				success: function (data) {
 					if (data == true) {
-						alert("隱藏投票成功")
+						alert("隱藏投票成功");
+						location.reload();
 					}
 				}
 			});
@@ -151,7 +153,8 @@ function changevoting(id) {
 				contentType: "application/json",
 				success: function (data) {
 					if (data == true) {
-						alert("進行投票成功")
+						alert("進行投票成功");
+						location.reload();
 					}
 				}
 			});

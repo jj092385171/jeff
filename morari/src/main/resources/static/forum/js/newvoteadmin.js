@@ -15,7 +15,7 @@ fetch("/morari/forum/html/newvote.html")
  			// 新增畫面選項
 	 		$("#newoption").click(function(e){
 				e.preventDefault();
-				var newvoteoption = "<label style='margin:0px 4px 0px 7px;'>選項" + optionnumber + "</label><input type=\"text\" id=\"option" + optionnumber + "\" maxlength='50' size='80' style='margin: 0px 0px 5px 0px'><br>";
+				var newvoteoption = "<label style='margin:0px 0px 0px 7px;'>選項" + optionnumber + "</label><br><input type=\"text\" id=\"option" + optionnumber + "\" maxlength='50' size='80' style='margin: 0px 0px 5px 0px'><br>";
 				$("#newvoteoption").append(newvoteoption);
 				optionnumber += 1;
 			});

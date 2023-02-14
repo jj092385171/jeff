@@ -48,8 +48,9 @@ $(document)
 								for (let i = 0; i < countyValue.length; i++) {
 									if (countyValue[i] == row.county) {
 										return countyInner[i];
-									} return null;
+									} 
 								}
+								return null;
 							}
 						},
 						{ data: "startdate", title: "起始日期", responsivePriority: 17 },
