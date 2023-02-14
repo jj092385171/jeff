@@ -21,65 +21,70 @@ $(document).ready(function() {
 						"data": response,
 						"columns":
 							[
+
 								{
 									data: 'number',
 									title: "履歷編號",
-									width: "80px",
+									responsivePriority: 1,
 								},
 								{
 									data: 'userprofiles.uid',
 									title: "會員編號",
-									width: "80px"
+									responsivePriority: 10,
 								},
 
 								{
 									data: 'name',
 									title: "姓名",
-									width: "100px",
+									responsivePriority: 5,
 								},
 
 								{
 									data: 'age',
 									title: "年次",
-									width: "80px"
+									responsivePriority: 2,
 								},
 
 								{
 									data: 'gender',
 									title: "性別",
-									width: "70px"
+									responsivePriority: 2,
 								},
 
 								{
 									data: 'mail',
 									title: "email",
-									width: "100px"
+									responsivePriority: 6,
 								},
 
 								{
 									data: 'phone',
 									title: "電話",
-									width: "100px"
+									responsivePriority: 4,
 								},
 
 								{
 									data: 'educational',
 									title: "學歷",
-									width: "120px"
+									responsivePriority: 7,
 								},
 
 								{
 									data: 'skill',
 									title: "專業技能",
-									width: "130px"
+									responsivePriority: 8,
 								},
 								{
-									width: "130px",
+									data: null,
+									title: "寄信",
+									responsivePriority: 1,
 									render: function(data, type, row) {
 										return "<button  class='btn btn-success btn-icon-split' onclick='mailInsert(" + row.number + ")'>mail通知面試</button>";
 									}
 								},
+
 							],
+						"responsive": true,
 
 						lengthMenu: [5, 10, 15, 20],
 						language: {
@@ -96,6 +101,7 @@ $(document).ready(function() {
 			});
 		});
 });
+
 //			if (response == null || response.length == 0) {
 //				var h2 = $('#re');
 //				h2.prepend('投遞履歷結果');

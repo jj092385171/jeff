@@ -32,75 +32,77 @@ $(document).ready(function() {
 								{
 									data: 'number',
 									title: "履歷編號",
-									width: "80px",
+									responsivePriority: 1,
 								},
 								{
 									data: 'userprofiles.uid',
 									title: "會員編號",
-									width: "80px"
+									responsivePriority: 10,
 								},
 
 								{
 									data: 'name',
 									title: "姓名",
-									width: "100px",
+									responsivePriority: 5,
 								},
 
 								{
 									data: 'age',
 									title: "年次",
-									width: "80px"
+									responsivePriority: 2,
 								},
 
 								{
 									data: 'gender',
 									title: "性別",
-									width: "70px"
+									responsivePriority: 2,
 								},
 
 								{
 									data: 'mail',
 									title: "email",
-									width: "100px"
+									responsivePriority: 6,
 								},
 
 								{
 									data: 'phone',
 									title: "電話",
-									width: "100px"
+									responsivePriority: 4,
 								},
 
 								{
 									data: 'educational',
 									title: "學歷",
-									width: "120px"
+									responsivePriority: 7,
 								},
 
 								{
 									data: 'skill',
 									title: "專業技能",
-									width: "130px"
+									responsivePriority: 8,
 								},
 
 								{
+									data: null,
 									title: "修改",
-									width: "80px",
+									responsivePriority: 1,
 									render: function(data, type, row) {
 										//										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
 										return '<button class=\"datatable_edit_button\" onclick=\"resumeUpdate(\'' + row.number + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 									}
 								},
 								{
+									data: null,
 									title: "刪除",
-									width: "80px",
+									responsivePriority: 1,
 									render: function(data, type, row) {
-//										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeDelete(' + row.number + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+										//										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeDelete(' + row.number + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
 										return '<button class=\"datatable_del_button\"   onclick=\"resumeDelete(\'' + row.number + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 									}
 								},
 
 							],
-
+						"responsive": true,
 						lengthMenu: [5, 10, 15, 20],
 						language: {
 							"lengthMenu": "顯示_MENU_ 筆資料",
