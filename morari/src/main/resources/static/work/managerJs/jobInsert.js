@@ -5,6 +5,11 @@ $(document).ready(function() {
 	var url = window.location.href;
 	var campid = url.split("/").pop();
 
+	// 一鍵輸入 
+	$("#fastinput").click(function() {
+		fastinport();
+	});
+
 	$.ajax({
 		type: 'POST',
 		url: '/morari/admin/user/work/selectCampid.controller/' + campid,
@@ -63,10 +68,20 @@ $(document).ready(function() {
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.time + "</td>" +
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.rackup + "</td>" +
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + "</tr>";
+						"<td><img width='80' height='80' src='" + response.img + "'></td>" + "</tr>";
 					table.append(tr);
 				}
 			}
 		});
 	});
 });
+function fastinport() {
+	$("#type").val("長期工作");
+	$("#job").val("房務員");
+	$("#salary").val("36000");
+	$("#quantity").val("1");
+	$("#date").val("隨時");
+	$("#time").val("10-19");
+	$("#remark").val("細心、負責，交辦事項能完成");
+
+}

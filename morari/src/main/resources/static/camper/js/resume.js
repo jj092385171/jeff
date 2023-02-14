@@ -1,6 +1,6 @@
 // 載入 你的.html
 var uid;
-$(document).ready(function() {
+$(document).ready(function () {
 
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
@@ -15,7 +15,7 @@ $(document).ready(function() {
 				type: 'GET',
 				url: '/morari/guest/work/guestSelectResume.controller/' + uid,
 				contentType: 'application/json',
-				success: function(data) {
+				success: function (data) {
 					console.log(data);
 					if (data == null || data.length == 0) {
 						$('#booking').remove();

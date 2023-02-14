@@ -10,8 +10,11 @@ $(document).ready(function() {
 		})
 	var url = window.location.href;
 	var campid = url.split("/").pop();
-	console.log(campid);
 
+	// 一鍵輸入 
+	$("#fastinput").click(function() {
+		fastinport();
+	});
 
 	$.ajax({
 		type: 'POST',
@@ -55,7 +58,7 @@ $(document).ready(function() {
 					table.append("<tr align='center'><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>類型</th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
 
 					//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
-						var tr = "<tr>" +
+					var tr = "<tr>" +
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.userprofiles.uid + "</td>" +
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.rackid + "</td>" +
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.campname + "</td>" +
@@ -68,7 +71,7 @@ $(document).ready(function() {
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.time + "</td>" +
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.rackup + "</td>" +
 						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + "</tr>";
+						"<td><img width='80' height='80' src='" + response.img + "'></td>" + "</tr>";
 					table.append(tr);
 					//});
 				}
@@ -76,3 +79,13 @@ $(document).ready(function() {
 		});
 	});
 });
+function fastinport() {
+	$("#type").val("短期工讀");
+	$("#job").val("櫃台");
+	$("#salary").val("時薪");
+	$("#quantity").val("1");
+	$("#date").val("3月1日");
+	$("#time").val("10-19");
+	$("#remark").val("細心、負責、情緒控管好、英文能力佳");
+
+}

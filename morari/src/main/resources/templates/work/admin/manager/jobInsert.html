@@ -43,7 +43,7 @@
                             <form  id="insert" >
                                  <div class="form-row">
                                     <div class="control-group col-sm-6">
-                                        <label>會員編號</label>
+                                        <label><b>會員編號</b></label>
                                         <input type="text" class="form-control" name="uid" id="uid" style="border-radius: 10%;border: 2px solid gray" required="required" readonly />
                                         <p class="help-block text-danger"></p>
                                     </div>
@@ -51,12 +51,12 @@
                                 <div class="form-row">
                                     
                                     <div class="control-group col-sm-6">
-                                        <label>營區名稱</label>
+                                        <label><b>營區名稱</b></label>
                                         <input id="1" type="text" name="campname" class="form-control"  style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required" readonly />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                  	 <div class="control-group col-sm-6">
-                                        <label>地址</label>
+                                        <label><b>地址</b></label>
                                         <input id="2" type="text" name="place" class="form-control"  style="border-radius: 10%;border: 2px solid gray"placeholder="民國" required="required" readonly/>
                                         <p class="help-block text-danger"></p>
                                     </div>
@@ -64,8 +64,8 @@
                                 <div class="form-row">
                                    
                                     <div class="control-group col-sm-6">
-                                        <label>類型</label>
-                                        <select class="custom-select" name="type" required="required" style="border-radius: 10%;border: 2px solid gray"  />
+                                        <label><b>類型</b></label>
+                                        <select class="custom-select" name="type" id="type" required="required" style="border-radius: 10%;border: 2px solid gray"  />
                                         <option disabled selected>請選擇</option>
                                         <option value="短期工讀">短期工讀</option>
                                         <option value="長期工作">長期工作</option>
@@ -74,8 +74,8 @@
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="control-group col-sm-6">
-                                        <label>職缺</label>
-                                        <select class="custom-select" name="job" required="required" style="border-radius: 10%;border: 2px solid gray"  />
+                                        <label><b>職缺</b></label>
+                                        <select class="custom-select" name="job" id="job" required="required" style="border-radius: 10%;border: 2px solid gray"  />
                                         <option value="" disabled selected>請選擇</option>
                                         <option value="廚師">廚師</option>
                                         <option value="廚助">廚助</option>
@@ -89,38 +89,40 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="control-group col-sm-6">
-                                        <label>薪資</label>
-                                        <input type="text" class="form-control" name="salary" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <label><b>薪資</b></label>
+                                        <input type="text" class="form-control" id="salary" name="salary" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="control-group col-sm-6">
-                                    	<label>人數</label><br>
-                                    	 <input type="number" class="form-control" name="quantity" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                    	<label><b>人數</b></label><br>
+                                    	 <input type="number" class="form-control" id="quantity" name="quantity" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
 										<p class="help-block text-danger"></p>
                                 	</div>
                                 </div>
                                 <div class="form-row">
                                     <div class="control-group col-sm-6">
-                                        <label>上班日期</label>
-                                        <input type="text" class="form-control" name="date" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <label><b>上班日期</b></label>
+                                        <input type="text" class="form-control" id="date" name="date" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="control-group col-sm-6">
-                                    	<label>上班時段</label><br>
-                                    	 <input type="text" class="form-control" name="time" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                    	<label><b>上班時段</b></label><br>
+                                    	 <input type="text" class="form-control" id="time" name="time" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
 										<p class="help-block text-danger"></p>
                                 	</div>
                                 </div>
                                 <div class="control-group">
-                                    <label>備註</label>
-                                    <textarea class="form-control" name="remark" cols="20" rows="5"style="border-radius: 10%;border: 2px solid gray" required="required" ></textarea>
+                                    <label><b>備註</b></label>
+                                    <textarea class="form-control" name="remark" id="remark" cols="20" rows="5"style="border-radius: 10%;border: 2px solid gray" required="required" ></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <input class="btn btn-success btn-icon-split" id="send" type="button" value="送出">
-								<input class="btn btn-success btn-icon-split" type="reset" value="取消"><br>
+								<input class="btn btn-success btn-icon-split" type="reset" value="取消">
+								<input class="btn btn-success btn-icon-split" type="button" value="一鍵輸入" id="fastinput">
 <!--                         		照片 -->
                         		<input id="3" type="hidden" name="img" required><br>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
