@@ -38,7 +38,6 @@ import com.campingmapping.team4.spring.t433forum.model.entity.PostComment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 @Builder
 @Getter
 @Setter
@@ -126,17 +125,9 @@ public class UserProfiles implements UserDetails {
   public boolean isEnabled() {
     return isenabled;
   }
-<<<<<<< HEAD
-//履歷
- @JsonIgnore
- @JsonIgnoreProperties("userprofiles")
- @OneToOne(fetch = FetchType.LAZY, mappedBy = "userprofiles")
- private ResumeBean resume;
-// PO文
-=======
+
 
   // PO文
->>>>>>> origin/01
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
@@ -151,17 +142,12 @@ public class UserProfiles implements UserDetails {
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private Collection<JobBean> job;
-<<<<<<< HEAD
-
-
-=======
   // 履歷
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToOne(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private ResumeBean resume;
   // PO文
->>>>>>> origin/01
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "userprofiles")

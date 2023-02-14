@@ -51,48 +51,48 @@
                                     </div>
                                     <div class="control-group col-sm-6">
                                         <label>姓名</label>
-                                        <input type="text" class="form-control" name="name" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <input type="text" class="form-control" id="name"name="name" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="control-group col-sm-6">
                                         <label>年次</label>
-                                        <input type="text" class="form-control" name="age" style="border-radius: 10%;border: 2px solid gray"placeholder="民國" required="required" />
+                                        <input type="text" class="form-control" id="age" name="age" style="border-radius: 10%;border: 2px solid gray"placeholder="民國" required="required" />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="control-group col-sm-6">
                                         <label>Email</label>
-                                        <input type="text" class="form-control"  name="mail" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <input type="text" class="form-control" id="mail" name="mail" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="control-group col-sm-6">
                                         <label>電話</label>
-                                        <input type="text" class="form-control" name="phone" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
+                                        <input type="text" class="form-control" id="phone" name="phone" style="border-radius: 10%;border: 2px solid gray"placeholder="" required="required"  />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="control-group col-sm-6">
                                     	<label>性別</label><br>
                                     	<input type="radio" name="gender" value="男"> 男
-										<input type="radio" name="gender" value="女"> 女
+										<input id="gender" type="radio" name="gender" value="女"> 女
 										<p class="help-block text-danger"></p>
                                 	</div>
                                 </div>
                                 <div class="control-group">
                                     <label>學歷</label>
-                                    <textarea class="form-control" name="educational" cols="20" rows="5"style="border-radius: 10%;border: 2px solid gray" required="required" ></textarea>
+                                    <textarea class="form-control" id="educational" name="educational" cols="20" rows="5"style="border-radius: 10%;border: 2px solid gray" required="required" ></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group">
                                     <label>專業技能</label>
-                                     <textarea class="form-control" name="skill"  cols="20" rows="5" style="border-radius: 10%;border: 2px solid gray"required="required" ></textarea>
+                                     <textarea class="form-control" id="skill" name="skill"  cols="20" rows="5" style="border-radius: 10%;border: 2px solid gray"required="required" ></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <input class="btn btn-success btn-icon-split" id="send" type="button" value="送出">
-								<input class="btn btn-success btn-icon-split" type="reset" value="取消"><br>
-                        
+								<input class="btn btn-success btn-icon-split" type="reset" value="取消">
+                        		<input class="btn btn-success btn-icon-split" type="button" value="一鍵輸入" id="fastinput">
                             </form>
                         </div>
                     </div>
