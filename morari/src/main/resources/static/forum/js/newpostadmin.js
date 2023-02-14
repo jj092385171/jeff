@@ -17,8 +17,8 @@ fetch("/morari/forum/html/newpost.html")
 					alert("請輸入內容");
 					return;
 				}
-				if($("#price").val() < 0){
-					alert("輸入金額不可小於0");
+				if($("#price").val() < 0 || $("#price").val() > 2147483647){
+					alert("輸入金額有誤");
 					return;
 				}
 				if($("#endDate").val() == "" && $("#startDate").val() !== "" || $("#endDate").val() !== "" && $("#startDate").val() == ""){

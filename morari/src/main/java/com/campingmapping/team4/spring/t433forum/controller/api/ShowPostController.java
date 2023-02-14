@@ -36,50 +36,71 @@ public class ShowPostController {
 	public List<PostAdmin> processShowAllPost() {
 		return postService.getAllPost();
 	}
-	
+
 	// 查會員貼文
 	@GetMapping("/showpostbyuserid.controller/{userid}")
-	public List<Post> processShowPostByUserId(@PathVariable(name = "userid") UUID userId){
+	public List<Post> processShowPostByUserId(@PathVariable(name = "userid") UUID userId) {
 		return postService.getUserNonHidePost(userId);
 	}
 
 	// 查非隱藏貼文
 	@GetMapping("/shownonhidepost.controller")
-	public List<Post> processShowNonHidePost(){
+	public List<Post> processShowNonHidePost() {
 		return postService.getNonHidePost();
 	}
-	
+
 	// 查隱藏貼文
 	@GetMapping("/showhidepost.controller")
-	public List<Post> processShowHidePost(){
+	public List<Post> processShowHidePost() {
 		return postService.getHidePost();
 	}
-	
+
 	// 查檢舉貼文
 	@GetMapping("/showreportpost.controller")
-	public List<Post> processShowReportPost(){
+	public List<Post> processShowReportPost() {
 		return postService.getReportPost();
 	}
-	
+
 	// 查貼文所有留言
 	@GetMapping("/showpostcommentbypostid.controller/{postid}")
-	public List<ShowPostComment> processShowPostCommentByPostId(@PathVariable(name = "postid") Integer postId){
+	public List<ShowPostComment> processShowPostCommentByPostId(@PathVariable(name = "postid") Integer postId) {
 		return postCommentService.getPostCommentByPostId(postId);
 	}
-	
+
 	// 查貼文所有非隱藏留言
-//	@GetMapping("/showpostcommentnonhidebypostid.controller/{postid}")
-//	public List<ShowPostComment> processShowPostCommentNonHideByPostId(@PathVariable(name = "postid") Integer postId){
-//		return postCommentService.getPostCommentNonHideByPostId(postId);
-//		
-//	}
-	
+	// @GetMapping("/showpostcommentnonhidebypostid.controller/{postid}")
+	// public List<ShowPostComment>
+	// processShowPostCommentNonHideByPostId(@PathVariable(name = "postid") Integer
+	// postId){
+	// return postCommentService.getPostCommentNonHideByPostId(postId);
+	//
+	// }
+
 	// 查貼文所有非隱藏留言+分頁
 	@GetMapping("/showpostcommentnonhidebypostid.controller/{postid}/{page}")
-	public List<ShowPostComment> processShowPostCommentNonHideByPostId(@PathVariable Integer postid, @PathVariable Integer page){
+	public List<ShowPostComment> processShowPostCommentNonHideByPostId(@PathVariable Integer postid,
+			@PathVariable Integer page) {
 		int pageSize = 3; // 每頁顯示的筆數
-		Pageable pageable = PageRequest.of(page-1, pageSize); //設定顯示頁碼 及 每頁筆數
-		Page<ShowPostComment> postCommentNonHideByPostId = postCommentService.getPostCommentNonHideByPostId(postid, pageable);
+		Pageable pageable = PageRequest.of(page - 1, pageSize); // 設定顯示頁碼 及 每頁筆數
+		Page<ShowPostComment> postCommentNonHideByPostId = postCommentService.getPostCommentNonHideByPostId(postid,
+				pageable);
 		return postCommentNonHideByPostId.getContent();
+	}
+
+	// 查熱門貼文
+	@GetMapping("/showhotpost.controller")
+	public Post processShowHotPost() {
+		int max = 0;
+		Post hotPost = null;
+		List<Post> nonHidePost = postService.getNonHidePost();
+		for (Post post : nonHidePost) {
+			List<ShowPostComment> postCommentByPostId = postCommentService.getPostCommentByPostId(post.getPostid());
+			int count = post.getUserlike() + postCommentByPostId.size();
+			if (count > max) {
+				max = count;
+				hotPost = post;
+			}
+		}
+		return hotPost;
 	}
 }
