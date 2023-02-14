@@ -128,13 +128,14 @@
               }
               else if (QueryByCityIDsResult.error == 'none') {
                 $(".row").empty();
-                $('#changeP').empty();
+                $('#changeP').hide();
                 $("#errorcityIDs").append(QueryByCityIDsResult.noData);
                 return;
               }
               else {
                 $(".row").empty();
                 var camprow = $('#camprow');
+                $('#changeP').show();
                 var p = '';
 
                 $.each(QueryByCityIDsResult, function (i, n) {
