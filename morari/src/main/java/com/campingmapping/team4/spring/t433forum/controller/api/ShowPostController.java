@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +27,7 @@ public class ShowPostController {
 
 	// 查單一貼文
 	@GetMapping("/showpostbyid.controller/{postid}")
-	public Post processShowPostById(@PathVariable(name = "postid") Integer postId) {
+	public PostAdmin processShowPostById(@PathVariable(name = "postid") Integer postId) {
 		return postService.getPostById(postId);
 	}
 
@@ -43,7 +46,6 @@ public class ShowPostController {
 	// 查非隱藏貼文
 	@GetMapping("/shownonhidepost.controller")
 	public List<Post> processShowNonHidePost(){
-		
 		return postService.getNonHidePost();
 	}
 	
@@ -63,5 +65,21 @@ public class ShowPostController {
 	@GetMapping("/showpostcommentbypostid.controller/{postid}")
 	public List<ShowPostComment> processShowPostCommentByPostId(@PathVariable(name = "postid") Integer postId){
 		return postCommentService.getPostCommentByPostId(postId);
+	}
+	
+	// 查貼文所有非隱藏留言
+//	@GetMapping("/showpostcommentnonhidebypostid.controller/{postid}")
+//	public List<ShowPostComment> processShowPostCommentNonHideByPostId(@PathVariable(name = "postid") Integer postId){
+//		return postCommentService.getPostCommentNonHideByPostId(postId);
+//		
+//	}
+	
+	// 查貼文所有非隱藏留言+分頁
+	@GetMapping("/showpostcommentnonhidebypostid.controller/{postid}/{page}")
+	public List<ShowPostComment> processShowPostCommentNonHideByPostId(@PathVariable Integer postid, @PathVariable Integer page){
+		int pageSize = 3; // 每頁顯示的筆數
+		Pageable pageable = PageRequest.of(page-1, pageSize); //設定顯示頁碼 及 每頁筆數
+		Page<ShowPostComment> postCommentNonHideByPostId = postCommentService.getPostCommentNonHideByPostId(postid, pageable);
+		return postCommentNonHideByPostId.getContent();
 	}
 }

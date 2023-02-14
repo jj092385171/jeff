@@ -20,6 +20,7 @@ public class PostAdmin{
 	private UUID uid;
 	private String title;
 	private String content;
+	private String picture;
 	private Integer people;
 	private Integer price;
 	private String county;

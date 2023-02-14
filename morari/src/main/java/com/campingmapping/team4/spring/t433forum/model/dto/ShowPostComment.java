@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ShowPostComment {
 	
-private Integer postcommentid;
-	
+	private Integer postcommentid;
 	private Integer postid;
 	private UUID uid;
 	private String postcomment;

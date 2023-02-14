@@ -10,10 +10,10 @@ import com.campingmapping.team4.spring.t433forum.model.entity.Post;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
 	// 依user查貼文
-	public List<Post> findByUserprofiles(UserProfiles uProfiles);
+	public List<Post> findByUserprofilesOrderByReleasedateDesc(UserProfiles uProfiles);
 	
 	// 依隱藏狀態查貼文
-	public List<Post> findByPosthide(Integer hide);
+	public List<Post> findByPosthideOrderByReleasedateDesc(Integer hide);
 	
 	// 依檢舉狀態查貼文
 	public List<Post> findByPostreport(Integer report);

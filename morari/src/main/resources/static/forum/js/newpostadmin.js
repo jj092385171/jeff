@@ -17,8 +17,12 @@ fetch("/morari/forum/html/newpost.html")
 					alert("請輸入內容");
 					return;
 				}
-				if($("#price").val() <= 0){
-					alert("輸入金額需大於0");
+				if($("#price").val() < 0){
+					alert("輸入金額不可小於0");
+					return;
+				}
+				if($("#endDate").val() == "" && $("#startDate").val() !== "" || $("#endDate").val() !== "" && $("#startDate").val() == ""){
+					alert("需同時輸入開始露營日期及結束露營日期");
 					return;
 				}
 				if($("#endDate").val() < $("#startDate").val()){

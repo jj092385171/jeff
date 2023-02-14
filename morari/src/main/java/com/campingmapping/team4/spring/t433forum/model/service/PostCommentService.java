@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,12 +36,13 @@ public class PostCommentService {
 	@Autowired
 	private HttpServletRequest request;
 
-	// 依貼文查所有留言
+	// 依貼文查留言
 	public List<ShowPostComment> getPostCommentByPostId(Integer postid) {
 		Post post = postRepository.findById(postid).get();
 		List<ShowPostComment> list = new ArrayList<>();
-		postCommentRepository.findBypost(post).forEach(postcomment -> {
+		postCommentRepository.findByPost(post).forEach(postcomment -> {
 			ShowPostComment showPostComment = new ShowPostComment();
+			showPostComment.setPostcommentid(postcomment.getPostcommentid());
 			showPostComment.setPostid(postcomment.getPost().getPostid());
 			showPostComment.setUid(postcomment.getUserprofiles().getUid());
 			showPostComment.setPostcomment(postcomment.getPostcomment());
@@ -47,6 +51,28 @@ public class PostCommentService {
 			list.add(showPostComment);
 		});
 		return list;
+	}
+	
+	// 依貼文查非隱藏留言+分頁
+//	public List<ShowPostComment> getPostCommentNonHideByPostId(Integer postid) {
+	public Page<ShowPostComment> getPostCommentNonHideByPostId(Integer postid, Pageable pageable) {
+		Post post = postRepository.findById(postid).get();
+		List<ShowPostComment> list = new ArrayList<>();
+//		postCommentRepository.findByPostAndPostcommenthide(post, 0).forEach(postcomment -> {
+		postCommentRepository.findByPostAndPostcommenthide(post, 0, pageable).forEach(postcomment -> {
+			ShowPostComment showPostComment = new ShowPostComment();
+			showPostComment.setPostcommentid(postcomment.getPostcommentid());
+			showPostComment.setPostid(postcomment.getPost().getPostid());
+			showPostComment.setUid(postcomment.getUserprofiles().getUid());
+			showPostComment.setPostcomment(postcomment.getPostcomment());
+			showPostComment.setPostcommentreport(postcomment.getPostcommentreport());
+			showPostComment.setPostcommenthide(postcomment.getPostcommenthide());
+			list.add(showPostComment);
+		});
+		
+		PageImpl<ShowPostComment> pageImpl = new PageImpl<>(list, pageable, list.size());
+//		return list;
+		return pageImpl;
 	}
 
 	// 新增留言
@@ -62,16 +88,31 @@ public class PostCommentService {
 		return postCommentRepository.save(postComment);
 	}
 
-	// // 隱藏留言
-	// public void hidePostComment(PostComment postComment) throws SQLException{
-	// postComment.setPostCommentHide(1);
-	// postCommentDao.changeHidePostComment(postComment);
-	// }
+	// 隱藏留言
+	public PostComment hidePostComment(Integer postcommentid) {
+		PostComment postComment = postCommentRepository.findById(postcommentid).get();
+		postComment.setPostcommenthide(1);
+		return postCommentRepository.save(postComment);
+	}
 
-	// // 取消隱藏留言
-	// public void cancelHidePostComment(PostComment postComment) throws
-	// SQLException{
-	// postComment.setPostCommentHide(0);
-	// postCommentDao.changeHidePostComment(postComment);
-	// }
+	// 取消隱藏留言
+	public PostComment cancelHidePostComment(Integer postcommentid) {
+		PostComment postComment = postCommentRepository.findById(postcommentid).get();
+		postComment.setPostcommenthide(0);
+		return postCommentRepository.save(postComment);
+	}
+	
+	// 檢舉留言
+	public PostComment reportPostComment(Integer postcommentid) {
+		PostComment postComment = postCommentRepository.findById(postcommentid).get();
+		postComment.setPostcommentreport(1);
+		return postCommentRepository.save(postComment);
+	}
+
+	// 取消檢舉留言
+	public PostComment cancelReportPostComment(Integer postcommentid) {
+		PostComment postComment = postCommentRepository.findById(postcommentid).get();
+		postComment.setPostcommentreport(0);
+		return postCommentRepository.save(postComment);
+	}
 }

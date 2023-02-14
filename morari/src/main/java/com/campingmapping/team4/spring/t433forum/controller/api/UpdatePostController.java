@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t433forum.model.dto.PostAdmin;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
 import com.campingmapping.team4.spring.t433forum.model.entity.PostLike;
+import com.campingmapping.team4.spring.t433forum.model.service.PostCommentService;
 import com.campingmapping.team4.spring.t433forum.model.service.PostLikeService;
 import com.campingmapping.team4.spring.t433forum.model.service.PostService;
 import com.campingmapping.team4.spring.utils.service.JwtService;
@@ -24,6 +27,10 @@ public class UpdatePostController {
 	@Autowired
 	private PostLikeService postLikeService;
 	@Autowired
+	private PostCommentService postCommentService;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
 	private JwtService jwtService;
 	@Autowired
 	private HttpServletRequest request;
@@ -32,8 +39,8 @@ public class UpdatePostController {
 	@PutMapping("/updatepost.controller")
 	public String updatePost(@RequestBody Post post) {
 		Integer postid = post.getPostid();
-		Post postById = postService.getPostById(postid);
-		post.setUserprofiles(postById.getUserprofiles());
+		PostAdmin postById = postService.getPostById(postid);
+		post.setUserprofiles(userRepository.findById(postById.getUid()).get());
 		post.setUserlike(postById.getUserlike());
 		post.setUserunlike(postById.getUserunlike());
 		post.setPostreport(postById.getPostreport());
@@ -60,6 +67,7 @@ public class UpdatePostController {
 	@PutMapping("/hidepost.controller/{postid}")
 	public String hidePost(@PathVariable Integer postid) {
 		postService.hide(postid);
+//		return new RedirectView("/morari/forum/usershowpost.controller/" + postid);
 		return "true";
 	}
 	
@@ -104,5 +112,31 @@ public class UpdatePostController {
 		return "true";
 	}
 	
-	
+	// 檢舉留言
+	@PutMapping("/reportpostcomment.controller/{postcommentid}")
+	public String reportPostComment(@PathVariable Integer postcommentid) {
+		postCommentService.reportPostComment(postcommentid);
+		return "true";
+	}
+		
+	// 取消檢舉留言
+	@PutMapping("/cancelreportpostcomment.controller/{postcommentid}")
+	public String cancelReportPostComment(@PathVariable Integer postcommentid) {
+		postCommentService.cancelReportPostComment(postcommentid);
+		return "true";
+	}
+		
+	// 隱藏留言
+	@PutMapping("/hidepostcomment.controller/{postcommentid}")
+	public String hidePostComment(@PathVariable Integer postcommentid) {
+		postCommentService.hidePostComment(postcommentid);
+		return "true";
+	}
+		
+	// 取消隱藏留言
+	@PutMapping("/cancelhidepostcomment.controller/{postcommentid}")
+	public String cancelHidePostComment(@PathVariable Integer postcommentid) {
+		postCommentService.cancelHidePostComment(postcommentid);
+		return "true";
+	}
 }
