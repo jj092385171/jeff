@@ -30,109 +30,97 @@ $(document).ready(function() {
 							{
 								data: 'rackid',
 								title: "刊登編號",
-								width: "40px",
+								responsivePriority: 1,
 							},
 							{
 								data: 'userprofiles.uid',
 								title: "會員編號",
-								width: "100px"
+								responsivePriority: 12,
 							},
 
 							{
 								data: 'campname',
 								title: "營區",
-								width: "80px"
+								responsivePriority: 2,
 							},
 
 							{
 								data: 'place',
 								title: "地點",
-								width: "100px"
+								responsivePriority: 8,
 							},
 							{
 								data: 'type',
 								title: "類型",
-								width: "100px"
+								responsivePriority: 5,
 							},
 
 							{
 								data: 'job',
 								title: "職缺",
-								width: "100px",
+								responsivePriority: 4,
 							},
 
 							{
 								data: 'salary',
 								title: "薪資",
-								width: "100px"
+								responsivePriority: 3,
 							},
 
 							{
 								data: 'quantity',
 								title: "人數",
-								width: "70px"
+								responsivePriority: 2,
 							},
 
 							{
 								data: 'date',
 								title: "上班日期",
-								width: "60px"
+								responsivePriority: 6,
 							},
 
 							{
 								data: 'time',
 								title: "上班時段",
-								width: "50px"
+								responsivePriority: 7,
 							},
 
 							{
 								data: 'rackup',
 								title: "刊登時間",
-								width: "40px"
+								responsivePriority: 10,
 							},
 
 							{
 								data: 'remark',
 								title: "備註",
-								width: "100px"
+								responsivePriority: 11,
 							},
 
 							{
 								data: 'img',
 								title: "照片",
-								width: "100px",
+								responsivePriority: 13,
 								render: function(data, type, row) {
-									return '<img src="' + data + '"/>';
+									return '<img width="300" src="' + data + '"/>';
 								}
 							},
 
 							{
+								data: null,
 								title: "修改",
-								width: "100px",
+								responsivePriority: 1,
 								render: function(data, type, row) {
 //									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
 									return '<button class=\"datatable_edit_button\" onclick=\"jobUpdate(\'' + row.rackid + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 
 								}
 							},
-//							 {
-//
-//          "title": "修改",
-//          render: function (data, type, row, meta) {
-//           return '<button class=\"datatable_edit_button\" onclick=\"edituser(\'' + meta.row + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
-//          }
-//          , responsivePriority: 11
-//         },
-//         {
-//          "title": "刪除",
-//          render: function (data, type, row, meta) {
-//           return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + meta.row + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
-//          }
-//          , responsivePriority: 12
-//         }
+
 							{
+								data: null,
 								title: "刪除",
-								width: "100px",
+								responsivePriority: 1,
 								render: function(data, type, row) {
 //									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
 									return '<button class=\"datatable_del_button\"   onclick=\"jobDelete(\'' + row.rackid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
@@ -140,7 +128,7 @@ $(document).ready(function() {
 							},
 
 						],
-
+						"responsive": true,
 						lengthMenu: [5, 10, 15, 20],
 						language: {
 							"lengthMenu": "顯示_MENU_ 筆資料",
