@@ -3,7 +3,7 @@ var file;
 fetch("/morari/camper/html/guestedit.html")
     .then(response => response.text())
     .then(html => {
-        // 將載入的 HTML 放入 .footer 元素中
+        // 將載入的 HTML 放入 .guestedit 元素中
         document.querySelector(".guestedit").innerHTML = html;
         fetch("/morari/admin/camper/api/guestdetail")
             .then(response => response.json())
