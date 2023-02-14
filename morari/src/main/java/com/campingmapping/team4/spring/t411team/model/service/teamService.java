@@ -11,11 +11,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
+import com.campingmapping.team4.spring.t411team.model.Dao.repository.ApplyRepository;
 import com.campingmapping.team4.spring.t411team.model.Dao.repository.InitiatingRepository;
 import com.campingmapping.team4.spring.t411team.model.Dao.repository.MessageAreaRepository;
 import com.campingmapping.team4.spring.t411team.model.Dao.repository.ThundsupRepository;
+import com.campingmapping.team4.spring.t411team.model.entity.Apply;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t411team.model.entity.MessageArea;
 import com.campingmapping.team4.spring.t411team.model.entity.Thundsup;
@@ -35,6 +39,9 @@ public class teamService {
 	
 	@Autowired
 	private MessageAreaRepository mRepo;
+	
+	@Autowired
+	private ApplyRepository aRepo;
 	
 	//新增Initiating資料
 	public Initiating insert(Initiating i ,UUID uid) {
@@ -61,6 +68,7 @@ public class teamService {
 		i.setUserprofiles(uRepo.findById(uid).get());
 		i.setThumbsUp(0);
 		i.setViewingCount(0);
+		i.setApplycount(0);
 		return iRepo.save(i);
 	}
 	
@@ -83,9 +91,13 @@ public class teamService {
 				}
 				information = information.substring(0, information.length()-1) + ";";
 			}
-			
 		i.setTag(information);
-		
+		i.setViewingCount(i.getViewingCount());
+		i.setThumbsUp(iRepo.findById(i.getInitiatingnum()).get().getThumbsUp());
+		return iRepo.save(i);
+	}
+	//跳轉增加瀏覽數
+	public Initiating ThumbsUp(Initiating i) {
 		return iRepo.save(i);
 	}
 	
@@ -104,6 +116,11 @@ public class teamService {
 		}
 		
 		return i;
+	}
+	
+	//透過user查詢Initiating資料
+	public List<Initiating> findByUser(UserProfiles uid){
+		return iRepo.findByUserprofiles(uid);
 	}
 	
 	//查詢Initiating全部資料
@@ -234,6 +251,46 @@ public class teamService {
 		MessageArea m = mRepo.findById(mid).get();
 		m.setMessage(message);
 		return mRepo.save(m);
+	}
+	
+	//查詢登入用戶需回覆的表單
+	public List<Apply> findApplyByUser(UUID uid){
+		ArrayList<Apply> resultList = new ArrayList<Apply>();
+		List<Initiating> iList = iRepo.findByUserprofiles(uRepo.findById(uid).get());
+		if(iList.size() != 0) {
+			for (Initiating initiating : iList) {
+				List<Apply> aList = aRepo.findByInitiatingAndResponsestate(initiating, 0);
+				if(aList.size() != 0) {
+					resultList.addAll(aList);
+					return resultList;
+				}else {
+					return null;
+				}
+			}
+		}else {
+			return null;
+		}
+		return null;
+	}
+	
+	//查詢登入用戶需要查看的申請回覆
+	public List<Apply> findApplyResponseByUser(UUID uid) {
+		return aRepo.findByUserprofilesAndResponsestate(uRepo.findById(uid).get(), 1);
+	}
+	
+	//新增申請表單
+	public Apply insertApply(UUID uid, Apply a) {
+		a.setUserprofiles(uRepo.findById(uid).get());
+		a.setInitiating(iRepo.findById(a.getInitiatingnumber()).get());
+		a.setResponsestate(0);
+		a.setPairstate(0);
+		a.setLimit(0);
+		return aRepo.save(a);
+	}
+	
+	//修改申請表單
+	public Apply updateApply(Apply a) {
+		return aRepo.save(a);
 	}
 	
 }
