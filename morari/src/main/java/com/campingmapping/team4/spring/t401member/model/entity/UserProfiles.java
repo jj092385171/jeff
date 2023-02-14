@@ -144,8 +144,7 @@ public class UserProfiles implements UserDetails {
   // 履歷
   @JsonIgnore
   @JsonIgnoreProperties("userprofiles")
-  @OneToOne
-  // (fetch = FetchType.LAZY, mappedBy = "userprofiles")
+  @OneToOne(fetch = FetchType.LAZY, mappedBy = "userprofiles")
   private ResumeBean resume;
   // PO文
   @JsonIgnore

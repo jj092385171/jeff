@@ -128,13 +128,14 @@
 
         function load(indexPage) {
             $.getJSON('/morari/admin/camp/showAllOrders/' + indexPage, function (data) {
-
+                
                 $('#ordertable').empty();
                 $('#changeP').empty();
                 $('#promote').empty();
+                
                 var ordertable = $('#ordertable');
                 var ordertr = '';
-
+                
                 ordertable.append('<thead><th>訂單編號</th><th>營地名</th><th>城市名</th><th>圖片</th><th>地點</th><th>訂購者</th><th>訂購者信箱</th><th>成立時間</th><th>入營時間</th><th>離營時間</th><th>總金額</th><th>訂單狀態</th><th>明細</th></thead>');
 
                 $.each(data["orderList"], function (i, oneorder) {
