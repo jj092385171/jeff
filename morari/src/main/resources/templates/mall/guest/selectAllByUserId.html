@@ -76,7 +76,6 @@
       .then(datauid => {
         uid = datauid
         id = datauid;
-        console.log(id);
 
         fetch('/morari/ProductCart/selectAllByUserId', { method: 'GET' }).then(
           function (response) {
@@ -123,9 +122,6 @@
 
           });
       });
-  </script>
-
-  <script>
     function selectbyuserid() {
       if (confirm("確定清空購物車?")) {
         $.ajax({
@@ -196,11 +192,10 @@
 
     }
     function createOrder() {
-      $.ajax({
-        success: function (data) {
-          window.location.href = "/morari/ProductOrder/orderPreview.controller/" + uid;
-        }
-      });
+
+      window.location.href = "/morari/ProductOrder/orderPreview.controller/" + uid;
+
+
     }
   </script>
 

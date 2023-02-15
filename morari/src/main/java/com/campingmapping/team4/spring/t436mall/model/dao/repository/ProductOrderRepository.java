@@ -23,6 +23,7 @@ public interface ProductOrderRepository extends	JpaRepository<ProductOrder, Inte
 			+" LEFT JOIN category c ON d.pdid = c.pdid WHERE p.id= ?1", nativeQuery = true)
 	public List<ProductOrderVo> findById(String id);
 	// 依userID來搜尋所有訂單
+	@Query(value = "SELECT * FROM productorder WHERE userid= ?1 ORDER BY datetime DESC", nativeQuery = true)
 	public List<ProductOrder> findByUserid(String userid);
 	// 搜尋所有訂單(只有後臺能使用)
 	// 修改訂單出貨地址、收件人、手機號(只有後臺能使用)

@@ -87,12 +87,16 @@ public class Initiating {
 	@Column(name = "viewingcount")
 	private int viewingCount;
 	
-	@Column(name = "thumbsUp")
+	@Column(name = "thumbsup")
 	private Integer thumbsUp;
 	
 	@Column(name = "title")
 	private String title;
 	
+	@Column(name = "applycount")
+	private int applycount;
+	
+	@Transient
 	private String img;
 
 }

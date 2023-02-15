@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.campingmapping.team4.spring.t411team.model.entity.Apply;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
 import com.campingmapping.team4.spring.t411team.model.entity.MessageArea;
 import com.campingmapping.team4.spring.t411team.model.entity.Thundsup;
@@ -60,6 +61,7 @@ public class TeamPageComtroller {
 		return view;
 	}
 	
+	//分頁顯示
 	@GetMapping("/viewPaging.controller/{page}")
 	@ResponseBody
 	public List<Initiating> showAllpage(@PathVariable("page")@Nullable String page) throws JsonProcessingException{
@@ -100,6 +102,7 @@ public class TeamPageComtroller {
 		return "update OK";
 	}
 	
+	//動態查詢
 	@PostMapping("/select.controller/{uid}")
 	@ResponseBody
 	public List<Initiating> select(@RequestBody Initiating i, @PathVariable String uid){
@@ -116,6 +119,7 @@ public class TeamPageComtroller {
 		return result;
 	}
 	
+	//透過id找尋initiating資料
 	@PostMapping("/findById.controller/{id}")
 	@ResponseBody
 	public Initiating findById(@PathVariable("id") String id){
@@ -176,8 +180,14 @@ public class TeamPageComtroller {
 	public String moreinformation(@PathVariable Integer num) {
 		Initiating i = teamService.findById(num);
 		i.setViewingCount(i.getViewingCount()+1);
-		teamService.update(i);
+		teamService.ThumbsUp(i);
 		return "team/guest/initiatingform";
+	}
+	
+	//可以用來當user前端跳轉，可調整
+	@GetMapping("/apply.controller/{num}")
+	public String apply(@PathVariable Integer num) {
+		return "team/guest/apply";
 	}
 	
 	//顯示本人留言
@@ -202,6 +212,28 @@ public class TeamPageComtroller {
 	public String deleteMessage(@PathVariable Integer mid) {
 		teamService.deleteMessage(mid);
 		return "delete OK";
+	}
+	
+	//新增申請表單
+	@PostMapping("/insertApply.controller/{uid}")
+	@ResponseBody
+	public String insertApply(@RequestBody Apply a,@PathVariable UUID uuid) {
+		teamService.insertApply(uuid, a);
+		return "apply OK";
+	}
+	
+	//查詢需要回覆的申請清單
+	@GetMapping("/findApply.controller/{uid}")
+	@ResponseBody
+	public List<Apply> findApplyByUser(@PathVariable UUID uid){
+		return teamService.findApplyByUser(uid);
+	}
+	
+	//查詢收到回覆的申請清單
+	@GetMapping("/findApplyResponse.controller/{uid}")
+	@ResponseBody
+	public List<Apply> findApplyResponse(@PathVariable UUID uid){
+		return teamService.findApplyResponseByUser(uid);
 	}
 	
 	//回傳img的google位址

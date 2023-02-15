@@ -20,29 +20,29 @@ import com.campingmapping.team4.spring.t436mall.model.service.impl.CategoryServi
 @RequestMapping("/mall")
 public class MallPageComtroller {
 
-	@GetMapping({ "", "/" })
+	@GetMapping({"", "/"})
 	public String mallIndex() {
 		return "mall/admin/index";
 	}
 
 	@Autowired
 	private CategoryServiceImpl cServiceImpl;
-	
+
 	@GetMapping("/productqueryallmain.controller")
 	public String processQueryAllAction() {
 		return "mall/admin/productindex";
 	}
-	
+
 	@GetMapping("/productcreate.controller")
 	public String processcreateAction() {
 		return "mall/admin/newproduct";
 	}
-	
+
 	@GetMapping("/updateproduct.controller/{id}")
 	public String processupdateAction() {
 		return "mall/admin/updateproduct";
 	}
-	
+
 	@GetMapping("/productselectbypdid.controller/{id}")
 	public String processQueryByPdIdAction() {
 		return "mall/guest/productselectbypdid";
@@ -51,8 +51,8 @@ public class MallPageComtroller {
 	// 新增一筆產品
 	@PostMapping("/create.controller")
 	@ResponseBody
-	public String create(@RequestBody Category category ) {
-		System.out.println(category.getPdid()); 
+	public String create(@RequestBody Category category) {
+		System.out.println(category.getPdid());
 		cServiceImpl.create(category);
 		return "insert ok!!";
 	}
@@ -71,11 +71,18 @@ public class MallPageComtroller {
 		return cServiceImpl.selectByPdid(Pdid);
 	}
 
+	// 依Pdtype來搜尋所有產品
+	@GetMapping("/selectbypdtype/{Pdtype}")
+	@ResponseBody
+	public List<Category> selectByPdtype(@PathVariable String Pdtype) {
+		return cServiceImpl.selectByType(Pdtype);
+	}
+
 	// 依Pdid來刪除單筆產品
 	@DeleteMapping("/deleteByPdid/{Pdid}")
 	@ResponseBody
 	public String deleteByPdid(@PathVariable int Pdid) {
-		
+
 		cServiceImpl.deleteByPdid(Pdid);
 		return "刪除成功!";
 	}

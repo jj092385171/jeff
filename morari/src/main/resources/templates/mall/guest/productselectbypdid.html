@@ -40,9 +40,6 @@
 			<div class="container">
 				<div class="section-header">
 					<h2>凹豆商城</h2>
-					<p>
-						<input type='button' id='selectbyuserid' value='查看購物車' onclick='selectbyuserid(uid)'>
-					</p>
 				</div>
 				<div id="banners" class="row">
 					<div class="modal fade bs-example-modal-lg text-center" id="imgModal" tabindex="-1" role="dialog"
@@ -138,7 +135,7 @@
 						'<h3>' + n.pdname + '</h3>' +
 						'<h1>NT$' + n.pdprice + '</h1>' +
 						'<ul class="room-size">' +
-						'<li><i class="fa fa-arrow-right"></i>品牌: ' + n.pdcontent + '</li>' +
+						'<li><i class="fa fa-arrow-right"></i>品牌: ' + n.pdtitle + '</li>' +
 						'<li><i class="fa fa-arrow-right"></i>類型: ' + n.pdtype + ' </li>' +
 						'</ul>' +
 
@@ -146,6 +143,14 @@
 						'<a href="#" data-toggle="modal" data-target="#modal-id" onclick="addToCart(' + n.pdid + ')">加入購物車</a>' +
 						'<a href="https://localhost:8443/morari/ProductCart/productcartqueryallmain.controller">返回商城</a>' +
 						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'<div>' +
+						'<div class="container">' +
+						'<div class="section-header">' +
+						'<h1>' + "產品描述" + '</h1>' +
+						'<h5>' + n.pdcontent + '</h5>' +
 						'</div>' +
 						'</div>' +
 						'</div>';

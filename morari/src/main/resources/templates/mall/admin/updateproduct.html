@@ -46,7 +46,7 @@
 					<form id="formnew">
 						<h3>修改產品</h3>
 						會員ID<br>
-						<input type="text" name="userid" id="userid" readonly="readonly"><br>
+						<input type="text" name="userid" id="userid" readonly="readonly" size="37"><br>
 						產品ID<br>
 						<input type="text" name="pdid" id="pdid" readonly="readonly"><br>
 						產品名稱<br>
@@ -54,7 +54,7 @@
 						品牌名稱<br>
 						<input type="text" name="pdtitle" id="pdtitle"><br>
 						產品規格<br>
-						<input type="text" name="pdcontent" id="pdcontent"><br>
+						<textarea class="form-control form-control-edit" maxlength="500" id="pdcontent" name="pdcontent" placeholder="About" style=" border-radius: 10px; height: 100px; resize: none; overflow: auto;"></textarea>
 						產品類型<br>
 						<select name="pdtype" id="pdtype">
 							<option>請選擇產品類別</option>
@@ -142,6 +142,7 @@
 					$('#pdprice').val(data.pdprice);
 					$('#pdinventory').val(data.pdinventory);
 					$('#pddate').val(data.pddate);
+					$('#pdpicture').val(data.pdpicture);
 
 				}
 			});

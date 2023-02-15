@@ -34,7 +34,7 @@ public class Category {
 	@Column(name = "pdtitle")
 	private String pdtitle;
 	// 品牌名稱
-	@Column(name = "pdcontent")
+	@Column(name = "pdcontent", length = 500)
 	private String pdcontent;
 	// 產品規格
 	@Column(name = "pdtype")

@@ -66,13 +66,15 @@
   <!-- Main Javascript File -->
   <script src="/morari/guest/js/main.js" defer></script>
 
-  <script>
-    var url = window.location.href;
-    var id = url.split("/").pop();
-  </script>
   <script type="text/javascript">
     var njsdata;
-    fetch('/morari/ProductCart/selectAllByUserId/' + id, { method: 'GET' }).then(
+
+
+    var id
+    var uid;
+
+
+    fetch('/morari/ProductCart/selectAllByUserId', { method: 'GET' }).then(
       function (response) {
         if (response.status != 200) {
           console.log(response.satus);
@@ -112,13 +114,18 @@
               "<tr><td colspan='5' style='text-align:center'><input type='text' value='0976852865' name='odrecipientphone' id='odrecipientphone'/></td></tr><br>" +
               "<tr><td colspan='5' style='text-align:center'>收件地址</td></tr><br>" +
               "<tr><td colspan='5' style='text-align:center'><input type='text' value='新北市三重區' name='odshippingaddress' id='odshippingaddress'/></td></tr>" +
-              "<tr><td colspan='5' style='text-align:right'><input type='button' id='createOrder' value='提交訂單' onclick='createOrder(" + total + ")'></td></tr>" +
+              "<tr><td colspan='2' style='text-align:left'><input type='button' value='一鍵輸入' onclick='inputvalue()'></td>" +
+              "<td colspan='3' style='text-align:right'><input type='button' id='createOrder' value='提交訂單' onclick='createOrder(" + total + ")'></td></tr>" +
               "</form>" +
               "</tr>";
           }
           document.getElementById('result').innerHTML = tableData;
         });
       });
+
+
+
+
     function createOrder(total) {
       var odrecipient = $('#odrecipient').val();
       var odrecipientphone = $('#odrecipientphone').val();
@@ -147,13 +154,7 @@
           contentType: "application/json",
           success: function (response) {
             alert(response);
-            var uid;
-            fetch("/morari/utils/getuid")
-              .then(response => response.text())
-              .then(datauid => {
-                uid = datauid;
-                window.location.href = "/morari/ProductOrder/selectorderbyuseridAction.controller/" + uid;
-              })
+            window.location.href = "/morari/ProductOrder/selectorderbyuseridAction.controller";
           },
           error: function () {
             // 刪除失敗時的處理
@@ -162,6 +163,11 @@
         });
       } else {
       }
+    }
+    function inputvalue() {
+      $('#odrecipient').val("陳昱辰");
+      $('#odrecipientphone').val("0976852865");
+      $('#odshippingaddress').val("新北市三重區");
     }
   </script>
 

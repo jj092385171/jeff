@@ -26,7 +26,8 @@ $(document).ready(function() {
 	//新增職缺
 	$("#send").click(function() {
 
-
+//  var uid =document.getElementById('uid')
+ console.log(uid);
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();
 			var indexed_array = {};
@@ -56,19 +57,19 @@ $(document).ready(function() {
 					table.append("<tr align='center'><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>類型</th></th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
 
 					var tr = "<tr>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.userprofiles.uid + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.rackid + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.campname + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.place + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.type + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.job + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.salary + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.quantity + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.date + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.time + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.rackup + "</td>" +
-						"<td style='border: 1px solid #2A52BE;padding: 8px;text-align: center;background-color:#FFFF4D'>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='" + response.img + "'></td>" + "</tr>";
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.userprofiles.uid + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.rackid + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.campname + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.place + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.type + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.job + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.salary + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.quantity + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.date + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.time + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.rackup + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb '>" + response.remark + "</td>" +
+						"<td><img width='120px' height='120px' src='" + response.img + "'></td>" + "</tr>";
 					table.append(tr);
 				}
 			}

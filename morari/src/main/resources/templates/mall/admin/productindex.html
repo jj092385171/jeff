@@ -105,8 +105,7 @@
 							console.log(response);
 							response.json().then(
 								function (n) {
-									table = $(
-										'#result')
+									table = $('#result')
 										.DataTable(
 											{
 												data: n,
@@ -126,7 +125,7 @@
 													{
 														data: 'userid',
 														title: '會員id',
-														responsivePriority: 13
+														responsivePriority: 10
 													},
 													{
 														data: 'pdtitle',
@@ -136,7 +135,7 @@
 													{
 														data: 'pdcontent',
 														title: '產品規格',
-														responsivePriority: 9
+														responsivePriority: 13
 													},
 													{
 														data: 'pdtype',
@@ -150,7 +149,7 @@
 															data,
 															type,
 															row) {
-															return `<img src='${data.pdpicture}' style="max-width: 150px;">`;
+															return `<img src='${data.pdpicture}' style="max-width: 130px;">`;
 														},
 														responsivePriority: 5
 													},
@@ -172,7 +171,7 @@
 													{
 														data: 'pdlastupdate',
 														title: '產品修改時間',
-														responsivePriority: 10
+														responsivePriority: 9
 													},
 													{
 														data: null,
@@ -208,13 +207,16 @@
 												}
 
 											});
-
+									// 表頭不換行
+									$('#result thead tr th').css('white-space', 'nowrap');
+									table.responsive.recalc();
 									setTimeout(
 										function () {
 											table.responsive
 												.recalc();
 										},
 										1000);
+
 
 								});
 						});
