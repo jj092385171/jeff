@@ -33,7 +33,7 @@ spring:
     url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
 
     password: "P@ssw0rd"
-    username: sa    
+    username: sa  
     # password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
     # username: Team4Admin    
 # -------------MYSQL------------- 

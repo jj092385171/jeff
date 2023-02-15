@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.campingmapping.team4.spring.t424camp.controller.web.guest.returnFulledDays;
+
 @Controller
 @RequestMapping("/forum")
 public class ForumPageController {
@@ -47,5 +49,11 @@ public class ForumPageController {
 	@GetMapping("/showvote.controller")
 	public String processShowVote() {
 		return "forum/guest/vote";
+	}
+	
+	// 查看camper
+	@GetMapping("/showcamper.controller")
+	public String processShowCamper() {
+		return "camper";
 	}
 }

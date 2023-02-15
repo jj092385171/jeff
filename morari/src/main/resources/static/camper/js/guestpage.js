@@ -16,6 +16,10 @@ fetch("/morari/camper/html/guestpage.html")
                 document.getElementById("point").textContent = "Point : "+data.point;
                 document.getElementById("campershot").src = data.shot;
                 document.getElementById("about").textContent = data.about;
+                
+                
+                
+                
             })            
         } 
 

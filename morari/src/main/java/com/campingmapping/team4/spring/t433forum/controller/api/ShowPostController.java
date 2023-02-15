@@ -82,4 +82,21 @@ public class ShowPostController {
 		Page<ShowPostComment> postCommentNonHideByPostId = postCommentService.getPostCommentNonHideByPostId(postid, pageable);
 		return postCommentNonHideByPostId.getContent();
 	}
+
+	// 查熱門貼文
+	@GetMapping("/showhotpost.controller")
+	public Post processShowHotPost(){
+		int max = 0;
+		Post hotPost = null;
+		List<Post> nonHidePost = postService.getNonHidePost();
+		for(Post post : nonHidePost) {
+			List<ShowPostComment> postCommentByPostId = postCommentService.getPostCommentByPostId(post.getPostid());
+			int count = post.getUserlike() + postCommentByPostId.size();
+			if(count > max) {
+				max = count;
+				hotPost = post;
+			}
+		}
+		return hotPost;
+	}
 }

@@ -4,6 +4,8 @@ let postid = arr[arr.length - 1];
 
 let page = 1;
 let commentnumber = 1;
+
+let uid = 1;
 		
 const fetch1 = fetch("/morari/forum/html/showpost.html").then(response => response.text());
 const fetch2 = fetch("/morari/forum/html/showpostcomment.html").then(response => response.text());
@@ -25,6 +27,8 @@ Promise.all([fetch1, fetch2]).then(results => {
 				$("#title").val(data.title);
 				$("#content").val(data.content);
 				$("#user").val(data.uid);
+				uid = data.uid;
+				
 				$("#picture").attr("src", data.picture);
 
 				if (data.people > 0) {
@@ -158,6 +162,11 @@ Promise.all([fetch1, fetch2]).then(results => {
 	});
 
 	});
+	
+function showcamper(){
+	window.location.href = "/morari/camper/" + uid;
+	console.log(uid);
+}
 
 // 檢舉留言
 function reportcomment(id){

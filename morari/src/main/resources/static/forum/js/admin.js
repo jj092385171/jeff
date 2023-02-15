@@ -28,22 +28,26 @@ $(function () {
 				render: function (data, type, row) {
 					if (data != null) {
 						return '<img src=\"' + data + '\" width="300"></img>';
-					}return null;
+					} return null;
 				}
 			},
 			{ data: "people", title: "人數", responsivePriority: 13 },
 			{ data: "price", title: "價錢", responsivePriority: 14 },
-			{ data: "county", title: "縣市", responsivePriority: 15,
+			{
+				data: "county", title: "縣市", responsivePriority: 15,
 				render: function (data, type, row) {
 					var countyInner = ["台北市", "新北市", "基隆市", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣",
 						"雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"];
 					var countyValue = ["TPE", "TPH", "KLU", "TYC", "HSH", "HSC", "MAL", "TXG", "CWH", "NTO", "YLH", "CHY",
 						"CYI", "TNN", "KHH", "IUH", "ILN", "HWA", "TTT", "PEH", "KMN", "LNN"];
 					for (let i = 0; i < countyValue.length; i++) {
+						console.log(row.county);
+						console.log(countyValue[i]);
 						if (countyValue[i] == row.county) {
+							console.log(countyInner[i]);
 							return countyInner[i];
-						}return null;
-					}
+						}
+					} return null;
 				}
 			},
 			{ data: "startdate", title: "起始日期", responsivePriority: 17 },
@@ -52,20 +56,22 @@ $(function () {
 			{ data: "releasedate", title: "更新日期", responsivePriority: 10 },
 			{ data: "userlike", title: "喜歡人數", responsivePriority: 11 },
 			{ data: "userunlike", title: "不喜歡人數", responsivePriority: 12 },
-			{ data: "postreport", title: "是否檢舉貼文", responsivePriority: 7,
+			{
+				data: "postreport", title: "是否檢舉貼文", responsivePriority: 7,
 				render: function (data, type, row) {
 					if (row.postreport == 0) {
 						return "否";
-					}else{
+					} else {
 						return "是";
 					}
 				}
 			},
-			{ data: "posthide", title: "是否隱藏貼文", responsivePriority: 5,
+			{
+				data: "posthide", title: "是否隱藏貼文", responsivePriority: 5,
 				render: function (data, type, row) {
 					if (row.posthide == 0) {
 						return "否";
-					}else{
+					} else {
 						return "是";
 					}
 				}
