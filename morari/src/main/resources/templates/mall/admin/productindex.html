@@ -149,7 +149,7 @@
 															data,
 															type,
 															row) {
-															return `<img src='${data.pdpicture}' style="max-width: 150px;">`;
+															return `<img src='${data.pdpicture}' style="max-width: 130px;">`;
 														},
 														responsivePriority: 5
 													},
@@ -207,6 +207,9 @@
 												}
 
 											});
+									// 表頭不換行
+									$('#result thead tr th').css('white-space', 'nowrap');
+									table.responsive.recalc();
 									setTimeout(
 										function () {
 											table.responsive

@@ -41,6 +41,20 @@ fetch("/morari/camper/html/usertable.html")
 								"pagingType": "full_numbers",
 								"columns": [
 									{
+										"data": 'accountnonlocked'
+										, "title": "鎖定"
+										, "render": function (
+											data, type,
+											row, meta) {
+											if (data) {
+												return '<input type="button" class="user_edit_button_ture" onclick="accountlocked(\'' + meta.row + '\')" value="未鎖定">'
+											} else {
+												return '<input type="button" class="user_edit_button_false" onclick="accountlocked(\'' + meta.row + '\')" value="已封鎖">'
+											}
+										}
+										, responsivePriority: 16
+									},
+									{
 										"data": 'uid'
 										, "title": "ID"
 										, "render": function (
@@ -77,20 +91,7 @@ fetch("/morari/camper/html/usertable.html")
 									// 	}
 									// 	, responsivePriority: 15
 									// },
-									{
-										"data": 'accountnonlocked'
-										, "title": "鎖定"
-										, "render": function (
-											data, type,
-											row, meta) {
-											if (data) {
-												return '<input type="button" class="user_edit_button_ture" onclick="accountlocked(\'' + meta.row + '\')" value="未鎖定">'
-											} else {
-												return '<input type="button" class="user_edit_button_false" onclick="accountlocked(\'' + meta.row + '\')" value="已封鎖">'
-											}
-										}
-										, responsivePriority: 16
-									},
+
 									{
 										"data": 'email'
 										, "title": "電子信箱"

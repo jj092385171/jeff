@@ -13958,3 +13958,17 @@ div.dtr-modal div.dtr-modal-background {
 .dataTables_paginate {
   text-align: right;
 }
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_desc:before {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
