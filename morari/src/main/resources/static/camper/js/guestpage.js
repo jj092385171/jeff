@@ -18,7 +18,7 @@ fetch("/morari/camper/html/guestpage.html")
                 document.getElementById("about").textContent = data.about;
                 
                 $.ajax({
-					url: "/morari/showpostbyuserid.controller/" + uid,
+					url: "/morari/showpostnonhidebyuserid.controller/" + uid,
 					dataType: "JSON",
 					contentType: "application/json",
 					success: function (data) {
@@ -30,7 +30,7 @@ fetch("/morari/camper/html/guestpage.html")
 							if(n.picture){
 								div += "<img src='"+ n.picture +"' width='100%'>";
 							}else{
-								div += "<img src='/morari/forum/img/nopicture.jpeg' width='100%' height='350px'>";
+								div += "<img src='/morari/forum/img/nopicture.jpeg' width='100%' height='400px'>";
 							}
 							div += "</div></div>";
 							div += "<div class='col-md-6'><div class='room-des'>";
