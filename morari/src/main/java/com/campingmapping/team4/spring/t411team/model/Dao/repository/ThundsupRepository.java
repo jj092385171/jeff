@@ -13,4 +13,5 @@ public interface ThundsupRepository extends JpaRepository<Thundsup, Integer> {
 	
 	List<Thundsup> findByInitiating(Initiating i);
 	
+	List<Thundsup> findByInitiatingAndUserprofiles(Initiating i, UserProfiles userProfiles);
 }

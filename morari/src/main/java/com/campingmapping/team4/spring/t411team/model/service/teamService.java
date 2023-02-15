@@ -96,6 +96,7 @@ public class teamService {
 		i.setThumbsUp(iRepo.findById(i.getInitiatingnum()).get().getThumbsUp());
 		return iRepo.save(i);
 	}
+	
 	//跳轉增加瀏覽數
 	public Initiating ThumbsUp(Initiating i) {
 		return iRepo.save(i);
@@ -179,13 +180,13 @@ public class teamService {
 	
 	//查詢按讚資料
 	public List<Thundsup> selectThundsup(Integer num, UUID u) {
-		
 		ArrayList<Thundsup> resultList = new ArrayList<Thundsup>();
 		Thundsup t = new Thundsup();
 		Initiating i = new Initiating();
 		t.setUserprofiles(uRepo.findById(u).get());
 		i.setInitiatingnum(num);
 		t.setInitiating(i);
+//		List<Thundsup> tList = tRepo.findByUserprofiles(t.getUserprofiles());
 		List<Thundsup> tList = tRepo.findByUserprofiles(t.getUserprofiles());
 		List<Thundsup> iList = tRepo.findByInitiating(i);
 		for (Thundsup thundsup1 : iList) {
@@ -253,7 +254,7 @@ public class teamService {
 		return mRepo.save(m);
 	}
 	
-	//查詢登入用戶需回覆的表單
+	//查詢登入用戶需回覆的申請表單
 	public List<Apply> findApplyByUser(UUID uid){
 		ArrayList<Apply> resultList = new ArrayList<Apply>();
 		List<Initiating> iList = iRepo.findByUserprofiles(uRepo.findById(uid).get());
@@ -262,13 +263,11 @@ public class teamService {
 				List<Apply> aList = aRepo.findByInitiatingAndResponsestate(initiating, 0);
 				if(aList.size() != 0) {
 					resultList.addAll(aList);
-					return resultList;
-				}else {
-					return null;
 				}
 			}
-		}else {
-			return null;
+			if(resultList != null) {
+				return resultList;
+			}
 		}
 		return null;
 	}
@@ -278,6 +277,11 @@ public class teamService {
 		return aRepo.findByUserprofilesAndResponsestate(uRepo.findById(uid).get(), 1);
 	}
 	
+	//透過用戶及表單號碼查詢申請表單是否已經存在
+	public List<Apply> findByUserAndInitiatingnum(UUID uid, Apply a){
+		return aRepo.findByInitiatingAndUserprofiles(iRepo.findById(a.getInitiatingnumber()).get(), uRepo.findById(uid).get());
+	}
+	
 	//新增申請表單
 	public Apply insertApply(UUID uid, Apply a) {
 		a.setUserprofiles(uRepo.findById(uid).get());
@@ -285,12 +289,48 @@ public class teamService {
 		a.setResponsestate(0);
 		a.setPairstate(0);
 		a.setLimit(0);
+		a.setResponsemessage(" ");
 		return aRepo.save(a);
 	}
 	
 	//修改申請表單
 	public Apply updateApply(Apply a) {
 		return aRepo.save(a);
+	}
+	
+	//透過aid查詢申請表單
+	public Apply findByAid(Integer aid){
+		Optional<Apply> ap = aRepo.findById(aid);
+		Apply a = null;
+		if(ap.isPresent()) {
+			a = ap.get();
+		}
+		return a;
+	}
+	
+	//接受申請表單
+	public Apply acceptApply(Apply a) {
+		a.setPairstate(1);
+		a.setResponsestate(a.getResponsestate()+1);
+		Initiating i = iRepo.findById(a.getInitiating().getInitiatingnum()).get();
+		i.setAcceptablenum(i.getAcceptablenum() - a.getApplypeople());
+		i.setCurrentnum(i.getCurrentnum() + a.getApplypeople());
+		iRepo.save(i);
+		return a;
+	}
+	
+	//拒絕申請表單
+	public Apply rejectApply(Apply a) {
+		a.setLimit(a.getLimit()+1);
+		a.setResponsestate(a.getResponsestate()+1);
+		return a;
+	}
+	
+	//永久拒絕特定用戶申請特定表單
+	public Apply permanentrejectApply(Apply a) {
+		a.setLimit(3);
+		a.setResponsestate(a.getResponsestate()+1);
+		return a;
 	}
 	
 }
