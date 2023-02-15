@@ -25,12 +25,21 @@
     <div id="amenities">
       <div class="container">
         <div class="section-header">
-
           <h2>凹豆商城</h2>
-        </div>
-        <div class="row" id="banners">
 
         </div>
+        <div class="room-link">
+          <a href="#" onclick="selectbypdtype('睡袋')" style="margin: 0px 8px;"> 睡袋 </a>
+          <a href="#" onclick="selectbypdtype('燈具')" style="margin: 0px 8px;"> 燈具 </a>
+          <a href="#" onclick="selectbypdtype('桌椅')" style="margin: 0px 8px;"> 桌椅 </a>
+          <a href="#" onclick="selectbypdtype('火爐/炊具')" style="margin: 0px 8px;">火爐/炊具</a>
+          <a href="#" onclick="selectbypdtype('保冷箱')" style="margin: 0px 8px;">保冷箱</a>
+          <a href="#" onclick="selectbypdtype('登山包')" style="margin: 0px 8px;">登山包</a>
+          <a href="#" onclick="selectbypdtype('登山鞋')" style="margin: 0px 8px;">登山鞋</a>
+          <a href="#" onclick="selectbypdtype('其他')" style="margin: 0px 8px;">其他</a>
+        </div><br><br>
+
+        <div class="row" id="banners"></div>
       </div>
     </div>
 
@@ -118,19 +127,59 @@
           }
         });
       });
-    function selectbyuserid(uid) {
-      $.ajax({
-        success: function (data) {
-          window.location.href = "/morari/ProductCart/queryAllByuserid.controller/" + uid;
-        }
-      });
-    }
-    function selectorderbyuserid(uid) {
-      $.ajax({
-        success: function (data) {
-          window.location.href = "/morari/ProductOrder/selectorderbyuseridAction.controller/" + uid;
-        }
-      });
+
+    function selectbypdtype(pdtype) {
+      var pdtype = pdtype;
+      fetch('/morari/mall/selectbypdtype/' + pdtype, { method: 'GET' }).then(
+
+        function (response) {
+          if (response.status != 200) {
+            console.log(response.satus);
+            return;
+          }
+          console.log(response);
+          response.json().then(function (n) {
+            console.log(n);
+            $('#banners').empty();
+            var banners = document.getElementById("banners");
+            for (var i = 0; i < n.length; i++) {
+              //创建一个div
+              var div = document.createElement("div");
+
+
+              //设置div的id
+              div.id = "abc";
+              //设置div的class
+              div.className = "col-md-3 col-sm-6";
+              //设置style
+              //div.style.display="block";
+              div.click = "selectbyid()";
+              //设置子div的其他属性，直接通过字符串连接的方式连接即可。动态值放在引号外面就行
+              div.innerHTML = '<div id="' + n[i].pdid + '" class="item" style="cursor: pointer;">' +
+                '<img  src="' + n[i].pdpicture + '" style="max-height: 130px;" alt="img">' +
+                '<div class="homepage-slider-caption">' +
+                '<h3>' + n[i].pdname + '</h3>' +
+                '<h4>NT$' + n[i].pdprice + '</h4>' +
+                '</div>' +
+                '</div> ';
+
+              banners.appendChild(div);
+              (function (i) {
+                var elementId = n[i].pdid;
+                document.getElementById(elementId).addEventListener("click", function () {
+                  // 觸發控制器的代碼
+                  $.ajax({
+                    success: function () {
+                      window.location.href = "/morari/mall/productselectbypdid.controller/" + elementId;
+                    }
+                  });
+                });
+              })(i);
+
+            }
+          });
+        });
+
     }
 
   </script>

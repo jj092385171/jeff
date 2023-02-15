@@ -54,14 +54,20 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> selectAll() {
 		return cDao.findAll();
 	}
-
+	
+	// 依pdtype來搜尋所有產品
+	@Override
+	public List<Category> selectByType(String pdtype) {
+		return cDao.findByType(pdtype);
+	}
 	// 根據購買減少庫存
 	@Override
 	public void updateBuy(List<Category> category) {
 
 		for (Category buy : category) {
 			Category inventory = cDao.findById(buy.getPdid()).get();
-			inventory.setPdinventory(inventory.getPdinventory() - buy.getPdinventory());
+			inventory.setPdinventory(
+					inventory.getPdinventory() - buy.getPdinventory());
 			cDao.save(inventory);
 		}
 	}
