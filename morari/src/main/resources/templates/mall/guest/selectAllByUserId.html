@@ -76,7 +76,6 @@
       .then(datauid => {
         uid = datauid
         id = datauid;
-        console.log(id);
 
         fetch('/morari/ProductCart/selectAllByUserId', { method: 'GET' }).then(
           function (response) {
@@ -122,86 +121,82 @@
             });
 
           });
+      });
+    function selectbyuserid() {
+      if (confirm("確定清空購物車?")) {
+        $.ajax({
+          url: '/morari/ProductCart/deleteAllByUserId/' + uid,
+          type: 'delete',
+          dataType: 'text',
+          success: function (data) {
+            alert(data);
+            location.reload();
+          },
+          error: function () {
+            // 刪除失敗時的處理
+            alert('刪除失敗');
+          }
+
         });
-  </script>
-
-  <script>
-        function selectbyuserid() {
-          if (confirm("確定清空購物車?")) {
-            $.ajax({
-              url: '/morari/ProductCart/deleteAllByUserId/' + uid,
-              type: 'delete',
-              dataType: 'text',
-              success: function (data) {
-                alert(data);
-                location.reload();
-              },
-              error: function () {
-                // 刪除失敗時的處理
-                alert('刪除失敗');
-              }
-
-            });
-          } else {
+      } else {
+      }
+    }
+    function confirmDelete(id) {
+      if (confirm("確定移除此產品?")) {
+        $.ajax({
+          url: '/morari/ProductCart/deleteById/' + id,
+          type: 'delete',
+          dataType: 'text',
+          success: function (data) {
+            alert(data);
+            location.reload();
+          },
+          error: function () {
+            // 刪除失敗時的處理
+            alert('刪除失敗');
           }
-        }
-        function confirmDelete(id) {
-          if (confirm("確定移除此產品?")) {
-            $.ajax({
-              url: '/morari/ProductCart/deleteById/' + id,
-              type: 'delete',
-              dataType: 'text',
-              success: function (data) {
-                alert(data);
-                location.reload();
-              },
-              error: function () {
-                // 刪除失敗時的處理
-                alert('刪除失敗');
-              }
-            });
-          } else {
-          }
-        }
-        function adjustQuantity(id, ctqty, pdinventory, value) {
-          var ctqty = parseInt(ctqty) + parseInt(value)
-          var pdinventory = parseInt(pdinventory)
-          if (parseInt(pdinventory) - parseInt(ctqty) != -1) {
+        });
+      } else {
+      }
+    }
+    function adjustQuantity(id, ctqty, pdinventory, value) {
+      var ctqty = parseInt(ctqty) + parseInt(value)
+      var pdinventory = parseInt(pdinventory)
+      if (parseInt(pdinventory) - parseInt(ctqty) != -1) {
 
-            if (parseInt(ctqty) != -1) {
-              var data = {
-                "id": id,
-                "ctqty": ctqty
-              };
-              $.ajax({
-                url: '/morari/ProductCart/updataById',
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                type: 'put',
-                dataType: 'text',
-                success: function (data) {
-                  location.reload();
-                }
-              });
-            } else {
-              alert("購物車數量已經見底囉!");
-
-            }
-          } else {
-            alert("目前庫存只剩" + parseInt(pdinventory) + "件產品囉!");
-
-          }
-
-
-
-        }
-        function createOrder() {
+        if (parseInt(ctqty) != -1) {
+          var data = {
+            "id": id,
+            "ctqty": ctqty
+          };
           $.ajax({
+            url: '/morari/ProductCart/updataById',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            type: 'put',
+            dataType: 'text',
             success: function (data) {
-              window.location.href = "/morari/ProductOrder/orderPreview.controller/" + uid;
+              location.reload();
             }
           });
+        } else {
+          alert("購物車數量已經見底囉!");
+
         }
+      } else {
+        alert("目前庫存只剩" + parseInt(pdinventory) + "件產品囉!");
+
+      }
+
+
+
+    }
+    function createOrder() {
+
+      window.location.href = "/morari/ProductOrder/orderPreview.controller/" + uid;
+
+
+    }
   </script>
 
 

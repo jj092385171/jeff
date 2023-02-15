@@ -76,13 +76,16 @@
 					<form id="formnew">
 						<h3>新增產品</h3>
 						會員ID<br>
-						<input type="text" value='' name="userid" id="userid" readonly><br>
+						<input type="text" name="userid" id="userid" readonly size="37"><br>
 						產品名稱<br>
-						<input type="text" value='測試用產品' name="pdname" id="pdname"><br>
+						<input type="text" value='測試用產品名稱' name="pdname" id="pdname"><br>
 						品牌名稱<br>
-						<input type="text" value='測試用產品1' name="pdtitle" id="pdtitle"><br>
+						<input type="text" value='測試用品牌' name="pdtitle" id="pdtitle"><br>
 						產品規格<br>
-						<input type="text" value='測試用產品' name="pdcontent" id="pdcontent"><br>
+						<!-- 						<input type="text" value='測試用產品' name="pdcontent" id="pdcontent" style="padding:10px;"><br> -->
+						<textarea class="form-control form-control-edit" maxlength="30" id="pdcontent" name="pdcontent"
+							placeholder="About"
+							style=" border-radius: 10px; height: 100px; resize: none; overflow: auto;"></textarea>
 						產品類型<br>
 						<select name="pdtype">
 							<option>請選擇產品類別</option>
@@ -103,13 +106,14 @@
 							style="display: none; padding: 0px; border: 0px; border-radius: 5px;">
 						<br>
 						價位<br>
-						<input type="text" value='' name="pdprice" onkeyup="value=value.replace(/[^\d]/g,'') "
-							required placeholder="請輸入價位,僅限數字"><br>
+						<input type="text" value='' name="pdprice" id="pdprice" onkeyup="value=value.replace(/[^\d]/g,'') " required
+							placeholder="請輸入價位,僅限數字"><br>
 						庫存數量<br>
-						<input type="text" value='' name="pdinventory" onkeyup="value=value.replace(/[^\d]/g,'') "
+						<input type="text" value='' name="pdinventory" id="pdinventory" onkeyup="value=value.replace(/[^\d]/g,'') "
 							required placeholder="請輸入庫存數量,僅限數字"><br>
-						<br> 
+						<br>
 						<input type="button" value="提交" onclick="submitForm()">
+						<input type="button" value="一鍵輸入" onclick="inputvalue()">
 					</form>
 					<table id="result"></table>
 
@@ -189,6 +193,13 @@
 				});
 			});
 		});
+		function inputvalue() {
+			$('#pdname').val("黑化生態野營求生小刀 Safari Knife");
+			$('#pdtitle').val("Horizon");
+			$('#pdcontent').val("加拿大Horizon黑化生態野營求生小刀，多項功能合一，可應對各式戶外需求。420不銹鋼強韌刀具，堅固耐用。質感鋁合金刀柄，符合人體工學。體積輕巧好收折，方便攜帶，適合戶外出遊、防身等用途攜帶。");
+			$('#pdprice').val("499");
+			$('#pdinventory').val("5");
+		}
 	</script>
 
 </body>

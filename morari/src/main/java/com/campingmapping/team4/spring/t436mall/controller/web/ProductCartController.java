@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +29,6 @@ public class ProductCartController {
 	JwtService jwtService;
 	@Autowired
 	private ProductCartServiceImpl PCServiceImpl;
-	private UUID uid;
 
 	@GetMapping({ "", "/" })
 	public String mallIndex() {
@@ -68,7 +66,7 @@ public class ProductCartController {
 	@ResponseBody
 	public String deleteById(@PathVariable Integer id) {
 		PCServiceImpl.deleteById(id);
-		return "delete ok!!";
+		return "移除成功!!";
 	}
 
 	// 依userid清空購物車、或結帳

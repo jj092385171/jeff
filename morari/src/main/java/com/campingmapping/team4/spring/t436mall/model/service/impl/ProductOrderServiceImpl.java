@@ -1,5 +1,7 @@
 package com.campingmapping.team4.spring.t436mall.model.service.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -67,12 +69,20 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 	// 依userID來搜尋所有訂單
 	@Override
 	public List<ProductOrder> selectAllByUserId(String userid) {
+
 		return pDao.findByUserid(userid);
 	}
 	// 搜尋所有訂單(只有後臺能使用)
 	@Override
 	public List<ProductOrder> selectAll() {
-		return pDao.findAll();
+		List<ProductOrder> orders = pDao.findAll();
+		Collections.sort(orders, new Comparator<ProductOrder>() {
+			@Override
+			public int compare(ProductOrder order1, ProductOrder order2) {
+				return order2.getDatetime().compareTo(order1.getDatetime());
+			}
+		});
+		return orders;
 	}
 	// 修改訂單狀態
 	@Override

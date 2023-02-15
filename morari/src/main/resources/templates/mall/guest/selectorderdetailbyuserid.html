@@ -7,9 +7,10 @@
   <script src="/morari/guest/js/share.js"></script>
 
   <style>
-    td {
+    tr {
       border: 2px black solid;
     }
+    
   </style>
 
 </head>
@@ -124,6 +125,7 @@
               "</tr>"
               ;
 
+              
             console.log(n);
             for (var i = 0; i < n.length; i++) {
               let a = i + 1;
@@ -142,7 +144,7 @@
             }
             tableData += "<tr>" +
               "<td align='right' colspan='4' style='margin-right: 40px;''>" +
-              "<a href='#'class='btn btn-danger btn-sm' onclick='selectorderbyuserid(uid)'>返回訂單列表</a>" +
+              "<a href='/morari/ProductOrder/selectorderbyuseridAction.controller'class='btn btn-danger btn-sm'>返回訂單列表</a>" +
               "<c:if test='${vo.order.status eq 1 }'>" +
               "<button type='button' onclick='pay('${vo.order.id}','${vo.order.money}')' class='btn btn-warning btn-sm'>ECPay</button>" +
               "<button type='button' onclick='payWeiXin('${vo.order.id}','${vo.order.money}')' class='btn btn-success btn-sm'>LINEPay</button>" +
@@ -168,13 +170,6 @@
         });
       } else {
       }
-    }
-    function selectorderbyuserid(uid) {
-      $.ajax({
-        success: function (data) {
-          window.location.href = "/morari/ProductOrder/selectorderbyuseridAction.controller/" + uid;
-        }
-      });
     }
   </script>
 
