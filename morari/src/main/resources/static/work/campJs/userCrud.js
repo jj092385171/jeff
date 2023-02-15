@@ -35,6 +35,7 @@ $(document).ready(function() {
 				contentType: 'application/json',
 				success: function(response) {
 					$('#showAllJob').empty("");
+					table =
 					$('#showAllJob').DataTable({
 						"data": response,
 						"columns": [
@@ -155,6 +156,12 @@ $(document).ready(function() {
 							}
 						}
 					});
+					// 表頭不換行
+					$('#showAll_wrapper thead tr th').css('white-space', 'nowrap');
+					table.responsive.recalc();
+					setTimeout(function () {
+						table.responsive.recalc();
+					}, 500);
 				}
 			});
 		})

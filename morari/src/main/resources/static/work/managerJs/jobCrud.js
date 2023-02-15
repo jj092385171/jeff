@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 	let uid;
 	fetch("/morari/utils/getuid")
@@ -8,7 +8,7 @@ $(document).ready(function() {
 			uid = data;
 		}).then(() => {
 
-			$("#campId").click(function() {
+			$("#campId").click(function () {
 
 				$('#campID').empty("");
 				var div = $('#campID');
@@ -21,125 +21,132 @@ $(document).ready(function() {
 				type: 'POST',
 				url: '/morari/admin/work/jobShowAll.controller',
 				contentType: 'application/json',
-				success: function(response) {
+				success: function (response) {
 					$('#showAll').empty("");
-					$('#showAll').DataTable({
-						"data": response,
-						"columns": [
+					table =
+						$('#showAll').DataTable({
+							"data": response,
+							"columns": [
 
-							{
-								data: 'rackid',
-								title: "刊登編號",
-								responsivePriority: 1,
-							},
-							{
-								data: 'userprofiles.uid',
-								title: "會員編號",
-								responsivePriority: 12,
-							},
+								{
+									data: 'rackid',
+									title: "刊登編號",
+									responsivePriority: 1,
+								},
+								{
+									data: 'userprofiles.uid',
+									title: "會員編號",
+									responsivePriority: 12,
+								},
 
-							{
-								data: 'campname',
-								title: "營區",
-								responsivePriority: 2,
-							},
+								{
+									data: 'campname',
+									title: "營區",
+									responsivePriority: 2,
+								},
 
-							{
-								data: 'place',
-								title: "地點",
-								responsivePriority: 8,
-							},
-							{
-								data: 'type',
-								title: "類型",
-								responsivePriority: 5,
-							},
+								{
+									data: 'place',
+									title: "地點",
+									responsivePriority: 8,
+								},
+								{
+									data: 'type',
+									title: "類型",
+									responsivePriority: 5,
+								},
 
-							{
-								data: 'job',
-								title: "職缺",
-								responsivePriority: 4,
-							},
+								{
+									data: 'job',
+									title: "職缺",
+									responsivePriority: 4,
+								},
 
-							{
-								data: 'salary',
-								title: "薪資",
-								responsivePriority: 3,
-							},
+								{
+									data: 'salary',
+									title: "薪資",
+									responsivePriority: 3,
+								},
 
-							{
-								data: 'quantity',
-								title: "人數",
-								responsivePriority: 2,
-							},
+								{
+									data: 'quantity',
+									title: "人數",
+									responsivePriority: 2,
+								},
 
-							{
-								data: 'date',
-								title: "上班日期",
-								responsivePriority: 6,
-							},
+								{
+									data: 'date',
+									title: "上班日期",
+									responsivePriority: 6,
+								},
 
-							{
-								data: 'time',
-								title: "上班時段",
-								responsivePriority: 7,
-							},
+								{
+									data: 'time',
+									title: "上班時段",
+									responsivePriority: 7,
+								},
 
-							{
-								data: 'rackup',
-								title: "刊登時間",
-								responsivePriority: 10,
-							},
+								{
+									data: 'rackup',
+									title: "刊登時間",
+									responsivePriority: 10,
+								},
 
-							{
-								data: 'remark',
-								title: "備註",
-								responsivePriority: 11,
-							},
+								{
+									data: 'remark',
+									title: "備註",
+									responsivePriority: 15,
+								},
 
-							{
-								data: 'img',
-								title: "照片",
-								responsivePriority: 13,
-								render: function(data, type, row) {
-									return '<img width="300" src="' + data + '"/>';
+								{
+									data: 'img',
+									title: "照片",
+									responsivePriority: 13,
+									render: function (data, type, row) {
+										return '<img width="300" src="' + data + '"/>';
+									}
+								},
+
+								{
+									data: null,
+									title: "修改",
+									responsivePriority: 1,
+									render: function (data, type, row) {
+										//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+										return '<button class=\"datatable_edit_button\" onclick=\"jobUpdate(\'' + row.rackid + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
+
+									}
+								},
+
+								{
+									data: null,
+									title: "刪除",
+									responsivePriority: 1,
+									render: function (data, type, row) {
+										//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+										return '<button class=\"datatable_del_button\"   onclick=\"jobDelete(\'' + row.rackid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
+									}
+								},
+
+							],
+							"responsive": true,
+							lengthMenu: [5, 10, 15, 20],
+							language: {
+								"lengthMenu": "顯示_MENU_ 筆資料",
+								"info": "第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+								"search": "搜尋：",
+								"paginate": {
+									"previous": " 上一頁__",
+									"next": "__下一頁"
 								}
-							},
-
-							{
-								data: null,
-								title: "修改",
-								responsivePriority: 1,
-								render: function(data, type, row) {
-//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.rackid + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
-									return '<button class=\"datatable_edit_button\" onclick=\"jobUpdate(\'' + row.rackid + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
-
-								}
-							},
-
-							{
-								data: null,
-								title: "刪除",
-								responsivePriority: 1,
-								render: function(data, type, row) {
-//									return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobDelete(' + row.rackid + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
-									return '<button class=\"datatable_del_button\"   onclick=\"jobDelete(\'' + row.rackid + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
-								}
-							},
-
-						],
-						"responsive": true,
-						lengthMenu: [5, 10, 15, 20],
-						language: {
-							"lengthMenu": "顯示_MENU_ 筆資料",
-							"info": "第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
-							"search": "搜尋：",
-							"paginate": {
-								"previous": " 上一頁__",
-								"next": "__下一頁"
 							}
-						}
-					});
+						});
+					// 表頭不換行
+					$('#showAll_wrapper thead tr th').css('white-space', 'nowrap');
+					table.responsive.recalc();
+					setTimeout(function () {
+						table.responsive.recalc();
+					}, 500);
 				}
 			});
 		});
@@ -150,7 +157,7 @@ function jobDelete(rackid) {
 			type: 'delete',
 			url: '/morari/admin/work/jobDelete.controller/' + rackid,
 			dataType: 'TEXT',
-			success: function(data) {
+			success: function (data) {
 				alert(data);
 				location.reload();
 			}
@@ -169,23 +176,23 @@ function submitForm() {
 		type: 'POST',
 		url: '/morari/admin/user/work/selectUUid.controller/' + input1,
 		contentType: 'application/json',
-		success: function(data) {
+		success: function (data) {
 			$('#campName').empty("");
-			
-			if(data == null || data.length == 0){
+
+			if (data == null || data.length == 0) {
 				alert("該會員尚未新增營地資料")
-			}else{
-				
-			$.each(data, function(i, n) {
-				var table = $('#campName');
-				var tr = "<tr align='center'>" +
-					"<td>" + "<a style='color: 	#FF8C00' href='/morari/admin/work/insert.controller/" + n.campID + "'>" + n.campName + "</td>" +
-					"</tr>"
-				table.append(tr);
-			});
-				
+			} else {
+
+				$.each(data, function (i, n) {
+					var table = $('#campName');
+					var tr = "<tr align='center'>" +
+						"<td>" + "<a style='color: 	#FF8C00' href='/morari/admin/work/insert.controller/" + n.campID + "'>" + n.campName + "</td>" +
+						"</tr>"
+					table.append(tr);
+				});
+
 			}
-			
+
 		}
 	})
 }

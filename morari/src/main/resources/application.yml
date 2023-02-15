@@ -101,7 +101,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: camppingmapping@gmail.com
-    password: qmwwvqnergjzkdzq
+    password: jexwyiategzwzzor
     port: 587
     protocol: smtp
     properties:

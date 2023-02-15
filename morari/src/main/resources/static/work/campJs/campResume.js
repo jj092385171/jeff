@@ -17,6 +17,7 @@ $(document).ready(function() {
 				success: function(response) {
 
 					$('#showResume').empty("");
+					table =
 					$('#showResume').DataTable({
 						"data": response,
 						"columns":
@@ -97,6 +98,12 @@ $(document).ready(function() {
 							}
 						}
 					});
+							// 表頭不換行
+							$('#showAll_wrapper thead tr th').css('white-space', 'nowrap');
+							table.responsive.recalc();
+							setTimeout(function () {
+								table.responsive.recalc();
+							}, 500);
 				}
 			});
 		});
