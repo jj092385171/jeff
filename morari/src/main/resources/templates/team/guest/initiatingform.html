@@ -121,7 +121,7 @@
 									required="required"
 									data-validation-required-message="Please enter your special request">
 								<p class="help-block text-danger"></p>
-								<label>申請人數：</label> <input type="text" class="form-control"
+								<label>申請人數：</label> <input type="number" class="form-control"
 									name="applypeople" id="applypeople"
 									required="required"
 									data-validation-required-message="Please enter your special request">
@@ -177,6 +177,11 @@
   var num;
   
   var initiatingUser;
+  
+  var limit;
+  
+  var pair;
+  
   $(function () {
 	    $(document).ready(function () {
 	    	
@@ -188,89 +193,111 @@
 	    	fetch("/morari/utils/getuid")
 	    	.then(response => response.text())
 	    	.then(data => {
-	    		// console.log(data)
+	    		console.log(data)
 	    		user = data;
+	    		
+	    		fetch('/morari/team/findById.controller/{'+ num +"}" , { method: 'POST' }).then(
+						function (response) {
+							if (response.status != 200) {
+								console.log(response.satus);
+								return;
+							}
+							
+							console.log(response);
+
+							response.json().then(function (data) {
+								
+								var input = data.tag;
+								var items = input.split(";");
+								var result = "";
+								for (var i = 0; i < items.length; i++) {
+							    	var parts = items[i].split(":");
+							    	result += parts[0] + "<br>";
+								}
+								result = result.slice(0,-4)
+								
+								console.log(result)
+									
+									var pDay = new Date(data.postdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});
+									var sDay = new Date(data.startdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
+									var eDay = new Date(data.enddate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
+									
+									var pair = "可配對";
+									if (data.pair != 0) {
+										pair = "不可配對"
+									}
+									
+								document.getElementById('title').innerHTML = data.title;
+								document.getElementById('introduction').innerHTML = data.introduction;
+								document.getElementById('postmember').innerHTML = data.userprofiles.uid + "<br>" + pDay;
+								document.getElementById('tag').innerHTML = result;
+								document.getElementById('startday').innerHTML = sDay + "<br><br><br>";
+								document.getElementById('endday').innerHTML = eDay + "<br><br><br>";
+								document.getElementById('acceptablenum').innerHTML = data.acceptablenum;
+								document.getElementById('currentnum').innerHTML = data.currentnum;
+								document.getElementById('camparea').innerHTML = data.camparea;
+								document.getElementById('pair').innerHTML = pair;
+								const applynum = document.getElementById("applypeople");
+								applynum.setAttribute("max", data.acceptablenum);
+								applynum.setAttribute("min", 1);
+								
+								initiatingUser = data.userprofiles.uid;
+							});
+							
+					});
+		    	
+		    	
+		    	
+		    	fetch('/morari/team/selectMessage.controller/{'+ num +"}" , { method: 'GET' }).then(
+						function (response) {
+							if (response.status != 200) {
+								console.log(response.satus);
+								return;
+							}
+							
+							console.log(response);
+
+							response.json().then(function (data) {
+								
+								var messageData = "";
+									
+								for(let i = 0; i < data.length; i++){
+									if(data[i].userprofiles.uid == user){
+										messageData += '<div class="button"><button type="button" onclick="deleteMessage(' + data[i].messageid + ')">刪除</button></div>'
+									}
+									var pDay = new Date(data[i].postday).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit', 
+										hour: '2-digit', minute: '2-digit', second: '2-digit'});
+									console.log(pDay);
+									console.log(data[i].userprofiles.uid);
+									console.log(data[i].message);
+									messageData += "<h3>" + data[i].userprofiles.uid + ' 說：</h3><ul calss="room-size">' + data[i].message + '<i class="fa fa-arrow-right"></i>發文時間：' + pDay + "</ul><br>"
+								}
+								
+								document.getElementById('messageview').innerHTML = messageData;
+								
+							});
+							
+				});
+		    	
+		    	fetch('/morari/team/findApplyByUserAndInitiatingnum.controller/' +  user + "/" + num, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: null
+				})
+					.then(function (response) {
+						if (response.status == 200) {
+								
+						}
+						response.json().then(function (data){
+							console.log(data[0].limit)
+							limit = data[0].limit;
+							pair = data[0].pairstate;
+						});
+				});
+	    		
 	    	})
-	    	
-	    	fetch('/morari/team/findById.controller/{'+ num +"}" , { method: 'POST' }).then(
-					function (response) {
-						if (response.status != 200) {
-							console.log(response.satus);
-							return;
-						}
-						
-						console.log(response);
-
-						response.json().then(function (data) {
-							
-							var input = data.tag;
-							var items = input.split(";");
-							var result = "";
-							for (var i = 0; i < items.length; i++) {
-						    	var parts = items[i].split(":");
-						    	result += parts[0] + "<br>";
-							}
-							result = result.slice(0,-4)
-							
-							console.log(result)
-								
-								var pDay = new Date(data.postdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});
-								var sDay = new Date(data.startdate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
-								var eDay = new Date(data.enddate).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit'});;
-								
-								var pair = "可配對";
-								if (data.pair != 0) {
-									pair = "不可配對"
-								}
-								
-							document.getElementById('title').innerHTML = data.title;
-							document.getElementById('introduction').innerHTML = data.introduction;
-							document.getElementById('postmember').innerHTML = data.userprofiles.uid + "<br>" + pDay;
-							document.getElementById('tag').innerHTML = result;
-							document.getElementById('startday').innerHTML = sDay + "<br><br><br>";
-							document.getElementById('endday').innerHTML = eDay + "<br><br><br>";
-							document.getElementById('acceptablenum').innerHTML = data.acceptablenum;
-							document.getElementById('currentnum').innerHTML = data.currentnum;
-							document.getElementById('camparea').innerHTML = data.camparea;
-							document.getElementById('pair').innerHTML = pair;
-							
-							initiatingUser = data.userprofiles.uid;
-						});
-						
-				});
-	    	
-	    	
-	    	
-	    	fetch('/morari/team/selectMessage.controller/{'+ num +"}" , { method: 'GET' }).then(
-					function (response) {
-						if (response.status != 200) {
-							console.log(response.satus);
-							return;
-						}
-						
-						console.log(response);
-
-						response.json().then(function (data) {
-							
-							var messageData = "";
-								
-							for(let i = 0; i < data.length; i++){
-								if(data[i].userprofiles.uid == user){
-									messageData += '<div class="button"><button type="button" onclick="deleteMessage(' + data[i].messageid + ')">刪除</button></div>'
-								}
-								var pDay = new Date(data[i].postday).toLocaleDateString("zh-TW", {year: 'numeric', month: '2-digit', day: '2-digit', 
-									hour: '2-digit', minute: '2-digit', second: '2-digit'});
-								console.log(pDay);
-								console.log(data[i].userprofiles.uid);
-								console.log(data[i].message);
-								messageData += "<h3>" + data[i].userprofiles.uid + ' 說：</h3><ul calss="room-size">' + data[i].message + '<i class="fa fa-arrow-right"></i>發文時間：' + pDay + "</ul><br>"
-							}
-							
-							document.getElementById('messageview').innerHTML = messageData;
-							
-						});
-						
-				});
 	    	
 	    	
 	    	
@@ -324,12 +351,37 @@
 	    		if(user === initiatingUser){
 	    			window.alert("不可以對自己的表單申請")
 	    			return;
+	    		}else if(limit > 2){
+	    			window.alert("不可向此表單發出申請\n可能是達成了邀請上限，或是遭到發起人永久拒絕")
+	    			return;
+	    		}else if(pair > 0){
+	    			window.alert("本筆揪團已經被接受了，請不要再按了")
+	    			return;
 	    		}
 	    		
+	    		const formData = Array.from(this.elements).reduce(function (data, element) {
+				    data[element.name] = element.value;
+				    return data;
+				}, {});
 	    		
+	    		formData["initiatingnumber"] = num;
+	    		
+	    		const json = JSON.stringify(formData);
+	    		
+	    		fetch('/morari/team/insertApply.controller/' +  user, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: json
+				})
+					.then(function (response) {
+						if (response.status == 200) {
+							window.alert("成功發出申請");
+						}
+				});
 	    		
 			});
-	    	
 	    	
 	    });
 });
@@ -350,7 +402,7 @@ function deleteMessage(dvalue){
 					if (response.status == 200) {
 						location.href = "/morari/team/moreInformation.controller/" + num ;
 					}
-				});
+			});
 
 		}
 }
