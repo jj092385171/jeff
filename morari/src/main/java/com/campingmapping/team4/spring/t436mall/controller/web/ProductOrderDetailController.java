@@ -35,6 +35,7 @@ public class ProductOrderDetailController {
 	public List<ProductOrderDetail> selectAll() {
 		return pODServiceImpl.selectAll();
 	}
+	
 	// 根據訂單編號搜尋所有訂單詳情
 	@GetMapping("/selectAllByPdorderid/{pdorderid}")
 	@ResponseBody
@@ -42,4 +43,5 @@ public class ProductOrderDetailController {
 			@PathVariable String pdorderid) {
 		return pODServiceImpl.selectAllByPdorderid(pdorderid);
 	}
+	
 }

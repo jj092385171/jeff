@@ -161,7 +161,6 @@ public class TeamPageComtroller {
 					teamService.insertThundsup(x, uid);
 					Initiating initiating = teamService.findById(x);
 					initiating.setThumbsUp(initiating.getThumbsUp()+1);
-					teamService.insertThundsup(x, uid);
 				}
 			}
 			

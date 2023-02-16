@@ -10,7 +10,6 @@
     tr {
       border: 2px black solid;
     }
-    
   </style>
 
 </head>
@@ -71,6 +70,9 @@
     var id = url.split("/").pop();
     console.log(id);
     var uid;
+    var productName;
+    var amount;
+    var orderId;
     fetch("/morari/utils/getuid")
       .then(response => response.text())
       .then(datauid => {
@@ -89,7 +91,9 @@
         $(document).ready(function () {
 
           response.json().then(function (n) {
-            console.log(n);
+            productName = n[0].pdname
+            amount = n[0].pdqty
+            orderId = n[0].id
             var tableData =
               "<h3>我的訂單詳情&nbsp;&nbsp;" +
               "<small>   目前擁有<font color='red'>" + n.length + "</font>筆產品</small></h3>" +
@@ -125,8 +129,7 @@
               "</tr>"
               ;
 
-              
-            console.log(n);
+
             for (var i = 0; i < n.length; i++) {
               let a = i + 1;
               let pdallprice = n[i].pdprice * n[i].pdqty;
@@ -147,7 +150,7 @@
               "<a href='/morari/ProductOrder/selectorderbyuseridAction.controller'class='btn btn-danger btn-sm'>返回訂單列表</a>" +
               "<c:if test='${vo.order.status eq 1 }'>" +
               "<button type='button' onclick='pay('${vo.order.id}','${vo.order.money}')' class='btn btn-warning btn-sm'>ECPay</button>" +
-              "<button type='button' onclick='payWeiXin('${vo.order.id}','${vo.order.money}')' class='btn btn-success btn-sm'>LINEPay</button>" +
+              "<button type='button' onclick='payLinepay()' class='btn btn-success btn-sm'>LINEPay</button>" +
               "</c:if>" +
               "</td>" +
               "</tr>";
@@ -171,6 +174,38 @@
       } else {
       }
     }
+    function payLinepay() {
+      // 讀取表格欄位內的資料
+      //       var productName = $("#roomId").text();
+      //       var amount = $("#amount").text();
+      var currency = "TWD";
+      var confirmUrl = "https://localhost:8443/morari/frount_findtemple.controller";
+      //       var orderId = $("#orderId").text();
+
+      // 將資料轉換成JSON格式
+      var jsonData = {
+        "productName": productName,
+        "amount": amount,
+        "currency": currency,
+        "confirmUrl": confirmUrl,
+        "orderId": orderId
+      };
+      console.log(jsonData);
+      // 使用jQuery的ajax()方法將JSON數據發送到後端
+      $.ajax({
+        type: "GET",
+        url: "/frount_orderroomByLinePay",
+        data: { "JsonOrderList": JSON.stringify(jsonData) },
+        contentType: "application/json",
+        dataType: "text",
+        success: function (data) {
+          window.location.href = data;
+        },
+        error: function (error) {
+          // 處理錯誤
+        }
+      });
+    };
   </script>
 
 

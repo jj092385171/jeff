@@ -33,4 +33,6 @@ public class ProductOrderDetailServiceImpl implements ProductOrderDetailService 
 	public List<ProductOrderDetailVo> selectAllByPdorderid(String pdorderid) {
 		return pODDao.findByPdorderid(pdorderid);
 	}
+	
+	
 }
