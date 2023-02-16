@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t436mall.controller.web;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -84,9 +85,8 @@ public class ProductOrderController {
 	// 修改訂單狀態
 	@PutMapping("/updateProductOrderSatusById")
 	@ResponseBody
-	public void updateProductOrderSatusById(@RequestParam String orderStatus,
-			@RequestParam Timestamp newDate, @RequestParam String orderId) {
-		pOServiceImpl.updateProductOrderSatusById(orderStatus, newDate, orderId);
+	public void updateProductOrderSatusById(@RequestParam String odstatus, @RequestParam String orderId) {
+		pOServiceImpl.updateProductOrderSatusById(odstatus, orderId);
 	}
 
 	// 修改訂單出貨地址、收件人、手機號(只有後臺能使用)

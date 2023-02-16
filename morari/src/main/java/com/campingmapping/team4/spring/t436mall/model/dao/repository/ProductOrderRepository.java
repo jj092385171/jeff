@@ -28,7 +28,7 @@ public interface ProductOrderRepository extends	JpaRepository<ProductOrder, Inte
 	// 搜尋所有訂單(只有後臺能使用)
 	// 修改訂單出貨地址、收件人、手機號(只有後臺能使用)
 	@Modifying
-	@Query(value = "update productorder set orderstatus = ?1 newdate = ?2 where id = ?3", nativeQuery = true)
-	public void updateProductOrderSatusById(String orderStatus, Date newDate, String orderId);
+	@Query(value = "update productorder set odstatus = ?1 where id = ?2", nativeQuery = true)
+	public void updateProductOrderSatusById(String odstatus, String orderId);
 
 }
