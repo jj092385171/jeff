@@ -19,4 +19,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 	// 依pdtype來搜尋所有產品
 	@Query(value = "select * from category where pdtype= ?1", nativeQuery = true)
 	public List<Category> findByType(String pdtype);
+	@Query(value = "select * from category where userid= ?1", nativeQuery = true)
+	public List<Category> findByUserID(String userid);
 }

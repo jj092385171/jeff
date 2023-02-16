@@ -1,6 +1,7 @@
 package com.campingmapping.team4.spring.t436mall.controller.web;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,23 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
+import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVo;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.CategoryServiceImpl;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/mall")
 public class MallPageComtroller {
 
+	@Autowired
+	JwtService jwtService;
+	
+	@Autowired
+	private CategoryServiceImpl cServiceImpl;
+	
 	@GetMapping({"", "/"})
 	public String mallIndex() {
 		return "mall/admin/index";
 	}
 
-	@Autowired
-	private CategoryServiceImpl cServiceImpl;
-
 	@GetMapping("/productqueryallmain.controller")
 	public String processQueryAllAction() {
 		return "mall/admin/productindex";
+	}
+	@GetMapping("/productqueryallbyuseridmain.controller")
+	public String processQueryAllByuserIDAction() {
+		return "mall/admin/productindexbyuserID";
 	}
 
 	@GetMapping("/productcreate.controller")
@@ -76,6 +88,13 @@ public class MallPageComtroller {
 	@ResponseBody
 	public List<Category> selectByPdtype(@PathVariable String Pdtype) {
 		return cServiceImpl.selectByType(Pdtype);
+	}
+	
+	@GetMapping("/selectAllByUserId")
+	@ResponseBody
+	public List<Category> selectByUserID(HttpServletRequest request) {
+		UUID uid = jwtService.getUId(request);
+		return cServiceImpl.selectByUserID(uid.toString());
 	}
 
 	// 依Pdid來刪除單筆產品
