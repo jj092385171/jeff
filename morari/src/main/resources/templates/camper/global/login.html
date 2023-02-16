@@ -61,6 +61,10 @@
                                             class="btn btn-github btn-user btn-oauth" id="btn-oauth">
                                             <i class="fab fa-github fa-fw"></i>
                                         </a>
+                                        <a class="btn  btn-user btn-oauth" id="btn-key"
+                                        style="background-color: rgb(210, 156, 57);">
+                                        <i class="fas fa-comment-medical" style="color: white;"></i>
+                                    </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -92,6 +96,12 @@
     <script src="/morari/admin/js/sb-admin-2.min.js"></script>
 
     <script>
+
+let key = document.getElementById("btn-key");
+        key.addEventListener("click", () => {
+            document.getElementById("useremail").value= "eeit56t4@camp.com";
+            document.getElementById("userpassword").value="zxcvzxcvzxcv";
+        });
 
         // 擷取錯誤訊息
         function getUrlParameter(name) {
