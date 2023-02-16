@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderDetail;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/Category")
 public class CategoryController {
 
-	@GetMapping("/frount_orderroomByLinePay")
+	@GetMapping("/paybyline")
 	@ResponseBody
 	public String adasdfasdf(@RequestParam("JsonOrderList") String jsonData) {
 
@@ -30,7 +28,7 @@ public class CategoryController {
 		try {
 			// 建立連接
 			URL url = new URL(
-					"https://sandbox-api-pay.line.me/v2/payments/request%22");
+					"https://sandbox-api-pay.line.me/v2/payments/request");
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
 			// 設置請求方法
@@ -69,7 +67,6 @@ public class CategoryController {
 					e.printStackTrace();
 				}
 			}
-			System.out.println(response.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

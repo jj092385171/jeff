@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campingmapping.team4.spring.t436mall.model.entity.Category;
-import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVo;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.CategoryServiceImpl;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 

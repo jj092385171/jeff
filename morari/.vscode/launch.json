@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CampingmappingApplication<morari>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.campingmapping.team4.spring.CampingmappingApplication",
+            "projectName": "morari",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

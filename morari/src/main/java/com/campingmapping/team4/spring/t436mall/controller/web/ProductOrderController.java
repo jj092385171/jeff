@@ -24,6 +24,8 @@ import com.campingmapping.team4.spring.t436mall.model.service.impl.ProductOrderS
 public class ProductOrderController {
 
 	@Autowired
+	JwtService jwtService;
+	@Autowired
 	private ProductOrderServiceImpl pOServiceImpl;
 
 	@GetMapping("/orderPreview.controller/{id}")
@@ -61,9 +63,10 @@ public class ProductOrderController {
 	}
 
 	// 依userID來搜尋所有訂單
-	@GetMapping("/selectAllByUserId/{userid}")
+	@GetMapping("/selectAllByUserId")
 	@ResponseBody
-	public List<ProductOrder> selectAllByUserId(@PathVariable String userid) {
+	public List<ProductOrder> selectAllByUserId(HttpServletRequest request) {
+		UUID uid = jwtService.getUId(request);
 		return pOServiceImpl.selectAllByUserId(userid);
 	}
 

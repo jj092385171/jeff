@@ -43,7 +43,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 		Date now = new Date();
 		order.setDatetime(now);
 		order.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-		order.setOdstatus("未出貨");
+		order.setOdstatus("未付款");
 		order.setUserid(productcartvorequest.get(0).getUserid());
 		order.setOdrecipient(odrecipient);
 		order.setOdrecipientphone(odrecipientphone);

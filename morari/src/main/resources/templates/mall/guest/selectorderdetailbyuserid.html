@@ -73,6 +73,7 @@
     var productName;
     var amount;
     var orderId;
+    var picimg;
     fetch("/morari/utils/getuid")
       .then(response => response.text())
       .then(datauid => {
@@ -92,8 +93,9 @@
 
           response.json().then(function (n) {
             productName = n[0].pdname
-            amount = n[0].pdqty
+            amount = n[0].pdprice
             orderId = n[0].id
+            picimg = n[0].pdpicture
             var tableData =
               "<h3>我的訂單詳情&nbsp;&nbsp;" +
               "<small>   目前擁有<font color='red'>" + n.length + "</font>筆產品</small></h3>" +
@@ -179,7 +181,7 @@
       //       var productName = $("#roomId").text();
       //       var amount = $("#amount").text();
       var currency = "TWD";
-      var confirmUrl = "https://localhost:8443/morari/frount_findtemple.controller";
+      var confirmUrl = "https://localhost:8443/morari/Category/selectorderbyuseridAction.controller";
       //       var orderId = $("#orderId").text();
 
       // 將資料轉換成JSON格式
@@ -187,6 +189,7 @@
         "productName": productName,
         "amount": amount,
         "currency": currency,
+        "productImageUrl": picimg,
         "confirmUrl": confirmUrl,
         "orderId": orderId
       };
@@ -194,7 +197,7 @@
       // 使用jQuery的ajax()方法將JSON數據發送到後端
       $.ajax({
         type: "GET",
-        url: "/frount_orderroomByLinePay",
+        url: "/morari/Category/paybyline",
         data: { "JsonOrderList": JSON.stringify(jsonData) },
         contentType: "application/json",
         dataType: "text",
