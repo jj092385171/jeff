@@ -16,7 +16,6 @@ import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobReposito
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t424camp.model.dao.repository.CampRepository;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 
 @Service
 @Transactional

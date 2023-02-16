@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.service.JobService;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
-import com.campingmapping.team4.spring.utils.service.JwtService;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 //job職缺(管理者)的後台
 
@@ -27,12 +24,6 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/admin/work")
 public class AdminManagerJobController {
 	
-	@Autowired
-	private HttpServletRequest request;
-
-	@Autowired
-	private JwtService jwtService;
-
 	@Autowired
 	private JobService jService;
 	
