@@ -73,7 +73,6 @@ public class JobService {
 	}
 	// 真 刪除職缺
 	public String trueDeleteById(int rackID) {
-		System.out.println("22222222222222222222222222222222222222");
 //			return "確定刪除嗎?有人針對該職缺投遞履歷！";
 //		jobDao.deleteById(rackID);
 		jobDao.disableForeignKeyConstraints();;

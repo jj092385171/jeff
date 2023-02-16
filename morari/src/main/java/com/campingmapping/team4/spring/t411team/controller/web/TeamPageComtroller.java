@@ -149,7 +149,6 @@ public class TeamPageComtroller {
 				if(selectresult != null) {
 					for (Thundsup thundsup : selectresult) {
 						Integer tid = thundsup.getThundsupid();
-						System.out.println(tid);
 						teamService.deleteThundsup(tid);
 						Initiating initiating = teamService.findById(x);
 						initiating.setThumbsUp(initiating.getThumbsUp()-1);

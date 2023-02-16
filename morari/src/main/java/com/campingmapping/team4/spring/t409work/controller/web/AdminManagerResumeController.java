@@ -78,7 +78,6 @@ public class AdminManagerResumeController {
 	@ResponseBody
 	public List<ResumeBean> processShowResumeAllAction() {
 		List<ResumeBean> result = rService.findAll();
-		System.out.println(result);
 		return result;
 	}
 

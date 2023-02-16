@@ -38,11 +38,11 @@ fetch("/morari/admin/camper/api/userregisterdate")
     });
 
 
-    //   設定前30天的資訊
-
+    //   設定前幾天的資訊
+let howdays= 10;
     let today = new Date();
     let days = [];
-    for (var i = 30; i >= 0; i--) {
+    for (var i = howdays; i >= 0; i--) {
       var d = new Date(today);
       d.setDate(d.getDate() - i);
       var month = d.getMonth() + 1;
@@ -73,7 +73,7 @@ fetch("/morari/admin/camper/api/userregisterdate")
             // 數據標籤(人數，收益...)
             label: "Register",
             // 曲線度，0-1 
-            lineTension: 0.5,
+            lineTension: 0.1,
             // 曲線下方顏色
             backgroundColor: "rgba(78, 115, 223, 0.05)",
             // 曲線的顏色

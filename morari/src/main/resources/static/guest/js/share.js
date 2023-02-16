@@ -51,3 +51,7 @@ fetch("/morari/guest/share/footer.html")
     // 將載入的 HTML 放入 .footer 元素中
     document.querySelector(".footer").innerHTML = html;
   });
+  
+
+  
+  
