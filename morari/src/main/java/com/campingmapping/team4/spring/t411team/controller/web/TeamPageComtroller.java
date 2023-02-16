@@ -42,9 +42,6 @@ public class TeamPageComtroller {
 	@Autowired
 	private teamService teamService;
 	
-	@Autowired
-	private GoogleFileUtil googleFileService;
-	
 	@RequestMapping("/teammanager.controller")
 	public String  processmainAction() {
 		return "team/admin/teammanager";

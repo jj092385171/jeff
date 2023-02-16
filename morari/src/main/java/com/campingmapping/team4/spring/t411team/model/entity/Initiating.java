@@ -3,8 +3,6 @@ package com.campingmapping.team4.spring.t411team.model.entity;
 import java.util.Collection;
 import java.util.Date;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
