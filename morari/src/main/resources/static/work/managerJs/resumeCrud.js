@@ -45,6 +45,11 @@ $(document).ready(function() {
 									data: 'name',
 									title: "姓名",
 									responsivePriority: 5,
+									"render": function (
+										data, type,
+										row, meta) {
+											return "<p class=\"white-space nowrap\">"+data+"</p>"
+										}
 								},
 
 								{

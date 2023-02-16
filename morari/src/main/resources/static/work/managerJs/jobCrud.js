@@ -54,12 +54,22 @@ $(document).ready(function () {
 									data: 'type',
 									title: "類型",
 									responsivePriority: 5,
+									"render": function (
+										data, type,
+										row, meta) {
+											return "<p class=\"white-space nowrap\">"+data+"</p>"
+										}
 								},
 
 								{
 									data: 'job',
 									title: "職缺",
 									responsivePriority: 4,
+									"render": function (
+										data, type,
+										row, meta) {
+											return "<p class=\"white-space nowrap\">"+data+"</p>"
+										}
 								},
 
 								{
@@ -89,7 +99,13 @@ $(document).ready(function () {
 								{
 									data: 'rackup',
 									title: "刊登時間",
+									// 'white-space', 'nowrap'
 									responsivePriority: 10,
+									"render": function (
+										data, type,
+										row, meta) {
+											return "<p class=\"white-space nowrap\">"+data+"</p>"
+										}
 								},
 
 								{
