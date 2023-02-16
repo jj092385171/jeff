@@ -6,7 +6,7 @@
 
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
-
+	<link rel="stylesheet" href="/morari/admin/css/dataTable.css">
 </head>
 
 <body id="page-top" style="display: none">
@@ -30,13 +30,13 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-	<form action="/morari/admin/user/work/startCrud.controller" method="GET"
-		enctype="multipart/form-data">
-		<input type="submit" value="回首頁">
-	</form>
+	
 	<hr>
-		<h3 id="re"></h3>
-		<table id="showInsert"></table>
+		<table id="showResume" class="table is-striped"></table>
+		<form action="/morari/admin/user/work/startCrud.controller" method="GET"
+		enctype="multipart/form-data">
+		<input class="btn btn-success btn-icon-split" type="submit" value="回上一頁">
+	</form>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -77,6 +77,10 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
+     	<!-- datatables js -->
+	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
+	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
+	
     <script src="/morari/work/campJs/campResume.js" defer></script>
     <script type="text/javascript">
 

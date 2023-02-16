@@ -32,7 +32,7 @@ public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
   public void onAuthenticationSuccess(
       HttpServletRequest request, HttpServletResponse response, Authentication authentication)
       throws IOException {
-    // 尋找是哪的服務
+    // 尋找是哪的服務;
     String uri = request.getRequestURI();
     String[] parts = uri.split("/");
     String provider = parts[parts.length - 1];
@@ -42,10 +42,16 @@ public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     OAuth2Request oAuth2Request = attributeMapper.mapToUser(authProvider, oAuth2User.getAttributes());
     // 是否創建帳戶
     // UserProfiles user = authAccountService.createIfFirst(oAuth2Request);
-    authAccountService.createIfFirst(oAuth2Request);
+    UserProfiles userProfiles = authAccountService.createIfFirst(oAuth2Request);
+    if (!(userProfiles.getAccountnonexpired() && userProfiles.getAccountnonlocked() && userProfiles.isEnabled()
+    && userProfiles.isCredentialsNonExpired())) {
+      jwtService.removeToken(response);
+      response.sendRedirect("/morari/login?error=user_not_authorized");
+      return;
+    }
     // 拿取用戶資料
-    UserProfiles userProfiles = getOAuthUser((OAuth2User) authentication.getPrincipal());
-    AuthenticationResponse authenticationResponse = jwtService.generateToken(userProfiles,
+    UserProfiles getuserProfiles = getOAuthUser((OAuth2User) authentication.getPrincipal());
+    AuthenticationResponse authenticationResponse = jwtService.generateToken(getuserProfiles,
         false);
     jwtService.refreshTokenToCookie(response, authenticationResponse);
     // 重新導向

@@ -1,13 +1,13 @@
 // 載入 你的.html
 $(document).ready(function() {
 
-//	let uid;
-//	fetch("/morari/utils/getuid")
-//		.then(response => response.text())
-//		.then(data => {
-//			// console.log(data)
-//			uid = data;
-//		})
+	//	let uid;
+	//	fetch("/morari/utils/getuid")
+	//		.then(response => response.text())
+	//		.then(data => {
+	//			// console.log(data)
+	//			uid = data;
+	//		})
 
 	var url = window.location.href;
 	var id = url.split("/").pop();
@@ -52,6 +52,17 @@ $(document).ready(function() {
 					$("#16").attr('selected', true)
 					break;
 			}
+			switch (data.type) {
+				case '短期工讀':
+					$("#17").attr('selected', true)
+					break;
+				case '長期工作':
+					$("#18").attr('selected', true)
+					break;
+				case '打工換宿':
+					$("#19").attr('selected', true)
+					break;
+			}
 		}
 	});
 	$("#send").click(function() {
@@ -76,29 +87,29 @@ $(document).ready(function() {
 				$('#su').empty("");
 				$('#update').empty("");
 				$('#img').empty("");
-				
+
 				if (response == null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 				} else {
 					var h3 = $('#su');
 					h3.prepend('修改成功');
 					var table = $('#showInsert');
-					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
+					table.append("<tr align='center'><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>類型</th></th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
 
-					console.log("response:" + response);
-					var tr = "<tr align='center'>" +
-						"<td>" + response.userprofiles.uid + "</td>" +
-						"<td>" + response.rackid + "</td>" +
-						"<td>" + response.campname + "</td>" +
-						"<td>" + response.place + "</td>" +
-						"<td>" + response.job + "</td>" +
-						"<td>" + response.salary + "</td>" +
-						"<td>" + response.quantity + "</td>" +
-						"<td>" + response.date + "</td>" +
-						"<td>" + response.time + "</td>" +
-						"<td>" + response.rackup + "</td>" +
-						"<td>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='/morari/src/main/resources/static/images/'" + response.img + "></td>" + "</tr>";
+					var tr = "<tr>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.userprofiles.uid + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.rackid + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.campname + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.place + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.type + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.job + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.salary + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.quantity + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.date + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.time + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.rackup + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.remark + "</td>" +
+						"<td><img width='80' height='80' src='"+ response.img +"'></td>" + "</tr>";
 					table.append(tr);
 					//});
 				}

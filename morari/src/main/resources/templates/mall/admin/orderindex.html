@@ -94,47 +94,58 @@
                     return;
                 }
                 console.log(response);
-                response.json().then(function (n) {
+                var table
+                $(document).ready(function () {
 
-                    $('#result').DataTable({
-                        data: n,
-                        responsive: true,
-                        columns: [
+                    response.json().then(function (n) {
+                        table =
+                            $('#result').DataTable({
+                                data: n,
+                                responsive: true,
+                                columns: [
 
-                            { data: 'id', title: '訂單編號' },
-                            { data: 'userid', title: '用戶ID' },
-                            { data: 'odstatus', title: '出貨狀態' },
-                            { data: 'datetime', title: '訂單成立時間' },
-                            { data: 'money', title: '總金額' },
-                            { data: 'odrecipient', title: '收件人姓名' },
-                            { data: 'odrecipientphone', title: '收件人電話' },
-                            { data: 'odshippingaddress', title: '收件地址' },
+                                    { data: 'id', title: '訂單編號' },
+                                    { data: 'userid', title: '用戶ID' },
+                                    { data: 'odstatus', title: '出貨狀態' },
+                                    { data: 'datetime', title: '訂單成立時間' },
+                                    { data: 'money', title: '總金額' },
+                                    { data: 'odrecipient', title: '收件人姓名' },
+                                    { data: 'odrecipientphone', title: '收件人電話' },
+                                    { data: 'odshippingaddress', title: '收件地址' },
 
-                            {
-                                data: null, title: '查看詳情',
-                                render: function (data, type, row) {
+                                    {
+                                        data: null, title: '查看詳情',
+                                        render: function (data, type, row) {
 
-                                    return "<button id='orderDetail' type='button' value='n[i].id' onclick='orderDetail(\"" + row.id + "\")'>查看詳情</button>";
+                                            return "<button id='orderDetail' type='button' value='n[i].id' onclick='orderDetail(\"" + row.id + "\")'>查看詳情</button>";
+                                        }
+                                    },
+
+
+                                ],
+                                lengthMenu: [5, 10, 15, 20],
+                                language: {
+                                    "lengthMenu": "顯示 _MENU_ 筆資料",
+                                    "info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+                                    "search": "搜尋：",
+                                    "paginate": {
+                                        "next": "下一頁",
+                                        "previous": "上一頁"
+                                    }
                                 }
-                            },
 
+                            });
+                        // 表頭不換行
+                        $('#result thead tr th').css('white-space', 'nowrap');
+                        table.responsive.recalc();
+                        setTimeout(function () {
+                            table.responsive.recalc();
+                        }, 1000);
 
-                        ],
-                        lengthMenu: [5, 10, 15, 20],
-                        language: {
-                            "lengthMenu": "顯示 _MENU_ 筆資料",
-                            "info": "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
-                            "search": "搜尋：",
-                            "paginate": {
-                                "next": "下一頁",
-                                "previous": "上一頁"
-                            }
-                        }
 
                     });
-
-
                 });
+
             });
 
         function orderDetail(id) {

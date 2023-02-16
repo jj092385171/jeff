@@ -6,7 +6,7 @@
 
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
-
+	<link rel="stylesheet" href="/morari/admin/css/dataTable.css">
 </head>
 
 <body id="page-top" style="display: none">
@@ -30,15 +30,15 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
+<div class="long"><b>═══簡歷管理═══</b></div>
 	<div>
-		<h2>履歷(後臺)</h2>
-
-<!-- 		<form action="select.controller" method="POST"> -->
-<!-- 			<input type="submit" value="查詢"> -->
-<!-- 		</form> -->
+		<button id="campId" class="btn btn-success btn-icon-split">
+		<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+		<span class="text">新增簡歷</span></button>
 	</div>
 	<hr>
-
+	<div id="campID"></div>
+	
 	<table id="showResume" class="table is-striped"></table>
 <!--                     <div class="resumeCrud"></div> -->
 

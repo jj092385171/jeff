@@ -6,7 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +27,6 @@ import com.campingmapping.team4.spring.t401member.model.entity.UserDetail;
 import com.campingmapping.team4.spring.t401member.model.entity.UserName;
 import com.campingmapping.team4.spring.t401member.model.entity.UserPrivacy;
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-// import com.campingmapping.team4.spring.t401member.model.entity.UserRoles;
 import com.campingmapping.team4.spring.utils.config.MyConstants;
 
 import jakarta.servlet.http.Cookie;
@@ -66,7 +69,7 @@ public class AuthenticationService {
 					.gender(0)
 					.registerdata(new Date())
 					.subscribed(false)
-					.shot("https://storage.googleapis.com/morari/defaultshot")
+					.shot("https://storage.googleapis.com/morariphoto/defaultshot")
 					.about("暫時沒有留下什麼")
 					.build();
 			UserProfiles userProfiles = UserProfiles.builder()
@@ -76,6 +79,10 @@ public class AuthenticationService {
 					.userdetail(userDetail)
 					.usernames(userName)
 					.userprivacy(userPrivacy)
+					.accountnonexpired(true)
+					.iscredentialsnonexpired(true)
+					.isenabled(true)
+					.accountnonlocked(true)
 					.build();
 			userProfiles.getRoles().add(roleUser);
 			userRepository.save(userProfiles);
@@ -99,7 +106,25 @@ public class AuthenticationService {
 					request.rememberMe());
 			jwtService.refreshTokenToCookie(response, authenticationResponse);
 			return true;
-		} catch (Exception e) {
+		} 
+		catch (LockedException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (AccountExpiredException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (DisabledException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (CredentialsExpiredException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

@@ -2,21 +2,20 @@ package com.campingmapping.team4.spring.t409work.model.entity;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
-import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,22 +23,18 @@ import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-@ToString(exclude = {"resume"})
+@ToString(exclude = {"resumes"})
 @Entity
 @Table(name = "job")
 public class JobBean {
-//	@JsonIgnoreProperties("job")
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="job")//設一個外來建的集合
+	
+	@ManyToMany(mappedBy = "jobs")
 	@JsonIgnore
-	private Collection<ResumeBean> resume;
+	private Collection<ResumeBean> resumes = new HashSet<>();//外來鍵集合
 
 	@ManyToOne
 	@JoinColumn(name = "uid")
 	private UserProfiles userprofiles;// 會員
-	
-//	@ManyToOne
-//	@JoinColumn(name = "camp") // 營區地點、照片
-//	private Camp camp;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +45,8 @@ public class JobBean {
 	private String campname;// 營地名稱
 	@Column(name = "place")
 	private String place;// 地點
+	@Column(name = "type")
+	private String type;// 職缺種類
 	@Column(name = "job")
 	private String job;// 職缺
 	@Column(name = "salary")

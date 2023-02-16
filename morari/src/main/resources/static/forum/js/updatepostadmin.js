@@ -1,3 +1,5 @@
+let postid;
+
 // 載入 你的.html
 fetch("/morari/forum/html/updatepost.html")
 	.then(response => response.text())
@@ -10,7 +12,10 @@ fetch("/morari/forum/html/updatepost.html")
 			// postid
 			let url = window.location.href;
 			let arr = url.split('/');
-			let postid = arr[arr.length - 1];
+			postid = arr[arr.length - 1];
+			
+			var file;
+			var originalPicture;
 		
 			// 修改完成
 			$("#sub").click(function () {
@@ -23,41 +28,63 @@ fetch("/morari/forum/html/updatepost.html")
 						alert("請輸入內容");
 						return;
 					}
-					if ($("#price").val() <= 0) {
-						alert("輸入金額需大於0");
+					if($("#price").val() < 0 || $("#price").val() > 2147483647){
+						alert("輸入金額有誤");
+						return;
+					}
+					if($("#endDate").val() == "" && $("#startDate").val() !== "" || $("#endDate").val() !== "" && $("#startDate").val() == ""){
+						alert("需同時輸入開始露營日期及結束露營日期");
 						return;
 					}
 					if ($("#endDate").val() < $("#startDate").val()) {
 						alert("結束露營日期早於開始露營日期");
 						return;
 					}
-		
-					var params = {
-						"postid": postid,
-						"title": $("#title").val(),
-						"content": $("#postcontent").val(),
-						"people": $("#people").val(),
-						"price": $("#price").val(),
-						"county": $("#county").val(),
-						"startdate": $("#startDate").val(),
-						"enddate": $("#endDate").val(),
-						"score": $("#score").val()
+					
+					// 照片傳到google
+					let formData = new FormData();
+					if(file){
+						formData.append("file" ,file);
+						$.ajax({
+							type:"post",
+							url:"/morari/insertpicture.controller",
+							contentType: false,
+							processData: false,
+							data:formData,
+							success: function(data){
+								update(data);
+							}
+						});
+					}else{
+						update(originalPicture);
 					}
 		
-		
-					$.ajax({
-						type: "put",
-						url: "/morari/updatepost.controller",
-						dataType: "JSON",
-						contentType: "application/json",
-						data: JSON.stringify(params),
-						success: function (data) {
-							if (data == true) {
-								alert("更新成功")
-								window.location.href = "/morari/admin/forum/forumadminindex";
-							}
-						}
-					});
+//					var params = {
+//						"postid": postid,
+//						"title": $("#title").val(),
+//						"content": $("#postcontent").val(),
+//						"people": $("#people").val(),
+//						"price": $("#price").val(),
+//						"county": $("#county").val(),
+//						"startdate": $("#startDate").val(),
+//						"enddate": $("#endDate").val(),
+//						"score": $("#score").val()
+//					}
+//		
+//		
+//					$.ajax({
+//						type: "put",
+//						url: "/morari/updatepost.controller",
+//						dataType: "JSON",
+//						contentType: "application/json",
+//						data: JSON.stringify(params),
+//						success: function (data) {
+//							if (data == true) {
+//								alert("更新成功")
+//								window.location.href = "/morari/admin/forum/forumadminindex";
+//							}
+//						}
+//					});
 				}
 		
 			});
@@ -69,8 +96,9 @@ fetch("/morari/forum/html/updatepost.html")
 				contentType: "application/json",
 				success: function (data) {
 					$("#title").val(data.title);
-		
 					$("#postcontent").val(data.content);
+					$("#picture").attr("src", data.picture);
+					originalPicture = data.picture;
 		
 					var peopleMax = 10;
 					var option = document.createElement("option");
@@ -136,12 +164,55 @@ fetch("/morari/forum/html/updatepost.html")
 					}
 				}
 			});
+			
+			// 更新照片
+			$("#newpicture").change(function(){
+				file = this.files[0];
+				if(file.size > 1000000){
+					alert("照片大小限制1MB，請更換照片");
+					file = "";
+					$("#newpicture").val("");
+					return;
+			    }
+				let reader = new FileReader();
+				reader.onload = function (e) {
+					$("#picture").attr("src", e.target.result);
+				};
+				reader.readAsDataURL(file);
+			});
 		
 		});
 
 	});
 	
+function update(picture){
+	var params = {
+		"postid": postid,
+		"title": $("#title").val(),
+		"content": $("#postcontent").val(),
+		"picture":picture,
+		"people": $("#people").val(),
+		"price": $("#price").val(),
+		"county": $("#county").val(),
+		"startdate": $("#startDate").val(),
+		"enddate": $("#endDate").val(),
+		"score": $("#score").val()
+	}
 
+	$.ajax({
+		type: "put",
+		url: "/morari/updatepost.controller",
+		dataType: "JSON",
+		contentType: "application/json",
+		data: JSON.stringify(params),
+		success: function (data) {
+			if (data == true) {
+				alert("更新成功")
+				window.location.href = "/morari/admin/forum/forumadminindex";
+			}
+		}
+	});
+}
 
 
 

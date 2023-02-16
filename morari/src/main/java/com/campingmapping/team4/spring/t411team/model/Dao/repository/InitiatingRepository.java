@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t411team.model.entity.Initiating;
+import java.lang.Integer;
 
 public interface InitiatingRepository extends JpaRepository<Initiating, Integer> {
 	
@@ -19,4 +20,5 @@ public interface InitiatingRepository extends JpaRepository<Initiating, Integer>
 	public List<Initiating> findByCamparea(String camparea);
 	
 	public List<Initiating> findByUserprofiles(UserProfiles uid);
+	
 }

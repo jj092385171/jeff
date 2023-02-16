@@ -10,24 +10,20 @@ $(document).ready(function() {
 		url: '/morari/admin/resume/selectNumber.controller/' + id,
 		dataType: 'json',
 		success: function(data) {
-			$('#1').val(data.job.rackid);
-			$('#2').val(data.userprofiles.uid);
-			$('#3').val(data.work);
-			$('#4').val(data.name);
-			$('#5').val(data.age);
-			//			$('#6').val(data.gender);
-			$('#7').val(data.mail);
-			$('#8').val(data.phone);
-			$('#9').val(data.educational);
-			$('#10').val(data.experience);
-			$('#11').val(data.ptime);
+			$('#1').val(data.userprofiles.uid);
+			$('#2').val(data.name);
+			$('#3').val(data.age);
+			$('#6').val(data.mail);
+			$('#7').val(data.phone);
+			$('#8').val(data.educational);
+			$('#9').val(data.skill);
 
 			switch (data.gender) {
 				case '男':
-					$("#12").attr('checked', true)
+					$("#4").attr('checked', true)
 					break;
 				case '女':
-					$("#13").attr('checked', true)
+					$("#5").attr('checked', true)
 					break;
 			}
 		}
@@ -52,7 +48,7 @@ $(document).ready(function() {
 				console.log("response:" + response);
 				$('#showInsert').empty("");
 				$('#su').empty("");
-				$('#update').empty("");
+				$('#booking').remove();
 				$('#img').empty("");
 				if (response == null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
@@ -60,22 +56,17 @@ $(document).ready(function() {
 					var h3 = $('#su');
 					h3.prepend('修改成功');
 					var table = $('#showInsert');
-					table.append("<tr><th>刊登編號</th><th>履歷編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th></tr>");
-
+					table.append("<tr align='center'><th>會員編號</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>專業技能</th></tr>");
 
 					var tr = "<tr align='center'>" +
-						"<td>" + response.job.rackid + "</td>" +
-						"<td>" + response.number + "</td>" +
-						"<td>" + response.userprofiles.uid + "</td>" +
-						"<td>" + response.work + "</td>" +
-						"<td>" + response.name + "</td>" +
-						"<td>" + response.age + "</td>" +
-						"<td>" + response.gender + "</td>" +
-						"<td>" + response.mail + "</td>" +
-						"<td>" + response.phone + "</td>" +
-						"<td>" + response.educational + "</td>" +
-						"<td>" + response.experience + "</td>" +
-						"<td>" + response.ptime + "</td>" + "</tr>";
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.userprofiles.uid + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.name + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.age + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.gender + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.mail + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.phone + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.educational + "</td>" +
+						"<td style='border: 1px solid #dddbdb;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.skill + "</td></tr>";
 					table.append(tr);
 				}
 			}

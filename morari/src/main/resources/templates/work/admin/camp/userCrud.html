@@ -6,7 +6,8 @@
 
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
-
+	<link rel="stylesheet" href="/morari/admin/css/dataTable.css">
+	
 </head>
 
 <body id="page-top" style="display: none">
@@ -31,17 +32,16 @@
                 <div class="container-fluid">
 <!-- 這裡 -->
 	<div>
-		<h2>職缺(營主)</h2>
+		<div class="long"><b>═══職缺(營主)═══</b></div>
 		<button id="campId" class="btn btn-success btn-icon-split">
 		<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
 		<span class="text">新增職缺</span></button>
-
-	<table id="campName"></table>
-
 	</div>
-	<hr>
-
-	<table id="showInsert" class="table is-striped"></table>
+	
+	
+	
+	<table id="campName" class="table is-striped"></table>
+	<table id="showAllJob" class="table is-striped"></table>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -87,9 +87,9 @@
 	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
 	
     <script src="/morari/work/campJs/userCrud.js" defer></script>
-    <script type="text/javascript">
-
-	</script>
+    <script type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/609970ed36.js" crossorigin="anonymous"></script>
+	
 
 </body>
 

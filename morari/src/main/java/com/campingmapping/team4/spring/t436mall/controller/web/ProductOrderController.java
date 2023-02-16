@@ -30,12 +30,17 @@ public class ProductOrderController {
 	public String orderPreviewAction() {
 		return "mall/guest/orderPreview";
 	}
-	
+
 	@GetMapping("/AllorderAction.controller")
 	public String AllorderAction() {
 		return "mall/admin/orderindex";
 	}
-	
+
+	@GetMapping("/selectorderbyuseridAction.controller")
+	public String selectorderbyuseridAction() {
+		return "mall/guest/selectorderbyuserid";
+	}
+
 	// 根據購物車新增一筆訂單
 	@PostMapping("/create")
 	@ResponseBody
@@ -47,31 +52,36 @@ public class ProductOrderController {
 		pOServiceImpl.create(productcartvorequest, odrecipient, odrecipientphone, odshippingaddress, money);
 		return "結帳成功";
 	}
+
 	// 依orderID來搜尋單筆訂單
 	@GetMapping("/selectById/{id}")
 	@ResponseBody
 	public List<ProductOrderVo> selectById(@PathVariable String id) {
 		return pOServiceImpl.selectById(id);
 	}
+
 	// 依userID來搜尋所有訂單
 	@GetMapping("/selectAllByUserId/{userid}")
 	@ResponseBody
 	public List<ProductOrder> selectAllByUserId(@PathVariable String userid) {
 		return pOServiceImpl.selectAllByUserId(userid);
 	}
+
 	// 搜尋所有訂單(只有後臺能使用)
 	@GetMapping("/selectAll")
 	@ResponseBody
 	public List<ProductOrder> selectAll() {
 		return pOServiceImpl.selectAll();
 	}
+
 	// 修改訂單狀態
 	@PutMapping("/updateProductOrderSatusById")
 	@ResponseBody
 	public void updateProductOrderSatusById(@RequestParam String orderStatus,
 			@RequestParam Timestamp newDate, @RequestParam String orderId) {
-		pOServiceImpl.updateProductOrderSatusById(orderStatus, newDate,orderId);
+		pOServiceImpl.updateProductOrderSatusById(orderStatus, newDate, orderId);
 	}
+
 	// 修改訂單出貨地址、收件人、手機號(只有後臺能使用)
 	@PutMapping("/updateById")
 	@ResponseBody

@@ -77,6 +77,21 @@ window.onload = function () {
         .then(response => response.json())
         .then(loginstate => {
             if (loginstate) {
+
+                // 查看權限
+                fetch('/morari/admin/camper/api/userroles')
+                    .then(response => response.json())
+                    .then(data => {
+                        // 判斷是否有 SUPERADMIN 或 ADMIN 角色
+                        if (data.some(role => role.authority === 'SUPERADMIN' || role.authority === 'ADMIN')) {
+                            // 顯示編輯按鈕
+                            document.getElementById('edit-button-header').style = '';
+                            let mobile = document.querySelector('.mobile-menu')
+                                mobile.querySelector('.setpage').style = "";
+                            // document.getElementById('edit-button-fotter').style = '';
+                        }
+                    });
+
                 // 登入
                 fetch("/morari/guest/share/loginstate.html")
                     .then(response => response.text())
@@ -89,6 +104,15 @@ window.onload = function () {
                             .then(shotUrl => {
                                 document.querySelector('.userShot').src = shotUrl;
                             })
+                        // 找UID放入href
+                        fetch("/morari/utils/getuid")
+                            .then(response => response.text())
+                            .then(uid => {
+                                document.querySelector('.camperpage a').href = "/morari/camper/" + uid;
+                                let mobile = document.querySelector('.mobile-menu')
+                                mobile.querySelector('.camperpage a').href = "/morari/camper/" + uid;
+                            })
+
                     });
             } else {
                 // 未登入

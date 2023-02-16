@@ -10,8 +10,11 @@ $(document).ready(function() {
 		})
 	var url = window.location.href;
 	var campid = url.split("/").pop();
-	console.log(campid);
 
+	// 一鍵輸入 
+	$("#fastinput").click(function() {
+		fastinport();
+	});
 
 	$.ajax({
 		type: 'POST',
@@ -19,9 +22,9 @@ $(document).ready(function() {
 		dataType: 'json',
 		success: function(data) {
 			$('#1').val(data.campName);
-			$('#2').val(data.city.cityName+data.location);
+			$('#2').val(data.city.cityName + data.location);
 			$('#3').val(data.campPicturesPath);
-		
+
 		}
 	});
 
@@ -52,23 +55,23 @@ $(document).ready(function() {
 					var h3 = $('#su');
 					h3.prepend('新增成功');
 					var table = $('#showInsert');
-					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
+					table.append("<tr align='center'><th>會員編號</th><th>刊登編號</th><th>營區</th><th>地點</th><th>類型</th><th>職缺</th><th>薪資</th><th>人數</th><th>上班日期</th><th>上班時段</th><th>刊登時間</th><th>備註</th><th>照片</th></tr>");
 
 					//$.each(response, function (i,n) { i=index 第幾個 n=element 元素
-					console.log("response:" + response);
-					var tr = "<tr align='center'>" +
-						"<td>" + response.userprofiles.uid + "</td>" +
-						"<td>" + response.rackid + "</td>" +
-						"<td>" + response.campname + "</td>" +
-						"<td>" + response.place + "</td>" +
-						"<td>" + response.job + "</td>" +
-						"<td>" + response.salary + "</td>" +
-						"<td>" + response.quantity + "</td>" +
-						"<td>" + response.date + "</td>" +
-						"<td>" + response.time + "</td>" +
-						"<td>" + response.rackup + "</td>" +
-						"<td>" + response.remark + "</td>" +
-						"<td><img width='80' height='80' src='/morari/src/main/resources/static/images/'"+response.img +"></td>" + "</tr>";
+					var tr = "<tr>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.userprofiles.uid + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.rackid + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.campname + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.place + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.type + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.job + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.salary + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.quantity + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.date + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.time + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.rackup + "</td>" +
+						"<td style='border: 1px solid #f2f2f2;padding: 8px;text-align: center;background-color:#dddbdb'>" + response.remark + "</td>" +
+						"<td><img width='80' height='80' src='" + response.img + "'></td>" + "</tr>";
 					table.append(tr);
 					//});
 				}
@@ -76,3 +79,13 @@ $(document).ready(function() {
 		});
 	});
 });
+function fastinport() {
+	$("#type").val("短期工讀");
+	$("#job").val("櫃台");
+	$("#salary").val("時薪");
+	$("#quantity").val("1");
+	$("#date").val("3月1日");
+	$("#time").val("10-19");
+	$("#remark").val("細心、負責、情緒控管好、英文能力佳");
+
+}

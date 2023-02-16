@@ -5,16 +5,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
-import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobRepository;
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t424camp.model.dao.repository.CampRepository;
@@ -29,8 +26,8 @@ public class JobService {
 
 	@Autowired
 	private UserRepository uDao;
-	
-	@Autowired 
+
+	@Autowired
 	private CampRepository campDao;
 
 	// 秀全部
@@ -60,10 +57,10 @@ public class JobService {
 			jBean.setSalary(jobBean.getSalary());
 			jBean.setTime(jobBean.getTime());
 			jBean.setQuantity(jobBean.getQuantity());
+			jBean.setType(jobBean.getType());
 
 			jBean.setRackup(result.get().getRackup());
 //		        jBean.setUserprofiles(result.get().getUserprofiles().getUid());	        
-			// 使用save更新資料庫中的資料
 			return jobDao.save(jBean);
 		}
 		// 找不到對應的資料
@@ -89,6 +86,11 @@ public class JobService {
 	public List<JobBean> findByJobisLike(String job) {
 		return jobDao.findByJobisLike(job);
 	}
+	
+	// 查職缺類型
+	public List<JobBean> findByTypeisLike(String type) {
+		return jobDao.findByTypeisLike(type);
+	}
 
 	// 透過會員id找資料
 	public List<JobBean> findUid(UUID uid) {
@@ -97,21 +99,23 @@ public class JobService {
 		ArrayList<JobBean> arrayList = new ArrayList<JobBean>(job);
 		return arrayList;
 	}
+
 	// 透過uid搜尋camp的東西
 	public ArrayList<Camp> findUUid(UUID uid) {
 		Collection<Camp> camp = uDao.findById(uid).get().getCamp();
 		ArrayList<Camp> arrayList = new ArrayList<Camp>(camp);
 		return arrayList;
 	}
+
 	// 透過campid搜尋camp的東西
 	public Camp findCampid(Integer campid) {
 		Camp camp = campDao.findById(campid).get();
 		return camp;
 	}
-//	// 透過campName搜尋camp的東西
-//	public Camp findByCampisLike(String campName) {
-//		Camp camp = campDao.findByCampName(campName);
-//		return camp;
-//	}
+
+	// 存履歷到jobs裡
+	public JobBean save(JobBean job) {
+		return jobDao.save(job);
+	}
 
 }

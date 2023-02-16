@@ -1,0 +1,4 @@
+專題期間我負責架設、整合專案以及實作會員的項目，並使用了SpringSecurity結合JWT與OAUTH2.0實現註冊登入權限驗證等功能，也把儲存JWT的COOKIE設置為httponly以及security，也成功在專案中使用HTTPS認證並執行，以增加專案的安全性。除了會員功能外，我也嘗試了前台後台的前端套版，並把頁面分割成各個Component以方便程式維護及控管。
+
+
+bNEKcZB2ab!BB4W

@@ -1,22 +1,34 @@
 package com.campingmapping.team4.spring.t433forum.model.entity;
-// package com.campingmapping.team4.spring.t4_33Forum.model.entity;
 
-// import jakarta.persistence.CascadeType;
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.FetchType;
-// import jakarta.persistence.JoinTable;
-// import jakarta.persistence.ManyToMany;
-// import jakarta.persistence.Table;
-// import lombok.Data;
-// import lombok.NoArgsConstructor;
+import com.campingmapping.team4.spring.t401member.model.entity.UserProfiles;
 
-// @Data
-// @NoArgsConstructor
-// @Entity
-// @Table(name = "voteRecord")
-// public class VoteRecord {
-// @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-// @JoinTable()
-// private Integer optionId;
-// private Integer userId;
-// }
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "voterecord")
+public class VoteRecord {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "voterecordid")
+	private Integer voterecordid;
+	
+	@ManyToOne
+	@JoinColumn(name = "voteoptionid")
+	private VoteOption voteoption;
+	
+	@ManyToOne
+	@JoinColumn(name = "uid")
+	private UserProfiles userprofiles;
+}

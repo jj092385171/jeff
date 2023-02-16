@@ -1,4 +1,12 @@
+let url = window.location.href;
+let arr = url.split('/');
+let postid = arr[arr.length - 1];
 
+let page = 1;
+let commentnumber = 1;
+
+let uid = 1;
+		
 const fetch1 = fetch("/morari/forum/html/showpost.html").then(response => response.text());
 const fetch2 = fetch("/morari/forum/html/showpostcomment.html").then(response => response.text());
 
@@ -8,9 +16,6 @@ Promise.all([fetch1, fetch2]).then(results => {
 	document.querySelector(".showpostcomment").innerHTML = html2;
 	// 執行您的 JS
 	$(document).ready(function () {
-		let url = window.location.href;
-		let arr = url.split('/');
-		let postid = arr[arr.length - 1];
 
 		// 顯示貼文
 		$.ajax({
@@ -18,9 +23,13 @@ Promise.all([fetch1, fetch2]).then(results => {
 			dataType: "JSON",
 			contentType: "application/json",
 			success: function (data) {
+				console.log(data);
 				$("#title").val(data.title);
-
 				$("#content").val(data.content);
+				$("#user").val(data.uid);
+				uid = data.uid;
+				
+				$("#picture").attr("src", data.picture);
 
 				if (data.people > 0) {
 					$("#people").val(data.people);
@@ -61,22 +70,28 @@ Promise.all([fetch1, fetch2]).then(results => {
 
 		// 顯示留言
 		$.ajax({
-			url: "/morari/showpostcommentbypostid.controller/" + postid,
+			url: "/morari/showpostcommentnonhidebypostid.controller/" + postid + "/" + page,
 			dataType: "JSON",
 			contentType: "application/json",
 			success: function (data) {
-				var table = $("#showpostcomment");
 				$.each(data, function (i, n) {
 					// i=index 第幾個 n=element 元素
-					var tr = "<tr>" + "<td>會員ID:" + n.uid + "<br>留言:" + n.postcomment + "<br>" + "</td>" + "</tr>";
-					table.append(tr);
+					var div = "<label># "+ commentnumber +"樓</label><br><input type='text' class='form-control' value='" + n.postcomment + "' style='width: 95%; float: left;' disabled>";
+					div += "<button onclick='reportcomment(" + n.postcommentid + ")' style='float: right;'>檢舉</button><br><br>";
+					$("#showpostcomment").append(div);
+					commentnumber ++;
 				});
+				if(data.length == 3){
+					var more = "<button onclick='showmore()'>顯示更多</button><br><br>";
+					$("#showmore").append(more);
+					page+=1;
+				}
 			}
 		});
 
 		// 檢舉貼文
 		$("#sub").click(function () {
-			if (confirm("是否確定檢舉?")) {
+			if (confirm("是否確定檢舉貼文?")) {
 				$.ajax({
 					type: "put",
 					url: "/morari/reportpost.controller/" + postid,
@@ -147,17 +162,47 @@ Promise.all([fetch1, fetch2]).then(results => {
 	});
 
 	});
+	
+function showcamper(){
+	window.location.href = "/morari/camper/" + uid;
+	console.log(uid);
+}
 
+// 檢舉留言
+function reportcomment(id){
+	if (confirm("是否確定檢舉留言?")) {
+		$.ajax({
+			type: "put",
+			url: "/morari/reportpostcomment.controller/" + id,
+			dataType: "JSON",
+			contentType: "application/json",
+			success: function (data) {
+				if (data == true) {
+					alert("檢舉成功");
+				}
+			}
+		});
+	}
+}	
 
-
-
-
-
-
-
-
-
-
-
-
-
+// 顯示更多留言
+function showmore(){
+	$.ajax({
+		url: "/morari/showpostcommentnonhidebypostid.controller/" + postid + "/" + page,
+		dataType: "JSON",
+		contentType: "application/json",
+		success: function (data) {
+			$.each(data, function (i, n) {
+				// i=index 第幾個 n=element 元素
+				var div = "<label># "+ commentnumber +"樓</label><br><input type='text' class='form-control' value='" + n.postcomment + "' style='width: 95%; float: left;' disabled>";
+				div += "<button onclick='reportcomment(" + n.postcommentid + ")' style='float: right;'>檢舉</button><br><br>";
+				$("#showpostcomment").append(div);
+				commentnumber ++;
+			});
+			if(data.length < 3){
+				$("#showmore").empty("");
+			}
+			page+=1;
+		}
+	});
+}

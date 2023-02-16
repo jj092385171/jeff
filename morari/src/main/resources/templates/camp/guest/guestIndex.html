@@ -19,15 +19,14 @@
     <div id="amenities">
       <div class="container">
         <div class="section-header">
-          <h2>Amenities & Services</h2>
+          <h2 style="color: brown;">═══ 精選營地 ═══</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in mi libero. Quisque convallis,
-            enim at venenatis tincidunt.
+            「Morari」是一個網路平台，致力於統合全台的露營地資訊，提供使用者方便快速的露營地查詢、預約和結帳服務。我們致力於打造一個簡化且優質的使用者體驗，讓露營不再是困難的選擇。體驗一次輕鬆愉快的露營生活，就在「Morari」。
           </p>
         </div>
-        
 
-        <form id="cityform" method="post" >
+
+        <form id="cityform" method="post">
           <table id="citytable"></table>
         </form>
 
@@ -128,13 +127,14 @@
               }
               else if (QueryByCityIDsResult.error == 'none') {
                 $(".row").empty();
-                $('#changeP').empty();
+                $('#changeP').hide();
                 $("#errorcityIDs").append(QueryByCityIDsResult.noData);
                 return;
               }
               else {
                 $(".row").empty();
                 var camprow = $('#camprow');
+                $('#changeP').show();
                 var p = '';
 
                 $.each(QueryByCityIDsResult, function (i, n) {
@@ -199,7 +199,7 @@
         var changetr = '';
         changetr = '<tr id="tr2">'
           + '<td>' + 'Total Pages:' + '<br>' + totalPages + '</td>'
-          + '<td>' + 'Total Orders:' + '<br>' + totalOrders + '</td>'
+          + '<td>' + 'Total Camps:' + '<br>' + totalOrders + '</td>'
           + '<td>' + 'Page:' + '<br>' + buttons + '</td>'
           + '</tr>'
         changeP.append(changetr);

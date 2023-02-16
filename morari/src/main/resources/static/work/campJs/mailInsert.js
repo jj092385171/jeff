@@ -11,7 +11,13 @@ $(document).ready(function() {
 			$('#mail').val(data.mail);
 		}
 	});
-	
+	//文字編譯器
+//	ClassicEditor.create(document.querySelector('#editor'))
+//		.then(editor => {
+//			console.log(editor);
+//		}).catch(error => {
+//			console.error(error);
+//		});
 	$("#sendMail").submit(function(event) {
 		event.preventDefault();
 		$.ajax({
@@ -20,25 +26,14 @@ $(document).ready(function() {
 			data: $(this).serialize(),
 			datatype: 'TEXT',
 			success: function(response) {
-				alert(response);
-				window.location.href  = '/morari/admin/user/work/startCrud.controller';
+				if (confirm("確定寄出嗎?")) {
+					alert(response);
+					window.location.href = '/morari/admin/user/work/startCrud.controller';
+				}
 			}
 		});
 	});
 
-	//	$("#send").click(function() {
-	//		new FormData(document.getElementById("sendMail"));
-	//		$.ajax({
-	//			type: 'post',
-	//			url: '/morari/admin/user/work/userMail.controller',
-	//			contentType: 'application/json',
-	//			data: JSON.stringify(getFormData($("#sendMail"))),
-	//			datatype: 'TEXT',
-	//			success: function(data) {
-	//				alert(data);
-	//				location.reload();
-	//			}
-	//		});
-	//	});
+
 });
 

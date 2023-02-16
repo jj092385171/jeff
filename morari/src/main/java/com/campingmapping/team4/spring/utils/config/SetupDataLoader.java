@@ -40,10 +40,16 @@ public class SetupDataLoader implements
     // private UserRoleRepository userRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @Autowired
     private TagRepository tagRepository;
-    
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
+
     @Autowired
     private CityRepository cityRepository;
 
@@ -56,8 +62,8 @@ public class SetupDataLoader implements
         List<String> roles = Arrays.asList(
                 "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER");
         roles.forEach(r -> createRoleIfNotFound(r));
-        
-        String[] tags = { "大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲"};
+
+        String[] tags = { "大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲" };
         for (int i = 0; i < tags.length; i++) {
             createTagIfNotFound(tags[i]);
         }
@@ -66,6 +72,12 @@ public class SetupDataLoader implements
         for (int i = 0; i < citys.length; i++) {
             createCityIfNotFound(citys[i]);
         }
+
+        List<String> tags = Arrays.asList("大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲");
+        tags.forEach(t -> createTagIfNotFound(t));
+
+        List<String> citys = Arrays.asList("新北", "桃園", "新竹", "苗栗", "南投", "宜蘭", "台東");
+        citys.forEach(c -> createCityIfNotFound(c));
 
         // 檢查有無存在生成超級管理員
         Role adminRole = roleRepository.findByName("SUPERADMIN").get();
@@ -90,7 +102,7 @@ public class SetupDataLoader implements
                 .point(99999999L)
                 .gender(0)
                 .subscribed(false)
-                .shot("https://storage.googleapis.com/morari/adminshot")
+                .shot("https://storage.googleapis.com/morariphoto/adminshot")
                 .about("想幹嘛就幹嘛")
                 .registerdata(new Date())
                 .build();
@@ -104,9 +116,12 @@ public class SetupDataLoader implements
                 userProfiles.setPassword(passwordEncoder.encode(MyConstants.SUPER_ADMIN_PASSWORD));
                 userProfiles.getRoles().clear();
                 userProfiles.getRoles().add(adminRole);
+                userProfiles.setAccountnonexpired(true);
+                userProfiles.setAccountnonlocked(true);
+                userProfiles.setIscredentialsnonexpired(true);
+                userProfiles.setIsenabled(true);
                 userRepository.save(userProfiles);
-                
-                
+
             } else {
                 // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
                 userDetail.setRegisterdata(new Date());
@@ -118,9 +133,14 @@ public class SetupDataLoader implements
                         .userdetail(userDetail)
                         .usernames(userName)
                         .userprivacy(userPrivacy)
+                        .accountnonexpired(true)
+                        .iscredentialsnonexpired(true)
+                        .isenabled(true)
+                        .accountnonlocked(true)
                         .build();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
+
             }
 
         } catch (Exception e) {
@@ -135,7 +155,7 @@ public class SetupDataLoader implements
         return roleRepository.findByName(name)
                 .orElseGet(() -> roleRepository.save(Role.builder().name(name).build()));
     }
-    
+
     @Transactional
     public Tag createTagIfNotFound(String tagName) {
         return tagRepository.findByTagName(tagName)

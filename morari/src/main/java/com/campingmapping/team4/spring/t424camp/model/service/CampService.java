@@ -60,6 +60,11 @@ public class CampService {
 		UserProfiles user = userRepository.findById(uid).get();
 		// orders of user
 		Object[] orders = user.getCampOrder().toArray();
+
+		if(orders.length == 0){
+			return null;
+		}
+
 		int ordersMax = orders.length - 1;
 		int ordersMin = 0;
 		int ranOrdersNum = ordersMin + (int) (Math.random() * (ordersMax - ordersMin + 1));

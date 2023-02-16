@@ -1,6 +1,6 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +30,8 @@ public class AdminCampResumeController {
 	// 透過rackid找資料後給前端
 	@PostMapping("/userResumeRackId.controller/{rackID}")
 	@ResponseBody
-	public List<ResumeBean> processAction4(@PathVariable Integer rackID) {
-		List<ResumeBean> result = rService.findRid(rackID);
-		System.out.println(result);
-		return result;
+	public Collection<ResumeBean> processAction4(@PathVariable Integer rackID) {
+		 Collection<ResumeBean> findRid = rService.findRid(rackID);
+		return findRid;
 	}
 }

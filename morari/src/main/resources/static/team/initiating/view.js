@@ -7,7 +7,6 @@ fetch('view.controller', { method: 'GET' }).then(
 				
 				console.log(response);
 
-
 				response.json().then(function (data) {
 					var optionData= "";
 					

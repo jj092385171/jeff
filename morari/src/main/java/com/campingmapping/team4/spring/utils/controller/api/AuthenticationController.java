@@ -44,11 +44,15 @@ public class AuthenticationController {
 
   @PostMapping("/authenticate")
   public ResponseEntity<Void> authenticate(
-      @RequestBody AuthenticationRequest request, HttpServletResponse response) {
-    if (service.authenticate(request, response)) {
+      @RequestBody AuthenticationRequest request, HttpServletResponse response) throws IOException {
+
+    if (service.authenticate(request, response) == null) {
+      // 被封鎖403
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    } else if (service.authenticate(request, response)) {
       return ResponseEntity.status(HttpStatus.CREATED).build();
     } else {
-      // 驗證失敗
+      // 帳密錯誤401
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
@@ -67,17 +71,6 @@ public class AuthenticationController {
     return service.getroles();
   }
 
-  // @PostMapping("/logout")
-  // public void logout(HttpServletResponse response) throws IOException {
-  // // 處理登出邏輯，例如清除session、Cookie等
-  // Cookie jwtCookie = new Cookie(MyConstants.JWT_COOKIE_NAME, null);
-  // jwtCookie.setPath("/");
-  // jwtCookie.setHttpOnly(true);
-  // jwtCookie.setSecure(true);
-  // response.addCookie(jwtCookie);
-
-  // // 重定向到登入頁面
-  // response.sendRedirect("/morari");
-  // }
+  
 
 }

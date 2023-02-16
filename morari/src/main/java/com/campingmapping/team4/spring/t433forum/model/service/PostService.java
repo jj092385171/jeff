@@ -31,8 +31,26 @@ public class PostService {
 	private JwtService jwtService;
 
 	// 查單一貼文
-	public Post getPostById(Integer id) {
-		return postRepository.findById(id).get();
+	public PostAdmin getPostById(Integer id) {
+		Post post = postRepository.findById(id).get();
+		PostAdmin postAdmin = new PostAdmin();
+		postAdmin.setPostid(post.getPostid());
+		postAdmin.setUid(post.getUserprofiles().getUid());
+		postAdmin.setTitle(post.getTitle());
+		postAdmin.setContent(post.getContent());
+		postAdmin.setPicture(post.getPicture());
+		postAdmin.setPeople(post.getPeople());
+		postAdmin.setPrice(post.getPrice());
+		postAdmin.setCounty(post.getCounty());
+		postAdmin.setStartdate(post.getStartdate());
+		postAdmin.setEnddate(post.getEnddate());
+		postAdmin.setScore(post.getScore());
+		postAdmin.setReleasedate(post.getReleasedate());
+		postAdmin.setUserlike(post.getUserlike());
+		postAdmin.setUserunlike(post.getUserunlike());
+		postAdmin.setPostreport(post.getPostreport());
+		postAdmin.setPosthide(post.getPosthide());
+		return postAdmin;
 	}
 
 	// 查所有貼文
@@ -44,6 +62,7 @@ public class PostService {
 			postAdmin.setUid(post.getUserprofiles().getUid());
 			postAdmin.setTitle(post.getTitle());
 			postAdmin.setContent(post.getContent());
+			postAdmin.setPicture(post.getPicture());
 			postAdmin.setPeople(post.getPeople());
 			postAdmin.setPrice(post.getPrice());
 			postAdmin.setCounty(post.getCounty());
@@ -63,17 +82,17 @@ public class PostService {
 	// 查會員貼文
 	public List<Post> getUserNonHidePost(UUID userId) {
 		UserProfiles uProfiles = userRepository.findById(userId).get();
-		return postRepository.findByUserprofiles(uProfiles);
+		return postRepository.findByUserprofilesOrderByReleasedateDesc(uProfiles);
 	}
 
 	// 查非隱藏貼文
 	public List<Post> getNonHidePost() {
-		return postRepository.findByPosthide(0);
+		return postRepository.findByPosthideOrderByReleasedateDesc(0);
 	}
 
 	// 查隱藏貼文
 	public List<Post> getHidePost() {
-		return postRepository.findByPosthide(1);
+		return postRepository.findByPosthideOrderByReleasedateDesc(1);
 	}
 
 	// 查檢舉貼文

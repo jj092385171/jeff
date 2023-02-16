@@ -29,10 +29,10 @@ server:
 
 spring:
   datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
 # -------------MSSQL------------- 
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
-
+    # url: jdbc:sqlserver://localhost:1433;databaseName=campDB;TrustServerCertificate=True;encrypt=true;
     password: "0000"
     username: sa    
     # password: "q4t7w！z%C&F）J@NcRfUjXn2r5u8x/A？D（G-KaPdSgVkYp3s6v9y$B&E）H@MbQeThWmZq4t7w！z%C*F-JaNdRfUjXn2r5u8x/A？D("
@@ -48,10 +48,11 @@ spring:
       hibernate:
 # -------------MSSQL------------- 
         dialect: org.hibernate.dialect.SQLServer2016Dialect
-        '[allow_update_outside_transaction]': true
-        '[hbm2ddl.auto]': update
-        '[format_sql]': true
-    show-sql: true
+        allow_update_outside_transaction: true
+        format_sql: true
+        hbm2ddl:
+          auto: update
+    # show-sql: true
 # -------------MYSQL-------------
         # dialect: org.hibernate.dialect.MySQL8Dialect
         # '[allow_update_outside_transaction]': true
@@ -91,8 +92,8 @@ spring:
             clientSecret: e67cb760488cc52e98ca8a547922d1d740222db6
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           google:
-            client-id: 611952345376-olh286m5v2e498h8orje59blgkvss6vo.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 134414512944-tboh8b5p2i28prj0hao29qlt9cei62on.apps.googleusercontent.com
+            client-secret: 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
             redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
           facebook:
             clientId: 575077734065145
@@ -101,7 +102,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: camppingmapping@gmail.com
-    password: EEIT56cm
+    password: jexwyiategzwzzor
     port: 587
     protocol: smtp
     properties:
@@ -110,4 +111,7 @@ spring:
           auth: true
           starttls: 
             enable: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
 

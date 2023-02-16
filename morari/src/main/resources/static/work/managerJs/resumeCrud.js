@@ -10,11 +10,20 @@ $(document).ready(function() {
 			uid = data;
 		}).then(() => {
 
+			$("#campId").click(function() {
+
+				$('#campID').empty("");
+				var div = $('#campID');
+				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input class='btn btn-success btn-icon-split 'type='button' value='新增' onclick='submitForm()'></form>";
+				div.append(input);
+			})
+
 			$.ajax({
 				type: 'POST',
 				url: '/morari/admin/resume/resumeShowAll.controller',
 				contentType: 'application/json',
 				success: function(response) {
+					table =
 					$('#showResume').empty("");
 					$('#showResume').DataTable({
 						"data": response,
@@ -24,92 +33,77 @@ $(document).ready(function() {
 								{
 									data: 'number',
 									title: "履歷編號",
-									width: "80px",
+									responsivePriority: 1,
 								},
 								{
 									data: 'userprofiles.uid',
 									title: "會員編號",
-									width: "80px"
-								},
-								{
-									data: 'job.rackid',
-									title: "刊登編號",
-									width: "80px"
-								},
-
-
-								{
-									data: 'work',
-									title: "應徵職缺",
-									width: "80px"
+									responsivePriority: 10,
 								},
 
 								{
 									data: 'name',
 									title: "姓名",
-									width: "100px",
+									responsivePriority: 5,
 								},
 
 								{
 									data: 'age',
 									title: "年次",
-									width: "80px"
+									responsivePriority: 2,
 								},
 
 								{
 									data: 'gender',
 									title: "性別",
-									width: "70px"
+									responsivePriority: 2,
 								},
 
 								{
 									data: 'mail',
 									title: "email",
-									width: "100px"
+									responsivePriority: 6,
 								},
 
 								{
 									data: 'phone',
 									title: "電話",
-									width: "100px"
+									responsivePriority: 4,
 								},
 
 								{
 									data: 'educational',
 									title: "學歷",
-									width: "120px"
+									responsivePriority: 7,
 								},
 
 								{
-									data: 'experience',
-									title: "經歷",
-									width: "130px"
+									data: 'skill',
+									title: "專業技能",
+									responsivePriority: 8,
 								},
 
 								{
-									data: 'ptime',
-									title: "填寫時間",
-									width: "60px"
-								},
-
-								{
+									data: null,
 									title: "修改",
-									width: "80px",
+									responsivePriority: 1,
 									render: function(data, type, row) {
-										return '<button style="border:none;background-color:transparent" id="delete"  onclick="jobUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
-
+										//										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeUpdate(' + row.number + ')"><a href="#" class="btn btn-warning btn-circle"><i class="fas fa-user-edit"></i></a></button>';
+										return '<button class=\"datatable_edit_button\" onclick=\"resumeUpdate(\'' + row.number + '\')\"><i class=\"fas fa-sliders-h\"></i></button>'
 									}
 								},
 								{
+									data: null,
 									title: "刪除",
-									width: "80px",
+									responsivePriority: 1,
 									render: function(data, type, row) {
-										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeDelete(' + row.number + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+										//										return '<button style="border:none;background-color:transparent" id="delete"  onclick="resumeDelete(' + row.number + ')"><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash-alt"></i></a></button>';
+										return '<button class=\"datatable_del_button\"   onclick=\"resumeDelete(\'' + row.number + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
 									}
 								},
 
 							],
-
+						"responsive": true,
 						lengthMenu: [5, 10, 15, 20],
 						language: {
 							"lengthMenu": "顯示_MENU_ 筆資料",
@@ -121,6 +115,12 @@ $(document).ready(function() {
 							}
 						}
 					});
+					// 表頭不換行
+					$('#showAll_wrapper thead tr th').css('white-space', 'nowrap');
+					table.responsive.recalc();
+					setTimeout(function () {
+						table.responsive.recalc();
+					}, 500);
 				}
 			});
 		});
@@ -141,11 +141,32 @@ function resumeDelete(number) {
 	}
 };
 
-function jobUpdate(number) {
+function resumeUpdate(number) {
 	window.location.href = '/morari/admin/resume/update.controller/' + number
 
 };
 
+// 新增履歷 透過會員編號確定是否有無寫過
+function submitForm() {
+	var input1 = document.getElementById("uuid").value;
+	$.ajax({
+		type: 'POST',
+		url: '/morari/admin/resume/resumeSelectUid.controller/' + input1,
+		contentType: 'application/json',
+		success: function(data) {
+
+			if (data == null || data.length == 0) {
+
+				window.location.href = '/morari/admin/resume/startResumeInsert.controller/' + input1
+
+			} else {
+				alert("該會員已填寫過履歷");
+			}
+
+		}
+	});
+
+}
 
 
 
