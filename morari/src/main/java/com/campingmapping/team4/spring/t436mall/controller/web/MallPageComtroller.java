@@ -64,7 +64,6 @@ public class MallPageComtroller {
 	@PostMapping("/create.controller")
 	@ResponseBody
 	public String create(@RequestBody Category category) {
-		System.out.println(category.getPdid());
 		cServiceImpl.create(category);
 		return "insert ok!!";
 	}

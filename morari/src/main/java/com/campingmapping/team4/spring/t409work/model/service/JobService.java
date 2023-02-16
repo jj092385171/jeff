@@ -46,7 +46,6 @@ public class JobService {
 
 	// 改職缺內容
 	public JobBean updateJob(JobBean jobBean, Integer rackid) {
-		System.out.println(rackid);
 		Optional<JobBean> result = jobDao.findById(rackid);
 		if (result.isPresent()) {
 			JobBean jBean = result.get();

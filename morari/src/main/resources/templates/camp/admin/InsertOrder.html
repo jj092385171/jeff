@@ -110,7 +110,6 @@
                         nums.push(num);
                     });
                     let div = $('#div').find('input[name="goingdate"]')
-                    console.log(div)
                     let goingdate = $($('#div').find('input[name="goingdate"]').get(0)).val();
                     let leavingdate = $($('#div').find('input[name="leavingdate"]').get(0)).val();
 
@@ -134,7 +133,6 @@
                             $("#errordate").empty();
                             $("#errornone").empty();
 
-                            console.log(after)
                             if (after.error == 'true') {
                                 $(".errorsiteID").append(after.siteIds);
                                 $(".errornumbers").append(after.nums);

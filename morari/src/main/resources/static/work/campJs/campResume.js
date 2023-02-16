@@ -2,12 +2,10 @@
 $(document).ready(function() {
 	var url = window.location.href;
 	var rackid = url.split("/").pop();
-	console.log(rackid);
 	let uid;
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
 		.then(data => {
-			// console.log(data)
 			uid = data;
 		}).then(() => {
 			$.ajax({

@@ -23,7 +23,6 @@ Promise.all([fetch1, fetch2]).then(results => {
 			dataType: "JSON",
 			contentType: "application/json",
 			success: function (data) {
-				console.log(data);
 				$("#title").val(data.title);
 				$("#content").val(data.content);
 				$("#user").val(data.uid);
@@ -165,7 +164,6 @@ Promise.all([fetch1, fetch2]).then(results => {
 	
 function showcamper(){
 	window.location.href = "/morari/camper/" + uid;
-	console.log(uid);
 }
 
 // 檢舉留言

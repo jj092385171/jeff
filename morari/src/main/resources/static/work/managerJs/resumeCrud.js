@@ -119,6 +119,7 @@ $(document).ready(function() {
 					$('#showResume thead tr th').css('white-space', 'nowrap');
 					table.responsive.recalc();
 					setTimeout(function () {
+						
 						table.responsive.recalc();
 					}, 500);
 				}

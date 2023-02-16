@@ -142,13 +142,9 @@ public class TeamPageComtroller {
 	public String thumbsUp(@RequestBody @Nullable String[] arr,@PathVariable UUID uid) {
 		int x;
 		for(int i = 0; i < arr.length; i++) {
-			System.out.println("我要按讚");
-			System.out.println(uid);
 			x = Integer.valueOf(arr[i]);
-			System.out.println(x);
 			if (x < 0) {
 				x = 0-x;
-				System.out.println(x);
 				List<Thundsup> selectresult = teamService.selectThundsup(x, uid);
 				if(selectresult != null) {
 					for (Thundsup thundsup : selectresult) {
@@ -160,7 +156,6 @@ public class TeamPageComtroller {
 					}
 				}
 			}else {
-				System.out.println(x);
 				List<Thundsup> selectresult = teamService.selectThundsup(x, uid);
 				if (selectresult == null) {
 					teamService.insertThundsup(x, uid);
@@ -170,10 +165,8 @@ public class TeamPageComtroller {
 				}
 			}
 			
-			System.out.println("完成一圈");
 		}
 		
-		System.out.println("按讚成功");
 		return "ok";
 	}
 	

@@ -80,7 +80,6 @@ function getuservalue() {
         shot: document.getElementById("shot").value,
         about: document.getElementById("about").value,
     };
-    console.log(data)
     fetch("/morari/guest/camper/api/userdetail/" + uid, {
         method: "PUT",
         headers: {
@@ -89,7 +88,6 @@ function getuservalue() {
         body: JSON.stringify(data)
     })
         .then(response => {
-            console.log(response.status)
             if (response.status == 200) {
                 alert('修改成功');
                 window.location.reload();

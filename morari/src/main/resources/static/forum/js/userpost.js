@@ -10,7 +10,6 @@ $(function () {
 				dataType: "JSON",
 				contentType: "application/json",
 				success: function (data) {
-					console.log(data);
 					if(data.length != 0){
 						var div = "<div id='rooms'><div class='row'>";
 						$.each(data, function (i, n) {

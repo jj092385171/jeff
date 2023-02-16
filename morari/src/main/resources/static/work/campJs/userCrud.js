@@ -17,7 +17,6 @@ $(document).ready(function() {
 					url: '/morari/admin/user/work/selectUUid.controller/' + uid,
 					contentType: 'application/json',
 					success: function(data) {
-						console.log(data);
 						$.each(data, function(i, n) {
 							var table = $('#campName');
 							var tr = "<tr align='center'>" +

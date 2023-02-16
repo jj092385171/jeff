@@ -112,7 +112,6 @@ function selectJob(job) {
 };
 function selectType(type) {
 	
-	console.log(type);
 	$.ajax({
 		type: 'POST',
 		url: '/morari/guest/work/selectTypeLike.controller/' + type,

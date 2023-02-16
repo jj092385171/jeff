@@ -25,7 +25,6 @@
 					table.append("<tr><th>刊登編號</th><th>履歷編號</th><th>會員編號</th><th>應徵職缺</th><th>姓名</th><th>年次</th><th>性別</th><th>email</th><th>電話</th><th>學歷</th><th>經歷</th><th>填寫時間</th><th></th></tr>");
 
 					$.each(data, function (i, n) {
-						console.log("data:" + data);
 						var tr = "<tr align='center'>" + 
 						"<td>" + n.job.rackid + "</td>" +
     					"<td>" + n.number + "</td>" +
@@ -55,7 +54,6 @@
 				success: function (data) {
 					$('#showInsert').empty("");
 					$('#su').empty("");
-					console.log("data:"+data);
 					
 					if (data.length == 0||data==null) {
 						$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");

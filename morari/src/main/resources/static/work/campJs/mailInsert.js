@@ -2,7 +2,6 @@
 $(document).ready(function() {
 	var url = window.location.href;
 	var id = url.split("/").pop();
-	console.log(id);
 
 	// 一鍵輸入 
 	$("#fastinput").click(function() {
