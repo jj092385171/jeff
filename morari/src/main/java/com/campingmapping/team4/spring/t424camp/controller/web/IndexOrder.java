@@ -54,19 +54,11 @@ public class IndexOrder {
 		if (page == null) {
 			page = 1;
 		}
-<<<<<<< HEAD
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		int pageSize = 3;
-		Pageable pageable = PageRequest.of(page-1, pageSize);
-=======
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		int pageSize = 3;
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
->>>>>>> origin/36
 		Page<Order> pageList = orderService.getByPage(pageable);
 		List<Order> orderList = pageList.getContent();
 		map.put("orderList", orderList);

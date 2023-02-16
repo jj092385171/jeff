@@ -51,7 +51,7 @@ public class AdminManagerJobController {
 	}
 
 	// 啟動select
-	@PostMapping("/select.controller")
+	@PostMapping("/select.controller/{uid}")
 	public String processMainAction3() {
 		return "work/admin/manager/jobSelect";
 	}
@@ -65,10 +65,10 @@ public class AdminManagerJobController {
 
 	
 	// 新增職缺
-	@PostMapping("/jobInsert.controller")
+	@PostMapping("/jobInsert.controller/{uid}")
 	@ResponseBody
-	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
-		UUID uid = jwtService.getUId(request);
+	public JobBean processInsertAction2(@RequestBody JobBean jobBean,@PathVariable("uid") UUID uid) {
+//		UUID uid = jwtService.getUId(request);
 		JobBean insert = jService.insert(jobBean, uid);
 		return insert;
 	}

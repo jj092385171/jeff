@@ -41,8 +41,6 @@ public class SetupDataLoader implements
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-<<<<<<< HEAD
-=======
     @Autowired
     private TagRepository tagRepository;
 
@@ -50,7 +48,6 @@ public class SetupDataLoader implements
     private CityRepository cityRepository;
 
 
->>>>>>> origin/36
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -60,8 +57,6 @@ public class SetupDataLoader implements
         List<String> roles = Arrays.asList(
                 "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER","COMPANY");
         roles.forEach(r -> createRoleIfNotFound(r));
-<<<<<<< HEAD
-=======
 
         String[] tags = { "大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲" };
         for (int i = 0; i < tags.length; i++) {
@@ -72,7 +67,6 @@ public class SetupDataLoader implements
         for (int i = 0; i < citys.length; i++) {
             createCityIfNotFound(citys[i]);
         }
->>>>>>> origin/36
 
 
         // 檢查有無存在生成超級管理員
@@ -136,10 +130,7 @@ public class SetupDataLoader implements
                         .build();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/36
             }
 
         } catch (Exception e) {
@@ -154,11 +145,7 @@ public class SetupDataLoader implements
         return roleRepository.findByName(name)
                 .orElseGet(() -> roleRepository.save(Role.builder().name(name).build()));
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> origin/36
     @Transactional
     public Tag createTagIfNotFound(String tagName) {
         return tagRepository.findByTagName(tagName)
