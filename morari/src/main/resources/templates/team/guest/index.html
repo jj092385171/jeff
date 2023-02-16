@@ -154,7 +154,7 @@
 											'<div class="row">' +
 											'<div  class="col-md-6">' +
 											'<div class="room-img">' +
-											'<img src="' + data[i].picture + '"' + ' width="100%" height="50%">' +
+											'<img src="' + data[i].picture + '" width="100%" height="50%">' +
 											"</div>" +
 											"</div>" +
 											'<div class="col-md-6">' +
@@ -201,7 +201,9 @@
 											for (let i = 0; i < thup.length; i++) {
 
 												for (let j = 0; j < data.length; j++) {
-
+													if (Number(thup[i].id) == data[j].initiating.initiatingnum) {
+														thup[i].style.backgroundColor = "yellow";
+													}
 												}
 
 											}
@@ -354,7 +356,7 @@
 								'<div class="row">' +
 								'<div  class="col-md-6">' +
 								'<div class="room-img">' +
-								'<img src="' + data[i].picture + '">' +
+								'<img src="' + data[i].picture + '" width="100%" height="50%">' +
 								"</div>" +
 								"</div>" +
 								'<div class="col-md-6">' +
