@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t411team.controller.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -72,6 +73,7 @@ public class TeamPageComtroller {
 		return view.getContent();
 	}
 	
+	//修改Initiating
 	@PostMapping("/insertMaterial.controller/{uid}")
 	@ResponseBody
 	public String insert(@RequestBody Initiating i , @PathVariable UUID uid) {
@@ -79,6 +81,7 @@ public class TeamPageComtroller {
 		return "Insert OK";
 	}
 	
+	//刪除Initiating
 	@DeleteMapping("/delete.controller/{id}")
 	@ResponseBody
 	public String delete(@PathVariable("id") String id) {
@@ -179,15 +182,16 @@ public class TeamPageComtroller {
 	@GetMapping("/moreInformation.controller/{num}")
 	public String moreinformation(@PathVariable Integer num) {
 		Initiating i = teamService.findById(num);
-		i.setViewingCount(i.getViewingCount()+1);
+		int viewingCount1 = i.getViewingCount();
+		i.setViewingCount(viewingCount1+1);
 		teamService.ThumbsUp(i);
 		return "team/guest/initiatingform";
 	}
 	
 	//可以用來當user前端跳轉，可調整
-	@GetMapping("/apply.controller/{num}")
-	public String apply(@PathVariable Integer num) {
-		return "team/guest/apply";
+	@GetMapping("/apply.controller")
+	public String apply() {
+		return "team/guest/apply2";
 	}
 	
 	//顯示本人留言
@@ -217,8 +221,20 @@ public class TeamPageComtroller {
 	//新增申請表單
 	@PostMapping("/insertApply.controller/{uid}")
 	@ResponseBody
-	public String insertApply(@RequestBody Apply a,@PathVariable UUID uuid) {
-		teamService.insertApply(uuid, a);
+	public String insertApply(@RequestBody Apply a,@PathVariable UUID uid) {
+		List<Apply> aList = teamService.findByUserAndInitiatingnum(uid, a);
+		if(aList != null) {
+			for (Apply apply : aList) {
+				Apply a2 = teamService.findByAid(apply.getApplyid());
+				a2.setApplypeople(a.getApplypeople());
+				a2.setApplymessage(a.getApplymessage());
+				a2.setResponsestate(0);
+				a2.setLimit(a2.getLimit()+1);
+				teamService.updateApply(a2);
+				return "apply OK";
+			}
+		}
+		teamService.insertApply(uid, a);
 		return "apply OK";
 	}
 	
@@ -236,10 +252,61 @@ public class TeamPageComtroller {
 		return teamService.findApplyResponseByUser(uid);
 	}
 	
+	//查看了收到回覆的申請清單
+	@PostMapping("overViewApplyResponse.controller/{uid}")
+	@ResponseBody
+	public String overViewApplyResponse(@PathVariable UUID uid) {
+		List<Apply> aList = teamService.findApplyResponseByUser(uid);
+		for (Apply apply : aList) {
+			Apply a = teamService.findByAid(apply.getApplyid());
+			a.setResponsestate(a.getResponsestate()+1);
+			teamService.updateApply(a);
+		}
+		return "view Over";
+	}
+	
+	//接受申請的表單
+	@PostMapping("acceptApply.controller/{aid}")
+	@ResponseBody
+	public String acceptApply(@PathVariable String aid) {
+		Apply a = teamService.findByAid(Integer.valueOf(aid));
+		teamService.acceptApply(a);
+		return "accept OK";
+	}
+	
+	//拒絕申請的表單
+	@PostMapping("/reject.controller/{aid}")
+	@ResponseBody
+	public String rejectApply(@PathVariable String aid) {
+		Apply a = teamService.findByAid(Integer.valueOf(aid));
+		teamService.rejectApply(a);
+		return "reject OK";
+	}
+	
+	//永久拒絕申請的表單
+	@PostMapping("/permanentreject.controller/{aid}")
+	@ResponseBody
+	public String permanentrejectApply(@PathVariable String aid) {
+		Apply a = teamService.findByAid(Integer.valueOf(aid));
+		teamService.permanentrejectApply(a);
+		return "permanentreject OK";
+	}
+	
+	//查看自己是否可以發出申請
+	@PostMapping("/findApplyByUserAndInitiatingnum.controller/{uid}/{num}")
+	@ResponseBody
+	public List<Apply> findApplyByUserAndInitiatingnum(@PathVariable UUID uid,@PathVariable String num){
+		Apply a = new Apply();
+		a.setInitiatingnumber(Integer.valueOf(num));
+		return teamService.findByUserAndInitiatingnum(uid, a);
+	}
+	
 	//回傳img的google位址
-	@PostMapping("/getGoogledriveSrc.controller")
-	public String getGoogledriveSrc(@RequestParam MultipartFile file) {
-		return null;
+	@PostMapping("/uploadpicturetogoogle.controller")
+	@ResponseBody
+	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+		String fileName="pd"+UUID.randomUUID().toString();
+		return GoogleFileUtil.uploadFile(fileName,file);
 	}
 
 }

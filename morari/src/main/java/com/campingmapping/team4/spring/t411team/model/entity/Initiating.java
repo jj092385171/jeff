@@ -96,7 +96,7 @@ public class Initiating {
 	@Column(name = "applycount")
 	private int applycount;
 	
-	@Transient
-	private String img;
+	@Column(name = "picture")
+	private String picture;
 
 }

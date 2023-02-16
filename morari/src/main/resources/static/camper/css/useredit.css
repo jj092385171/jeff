@@ -34,3 +34,6 @@
         /* box-shadow: 0.5px 0.5px 1px #000; */
         background-color: rgb(143, 83, 83);
     }
+#usereditform input {
+    color: #000;
+}
