@@ -19,7 +19,7 @@ public class GetUidWebController {
     @GetMapping("/utils/getuid")
     public String getUidWeb() {
 
-        return jwtService.getUId(request).toString();
+        return jwtService.getStringUId(request);
     }
 
 }

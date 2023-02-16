@@ -2,10 +2,8 @@
 fetch('/morari/mall/selectAllPd', { method: 'GET' }).then(
 			function (response) {
 				if (response.status != 200) {
-					console.log(response.satus);
 					return;
 				}
-				console.log(response);
 				response.json().then(function (n) {
 					var tableData = 
 						"<th>產品編號</th>"+"<th>產品名稱</th>"+

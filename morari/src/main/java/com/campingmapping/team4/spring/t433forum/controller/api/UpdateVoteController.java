@@ -44,9 +44,7 @@ public class UpdateVoteController {
 	// 抽獎
 	@PutMapping("/updatewinner.controller/{voteid}")
 	public Boolean updateWinner(@PathVariable Integer voteid) {
-		System.out.println(voteid);
 		Vote vote = voteRecordService.updateWinner(voteid);
-		System.out.println(vote);
 		if(vote != null) {
 			String email = vote.getWinner().getEmail();
 			String title = "morari恭喜你中獎";

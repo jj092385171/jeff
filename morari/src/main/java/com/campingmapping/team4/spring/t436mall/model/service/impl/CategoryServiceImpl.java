@@ -60,6 +60,13 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> selectByType(String pdtype) {
 		return cDao.findByType(pdtype);
 	}
+	
+	@Override
+	public List<Category> selectByUserID(String userid) {
+		return cDao.findByUserID(userid);
+	}
+	
+	
 	// 根據購買減少庫存
 	@Override
 	public void updateBuy(List<Category> category) {

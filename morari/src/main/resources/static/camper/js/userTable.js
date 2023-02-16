@@ -434,7 +434,6 @@ function getuservalue() {
 		body: JSON.stringify(data)
 	})
 		.then(response => {
-			console.log(response.status)
 			if (response.status == 200) {
 				alert('修改成功');
 				window.location.reload();
@@ -456,7 +455,6 @@ function accountlocked(index) {
 		body: accountnonlocked
 	})
 		.then(response => {
-			console.log(response.status)
 			if (response.status == 200) {
 				alert('修改成功');
 				window.location.reload();
@@ -478,7 +476,6 @@ function enabled(index) {
 		body: isenabled
 	})
 		.then(response => {
-			console.log(response.status)
 			if (response.status == 200) {
 				alert('修改成功');
 				window.location.reload();

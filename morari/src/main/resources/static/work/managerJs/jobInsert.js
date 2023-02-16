@@ -27,7 +27,6 @@ $(document).ready(function() {
 	$("#send").click(function() {
 
 //  var uid =document.getElementById('uid')
- console.log(uid);
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();
 			var indexed_array = {};

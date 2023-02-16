@@ -3,7 +3,6 @@
 $(document).ready(function() {
 	var url = window.location.href;
 	var id = url.split("/").pop();
-	console.log(id);
 
 	$.ajax({
 		type: 'POST',
@@ -36,7 +35,6 @@ $(document).ready(function() {
 			$.map(unindexed_array, function(n, i) {
 				indexed_array[n['name']] = n['value'];
 			});
-			console.log(indexed_array);
 			return indexed_array;
 		}
 		$.ajax({
@@ -45,7 +43,6 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(getFormData($("#update"))),
 			success: function(response) {
-				console.log("response:" + response);
 				$('#showInsert').empty("");
 				$('#su').empty("");
 				$('#booking').remove();

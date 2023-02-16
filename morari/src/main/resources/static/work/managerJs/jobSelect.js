@@ -8,7 +8,6 @@ function selectJob(job) {
 				$('#showInsert').empty("");
 				$('#su').empty("");
 				
-					console.log(data);
 				if (data.length == 0||data== null) {
 					$('table').prepend("<tr><td colspan='2'>暫無資料</td></tr>");
 				} else {
@@ -18,7 +17,6 @@ function selectJob(job) {
 					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
 
 					$.each(data, function (i, n) {
-						console.log("data:" + data);
 						var tr = "<tr align='center'>" + 
 						"<td>" + n.userprofiles.uid + "</td>" + 
 						"<td>" + n.rackid + "</td>" +
@@ -40,7 +38,6 @@ function selectJob(job) {
 		});
 	};
 	function selectUid(uid) {
-		console.log(uid);
 		$.ajax({
 			type:'POST',
 			url: '/morari/admin/work/selectUid.controller/'+uid,
@@ -60,7 +57,6 @@ function selectJob(job) {
 					table.append("<tr><th>會員編號</th><th>刊登編號</th><th>刊登時間</th><th>職缺</th><th>薪資</th><th>人數</th><th>地點</th><th>可上班日期</th><th>可上班時段</th><th>備註</th><th>照片</th><th></th></tr>");
 
 					$.each(data, function (i, n) {
-						console.log("data:" + data);
 						var tr = "<tr align='center'>" + 
 						"<td>" + n.userprofiles.uid + "</td>" + 
 						"<td>" + n.rackid + "</td>" +

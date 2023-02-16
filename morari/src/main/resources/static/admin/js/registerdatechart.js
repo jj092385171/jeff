@@ -60,8 +60,7 @@ fetch("/morari/admin/camper/api/userregisterdate")
       Xlabels.push(date);
       values.push(count);
     }
-    console.log(Xlabels)
-    console.log(values)
+   
 
     // Area Chart Example
     var ctx = document.getElementById("registerdate");

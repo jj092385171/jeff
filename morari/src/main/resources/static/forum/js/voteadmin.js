@@ -106,7 +106,6 @@ function lottery(id){
 
 function changevoting(id) {
 	let selectedValue = $("#changevotingid" + id).val();
-	console.log(selectedValue);
 	if (selectedValue == 2) {
 		if (confirm("是否要結束投票?")) {
 

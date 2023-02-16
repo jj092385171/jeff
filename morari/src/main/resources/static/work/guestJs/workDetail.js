@@ -12,7 +12,6 @@ $(document).ready(function() {
 	fetch("/morari/utils/getuid")
 		.then(response => response.text())
 		.then(data => {
-			// console.log(data)
 			uid = data;
 		})
 	var url = window.location.href;
@@ -74,7 +73,6 @@ function mailResume(rackid) {
 		url: '/morari/guest/work/applyJob.controller/' + uid + '/' + rackid,
 		dataType: 'TEXT',
 		success: function(data) {
-			console.log(data);
 			if (data == 'false') {
 				if (confirm("尚未填寫履歷！是否要前往填寫？")) {
 					window.location.href = '/morari/guest/work/startResumeInsert.controller';

@@ -8,10 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class GoogleFileUtil {
-    public static void main(String[] args) throws IOException {
-        String filepath = uploadFile("finger", "ryantestpicture");
-        System.out.println("公开访问地址是：：：：" + filepath);
-    }
+    // public static void main(String[] args) throws IOException {
+    //     String filepath = uploadFile("finger", "ryantestpicture");
+    //     System.out.println("公开访问地址是：：：：" + filepath);
+    // }
 
     public static String uploadFile(String fileName,String bucketName) throws IOException {
         //要上传的本地文件的绝对路径

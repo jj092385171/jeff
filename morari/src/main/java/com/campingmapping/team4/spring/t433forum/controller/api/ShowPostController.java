@@ -40,13 +40,19 @@ public class ShowPostController {
 	// 查會員貼文
 	@GetMapping("/showpostbyuserid.controller/{userid}")
 	public List<Post> processShowPostByUserId(@PathVariable(name = "userid") UUID userId) {
-		return postService.getUserNonHidePost(userId);
+		return postService.getUserPost(userId);
 	}
 
 	// 查非隱藏貼文
 	@GetMapping("/shownonhidepost.controller")
 	public List<Post> processShowNonHidePost() {
 		return postService.getNonHidePost();
+	}
+	
+	// 查會員非隱藏貼文
+	@GetMapping("/showpostnonhidebyuserid.controller/{userid}")
+	public List<Post> processShowPostNonHideByUserId(@PathVariable(name = "userid") UUID userId) {
+		return postService.getUserNonHidePost(userId);
 	}
 
 	// 查隱藏貼文

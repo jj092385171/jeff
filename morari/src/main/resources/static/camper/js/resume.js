@@ -16,7 +16,6 @@ $(document).ready(function () {
 				url: '/morari/guest/work/guestSelectResume.controller/' + uid,
 				contentType: 'application/json',
 				success: function (data) {
-					console.log(data);
 					if (data == null || data.length == 0) {
 						$('#booking').remove();
 						var table = $('#items');

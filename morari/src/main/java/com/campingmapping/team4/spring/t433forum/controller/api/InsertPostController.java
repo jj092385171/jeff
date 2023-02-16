@@ -48,7 +48,6 @@ public class InsertPostController {
 	// 新增照片
 	@PostMapping("/insertpicture.controller")
 	public static String insertPicture(@RequestBody MultipartFile file) {
-		System.out.println(file);
 		String fileName = "post" + UUID.randomUUID().toString();
 		try {
 			return GoogleFileUtil.uploadFile(fileName, file);

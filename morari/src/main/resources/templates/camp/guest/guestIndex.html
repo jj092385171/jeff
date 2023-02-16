@@ -126,13 +126,13 @@
                 return;
               }
               else if (QueryByCityIDsResult.error == 'none') {
-                $(".row").empty();
+                $("#camprow").empty();
                 $('#changeP').hide();
                 $("#errorcityIDs").append(QueryByCityIDsResult.noData);
                 return;
               }
               else {
-                $(".row").empty();
+                $("#camprow").empty();
                 var camprow = $('#camprow');
                 $('#changeP').show();
                 var p = '';

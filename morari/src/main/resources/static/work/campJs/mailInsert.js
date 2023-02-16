@@ -2,7 +2,11 @@
 $(document).ready(function() {
 	var url = window.location.href;
 	var id = url.split("/").pop();
-	console.log(id);
+
+	// 一鍵輸入 
+	$("#fastinput").click(function() {
+		fastinport();
+	});
 	$.ajax({
 		type: 'POST',
 		url: '/morari/admin/resume/selectNumber.controller/' + id,
@@ -11,13 +15,15 @@ $(document).ready(function() {
 			$('#mail').val(data.mail);
 		}
 	});
+
+
 	//文字編譯器
-//	ClassicEditor.create(document.querySelector('#editor'))
-//		.then(editor => {
-//			console.log(editor);
-//		}).catch(error => {
-//			console.error(error);
-//		});
+	//	ClassicEditor.create(document.querySelector('#editor'))
+	//		.then(editor => {
+	//			console.log(editor);
+	//		}).catch(error => {
+	//			console.error(error);
+	//		});
 	$("#sendMail").submit(function(event) {
 		event.preventDefault();
 		$.ajax({
@@ -36,4 +42,7 @@ $(document).ready(function() {
 
 
 });
-
+function fastinport() {
+	$("#subject").val("面試通知");
+	$("#editor").val("您好，請問3/5下午2點方便面試嗎?");
+}

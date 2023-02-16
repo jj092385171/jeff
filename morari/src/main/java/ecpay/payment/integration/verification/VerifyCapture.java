@@ -42,8 +42,8 @@ public class VerifyCapture extends PaymentVerifyBase{
 			Element tmpEle = (Element)nodeList.item(i);
 			
 			try {
-				method = cls.getMethod("get"+tmpEle.getAttribute("name"), null);
-				objValue = method.invoke(obj, null).toString();
+				method = cls.getMethod("get"+tmpEle.getAttribute("name"), (Class<?>[]) null);
+				objValue = method.invoke(obj, (Object[]) null).toString();
 			} catch (Exception e) {
 				throw new EcpayException(ErrorMessage.OBJ_MISSING_FIELD);
 			}

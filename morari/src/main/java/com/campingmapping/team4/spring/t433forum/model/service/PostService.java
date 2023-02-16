@@ -80,7 +80,7 @@ public class PostService {
 	}
 
 	// 查會員貼文
-	public List<Post> getUserNonHidePost(UUID userId) {
+	public List<Post> getUserPost(UUID userId) {
 		UserProfiles uProfiles = userRepository.findById(userId).get();
 		return postRepository.findByUserprofilesOrderByReleasedateDesc(uProfiles);
 	}
@@ -90,6 +90,12 @@ public class PostService {
 		return postRepository.findByPosthideOrderByReleasedateDesc(0);
 	}
 
+	// 查會員非隱藏貼文
+	public List<Post> getUserNonHidePost(UUID userId) {
+		UserProfiles uProfiles = userRepository.findById(userId).get();
+		return postRepository.findByUserprofilesAndPosthideOrderByReleasedateDesc(uProfiles, 0);
+	}
+	
 	// 查隱藏貼文
 	public List<Post> getHidePost() {
 		return postRepository.findByPosthideOrderByReleasedateDesc(1);

@@ -42,14 +42,12 @@ public class TeamPageComtroller {
 	@Autowired
 	private teamService teamService;
 	
-	@Autowired
-	private GoogleFileUtil googleFileService;
-	
 	@RequestMapping("/teammanager.controller")
 	public String  processmainAction() {
 		return "team/admin/teammanager";
 	}
 	
+	//新增跳轉
 	@RequestMapping("/insert.controller")
 	public String intoInsertAction() {
 		return "team/admin/insertManager";
@@ -90,10 +88,18 @@ public class TeamPageComtroller {
 		return "Delete OK";
 	}
 	
+	//管理者修改
 	@GetMapping("/update.controller")
 	public String display() {
 		return "team/admin/updateManager";
 	}
+	
+	//使用者修改
+	@GetMapping("/guestupdate.controller")
+	public String guestdisplay() {
+		return "team/guest/guestupdate";
+	}
+	
 	
 	@PutMapping("/updateMaterial.controller")
 	@ResponseBody
@@ -136,13 +142,9 @@ public class TeamPageComtroller {
 	public String thumbsUp(@RequestBody @Nullable String[] arr,@PathVariable UUID uid) {
 		int x;
 		for(int i = 0; i < arr.length; i++) {
-			System.out.println("我要按讚");
-			System.out.println(uid);
 			x = Integer.valueOf(arr[i]);
-			System.out.println(x);
 			if (x < 0) {
 				x = 0-x;
-				System.out.println(x);
 				List<Thundsup> selectresult = teamService.selectThundsup(x, uid);
 				if(selectresult != null) {
 					for (Thundsup thundsup : selectresult) {
@@ -154,7 +156,6 @@ public class TeamPageComtroller {
 					}
 				}
 			}else {
-				System.out.println(x);
 				List<Thundsup> selectresult = teamService.selectThundsup(x, uid);
 				if (selectresult == null) {
 					teamService.insertThundsup(x, uid);
@@ -164,10 +165,8 @@ public class TeamPageComtroller {
 				}
 			}
 			
-			System.out.println("完成一圈");
 		}
 		
-		System.out.println("按讚成功");
 		return "ok";
 	}
 	
@@ -192,6 +191,11 @@ public class TeamPageComtroller {
 	@GetMapping("/apply.controller")
 	public String apply() {
 		return "team/guest/apply2";
+	}
+	
+	@GetMapping("/guestinsert.controller")
+	public String guestinsert() {
+		return "team/guest/guestinsert";
 	}
 	
 	//顯示本人留言

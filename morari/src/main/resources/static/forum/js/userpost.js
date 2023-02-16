@@ -10,7 +10,6 @@ $(function () {
 				dataType: "JSON",
 				contentType: "application/json",
 				success: function (data) {
-					console.log(data);
 					if(data.length != 0){
 						var div = "<div id='rooms'><div class='row'>";
 						$.each(data, function (i, n) {
@@ -20,7 +19,7 @@ $(function () {
 							if(n.picture){
 								div += "<img src='"+ n.picture +"' width='100%'>";
 							}else{
-								div += "<img src='/morari/forum/img/nopicture.jpeg' width='100%' height='350px'>";
+								div += "<img src='/morari/forum/img/nopicture.jpeg' width='100%' height='400px'>";
 							}
 							div += "</div></div>";
 							div += "<div class='col-md-6'><div class='room-des'>";

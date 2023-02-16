@@ -11,7 +11,6 @@ $(document).ready(function() {
 
 	var url = window.location.href;
 	var id = url.split("/").pop();
-	console.log(id);
 
 	$.ajax({
 		type: 'POST',
@@ -27,7 +26,6 @@ $(document).ready(function() {
 			$('#7').val(data.time);
 			$('#8').val(data.remark);
 			$('#9').val(data.img);
-			console.log(data.job);
 
 			switch (data.job) {
 				case '廚師':
@@ -74,7 +72,6 @@ $(document).ready(function() {
 			$.map(unindexed_array, function(n, i) {
 				indexed_array[n['name']] = n['value'];
 			});
-			console.log(indexed_array);
 			return indexed_array;
 		}
 		$.ajax({

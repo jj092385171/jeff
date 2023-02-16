@@ -55,7 +55,7 @@ public class SetupDataLoader implements
         if (alreadySetup)
             return;
         List<String> roles = Arrays.asList(
-                "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER");
+                "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER","COMPANY");
         roles.forEach(r -> createRoleIfNotFound(r));
 
         String[] tags = { "大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲" };
