@@ -2,6 +2,7 @@ package com.campingmapping.team4.spring.t436mall.controller.web;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVoReques
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrder;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderVo;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.ProductOrderServiceImpl;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/ProductOrder")
@@ -67,7 +71,7 @@ public class ProductOrderController {
 	@ResponseBody
 	public List<ProductOrder> selectAllByUserId(HttpServletRequest request) {
 		UUID uid = jwtService.getUId(request);
-		return pOServiceImpl.selectAllByUserId(userid);
+		return pOServiceImpl.selectAllByUserId(uid.toString());
 	}
 
 	// 搜尋所有訂單(只有後臺能使用)
