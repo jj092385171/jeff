@@ -19,6 +19,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/Category")
 public class CategoryController {
 
+	@GetMapping("/getlinepay.controller")
+	public String getlinepayAction(@RequestParam("")  jsonData) {
+
+
+		return "mall/admin/productindex";
+	}
+
 	@GetMapping("/paybyline")
 	@ResponseBody
 	public String adasdfasdf(@RequestParam("JsonOrderList") String jsonData) {
@@ -62,6 +69,7 @@ public class CategoryController {
 					JsonNode root = mapper.readTree(jsonStr);
 					paymentUrl = root.path("info").path("paymentUrl")
 							.path("web").asText();
+							
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,6 +78,7 @@ public class CategoryController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(paymentUrl);
 		return paymentUrl;
 	}
 
