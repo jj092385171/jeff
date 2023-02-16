@@ -14,8 +14,6 @@ $(document).ready(function() {
 				url: '/morari/guest/work/guestSelectResume.controller/' + uid,
 				contentType: 'application/json',
 				success: function(data) {
-					console.log(data);
-					console.log(data.unmber);
 					$('#1').val(data.userprofiles.uid);
 					$('#2').val(data.name);
 					$('#3').val(data.age);
@@ -41,7 +39,6 @@ $(document).ready(function() {
 							$.map(unindexed_array, function(n, i) {
 								indexed_array[n['name']] = n['value'];
 							});
-							console.log(indexed_array);
 							return indexed_array;
 						}
 						$.ajax({

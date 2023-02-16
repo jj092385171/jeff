@@ -1,11 +1,9 @@
 fetch('view.controller', { method: 'GET' }).then(
 			function (response) {
 				if (response.status != 200) {
-					console.log(response.satus);
 					return;
 				}
 				
-				console.log(response);
 
 
 				response.json().then(function (data) {
@@ -118,10 +116,8 @@ fetch('view.controller', { method: 'GET' }).then(
 		document.getElementById("result").addEventListener("click", function(event) {
 			  if (event.target.name === "delete") {
 				  	var name = event.target.name;
-		        	console.log(name);
 		            var formData = new FormData(event.target.form);
 		            var value = formData.get('dnum');
-		            console.log(value);
 		            
 		            // 發出 DELETE 請求
 		            var xhr = new XMLHttpRequest();
@@ -132,7 +128,6 @@ fetch('view.controller', { method: 'GET' }).then(
 		           		xhr.open('DELETE', 'delete.controller/{' + value + "}");
 		            	xhr.onload = function() {
 		            	  if (xhr.status === 200) {
-		            	    console.log(xhr.responseText);
 		            	    location.href="/morari/team/teammanager.controller";
 		            	  }
 		            	  else {
@@ -157,7 +152,6 @@ fetch('view.controller', { method: 'GET' }).then(
 		        	
 		        	// 取得表單輸入
 		        	var name = button.name;
-		        	console.log(name);
 		            var formData = new FormData(button.form);
 		            var value = formData.get('dnum'); 
 		           
@@ -168,11 +162,8 @@ fetch('view.controller', { method: 'GET' }).then(
     						$("#selectResult").DataTable().destroy();
 						}
 		     			
-		     			console.log(formData)
 		     			var startdate = formData.get('startdate');
-		     			console.log(startdate);
 		     			var enddate = formData.get('enddate');
-		     			console.log(enddate);
 		     			
 		     			if(startdate > enddate && startdate != "" && enddate != ""){
 		     				alert("起始日期不可小於結束日期，這不是時空旅行！！！");
@@ -183,7 +174,6 @@ fetch('view.controller', { method: 'GET' }).then(
 			     		formData.delete("initiatingnum");
 			     		formData.append("initiatingnum", parseInt(inum));
 			     		var uid = formData.get("userprofiles");
-			     		console.log(uid);
 			     		formData.delete("userprofiles");
 		     				
 		     			const data = Object.fromEntries(formData);
@@ -197,7 +187,6 @@ fetch('view.controller', { method: 'GET' }).then(
 							body: json
 						})
 							.then(function (response) {
-								console.log(response);
 								if (response.status == 200) {
 									response.json().then(function (data){
 								num += 1;

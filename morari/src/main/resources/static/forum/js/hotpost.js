@@ -10,7 +10,6 @@ fetch("/morari/forum/html/hotpost.html")
 				dataType: "JSON",
 				contentType: "application/json",
 				success: function (data) {
-					console.log(data);
 					if(data.picture){
 						$("#hotimage").attr({"src": data.picture, "width": "100%"});
 					}else{

@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<UserDetailAdminWeb> showAllUser() {
-
         return userRepository.findAll()
                 .stream()
                 .map(userpProfilesMapperUesrDetailAdminWebDTO)

@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/morari/home">
         <div class="sidebar-brand-icon ">
-            <img src="/morari/img/camper.png" alt="home" style="max-width: 50px;">
+            <img src="/morari/img/camper.png" alt="home" style="max-width: 50px;max-height: 50px;">
         </div>
     </a>
     <!-- Nav Item - Dashboard -->
@@ -25,7 +25,7 @@
         </a>
         <div id="Member" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">會員管理</h6>
+                <h6 class="collapse-header">會員</h6>
                 <a class="collapse-item" id="alluser" style="display: none;" href="/morari/admin/camper/alluser">總覽</a>
                 <a class="collapse-item " href="/morari/admin/camper/guestedit">我的資料</a>
                 <a class="collapse-item " href="/morari/guest/work/resume.controller">我的簡歷</a>
@@ -35,7 +35,7 @@
     <!-- ===================================================== -->
 
     <!-- T4-11 Team Menu -->
-    <li class="nav-item active">
+    <li class="nav-item active" id="teamadmin" style="display: none;">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#TeamAdmin" aria-expanded="true"
             aria-controls="TeamAdmin">
             <i class="fas fa-users"></i>
@@ -52,7 +52,7 @@
     <!-- ===================================================== -->
 
     <!-- T4-24 Camp Menu -->
-    <li class="nav-item active">
+    <li class="nav-item active" >
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#CampOwner" aria-expanded="true"
             aria-controls="CampOwner">
             <i class="fas fa-campground"></i>
@@ -61,15 +61,16 @@
         <div id="CampOwner" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">營地</h6>
-                <a class="collapse-item" href="/morari/admin/camp/campindex">營地總覽</a>
-                <a class="collapse-item" href="/morari/admin/camp/orderindex">訂單總覽</a>
+                <a class="collapse-item" id="campall" style="display: none;" href="/morari/admin/camp/campindex">營地總覽</a>
+                <a class="collapse-item" id="camporderall" style="display: none;" href="/morari/admin/camp/orderindex">訂單總覽</a>
+                <a class="collapse-item" id="usercamporder"  href="/morari/camp/myOrders">營地訂單</a>
             </div>
         </div>
     </li>
     <!-- ===================================================== -->
 
     <!-- T4-36 Mall Menu -->
-    <li class="nav-item active">
+    <li class="nav-item active" style="display: none;"  id="mallitem">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#ProductOrder" aria-expanded="true"
             aria-controls="ProductOrder">
             <i class="fas fa-store"></i>
@@ -78,8 +79,12 @@
         <div id="ProductOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">商城</h6>
-                <a class="collapse-item" href="/morari/mall/productqueryallmain.controller">商城管理</a>
-                <a class="collapse-item" href="/morari/ProductOrder/AllorderAction.controller">訂單管理</a>
+                <a class="collapse-item" id="mallall" style="display: none;"
+                    href="/morari/mall/productqueryallmain.controller">商城所有產品管理</a>
+                <a class="collapse-item" id="mallproduct" style="display: none;"
+                    href="/morari/mall/productqueryallbyuseridmain.controller">商城產品管理</a>
+                <a class="collapse-item" id="mallorder" style="display: none;"
+                    href="/morari/ProductOrder/AllorderAction.controller">商品訂單</a>
 
 
             </div>
@@ -88,7 +93,7 @@
     <!-- ===================================================== -->
 
     <!-- T4-09 Work Menu -->
-    <li class="nav-item active">
+    <li class="nav-item active" id="workitem" style="display: none;">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#enterprise" aria-expanded="true"
             aria-controls="enterprise">
             <i class="fas fa-file"></i>
@@ -96,18 +101,17 @@
         </a>
         <div id="enterprise" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">管理者</h6>
-                <a class="collapse-item" href="/morari/admin/work/crud.controller">職缺</a>
-                <a class="collapse-item" href="/morari/admin/resume/resumeCrud.controller">履歷</a>
-                <h6 class="collapse-header">營主</h6>
-                <a class="collapse-item" href="/morari/admin/user/work/startCrud.controller">職缺</a>
+                <h6 class="collapse-header">職缺</h6>
+                <a class="collapse-item" id="workall" style="display: none;" href="/morari/admin/work/crud.controller">職缺總覽</a>
+                <a class="collapse-item" id="resumeall" style="display: none;" href="/morari/admin/resume/resumeCrud.controller">履歷管理</a>
+                <a class="collapse-item" id="company" style="display: none;" href="/morari/admin/user/work/startCrud.controller">我的職缺</a>
             </div>
         </div>
     </li>
     <!-- ===================================================== -->
 
     <!-- T4-33 Forum Menu -->
-    <li class="nav-item active">
+    <li class="nav-item active" style="display: none;" id="forumadmin">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#applier" aria-expanded="true"
             aria-controls="applier">
             <i class="far fa-comments"></i>

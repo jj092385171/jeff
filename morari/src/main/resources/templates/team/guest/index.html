@@ -36,8 +36,25 @@
 					一個人出遊或許膽怯，但在這裡，你可以號召有相同興趣的夥伴！！！ 還在等什麼呢？選好你想去的地點，發起揪團，或是加入他人吧！！！
 				</p>
 			</div>
+			
+			<div class="col-md-12 room">
+			<div class="row">
+			<div class="room-does">
+			<div class="room-link">
+			<a href="#" data-toggle="modal" data-target="#modal-id" onclick="insert();">發起揪團</a>
+			</div>
+			</div>
+			</div>
+			</div>
 
 			<div id="result" class="row"></div>
+
+			<div id="apply" class="room-link"></div>
+			
+			<div id="applyresponse" class="room-link"></div>
+			
+			<div id="showapplyresponse" class="room-link"></div>
+
 		</div>
 	</div>
 	<div id="page"></div>
@@ -103,15 +120,15 @@
 									var tableData = "";
 
 									var pagebtn = "";
-									
+
 									var five = 5;
-									
+
 									datalength = data.length;
-									
-									if(datalength < 5){
+
+									if (datalength < 5) {
 										five = datalength
 									}
-									
+
 
 									pages = Math.ceil(datalength / 5);
 
@@ -120,8 +137,8 @@
 									for (var x = 0; x < pages; x++) {
 										pagebtn += '<button type="button" onclick="load(' + (x + 1) + ')" value="' + (x + 1) + '">' + (x + 1) + '</button>';
 									}
-									
-									
+
+
 									for (var i = 0; i < five; i++) {
 
 										var pDay = new Date(data[i].postdate).toLocaleDateString("zh-TW", { year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -137,7 +154,7 @@
 											'<div class="row">' +
 											'<div  class="col-md-6">' +
 											'<div class="room-img">' +
-											'<img src="/morari/guest/img/room/room-1.jpg">' +
+											'<img src="' + data[i].picture + '">' +
 											"</div>" +
 											"</div>" +
 											'<div class="col-md-6">' +
@@ -185,31 +202,90 @@
 
 												for (let j = 0; j < data.length; j++) {
 
-													if (Number(thup[i].id) == data[j].initiating.initiatingnum) {
-														thup[i].style.backgroundColor = "yellow";
-													}
 												}
 
 											}
 										});
 
 									});
+
 							});
+
+
+						fetch('/morari/team/findApply.controller/' + user, { method: 'GET' }).then(
+							function (response) {
+								if (response.status != 200) {
+									console.log(response.satus);
+									return;
+								}
+
+								console.log(response);
+
+								response.json().then(function (data) {
+
+									console.log("有囉")
+									
+									var applyData = "";
+									
+									if(data.length > 0){
+										
+										applyData += '<a href="#" data-toggle="modal" data-target="#modal-id" onclick=' + '"apply();">您有' + data.length + '筆揪團申請未回覆</a>'
+										
+									}
+									
+									document.getElementById('apply').innerHTML = applyData;
+									
+								});
+
+							});
+							
+						//查看申請清單的回覆
+						
+						fetch('/morari/team/findApplyResponse.controller/' + user, { method: 'GET' }).then(
+								function (response) {
+									if (response.status != 200) {
+										console.log(response.satus);
+										return;
+									}
+
+									console.log(response);
+
+									response.json().then(function (data) {
+
+										console.log("有回覆囉")
+										
+										var applyresponseData = "";
+										
+										var showapplyresponse ="";
+										
+										if(data.length > 0){
+											
+											applyresponseData += '<a href="#" data-toggle="modal" data-target="#modal-id" onclick=' + '"applyresponse();">您有' + data.length + '筆揪團申請的回覆</a>'
+											
+											for(var i = 0; i < data.length; i++){
+												if(data[i].pairstate == 0){
+													showapplyresponse += '<p>揪團 ' + data[i].initiating.initiatingnum + ' 號的發起人：' + data[i].userprofiles.uid + ' 拒絕了你的申請</p>'
+												}else if(data[i].pairstate == 1){
+													showapplyresponse += '<p>揪團 ' + data[i].initiating.initiatingnum + ' 號的發起人：' + data[i].userprofiles.uid + ' 接受了你的申請</p>'
+												}
+											}
+											
+											document.getElementById('showapplyresponse').innerHTML = showapplyresponse;
+											document.getElementById('showapplyresponse').style.display = "none";
+											
+										}
+										
+										document.getElementById('apply').innerHTML = applyresponseData;
+										
+									});
+
+								});
+
 					});
-
-
-
-
 
 			});
 
-
-
-
 		})
-
-
-
 
 
 		function load(indexPage) {
@@ -278,7 +354,7 @@
 								'<div class="row">' +
 								'<div  class="col-md-6">' +
 								'<div class="room-img">' +
-								'<img src="/morari/guest/img/room/room-1.jpg">' +
+								'<img src="' + data[i].picture + '">' +
 								"</div>" +
 								"</div>" +
 								'<div class="col-md-6">' +
@@ -349,8 +425,35 @@
 		}
 
 		function moreInformation(initiatingnum) {
+			
 			console.log("更多資訊")
+			
 			window.location.href = "/morari/team/moreInformation.controller/" + initiatingnum;
+		}
+		
+		function apply(){
+			window.location.href = "/morari/team/apply.controller";
+		}
+		
+		function applyresponse(){
+			document.getElementById('showapplyresponse').style.display = "block";
+			
+			fetch('/morari/team/overViewApplyResponse.controller/' +  user, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: null
+			})
+				.then(function (response) {
+					if (response.status == 200) {
+						console.log("查看完畢")
+					}
+			});
+		}
+		
+		function insert(){
+			window.location.href = "/morari/team/guestinsert.controller"
 		}
 
 		window.addEventListener("unload", async function (event) {

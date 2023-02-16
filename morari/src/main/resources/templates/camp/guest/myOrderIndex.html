@@ -170,15 +170,14 @@
                     + '</tr>'
                 changeP.append(changetr);
 
-                
                 var promote = $('#promote');
                 var promotediv = '';
                 $.each(data["recommend"], function (i, recommend) {
                     promotediv = '<div class="col-xl-3 col-md-6 mb-4">'
                         + '<div class="card border-left-primary shadow h-100 py-2" >'
-                            + '<div class="card-body">'
-                                + '<div class="row no-gutters align-items-center">'
-                                    + '<div class="col mr-2">'
+                        + '<div class="card-body">'
+                        + '<div class="row no-gutters align-items-center">'
+                        + '<div class="col mr-2">'
                         + '<div style="display:none">' + recommend.campID + '</div>'
                         + '<div class="recommendinner" class="h5 mb-0 font-weight-bold text-gray-800"><a href="#">' + recommend.campName + '</a><br><img id="img" src="' + recommend.campPicturesPath + '">' + '</div>'
                         + '<div class="recommendinner">' + recommend.city.cityName + '</div>'
@@ -188,14 +187,14 @@
                         + '</div>'
                         + '</div>'
                         + '</div>'
-                        
-                        promote.append(promotediv);
-                    });
-                    
-                    $('th').width('100px').css("text-align", "center");
-                    $('td').width('100px').css("text-align", "center");
-                    $('img').width('85px').height('85px');
-                    $('.recommendinner').css("text-align", "center");
+
+                    promote.append(promotediv);
+                });
+
+                $('th').width('100px').css("text-align", "center");
+                $('td').width('100px').css("text-align", "center");
+                $('img').width('85px').height('85px');
+                $('.recommendinner').css("text-align", "center");
                 $('.long').width('400px').css("font-size", "25px").css("color", "SaddleBrown");
             });
 

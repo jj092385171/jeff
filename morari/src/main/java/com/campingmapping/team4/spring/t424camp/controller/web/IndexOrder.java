@@ -24,63 +24,68 @@ import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @Controller
 @RequestMapping("/admin/camp")
 public class IndexOrder {
-	
+
 	@Autowired
 	private OrderService orderService;
-	
+
 	@Autowired
 	private JwtService jwtService;
-	
+
 	@Autowired
 	private HttpServletRequest httpServletRequest;
-	
+
 	@Autowired
 	private CampService campService;
-	
-	
+
 	@GetMapping("/orderindex")
 	public String showOrderIndex() {
 		return "camp/admin/AdminOrderIndex";
 	}
-	
-//	@GetMapping("/showAllOrders")
-//	@ResponseBody
-//	public Object showAllOrder() {
+
+	// @GetMapping("/showAllOrders")
+	// @ResponseBody
+	// public Object showAllOrder() {
 	@GetMapping("/showAllOrders/{page}")
 	@ResponseBody
-	public Object showAllOrder(@PathVariable("page")@Nullable Integer page ) {
-		if(page == null) {
+	public Object showAllOrder(@PathVariable("page") @Nullable Integer page) {
+		if (page == null) {
 			page = 1;
 		}
+<<<<<<< HEAD
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int pageSize = 3;
 		Pageable pageable = PageRequest.of(page-1, pageSize);
+=======
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int pageSize = 3;
+		Pageable pageable = PageRequest.of(page - 1, pageSize);
+>>>>>>> origin/36
 		Page<Order> pageList = orderService.getByPage(pageable);
 		List<Order> orderList = pageList.getContent();
 		map.put("orderList", orderList);
-		
+
 		int totalPages = pageList.getTotalPages();
 		map.put("totalPages", totalPages);
-		
+
 		long totalOrders = pageList.getTotalElements();
 		map.put("totalOrders", totalOrders);
-		
-//		List<Order> orderList = orderService.findAll();
-//		map.put("orderList", orderList);
-		
-		
-		//使用者
+
+		// List<Order> orderList = orderService.findAll();
+		// map.put("orderList", orderList);
+
+		// 使用者
 		UUID uid = jwtService.getUId(httpServletRequest);
-		
+
 		List<Camp> recommend = campService.recommendCampToUser(uid);
 		map.put("recommend", recommend);
-		
+
 		return map;
 	}
 

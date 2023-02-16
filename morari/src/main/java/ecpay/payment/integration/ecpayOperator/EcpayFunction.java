@@ -12,7 +12,6 @@ import java.net.URLEncoder;
 import java.security.AlgorithmParameters;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.Security;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public class EcpayFunction {
 		try{
 			for(String name: fieldNames){
 				if(name != "CheckMacValue" && name != "PaymentToken"){
-					Method method = cls.getMethod("get"+name, null);
+					Method method = cls.getMethod("get"+name, (Class<?>[]) null);
 					data = data + '&' + name + '=' + method.invoke(obj).toString();
 				}
 			}
@@ -159,7 +158,7 @@ public class EcpayFunction {
 		String result = "";
 		for(int i = 0; i < fieldNames.size(); i++){
 			try{
-				method = cls.getMethod("get"+fieldNames.get(i), null);
+				method = cls.getMethod("get"+fieldNames.get(i), (Class<?>[]) null);
 				fieldNames.set(i, fieldNames.get(i) + '=' + invokeMethod(method, obj));
 			} catch(Exception e){
 				throw new EcpayException(ErrorMessage.OBJ_MISSING_FIELD);
@@ -181,7 +180,7 @@ public class EcpayFunction {
 		for(int i = 0; i < fieldNames.size(); i++){
 			Method method;
 			try{
-				method = cls.getMethod("get"+fieldNames.get(i), null);
+				method = cls.getMethod("get"+fieldNames.get(i), (Class<?>[]) null);
 				resultDict.put(fieldNames.get(i), invokeMethod(method, obj));
 			} catch(Exception e){
 				throw new EcpayException(ErrorMessage.OBJ_MISSING_FIELD);
@@ -192,7 +191,7 @@ public class EcpayFunction {
 	
 	private final static String invokeMethod(Method method, Object obj){
 		try{
-			return method.invoke(obj, null).toString();
+			return method.invoke(obj, (Object[]) null).toString();
 		} catch(Exception e){
 			throw new EcpayException(ErrorMessage.OBJ_MISSING_FIELD);
 		}

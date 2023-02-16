@@ -2,38 +2,32 @@
 <html lang="zh-TW">
 
 <head>
-    <script src="/morari/admin/js/head.js"></script>
+  <script src="/morari/guest/js/head.js"></script>
+  <!-- sharepage 公用頁面 -->
+  <script src="/morari/guest/js/share.js"></script>
 
-    <!-- sharepage -->
-    <script src="/morari/admin/js/share.js"></script>
-	
+
 </head>
 
-<body id="page-top" style="display: none">
+<body style="display: none">
+  <!-- Header Section Start -->
+  <div class="header"></div>
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <!-- sidebar -->
-        <div class="sidebarshare"></div>
-        <!-- sidebar end -->
+  <!-- Header Section End -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- topbar -->
-                <div class="topbarshare"></div>
-                <!-- topbar end -->
-
-                <!-- Begin Page Content(開始主要內容區塊) -->
-                <div class="container-fluid">
-				
-				<div class="container">
-                <h2>揪團管理</h2>
-				
-				<form id="insert">
+  <!-- 分離範例 -->
+  <script src="/morari/team/js/test.js"></script>
+  
+   <div id="booking">
+            <div class="container">
+                <div class="section-header">
+                    <h2>發起揪團</h2>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="booking-form">
+                            <div id="success"></div>
+                            <form id="insert">
 				
 				
 				發文會員:<input type="text" class="form-control" id="userid" name="userid" readonly><br> 
@@ -71,60 +65,48 @@
 				<input type="checkbox" name="equipment" value="手電筒">手電筒<input type="checkbox" name="equipment" value="桌遊">桌遊<br><br>
 				</div>
 				<div class="control-group col-sm-6">
-				<label>說點什麼吧！</label><br><textarea name="introduction"  class="form-control" style="width: 541px; height: 150px; word-wrap: break-word; overflow-wrap: break-word;"></textarea>
+				<label>說點什麼吧！</label><br><textarea name="introduction" id="introduction"  class="form-control" style="width: 475px; height: 150px; word-wrap: break-word; overflow-wrap: break-word;"></textarea>
 				<br></div></div>
 				<br>
+				<input type="button" onclick="inputvalue();">一鍵輸入
 				<button class="btn btn-success btn-icon-split" type="submit" id="send" value="Send">
 				<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
 				<span class="text">發起揪團</span></button>
 				</form>
-				
-
+                        </div>
+                    </div>
                 </div>
-                </div>
-                <!-- /.container-fluid(結束主要內容區塊) -->
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <div class="footershare"></div>
-            <!-- End of Footer -->
-
         </div>
-        <!-- End of Content Wrapper -->
+   
+  <!-- Footer Section Start -->
+  <div class="footer"></div>
+  <!-- Footer Section End -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    <!-- Logout Modal-->
-    <div class="loginoutshare"></div>
+  <!-- Vendor JavaScript File -->
+  <script src="/morari/guest/vendor/jquery/jquery.min.js"></script>
+  <script src="/morari/guest/vendor/jquery/jquery-migrate.min.js" defer></script>
+  <script src="/morari/guest/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <script src="/morari/guest/vendor/easing/easing.min.js" defer></script>
+  <script src="/morari/guest/vendor/stickyjs/sticky.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/hoverIntent.js" defer></script>
+  <script src="/morari/guest/vendor/superfish/superfish.min.js" defer></script>
+  <script src="/morari/guest/vendor/wow/wow.min.js" defer></script>
+  <script src="/morari/guest/vendor/slick/slick.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/moment-timezone.min.js" defer></script>
+  <script src="/morari/guest/vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js" defer></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/morari/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/morari/admin/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <!-- Booking Javascript File -->
+  <script src="/morari/guest/js/booking.js" defer></script>
+  <script src="/morari/guest/js/jqBootstrapValidation.min.js" defer></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/morari/admin/vendor/jquery-easing/jquery.easing.min.js" defer></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="/morari/admin/js/sb-admin-2.min.js" defer></script>
-
-    <!-- Page level plugins -->
-    <script src="/morari/admin/vendor/chart.js/Chart.min.js" defer></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
-    <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-	
-	<script src="/morari/admin/vendor/datatables/datatables13.js" ></script>
-    <script src="/morari/admin/vendor/datatables/datatableresponsive.js" ></script>
-	
+  <!-- Main Javascript File -->
+  <script src="/morari/guest/js/main.js" defer></script>
+  
 	<script type="text/javascript">
 	fetch("/morari/utils/getuid")
 	.then(response => response.text())
@@ -191,7 +173,7 @@
 					})
 						.then(function (response) {
 							if (response.status == 200) {
-								location.href = "/morari/team/teammanager.controller";
+								location.href = "/morari/team";
 							}
 					});
 
@@ -234,7 +216,20 @@
 			});
 		});
 	});
-	</script>
+	
+	function inputvalue(){
+		document.getElementById("title").setAttribute("value", "一起來場酣暢淋漓的露營吧");
+		document.getElementById("startdate").setAttribute("value", "2023-03-04");
+		document.getElementById("enddate").setAttribute("value", "2023-03-05");
+		document.getElementById("currentnum").setAttribute("value", "8");
+		document.getElementById("acceptablenum").setAttribute("value", "8");
+		document.getElementById("introduction").value = "歡迎各位露營同好一起參加，讓我們快樂去露營吧，GOGOGO"
+		document.getElementById("camparea").setAttribute("value", "玉山");
+	}
+	
+	</script>	
+
+	
 </body>
 
 </html>

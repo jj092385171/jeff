@@ -116,9 +116,10 @@ $(document).ready(function() {
 						}
 					});
 					// 表頭不換行
-					$('#showAll_wrapper thead tr th').css('white-space', 'nowrap');
+					$('#showResume thead tr th').css('white-space', 'nowrap');
 					table.responsive.recalc();
 					setTimeout(function () {
+						
 						table.responsive.recalc();
 					}, 500);
 				}

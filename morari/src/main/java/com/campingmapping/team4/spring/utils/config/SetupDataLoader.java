@@ -40,13 +40,17 @@ public class SetupDataLoader implements
     // private UserRoleRepository userRoleRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
+<<<<<<< HEAD
+=======
     @Autowired
     private TagRepository tagRepository;
-    
+
     @Autowired
     private CityRepository cityRepository;
 
+
+>>>>>>> origin/36
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -54,14 +58,22 @@ public class SetupDataLoader implements
         if (alreadySetup)
             return;
         List<String> roles = Arrays.asList(
-                "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER");
+                "SUPERADMIN", "ADMIN", "CAMP", "SHOP", "FORUM", "MALL", "TEAM", "USER","COMPANY");
         roles.forEach(r -> createRoleIfNotFound(r));
+<<<<<<< HEAD
+=======
 
-        List<String> tags = Arrays.asList( "大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲" );
-        tags.forEach(t->createTagIfNotFound(t));
+        String[] tags = { "大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲" };
+        for (int i = 0; i < tags.length; i++) {
+            createTagIfNotFound(tags[i]);
+        }
 
-        List<String> citys = Arrays.asList( "新北", "桃園", "新竹", "苗栗", "南投", "宜蘭", "台東" );
-        citys.forEach(c->createCityIfNotFound(c));
+        String[] citys = { "新北", "桃園", "新竹", "苗栗", "南投", "宜蘭", "台東" };
+        for (int i = 0; i < citys.length; i++) {
+            createCityIfNotFound(citys[i]);
+        }
+>>>>>>> origin/36
+
 
         // 檢查有無存在生成超級管理員
         Role adminRole = roleRepository.findByName("SUPERADMIN").get();
@@ -105,8 +117,7 @@ public class SetupDataLoader implements
                 userProfiles.setIscredentialsnonexpired(true);
                 userProfiles.setIsenabled(true);
                 userRepository.save(userProfiles);
-                
-                
+
             } else {
                 // Role adminRole = roleRepository.findByName("SUPERADMIN").get();
                 userDetail.setRegisterdata(new Date());
@@ -125,6 +136,10 @@ public class SetupDataLoader implements
                         .build();
                 userProfiles.getRoles().add(adminRole);
                 userRepository.save(userProfiles);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/36
             }
 
         } catch (Exception e) {
@@ -139,7 +154,11 @@ public class SetupDataLoader implements
         return roleRepository.findByName(name)
                 .orElseGet(() -> roleRepository.save(Role.builder().name(name).build()));
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/36
     @Transactional
     public Tag createTagIfNotFound(String tagName) {
         return tagRepository.findByTagName(tagName)

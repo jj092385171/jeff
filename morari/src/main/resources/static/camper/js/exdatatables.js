@@ -642,7 +642,6 @@ fetch("/morari/camper/html/usertable.html")
 					// 選取整ROW
 					$('#memberlist tbody').on('click', 'tr', function () {
 						let index = table.row(this).index();
-						// console.log('You clicked on row ' + index);
 					});
 
 					// 表頭不換行
