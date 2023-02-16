@@ -102,6 +102,15 @@ public class JwtService {
     UUID uid = UUID.fromString((String) claims.get("uid"));
     return uid;
   }
+  // 當前使用者的UID字串
+ public String getStringUId(HttpServletRequest request){
+  UUID uid = getUId(request);
+  try {
+    return uid.toString();
+  } catch (Exception e) {
+    return "";
+  }
+ }
 
   // 設置HttpOnly&Https的Cookie
   public Cookie setCookie(String key, String value) {

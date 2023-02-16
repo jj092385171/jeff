@@ -29,24 +29,43 @@
 
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
-
+				
+				<div class="container">
                 <h3>揪團管理</h3>
 				
 				<form id="update">
+				
+				
 				<input type="hidden" id="initiatingnum" name="initiatingnum"><br>
 				<input type="hidden" id="userprofiles" name="userprofiles">
-				標題:<input type="text" id="title" name="title" placeholder="請輸入想要的標題"><br>
-				起始日期:<input type="date" id="startdate" name="startdate" required><br>
-				結束日期:<input type="date" id="enddate" name="enddate" required><br>
-				現有人數:<input type="text" id="currentnum" name="currentnum"
-				onkeyup="value=value.replace(/[^\d]/g,'') " required
-				placeholder="請輸入現有人數,僅限數字"><br> 接受人數:<input type="text"
-				id="acceptablenum" name="acceptablenum"
-				onkeyup="value=value.replace(/[^\d]/g,'') " required
-				placeholder="請輸入接受人數,僅限數字"><br> 露營地點:<input type="text"
-				id="camparea" name="camparea" required placeholder="請輸入露營地點"><br>
+				標題:<input type="text" class="form-control" id="title" name="title" placeholder="請輸入想要的標題"><br>
+				<div class="form-row">
+   				<div class="control-group col-sm-6">
+				起始日期:<input type="date" class="form-control" id="startdate" name="startdate"
+					required><br> </div>
+  				 <div class="control-group col-sm-6">
+				結束日期:<input type="date" class="form-control" id="enddate" name="enddate" required><br>
+				 </div></div>
+				<div class="form-row">
+   				<div class="control-group col-sm-6">
+				現有人數:<input type="text" class="form-control" id="currentnum" name="currentnum" onkeyup="value=value.replace(/[^\d]/g,'') " required
+					placeholder="請輸入現有人數,僅限數字"><br></div>
+					<div class="control-group col-sm-6">
+				接受人數:<input type="text" class="form-control" id="acceptablenum" name="acceptablenum" onkeyup="value=value.replace(/[^\d]/g,'') "
+					required placeholder="請輸入接受人數,僅限數字"><br>
+				</div></div>
 				配對狀態:<input type="radio" id="pair1" name="pair" value="0" checked>可配對
 				<input type="radio" id="pair2" name="pair" value="1">不可配對<br>
+				<input type="hidden" id="pair" name="pair" value="0" required>
+				<div class="form-row">
+   				<div class="control-group col-sm-6">
+				<label>露營地點：</label><input class="form-control" type="text" id="camparea" name="camparea" required placeholder="請輸入露營地點"><br>
+				<input type="hidden" id="pair" name="pair" value="0" required>
+				<input type="hidden" value='' id="picture" name="picture" />
+						<img src="https://storage.googleapis.com/ryantestpicture/finger" alt="finger"
+							style="max-width: 150px;" id="finger" class="btn">
+						<input type="file" class="form-control-file" id="newjpg" accept="image/*"
+							style="display: none; padding: 0px; border: 0px; border-radius: 5px;">
 				相關資訊：<br>
 				期望性別：<input type="radio" name="gender" value="男生" checked>男生<input type="radio" name="gender" value="女生">女生<input type="radio" name="gender" value="男女皆可">都可以<br>
 				預期住宿：<input type="checkbox" name="lodging" value="帳篷">帳篷<input type="checkbox" name="lodging" value="小木屋">小木屋
@@ -54,13 +73,23 @@
 				目前配備：<input type="checkbox" name="equipment" value="帳篷">帳篷<input type="checkbox" name="equipment" value="露營椅">露營椅
 				<input type="checkbox" name="equipment" value="卡式爐">卡式爐<input type="checkbox" name="equipment" value="睡袋">睡袋
 				<input type="checkbox" name="equipment" value="手電筒">手電筒<input type="checkbox" name="equipment" value="桌遊">桌遊<br><br>
-				說點什麼吧！<br><input id="introduction" name="introduction" type="text" style="width: 500px; height: 50px; word-wrap: break-word; overflow-wrap: break-word;">
+				</div>
+				<div class="control-group col-sm-6">
+				<label>說點什麼吧！</label><br><textarea name="introduction"  class="form-control" style="width: 541px; height: 150px; word-wrap: break-word; overflow-wrap: break-word;"></textarea>
+				<br></div></div>
 				<br>
 				<br>
-				<button type="submit" id="send" value="Send">送出</button>
+					<button class="btn btn-success btn-icon-split" type="submit" id="send" value="Send">
+				<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
+				<span class="text">修改</span></button>
 				</form>
-
-
+				
+				
+				
+				
+				
+				
+				</div>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -152,7 +181,40 @@
 			    	});
 			    }
 	});
+	
 		
+		document.getElementById("finger").addEventListener("click", function () {
+			document.getElementById("newjpg").click();
+		});
+		
+		document.getElementById("newjpg").addEventListener("change", function () {
+			file = this.files[0];
+			console.log(file)
+			let reader = new FileReader();
+			reader.onload = function (e) {
+				document.getElementById("finger").src = e.target.result;
+			};
+			reader.readAsDataURL(file);
+		});
+
+		$(document).ready(function () {
+			$('input[type="file"]').change(function () {
+				var file = this.files[0];
+				var formData = new FormData();
+				formData.append('file', file);
+				$.ajax({
+					type: 'POST',
+					url: '/morari/team/uploadpicturetogoogle.controller',
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (responseData) {
+						console.log(responseData);
+						document.getElementById("picture").value = responseData;
+					}
+				});
+			});
+		});
 	
 	$(function () {
     $(document).ready(function () {

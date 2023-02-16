@@ -68,12 +68,13 @@ public class VoteRecordService {
 
 	// 依option查得票數
 	public Integer showVoteRecord(VoteOption voteOption) {
-		List<VoteRecord> voteRecords = voteRecordRepository.findByVoteoption(voteOption);
-		int count = 0;
-		for (VoteRecord VoteRecord : voteRecords) {
-			count++;
-		}
-		return count;
+		// List<VoteRecord> voteRecords = ;
+		// int count = voteRecords.size();
+		
+		// for (VoteRecord VoteRecord : voteRecords) {
+		// 	count++;
+		// }
+		return voteRecordRepository.findByVoteoption(voteOption).size();
 	}
 
 	// 抽獎並記錄得獎者
