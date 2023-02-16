@@ -47,11 +47,6 @@ public class SetupDataLoader implements
     @Autowired
     private CityRepository cityRepository;
 
-    @Autowired
-    private TagRepository tagRepository;
-
-    @Autowired
-    private CityRepository cityRepository;
 
     @Override
     @Transactional
@@ -73,11 +68,6 @@ public class SetupDataLoader implements
             createCityIfNotFound(citys[i]);
         }
 
-        List<String> tags = Arrays.asList("大草原", "夜景", "親子娛樂", "雲海", "泡湯", "螢火蟲");
-        tags.forEach(t -> createTagIfNotFound(t));
-
-        List<String> citys = Arrays.asList("新北", "桃園", "新竹", "苗栗", "南投", "宜蘭", "台東");
-        citys.forEach(c -> createCityIfNotFound(c));
 
         // 檢查有無存在生成超級管理員
         Role adminRole = roleRepository.findByName("SUPERADMIN").get();
