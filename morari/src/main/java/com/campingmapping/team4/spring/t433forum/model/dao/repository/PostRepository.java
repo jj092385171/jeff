@@ -15,6 +15,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	// 依隱藏狀態查貼文
 	public List<Post> findByPosthideOrderByReleasedateDesc(Integer hide);
 	
+	// 依user查貼文
+	public List<Post> findByUserprofilesAndPosthideOrderByReleasedateDesc(UserProfiles uProfiles, Integer hide);
+	
 	// 依檢舉狀態查貼文
 	public List<Post> findByPostreport(Integer report);
 }
