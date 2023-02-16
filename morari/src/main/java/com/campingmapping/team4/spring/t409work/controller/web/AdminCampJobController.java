@@ -85,12 +85,19 @@ public class AdminCampJobController {
 		return jService.insert(jobBean, uid);
 	}
 
-	// 刪除
-	@DeleteMapping("/userDelete.controller/{rackID}")
+	// 刪除搜尋是否還有簡歷
+	@GetMapping("/userDelete.controller/{rackID}")
 	@ResponseBody
-	public String processDeleteAction(@PathVariable Integer rackID) {
-		jService.deleteById(rackID);
-		return "刪除成功";
+	public Boolean processDeleteAction(@PathVariable Integer rackID) {
+		return jService.deleteById(rackID);
+		 
+	}
+	// 真刪除
+	@DeleteMapping("/userTrueDelete.controller/{rackID}")
+	@ResponseBody
+	public String processTrueDeleteAction(@PathVariable Integer rackID) {
+		return jService.trueDeleteById(rackID);
+		
 	}
 
 	// 修改

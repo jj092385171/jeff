@@ -16,6 +16,7 @@ import com.campingmapping.team4.spring.t409work.model.Dao.repository.JobReposito
 import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t424camp.model.dao.repository.CampRepository;
 import com.campingmapping.team4.spring.t424camp.model.entity.Camp;
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 
 @Service
 @Transactional
@@ -67,8 +68,23 @@ public class JobService {
 	}
 
 	// 刪除職缺
-	public void deleteById(int rackID) {
+	public Boolean deleteById(int rackID) {
+		return  !jobDao.findByResume(rackID).isEmpty();
+
+	}
+	// 真 刪除職缺
+	public String trueDeleteById(int rackID) {
+		System.out.println("22222222222222222222222222222222222222");
+//			return "確定刪除嗎?有人針對該職缺投遞履歷！";
+//		jobDao.deleteById(rackID);
+		jobDao.disableForeignKeyConstraints();;
+		    // 刪除目標資料列
 		jobDao.deleteById(rackID);
+		    // 再重新建立外部鍵約束
+		jobDao.enableForeignKeyConstraints();
+		    
+		return "刪除成功";
+	
 	}
 
 	// 透過rackID抓一筆資料
