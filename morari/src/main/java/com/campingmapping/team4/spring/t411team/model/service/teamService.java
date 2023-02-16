@@ -184,7 +184,6 @@ public class teamService {
 		t.setUserprofiles(uRepo.findById(u).get());
 		i.setInitiatingnum(num);
 		t.setInitiating(i);
-//		List<Thundsup> tList = tRepo.findByUserprofiles(t.getUserprofiles());
 		List<Thundsup> tList = tRepo.findByUserprofiles(t.getUserprofiles());
 		List<Thundsup> iList = tRepo.findByInitiating(i);
 		for (Thundsup thundsup1 : iList) {

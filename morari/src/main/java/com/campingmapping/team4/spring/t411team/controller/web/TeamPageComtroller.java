@@ -47,6 +47,7 @@ public class TeamPageComtroller {
 		return "team/admin/teammanager";
 	}
 	
+	//新增跳轉
 	@RequestMapping("/insert.controller")
 	public String intoInsertAction() {
 		return "team/admin/insertManager";
@@ -87,10 +88,18 @@ public class TeamPageComtroller {
 		return "Delete OK";
 	}
 	
+	//管理者修改
 	@GetMapping("/update.controller")
 	public String display() {
 		return "team/admin/updateManager";
 	}
+	
+	//使用者修改
+	@GetMapping("/guestupdate.controller")
+	public String guestdisplay() {
+		return "team/guest/guestupdate";
+	}
+	
 	
 	@PutMapping("/updateMaterial.controller")
 	@ResponseBody
@@ -189,6 +198,11 @@ public class TeamPageComtroller {
 	@GetMapping("/apply.controller")
 	public String apply() {
 		return "team/guest/apply2";
+	}
+	
+	@GetMapping("/guestinsert.controller")
+	public String guestinsert() {
+		return "team/guest/guestinsert";
 	}
 	
 	//顯示本人留言

@@ -36,6 +36,16 @@
 					一個人出遊或許膽怯，但在這裡，你可以號召有相同興趣的夥伴！！！ 還在等什麼呢？選好你想去的地點，發起揪團，或是加入他人吧！！！
 				</p>
 			</div>
+			
+			<div class="col-md-12 room">
+			<div class="row">
+			<div class="room-does">
+			<div class="room-link">
+			<a href="#" data-toggle="modal" data-target="#modal-id" onclick="insert();">發起揪團</a>
+			</div>
+			</div>
+			</div>
+			</div>
 
 			<div id="result" class="row"></div>
 
@@ -440,6 +450,10 @@
 						console.log("查看完畢")
 					}
 			});
+		}
+		
+		function insert(){
+			window.location.href = "/morari/team/guestinsert.controller"
 		}
 
 		window.addEventListener("unload", async function (event) {
