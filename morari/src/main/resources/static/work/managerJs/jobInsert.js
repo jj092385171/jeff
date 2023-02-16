@@ -23,10 +23,11 @@ $(document).ready(function() {
 		}
 	});
 
+
 	//新增職缺
 	$("#send").click(function() {
 
-//  var uid =document.getElementById('uid')
+		//  var uid =document.getElementById('uid')
 		function getFormData($form) {
 			var unindexed_array = $form.serializeArray();
 			var indexed_array = {};
@@ -37,9 +38,11 @@ $(document).ready(function() {
 
 			return indexed_array;
 		}
+		var uuid = document.getElementById("uid").value;
+		console.log(uuid);
 		$.ajax({
 			type: 'POST',
-			url: '/morari/admin/user/work/userInsert.controller',
+			url: '/morari/admin/work/jobInsert.controller/' + uuid,
 			contentType: 'application/json',
 			data: JSON.stringify(getFormData($("#insert"))),
 			success: function(response) {
