@@ -17,6 +17,8 @@ public interface CategoryService {
 	public List<Category> selectAll();
 	//依pdtype來搜尋所有產品
 	public List<Category> selectByType(String pdtype);
+	//依userid來搜尋所有產品
+	public List<Category> selectByUserID(String userid);
 	
 	public void updateBuy(List<Category> category);
 }
