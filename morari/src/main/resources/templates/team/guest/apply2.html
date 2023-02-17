@@ -87,6 +87,8 @@
 
 								response.json().then(function (data) {
 
+									console.log(data)
+									
 									var applyData = "";
 
 									for (var i = 0; i < data.length; i++) {
@@ -95,13 +97,13 @@
 											'<div class="row">' +
 											'<div  class="col-md-6">' +
 											'<div class="room-img">' +
-											'<img src="/morari/guest/img/room/room-1.jpg">' +
+											'<img src="' + data[i].initiating.picture + '">' +
 											"</div>" +
 											"</div>" +
 											'<div class="col-md-6">' +
 											'<div class="room-des">' +
 											'<h3>揪團編號：' + data[i].initiating.initiatingnum + ' / 露營地點：' + data[i].initiating.camparea + '</h3>' +
-											'<h3>' + data[i].userprofiles.uid + '</h3>' +
+											'<h3>' + data[i].userprofiles.userdetail.nickname + '</h3>' +
 											'<h1>' + data[i].applypeople + '<span>(申請人數)</span></h1>' +
 											'<span>對你說：' + data[i].applymessage + '</span>' +
 											'<div class="room-link">' +
