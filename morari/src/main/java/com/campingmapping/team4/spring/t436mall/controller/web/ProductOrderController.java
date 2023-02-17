@@ -1,7 +1,9 @@
 package com.campingmapping.team4.spring.t436mall.controller.web;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,16 @@ import com.campingmapping.team4.spring.t436mall.model.entity.ProductCartVoReques
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrder;
 import com.campingmapping.team4.spring.t436mall.model.entity.ProductOrderVo;
 import com.campingmapping.team4.spring.t436mall.model.service.impl.ProductOrderServiceImpl;
+import com.campingmapping.team4.spring.utils.service.JwtService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/ProductOrder")
 public class ProductOrderController {
 
+	@Autowired
+	JwtService jwtService;
 	@Autowired
 	private ProductOrderServiceImpl pOServiceImpl;
 
@@ -61,10 +68,11 @@ public class ProductOrderController {
 	}
 
 	// 依userID來搜尋所有訂單
-	@GetMapping("/selectAllByUserId/{userid}")
+	@GetMapping("/selectAllByUserId")
 	@ResponseBody
-	public List<ProductOrder> selectAllByUserId(@PathVariable String userid) {
-		return pOServiceImpl.selectAllByUserId(userid);
+	public List<ProductOrder> selectAllByUserId(HttpServletRequest request) {
+		UUID uid = jwtService.getUId(request);
+		return pOServiceImpl.selectAllByUserId(uid.toString());
 	}
 
 	// 搜尋所有訂單(只有後臺能使用)
@@ -77,9 +85,8 @@ public class ProductOrderController {
 	// 修改訂單狀態
 	@PutMapping("/updateProductOrderSatusById")
 	@ResponseBody
-	public void updateProductOrderSatusById(@RequestParam String orderStatus,
-			@RequestParam Timestamp newDate, @RequestParam String orderId) {
-		pOServiceImpl.updateProductOrderSatusById(orderStatus, newDate, orderId);
+	public void updateProductOrderSatusById(@RequestParam String odstatus, @RequestParam String orderId) {
+		pOServiceImpl.updateProductOrderSatusById(odstatus, orderId);
 	}
 
 	// 修改訂單出貨地址、收件人、手機號(只有後臺能使用)

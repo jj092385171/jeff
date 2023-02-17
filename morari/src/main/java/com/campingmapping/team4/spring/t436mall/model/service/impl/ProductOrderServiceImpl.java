@@ -43,7 +43,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 		Date now = new Date();
 		order.setDatetime(now);
 		order.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-		order.setOdstatus("未出貨");
+		order.setOdstatus("未付款");
 		order.setUserid(productcartvorequest.get(0).getUserid());
 		order.setOdrecipient(odrecipient);
 		order.setOdrecipientphone(odrecipientphone);
@@ -86,11 +86,8 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 	}
 	// 修改訂單狀態
 	@Override
-	public void updateProductOrderSatusById(String orderStatus, Date newDate,
-			String orderId) {
-		Date now = new Date();
-		newDate = now;
-		pDao.updateProductOrderSatusById(orderStatus, newDate, orderId);
+	public void updateProductOrderSatusById(String odstatus,String orderId) {
+		pDao.updateProductOrderSatusById(odstatus, orderId);
 	}
 	// 修改訂單出貨地址、收件人、手機號(只有後臺能使用)
 	@Override

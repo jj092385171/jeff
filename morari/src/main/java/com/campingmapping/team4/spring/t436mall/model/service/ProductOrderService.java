@@ -20,8 +20,7 @@ public interface ProductOrderService {
 	// 搜尋所有訂單(只有後臺能使用)
 	public List<ProductOrder> selectAll();
 	// 修改訂單狀態
-	public void updateProductOrderSatusById(String orderStatus, Date newDate,
-			String orderId);
+	public void updateProductOrderSatusById(String odstatus,String orderId);
 	// 修改訂單出貨地址、收件人、手機號(只有後臺能使用)
 	public ProductOrder updateById(ProductOrder productorder);
 	// 依userID來修改單筆產品(只有後臺能使用)
