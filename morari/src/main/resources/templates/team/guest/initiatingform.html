@@ -232,7 +232,7 @@
 									
 								document.getElementById('title').innerHTML = data.title;
 								document.getElementById('introduction').innerHTML = data.introduction;
-								document.getElementById('postmember').innerHTML = data.userprofiles.uid + "<br>" + pDay;
+								document.getElementById('postmember').innerHTML = data.userprofiles.userdetail.nickname + "<br>" + pDay;
 								document.getElementById('tag').innerHTML = result;
 								document.getElementById('startday').innerHTML = sDay + "<br><br><br>";
 								document.getElementById('endday').innerHTML = eDay + "<br><br><br>";
@@ -285,7 +285,7 @@
 									console.log(pDay);
 									console.log(data[i].userprofiles.uid);
 									console.log(data[i].message);
-									messageData += "<h3>" + data[i].userprofiles.uid + ' 說：</h3><ul calss="room-size">' + data[i].message + '<i class="fa fa-arrow-right"></i>發文時間：' + pDay + "</ul><br>"
+									messageData += "<h3>" + data[i].userprofiles.userdetail.nickname + ' 說：</h3><ul calss="room-size">' + data[i].message + '<i class="fa fa-arrow-right"></i>發文時間：' + pDay + "</ul><br>"
 								}
 								
 								document.getElementById('messageview').innerHTML = messageData;
