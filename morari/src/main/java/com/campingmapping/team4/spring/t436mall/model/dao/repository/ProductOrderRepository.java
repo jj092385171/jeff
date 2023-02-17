@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t436mall.model.dao.repository;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;

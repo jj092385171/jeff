@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.campingmapping.team4.spring.t401member.model.dto.UserDetailAdminWeb;
 import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestEdit;
@@ -35,4 +36,6 @@ public interface UserService {
     public List<Date> getUserRegisterDate();
 
     public Collection<? extends GrantedAuthority> getUserRoles(HttpServletRequest request);
+
+    public String updateShot(String id,MultipartFile file);
 }

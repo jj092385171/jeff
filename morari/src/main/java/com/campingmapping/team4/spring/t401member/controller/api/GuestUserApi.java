@@ -43,8 +43,8 @@ public class GuestUserApi {
     @PutMapping("/shot")
     @ResponseBody
     public String putShot(@RequestParam("uid") String id,
-            @RequestParam("file") MultipartFile file) throws IOException {
-        return GoogleFileUtil.uploadFile("usershot" + id, file);
+            @RequestParam("file") MultipartFile file)  {
+        return userService.updateShot("usershot" + id, file);
     }
 
     @GetMapping("/nickname")

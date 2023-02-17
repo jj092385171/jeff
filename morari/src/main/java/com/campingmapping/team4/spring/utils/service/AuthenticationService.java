@@ -97,6 +97,7 @@ public class AuthenticationService {
 	@Transactional
 	public Boolean authenticate(AuthenticationRequest request, HttpServletResponse response) {
 		try {
+			
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
 							request.email(),

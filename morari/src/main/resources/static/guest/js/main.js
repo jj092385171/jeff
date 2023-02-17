@@ -72,7 +72,7 @@ window.onload = function () {
     fetch("/morari/api/auth/state", {
         method: "Get",
         // 發送請求時附帶Cookie
-        credentials: "include"
+        credentials: "same-origin"
     })
         .then(response => response.json())
         .then(loginstate => {
