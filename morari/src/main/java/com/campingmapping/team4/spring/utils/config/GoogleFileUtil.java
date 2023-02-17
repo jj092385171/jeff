@@ -2,6 +2,7 @@ package com.campingmapping.team4.spring.utils.config;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,7 @@ public class GoogleFileUtil {
     // 製作帳號物件
     Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
     // 檔案轉為byte
+    fileName=UUID.randomUUID().toString();
     byte[] bytes = files.getBytes();
     //上傳到指定的雲端儲存中
     BlobId blobId=BlobId.of(MyConstants.GOOGLE_BUCKETNAME,fileName);

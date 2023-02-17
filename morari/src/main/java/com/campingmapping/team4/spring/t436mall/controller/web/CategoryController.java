@@ -76,7 +76,6 @@ public class CategoryController {
 			while ((responseLine = br.readLine()) != null) {
 				response.append(responseLine.trim());
 				String jsonStr = responseLine;
-				System.out.println(jsonStr);
 				try {
 					// 把line回傳的orderid暫存
 					ObjectMapper mapper = new ObjectMapper();
