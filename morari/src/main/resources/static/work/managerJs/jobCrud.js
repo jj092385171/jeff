@@ -23,6 +23,7 @@ $(document).ready(function () {
 				contentType: 'application/json',
 				success: function (response) {
 					$('#showAll').empty("");
+					console.log(response);
 					table =
 						$('#showAll').DataTable({
 							"data": response,
@@ -32,6 +33,9 @@ $(document).ready(function () {
 									data: 'rackid',
 									title: "刊登編號",
 									responsivePriority: 1,
+									render: function (data, type, row) {
+										return "<a style='color:#FF8C00' href='/morari/admin/work/resumeStart.controller/" + row.rackid + "'>" + row.rackid + '<i class="fa-solid fa-file"></i>'
+									}
 								},
 								{
 									data: 'userprofiles.uid',
@@ -158,7 +162,7 @@ $(document).ready(function () {
 							}
 						});
 					// 表頭不換行
-					$('#showAll_wrapper thead tr th').css('white-space', 'nowrap');
+					$('#showAll thead tr th').css('white-space', 'nowrap');
 					table.responsive.recalc();
 					setTimeout(function () {
 						table.responsive.recalc();
@@ -169,18 +173,44 @@ $(document).ready(function () {
 })
 function jobDelete(rackid) {
 	if (confirm("確定刪除該筆資料(刊登編號:" + rackid + ")?")) {
+		console.log(rackid)
 		$.ajax({
-			type: 'delete',
-			url: '/morari/admin/work/jobDelete.controller/' + rackid,
-			dataType: 'TEXT',
+			type: 'GET',
+			url: '/morari/admin/user/work/userDelete.controller/' + rackid,
+			dataType: 'json',
 			success: function (data) {
-				alert(data);
-				location.reload();
+				
+				
+				if (data) {
+					if (confirm("該職缺有人投遞簡歷確定刪除嗎?")) {
+						$.ajax({
+							type: 'delete',
+							url: '/morari/admin/user/work/userTrueDelete.controller/' + rackid,
+							dataType: 'text',
+							success: function (data) {
+								console.log(data)
+								alert(data);
+								location.reload();
+							}
+
+						})
+					}
+				} else {
+					console.log('123123131')
+					$.ajax({
+						type: 'delete',
+						url: '/morari/admin/user/work/userTrueDelete.controller/' + rackid,
+						contentType: 'application/json',
+						success: function (data) {
+							alert(data);
+							location.reload();
+						}
+					})
+				}
 			}
-		});
-	} else {
+		})
 	}
-};
+}
 function jobUpdate(rackid) {
 	window.location.href = '/morari/admin/work/startUpdate.controller/' + rackid
 };

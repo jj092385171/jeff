@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -80,9 +81,11 @@ public class AdminCampJobController {
 	// 新增
 	@PostMapping("/userInsert.controller")
 	@ResponseBody
-	public JobBean processInsertAction2(@RequestBody JobBean jobBean) {
+	public List<JobBean> processInsertAction2(@RequestBody JobBean jobBean) {
 		UUID uid = jwtService.getUId(request);
-		return jService.insert(jobBean, uid);
+		JobBean insert = jService.insert(jobBean, uid);
+		List<JobBean> list = Arrays.asList(insert);
+		return list;
 	}
 
 	// 刪除搜尋是否還有簡歷
@@ -103,8 +106,10 @@ public class AdminCampJobController {
 	// 修改
 	@PutMapping("/userUpdate.controller/{rackid}")
 	@ResponseBody
-	public JobBean processUpdateAction(@RequestBody JobBean jBean, @PathVariable Integer rackid) {
-		return jService.updateJob(jBean, rackid);
+	public List<JobBean> processUpdateAction(@RequestBody JobBean jBean, @PathVariable Integer rackid) {
+		 JobBean updateJob = jService.updateJob(jBean, rackid);
+		 List<JobBean> list = Arrays.asList(updateJob);
+		return list;
 	}
 
 	// 透過rackid找資料後給前端修改
