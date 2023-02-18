@@ -72,7 +72,7 @@ window.onload = function () {
     fetch("/morari/api/auth/state", {
         method: "Get",
         // 發送請求時附帶Cookie
-        credentials: "same-origin"
+        credentials: "include"
     })
         .then(response => response.json())
         .then(loginstate => {
@@ -87,7 +87,7 @@ window.onload = function () {
                             // 顯示編輯按鈕
                             document.getElementById('edit-button-header').style = '';
                             let mobile = document.querySelector('.mobile-menu')
-                                mobile.querySelector('.setpage').style = "";
+                            mobile.querySelector('.setpage').style = "";
                             // document.getElementById('edit-button-fotter').style = '';
                         }
                     });
@@ -112,6 +112,16 @@ window.onload = function () {
                                 let mobile = document.querySelector('.mobile-menu')
                                 mobile.querySelector('.camperpage a').href = "/morari/camper/" + uid;
                             })
+                        // WebSocket載入
+                        var socket = new SockJS('/morari/websocket');
+                        var stompClient = Stomp.over(socket);
+
+                        stompClient.connect({}, function (frame) {
+                            stompClient.subscribe('/morari/topic/greetings', function (greeting) {
+                                showGreeting(JSON.parse(greeting.body).content);
+                            });
+                        });
+
 
                     });
             } else {

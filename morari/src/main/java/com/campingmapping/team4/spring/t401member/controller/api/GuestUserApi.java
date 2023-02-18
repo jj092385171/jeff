@@ -1,6 +1,5 @@
 package com.campingmapping.team4.spring.t401member.controller.api;
 
-import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestEdit;
 import com.campingmapping.team4.spring.t401member.model.dto.UserDetailGuestWeb;
 import com.campingmapping.team4.spring.t401member.model.service.*;
-import com.campingmapping.team4.spring.utils.config.GoogleFileUtil;
 import com.campingmapping.team4.spring.utils.service.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;

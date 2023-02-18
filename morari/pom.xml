@@ -171,6 +171,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		<!-- websocket -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -186,9 +192,9 @@
 			<artifactId>log4j-api</artifactId>
 		</dependency>
 		<dependency>
-		  <groupId>com.opencsv</groupId>
-		  <artifactId>opencsv</artifactId>
-		  <version>5.7.0</version>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.7.0</version>
 		</dependency>
 
 	</dependencies>
