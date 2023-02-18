@@ -49,6 +49,9 @@ public class PostService {
 		postAdmin.setUserlike(post.getUserlike());
 		postAdmin.setUserunlike(post.getUserunlike());
 		postAdmin.setPostreport(post.getPostreport());
+		if(post.getInformantuserprofiles() != null) {
+			postAdmin.setInformantuid(post.getInformantuserprofiles().getUid());
+		}
 		postAdmin.setPosthide(post.getPosthide());
 		return postAdmin;
 	}
@@ -73,6 +76,9 @@ public class PostService {
 			postAdmin.setUserlike(post.getUserlike());
 			postAdmin.setUserunlike(post.getUserunlike());
 			postAdmin.setPostreport(post.getPostreport());
+			if(post.getInformantuserprofiles() != null) {
+				postAdmin.setInformantuid(post.getInformantuserprofiles().getUid());
+			}
 			postAdmin.setPosthide(post.getPosthide());
 			list.add(postAdmin);
 		});
@@ -115,8 +121,8 @@ public class PostService {
 		post.setUserlike(0);
 		post.setUserunlike(0);
 		post.setPostreport(0);
+		post.setInformantuserprofiles(null);
 		post.setPosthide(0);
-
 		return postRepository.save(post);
 	}
 
@@ -124,7 +130,6 @@ public class PostService {
 	public Post update(Post post) {
 		post.setReleasedate(new Date());
 		post.setPostreport(0);
-
 		return postRepository.save(post);
 	}
 
@@ -171,7 +176,10 @@ public class PostService {
 	// 檢舉
 	public Post report(Integer postid) {
 		Post post = postRepository.findById(postid).get();
+		UUID uid = jwtService.getUId(request);
+		UserProfiles userProfiles = userRepository.findById(uid).get();
 		post.setPostreport(1);
+		post.setInformantuserprofiles(userProfiles);
 		return postRepository.save(post);
 	}
 
@@ -179,6 +187,7 @@ public class PostService {
 	public Post cancelReport(Integer postid) {
 		Post post = postRepository.findById(postid).get();
 		post.setPostreport(0);
+		post.setInformantuserprofiles(null);
 		return postRepository.save(post);
 	}
 

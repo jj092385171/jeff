@@ -81,6 +81,11 @@ public class Post {
 	@Column(name = "postreport")
 	private Integer postreport;
 	
+	// 檢舉者
+	@ManyToOne
+	@JoinColumn(name = "informantuid")
+	private UserProfiles informantuserprofiles;
+	
 	// 隱藏1 未隱藏0
 	@Column(name = "posthide")
 	private Integer posthide;

@@ -73,15 +73,6 @@ public class ShowPostController {
 		return postCommentService.getPostCommentByPostId(postId);
 	}
 
-	// 查貼文所有非隱藏留言
-	// @GetMapping("/showpostcommentnonhidebypostid.controller/{postid}")
-	// public List<ShowPostComment>
-	// processShowPostCommentNonHideByPostId(@PathVariable(name = "postid") Integer
-	// postId){
-	// return postCommentService.getPostCommentNonHideByPostId(postId);
-	//
-	// }
-
 	// 查貼文所有非隱藏留言+分頁
 	@GetMapping("/showpostcommentnonhidebypostid.controller/{postid}/{page}")
 	public List<ShowPostComment> processShowPostCommentNonHideByPostId(@PathVariable Integer postid,

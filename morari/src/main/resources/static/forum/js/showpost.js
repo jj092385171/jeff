@@ -90,7 +90,7 @@ Promise.all([fetch1, fetch2]).then(results => {
 
 		// 檢舉貼文
 		$("#sub").click(function () {
-			if (confirm("是否確定檢舉貼文?")) {
+			if (confirm("是否確定檢舉貼文? 惡意檢舉貼文可能導致帳號被封鎖！")) {
 				$.ajax({
 					type: "put",
 					url: "/morari/reportpost.controller/" + postid,

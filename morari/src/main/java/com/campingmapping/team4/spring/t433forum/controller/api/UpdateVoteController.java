@@ -48,7 +48,7 @@ public class UpdateVoteController {
 		if(vote != null) {
 			String email = vote.getWinner().getEmail();
 			String title = "morari恭喜你中獎";
-			String message = "恭喜您在「" + vote.getVotename() + "」投票中中獎";
+			String message = "恭喜您在「" + vote.getVotename() + "」投票中中獎，獲得登山包一個！";
 			emailService.sendEmail(email, title, message);
 			return true;
 		}

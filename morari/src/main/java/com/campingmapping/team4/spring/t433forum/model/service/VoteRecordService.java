@@ -68,12 +68,6 @@ public class VoteRecordService {
 
 	// 依option查得票數
 	public Integer showVoteRecord(VoteOption voteOption) {
-		// List<VoteRecord> voteRecords = ;
-		// int count = voteRecords.size();
-		
-		// for (VoteRecord VoteRecord : voteRecords) {
-		// 	count++;
-		// }
 		return voteRecordRepository.findByVoteoption(voteOption).size();
 	}
 
