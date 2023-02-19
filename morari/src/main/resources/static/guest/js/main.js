@@ -87,7 +87,7 @@ window.onload = function () {
                             // 顯示編輯按鈕
                             document.getElementById('edit-button-header').style = '';
                             let mobile = document.querySelector('.mobile-menu')
-                                mobile.querySelector('.setpage').style = "";
+                            mobile.querySelector('.setpage').style = "";
                             // document.getElementById('edit-button-fotter').style = '';
                         }
                     });
@@ -132,7 +132,9 @@ window.onload = function () {
             event.target !== dropdownContent && event.target.parentNode !== dropdownContent) {
             dropdownContent.style.display = "none";
         }
+
     });
+
 
 }
 // 切換下拉選單顯示/隱藏
@@ -144,3 +146,43 @@ function toggleDropdown() {
         dropdownContent.style.display = "none";
     }
 };
+// SA快
+function submitadmin() {
+    const data = {
+        email: "sa",
+        password: "0000",
+        rememberMe: true
+    }
+    sendlogin(data)
+}
+
+function sendlogin(data) {
+    fetch("/morari/api/auth/authenticate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(
+            response => {
+
+                if (response.status === 201) {
+                    // success
+                    window.location.href = '/morari/home';
+                } else if (response.status === 401) {
+                    document.getElementById("errormsg").innerHTML = "Invalid Email or Password";
+                } else if (response.status === 403) {
+                    document.getElementById("errormsg").innerHTML = "ser not authorized, please contact us.";
+                } else {
+                    document.getElementById("errormsg").innerHTML = "login failed";
+                }
+            })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+}
+
+function googlequick() {
+    window.location.href = "/morari/login/oauth2/authorization/google"
+}

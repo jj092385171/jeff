@@ -5,15 +5,15 @@ Chart.defaults.global.defaultFontColor = '#858796';
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
-  type: 'doughnut',
+  type: 'pie',
   data: {
-    labels: ["Direct", "Referral", "Social"],
-    datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-      hoverBorderColor: "rgba(234, 236, 244, 1)",
-    }],
+    labels: ['睡袋', '燈具', '登山鞋', '登山包', '火爐', '桌椅'],
+  datasets: [{
+    label: '# of Votes',
+    data: [12, 19, 3, 5, 2, 3],
+    borderWidth: 1,
+    backgroundColor: ['#CB4335', '#1F618D', '#F1C40F', '#27AE60', '#884EA0', '#D35400'],
+  }]
   },
   options: {
     maintainAspectRatio: false,
@@ -28,8 +28,14 @@ var myPieChart = new Chart(ctx, {
       caretPadding: 10,
     },
     legend: {
-      display: false
+      display: true,
+      position: 'bottom',
+      labels: {
+        fontColor: '#333',
+        fontSize: 12,
+        padding: 20
+      }
     },
-    cutoutPercentage: 80,
+    // cutoutPercentage: 80,
   },
 });
