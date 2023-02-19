@@ -42,6 +42,12 @@ public class PostComment {
 	private String postcomment;
 	@Column(name = "postcommentreport")
 	private Integer postcommentreport;
+	
+	// 檢舉者
+	@ManyToOne
+	@JoinColumn(name = "informantuid")
+	private UserProfiles informantuserprofiles;
+	
 	@Column(name = "postcommenthide")
 	private Integer postcommenthide;
 

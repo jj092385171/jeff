@@ -25,21 +25,21 @@ $(document)
 					"pagingType": "full_numbers",
 					"columns": [
 						{ data: "postid", title: "貼文編號", responsivePriority: 2 },
-						{ data: "uid", title: "會員編號", responsivePriority: 19 },
+						{ data: "uid", title: "會員編號", responsivePriority: 20 },
 						{ data: "title", title: "標題", responsivePriority: 3 },
-						{ data: "content", title: "內容", responsivePriority: 21 },
+						{ data: "content", title: "內容", responsivePriority: 22 },
 						{
-							data: "picture", title: "照片", responsivePriority: 20,
+							data: "picture", title: "照片", responsivePriority: 21,
 							render: function (data, type, row) {
 								if (data != null) {
 									return '<img src=\"' + data + '\" width="300"></img>';
 								} return null;
 							}
 						},
-						{ data: "people", title: "人數", responsivePriority: 13 },
-						{ data: "price", title: "價錢", responsivePriority: 14 },
+						{ data: "people", title: "人數", responsivePriority: 14 },
+						{ data: "price", title: "價錢", responsivePriority: 15 },
 						{
-							data: "county", title: "縣市", responsivePriority: 15,
+							data: "county", title: "縣市", responsivePriority: 16,
 							render: function (data, type, row) {
 								var countyInner = ["台北市", "新北市", "基隆市", "桃園市", "新竹縣", "新竹市", "苗栗縣", "台中市", "彰化縣", "南投縣",
 									"雲林縣", "嘉義縣", "嘉義市", "台南市", "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣"];
@@ -53,12 +53,12 @@ $(document)
 								return null;
 							}
 						},
-						{ data: "startdate", title: "起始日期", responsivePriority: 17 },
-						{ data: "enddate", title: "結束日期", responsivePriority: 18 },
-						{ data: "score", title: "評分", responsivePriority: 16 },
-						{ data: "releasedate", title: "更新日期", responsivePriority: 10 },
-						{ data: "userlike", title: "喜歡人數", responsivePriority: 11 },
-						{ data: "userunlike", title: "不喜歡人數", responsivePriority: 12 },
+						{ data: "startdate", title: "起始日期", responsivePriority: 18 },
+						{ data: "enddate", title: "結束日期", responsivePriority: 19 },
+						{ data: "score", title: "評分", responsivePriority: 17 },
+						{ data: "releasedate", title: "更新日期", responsivePriority: 11 },
+						{ data: "userlike", title: "喜歡人數", responsivePriority: 12 },
+						{ data: "userunlike", title: "不喜歡人數", responsivePriority: 13 },
 						{
 							data: "postreport", title: "是否檢舉貼文", responsivePriority: 7,
 							render: function (data, type, row) {
@@ -70,7 +70,7 @@ $(document)
 							}
 						},
 						{
-							data: "informantuid", title: "檢舉者", responsivePriority: 7,
+							data: "informantuid", title: "檢舉者", responsivePriority: 8,
 							render: function (data, type, row) {
 								if (row.postreport == 0) {
 									return "";
@@ -106,7 +106,7 @@ $(document)
 							}
 						},
 						{
-							data: "postid", title: "取消檢舉貼文", responsivePriority: 8,
+							data: "postid", title: "取消檢舉貼文", responsivePriority: 9,
 							render: function (data, type, row) {
 								if (row.postreport == 1) {
 									return '<button class="my-button datatable_report_button" onclick="cancelreportpost(\'' + row.postid + '\',\'' + row.informantuid + '\')"><i class="fas fa-bell-slash"></i></button>';
@@ -115,7 +115,7 @@ $(document)
 							}
 						},
 						{
-							data: "postid", title: "查看留言", responsivePriority: 9,
+							data: "postid", title: "查看留言", responsivePriority: 10,
 							render: function (data, type, row) {
 								return '<button class="my-button datatable_search_button" onclick=\"window.location.href=\'/morari/admin/forum/showcommentadmin.controller/' + row.postid + '\'\"><i class=\"fas fa-search-plus\"></i></button>';
 							}

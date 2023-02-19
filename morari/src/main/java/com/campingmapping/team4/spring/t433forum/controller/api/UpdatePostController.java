@@ -131,9 +131,9 @@ public class UpdatePostController {
 		
 	// 取消檢舉留言
 	@PutMapping("/cancelreportpostcomment.controller/{postcommentid}")
-	public String cancelReportPostComment(@PathVariable Integer postcommentid) {
+	public Boolean cancelReportPostComment(@PathVariable Integer postcommentid) {
 		postCommentService.cancelReportPostComment(postcommentid);
-		return "true";
+		return true;
 	}
 		
 	// 隱藏留言
