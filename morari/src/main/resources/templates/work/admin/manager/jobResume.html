@@ -30,23 +30,13 @@
                 <!-- Begin Page Content(開始主要內容區塊) -->
                 <div class="container-fluid">
 <!-- 這裡 -->
-<div class="long"><b>═══職缺管理═══</b></div>
-	<div>
-		<button id="campId" class="btn btn-success btn-icon-split">
-		<span class="icon text-white-50"><i class="fas fa-plus"></i></span>
-		<span class="text">新增職缺</span></button>
-	</div>
-
-	<div id="campID"></div>
 	
 	<hr>
-	<table id="campName" class="table is-striped"></table>
-		
-	<hr>
-
-	<table id="showAll" class="table is-striped"></table>
-
-
+		<table id="showResume" class="table is-striped"></table>
+		<form action="/morari/admin/work/crud.controller" method="GET"
+		enctype="multipart/form-data">
+		<input class="btn btn-success btn-icon-split" type="submit" value="回上一頁">
+	</form>
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
 
@@ -87,14 +77,14 @@
     <!-- Page level custom scripts -->
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
-   
-    	<!-- datatables js -->
+     	<!-- datatables js -->
 	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
 	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
 	
-	<script src="/morari/work/managerJs/jobCrud.js" defer></script>
-    <script type="text/javascript">    </script>
- 	<script src="https://kit.fontawesome.com/609970ed36.js" crossorigin="anonymous"></script>
+    <script src="/morari/work/managerJs/jobResume.js" defer></script>
+    <script type="text/javascript">
+
+	</script>
 
 </body>
 

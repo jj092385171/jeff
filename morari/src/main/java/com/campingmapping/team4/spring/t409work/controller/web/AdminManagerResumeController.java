@@ -1,5 +1,6 @@
 package com.campingmapping.team4.spring.t409work.controller.web;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.campingmapping.team4.spring.t409work.model.entity.JobBean;
 import com.campingmapping.team4.spring.t409work.model.entity.ResumeBean;
 import com.campingmapping.team4.spring.t409work.model.service.ResumeService;
 
@@ -69,8 +71,11 @@ public class AdminManagerResumeController {
 	// 修改
 	@PutMapping("/resumeUpdate.controller/{number}")
 	@ResponseBody
-	public ResumeBean processUpdateAction(@RequestBody ResumeBean rBean, @PathVariable Integer number) {
-		return rService.updateJob(rBean, number);
+	public List<ResumeBean> processUpdateAction(@RequestBody ResumeBean rBean, @PathVariable Integer number) {
+		
+		 ResumeBean updateJob = rService.updateJob(rBean, number);
+		 List<ResumeBean> list = Arrays.asList(updateJob);
+		return list;
 	}
 
 	// 找全部
@@ -116,8 +121,10 @@ public class AdminManagerResumeController {
 	// 新增履歷
 	@PostMapping("/resumeInsert.controller/{uid}")
 	@ResponseBody
-	public ResumeBean processInsertAction2(@RequestBody ResumeBean rBean,@PathVariable("uid") UUID uid) {
-		return rService.insert(rBean, uid);
+	public List<ResumeBean> processInsertAction2(@RequestBody ResumeBean rBean,@PathVariable("uid") UUID uid) {
+		 ResumeBean insert = rService.insert(rBean, uid);
+		 List<ResumeBean> list = Arrays.asList(insert);
+		return list;
 	}
 
 }

@@ -6,7 +6,7 @@
 
     <!-- sharepage -->
     <script src="/morari/admin/js/share.js"></script>
-
+	<link rel="stylesheet" href="/morari/admin/css/dataTable.css">
 </head>
 
 <body id="page-top" style="display: none">
@@ -99,29 +99,13 @@
                 </div>
             </div>
         </div>
-<!-- 	<h3>填寫簡歷</h3> -->
 
-<!-- 	<form id="insert" enctype="multipart/form-data"> -->
-	
-<!-- 		會員編號 <input type="text" name="uid" id="uid" required readonly><br> -->
-<!-- 		姓名 <input type="text" name="name" required><br> -->
-<!-- 		年次 <input type="number" name="age" required><br> -->
-<!-- 		性別 <input type="radio" name="gender" value="男" checked> 男 -->
-<!-- 			<input type="radio" name="gender" value="女"> 女<br> -->
-<!-- 		email <input type="text" name="mail" required><br> -->
-<!-- 		電話 <input type="number" name="phone" required><br> -->
-<!-- 		學歷<textarea name="educational" cols="20" rows="5"></textarea><br> -->
-<!-- 		專業技能<textarea name="skill" cols="20" rows="5"></textarea><br> -->
-
-<!-- 		<input id="send" type="button" value="送出"><br> -->
-<!-- 		<input type="reset" value="取消"><br> -->
-<!-- 	</form> -->
 	
 
 	<hr>
 	
 	<h3 id="su"></h3>
-	<table id="showInsert"></table>
+	<table id="showInsert" class="table is-striped"></table>
 
                 </div>
                 <!-- /.container-fluid(結束主要內容區塊) -->
@@ -164,6 +148,9 @@
     <script src="/morari/admin/js/demo/chart-area-demo.js" defer></script>
     <script src="/morari/admin/js/demo/chart-pie-demo.js" defer></script>
    
+   	<!-- datatables js -->
+	<script src="/morari/admin/vendor/datatables/datatables13.js"></script>
+	<script src="/morari/admin/vendor/datatables/datatableresponsive.js"></script>
     <!-- 我自己的東西 -->
     <script src="/morari/work/managerJs/resumeInsert.js" defer></script>
     <script type="text/javascript"></script>
