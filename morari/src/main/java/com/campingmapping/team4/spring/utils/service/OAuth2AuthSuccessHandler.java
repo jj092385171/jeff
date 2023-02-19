@@ -43,6 +43,7 @@ public class OAuth2AuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     // 是否創建帳戶
     // UserProfiles user = authAccountService.createIfFirst(oAuth2Request);
     UserProfiles userProfiles = authAccountService.createIfFirst(oAuth2Request);
+    // 權限是否正常
     if (!(userProfiles.getAccountnonexpired() && userProfiles.getAccountnonlocked() && userProfiles.isEnabled()
     && userProfiles.isCredentialsNonExpired())) {
       jwtService.removeToken(response);

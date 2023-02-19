@@ -61,6 +61,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String email = jwtService.extractUsername(refreshToken);
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         if (jwtService.isTokenValid(refreshToken, userDetails)) {
+
+          // 權限是否正常
+          if (!(userDetails.isAccountNonExpired() && userDetails.isAccountNonLocked() && userDetails.isEnabled()
+              && userDetails.isCredentialsNonExpired())) {
+            jwtService.removeToken(response);
+            response.sendRedirect("/morari/login?error=user_not_authorized");
+            return;
+          }
+
           // 生成新令牌
           authenticationResponse = jwtService.generateToken(userDetails, remember);
           // 刷新Cookie

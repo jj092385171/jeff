@@ -97,35 +97,40 @@ public class AuthenticationService {
 	@Transactional
 	public Boolean authenticate(AuthenticationRequest request, HttpServletResponse response) {
 		try {
-			
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
 							request.email(),
 							request.password()));
 			UserProfiles userProfiles = userRepository.findByEmail(request.email()).orElseThrow();
+			 // 權限是否正常
+			 if (!(userProfiles.getAccountnonexpired() && userProfiles.getAccountnonlocked() && userProfiles.isEnabled()
+			 && userProfiles.isCredentialsNonExpired())) {
+			   jwtService.removeToken(response);
+			   response.sendRedirect("/morari/login?error=user_not_authorized");
+			 }
 			AuthenticationResponse authenticationResponse = jwtService.generateToken(userProfiles,
 					request.rememberMe());
 			jwtService.refreshTokenToCookie(response, authenticationResponse);
 			return true;
 		} 
 		catch (LockedException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 		catch (AccountExpiredException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 		catch (DisabledException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 		catch (CredentialsExpiredException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 	}
