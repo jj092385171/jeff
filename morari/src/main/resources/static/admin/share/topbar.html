@@ -11,7 +11,7 @@
 
 
 
-        
+
 
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -19,8 +19,26 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
             </a>
-      
 
+            <!-- Nav Item - Alerts -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                    Alerts Center
+                </h6>
+              
+              
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+            </div>
+        </li>
 
 
 
@@ -29,7 +47,8 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 userNickname">Douglas McGee</span> -->
-                <img class="img-profile rounded-circle userShot" src=""style="max-width: 50px; max-height: 50px !important;">
+                <img class="img-profile rounded-circle userShot" src=""
+                    style="max-width: 50px; max-height: 50px !important;">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -52,7 +71,7 @@
                 <a class="dropdown-item" href="/morari/camp/myOrders">
                     <i class="fas fa-phone-volume  fa-sm fa-fw mr-2 "></i>
                     Camp Order
-                    
+
                 </a>
                 <!-- <div class="dropdown-divider"></div> -->
                 <a class="dropdown-item" href="/morari/logout" data-toggle="modal" data-target="#logoutModal">
