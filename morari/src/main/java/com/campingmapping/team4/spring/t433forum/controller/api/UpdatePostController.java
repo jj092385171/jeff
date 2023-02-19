@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campingmapping.team4.spring.t401member.model.dao.repository.UserRepository;
+import com.campingmapping.team4.spring.t401member.model.service.impl.UserServiceImpl;
 import com.campingmapping.team4.spring.t433forum.model.dto.PostAdmin;
 import com.campingmapping.team4.spring.t433forum.model.entity.Post;
 import com.campingmapping.team4.spring.t433forum.model.entity.PostLike;
@@ -34,6 +35,8 @@ public class UpdatePostController {
 	private JwtService jwtService;
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private UserServiceImpl userServiceImpl;
 
 	// 修改貼文
 	@PutMapping("/updatepost.controller")
@@ -44,6 +47,7 @@ public class UpdatePostController {
 		post.setUserlike(postById.getUserlike());
 		post.setUserunlike(postById.getUserunlike());
 		post.setPostreport(postById.getPostreport());
+		post.setInformantuserprofiles(userRepository.findById(postById.getInformantuid()).get());
 		post.setPosthide(postById.getPosthide());
 		postService.update(post);
 		return "true";
@@ -63,11 +67,17 @@ public class UpdatePostController {
 		return "true";
 	}
 	
+	// 封鎖檢舉者
+	@PutMapping("/lockaccount.controller/{uid}")
+	public Boolean lockaccount(@PathVariable UUID uid) {
+		// 使用者狀態：true可用 false封鎖
+		return userServiceImpl.updateaccountlocked(uid, false);
+	}
+	
 	// 隱藏貼文
 	@PutMapping("/hidepost.controller/{postid}")
 	public String hidePost(@PathVariable Integer postid) {
 		postService.hide(postid);
-//		return new RedirectView("/morari/forum/usershowpost.controller/" + postid);
 		return "true";
 	}
 	

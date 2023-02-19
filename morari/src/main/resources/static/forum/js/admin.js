@@ -70,6 +70,16 @@ $(document)
 							}
 						},
 						{
+							data: "informantuid", title: "檢舉者", responsivePriority: 7,
+							render: function (data, type, row) {
+								if (row.postreport == 0) {
+									return "";
+								} else {
+									return row.informantuid;
+								}
+							}
+						},
+						{
 							data: "posthide", title: "是否隱藏貼文", responsivePriority: 5,
 							render: function (data, type, row) {
 								if (row.posthide == 0) {
@@ -99,7 +109,7 @@ $(document)
 							data: "postid", title: "取消檢舉貼文", responsivePriority: 8,
 							render: function (data, type, row) {
 								if (row.postreport == 1) {
-									return '<button class="my-button datatable_report_button" onclick="cancelreportpost(' + row.postid + ')"><i class=\"fas fa-bell-slash\"></i></button>';
+									return '<button class="my-button datatable_report_button" onclick="cancelreportpost(\'' + row.postid + '\',\'' + row.informantuid + '\')"><i class="fas fa-bell-slash"></i></button>';
 								}
 								return null;
 							}
@@ -162,7 +172,7 @@ function cancelhidepost(id) {
 			contentType: "application/json",
 			success: function (data) {
 				if (data == true) {
-					alert("取消隱藏成功")
+					alert("取消隱藏成功");
 					location.reload();
 				}
 			}
@@ -170,7 +180,7 @@ function cancelhidepost(id) {
 	}
 }
 
-function cancelreportpost(id) {
+function cancelreportpost(id, informantuid) {
 	if (confirm("是否確定取消檢舉?")) {
 		$.ajax({
 			type: "put",
@@ -179,8 +189,23 @@ function cancelreportpost(id) {
 			contentType: "application/json",
 			success: function (data) {
 				if (data == true) {
-					alert("取消檢舉成功")
-					location.reload();
+					alert("取消檢舉成功");
+					if (confirm("是否封鎖檢舉者?")) {
+						$.ajax({
+							type: "put",
+							url: "/morari/lockaccount.controller/" + informantuid,
+							dataType: "JSON",
+							contentType: "application/json",
+							success: function (data) {
+								if (data == true) {
+									alert("封鎖檢舉者成功");
+									location.reload();
+								}
+							}
+						});
+					}else{
+						location.reload();
+					}
 				}
 			}
 		});

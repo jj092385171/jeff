@@ -34,5 +34,6 @@ public class PostAdmin{
 	private Integer userlike;
 	private Integer userunlike;
 	private Integer postreport;
+	private UUID informantuid;
 	private Integer posthide;
 }
