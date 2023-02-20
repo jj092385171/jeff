@@ -168,7 +168,7 @@ function showcamper(){
 
 // 檢舉留言
 function reportcomment(id){
-	if (confirm("是否確定檢舉留言?")) {
+	if (confirm("是否確定檢舉留言? 惡意檢舉留言可能導致帳號被封鎖！")) {
 		$.ajax({
 			type: "put",
 			url: "/morari/reportpostcomment.controller/" + id,

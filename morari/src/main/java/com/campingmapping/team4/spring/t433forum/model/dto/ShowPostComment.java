@@ -18,5 +18,6 @@ public class ShowPostComment {
 	private UUID uid;
 	private String postcomment;
 	private Integer postcommentreport;
+	private UUID informantuid;
 	private Integer postcommenthide;
 }
