@@ -80,14 +80,14 @@ public class SetupDataLoader implements
                 .build();
         // Detail
         UserDetail userDetail = UserDetail.builder()
-                .nickname("燚~超-級=管=理-員~燚")
+                .nickname("超級管理員")
                 .exp(999999L)
                 .level(999999)
                 .point(99999999L)
                 .gender(0)
                 .subscribed(false)
                 .shot("https://storage.googleapis.com/morariphoto/adminshot")
-                .about("想幹嘛就幹嘛")
+                .about("「Morari」是一個拉丁文動詞，意思是 \"停留、留宿\"，「Morari」不僅是一個露營平台，更是一個重新體驗生活的機會。期望為所有使用者提供優質的露營體驗，帶領大家遠離城市的喧囂，讓更多人能夠感受大自然的力量，沉澱身心靈、恢復疲累的精神。")
                 .registerdata(new Date())
                 .build();
         try {

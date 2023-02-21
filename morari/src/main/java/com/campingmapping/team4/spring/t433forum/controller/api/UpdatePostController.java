@@ -47,7 +47,9 @@ public class UpdatePostController {
 		post.setUserlike(postById.getUserlike());
 		post.setUserunlike(postById.getUserunlike());
 		post.setPostreport(postById.getPostreport());
-		post.setInformantuserprofiles(userRepository.findById(postById.getInformantuid()).get());
+		if(post.getInformantuserprofiles() != null) {
+			post.setInformantuserprofiles(userRepository.findById(postById.getInformantuid()).get());
+		}
 		post.setPosthide(postById.getPosthide());
 		postService.update(post);
 		return "true";

@@ -23,8 +23,8 @@ $(document).ready(function() {
 				url: '/morari/admin/resume/resumeShowAll.controller',
 				contentType: 'application/json',
 				success: function(response) {
-					table =
 					$('#showResume').empty("");
+					table =
 					$('#showResume').DataTable({
 						"data": response,
 						"columns":
@@ -122,14 +122,15 @@ $(document).ready(function() {
 					});
 					// 表頭不換行
 					$('#showResume thead tr th').css('white-space', 'nowrap');
-					table.responsive.recalc();
-					setTimeout(function () {
-						
+					// table.responsive.recalc();
+					setTimeout(function () {						
 						table.responsive.recalc();
 					}, 500);
 				}
 			});
 		});
+
+		
 });
 
 function resumeDelete(number) {
