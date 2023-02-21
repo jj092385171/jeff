@@ -89,7 +89,9 @@ public class teamService {
 				}
 				information = information.substring(0, information.length()-1) + ";";
 			}
-		i.setTag(information);
+			if(information.length() > 8){
+				i.setTag(information);
+			}
 		i.setViewingCount(i.getViewingCount());
 		i.setThumbsUp(iRepo.findById(i.getInitiatingnum()).get().getThumbsUp());
 		return iRepo.save(i);

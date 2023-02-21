@@ -196,7 +196,7 @@ function userDelete(rackid) {
 				
 				
 				if (data) {
-					if (confirm("該職缺有人投遞簡歷確定刪除嗎?")) {
+					if (confirm("該職缺有人投遞簡歷，確定刪除嗎?")) {
 						$.ajax({
 							type: 'delete',
 							url: '/morari/admin/user/work/userTrueDelete.controller/' + rackid,
