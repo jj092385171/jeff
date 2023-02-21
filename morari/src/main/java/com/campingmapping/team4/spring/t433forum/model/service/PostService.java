@@ -130,6 +130,7 @@ public class PostService {
 	public Post update(Post post) {
 		post.setReleasedate(new Date());
 		post.setPostreport(0);
+		post.setInformantuserprofiles(null);
 		return postRepository.save(post);
 	}
 

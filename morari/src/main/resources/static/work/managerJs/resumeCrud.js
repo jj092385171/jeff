@@ -14,8 +14,16 @@ $(document).ready(function() {
 
 				$('#campID').empty("");
 				var div = $('#campID');
-				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input class='btn btn-success btn-icon-split 'type='button' value='新增' onclick='submitForm()'></form>";
+				var input = "<form>請輸入會員編號<input type='text' id='uuid'><input class='btn btn-success btn-icon-split 'type='button' value='新增' onclick='submitForm()'></form><input class='btn btn-success btn-icon-split' type='button' value='帳號1' id='fastinput1'><input class='btn btn-success btn-icon-split' type='button' value='帳號2' id='fastinput2'>";
 				div.append(input);
+				// 一鍵輸入 
+				$("#fastinput1").click(function () {
+					fastinport1();
+				});
+				// 一鍵輸入 
+				$("#fastinput2").click(function () {
+					fastinport2();
+				});
 			})
 
 			$.ajax({
@@ -23,8 +31,8 @@ $(document).ready(function() {
 				url: '/morari/admin/resume/resumeShowAll.controller',
 				contentType: 'application/json',
 				success: function(response) {
-					table =
 					$('#showResume').empty("");
+					table =
 					$('#showResume').DataTable({
 						"data": response,
 						"columns":
@@ -122,14 +130,15 @@ $(document).ready(function() {
 					});
 					// 表頭不換行
 					$('#showResume thead tr th').css('white-space', 'nowrap');
-					table.responsive.recalc();
-					setTimeout(function () {
-						
+					// table.responsive.recalc();
+					setTimeout(function () {						
 						table.responsive.recalc();
 					}, 500);
 				}
 			});
 		});
+
+		
 });
 
 function resumeDelete(number) {
@@ -166,14 +175,23 @@ function submitForm() {
 				window.location.href = '/morari/admin/resume/startResumeInsert.controller/' + input1
 
 			} else {
-				alert("該會員已填寫過履歷");
+				alert("該會員已填寫過簡歷");
 			}
 
 		}
 	});
 
 }
+function fastinport1() {
+	//$("#uuid").val("c3a7996b-a722-49fc-a7d2-cfc4e359a8dd");
+	document.getElementById('uuid').setAttribute("value", "c3a7996b-a722-49fc-a7d2-cfc4e359a8dd");
 
+}
+function fastinport2() {
+	//$("#uuid").val("82cea0ee-92a0-40e1-bd07-b1d6ed124c2a");
+	document.getElementById('uuid').setAttribute("value", "82cea0ee-92a0-40e1-bd07-b1d6ed124c2a");
+
+}
 
 
 
