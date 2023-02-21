@@ -49,7 +49,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class UserProfiles implements UserDetails {
 
-  @Id
+	private static final long serialVersionUID = 1L;
+
+@Id
   private UUID uid;
 
   @Column(nullable = false, unique = true, length = 50)
