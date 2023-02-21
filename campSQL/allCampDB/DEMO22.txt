@@ -1,0 +1,1859 @@
+USE [master]
+GO
+/****** Object:  Database [campDB]    Script Date: 2023/2/22 上午 10:24:53 ******/
+CREATE DATABASE [campDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'campDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\campDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'campDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\campDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [campDB] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [campDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [campDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [campDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [campDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [campDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [campDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [campDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [campDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [campDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [campDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [campDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [campDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [campDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [campDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [campDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [campDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [campDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [campDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [campDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [campDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [campDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [campDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [campDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [campDB] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [campDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [campDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [campDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [campDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [campDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [campDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [campDB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'campDB', N'ON'
+GO
+ALTER DATABASE [campDB] SET QUERY_STORE = OFF
+GO
+USE [campDB]
+GO
+/****** Object:  Table [dbo].[apply]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[apply](
+	[applyid] [int] IDENTITY(1,1) NOT NULL,
+	[applymessage] [varchar](255) NULL,
+	[applypeople] [int] NULL,
+	[limit] [int] NULL,
+	[pairstate] [int] NULL,
+	[responsemessage] [varchar](255) NULL,
+	[responsestate] [int] NULL,
+	[initiatingnum] [int] NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[applyid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[camp]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[camp](
+	[campid] [int] IDENTITY(1,1) NOT NULL,
+	[campname] [varchar](255) NULL,
+	[camppicturespath] [varchar](255) NULL,
+	[description] [varchar](255) NULL,
+	[location] [varchar](255) NULL,
+	[fkcityid] [int] NULL,
+	[fkuserid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[campid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[camporder]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[camporder](
+	[orderid] [int] IDENTITY(1,1) NOT NULL,
+	[goingtime] [datetime2](6) NULL,
+	[leavingtime] [datetime2](6) NULL,
+	[ordertime] [datetime2](6) NULL,
+	[status] [varchar](255) NULL,
+	[totalprice] [int] NULL,
+	[fkcampid] [int] NULL,
+	[fkuserid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[orderid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[camporderitem]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[camporderitem](
+	[orderitemid] [int] IDENTITY(1,1) NOT NULL,
+	[goingtime] [datetime2](6) NULL,
+	[leavingtime] [datetime2](6) NULL,
+	[numbers] [int] NULL,
+	[unitprice] [int] NULL,
+	[fkorderid] [int] NULL,
+	[fksiteid] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[orderitemid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[category]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[category](
+	[pdid] [int] IDENTITY(1,1) NOT NULL,
+	[pdcontent] [varchar](500) NULL,
+	[pddate] [datetime2](6) NULL,
+	[pdinventory] [int] NULL,
+	[pdlastupdate] [datetime2](6) NULL,
+	[pdname] [varchar](255) NULL,
+	[pdpicture] [varchar](255) NULL,
+	[pdprice] [int] NULL,
+	[pdtitle] [varchar](255) NULL,
+	[pdtype] [varchar](255) NULL,
+	[userid] [varchar](255) NULL,
+ CONSTRAINT [PK__category__82226496C31E37E6] PRIMARY KEY CLUSTERED 
+(
+	[pdid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[city]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[city](
+	[cityid] [int] IDENTITY(1,1) NOT NULL,
+	[cityname] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[cityid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[coupon]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[coupon](
+	[couponid] [int] IDENTITY(1,1) NOT NULL,
+	[couponamount] [int] NULL,
+	[couponcode] [varchar](255) NULL,
+	[couponname] [varchar](255) NULL,
+	[couponphoto] [varbinary](max) NULL,
+	[couponrule] [varchar](255) NULL,
+	[couponstate] [varchar](255) NULL,
+	[coupontype] [int] NULL,
+	[couponused] [int] NULL,
+	[creatdate] [datetime2](6) NULL,
+	[enddate] [datetime2](6) NULL,
+	[showcoupon] [varchar](255) NULL,
+	[startdate] [datetime2](6) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[couponid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[couponwallet]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[couponwallet](
+	[cwid] [int] IDENTITY(1,1) NOT NULL,
+	[couponwalletstate] [int] NULL,
+	[showcouponwallet] [varchar](255) NULL,
+	[couponid] [int] NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[cwid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[initiating]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[initiating](
+	[initiatingnum] [int] IDENTITY(1,1) NOT NULL,
+	[acceptablenum] [int] NULL,
+	[applycount] [int] NULL,
+	[camparea] [varchar](255) NULL,
+	[currentnum] [int] NULL,
+	[enddate] [datetime2](6) NULL,
+	[introduction] [varchar](255) NULL,
+	[pair] [int] NULL,
+	[postdate] [datetime2](6) NULL,
+	[startdate] [datetime2](6) NULL,
+	[tag] [varchar](255) NULL,
+	[thumbsup] [int] NULL,
+	[title] [varchar](255) NULL,
+	[viewingcount] [int] NULL,
+	[uid] [binary](16) NULL,
+	[img] [varchar](255) NULL,
+	[thumbs_up] [int] NULL,
+	[picture] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[initiatingnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[job]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[job](
+	[rackid] [int] IDENTITY(1,1) NOT NULL,
+	[campname] [varchar](255) NULL,
+	[date] [varchar](255) NULL,
+	[img] [varchar](255) NULL,
+	[job] [varchar](255) NULL,
+	[place] [varchar](255) NULL,
+	[quantity] [int] NULL,
+	[rackup] [datetime2](6) NULL,
+	[remark] [varchar](255) NULL,
+	[salary] [varchar](255) NULL,
+	[time] [varchar](255) NULL,
+	[type] [varchar](255) NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rackid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[loginhistory]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[loginhistory](
+	[loginhistoryid] [int] IDENTITY(1,1) NOT NULL,
+	[logindate] [datetime2](6) NULL,
+	[loginhistoryip] [varchar](255) NULL,
+	[showloginhistory] [varchar](255) NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[loginhistoryid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[messagearea]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[messagearea](
+	[messageid] [int] IDENTITY(1,1) NOT NULL,
+	[message] [varchar](255) NULL,
+	[postday] [datetime2](6) NULL,
+	[initiatingnum] [int] NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[messageid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[passwordhistory]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[passwordhistory](
+	[passwordhistoryid] [int] IDENTITY(1,1) NOT NULL,
+	[account] [varchar](255) NULL,
+	[oldpassword] [varchar](255) NULL,
+	[setpassworddate] [datetime2](6) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[passwordhistoryid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[post]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[post](
+	[postid] [int] IDENTITY(1,1) NOT NULL,
+	[content] [varchar](max) NOT NULL,
+	[county] [varchar](255) NULL,
+	[enddate] [datetime2](6) NULL,
+	[people] [int] NULL,
+	[picture] [varchar](255) NULL,
+	[posthide] [int] NULL,
+	[postreport] [int] NULL,
+	[price] [int] NULL,
+	[releasedate] [datetime2](6) NULL,
+	[score] [int] NULL,
+	[startdate] [datetime2](6) NULL,
+	[title] [varchar](255) NOT NULL,
+	[userlike] [int] NULL,
+	[userunlike] [int] NULL,
+	[uid] [binary](16) NULL,
+	[informantuid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[postid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[postcomment]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[postcomment](
+	[postcommentid] [int] IDENTITY(1,1) NOT NULL,
+	[postcomment] [varchar](255) NULL,
+	[postcommenthide] [int] NULL,
+	[postcommentreport] [int] NULL,
+	[postid] [int] NULL,
+	[uid] [binary](16) NULL,
+	[informantuid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[postcommentid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[postlike]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[postlike](
+	[postlikeid] [int] IDENTITY(1,1) NOT NULL,
+	[likeorunlike] [int] NULL,
+	[postid] [int] NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[postlikeid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[productcart]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[productcart](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ctqty] [int] NULL,
+	[pdid] [int] NULL,
+	[userid] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[productorder]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[productorder](
+	[id] [varchar](255) NOT NULL,
+	[datetime] [datetime2](6) NULL,
+	[money] [int] NULL,
+	[odrecipient] [varchar](255) NULL,
+	[odrecipientphone] [varchar](255) NULL,
+	[odshippingaddress] [varchar](255) NULL,
+	[odshippingdatetime] [datetime2](6) NULL,
+	[odstatus] [varchar](255) NULL,
+	[userid] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[productorderdetail]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[productorderdetail](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[pdid] [int] NULL,
+	[pdorderid] [varchar](255) NULL,
+	[pdqty] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[resume]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[resume](
+	[number] [int] IDENTITY(1,1) NOT NULL,
+	[age] [int] NULL,
+	[educational] [varchar](255) NULL,
+	[gender] [varchar](255) NULL,
+	[mail] [varchar](255) NULL,
+	[name] [varchar](255) NULL,
+	[phone] [varchar](255) NULL,
+	[skill] [varchar](255) NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[number] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[resume_job]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[resume_job](
+	[number] [int] NOT NULL,
+	[rackid] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[role]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[role](
+	[rid] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[site]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[site](
+	[siteid] [int] IDENTITY(1,1) NOT NULL,
+	[sitemoney] [int] NULL,
+	[sitename] [varchar](255) NULL,
+	[sitepicturespath] [varchar](255) NULL,
+	[totalsites] [int] NULL,
+	[fkcampid] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[siteid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tag]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tag](
+	[tagid] [int] IDENTITY(1,1) NOT NULL,
+	[tagname] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[tagid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tagofcamp]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tagofcamp](
+	[fkcampid] [int] NOT NULL,
+	[fktagid] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[fkcampid] ASC,
+	[fktagid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[thundsup]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[thundsup](
+	[thundsupid] [int] IDENTITY(1,1) NOT NULL,
+	[initiatingnum] [int] NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[thundsupid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[user_role]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[user_role](
+	[uid] [binary](16) NOT NULL,
+	[rid] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[uid] ASC,
+	[rid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[userprofiles]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[userprofiles](
+	[uid] [binary](16) NOT NULL,
+	[accountnonexpired] [bit] NULL,
+	[accountnonlocked] [bit] NULL,
+	[email] [varchar](50) NOT NULL,
+	[iscredentialsnonexpired] [bit] NULL,
+	[isenabled] [bit] NULL,
+	[password] [varchar](255) NULL,
+	[about] [varchar](max) NULL,
+	[exp] [bigint] NULL,
+	[gender] [int] NULL,
+	[level] [int] NULL,
+	[nickname] [varchar](255) NULL,
+	[point] [bigint] NULL,
+	[registerdata] [datetime2](6) NULL,
+	[shot] [varchar](255) NULL,
+	[subscribed] [bit] NULL,
+	[firstname] [varchar](255) NULL,
+	[lastname] [varchar](255) NULL,
+	[address] [varchar](255) NULL,
+	[birthday] [datetime2](6) NULL,
+	[phone] [varchar](255) NULL,
+	[resume_number] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[uid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[vote]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[vote](
+	[voteid] [int] IDENTITY(1,1) NOT NULL,
+	[votename] [varchar](255) NULL,
+	[voting] [int] NULL,
+	[uid] [binary](16) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[voteid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[voteoption]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[voteoption](
+	[optionid] [int] IDENTITY(1,1) NOT NULL,
+	[optionname] [varchar](255) NULL,
+	[voteid] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[optionid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[voterecord]    Script Date: 2023/2/22 上午 10:24:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[voterecord](
+	[voterecordid] [int] IDENTITY(1,1) NOT NULL,
+	[uid] [binary](16) NULL,
+	[voteoptionid] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[voterecordid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[camp] ON 
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (1, N'聖德露營地', N'https://storage.googleapis.com/morariphoto/camp_015A6619-rsz.jpg', N'桃園最好玩~~ 超讚!!', N'中壢區新生路二段421號', 2, 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (2, N'虎頭山營王', N'https://storage.googleapis.com/morariphoto/camp_下載.jfif', N'自然風光壯闊!! 給人震撼的感受!!', N'桃園區公園路42號', 2, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (3, N'森林深夢', N'https://storage.googleapis.com/morariphoto/camp_images.jfif', N'寧靜的環境，讓心靈得到放鬆。', N'新埔鎮52之20號', 3, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (4, N'野心曲', N'https://storage.googleapis.com/morariphoto/camp_images (1).jfif', N'方便的設施，讓露營生活更輕鬆!!', N'成功鎮麒麟路52-6號', 7, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (5, N'大自然序曲', N'https://storage.googleapis.com/morariphoto/camp_015A6619-rsz.jpg', N'愜意的生活，享受露營的悠閒與愉悅', N'大同鄉泰雅路二段88巷211-9號', 6, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (6, N'星願留', N'https://storage.googleapis.com/morariphoto/camp_RS57480_Photo-by-Todd-Trapani-Pexels-qut.jpg', N'愜意的生活，享受露營的悠閒與愉悅~~', N'三灣鄉內灣村龍峎頂5-17號', 4, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (7, N'幽谷漫遊', N'https://storage.googleapis.com/morariphoto/camp_Gwydir-Riverside-Camping-Bingara-NSW-My-Rigg-Adventures.jpg', N'美好的回憶，留存露營的美好時光!!', N'魚池鄉大雁巷31-7號', 5, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (8, N'夢想營', N'https://storage.googleapis.com/morariphoto/camp_Grand-Canyon-Free-Dispersed-Camping-Tent.jpg', N'非常的安靜，給人很好的休閒空間~~', N'北投區秀山路85巷80號', 1, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (9, N'野心留痕', N'https://storage.googleapis.com/morariphoto/camp_Gwydir-Riverside-Camping-Bingara-NSW-My-Rigg-Adventures.jpg', N'美妙的景色，增添露營的快樂。', N'大溪區福山一路118-1號', 2, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (10, N'樹海漫漫遊', N'https://storage.googleapis.com/morariphoto/camp_Oxley_Wild_Rivers_National_Park.jpg', N'愉快的環境~~ 提供最好的露營體驗!!', N'復興區2鄰合流48之8號', 2, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (11, N'怡然山谷', N'https://storage.googleapis.com/morariphoto/camp_photo-1510312305653-8ed496efae75.jfif', N'舒適的空間，享受露營的愉快與自在。', N'復興區6鄰21號', 2, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (12, N'森林沉默', N'https://storage.googleapis.com/morariphoto/camp_military-members-camp-for-free-.jpg', N'獨特的風景，令人驚豔不已!!', N'復興區雪霧鬧道路', 2, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (13, N'自在綠意', N'https://storage.googleapis.com/morariphoto/camp_mann-river-sunset-northern-nsw-camping-grafton-gle.jpg', N'喧囂城市中，逃離塵囂。', N'金山區仔5-2號', 1, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (14, N'心靈森林', N'https://storage.googleapis.com/morariphoto/camp_light-tent-to-watch-the-mist-and-the-sun-rise-in-a-forest-camp-among-the-meadows-free-photo.jpg', N'綠意盎然，令人心曠神怡。', N'尖石鄉新樂村5鄰上水田150-2號', 3, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (15, N'閃耀宜蘭', N'https://storage.googleapis.com/morariphoto/camp_349.jfif', N'安靜的環境，放鬆心情!!', N'員山鄉長嶺路195號264', 6, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[camp] ([campid], [campname], [camppicturespath], [description], [location], [fkcityid], [fkuserid]) VALUES (17, N'蟬說', N'https://storage.googleapis.com/morariphoto/camp_白泥部落(八鄉石崗)豪華露營體驗.jpg', N'在充滿金雨樹的山林閱山，園區內層山疊嶂，僅有幾座小帳篷，露營的當下，遠望都市，夜晚時看看星空，原來世界這麼大，煩惱可以這麼狹小，來山中靜靜吧! 所有美好都留在這裡。', N'五峰鄉16號', 3, 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+SET IDENTITY_INSERT [dbo].[camp] OFF
+GO
+SET IDENTITY_INSERT [dbo].[camporder] ON 
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (1, CAST(N'2023-02-01T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-02T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-14T20:16:04.0770000' AS DateTime2), N'訂單已完成', 4800, 1, 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (2, CAST(N'2023-02-27T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-28T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-14T20:22:45.3790000' AS DateTime2), N'訂單付款成功', 4800, 1, 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (3, CAST(N'2023-03-04T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-14T20:27:01.5860000' AS DateTime2), N'訂單付款成功', 4800, 1, 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (4, CAST(N'2023-02-26T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-27T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-14T20:30:08.5520000' AS DateTime2), N'訂單付款成功', 3000, 3, 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (5, CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-06T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-14T20:32:14.0970000' AS DateTime2), N'訂單付款成功', 3000, 5, 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (6, CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-06T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-14T20:33:44.4250000' AS DateTime2), N'訂單付款成功', 3000, 8, 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (7, CAST(N'2023-02-23T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-24T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-14T20:44:09.3270000' AS DateTime2), N'訂單付款成功', 4800, 1, 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (8, CAST(N'2023-03-10T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-11T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-16T17:37:49.8660000' AS DateTime2), N'訂單付款成功', 4800, 1, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (9, CAST(N'2023-03-11T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-13T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-16T19:28:25.0950000' AS DateTime2), N'訂單付款成功', 4800, 1, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (10, CAST(N'2023-03-18T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-19T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-16T19:29:38.4420000' AS DateTime2), N'訂單付款成功', 4800, 1, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (11, CAST(N'2023-02-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-06T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-16T19:32:21.5800000' AS DateTime2), N'訂單已完成', 4800, 1, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (12, CAST(N'2023-04-01T00:00:00.0000000' AS DateTime2), CAST(N'2023-04-02T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-16T19:34:27.1750000' AS DateTime2), N'訂單付款成功', 4800, 1, 0xEE8033CD1A2B405A9A250AC8D9EC4AB0)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (13, CAST(N'2023-04-08T00:00:00.0000000' AS DateTime2), CAST(N'2023-04-09T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-16T20:38:26.6090000' AS DateTime2), N'訂單付款成功', 4800, 1, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (14, CAST(N'2023-02-17T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-18T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-17T11:46:00.0750000' AS DateTime2), N'訂單已完成', 4800, 1, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (15, CAST(N'2023-02-18T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-19T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-21T14:07:40.1570000' AS DateTime2), N'訂單已完成', 3000, 2, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[camporder] ([orderid], [goingtime], [leavingtime], [ordertime], [status], [totalprice], [fkcampid], [fkuserid]) VALUES (16, CAST(N'2023-03-04T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-21T14:09:59.6410000' AS DateTime2), N'訂單付款成功', 3000, 9, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+SET IDENTITY_INSERT [dbo].[camporder] OFF
+GO
+SET IDENTITY_INSERT [dbo].[camporderitem] ON 
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (1, CAST(N'2023-02-01T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-02T00:00:00.0000000' AS DateTime2), 4, 600, 1, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (2, CAST(N'2023-02-01T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-02T00:00:00.0000000' AS DateTime2), 3, 800, 1, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (3, CAST(N'2023-02-27T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-28T00:00:00.0000000' AS DateTime2), 3, 800, 2, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (4, CAST(N'2023-02-27T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-28T00:00:00.0000000' AS DateTime2), 4, 600, 2, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (5, CAST(N'2023-03-04T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), 4, 600, 3, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (6, CAST(N'2023-03-04T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), 3, 800, 3, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (7, CAST(N'2023-02-26T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-27T00:00:00.0000000' AS DateTime2), 5, 600, 4, 4)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (8, CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-06T00:00:00.0000000' AS DateTime2), 5, 600, 5, 6)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (9, CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-06T00:00:00.0000000' AS DateTime2), 5, 600, 6, 9)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (10, CAST(N'2023-02-23T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-24T00:00:00.0000000' AS DateTime2), 4, 600, 7, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (11, CAST(N'2023-02-23T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-24T00:00:00.0000000' AS DateTime2), 3, 800, 7, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (12, CAST(N'2023-03-10T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-11T00:00:00.0000000' AS DateTime2), 4, 600, 8, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (13, CAST(N'2023-03-10T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-11T00:00:00.0000000' AS DateTime2), 3, 800, 8, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (14, CAST(N'2023-03-11T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-13T00:00:00.0000000' AS DateTime2), 3, 800, 9, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (15, CAST(N'2023-03-11T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-13T00:00:00.0000000' AS DateTime2), 4, 600, 9, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (16, CAST(N'2023-03-18T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-19T00:00:00.0000000' AS DateTime2), 3, 800, 10, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (17, CAST(N'2023-03-18T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-19T00:00:00.0000000' AS DateTime2), 4, 600, 10, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (18, CAST(N'2023-02-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-06T00:00:00.0000000' AS DateTime2), 3, 800, 11, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (19, CAST(N'2023-02-05T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-06T00:00:00.0000000' AS DateTime2), 4, 600, 11, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (20, CAST(N'2023-04-01T00:00:00.0000000' AS DateTime2), CAST(N'2023-04-02T00:00:00.0000000' AS DateTime2), 4, 600, 12, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (21, CAST(N'2023-04-01T00:00:00.0000000' AS DateTime2), CAST(N'2023-04-02T00:00:00.0000000' AS DateTime2), 3, 800, 12, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (22, CAST(N'2023-04-08T00:00:00.0000000' AS DateTime2), CAST(N'2023-04-09T00:00:00.0000000' AS DateTime2), 3, 800, 13, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (23, CAST(N'2023-04-08T00:00:00.0000000' AS DateTime2), CAST(N'2023-04-09T00:00:00.0000000' AS DateTime2), 4, 600, 13, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (24, CAST(N'2023-02-17T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-18T00:00:00.0000000' AS DateTime2), 4, 600, 14, 2)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (25, CAST(N'2023-02-17T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-18T00:00:00.0000000' AS DateTime2), 3, 800, 14, 1)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (26, CAST(N'2023-02-18T00:00:00.0000000' AS DateTime2), CAST(N'2023-02-19T00:00:00.0000000' AS DateTime2), 5, 600, 15, 3)
+GO
+INSERT [dbo].[camporderitem] ([orderitemid], [goingtime], [leavingtime], [numbers], [unitprice], [fkorderid], [fksiteid]) VALUES (27, CAST(N'2023-03-04T00:00:00.0000000' AS DateTime2), CAST(N'2023-03-05T00:00:00.0000000' AS DateTime2), 5, 600, 16, 10)
+GO
+SET IDENTITY_INSERT [dbo].[camporderitem] OFF
+GO
+SET IDENTITY_INSERT [dbo].[category] ON 
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (1, N'三公升大容量，用於煎煮、烤箱、火鍋、炒食皆可行
+不沾鍋底紋理，可積蓄食用油，防止沾黏效果更佳
+可透視玻璃蓋，把握烹煮時機
+底部波浪狀卡榫，適用常見爐具
+鍋底齒狀止滑安全設計', CAST(N'2023-02-15T14:56:16.5780000' AS DateTime2), 30, CAST(N'2023-02-15T14:56:16.5780000' AS DateTime2), N'野樂 S-1-2 Kooke 酷客炫卡爐 之煎烤煮不沾方鍋', N'https://storage.googleapis.com/morariphoto/pd7b89b9bc-7514-4c95-849d-d93fed2e1de8', 1080, N'CampingAce 野樂', N'火爐/炊具', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (2, N'可當野炊焚火台、烤肉架
+特殊六角設計、烤網面積大
+折疊收納體積小攜帶方便
+附收納袋
+不鏽鋼材質.堅固耐腐蝕', CAST(N'2023-02-15T15:02:14.4420000' AS DateTime2), 30, CAST(N'2023-02-15T15:02:14.4420000' AS DateTime2), N'六角焚火台', N'https://storage.googleapis.com/morariphoto/pd7e01e0df-14fe-4dbd-a745-ea672ede4801', 3200, N'ADISI', N'火爐/炊具', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (3, N'堅固耐用的鋼結構
+軌道系統，可旋轉移動烤網位置
+立桿可調整燒烤網架高度位置以控制火候溫度
+非常適合在庭院使用，也很容易打包用於露營
+烤網防燙握把設計
+戶外大型多人燒烤爐
+模組化多用途設計，可作為火爐、燒烤爐、烹飪台等', CAST(N'2023-02-15T15:04:46.4530000' AS DateTime2), 30, CAST(N'2023-02-15T15:04:46.4530000' AS DateTime2), N'23吋燒烤爐 Fire Pit Grill', N'https://storage.googleapis.com/morariphoto/pde11a0587-4de4-40ba-8286-2c5bf5bd8dd8', 9500, N'Barebones', N'火爐/炊具', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (4, N'外帳 310 x (140+300+140)x 195cm 185T 75D Poly PU銀膠、防水係數 2000 mm 內帳 300 x 300 x190 cm || Poly 透氣布 重量: 約13.8KG
+收納包裝尺寸 : 25 x 25 x 63 cm 帳底 150D Poly +PU膠 防水係數 3000mm 寬敞舒適大空間 內外帳通風設計不悶熱
+加上前後延伸加高空間設計 搭設更方便簡單！', CAST(N'2023-02-15T15:26:27.2290000' AS DateTime2), 25, CAST(N'2023-02-15T15:26:27.2290000' AS DateTime2), N'山毛櫸八人庭院帳', N'https://storage.googleapis.com/morariphoto/pdf1941313-1707-49ce-ab04-9d14aafaac44', 11000, N'ADISI', N'睡袋', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (5, N'通風氣窗設計
+可加裝鐵桿撐起前庭
+空間寬廣
+需搭配香楓六人主帳
+7001鋁桿', CAST(N'2023-02-15T15:28:24.8520000' AS DateTime2), 10, CAST(N'2023-02-15T15:28:24.8520000' AS DateTime2), N'香楓鋁桿帳活動式延伸帳', N'https://storage.googleapis.com/morariphoto/pdcfd241e7-9817-4a05-85d1-3c27e7300536', 4600, N'ADISI', N'睡袋', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (6, N'外帳 275 x (120+270+120)x 185cm
+185T 75D Poly PU銀膠、防水係數 2000 mm
+內帳 270 x 270 x180 cm || Poly 透氣布
+重量: 約11.8KG
+收納包裝尺寸 : 24 x 24 x 56 cm
+帳底 150D Poly +PU膠 防水係數 3000mm
+寬敞舒適大空間
+內外帳通風設計不悶熱
+加上前後延伸加高空間設計
+搭設更方便簡單', CAST(N'2023-02-15T15:30:05.9320000' AS DateTime2), 10, CAST(N'2023-02-15T15:30:05.9320000' AS DateTime2), N'山毛櫸六人庭院帳', N'https://storage.googleapis.com/morariphoto/pd7b747eb7-e02d-4158-89e2-ffcf113f0e06', 9800, N'ADISI', N'睡袋', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (7, N'最高亮度220流明、最低亮度50流明
+採用USB充電，充到飽只需4~6小時
+電力維持低亮度至多到80小時，最高亮度4小時
+電量指示燈貼心提醒您何時需要充電
+LED 多種亮度調整，不因使用造成金屬高溫，安全又實用', CAST(N'2023-02-15T15:32:50.7960000' AS DateTime2), 10, CAST(N'2023-02-15T15:32:50.7960000' AS DateTime2), N'手提營燈 Forest LIV-261 / 黑銅色', N'https://storage.googleapis.com/morariphoto/pd17597de4-1056-48a9-85b6-253327882d23', 2500, N'Barebones', N'請選擇產品類別', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (8, N'USB插電式/低35.高100流明
+溫暖光線營造出舒適的氛圍
+電?線附有懸掛鉤環方便懸掛或吊掛
+可懸掛在樹上或陽台上增添美感
+IPX4防水等級防鏽塗層鋼
+復古造型營燈居家、宴會佈置、戶外露營皆適用
+可單獨使用或最多串連6個垂飾
+※ 此商品頁為單入販售', CAST(N'2023-02-15T15:34:27.5980000' AS DateTime2), 10, CAST(N'2023-02-15T15:34:27.5980000' AS DateTime2), N'垂吊營燈 Edison Pendant Light LIV-264 / 霧黑 (單入)', N'https://storage.googleapis.com/morariphoto/pd1c034803-536e-4c70-9f8a-551a88d09079', 1180, N'Barebones', N'燈具', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (9, N'三入串連/插電式/40～250流明
+IPX4 防水等級防鏽塗層鋼
+附懸掛鉤環3個，方便懸掛或吊掛
+可懸掛在樹上或陽台上增添美感
+三個無法拆開使用
+復古造型營燈居家、宴會佈置、戶外露營皆適用', CAST(N'2023-02-15T15:35:27.2560000' AS DateTime2), 10, CAST(N'2023-02-15T15:35:27.2560000' AS DateTime2), N'串連垂吊營燈 Edison String Lights LIV-265 / 霧黑', N'https://storage.googleapis.com/morariphoto/pd6ce762e2-bb85-49ff-8440-635ea9706aa2', 2280, N'Barebones', N'燈具', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (10, N'4片頂板
+摺疊桌可垂直堆疊 (另外加購)
+下方裝上網布後可置放更多物品
+另有延伸燈架及掛架可購買安裝
+可另外購買連接桌板，將工作台連接安裝，加大使用面積
+在兩側底部安裝固定桿，結構更堅固
+可以收至附贈的袋內方便攜帶
+尺寸：展開 - 56.5×39.5×37(h) cm / 收納 - 47×16×12(h) cm
+重量：約 1.9 kg
+材質：鋁、PP聚丙烯、聚酯纖維、600D聚酯纖維 (收納袋)
+內容：頂板 x 4、支架、網布、收納袋
+產地：中國 (韓國品牌)', CAST(N'2023-02-15T15:37:09.4800000' AS DateTime2), 10, CAST(N'2023-02-15T15:37:09.4800000' AS DateTime2), N'輕量鋁板摺疊桌 ZFATA0301 / 折合桌', N'https://storage.googleapis.com/morariphoto/pdf6062273-16b4-4013-b0cb-deb3a68ef0d2', 2980, N'ZED', N'桌椅', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (11, N'鋁合金材質，重量輕、堅固耐用
+蛋捲式桌面設計，可將桌面捲起收納
+魔鬼氈黏扣帶，加強固定桌面與腳架
+兩段式卡扣升降腳架，共有三種高度可調整
+快拆系統，便於快速調整桌子高度
+附收納提袋，方便攜帶，一提就走
+簡易組裝，不占空間
+高質感木紋鋁板桌面
+另有M號鋁捲桌可供選擇
+耐重40kg', CAST(N'2023-02-15T15:38:10.7140000' AS DateTime2), 10, CAST(N'2023-02-15T15:38:10.7140000' AS DateTime2), N'木紋兩段式鋁捲桌 AS21028-1 (L) / 摺疊桌', N'https://storage.googleapis.com/morariphoto/pdb4722286-3a18-49b1-81fe-17635e4c636d', 3680, N'ADISI', N'桌椅', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (12, N'收納方便 、附贈收納袋一提就走
+金屬黑框磨砂材質精美/質感升級
+榮獲日本最佳設計大獎
+W64*D78*H94cm/5KGS
+三種顏色可供挑選
+本頁面販售:黑色', CAST(N'2023-02-15T15:39:45.4520000' AS DateTime2), 20, CAST(N'2023-02-15T15:39:45.4520000' AS DateTime2), N'晴空椅AS14002_黑色', N'https://storage.googleapis.com/morariphoto/pd628c62bd-331b-4756-986b-57510b7a740a', 2750, N'ADISI', N'桌椅', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (13, N'透氣網布座布
+航太鋁合金7075支架
+超輕量、強度夠、更耐久
+防倒安全設計
+兩段可調整高度設計
+承重可達145kg
+收納尺寸：16x49x13 cm
+展開尺寸：63x69x107/96(H) cm
+商品重量：1.7kg
+網頁商品顏色因拍攝角度、光線、場景及螢幕設定的不同，會有些微色差，請以實品為準。', CAST(N'2023-02-15T15:41:32.1280000' AS DateTime2), 7, CAST(N'2023-02-15T15:41:32.1280000' AS DateTime2), N'輕量網布蝴蝶形摺疊椅｜黑色', N'https://storage.googleapis.com/morariphoto/pd2971ace7-400e-44f0-a361-f5943ded4373', 3450, N'Monterra', N'桌椅', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (14, N'發泡絕緣層有效保冷，不會像單層冰盆、冰桶有「外表出汗」的現象。
+藉由Cool Riser Technology?專利技術，有效隔熱提升保冷功能。
+內部使用耐用、不易用髒且好清潔的聚丙烯製作而成。
+段式防漏排水閥，方便將融化的冰塊水排出，及清洗內部。且不會在未開啟狀況下漏水。
+寬厚且符合人體工學設計的把手，更好拿取及攜帶。
+「可層層堆疊」設計，更方便簡單收納及擺放。（※堆疊為示意圖，商品僅販售黑色一入，無其他顏色。）', CAST(N'2023-02-15T15:43:07.1470000' AS DateTime2), 8, CAST(N'2023-02-15T15:43:07.1470000' AS DateTime2), N'PARTY 系列 20QT 派對冰桶', N'https://storage.googleapis.com/morariphoto/pd41b12987-cbbb-4da1-aaa7-6f922ce78469', 1500, N'IGLOO', N'保冷箱', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (15, N'使用 New Thermecool? Foam 環保發泡填充，可有效隔絕外界溫度。
+28L 空間可容納 41 瓶 350ml 鋁罐，可放入市面上常見的飲料罐，最大可放置2L保特瓶。
+抗紫外線，不怕被太陽曬到變質，適合航行、釣魚等活動。
+上蓋自動排水飲料杯架，方便拿取飲料，可放置兩個　350ml　的鋁罐。
+方便搬運的上提式手把，並有舒適的橡膠手把。
+Cool Riser Technology R－ 底部架高減少地面與地面接觸的面積，以降低熱傳導，達到提升保冷效能。
+最熱銷的尺寸之一，好攜帶拿了就出發，適合釣魚、野餐、海邊及短程旅遊', CAST(N'2023-02-15T15:44:53.9120000' AS DateTime2), 7, CAST(N'2023-02-15T15:44:53.9120000' AS DateTime2), N'MARINE UL 系列三日鮮 30QT 冰桶', N'https://storage.googleapis.com/morariphoto/pd54f7ba61-3c3b-497f-b6e0-b55b11a1d82d', 2400, N'Igloo', N'保冷箱', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (16, N'對於著重競速的活動，這款具備防水性能的輕量靴款，能提供雙足前所未有的舒適和保護。即使背負沉重裝備、需要長時間久站和長途跋涉，都能應付自如。
+顏色：Army Green/軍綠
+鞋面：1.6-1.8mm 反毛皮、300D尼龍、尼龍織帶
+內襯：Gore-TexR Extended Comfort
+鞋墊：PU
+鞋底：GarmontR NFS
+重量：535克（英碼8號單腳）
+產地：越南', CAST(N'2023-02-15T15:46:38.0640000' AS DateTime2), 15, CAST(N'2023-02-15T15:46:38.0640000' AS DateTime2), N'中性款 GTX 高筒Mission軍靴', N'https://storage.googleapis.com/morariphoto/pdc98c34ed-7039-4fc3-9bd5-af623721411e', 5400, N'GARMONT', N'登山鞋', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (17, N'適合穿著於需要長途負重前行的旅途，或是在困難的地形中行走。
+鞋面：防水磨砂革+多合一軟殼面料(schoellerR)
+內襯：Gore-Tex Performance Comfort Footwear+防水皮革
+鞋床：Asoflex 00 MR
+鞋底：Asolo /VibramRMaster+mono density midsole+dual color PU heel
+（黃金大底+單密度微孔中底+腳跟雙層PU）
+重量：650克（英碼8號單腳）', CAST(N'2023-02-15T15:48:24.6070000' AS DateTime2), 3, CAST(N'2023-02-15T15:48:24.6070000' AS DateTime2), N'大背包健行鞋 SUPERIOR GV', N'https://storage.googleapis.com/morariphoto/pde11ec22e-5804-4b8f-b336-aae35e488d42', 11800, N'ASOLO', N'登山鞋', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (18, N'VariSlide 背長快速調系統
+VariFlex 可動式魚鰭腰帶系統
+符合人體工學的 Active Fit 肩帶
+不含氟化物PFC FREE
+容量：50+10 L
+重量：2160 g
+尺寸：高78 x 寬31 x 深26 cm
+顏色：黑/水藍
+產地：越南', CAST(N'2023-02-15T15:50:02.4470000' AS DateTime2), 15, CAST(N'2023-02-15T15:50:02.4470000' AS DateTime2), N'拔熱式透氣背包', N'https://storage.googleapis.com/morariphoto/pd84bf6e7c-61e2-4c22-b369-11648a8c8392', 9500, N'Deuter', N'登山包', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (19, N'符合人體工學的3D網狀背板、舒適透氣，梯形腰墊能確保負載均勻分佈在肌肉骨骼系統上，且不影響骨盆活動。
+容量：25L
+重量：710g
+尺寸：高55x寬29x深19 cm
+顏色：黑/水藍、蔚藍
+產地：越南', CAST(N'2023-02-15T15:51:49.8000000' AS DateTime2), 13, CAST(N'2023-02-15T15:51:49.8000000' AS DateTime2), N'LITE超輕量旅遊背包', N'https://storage.googleapis.com/morariphoto/pd38ba8138-f1a6-48f3-a76d-eb96b128d266', 4550, N'Deuter', N'登山包', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (20, N'材質：不鏽鋼+熱處理樺木
+內容：4把刀/1把叉/1磨刀石
+產地：芬蘭
+由 Harri Koskinen 設計的 Cabin Chef 刀具組適用露營和度假小屋廚房必備的刀具。
+刀片由優質耐用的不銹鋼製成，
+該套裝包括：一把廚師刀、一把魚片刀、一把魚叉、兩把小刀和一塊磨刀石。
+手柄由芬蘭熱處理樺木製成 - 這種材料以其耐用性及溫暖舒適的手感而聞名。
+啞光飾面確保即使在潮濕時也能安全抓握。', CAST(N'2023-02-15T15:53:52.3410000' AS DateTime2), 10, CAST(N'2023-02-15T15:53:52.3410000' AS DateTime2), N'Cabin Chef Set 野營刀具組', N'https://storage.googleapis.com/morariphoto/pdfdb9287d-11df-4ff4-b60c-c991b1658e73', 16200, N'Marttiini', N'其他', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (21, N'自帶餐具，淘汰一次性塑膠
+磁性設計，方便推疊收納攜帶
+高強度材質，硬質陽極氧化 7075-T6 鋁合金
+永續材質，收納袋採用再生聚酯纖維
+5款顏色供選擇
+Magware 磁性餐具，自帶餐具 (BYOC) Bring Your Own Cutlery 有助於減少每年被丟棄的一次性餐具的數量。
+榮獲2022年度 德國 紅點設計大獎
+榮獲2022年度 美國 Core77 工業設計大獎
+Outside Magazine 評選為2022年度最佳裝備', CAST(N'2023-02-15T15:57:00.6270000' AS DateTime2), 5, CAST(N'2023-02-15T15:57:00.6270000' AS DateTime2), N'Magware 磁性餐具三件組', N'https://storage.googleapis.com/morariphoto/pdec40cbff-b87c-4548-8478-065ed20159f7', 1080, N'Full Windsor', N'火爐/炊具', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (22, N'GALLAGATOR讓你可以輕鬆的在都市與戶外行動。
+採用經典的3-ZIP三向拉鍊設計，讓打包與拿取物品更便利！
+背部的兩條直立的泡棉襯墊提升背負時的舒適度！
+不論你是想要當作一日健行包、登頂包或是日用包，它都可以滿足你的需求。', CAST(N'2023-02-16T16:14:13.4940000' AS DateTime2), 5, CAST(N'2023-02-16T16:14:13.4940000' AS DateTime2), N'Gallagator 19　Black', N'https://storage.googleapis.com/morariphoto/pd9981b733-9f5f-4244-8426-9e42a1c1fc31', 1999, N'Mystery Ranch', N'登山包', N'd4ce0cf7-9704-47a0-b27f-24438ac17686')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (23, N'容納人數 : 6 - 8 人 打包重量 : 約11.5kg 外帳展開尺寸 : 460 cm x 460 cm x 300 cm
+內帳展開尺寸 : 450 cm x 420 cm x 300 cm 收納尺寸：23 cm x 23 cm x74 cm
+外帳面料：210T聚酯纖維
+內帳面料：185T聚酯纖維
+地布面料：210D聚酯纖維牛津
+外帳防水係數：2000mm
+地布防水係數：3000mm', CAST(N'2023-02-16T16:17:01.0810000' AS DateTime2), 5, CAST(N'2023-02-16T16:17:01.0810000' AS DateTime2), N'經典白色八角帳', N'https://storage.googleapis.com/morariphoto/pdabb025c8-35b8-4e95-96ea-23e92aa28a4a', 7999, N'CAPTAIN STAG', N'睡袋', N'd4ce0cf7-9704-47a0-b27f-24438ac17686')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (24, N'32公升行動冰箱大小約莫一般摺疊箱大小，非常適合放在後車廂，在一般露營情況下，32公升的行動冰箱已經非常足夠兩天兩夜的情況使用。
+冰箱佔有一定的體積在擺設布景時候，如果冰箱顏色非常突兀，在過去我們會罩上一些好看的織布來修飾，以達到裝飾的整體性，
+但這款行動冰箱看來，是玩美學派所需要的沙色，在整體裝飾上以及實用上，都達到一定的水準，可以說是目前市面上唯一強調美學保冰桶。', CAST(N'2023-02-16T16:18:21.0020000' AS DateTime2), 5, CAST(N'2023-02-16T16:18:21.0020000' AS DateTime2), N'32L保冰箱', N'https://storage.googleapis.com/morariphoto/pd62e17a3e-7c5a-4170-b41d-2c24e3e62581', 899, N'LOHACAMP', N'保冷箱', N'd4ce0cf7-9704-47a0-b27f-24438ac17686')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (25, N'經典的GLACIER更新款，有著所有EXPIDITION系列包款的更新功能。可調式的背負系統與堅韌耐用的布料、長時間背負時的依然可以保有穩定及舒適性；
+背包主袋的頂部開口有兩段式的收縮調節繩，可提高耐候性亦可增加收納空間；Speedzip?隔層方便快速拿取睡袋。 可拆式頂袋能與背板(YOKE)結合，
+當成後背包/登頂包使用；且頂袋具有兩個獨立隔層空間，方便放置物品。', CAST(N'2023-02-16T16:19:05.3960000' AS DateTime2), 5, CAST(N'2023-02-16T16:19:05.3960000' AS DateTime2), N'GLACIER 71 Wood', N'https://storage.googleapis.com/morariphoto/pdb5b6d72d-ed9b-48e9-8740-1cb936bccd3a', 3999, N'Mystery Ranch', N'登山包', N'd4ce0cf7-9704-47a0-b27f-24438ac17686')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (27, N'健康環保:這款旅行叉勺刀組採用高品質食品級不鏽鋼製成,可重複使用且耐用,適合日常使用。 易於清潔,可用洗碗機清洗。
+7 件旅行餐具組,附收納盒:餐刀、餐匙、餐叉、筷子、清掃刷、直吸管、彎曲吸管、攜帶收納袋
+方便攜帶:這款旅行餐具組體積小,重量輕,8 件旅行餐具組附收納盒,是日常使用的必備品。 適用於鋪車、工作、學校、飛行、工作場所、外出用餐、野餐、露營等。
+經典規格:這款露營叉勺外型簡約,邊緣光滑,無粗糙點,抗氧化,時尚大方。 這款便攜式銀器套裝附收納盒可搭配任何風格的廚房,以滿足每個人的基本用餐需求。 ?', CAST(N'2023-02-16T16:23:10.4590000' AS DateTime2), 5, CAST(N'2023-02-16T16:23:10.4590000' AS DateTime2), N'便攜式不鏽鋼餐具組', N'https://storage.googleapis.com/morariphoto/pdbc488472-d71d-4ce3-a69e-005fb3db1013', 699, N'Topbooc', N'其他', N'd4ce0cf7-9704-47a0-b27f-24438ac17686')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (28, N'[超厚和優質材質]:這些燒烤工具和烤架配件由超厚實心不銹鋼製成,具有出色的耐用性和防鏽性,這意味著不再生鏽、彎曲或斷裂。它們可以安全地扔進洗碗機中,比木材或矽膠手柄工具更耐用,更安全,因為它們在長時間使用後不會破裂或融化。', CAST(N'2023-02-16T16:24:56.5050000' AS DateTime2), 8, CAST(N'2023-02-16T16:24:56.5050000' AS DateTime2), N'66 件組 戶外燒烤用具組', N'https://storage.googleapis.com/morariphoto/pd6211cfd8-95e5-499a-aed4-6c667cb4e370', 1199, N'Mirror Flower', N'其他', N'd4ce0cf7-9704-47a0-b27f-24438ac17686')
+GO
+INSERT [dbo].[category] ([pdid], [pdcontent], [pddate], [pdinventory], [pdlastupdate], [pdname], [pdpicture], [pdprice], [pdtitle], [pdtype], [userid]) VALUES (29, N'【復古燈】這款燈由高品質的帽子形黑色金屬製成,發光效果更佳的 ABS 燈泡。 復古風格和淺黃色照明可以為您的家營造溫暖的氛圍。 ?
+【電池供電燈】由 4 顆 AA 電池供電(不含電池)。 尺寸為 7.5 x 7.6 x 70.4 公分。 開/關開關位於電池盒蓋上。
+【6 小時計時器】有 2 種照明模式:恆定照明和 6 小時計時。 電池盒上的開/關/定時器按鈕(需要 2 顆 AA 電池,不含電池)。
+【耐候】 由防水金屬製成,IP44 防水等級,不易生鏽或褪色,確保在大多數天氣條件下保持持久的性能。', CAST(N'2023-02-16T16:26:40.5210000' AS DateTime2), 5, CAST(N'2023-02-16T16:26:40.5210000' AS DateTime2), N'電池供電懸掛燈 6 小時計時器', N'https://storage.googleapis.com/morariphoto/pdc37f7f96-c4e9-4e9e-a89b-19fd6e6a10cd', 999, N'Larekook', N'燈具', N'd4ce0cf7-9704-47a0-b27f-24438ac17686')
+GO
+SET IDENTITY_INSERT [dbo].[category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[city] ON 
+GO
+INSERT [dbo].[city] ([cityid], [cityname]) VALUES (1, N'新北')
+GO
+INSERT [dbo].[city] ([cityid], [cityname]) VALUES (2, N'桃園')
+GO
+INSERT [dbo].[city] ([cityid], [cityname]) VALUES (3, N'新竹')
+GO
+INSERT [dbo].[city] ([cityid], [cityname]) VALUES (4, N'苗栗')
+GO
+INSERT [dbo].[city] ([cityid], [cityname]) VALUES (5, N'南投')
+GO
+INSERT [dbo].[city] ([cityid], [cityname]) VALUES (6, N'宜蘭')
+GO
+INSERT [dbo].[city] ([cityid], [cityname]) VALUES (7, N'台東')
+GO
+SET IDENTITY_INSERT [dbo].[city] OFF
+GO
+SET IDENTITY_INSERT [dbo].[initiating] ON 
+GO
+INSERT [dbo].[initiating] ([initiatingnum], [acceptablenum], [applycount], [camparea], [currentnum], [enddate], [introduction], [pair], [postdate], [startdate], [tag], [thumbsup], [title], [viewingcount], [uid], [img], [thumbs_up], [picture]) VALUES (1, 4, 0, N'玉山', 3, CAST(N'2023-02-23T08:00:00.0000000' AS DateTime2), N'安安唷', 0, CAST(N'2023-02-16T18:08:22.1820000' AS DateTime2), CAST(N'2023-02-21T08:00:00.0000000' AS DateTime2), N'性別：男女皆可;預期住宿：小木屋;目前裝備：露營椅;', 0, N'攻頂玉山', 0, 0x82CEA0EE92A040E1BD07B1D6ED124C2A, NULL, NULL, N'https://storage.googleapis.com/morariphoto/07b9db0c-8ddc-459a-bb1d-4525f727a3f2')
+GO
+INSERT [dbo].[initiating] ([initiatingnum], [acceptablenum], [applycount], [camparea], [currentnum], [enddate], [introduction], [pair], [postdate], [startdate], [tag], [thumbsup], [title], [viewingcount], [uid], [img], [thumbs_up], [picture]) VALUES (2, 3, 0, N'新竹', 2, CAST(N'2023-02-18T08:00:00.0000000' AS DateTime2), N'0.0', 0, CAST(N'2023-02-16T18:09:10.9490000' AS DateTime2), CAST(N'2023-02-18T08:00:00.0000000' AS DateTime2), N'性別：男生;預期住宿：露營車;目前裝備：卡式爐;', 0, N'新竹露營', 17, 0x82CEA0EE92A040E1BD07B1D6ED124C2A, NULL, NULL, N'https://storage.googleapis.com/morariphoto/pd47923668-fe09-468f-990b-eaeae81871b4')
+GO
+INSERT [dbo].[initiating] ([initiatingnum], [acceptablenum], [applycount], [camparea], [currentnum], [enddate], [introduction], [pair], [postdate], [startdate], [tag], [thumbsup], [title], [viewingcount], [uid], [img], [thumbs_up], [picture]) VALUES (3, 3, 0, N'霧繞', 6, CAST(N'2023-02-25T08:00:00.0000000' AS DateTime2), N'一起來看看霧繞美景吧', 0, CAST(N'2023-02-16T18:10:00.5460000' AS DateTime2), CAST(N'2023-02-23T08:00:00.0000000' AS DateTime2), N'性別：null;', 1, N'霧繞', 14, 0x82CEA0EE92A040E1BD07B1D6ED124C2A, NULL, NULL, N'https://storage.googleapis.com/morariphoto/pda692130c-d659-4212-9d08-241fba42ff18')
+GO
+INSERT [dbo].[initiating] ([initiatingnum], [acceptablenum], [applycount], [camparea], [currentnum], [enddate], [introduction], [pair], [postdate], [startdate], [tag], [thumbsup], [title], [viewingcount], [uid], [img], [thumbs_up], [picture]) VALUES (4, 4, 0, N'彩虹田營地', 4, CAST(N'2023-02-28T08:00:00.0000000' AS DateTime2), N'找不到方向，往彩虹天堂，但可以找到彩虹田', 0, CAST(N'2023-02-16T18:11:10.0500000' AS DateTime2), CAST(N'2023-02-26T08:00:00.0000000' AS DateTime2), N'性別：null;', 1, N'彩虹田GOGO', 0, 0x82CEA0EE92A040E1BD07B1D6ED124C2A, NULL, NULL, N'https://storage.googleapis.com/morariphoto/pd657b3fde-7bd1-40d7-960d-00619ce0aa36')
+GO
+INSERT [dbo].[initiating] ([initiatingnum], [acceptablenum], [applycount], [camparea], [currentnum], [enddate], [introduction], [pair], [postdate], [startdate], [tag], [thumbsup], [title], [viewingcount], [uid], [img], [thumbs_up], [picture]) VALUES (8, 8, 0, N'金門', 2, CAST(N'2023-02-20T08:00:00.0000000' AS DateTime2), N'碰碰碰', 0, CAST(N'2023-02-16T19:25:11.7550000' AS DateTime2), CAST(N'2023-02-17T08:00:00.0000000' AS DateTime2), N'性別：null;', 1, N'安安', 0, 0x82CEA0EE92A040E1BD07B1D6ED124C2A, NULL, NULL, N'https://storage.googleapis.com/morariphoto/pda58623f7-1cd6-4122-87b3-b258738bce4b')
+GO
+INSERT [dbo].[initiating] ([initiatingnum], [acceptablenum], [applycount], [camparea], [currentnum], [enddate], [introduction], [pair], [postdate], [startdate], [tag], [thumbsup], [title], [viewingcount], [uid], [img], [thumbs_up], [picture]) VALUES (9, 6, 0, N'雪山', 10, CAST(N'2023-03-09T08:00:00.0000000' AS DateTime2), N'我們要改成雪山了喔，大家注意一下', 0, CAST(N'2023-02-16T20:59:25.4550000' AS DateTime2), CAST(N'2023-03-07T08:00:00.0000000' AS DateTime2), N'性別：男女皆可;預期住宿：小木屋;目前裝備：露營椅;', 0, N'換一個營地囉', 4, 0xA937C8516CCB4ECFB1A67996C98EBB4F, NULL, NULL, N'')
+GO
+INSERT [dbo].[initiating] ([initiatingnum], [acceptablenum], [applycount], [camparea], [currentnum], [enddate], [introduction], [pair], [postdate], [startdate], [tag], [thumbsup], [title], [viewingcount], [uid], [img], [thumbs_up], [picture]) VALUES (10, 8, 0, N'玉山', 8, CAST(N'2023-03-05T08:00:00.0000000' AS DateTime2), N'歡迎各位露營同好一起參加，讓我們快樂去露營吧，GOGOGO', 0, CAST(N'2023-02-21T13:57:25.5090000' AS DateTime2), CAST(N'2023-03-04T08:00:00.0000000' AS DateTime2), N'性別：男女皆可;預期住宿：露營車;目前裝備：露營椅;', 0, N'一起來場酣暢淋漓的露營吧', 0, 0x82CEA0EE92A040E1BD07B1D6ED124C2A, NULL, NULL, N'https://storage.googleapis.com/morariphoto/e066ed16-b4a4-4d87-bcde-da1f85222145')
+GO
+SET IDENTITY_INSERT [dbo].[initiating] OFF
+GO
+SET IDENTITY_INSERT [dbo].[job] ON 
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (3, N'聖德露營地', N'2023/2/24', N'https://storage.googleapis.com/morariphoto/camp_01hsinchu野漾莊園.jpg', N'房務員', N'桃園中壢區新生路二段421號', 3, CAST(N'2023-02-15T17:47:55.3330000' AS DateTime2), N'◆急徵寒假工讀生！
+◆歡迎中高齡、外籍學生、新住民、斜槓人才！！
+◆無經驗可！透過服務傳遞快樂的工作
+◆有興趣者歡迎投遞履歷~~~', N'時薪', N'假日中班 10-19', N'長期工作', 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (6, N'心靈森林', N'2023/3/25', N'https://storage.googleapis.com/morariphoto/camp_light-tent-to-watch-the-mist-and-the-sun-rise-in-a-forest-camp-among-the-meadows-free-photo.jpg', N'櫃台', N'新竹尖石鄉新樂村5鄰上水田150-2號', 1, CAST(N'2023-02-15T18:26:24.8770000' AS DateTime2), N'我們的環境優美,在國家的重要建設中,我們的工作環境,真的很寬敞,打開後門,你可以看得到青山綠水,白雲藍天,更可以呼吸到新鮮的空氣,每天來上班都好像是來郊遊
+ 我們的團隊,一共有25名的工作伙伴,你上班一點也不會寂寞 ', N'一日$500', N'周一至周五9-18', N'打工換宿', 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (8, N'虎頭山營王', N'隨時', N'https://storage.googleapis.com/morariphoto/camp_下載.jfif', N'櫃台', N'桃園桃園區公園路42號', 1, CAST(N'2023-02-15T18:32:38.6350000' AS DateTime2), N'*櫃檯人員*
+需要有餐飲經驗，現場泡製飲品，知道如何應對客人，反應快，笑容滿面！', N'36000', N'10-19', N'長期工作', 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (9, N'虎頭山營王', N'2023/4/22', N'https://storage.googleapis.com/morariphoto/camp_下載.jfif', N'房務員', N'桃園桃園區公園路42號', 2, CAST(N'2023-02-15T18:35:38.9450000' AS DateTime2), N'1.客房清潔、遞送服務及夜床服務
+2.客房設備設施定期清潔保養工作
+3.公共區域清潔之維護
+4.主管交辦事項', N'32000', N'4-22', N'長期工作', 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (13, N'大自然序曲', N'2023/5/6', N'https://storage.googleapis.com/morariphoto/camp_015A6619-rsz.jpg', N'廚師', N'宜蘭大同鄉泰雅路二段88巷211-9號', 1, CAST(N'2023-02-15T18:59:57.7350000' AS DateTime2), N'需具有餐飲業熱誠，會基本炒熟食(其他有主廚會教),烹煮料理，食材.出餐. 月薪38000起，享勞健保，勞退，供餐 ', N'38000', N'做二休二 9-19', N'短期工讀', 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (14, N'星願留', N'隨時', N'https://storage.googleapis.com/morariphoto/camp_RS57480_Photo-by-Todd-Trapani-Pexels-qut.jpg', N'廚助', N'苗栗三灣鄉內灣村龍峎頂5-17號', 1, CAST(N'2023-02-15T19:01:36.5650000' AS DateTime2), N'1. 協助西餐料理，包括餐前湯、前菜、主菜及甜點盤飾。 2. 於營業時間內的菜餚準備。 3. 協助現場主管例行事務。 4. 確保所負責的餐點品質並符合衛生管理的規定。 5. 維持及確保工作環境及冷凍庫衛生與清潔。', N'時薪$190', N'10-19', N'短期工讀', 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (15, N'森林深夢', N'2023/2/28', N'https://storage.googleapis.com/morariphoto/camp_images.jfif', N'櫃台', N'新竹新埔鎮52之20號', 1, CAST(N'2023-02-15T19:04:03.5860000' AS DateTime2), N'1.提供顧客接待與需求服務。 2.傾聽及處理客戶提供意見。 3.傳達公司資訊給顧客並提供相關事項的衛教服務。 4.櫃台行政工作 (結帳、電腦資料登錄、文書資料歸檔、健保申請....)。 5.主管交辦事項。', N'時薪$180', N'7-16', N'短期工讀', 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (16, N'閃耀宜蘭', N'隨時', N'https://storage.googleapis.com/morariphoto/camp_349.jfif', N'清潔員', N'宜蘭員山鄉長嶺路195號264', 1, CAST(N'2023-02-15T19:06:27.3130000' AS DateTime2), N'1.公共區域清潔打掃
+2.倒垃圾
+3.主管交辦事項', N'一日$300', N'10-19', N'打工換宿', 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (17, N'聖德露營地', N'2023/5/6', N'https://storage.googleapis.com/morariphoto/camp_01hsinchu野漾莊園.jpg', N'廚助', N'桃園中壢區新生路二段421號', 1, CAST(N'2023-02-15T19:31:42.4060000' AS DateTime2), N'', N'36000', N'10-19', N'長期工作', 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (18, N'森林深夢', N'3月1日', N'https://storage.googleapis.com/morariphoto/camp_images.jfif', N'櫃台', N'新竹新埔鎮52之20號', 1, CAST(N'2023-02-16T17:56:41.4820000' AS DateTime2), N'細心、負責、情緒控管好、英文能力佳', N'時薪', N'10-19', N'短期工讀', 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[job] ([rackid], [campname], [date], [img], [job], [place], [quantity], [rackup], [remark], [salary], [time], [type], [uid]) VALUES (22, N'聖德露營地', N'', N'https://storage.googleapis.com/morariphoto/camp_015A6619-rsz.jpg', NULL, N'桃園中壢區新生路二段421號', NULL, CAST(N'2023-02-17T11:53:29.1410000' AS DateTime2), N'', N'', N'', NULL, 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+SET IDENTITY_INSERT [dbo].[job] OFF
+GO
+SET IDENTITY_INSERT [dbo].[post] ON 
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (1, N'位於桃園復興鄉的「隱峇里山莊」坐落山林蓊鬱的山腰上，園區占地超過3000坪，充滿濃濃的異國峇里島風情。白天欣賞飄渺山嵐、傍晚飽覽夕陽美景，冬天更有機會看見夢幻雲海，一年四季皆有不同景致，園區還提供２輛露營車，車內更附有空調、舒適雙人床、獨立衛浴、冰箱，也設有景觀餐廳，不需自帶營地裝備或料理食材，就能輕鬆享受露營樂趣！', N'TYC', CAST(N'2022-11-30T00:00:00.0000000' AS DateTime2), 2, N'https://storage.googleapis.com/morariphoto/post1fdde4a6-eb0a-42ea-b30a-247acada666e', 0, 0, 3000, CAST(N'2023-02-15T16:09:45.4640000' AS DateTime2), 3, CAST(N'2022-11-29T00:00:00.0000000' AS DateTime2), N'隱峇里山莊', 1, 1, 0xA937C8516CCB4ECFB1A67996C98EBB4F, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (2, N'與自然共存、與自然共好，整個營區也將光源降至最低，所處地段也是台東長濱最沒光害的區域，省道上連路燈都沒有，就是為了讓遊客仰望天空就能眺望星空，也減少土地開發、不使用額外的娛樂硬體設施，保留原始的生態樣貌。帳棚內該有的備品應有盡有，讓你一個背包就能無憂入住。每帳皆有獨立烤肉桌、雙人搖椅、大洋傘，讓你走出門就能在營區內 Chill 一整個下午，看看太平洋，早晨享受第一道曙光。', N'TTT', NULL, 4, N'https://storage.googleapis.com/morariphoto/postc10af7be-f12a-421c-befb-09ac92e573cc', 0, 0, 7999, CAST(N'2023-02-15T16:13:12.3550000' AS DateTime2), 4, NULL, N'海邊舟舟曉晴星空露營地｜免搭帳星空露營', 1, 1, 0xA937C8516CCB4ECFB1A67996C98EBB4F, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (3, N'「亞爸的山」位於宜蘭縣大同鄉，四周雲霧環繞，可遠眺群山縱谷，無論是春天賞櫻、夏日避暑、秋天雲海、冬天雪景，一年四季皆可欣賞不同景致，推薦可於11月下旬後入住，並造訪「武陵農場」欣賞楓紅、金黃銀杏與浪漫落羽松美景。營區內提供自搭帳露營地、小木屋等多種房型，還有可探索走訪的祕境與步道，同時設有兒童遊戲區讓孩子玩樂，非常適合親子出遊或三五好友一同出遊，享受高山露營樂趣！', N'', CAST(N'2023-01-06T00:00:00.0000000' AS DateTime2), NULL, N'https://storage.googleapis.com/morariphoto/post2446adf1-5cab-40f9-b3d6-03f3a65054cc', 0, 0, 12000, CAST(N'2023-02-15T16:16:13.8430000' AS DateTime2), 5, CAST(N'2023-01-04T00:00:00.0000000' AS DateTime2), N'亞爸的山', 4, 0, 0x0E26D599CBD643E181153B4CAA5C4C92, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (4, N'今年228連假想帶家人到東部走走，大家有推薦的營地嗎?
+疫情真的悶太久了，要帶小孩去放電一下啦~~', N'', CAST(N'2023-02-27T00:00:00.0000000' AS DateTime2), NULL, NULL, 0, 0, NULL, CAST(N'2023-02-15T16:19:55.9810000' AS DateTime2), NULL, CAST(N'2023-02-25T00:00:00.0000000' AS DateTime2), N'[討論]大家有推薦的營地嗎?', 2, 0, 0x0E26D599CBD643E181153B4CAA5C4C92, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (5, N'位在基隆暖東峽谷的拉波波村，全新設立的露營園區，距離台北僅需 30 分鐘的車程，鄰近暖東峽谷步道周圍遍佈多樣的生態，在大自然的環繞下入住園區，無需準備大包小包的露營配備，即可享受一泊三食露營體驗，獨立的衛浴設備免去露營使用公共衛浴的不便，園區內的星月花園及小溪樂園提供廣闊的草坪及人造溪流，讓入住的村友們可以在草地上悠閒的野餐，孩子們則可以盡情地奔跑、嬉戲，適合大人小孩一起體驗露營的樂趣！', N'KLU', NULL, 6, N'https://storage.googleapis.com/morariphoto/post1dde3e68-751e-4a51-8f02-27414864f325', 0, 0, NULL, CAST(N'2023-02-15T16:36:34.1180000' AS DateTime2), NULL, NULL, N'拉波波村 Glamping 輕奢露營', 2, 0, 0x0E26D599CBD643E181153B4CAA5C4C92, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (6, N'遠山望月溫泉風呂露營區位於高雄六龜寶來花賞公園，在南橫公路的入口處，海拔高約 500 公尺，四面環山，自然景觀豐富，多動植物資源，無光害，為觀星的好去處，夜間生態資源也相當多樣化。園區內一年四季皆有不同的花卉，蝴蝶、蜻蜓、鳥兒隨之翩翩飛舞，相當賞心悅目。園區內 3 種不同體驗的住宿型態，除湯屋VILLA營車及豪華狩獵帳外，也有自搭帳篷，可供旅客自行選擇。不論何種住宿形式，均可享受溫泉大眾池的泡湯樂趣。', N'', CAST(N'2023-02-03T00:00:00.0000000' AS DateTime2), 4, N'https://storage.googleapis.com/morariphoto/post5b3c1028-b673-4c8c-bf40-31e02e851427', 0, 0, NULL, CAST(N'2023-02-15T16:40:42.2510000' AS DateTime2), 5, CAST(N'2023-02-01T00:00:00.0000000' AS DateTime2), N'遠山望月溫泉風呂露營區', 3, 0, 0x0E26D599CBD643E181153B4CAA5C4C92, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (7, N'位於花蓮縣壽豐鄉的布萊頓霍夫莊園，矗立於美麗的東海岸旁，距離遠雄海洋公園約 0.35 公里，距離洄瀾灣約 5.56 公里。凡入住布萊頓霍夫莊園露營車，可享用與早餐，每輛露營車皆附有躺椅與有棚餐桌椅一組，車內擁有獨立衛浴設備與客廳，其中，極光系列露營車更設有天窗，提供旅客沐浴於星空下的驚喜住宿體驗。布萊頓霍夫莊園露營車，有別於一般露營車簡約的配備，在接近大自然的同時也可以擁有奢華的住宿品質。', N'HWA', CAST(N'2022-09-17T00:00:00.0000000' AS DateTime2), 2, N'https://storage.googleapis.com/morariphoto/post46013da3-6bfe-49b2-8bba-58b324f2f4a1', 0, 0, 8888, CAST(N'2023-02-15T16:46:29.9220000' AS DateTime2), 5, CAST(N'2022-09-15T00:00:00.0000000' AS DateTime2), N'布萊頓霍夫莊園露營車', 2, 0, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (8, N'位於新竹尖石鄉的「悠野''s豪華露營」，提供豐盛的一泊三食，包括「迎賓下午茶」「豪華晚餐BBQ」與「健康輕食早餐」，更可入住設有舒適彈簧床、冷暖氣、飲水機的雪球奢華帳，也有乾濕分離淋浴間、溜滑梯、鞦韆、兒童越野車等設備。除了遠眺山景、仰望滿天星斗，營區內另提供多元付費體驗活動，親子出遊不用擔心孩子無聊，家長也可以在大自然沐浴之下洗滌身心、充分放鬆！', N'', NULL, NULL, N'https://storage.googleapis.com/morariphoto/post36f381ba-fd87-4ba1-8d82-9cce31938512', 0, 0, NULL, CAST(N'2023-02-15T16:47:21.1050000' AS DateTime2), NULL, NULL, N'悠野''s豪華露營', 3, 0, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (9, N'最近被野溪露營燒到了，但沒有經驗不敢貿然前往，請大大分享一下經驗，感謝萬分', N'', NULL, NULL, NULL, 0, 0, NULL, CAST(N'2023-02-15T16:52:26.1440000' AS DateTime2), NULL, NULL, N'[討論]有人有野溪露營的經驗嗎?', 1, 1, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (10, N'有在關注豪華露營的朋友們一定有看過這間星空帳篷！外觀超可愛，重點在它屋頂上面的透明玻璃，讓你晚上睡覺的時候可以看著星空、聊著天入睡，非常浪漫～～～而且，房間內有獨立衛浴就算了，居然還有浴缸！但是僅僅限量兩間！所以非常難預約，想要入住的朋友們要趕快打電話詢問了！', N'CHY', CAST(N'2023-02-11T00:00:00.0000000' AS DateTime2), 4, N'https://storage.googleapis.com/morariphoto/post50333057-ac67-436c-a0a2-e5336a12cfd1', 0, 1, 9999, CAST(N'2023-02-21T14:48:21.4460000' AS DateTime2), 4, CAST(N'2023-02-10T00:00:00.0000000' AS DateTime2), N'星空帳篷', 2, 1, 0x746BAB6245844D43A3A9E077C72023AA, 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (11, N'佇立一甲子的三合院古樸又美麗，充滿溫暖與關愛，在古厝旁一片綠油油草地上休憩，靜靜感受大自然生態的和聲與奏樂，一邊欣賞美麗的晚霞雲彩，暫時忘卻平常的工作壓力與煩惱，?忙碌的生活增添一點樂趣與愜意！', N'MAL', NULL, 8, N'https://storage.googleapis.com/morariphoto/post606ed2f5-990d-48d9-acd7-57ee02f48254', 0, 0, NULL, CAST(N'2023-02-15T17:16:26.2100000' AS DateTime2), 4, NULL, N'通霄三合院農庄', 4, 0, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[post] ([postid], [content], [county], [enddate], [people], [picture], [posthide], [postreport], [price], [releasedate], [score], [startdate], [title], [userlike], [userunlike], [uid], [informantuid]) VALUES (14, N'Morari 版規 2023.2 最新版
+
+一、本版禁止 未滿30字文、一行文、注音文、火星文、非露營相關文章。
+    違者第一次直接刪文，再犯封鎖兩周。
+
+
+二、請注重禮節。禁止對使用者有騷擾、威脅、誹謗、挑釁、謾罵等情形。
+    違者第一次警告，再犯封鎖一個月。(由管理員認定)  ', N'TYC', CAST(N'2022-10-16T00:00:00.0000000' AS DateTime2), 4, N'https://storage.googleapis.com/morariphoto/ccf90a5c-f95b-41c2-8c9a-ebcd9cf8797d', 0, 0, 5892, CAST(N'2023-02-21T11:27:09.6800000' AS DateTime2), 5, CAST(N'2022-10-15T00:00:00.0000000' AS DateTime2), N'[公告] 論壇注意事項', 0, 0, 0x82CEA0EE92A040E1BD07B1D6ED124C2A, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[post] OFF
+GO
+SET IDENTITY_INSERT [dbo].[postcomment] ON 
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (1, N'下次也要去', 0, 0, 1, 0x0E26D599CBD643E181153B4CAA5C4C92, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (2, N'第一次看', 1, 0, 6, 0x0E26D599CBD643E181153B4CAA5C4C92, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (5, N'推薦你花蓮的布萊頓霍夫莊園露營車', 0, 0, 4, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (7, N'看見這篇文章決定衝一波了!!!!!', 0, 0, 2, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (8, N'可以看海耶', 0, 0, 2, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (9, N'這個景很可以', 0, 0, 2, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (10, N'可以看到星星嗎?', 0, 0, 2, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (11, N'是粉紅色耶', 0, 0, 2, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (12, N'微笑灣農場不錯', 0, 0, 4, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (13, N'吃~~~', 0, 0, 8, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (14, N'栗松溫泉很美，但建議體力要練一下', 0, 0, 9, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (15, N'蚊蟲好多 不推', 0, 0, 10, 0x746BAB6245844D43A3A9E077C72023AA, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (18, N'桃園嘎拉賀野溪溫泉 可以考慮一下', 0, 0, 9, 0x0E26D599CBD643E181153B4CAA5C4C92, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (19, N'感謝分享', 0, 0, 11, 0xC1E04081CA14480282B8098CB74DB8DC, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (21, N'餓了', 0, 0, 8, 0xC1E04081CA14480282B8098CB74DB8DC, NULL)
+GO
+INSERT [dbo].[postcomment] ([postcommentid], [postcomment], [postcommenthide], [postcommentreport], [postid], [uid], [informantuid]) VALUES (22, N'吃瓜群眾', 0, 0, 4, 0xC1E04081CA14480282B8098CB74DB8DC, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[postcomment] OFF
+GO
+SET IDENTITY_INSERT [dbo].[postlike] ON 
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (1, 1, 1, 0x0E26D599CBD643E181153B4CAA5C4C92)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (2, 1, 3, 0x0E26D599CBD643E181153B4CAA5C4C92)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (3, 1, 6, 0x0E26D599CBD643E181153B4CAA5C4C92)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (4, 1, 4, 0x746BAB6245844D43A3A9E077C72023AA)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (5, 1, 9, 0x746BAB6245844D43A3A9E077C72023AA)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (6, 1, 3, 0x746BAB6245844D43A3A9E077C72023AA)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (7, 1, 8, 0x746BAB6245844D43A3A9E077C72023AA)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (8, 2, 10, 0x746BAB6245844D43A3A9E077C72023AA)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (9, 1, 11, 0x0E26D599CBD643E181153B4CAA5C4C92)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (10, 1, 7, 0x0E26D599CBD643E181153B4CAA5C4C92)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (11, 1, 11, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (12, 1, 10, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (13, 2, 9, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (14, 1, 8, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (15, 1, 7, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (16, 1, 6, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (17, 1, 5, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (18, 1, 4, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (19, 1, 3, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (20, 1, 2, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (21, 2, 1, 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (22, 1, 10, 0x82014115A5294C329996646E64BD8175)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (23, 2, 2, 0x82014115A5294C329996646E64BD8175)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (24, 1, 6, 0xB270342EA69148EAB44742B8162C0B0B)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (25, 1, 5, 0xB270342EA69148EAB44742B8162C0B0B)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (26, 1, 8, 0x077D38CC84BE4AE4A759889DC5951098)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (27, 1, 3, 0x077D38CC84BE4AE4A759889DC5951098)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (28, 1, 11, 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[postlike] ([postlikeid], [likeorunlike], [postid], [uid]) VALUES (29, 1, 11, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+SET IDENTITY_INSERT [dbo].[postlike] OFF
+GO
+SET IDENTITY_INSERT [dbo].[productcart] ON 
+GO
+INSERT [dbo].[productcart] ([id], [ctqty], [pdid], [userid]) VALUES (1, 1, 3, N'746bab62-4584-4d43-a3a9-e077c72023aa')
+GO
+SET IDENTITY_INSERT [dbo].[productcart] OFF
+GO
+INSERT [dbo].[productorder] ([id], [datetime], [money], [odrecipient], [odrecipientphone], [odshippingaddress], [odshippingdatetime], [odstatus], [userid]) VALUES (N'04c5ed67fb5541da8f9160fea61b3e2d', CAST(N'2023-02-16T17:18:16.4160000' AS DateTime2), 3200, N'陳昱辰', N'0976852865', N'新北市三重區', NULL, N'未出貨', N'0e26d599-cbd6-43e1-8115-3b4caa5c4c92')
+GO
+INSERT [dbo].[productorder] ([id], [datetime], [money], [odrecipient], [odrecipientphone], [odshippingaddress], [odshippingdatetime], [odstatus], [userid]) VALUES (N'0e6b42010d4646c8b26a32276757d340', CAST(N'2023-02-17T12:19:05.7520000' AS DateTime2), 9500, N'陳昱辰', N'0976852865', N'新北市三重區', NULL, N'未付款', N'4c33f2c9-2936-4fd1-a34b-138796329307')
+GO
+INSERT [dbo].[productorder] ([id], [datetime], [money], [odrecipient], [odrecipientphone], [odshippingaddress], [odshippingdatetime], [odstatus], [userid]) VALUES (N'28441ad87a5b4ada892220fa19d8160d', CAST(N'2023-02-21T14:17:44.8790000' AS DateTime2), 899, N'陳昱辰', N'0976852865', N'新北市三重區', NULL, N'已付款', N'ee8033cd-1a2b-405a-9a25-0ac8d9ec4ab0')
+GO
+INSERT [dbo].[productorder] ([id], [datetime], [money], [odrecipient], [odrecipientphone], [odshippingaddress], [odshippingdatetime], [odstatus], [userid]) VALUES (N'341fdc82c9294780981e6970f82d5e88', CAST(N'2023-02-17T12:02:09.1760000' AS DateTime2), 1080, N'陳昱辰', N'0976852865', N'新北市三重區', NULL, N'已付款', N'c3a7996b-a722-49fc-a7d2-cfc4e359a8dd')
+GO
+INSERT [dbo].[productorder] ([id], [datetime], [money], [odrecipient], [odrecipientphone], [odshippingaddress], [odshippingdatetime], [odstatus], [userid]) VALUES (N'6970085038ad4849a0ba1954fe27e2ac', CAST(N'2023-02-16T00:11:22.3610000' AS DateTime2), 6400, N'陳昱辰', N'0976852865', N'新北市三重區', NULL, N'未出貨', N'82cea0ee-92a0-40e1-bd07-b1d6ed124c2a')
+GO
+INSERT [dbo].[productorder] ([id], [datetime], [money], [odrecipient], [odrecipientphone], [odshippingaddress], [odshippingdatetime], [odstatus], [userid]) VALUES (N'9ccb484cb2d54ee39fbc636b7b5e25f4', CAST(N'2023-02-16T18:28:04.2720000' AS DateTime2), 12160, N'陳昱辰', N'0976852865', N'新北市三重區', NULL, N'未出貨', N'a937c851-6ccb-4ecf-b1a6-7996c98ebb4f')
+GO
+INSERT [dbo].[productorder] ([id], [datetime], [money], [odrecipient], [odrecipientphone], [odshippingaddress], [odshippingdatetime], [odstatus], [userid]) VALUES (N'edcc751257744aae8f1dd9867964e8fe', CAST(N'2023-02-21T14:18:35.6950000' AS DateTime2), 2750, N'陳昱辰', N'0976852865', N'新北市三重區', NULL, N'未付款', N'ee8033cd-1a2b-405a-9a25-0ac8d9ec4ab0')
+GO
+SET IDENTITY_INSERT [dbo].[productorderdetail] ON 
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (1, 2, N'6970085038ad4849a0ba1954fe27e2ac', 2)
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (2, 2, N'04c5ed67fb5541da8f9160fea61b3e2d', 1)
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (3, 6, N'9ccb484cb2d54ee39fbc636b7b5e25f4', 1)
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (4, 8, N'9ccb484cb2d54ee39fbc636b7b5e25f4', 2)
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (5, 1, N'341fdc82c9294780981e6970f82d5e88', 1)
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (6, 3, N'0e6b42010d4646c8b26a32276757d340', 1)
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (7, 24, N'28441ad87a5b4ada892220fa19d8160d', 1)
+GO
+INSERT [dbo].[productorderdetail] ([id], [pdid], [pdorderid], [pdqty]) VALUES (8, 12, N'edcc751257744aae8f1dd9867964e8fe', 1)
+GO
+SET IDENTITY_INSERT [dbo].[productorderdetail] OFF
+GO
+SET IDENTITY_INSERT [dbo].[resume] ON 
+GO
+INSERT [dbo].[resume] ([number], [age], [educational], [gender], [mail], [name], [phone], [skill], [uid]) VALUES (1, 88, N'國立東華大學法律系', N'男', N'hcc8462@gmail.com', N'范凱文', N'0915815650', N'日檢N3
+多益750分', 0xA937C8516CCB4ECFB1A67996C98EBB4F)
+GO
+INSERT [dbo].[resume] ([number], [age], [educational], [gender], [mail], [name], [phone], [skill], [uid]) VALUES (3, 81, N'澎湖科技大學餐飲管理學系', N'男', N'hcc8462@gmail.com', N'施育群', N'0912232499', N'丙級廚師證照，日檢n2', 0x077D38CC84BE4AE4A759889DC5951098)
+GO
+INSERT [dbo].[resume] ([number], [age], [educational], [gender], [mail], [name], [phone], [skill], [uid]) VALUES (4, 82, N'國立高雄第一科技大學', N'女', N'hcc8462@gmail.com', N'鍾唯閔', N'0912232499', N'日檢n2
+多益900分', 0x0E26D599CBD643E181153B4CAA5C4C92)
+GO
+INSERT [dbo].[resume] ([number], [age], [educational], [gender], [mail], [name], [phone], [skill], [uid]) VALUES (5, 86, N'中正大學中文系', N'女', N'hcc8462@gmail.com', N'蔡欣霏', N'0915815650', N'日檢N4
+韓文檢定500', 0x41600F10963D4F53A50E87E2907DF1BC)
+GO
+INSERT [dbo].[resume] ([number], [age], [educational], [gender], [mail], [name], [phone], [skill], [uid]) VALUES (6, 82, N'景文日文系
+', N'男', N'hcc8462@gmail.com', N'馬振軒', N'0915815650', N'日檢N1', 0xB270342EA69148EAB44742B8162C0B0B)
+GO
+INSERT [dbo].[resume] ([number], [age], [educational], [gender], [mail], [name], [phone], [skill], [uid]) VALUES (7, 88, N'文藻國際貿易學系', N'女', N'hcc8462@gmail.com', N'呂玟', N'0915815650', N'多益800分', 0xC1E04081CA14480282B8098CB74DB8DC)
+GO
+SET IDENTITY_INSERT [dbo].[resume] OFF
+GO
+INSERT [dbo].[resume_job] ([number], [rackid]) VALUES (1, 6)
+GO
+SET IDENTITY_INSERT [dbo].[role] ON 
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (1, N'SUPERADMIN')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (2, N'ADMIN')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (3, N'CAMP')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (4, N'SHOP')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (5, N'FORUM')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (6, N'MALL')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (7, N'TEAM')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (8, N'USER')
+GO
+INSERT [dbo].[role] ([rid], [name]) VALUES (9, N'COMPANY')
+GO
+SET IDENTITY_INSERT [dbo].[role] OFF
+GO
+SET IDENTITY_INSERT [dbo].[site] ON 
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (1, 800, N'聖德 - 高地區', N'https://storage.googleapis.com/morariphoto/site_glamping-header.jpg', 3, 1)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (2, 600, N'聖德 - 東區草皮', N'https://storage.googleapis.com/morariphoto/55a14221-db4f-4e33-9166-c1cb2a38e000', 2, 1)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (3, 600, N'虎頭山 - A區', N'https://storage.googleapis.com/morariphoto/site_b839abc7-dd2d-49fe-824d-f347fac17bb4.jpeg', 5, 2)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (4, 600, N'森林 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 3)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (5, 600, N'野心 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 4)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (6, 600, N'大自然 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 5)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (7, 600, N'星願 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 6)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (8, 600, N'幽谷 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 7)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (9, 600, N'夢想 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 8)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (10, 600, N'野心 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 9)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (11, 600, N'樹海 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 10)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (12, 600, N'怡然 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 11)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (13, 600, N'沉默 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 12)
+GO
+INSERT [dbo].[site] ([siteid], [sitemoney], [sitename], [sitepicturespath], [totalsites], [fkcampid]) VALUES (14, 600, N'自在 - A區', N'https://storage.googleapis.com/morariphoto/site_cattai-campground-05.jpg.crdownload', 5, 13)
+GO
+SET IDENTITY_INSERT [dbo].[site] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tag] ON 
+GO
+INSERT [dbo].[tag] ([tagid], [tagname]) VALUES (1, N'大草原')
+GO
+INSERT [dbo].[tag] ([tagid], [tagname]) VALUES (2, N'夜景')
+GO
+INSERT [dbo].[tag] ([tagid], [tagname]) VALUES (3, N'親子娛樂')
+GO
+INSERT [dbo].[tag] ([tagid], [tagname]) VALUES (4, N'雲海')
+GO
+INSERT [dbo].[tag] ([tagid], [tagname]) VALUES (5, N'泡湯')
+GO
+INSERT [dbo].[tag] ([tagid], [tagname]) VALUES (6, N'螢火蟲')
+GO
+SET IDENTITY_INSERT [dbo].[tag] OFF
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (1, 1)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (1, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (2, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (2, 6)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (3, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (3, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (3, 6)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (4, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (4, 3)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (4, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (4, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (5, 1)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (5, 3)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (5, 6)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (6, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (6, 3)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (6, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (7, 1)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (7, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (7, 6)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (8, 3)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (8, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (8, 6)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (9, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (9, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (9, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (10, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (10, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (10, 6)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (11, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (11, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (11, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (12, 1)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (12, 3)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (12, 6)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (13, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (13, 3)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (13, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (14, 2)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (14, 3)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (15, 4)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (15, 5)
+GO
+INSERT [dbo].[tagofcamp] ([fkcampid], [fktagid]) VALUES (17, 4)
+GO
+SET IDENTITY_INSERT [dbo].[thundsup] ON 
+GO
+INSERT [dbo].[thundsup] ([thundsupid], [initiatingnum], [uid]) VALUES (3, 3, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[thundsup] ([thundsupid], [initiatingnum], [uid]) VALUES (5, 8, 0xC3A7996BA72249FCA7D2CFC4E359A8DD)
+GO
+INSERT [dbo].[thundsup] ([thundsupid], [initiatingnum], [uid]) VALUES (7, 4, 0x82CEA0EE92A040E1BD07B1D6ED124C2A)
+GO
+SET IDENTITY_INSERT [dbo].[thundsup] OFF
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 1)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 2)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 3)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 4)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 5)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 6)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 7)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 9)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x077D38CC84BE4AE4A759889DC5951098, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x0E26D599CBD643E181153B4CAA5C4C92, 1)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x0E26D599CBD643E181153B4CAA5C4C92, 2)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x0E26D599CBD643E181153B4CAA5C4C92, 3)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x0E26D599CBD643E181153B4CAA5C4C92, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x3BD71FC891184302A4E27A31A6EF49A1, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x41600F10963D4F53A50E87E2907DF1BC, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x43A4BE6481514118A485A79C3E7640D8, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x4C33F2C929364FD1A34B138796329307, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x50DB44B1ADEC4D47A4015FD2F2D8D994, 6)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x50DB44B1ADEC4D47A4015FD2F2D8D994, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x746BAB6245844D43A3A9E077C72023AA, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x82014115A5294C329996646E64BD8175, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x82CEA0EE92A040E1BD07B1D6ED124C2A, 1)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x893F5173EB494A3599E0B1D5FD23B7B1, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0x94924065905C4317BD7DA730821CF26D, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA56E28AAA04048F0BFC414CEA823B10D, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 3)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 4)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 5)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 6)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 7)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 9)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xAFFE392B7FB945FDB277DC6439E57708, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xB270342EA69148EAB44742B8162C0B0B, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xB3B4375F65F34B5EA198F48A0974C1B6, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xC1E04081CA14480282B8098CB74DB8DC, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xC3A7996BA72249FCA7D2CFC4E359A8DD, 6)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xC3A7996BA72249FCA7D2CFC4E359A8DD, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 1)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 2)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 3)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 4)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 5)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 6)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 7)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 8)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 9)
+GO
+INSERT [dbo].[user_role] ([uid], [rid]) VALUES (0xF7782728B7ED421FA7DA7F9E9D4EE886, 8)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x07187884EC1A4604B0827D4A5D15058E, 1, 1, N'e@yahoo.com.tw', 1, 1, N'$2a$10$M.H36fj3VMBZgcCngn9eh.DDVekpSt7rtbxeZqLfsgJoKVlieMvEe', N'嗨，我是Ben，我喜歡露營是因為它可以讓我遠離城市的喧囂，享受大自然的美麗風光。我喜歡做營火，煮簡單的食物和與朋友聊天。在野外露營是一個讓我放鬆的好地方。', 1, 0, 1, N'Ben', 100, CAST(N'2023-02-14T17:30:57.7520000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/daf276d9-ca52-49ad-bdff-522397fcae48', 0, N'', N'', N'', CAST(N'2023-02-02T08:00:00.0000000' AS DateTime2), N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x077D38CC84BE4AE4A759889DC5951098, 1, 1, N'd@yahoo.com.tw', 1, 1, N'$2a$10$67pwWGYG0qiiv3JggP6PjO5cyDBa0Rki6EL4nbq09HzS4xes0IgYS', N'大家好，我是Lily，我喜歡露營是因為它讓我能夠體驗野外生活。我喜歡在河邊釣魚，爬山，觀賞星空，並且享受夜晚的寧靜。露營對我來說是一個很好的放鬆方式。', 1, 0, 1, N'Lily', 100, CAST(N'2023-02-15T17:28:53.3700000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x0E26D599CBD643E181153B4CAA5C4C92, 1, 1, N'suc12345@gmail.com', 1, 1, NULL, N'我是SSD，我愛上了露營是因為它可以讓我遠離工作的壓力和日常的瑣事。在野外，我可以自由呼吸新鮮的空氣，欣賞美麗的景色，並且享受和家人在一起的時光。', 1, 1, 1, N'ShihShihDer', 100, CAST(N'2023-02-14T18:45:19.0840000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/a4c237e8-479b-438b-9c6a-5d8cea68383c', 1, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x3BD71FC891184302A4E27A31A6EF49A1, 1, 1, N'eeit56t48@camp.com', 1, 1, N'$2a$10$8zrC118puc5pa6Fb4D2b3eHU2PbaQ3OK1N2aG9ol7Qsz7zXEuALje', N'我是Tom，我愛上了露營是因為它可以讓我遠離工作的壓力和日常的瑣事。在野外，我可以自由呼吸新鮮的空氣，欣賞美麗的景色，並且享受和家人在一起的時光。', 1, 0, 1, N'Tom', 100, CAST(N'2023-02-16T23:57:48.7870000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x41600F10963D4F53A50E87E2907DF1BC, 1, 1, N'jackEEIT56@gmail.com', 1, 1, N'$2a$10$lWZOgn64ymCyhoTWHFG4o.TSS0SP0.iMi4UyB8rw.jMppULjgpaGC', N'大家好，我是Grace，我喜歡露營是因為它可以讓我逃離城市的塵囂，並且享受大自然的美麗。我喜歡在森林裡散步，搭帳篷，和朋友分享旅途的經歷。露營讓我感到放鬆和充滿能量。', 1, 0, 1, N'Grace', 100, CAST(N'2023-02-14T20:13:49.5900000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/usershot41600f10-963d-4f53-a50e-87e2907df1bc', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x43A4BE6481514118A485A79C3E7640D8, 1, 1, N'eeit56t44@camp.com', 1, 1, N'$2a$10$HszSBLFldsv9pzWoWvrBQ.4wwQdrphjwR5/X/WncYvx3Hd08IwFvy', N'我是John，我喜歡露營是因為它讓我可以探索新的地方，體驗新的挑戰。我喜歡在野外爬山，做冒險活動，並且學習如何自給自足。露營是一個讓我成長和學習的地方。', 1, 0, 1, N'John', 100, CAST(N'2023-02-16T23:57:22.0910000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x4C33F2C929364FD1A34B138796329307, 1, 1, N'eeit56t4@camp.com', 1, 1, N'$2a$10$HZBdMg3ckiSmKGUdmp6miO85bOhj.uHteYOMgQmEHP.Sds3KEXEvG', N'暫時沒有留下什麼', 1, 0, 1, N'eeit56t4@camp.com', 100, CAST(N'2023-02-17T11:40:06.2560000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/2ec570d9-2231-4131-a553-8437b0719dc1', 1, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x50DB44B1ADEC4D47A4015FD2F2D8D994, 1, 1, N'hcc84621@gmail.com', 1, 1, N'$2a$10$jiHnEN4qD/iLw6yJuE/mueXkPzVWCD48vMRoQK8PdQt7NN7cSfDOO', N'嗨，我是Kate，我喜歡露營是因為它可以讓我和我的家人和朋友在一起。我喜歡在河邊釣魚，做營火，並且分享簡單的食物。露營是一個讓我們享受時光和互相聯繫的地方。', 1, 0, 1, N'Kate', 100, CAST(N'2023-02-13T20:29:45.2890000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x746BAB6245844D43A3A9E077C72023AA, 1, 1, N'z9988776654321@gmail.com', 1, 1, NULL, N'大家好，我是Grace，我喜歡露營是因為它可以讓我逃離城市的塵囂，並且享受大自然的美麗。我喜歡在森林裡散步，搭帳篷，和朋友分享旅途的經歷。露營讓我感到放鬆和充滿能量。', 1, 0, 1, N'Grace', 100, CAST(N'2023-02-15T16:44:00.8270000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/1ef590cb-e7e1-43a3-a962-47e93c48a4a5', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x82014115A5294C329996646E64BD8175, 1, 1, N'b@yahoo.com.tw', 1, 1, N'$2a$10$TIihwnjjOQcGwFDcNebz/epAPu037np4.50M/2TzgWKPzEAotsin6', N'暫時沒有留下什麼', 1, 0, 1, N'b@yahoo.com.tw', 100, CAST(N'2023-02-12T17:26:23.8800000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x82CEA0EE92A040E1BD07B1D6ED124C2A, 1, 1, N'sa', 1, 1, N'$2a$10$7Tjx7JeijKHLqkKz9XHsFeWvatoL8iH.fzeXzbMoxEd5/wxwuadjC', N'「Morari」是一個拉丁文動詞，意思是 "停留、留宿"，「Morari」不僅是一個露營平台，更是一個重新體驗生活的機會。期望為所有使用者提供優質的露營體驗，帶領大家遠離城市的喧囂，讓更多人能夠感受大自然的力量，沉澱身心靈、恢復疲累的精神。', 999999, 0, 999999, N'超級管理員', 99999999, CAST(N'2023-02-21T16:59:26.7610000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/adminshot', 0, N'camp', N'morari', N'morari', NULL, N'0912345678', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x893F5173EB494A3599E0B1D5FD23B7B1, 1, 1, N'aa12345678@gmail.com', 1, 1, N'$2a$10$q2hs8gAJYc57gB7wDlBTGedn8toSxmWF.qRzbGOXMrc68ECHb5XOG', N'暫時沒有留下什麼', 1, 0, 1, N'aa12345678@gmail.com', 100, CAST(N'2023-02-19T15:21:39.6450000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0x94924065905C4317BD7DA730821CF26D, 1, 1, N'eeit56t45@camp.com', 1, 1, N'$2a$10$w858WXh2VZ0L1QVJZ5TcqOd9F0BK8nNQDztdztifstJWSnR.hUdLe', N'暫時沒有留下什麼', 1, 0, 1, N'eeit56t45@camp.com', 100, CAST(N'2023-02-16T23:57:28.9560000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xA56E28AAA04048F0BFC414CEA823B10D, 1, 1, N'eeit56t42@camp.com', 1, 1, N'$2a$10$GOLoIX7doY23P.jYTkkLT.V4WfUWMNm7KXqDc.H3pQ4oxHdO.LEcm', N'暫時沒有留下什麼', 1, 0, 1, N'eeit56t42@camp.com', 100, CAST(N'2023-02-16T23:52:37.9190000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xA937C8516CCB4ECFB1A67996C98EBB4F, 1, 1, N'amuheropuipui@gmail.com', 1, 1, NULL, N'暫時沒有留下什麼', 1, 0, 1, N'英雄阿姆', 100, CAST(N'2023-02-14T18:45:31.8300000' AS DateTime2), N'https://lh3.googleusercontent.com/a/AEdFTp4rfmdp_-zrX21tsWPE3lIh9oZZC0fSNqc5fFEr=s96-c', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xAFFE392B7FB945FDB277DC6439E57708, 1, 1, N'eeit56t46@camp.com', 1, 1, N'$2a$10$LOxroH89ARQa.1qw7g0AMuvJbiHSTgkUASDA3aPufVKcv51JR/nJW', N'暫時沒有留下什麼', 1, 0, 1, N'eeit56t46@camp.com', 100, CAST(N'2023-02-16T23:57:35.7770000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xB270342EA69148EAB44742B8162C0B0B, 1, 1, N'c@yahoo.com.tw', 1, 1, N'$2a$10$AcgzPoWEP5QW.nDKhI2uneHEzK8.wnYI74Cl7WIjuEuEVk.KnqyrO', N'暫時沒有留下什麼', 1, 0, 1, N'c@yahoo.com.tw', 100, CAST(N'2023-02-13T17:27:06.6440000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xB3B4375F65F34B5EA198F48A0974C1B6, 1, 1, N'eeit56t47@camp.com', 1, 1, N'$2a$10$5X0bvUmCJWQchvU153ULluHg8R3pYeQBvcCP/Bzu2kVWBz7bI3uge', N'暫時沒有留下什麼', 1, 0, 1, N'eeit56t47@camp.com', 100, CAST(N'2023-02-17T23:57:42.0790000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xC1E04081CA14480282B8098CB74DB8DC, 1, 1, N'a@yahoo.com.tw', 1, 1, N'$2a$10$3jdRdAV7wQd6A7YjtGcGNufXbzlYCrbx7m1FGMAbsbNN1iGS0t9y.', N'暫時沒有留下什麼', 1, 0, 1, N'a@yahoo.com.tw', 100, CAST(N'2023-02-15T17:23:13.6290000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/defaultshot', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xC3A7996BA72249FCA7D2CFC4E359A8DD, 1, 1, N'hcc8462@gmail.com', 1, 1, NULL, N'暫時沒有留下什麼', 1, 0, 1, N'范凱玟', 100, CAST(N'2023-02-12T19:34:59.8230000' AS DateTime2), N'https://lh3.googleusercontent.com/a/AEdFTp7mNa-h2Jl1EIV5ViWenIXgXhUtEmnMWkwMSfrm=s96-c', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xEE8033CD1A2B405A9A250AC8D9EC4AB0, 1, 1, N'camppingmapping@gmail.com', 1, 1, NULL, N'暫時沒有留下什麼', 1, 0, 1, N'Mapping Campping', 100, CAST(N'2023-02-17T18:45:41.9420000' AS DateTime2), N'https://lh3.googleusercontent.com/a/AEdFTp4ipAH1asNoQb_ICuvCgv7TJAK5X0_LugHWfjbu=s96-c', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+INSERT [dbo].[userprofiles] ([uid], [accountnonexpired], [accountnonlocked], [email], [iscredentialsnonexpired], [isenabled], [password], [about], [exp], [gender], [level], [nickname], [point], [registerdata], [shot], [subscribed], [firstname], [lastname], [address], [birthday], [phone], [resume_number]) VALUES (0xF7782728B7ED421FA7DA7F9E9D4EE886, 1, 1, N'eeit56t43@camp.com', 1, 1, N'$2a$10$EJck3tVmqIcQhSlbgRL2aOmhfF2a3xqD18Pim4mrRJ//kkHfLYgSC', N'暫時沒有留下什麼', 1, 0, 1, N'eeit56t43@camp.com', 100, CAST(N'2023-01-25T23:57:12.1640000' AS DateTime2), N'https://storage.googleapis.com/morariphoto/dc8342f6-4622-4a93-a7bc-dd1af3adf489', 0, N'', N'', N'', NULL, N'', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[vote] ON 
+GO
+INSERT [dbo].[vote] ([voteid], [votename], [voting], [uid]) VALUES (1, N'今天就要出發去露營，你選擇去哪裡?', 2, 0x746BAB6245844D43A3A9E077C72023AA)
+GO
+INSERT [dbo].[vote] ([voteid], [votename], [voting], [uid]) VALUES (2, N'最棒的露營網站?', 1, NULL)
+GO
+INSERT [dbo].[vote] ([voteid], [votename], [voting], [uid]) VALUES (3, N'第一名的苗栗露營區', 1, NULL)
+GO
+INSERT [dbo].[vote] ([voteid], [votename], [voting], [uid]) VALUES (4, N'大家有露營的經驗嗎?', 1, 0x0E26D599CBD643E181153B4CAA5C4C92)
+GO
+SET IDENTITY_INSERT [dbo].[vote] OFF
+GO
+SET IDENTITY_INSERT [dbo].[voteoption] ON 
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (1, N'苗栗／南庄雲水溫泉度假村', 1)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (2, N'宜蘭／那山那谷', 1)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (3, N'南投／空中邊境景觀農場', 1)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (4, N' 宜蘭／三星祕露營區', 1)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (5, N'露營趣', 2)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (6, N'morari', 2)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (7, N'愛露營', 2)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (8, N'魯冰花農莊', 3)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (9, N'桃樂絲露營區', 3)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (10, N'拍片場', 3)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (11, N'樹語星晴', 3)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (12, N'有', 4)
+GO
+INSERT [dbo].[voteoption] ([optionid], [optionname], [voteid]) VALUES (13, N'沒有', 4)
+GO
+SET IDENTITY_INSERT [dbo].[voteoption] OFF
+GO
+SET IDENTITY_INSERT [dbo].[voterecord] ON 
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (1, 0x746BAB6245844D43A3A9E077C72023AA, 6)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (2, 0x746BAB6245844D43A3A9E077C72023AA, 4)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (3, 0x746BAB6245844D43A3A9E077C72023AA, 8)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (4, 0x0E26D599CBD643E181153B4CAA5C4C92, 6)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (5, 0x0E26D599CBD643E181153B4CAA5C4C92, 1)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (6, 0x0E26D599CBD643E181153B4CAA5C4C92, 10)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (7, 0x0E26D599CBD643E181153B4CAA5C4C92, 12)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (8, 0xB270342EA69148EAB44742B8162C0B0B, 12)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (9, 0x82014115A5294C329996646E64BD8175, 13)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (10, 0xC1E04081CA14480282B8098CB74DB8DC, 12)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (11, 0x077D38CC84BE4AE4A759889DC5951098, 13)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (12, 0x07187884EC1A4604B0827D4A5D15058E, 12)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (13, 0xC3A7996BA72249FCA7D2CFC4E359A8DD, 12)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (14, 0xC3A7996BA72249FCA7D2CFC4E359A8DD, 4)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (15, 0xC3A7996BA72249FCA7D2CFC4E359A8DD, 5)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (16, 0xC3A7996BA72249FCA7D2CFC4E359A8DD, 10)
+GO
+INSERT [dbo].[voterecord] ([voterecordid], [uid], [voteoptionid]) VALUES (17, 0xA937C8516CCB4ECFB1A67996C98EBB4F, 2)
+GO
+SET IDENTITY_INSERT [dbo].[voterecord] OFF
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UK_jgbyjshnyxl47jrxpvbrbumgs]    Script Date: 2023/2/22 上午 10:24:54 ******/
+ALTER TABLE [dbo].[userprofiles] ADD  CONSTRAINT [UK_jgbyjshnyxl47jrxpvbrbumgs] UNIQUE NONCLUSTERED 
+(
+	[email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[apply]  WITH CHECK ADD  CONSTRAINT [FK2h9dbgk80auc1rnwg6r0ci1h7] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[apply] CHECK CONSTRAINT [FK2h9dbgk80auc1rnwg6r0ci1h7]
+GO
+ALTER TABLE [dbo].[apply]  WITH CHECK ADD  CONSTRAINT [FK3yty1hcv7px21xsypiadmja5b] FOREIGN KEY([initiatingnum])
+REFERENCES [dbo].[initiating] ([initiatingnum])
+GO
+ALTER TABLE [dbo].[apply] CHECK CONSTRAINT [FK3yty1hcv7px21xsypiadmja5b]
+GO
+ALTER TABLE [dbo].[camp]  WITH CHECK ADD  CONSTRAINT [FK7jusixn379fi1mejor3ygiigs] FOREIGN KEY([fkcityid])
+REFERENCES [dbo].[city] ([cityid])
+GO
+ALTER TABLE [dbo].[camp] CHECK CONSTRAINT [FK7jusixn379fi1mejor3ygiigs]
+GO
+ALTER TABLE [dbo].[camp]  WITH CHECK ADD  CONSTRAINT [FKdgu1j44e1w2rkqocv8k3mmltv] FOREIGN KEY([fkuserid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[camp] CHECK CONSTRAINT [FKdgu1j44e1w2rkqocv8k3mmltv]
+GO
+ALTER TABLE [dbo].[camporder]  WITH CHECK ADD  CONSTRAINT [FKahdvfxmcpvkfynpvndg1x6ogx] FOREIGN KEY([fkuserid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[camporder] CHECK CONSTRAINT [FKahdvfxmcpvkfynpvndg1x6ogx]
+GO
+ALTER TABLE [dbo].[camporder]  WITH CHECK ADD  CONSTRAINT [FKohccuxpkliphxwfhcn3bror8k] FOREIGN KEY([fkcampid])
+REFERENCES [dbo].[camp] ([campid])
+GO
+ALTER TABLE [dbo].[camporder] CHECK CONSTRAINT [FKohccuxpkliphxwfhcn3bror8k]
+GO
+ALTER TABLE [dbo].[camporderitem]  WITH CHECK ADD  CONSTRAINT [FK1fopxdxphmiekv08t57xvsyoi] FOREIGN KEY([fksiteid])
+REFERENCES [dbo].[site] ([siteid])
+GO
+ALTER TABLE [dbo].[camporderitem] CHECK CONSTRAINT [FK1fopxdxphmiekv08t57xvsyoi]
+GO
+ALTER TABLE [dbo].[camporderitem]  WITH CHECK ADD  CONSTRAINT [FKheeed3kty7qnavstqdesc420j] FOREIGN KEY([fkorderid])
+REFERENCES [dbo].[camporder] ([orderid])
+GO
+ALTER TABLE [dbo].[camporderitem] CHECK CONSTRAINT [FKheeed3kty7qnavstqdesc420j]
+GO
+ALTER TABLE [dbo].[couponwallet]  WITH CHECK ADD  CONSTRAINT [FKjfe7wka4mi68afcfq6esjpyn1] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[couponwallet] CHECK CONSTRAINT [FKjfe7wka4mi68afcfq6esjpyn1]
+GO
+ALTER TABLE [dbo].[couponwallet]  WITH CHECK ADD  CONSTRAINT [FKtgo3ru7tjb9febabcv75909g3] FOREIGN KEY([couponid])
+REFERENCES [dbo].[coupon] ([couponid])
+GO
+ALTER TABLE [dbo].[couponwallet] CHECK CONSTRAINT [FKtgo3ru7tjb9febabcv75909g3]
+GO
+ALTER TABLE [dbo].[initiating]  WITH CHECK ADD  CONSTRAINT [FK7akiikwoihktiwrkccb123neb] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[initiating] CHECK CONSTRAINT [FK7akiikwoihktiwrkccb123neb]
+GO
+ALTER TABLE [dbo].[job]  WITH CHECK ADD  CONSTRAINT [FKkp6rtf44yso4k24qhtkvg0pht] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[job] CHECK CONSTRAINT [FKkp6rtf44yso4k24qhtkvg0pht]
+GO
+ALTER TABLE [dbo].[loginhistory]  WITH CHECK ADD  CONSTRAINT [FKjxatqkfsm6n9xbr6gxyedmib9] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[loginhistory] CHECK CONSTRAINT [FKjxatqkfsm6n9xbr6gxyedmib9]
+GO
+ALTER TABLE [dbo].[messagearea]  WITH CHECK ADD  CONSTRAINT [FKnu5ku165cfgw65avqdaneakok] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[messagearea] CHECK CONSTRAINT [FKnu5ku165cfgw65avqdaneakok]
+GO
+ALTER TABLE [dbo].[messagearea]  WITH CHECK ADD  CONSTRAINT [FKqbacqfqfr3652v61xoulrqw80] FOREIGN KEY([initiatingnum])
+REFERENCES [dbo].[initiating] ([initiatingnum])
+GO
+ALTER TABLE [dbo].[messagearea] CHECK CONSTRAINT [FKqbacqfqfr3652v61xoulrqw80]
+GO
+ALTER TABLE [dbo].[post]  WITH CHECK ADD  CONSTRAINT [FK2npcrhx5knvxm2y2vkchsstk4] FOREIGN KEY([informantuid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[post] CHECK CONSTRAINT [FK2npcrhx5knvxm2y2vkchsstk4]
+GO
+ALTER TABLE [dbo].[post]  WITH CHECK ADD  CONSTRAINT [FK3ch0ftv9mn5nufqgxevsi2xdk] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[post] CHECK CONSTRAINT [FK3ch0ftv9mn5nufqgxevsi2xdk]
+GO
+ALTER TABLE [dbo].[postcomment]  WITH CHECK ADD  CONSTRAINT [FKawuyd7ne2j6o4ricyv20263ix] FOREIGN KEY([postid])
+REFERENCES [dbo].[post] ([postid])
+GO
+ALTER TABLE [dbo].[postcomment] CHECK CONSTRAINT [FKawuyd7ne2j6o4ricyv20263ix]
+GO
+ALTER TABLE [dbo].[postcomment]  WITH CHECK ADD  CONSTRAINT [FKfntpskanxrwvm3hceq9b2tan4] FOREIGN KEY([informantuid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[postcomment] CHECK CONSTRAINT [FKfntpskanxrwvm3hceq9b2tan4]
+GO
+ALTER TABLE [dbo].[postcomment]  WITH CHECK ADD  CONSTRAINT [FKqouereo3ui4fdl7uvj7dip0h1] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[postcomment] CHECK CONSTRAINT [FKqouereo3ui4fdl7uvj7dip0h1]
+GO
+ALTER TABLE [dbo].[postlike]  WITH CHECK ADD  CONSTRAINT [FK2pcnjntf861reogx0o6pe6w3m] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[postlike] CHECK CONSTRAINT [FK2pcnjntf861reogx0o6pe6w3m]
+GO
+ALTER TABLE [dbo].[postlike]  WITH CHECK ADD  CONSTRAINT [FKhm23fc9kc6nylrlh1fahe9xnc] FOREIGN KEY([postid])
+REFERENCES [dbo].[post] ([postid])
+GO
+ALTER TABLE [dbo].[postlike] CHECK CONSTRAINT [FKhm23fc9kc6nylrlh1fahe9xnc]
+GO
+ALTER TABLE [dbo].[resume]  WITH CHECK ADD  CONSTRAINT [FK5ud2nr5c96ddywdln9hb6c47d] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[resume] CHECK CONSTRAINT [FK5ud2nr5c96ddywdln9hb6c47d]
+GO
+ALTER TABLE [dbo].[resume_job]  WITH NOCHECK ADD  CONSTRAINT [FK9s0u2xnea3nsltx4bsbb2ujry] FOREIGN KEY([rackid])
+REFERENCES [dbo].[job] ([rackid])
+GO
+ALTER TABLE [dbo].[resume_job] CHECK CONSTRAINT [FK9s0u2xnea3nsltx4bsbb2ujry]
+GO
+ALTER TABLE [dbo].[resume_job]  WITH NOCHECK ADD  CONSTRAINT [FKqhti8sg9giw7yi5m06tuswmft] FOREIGN KEY([number])
+REFERENCES [dbo].[resume] ([number])
+GO
+ALTER TABLE [dbo].[resume_job] CHECK CONSTRAINT [FKqhti8sg9giw7yi5m06tuswmft]
+GO
+ALTER TABLE [dbo].[site]  WITH CHECK ADD  CONSTRAINT [FKceugi4b2rk8f60mc2uavy7pre] FOREIGN KEY([fkcampid])
+REFERENCES [dbo].[camp] ([campid])
+GO
+ALTER TABLE [dbo].[site] CHECK CONSTRAINT [FKceugi4b2rk8f60mc2uavy7pre]
+GO
+ALTER TABLE [dbo].[tagofcamp]  WITH CHECK ADD  CONSTRAINT [FK8gne6db1ibanqk7433hw6rbr8] FOREIGN KEY([fktagid])
+REFERENCES [dbo].[tag] ([tagid])
+GO
+ALTER TABLE [dbo].[tagofcamp] CHECK CONSTRAINT [FK8gne6db1ibanqk7433hw6rbr8]
+GO
+ALTER TABLE [dbo].[tagofcamp]  WITH CHECK ADD  CONSTRAINT [FKnd21i4k5he2q2r66u4x625cu3] FOREIGN KEY([fkcampid])
+REFERENCES [dbo].[camp] ([campid])
+GO
+ALTER TABLE [dbo].[tagofcamp] CHECK CONSTRAINT [FKnd21i4k5he2q2r66u4x625cu3]
+GO
+ALTER TABLE [dbo].[thundsup]  WITH CHECK ADD  CONSTRAINT [FKdywx7sm376qnebxm4i01a8ecf] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[thundsup] CHECK CONSTRAINT [FKdywx7sm376qnebxm4i01a8ecf]
+GO
+ALTER TABLE [dbo].[thundsup]  WITH CHECK ADD  CONSTRAINT [FKs19oqg39pxs24r0s0489jjew1] FOREIGN KEY([initiatingnum])
+REFERENCES [dbo].[initiating] ([initiatingnum])
+GO
+ALTER TABLE [dbo].[thundsup] CHECK CONSTRAINT [FKs19oqg39pxs24r0s0489jjew1]
+GO
+ALTER TABLE [dbo].[user_role]  WITH CHECK ADD  CONSTRAINT [FKgfsjjrf7helkevrs9eppolbhq] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[user_role] CHECK CONSTRAINT [FKgfsjjrf7helkevrs9eppolbhq]
+GO
+ALTER TABLE [dbo].[user_role]  WITH CHECK ADD  CONSTRAINT [FKid0s4w8sbpgppnfro2ej3oana] FOREIGN KEY([rid])
+REFERENCES [dbo].[role] ([rid])
+GO
+ALTER TABLE [dbo].[user_role] CHECK CONSTRAINT [FKid0s4w8sbpgppnfro2ej3oana]
+GO
+ALTER TABLE [dbo].[userprofiles]  WITH CHECK ADD  CONSTRAINT [FK1ls5qhnfahsxepp9e3gloaojh] FOREIGN KEY([resume_number])
+REFERENCES [dbo].[resume] ([number])
+GO
+ALTER TABLE [dbo].[userprofiles] CHECK CONSTRAINT [FK1ls5qhnfahsxepp9e3gloaojh]
+GO
+ALTER TABLE [dbo].[vote]  WITH CHECK ADD  CONSTRAINT [FKtm1tgg63msfkxkonmqr90jsfv] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[vote] CHECK CONSTRAINT [FKtm1tgg63msfkxkonmqr90jsfv]
+GO
+ALTER TABLE [dbo].[voteoption]  WITH CHECK ADD  CONSTRAINT [FK917mcixoi3eplt0rvfahdj99s] FOREIGN KEY([voteid])
+REFERENCES [dbo].[vote] ([voteid])
+GO
+ALTER TABLE [dbo].[voteoption] CHECK CONSTRAINT [FK917mcixoi3eplt0rvfahdj99s]
+GO
+ALTER TABLE [dbo].[voterecord]  WITH CHECK ADD  CONSTRAINT [FKaejchsy0i4y5s6km6q65aju2n] FOREIGN KEY([voteoptionid])
+REFERENCES [dbo].[voteoption] ([optionid])
+GO
+ALTER TABLE [dbo].[voterecord] CHECK CONSTRAINT [FKaejchsy0i4y5s6km6q65aju2n]
+GO
+ALTER TABLE [dbo].[voterecord]  WITH CHECK ADD  CONSTRAINT [FKfcj9np8x4mff5wxdvpq4ja333] FOREIGN KEY([uid])
+REFERENCES [dbo].[userprofiles] ([uid])
+GO
+ALTER TABLE [dbo].[voterecord] CHECK CONSTRAINT [FKfcj9np8x4mff5wxdvpq4ja333]
+GO
+USE [master]
+GO
+ALTER DATABASE [campDB] SET  READ_WRITE 
+GO

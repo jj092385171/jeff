@@ -129,6 +129,9 @@
 								<div class="button">
 									<button type="submit" id="apply" >我想加入</button>
 								</div>
+								<div class="button"></div>
+								<input type="button" onclick="inputvalue();">一鍵輸入
+								</div>
 							</div>
 						</form>
 						<br>
@@ -420,6 +423,12 @@ function deleteMessage(dvalue){
 			});
 
 		}
+}
+
+function inputvalue(){
+		document.getElementById("applypeople").setAttribute("value", "2");
+		document.getElementById("applymessage").setAttribute("value", "管理員好帥");
+		document.getElementById("request").setAttribute("value", "管理員太帥了");
 }
 
 	
