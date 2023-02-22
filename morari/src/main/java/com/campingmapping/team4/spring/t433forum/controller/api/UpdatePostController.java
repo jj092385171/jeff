@@ -47,7 +47,9 @@ public class UpdatePostController {
 		post.setUserlike(postById.getUserlike());
 		post.setUserunlike(postById.getUserunlike());
 		post.setPostreport(postById.getPostreport());
-		post.setInformantuserprofiles(userRepository.findById(postById.getInformantuid()).get());
+		if(post.getInformantuserprofiles() != null) {
+			post.setInformantuserprofiles(userRepository.findById(postById.getInformantuid()).get());
+		}
 		post.setPosthide(postById.getPosthide());
 		postService.update(post);
 		return "true";
@@ -131,9 +133,9 @@ public class UpdatePostController {
 		
 	// 取消檢舉留言
 	@PutMapping("/cancelreportpostcomment.controller/{postcommentid}")
-	public String cancelReportPostComment(@PathVariable Integer postcommentid) {
+	public Boolean cancelReportPostComment(@PathVariable Integer postcommentid) {
 		postCommentService.cancelReportPostComment(postcommentid);
-		return "true";
+		return true;
 	}
 		
 	// 隱藏留言

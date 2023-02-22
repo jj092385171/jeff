@@ -17,28 +17,23 @@ package com.campingmapping.team4.spring.t401member.model.service.impl;
 //
 // @Override
 // public Cookie rember(String rember) {
-// // TODO Auto-generated method stub
 // return null;
 // }
 //
 // @Override
 // public HttpSession loginSession(String account, HttpSession session) {
-// // TODO Auto-generated method stub
 // return null;
 // }
 // @Override
 // public int LoginState(HttpServletRequest req, HttpServletResponse resp) {
-// // TODO Auto-generated method stub
 // return 0;
 // }
 // @Override
 // public License login(String account, String code) {
-// // TODO Auto-generated method stub
 // return null;
 // }
 // @Override
 // public void loginHistory(String account, String ip) {
-// // TODO Auto-generated method stub
 //
 // }
 //

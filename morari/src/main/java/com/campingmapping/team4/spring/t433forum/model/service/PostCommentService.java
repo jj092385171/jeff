@@ -47,6 +47,9 @@ public class PostCommentService {
 			showPostComment.setUid(postcomment.getUserprofiles().getUid());
 			showPostComment.setPostcomment(postcomment.getPostcomment());
 			showPostComment.setPostcommentreport(postcomment.getPostcommentreport());
+			if(postcomment.getInformantuserprofiles() != null) {
+				showPostComment.setInformantuid(postcomment.getInformantuserprofiles().getUid());
+			}	
 			showPostComment.setPostcommenthide(postcomment.getPostcommenthide());
 			list.add(showPostComment);
 		});
@@ -54,11 +57,9 @@ public class PostCommentService {
 	}
 	
 	// 依貼文查非隱藏留言+分頁
-//	public List<ShowPostComment> getPostCommentNonHideByPostId(Integer postid) {
 	public Page<ShowPostComment> getPostCommentNonHideByPostId(Integer postid, Pageable pageable) {
 		Post post = postRepository.findById(postid).get();
 		List<ShowPostComment> list = new ArrayList<>();
-//		postCommentRepository.findByPostAndPostcommenthide(post, 0).forEach(postcomment -> {
 		postCommentRepository.findByPostAndPostcommenthide(post, 0, pageable).forEach(postcomment -> {
 			ShowPostComment showPostComment = new ShowPostComment();
 			showPostComment.setPostcommentid(postcomment.getPostcommentid());
@@ -66,12 +67,13 @@ public class PostCommentService {
 			showPostComment.setUid(postcomment.getUserprofiles().getUid());
 			showPostComment.setPostcomment(postcomment.getPostcomment());
 			showPostComment.setPostcommentreport(postcomment.getPostcommentreport());
+			if(postcomment.getInformantuserprofiles() != null) {
+				showPostComment.setInformantuid(postcomment.getInformantuserprofiles().getUid());
+			}
 			showPostComment.setPostcommenthide(postcomment.getPostcommenthide());
 			list.add(showPostComment);
 		});
-		
 		PageImpl<ShowPostComment> pageImpl = new PageImpl<>(list, pageable, list.size());
-//		return list;
 		return pageImpl;
 	}
 
@@ -84,6 +86,7 @@ public class PostCommentService {
 		postComment.setUserprofiles(userProfiles);
 
 		postComment.setPostcommentreport(0);
+		postComment.setInformantuserprofiles(null);
 		postComment.setPostcommenthide(0);
 		return postCommentRepository.save(postComment);
 	}
@@ -105,7 +108,10 @@ public class PostCommentService {
 	// 檢舉留言
 	public PostComment reportPostComment(Integer postcommentid) {
 		PostComment postComment = postCommentRepository.findById(postcommentid).get();
+		UUID uid = jwtService.getUId(request);
+		UserProfiles userProfiles = userRepository.findById(uid).get();
 		postComment.setPostcommentreport(1);
+		postComment.setInformantuserprofiles(userProfiles);
 		return postCommentRepository.save(postComment);
 	}
 
@@ -113,6 +119,7 @@ public class PostCommentService {
 	public PostComment cancelReportPostComment(Integer postcommentid) {
 		PostComment postComment = postCommentRepository.findById(postcommentid).get();
 		postComment.setPostcommentreport(0);
+		postComment.setInformantuserprofiles(null);
 		return postCommentRepository.save(postComment);
 	}
 }
