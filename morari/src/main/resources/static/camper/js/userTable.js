@@ -202,13 +202,13 @@ fetch("/morari/camper/html/usertable.html")
 										}
 										, responsivePriority: 11
 									},
-									{
-										"title": "刪除",
-										render: function (data, type, row, meta) {
-											return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + meta.row + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
-										}
-										, responsivePriority: 12
-									}
+									// {
+									// 	"title": "刪除",
+									// 	render: function (data, type, row, meta) {
+									// 		return '<button class=\"datatable_del_button\"   onclick=\"deluser(\'' + meta.row + '\')\"><i class=\"fas fa-trash-alt\"></i></button>'
+									// 	}
+									// 	, responsivePriority: 12
+									// }
 								],
 								responsive: true,
 								columnDefs: [
