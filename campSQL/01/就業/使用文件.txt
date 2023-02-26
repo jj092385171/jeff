@@ -1,0 +1,16 @@
+https://0e54-118-166-213-112.jp.ngrok.io/morari
+
+上述連結是這次我的專題的暫時網站連結
+於首頁右上角 有一個 admin 的按鈕可以用來快速登入管理員
+(為了演示設計的 實際運行時並不會有此按鈕)
+登入管理員後 可以在網頁上欄 看到一個工具圖示的按鈕  點下即可到網頁後台
+我所做的部分為 前台的CAMPER
+以及後臺左側的Member欄位 
+由於網路環境的關係 執行速度可能會有所延遲
+
+https://github.com/ShihShihDer/morari
+
+是我們專案的公開GITHUB版本程式碼
+而我所撰寫的JAVA部分則為 t401member 和 utils
+前端網頁則是 static和templates裡面的camper
+以及其他公版 guest admin 等
